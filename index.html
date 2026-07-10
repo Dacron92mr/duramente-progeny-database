@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Duramente Progeny Database</title>
+  <link rel="stylesheet" href="style.css?v=20260711c">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="kicker">Local Database</p>
+      <h1>ドゥラメンテ産駒</h1>
+    </div>
+  </header>
+
+  <main class="layout">
+    <aside class="filters">
+      <label class="search">
+        <span>検索</span>
+        <input id="search" type="search" placeholder="馬名・母・調教師・牧場">
+      </label>
+
+      <div class="filter-row">
+        <label>
+          <span>生年</span>
+          <select id="year">
+            <option value="">すべて</option>
+          </select>
+        </label>
+        <label>
+          <span>性別</span>
+          <select id="sex">
+            <option value="">すべて</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="filter-row">
+        <label>
+          <span>毛色</span>
+          <select id="color">
+            <option value="">すべて</option>
+          </select>
+        </label>
+        <label>
+          <span>所属</span>
+          <select id="region">
+            <option value="">すべて</option>
+          </select>
+        </label>
+      </div>
+
+      <label>
+        <span>調教師</span>
+        <select id="trainer">
+          <option value="">すべて</option>
+        </select>
+      </label>
+
+      <label>
+        <span>最高戦績</span>
+        <select id="achievement">
+          <option value="">すべて</option>
+        </select>
+      </label>
+
+      <label>
+        <span>繁殖成績</span>
+        <select id="breeding">
+          <option value="">すべて</option>
+        </select>
+      </label>
+
+      <label>
+        <span>母父系</span>
+        <select id="bmsLine">
+          <option value="">すべて</option>
+        </select>
+      </label>
+
+      <label>
+        <span>牝系</span>
+        <select id="femaleFamily">
+          <option value="">すべて</option>
+        </select>
+      </label>
+    </aside>
+
+    <section class="content">
+      <div class="toolbar">
+        <div>
+          <h2>産駒一覧</h2>
+          <p id="resultCount"></p>
+        </div>
+        <div class="toolbar-actions">
+          <select id="sort">
+            <option value="earnings_netkeiba">賞金</option>
+            <option value="birth_year">生年</option>
+            <option value="name">馬名</option>
+          </select>
+          <button id="direction" type="button" aria-label="sort direction">↓</button>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>馬名</th>
+              <th>生年</th>
+              <th>性</th>
+              <th>毛色</th>
+              <th>所属</th>
+              <th>母</th>
+              <th>牝系</th>
+              <th>母父</th>
+              <th>調教師</th>
+              <th>賞金</th>
+              <th>主な勝鞍</th>
+            </tr>
+          </thead>
+          <tbody id="horseRows"></tbody>
+        </table>
+      </div>
+
+      <div class="pager">
+        <button id="prev" type="button">‹</button>
+        <span id="pageLabel"></span>
+        <button id="next" type="button">›</button>
+      </div>
+    </section>
+  </main>
+
+  <div class="drawer" id="drawer" aria-hidden="true">
+    <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="close"></button>
+    <aside class="drawer-panel">
+      <button class="icon-button close" id="closeDrawer" type="button" aria-label="close">×</button>
+      <div id="detail"></div>
+    </aside>
+  </div>
+
+  <script>window.STATIC_DATA_BASE = "data";</script>
+  <script src="app.js?v=20260711c"></script>
+</body>
+</html>
