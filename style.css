@@ -5,7 +5,7 @@
   --line: #d9d4ca;
   --paper: #fbfaf7;
   --panel: #ffffff;
-  --accent: #126b5a;
+  --accent: #8f1d2c;
   --accent-2: #9a3f2f;
   --gold: #b1842f;
   --soft: #eef4f1;
@@ -144,7 +144,7 @@ input:focus,
 select:focus,
 button:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(18, 107, 90, 0.14);
+  box-shadow: 0 0 0 3px rgba(143, 29, 44, 0.14);
 }
 
 .filter-row {
@@ -1200,6 +1200,26 @@ td {
   margin-top: 20px;
   border-top: 1px solid var(--line);
   padding-top: 18px;
+}
+
+details.analysis-block summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-size: 18px;
+  font-weight: 900;
+  list-style-position: inside;
+}
+
+.nested-head {
+  margin-top: 18px;
+}
+
+.chart-conclusion {
+  margin: 8px 0 14px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
 }
 
 .quality-panel h2 {

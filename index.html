@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260714e">
+  <link rel="stylesheet" href="style.css?v=20260714f">
 </head>
 <body>
   <header class="topbar">
@@ -13,13 +13,12 @@
       <h1>ドゥラメンテ産駒</h1>
     </div>
     <nav class="main-nav" aria-label="sections">
-      <button class="active" type="button" data-view="progeny">産駒一覧</button>
-      <button type="button" data-view="sire">種牡馬成績</button>
-      <button type="button" data-view="bms">母父分析</button>
-      <button type="button" data-view="pedigree">血統分析</button>
-      <button type="button" data-view="breeder">牧場分析</button>
-      <button type="button" data-view="racecourse">競馬場分析</button>
-      <button type="button" data-view="method">データ・方法</button>
+      <button class="active" type="button" data-view="progeny">産駒一覧｜产驹检索</button>
+      <button type="button" data-view="sire">種牡馬成績｜种牡马表现</button>
+      <button type="button" data-view="pedigree">血統分析｜血统分析</button>
+      <button type="button" data-view="production">生産・繁殖｜牧场与繁殖母马</button>
+      <button type="button" data-view="racecourse">競馬場分析｜赛马场表现</button>
+      <button type="button" data-view="method">データ・方法｜数据与方法</button>
     </nav>
   </header>
 
@@ -159,16 +158,12 @@
     <section class="analysis-page" id="sireContent"></section>
   </main>
 
-  <main class="analysis-shell view" id="bmsView" hidden>
-    <section class="analysis-page" id="bmsContent"></section>
-  </main>
-
   <main class="analysis-shell view" id="pedigreeView" hidden>
     <section class="analysis-page" id="pedigreeContent"></section>
   </main>
 
-  <main class="analysis-shell view" id="breederView" hidden>
-    <section class="analysis-page" id="breederContent"></section>
+  <main class="analysis-shell view" id="productionView" hidden>
+    <section class="analysis-page" id="productionContent"></section>
   </main>
 
   <main class="analysis-shell view" id="racecourseView" hidden>
@@ -189,6 +184,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260714e"></script>
+  <script src="app.js?v=20260714f"></script>
 </body>
 </html>
