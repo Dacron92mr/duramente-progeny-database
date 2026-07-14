@@ -81,6 +81,8 @@ const staticData = {
 };
 
 let tableCounter = 0;
+const chartRegistry = new Map();
+let chartResizeBound = false;
 
 function staticBase() {
   return String(window.STATIC_DATA_BASE || "").replace(/\/$/, "");
@@ -298,6 +300,42 @@ function methodLabel(key) {
   return labels[key] || key;
 }
 
+function chartShell(id) {
+  return `<div class="chart-canvas" id="${escapeHtml(id)}"></div>`;
+}
+
+function renderChart(id, option) {
+  const el = document.getElementById(id);
+  if (!el) return null;
+  if (!window.echarts) {
+    el.innerHTML = `<div class="chart-fallback">图表库加载失败，表格数据仍可查看。</div>`;
+    return null;
+  }
+  if (chartRegistry.has(id)) chartRegistry.get(id).dispose();
+  const chart = window.echarts.init(el);
+  chart.setOption(option);
+  chartRegistry.set(id, chart);
+  if (!chartResizeBound) {
+    window.addEventListener("resize", () => {
+      for (const item of chartRegistry.values()) item.resize();
+    });
+    chartResizeBound = true;
+  }
+  return chart;
+}
+
+function chartBlock(title, lead, id) {
+  return `
+    <article class="chart-card">
+      <div class="chart-card-head">
+        <h3>${escapeHtml(title)}</h3>
+        ${lead ? `<p>${escapeHtml(lead)}</p>` : ""}
+      </div>
+      ${chartShell(id)}
+    </article>
+  `;
+}
+
 function metricCard(label, value, sub = "") {
   return `
     <article class="metric-card">
@@ -462,67 +500,147 @@ function wireAnalysisFilters(container) {
   }
 }
 
+function renderSireCharts(profile) {
+  const crops = [...profile.crops].sort((a, b) => Number(a.label) - Number(b.label));
+  const cropLabels = crops.map((row) => row.label);
+  renderChart("sireCropChart", {
+    color: ["#126b5a", "#b1842f", "#9a3f2f", "#386fa4"],
+    tooltip: { trigger: "axis" },
+    legend: { top: 0, data: ["总奖金", "每匹平均", "出赛马", "胜马"] },
+    grid: { left: 58, right: 58, top: 52, bottom: 40 },
+    xAxis: { type: "category", data: cropLabels },
+    yAxis: [
+      { type: "value", name: "总奖金(亿円)", axisLabel: { formatter: (value) => `${(value / 10000).toFixed(0)}` } },
+      { type: "value", name: "头数", position: "right" },
+    ],
+    series: [
+      { name: "总奖金", type: "bar", data: crops.map((row) => row.total_earnings), yAxisIndex: 0 },
+      { name: "每匹平均", type: "bar", data: crops.map((row) => row.earnings_per_foal), yAxisIndex: 0 },
+      { name: "出赛马", type: "line", data: crops.map((row) => row.runners), yAxisIndex: 1, smooth: true },
+      { name: "胜马", type: "line", data: crops.map((row) => row.winners), yAxisIndex: 1, smooth: true },
+    ],
+  });
+
+  const ages = ["2", "3", "4", "5", "6+"];
+  const cropSet = [...new Set(profile.crop_development.map((row) => String(row.crop)))].sort();
+  renderChart("sireDevelopmentChart", {
+    color: ["#126b5a", "#b1842f", "#9a3f2f", "#386fa4", "#6f5aa7"],
+    tooltip: { trigger: "axis" },
+    legend: { top: 0, type: "scroll" },
+    grid: { left: 42, right: 22, top: 52, bottom: 40 },
+    xAxis: { type: "category", name: "年龄", data: ages },
+    yAxis: { type: "value", name: "累计胜场" },
+    series: cropSet.map((crop) => ({
+      name: crop,
+      type: "line",
+      smooth: true,
+      data: ages.map((age) => {
+        const row = profile.crop_development.find((item) => String(item.crop) === crop && String(item.age) === age);
+        return row ? row.cumulative_wins : 0;
+      }),
+    })),
+  });
+
+  const surfaces = ["芝", "ダ", "障"];
+  const distances = ["1200以下", "1400-1600", "1800-2000", "2200-2400", "2500以上"];
+  const heatData = [];
+  for (const [y, surface] of surfaces.entries()) {
+    for (const [x, distance] of distances.entries()) {
+      const row = profile.surface_distance.find((item) => item.surface === surface && item.distance === distance);
+      heatData.push([x, y, row?.win_rate ? Number((row.win_rate * 100).toFixed(1)) : 0, row?.starts || 0, row?.wins || 0]);
+    }
+  }
+  renderChart("sireSurfaceDistanceChart", {
+    tooltip: {
+      formatter: (params) => {
+        const [x, y, rate, starts, wins] = params.value;
+        return `${surfaces[y]} / ${distances[x]}<br>胜率 ${rate}% (${wins}/${starts})`;
+      },
+    },
+    grid: { left: 72, right: 24, top: 24, bottom: 54 },
+    xAxis: { type: "category", data: distances, axisLabel: { rotate: 25 } },
+    yAxis: { type: "category", data: surfaces },
+    visualMap: { min: 0, max: 25, calculable: true, orient: "horizontal", left: "center", bottom: 0, inRange: { color: ["#f3eee6", "#b1842f", "#126b5a"] } },
+    series: [{ type: "heatmap", data: heatData, label: { show: true, formatter: (params) => `${params.value[2]}%` } }],
+  });
+
+  renderChart("sireSexChart", {
+    color: ["#126b5a", "#b1842f"],
+    tooltip: { trigger: "axis" },
+    legend: { top: 0, data: ["胜率", "前三率"] },
+    grid: { left: 48, right: 22, top: 52, bottom: 34 },
+    xAxis: { type: "category", data: profile.sex_performance.map((row) => row.label) },
+    yAxis: { type: "value", axisLabel: { formatter: (value) => `${value}%` } },
+    series: [
+      { name: "胜率", type: "bar", data: profile.sex_performance.map((row) => Number(((row.win_rate || 0) * 100).toFixed(1))) },
+      { name: "前三率", type: "bar", data: profile.sex_performance.map((row) => Number(((row.top3_rate || 0) * 100).toFixed(1))) },
+    ],
+  });
+}
+
 async function renderSireAnalysis() {
   if (els.sireContent.dataset.loaded) return;
-  const [overview, crops, distanceSurface] = await Promise.all([
+  const [overview, sireProfile] = await Promise.all([
     getAnalytics("overview"),
-    getAnalytics("crops"),
-    getAnalytics("distance_surface"),
+    getAnalytics("sire_profile"),
   ]);
   const summary = overview.summary;
+  const profile = sireProfile.summary;
   els.sireContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">种牡马分析</p>
       <h1>種牡馬成績</h1>
-      <p>基于当前静态数据库计算ドゥラメンテ产驹成绩，按世代、场地、距离和性别拆分。这里不使用覆盖率不足的赛次奖金字段。</p>
+      <p>按 netkeiba Owners 的“产驹分析”思路重做：先看评价指标和主图，再看世代、年龄曲线、场地距离与性别拆分。当前没有全日本Leading Sire Top10原始表，所以不硬造排名。</p>
     </div>
-    <div class="metric-grid">
-      ${metricCard("产驹数", formatNumber(summary.foals), summary.generation_range)}
-      ${metricCard("出赛马", formatNumber(summary.runners), `出赛率 ${formatRate(summary.runner_rate)}`)}
-      ${metricCard("胜马", formatNumber(summary.winners), `胜马率 ${formatRate(summary.winner_foal_rate)}`)}
-      ${metricCard("重赏胜马", formatNumber(summary.graded_winners), `对产驹 ${formatRate(summary.graded_foal_rate)}`)}
-      ${metricCard("G1马", formatNumber(summary.g1_winners), `对产驹 ${formatRate(summary.g1_foal_rate)}`)}
-      ${metricCard("平均胜距", summary.awd ? `${formatNumber(summary.awd)} m` : "—", `${formatNumber(summary.winning_distance_count)} 场胜利计算`)}
+    <div class="sire-hero">
+      <div>
+        <p class="kicker">Career overview</p>
+        <h2>ドゥラメンテ产驹画像</h2>
+        <p>收录 ${formatNumber(profile.foals)} 匹产驹，出赛 ${formatNumber(profile.runners)} 匹，胜马 ${formatNumber(profile.winners)} 匹。重赏胜马 ${formatNumber(profile.graded_winners)} 匹，其中 G1 马 ${formatNumber(profile.g1_horses)} 匹。</p>
+      </div>
+      <div class="sire-hero-stats">
+        <strong>${money(profile.total_earnings)}</strong>
+        <span>马匹级累计总奖金</span>
+      </div>
     </div>
-    ${sectionBlock("世代比较", "按出生年份比较出赛率、胜马率、重赏胜马数和马匹级累计奖金。",
+    <div class="metric-grid sire-eval-grid">
+      ${sireProfile.evaluation_cards.map((card) => {
+        const value = card.unit === "rate" ? formatRate(card.value) :
+          card.unit === "万円" ? money(card.value) :
+          card.unit === "m" ? `${formatNumber(card.value)} m` :
+          formatNumber(card.value);
+        return metricCard(card.label, value, card.note);
+      }).join("")}
+    </div>
+    <div class="chart-grid">
+      ${chartBlock("生产年度主图", "柱为总奖金和每匹平均奖金，线为注册产驹、胜马和出赛马。", "sireCropChart")}
+      ${chartBlock("年龄累计胜场曲线", "每个出生世代从2岁起的累计胜场。", "sireDevelopmentChart")}
+    </div>
+    <div class="chart-grid">
+      ${chartBlock("场地 × 距离热图", "颜色代表胜率，单元格同时保留出走样本量。", "sireSurfaceDistanceChart")}
+      ${chartBlock("性别表现", "胜率与前三率并列比较。", "sireSexChart")}
+    </div>
+    ${sectionBlock("生产年度明细", "按出生年份比较出赛率、胜马率、2胜/3胜率、重赏胜马、平均奖金与芝/泥平均胜距。",
       analysisTable([
         { label: "生年", value: (row) => row.label },
         { label: "Foals", value: (row) => formatNumber(row.foals) },
-        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.debut_rate)})` },
         { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
-        { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
-        { label: "総賞金", value: (row) => money(row.total_earnings) },
-        { label: "平均賞金", value: (row) => money(row.avg_earnings_per_foal) },
-        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
-      ], crops)
+        { label: "2胜以上", value: (row) => `${formatNumber(row.two_win_horses)} (${formatRate(row.two_win_rate)})` },
+        { label: "3胜以上", value: (row) => `${formatNumber(row.three_win_horses)} (${formatRate(row.three_win_rate)})` },
+        { label: "重赏胜马", value: (row) => formatNumber(row.graded_winners) },
+        { label: "G1/G2/G3", value: (row) => `${formatNumber(row.g1_horses)}/${formatNumber(row.g2_horses)}/${formatNumber(row.g3_horses)}` },
+        { label: "总奖金", value: (row) => money(row.total_earnings) },
+        { label: "每匹平均", value: (row) => money(row.earnings_per_foal) },
+        { label: "芝AWD", value: (row) => row.turf_awd ? `${formatNumber(row.turf_awd)} m` : "—" },
+        { label: "泥AWD", value: (row) => row.dirt_awd ? `${formatNumber(row.dirt_awd)} m` : "—" },
+        { label: "代表马", value: representativeNames },
+      ], sireProfile.crops, { initialLimit: 10 })
     )}
-    ${sectionBlock("场地 / 距离 / 性别", "基于比赛记录的出走次数和胜场统计，不展示赛次奖金。",
-      `<div class="analysis-split">
-        ${analysisTable([
-          { label: "馬場", value: (row) => row.label },
-          { label: "出走", value: (row) => formatNumber(row.starts) },
-          { label: "勝利", value: (row) => formatNumber(row.wins) },
-          { label: "勝率", value: (row) => formatRate(row.win_rate) },
-          { label: "AWD", value: (row) => row.awd ? `${formatNumber(row.awd)} m` : "—" },
-        ], distanceSurface.by_surface)}
-        ${analysisTable([
-          { label: "区分", value: (row) => row.label },
-          { label: "出走", value: (row) => formatNumber(row.starts) },
-          { label: "勝利", value: (row) => formatNumber(row.wins) },
-          { label: "勝率", value: (row) => formatRate(row.win_rate) },
-        ], distanceSurface.by_distance)}
-      </div>`
-    )}
-    ${sectionBlock("性别拆分", "按牡、牝、セン拆分出走数、胜利数和胜率。赛次奖金字段覆盖率不足，本表不展示赛次奖金汇总。",
-      analysisTable([
-        { label: "性", value: (row) => row.label },
-        { label: "出走", value: (row) => formatNumber(row.starts) },
-        { label: "勝利", value: (row) => formatNumber(row.wins) },
-        { label: "勝率", value: (row) => formatRate(row.win_rate) },
-      ], distanceSurface.by_sex)
-    )}
+    <div class="sire-note">${escapeHtml(sireProfile.reference_model.leading_sire_note)}</div>
   `;
   wireExpandableTables(els.sireContent);
+  renderSireCharts(sireProfile);
   els.sireContent.dataset.loaded = "true";
 }
 
