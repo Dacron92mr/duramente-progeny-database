@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260714a">
+  <link rel="stylesheet" href="style.css?v=20260714b">
 </head>
 <body>
   <header class="topbar">
@@ -17,6 +17,8 @@
       <button type="button" data-view="sire">種牡馬成績</button>
       <button type="button" data-view="bms">母父分析</button>
       <button type="button" data-view="pedigree">血統分析</button>
+      <button type="button" data-view="breeder">牧場分析</button>
+      <button type="button" data-view="racecourse">競馬場分析</button>
       <button type="button" data-view="method">データ・方法</button>
     </nav>
   </header>
@@ -158,6 +160,14 @@
     <section class="analysis-page" id="pedigreeContent"></section>
   </main>
 
+  <main class="analysis-shell view" id="breederView" hidden>
+    <section class="analysis-page" id="breederContent"></section>
+  </main>
+
+  <main class="analysis-shell view" id="racecourseView" hidden>
+    <section class="analysis-page" id="racecourseContent"></section>
+  </main>
+
   <main class="analysis-shell view" id="methodView" hidden>
     <section class="analysis-page" id="methodContent"></section>
   </main>
@@ -171,6 +181,6 @@
   </div>
 
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260714a"></script>
+  <script src="app.js?v=20260714b"></script>
 </body>
 </html>

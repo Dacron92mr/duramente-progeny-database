@@ -45,6 +45,8 @@ const els = {
   sireContent: document.querySelector("#sireContent"),
   bmsContent: document.querySelector("#bmsContent"),
   pedigreeContent: document.querySelector("#pedigreeContent"),
+  breederContent: document.querySelector("#breederContent"),
+  racecourseContent: document.querySelector("#racecourseContent"),
   methodContent: document.querySelector("#methodContent"),
 };
 
@@ -287,6 +289,38 @@ function metricCard(label, value, sub = "") {
   `;
 }
 
+function rateWithCount(value, numerator, denominator) {
+  return `${formatRate(value)} (${formatNumber(numerator)}/${formatNumber(denominator)})`;
+}
+
+function barList(rows, labelFn, valueFn, subFn = () => "", maxValue = null) {
+  const max = maxValue ?? Math.max(...rows.map((row) => Number(valueFn(row)) || 0), 1);
+  return `
+    <div class="bar-list">
+      ${rows.map((row) => {
+        const value = Number(valueFn(row)) || 0;
+        return `
+          <div class="bar-row">
+            <div class="bar-label">${labelFn(row)}</div>
+            <div class="bar-track"><span style="width:${Math.max(3, (value / max) * 100)}%"></span></div>
+            <div class="bar-value">${escapeHtml(subFn(row) || formatNumber(value))}</div>
+          </div>
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
+function heatCell(row, bucket, type) {
+  const stats = row.surface?.[bucket] || row.distance?.[bucket] || {};
+  const rateValue = stats[`${type}_rate`];
+  const numerator = type === "win" ? stats.wins : stats.top3;
+  const denominator = stats.starts || 0;
+  const alpha = rateValue ? Math.min(0.9, 0.12 + rateValue * 1.7) : 0;
+  const label = denominator ? `${formatRate(rateValue)} (${formatNumber(numerator)}/${formatNumber(denominator)})` : "—";
+  return `<span class="heat-cell" style="background: rgba(18, 107, 90, ${alpha})">${escapeHtml(label)}</span>`;
+}
+
 function analysisTable(columns, rows, options = {}) {
   const limit = options.limit || rows.length;
   return `
@@ -411,13 +445,12 @@ async function renderSireAnalysis() {
         ], distanceSurface.by_distance)}
       </div>`
     )}
-    ${sectionBlock("Sex Split", "牡牝別の出走数・勝利数・勝率です。",
+    ${sectionBlock("Sex Split", "牡牝別の出走数・勝利数・勝率です。赛次奖金字段覆盖率不足，本表不展示赛次奖金汇总。",
       analysisTable([
         { label: "性", value: (row) => row.label },
         { label: "出走", value: (row) => formatNumber(row.starts) },
         { label: "勝利", value: (row) => formatNumber(row.wins) },
         { label: "勝率", value: (row) => formatRate(row.win_rate) },
-        { label: "総賞金", value: (row) => money(row.total_prize) },
       ], distanceSurface.by_sex)
     )}
   `;
@@ -478,23 +511,56 @@ async function renderBmsAnalysis() {
 async function renderPedigreeAnalysis() {
   if (els.pedigreeContent.dataset.loaded) return;
   const pedigree = await getAnalytics("pedigree");
+  const cross = pedigree.cross;
   els.pedigreeContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">Pedigree Analysis</p>
       <h1>血統分析</h1>
-      <p>現時点では登録済みのクロス文字列、牝系、母父系から安全に集計できる範囲だけを表示します。</p>
+      <p>Crossは修正済みパーサーで「祖先＋位置」を分解し、同一グループ内では独立産駒数で数えます。複数Crossを持つ馬は複数グループに入るため、総賞金は合算不可です。</p>
     </div>
-    ${sectionBlock("Cross Ancestors", "クロス欄に現れる祖先名の頻度です。",
+    <div class="metric-grid compact-metrics">
+      ${metricCard("Horses with cross", formatNumber(cross.summary.horses_with_cross), `${formatNumber(cross.summary.horses)} foals`)}
+      ${metricCard("Parsed entries", formatNumber(cross.summary.parsed_entries), "ancestor-pattern rows")}
+      ${metricCard("Ancestor groups", formatNumber(cross.ancestors.length), "distinct ancestors")}
+      ${metricCard("Pattern groups", formatNumber(cross.ancestor_patterns.length), "ancestor + pattern")}
+    </div>
+    ${sectionBlock("Cross Ancestors", "祖先ごとの独立産駒数、勝馬率、重賞馬率、馬匹級生涯賞金です。",
       analysisTable([
         { label: "祖先", value: (row) => row.label },
-        { label: "件数", value: (row) => formatNumber(row.count) },
-      ], pedigree.top_ancestors)
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "重賞勝馬", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
+        { label: "G1", value: (row) => formatNumber(row.g1_winners) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "平均", value: (row) => money(row.avg_earnings_per_foal) },
+        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
+        { label: "代表馬", value: representativeNames },
+      ], cross.ancestors)
     )}
-    ${sectionBlock("Cross Patterns", "S/M表記の組み合わせ別の頻度です。",
+    ${sectionBlock("Ancestor + Pattern", "具体的なCross形式ごとのランキングです。どの祖先のどの形が多いか、成績がよいかを見ます。",
+      analysisTable([
+        { label: "祖先", value: (row) => row.ancestor || row.label.split("|")[0] },
+        { label: "Cross形式", value: (row) => row.pattern || row.label.split("|")[1] },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "勝馬率", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
+        { label: "重賞馬率", value: (row) => rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "平均", value: (row) => money(row.avg_earnings_per_foal) },
+        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
+        { label: "Max", value: (row) => money(row.max_earnings) },
+        { label: "代表馬", value: representativeNames },
+      ], cross.ancestor_patterns)
+    )}
+    ${sectionBlock("Structure Only", "祖先名を外し、S/M位置だけで見た近交構造です。",
       analysisTable([
         { label: "Pattern", value: (row) => row.label },
-        { label: "件数", value: (row) => formatNumber(row.count) },
-      ], pedigree.cross_patterns)
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "勝馬率", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
+        { label: "重賞馬率", value: (row) => rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "代表馬", value: representativeNames },
+      ], cross.structures)
     )}
     ${sectionBlock("Female Family Performance", "牝系ごとの産駒数と成績。未分類は今後の再調査対象です。",
       analysisTable([
@@ -510,9 +576,137 @@ async function renderPedigreeAnalysis() {
   els.pedigreeContent.dataset.loaded = "true";
 }
 
+async function renderBreederAnalysis() {
+  if (els.breederContent.dataset.loaded) return;
+  const breeders = await getAnalytics("breeders");
+  els.breederContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Breeder Analysis</p>
+      <h1>牧場分析</h1>
+      <p>牧場ごとの産駒数、勝馬率（対産駒）、勝率（対出走）、重賞馬の分布を分けて表示します。主表は原牧場単位で、集团层は補助情報です。</p>
+    </div>
+    ${sectionBlock("Foals by Breeder", "Dora産駒数Top20。これは規模を見る図で、効率指標ではありません。",
+      barList(
+        breeders.top_foals.slice(0, 20),
+        (row) => escapeHtml(row.label),
+        (row) => row.foals,
+        (row) => `${formatNumber(row.foals)} foals`
+      )
+    )}
+    ${sectionBlock("Winner Rate by Breeder", "Foals≥5の牧場だけを表示。ラベルは必ず分子/分母つきです。",
+      barList(
+        breeders.winner_rates.slice(0, 20),
+        (row) => escapeHtml(row.label),
+        (row) => row.winner_foal_rate || 0,
+        (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals),
+        1
+      )
+    )}
+    ${sectionBlock("Graded Winner Sources", "重賞勝馬を出した牧場。独立馬匹数で、重賞勝利数ではありません。",
+      analysisTable([
+        { label: "牧場", value: (row) => row.label },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "重賞馬", value: (row) => formatNumber(row.graded_winners) },
+        { label: "G1馬", value: (row) => formatNumber(row.g1_winners) },
+        { label: "勝馬率/Foal", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "代表馬", value: representativeNames },
+      ], breeders.graded_sources)
+    )}
+    ${sectionBlock("Breeder Performance Table", breeders.method,
+      analysisTable([
+        { label: "牧場", value: (row) => row.label },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "総出走", value: (row) => formatNumber(row.starts) },
+        { label: "総勝場", value: (row) => formatNumber(row.wins_starts) },
+        { label: "勝率/出走", value: (row) => rateWithCount(row.win_start_rate, row.wins_starts, row.starts) },
+        { label: "複勝率", value: (row) => rateWithCount(row.top3_rate, row.top3, row.starts) },
+        { label: "重賞馬", value: (row) => formatNumber(row.graded_winners) },
+        { label: "G1馬", value: (row) => formatNumber(row.g1_winners) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
+        { label: "代表馬", value: representativeNames },
+      ], breeders.table, { limit: 120 })
+    )}
+  `;
+  els.breederContent.dataset.loaded = "true";
+}
+
+async function renderRacecourseAnalysis() {
+  if (els.racecourseContent.dataset.loaded) return;
+  const data = await getAnalytics("racecourses");
+  const surfaceColumns = ["芝", "ダ", "障"];
+  const distanceColumns = ["1200以下", "1400-1600", "1800-2000", "2200-2400", "2500以上"];
+  els.racecourseContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Racecourse Analysis</p>
+      <h1>競馬場分析</h1>
+      <p>meetingを競馬場単位に標準化し、finishが数値の有効出走だけで勝率・連対率・複勝率を計算します。JRA/NAR/海外は表内で区分します。</p>
+    </div>
+    <div class="metric-grid compact-metrics">
+      ${metricCard("Valid starts", formatNumber(data.summary.valid_starts), "finish numeric")}
+      ${metricCard("Racecourses", formatNumber(data.summary.courses), "canonical")}
+      ${metricCard("Chart threshold", `${formatNumber(data.summary.main_chart_min_starts)}+`, "starts")}
+    </div>
+    ${sectionBlock("Win Rate / Show Rate", "出走30以上の競馬場。勝率と複勝率を分けて表示します。",
+      `<div class="analysis-split">
+        ${barList(
+          data.main_chart.slice(0, 25),
+          (row) => `${escapeHtml(row.label)} <small>${escapeHtml(row.jurisdiction)}</small>`,
+          (row) => row.win_start_rate || 0,
+          (row) => rateWithCount(row.win_start_rate, row.wins_starts, row.starts),
+          1
+        )}
+        ${barList(
+          [...data.main_chart].sort((a, b) => (b.top3_rate || 0) - (a.top3_rate || 0)).slice(0, 25),
+          (row) => `${escapeHtml(row.label)} <small>${escapeHtml(row.jurisdiction)}</small>`,
+          (row) => row.top3_rate || 0,
+          (row) => rateWithCount(row.top3_rate, row.top3, row.starts),
+          1
+        )}
+      </div>`
+    )}
+    ${sectionBlock("Racecourse Table", data.method,
+      analysisTable([
+        { label: "競馬場", value: (row) => row.label },
+        { label: "区分", value: (row) => row.jurisdiction },
+        { label: "出走", value: (row) => formatNumber(row.starts) },
+        { label: "1着", value: (row) => formatNumber(row.wins_starts) },
+        { label: "2着", value: (row) => formatNumber(row.seconds) },
+        { label: "3着", value: (row) => formatNumber(row.thirds) },
+        { label: "勝率", value: (row) => rateWithCount(row.win_start_rate, row.wins_starts, row.starts) },
+        { label: "連対率", value: (row) => rateWithCount(row.quinella_rate, row.wins_starts + row.seconds, row.starts) },
+        { label: "複勝率", value: (row) => rateWithCount(row.top3_rate, row.top3, row.starts) },
+        { label: "芝勝率", value: (row) => rateWithCount(row.surface?.["芝"]?.win_rate, row.surface?.["芝"]?.wins || 0, row.surface?.["芝"]?.starts || 0) },
+        { label: "ダ勝率", value: (row) => rateWithCount(row.surface?.["ダ"]?.win_rate, row.surface?.["ダ"]?.wins || 0, row.surface?.["ダ"]?.starts || 0) },
+      ], data.table, { limit: 120 })
+    )}
+    ${sectionBlock("Racecourse x Surface", "色の濃さは率、セル内は分子/分母です。",
+      analysisTable([
+        { label: "競馬場", value: (row) => row.label },
+        ...surfaceColumns.flatMap((surface) => [
+          { label: `${surface}勝率`, value: (row) => heatCell(row, surface, "win"), html: true },
+          { label: `${surface}複勝率`, value: (row) => heatCell(row, surface, "top3"), html: true },
+        ]),
+      ], data.surface_heatmap)
+    )}
+    ${sectionBlock("Racecourse x Distance", "距離区間別の勝率です。",
+      analysisTable([
+        { label: "競馬場", value: (row) => row.label },
+        ...distanceColumns.map((bucket) => ({ label: bucket, value: (row) => heatCell(row, bucket, "win"), html: true })),
+      ], data.distance_heatmap)
+    )}
+  `;
+  els.racecourseContent.dataset.loaded = "true";
+}
+
 async function renderMethodology() {
   if (els.methodContent.dataset.loaded) return;
   const method = await getAnalytics("methodology");
+  const methodEntries = Object.entries(method).filter(([key]) => key !== "last_updated" && key !== "race_prize_quality");
+  const prize = method.race_prize_quality || {};
   els.methodContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">Data & Method</p>
@@ -521,12 +715,21 @@ async function renderMethodology() {
     </div>
     <section class="analysis-block">
       <div class="method-list">
-        ${Object.entries(method).filter(([key]) => key !== "last_updated").map(([key, value]) => `
+        ${methodEntries.map(([key, value]) => `
           <article>
             <strong>${escapeHtml(key)}</strong>
             <p>${escapeHtml(value)}</p>
           </article>
         `).join("")}
+      </div>
+      <div class="quality-panel">
+        <h2>Race Prize Quality Check</h2>
+        <div class="metric-grid compact-metrics">
+          ${metricCard("Race rows", formatNumber(prize.race_rows), "race_results")}
+          ${metricCard("Nonzero prize rows", formatNumber(prize.nonzero_prize_rows), `coverage ${formatRate(prize.coverage_rate)}`)}
+          ${metricCard("Raw prize sum", money(prize.sum_raw_prize), "unit not trusted")}
+        </div>
+        <p>${escapeHtml(prize.decision || "")}</p>
       </div>
       <p class="method-updated">Last updated: ${escapeHtml(method.last_updated)}</p>
     </section>
@@ -546,6 +749,8 @@ async function showView(name) {
   if (name === "sire") await renderSireAnalysis();
   if (name === "bms") await renderBmsAnalysis();
   if (name === "pedigree") await renderPedigreeAnalysis();
+  if (name === "breeder") await renderBreederAnalysis();
+  if (name === "racecourse") await renderRacecourseAnalysis();
   if (name === "method") await renderMethodology();
 }
 
