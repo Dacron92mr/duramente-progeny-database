@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260711c">
+  <link rel="stylesheet" href="style.css?v=20260714a">
 </head>
 <body>
   <header class="topbar">
@@ -12,9 +12,16 @@
       <p class="kicker">Local Database</p>
       <h1>ドゥラメンテ産駒</h1>
     </div>
+    <nav class="main-nav" aria-label="sections">
+      <button class="active" type="button" data-view="progeny">産駒一覧</button>
+      <button type="button" data-view="sire">種牡馬成績</button>
+      <button type="button" data-view="bms">母父分析</button>
+      <button type="button" data-view="pedigree">血統分析</button>
+      <button type="button" data-view="method">データ・方法</button>
+    </nav>
   </header>
 
-  <main class="layout">
+  <main class="layout view active" id="progenyView">
     <aside class="filters">
       <label class="search">
         <span>検索</span>
@@ -80,6 +87,13 @@
       </label>
 
       <label>
+        <span>母父</span>
+        <select id="broodmareSire">
+          <option value="">すべて</option>
+        </select>
+      </label>
+
+      <label>
         <span>牝系</span>
         <select id="femaleFamily">
           <option value="">すべて</option>
@@ -132,6 +146,22 @@
     </section>
   </main>
 
+  <main class="analysis-shell view" id="sireView" hidden>
+    <section class="analysis-page" id="sireContent"></section>
+  </main>
+
+  <main class="analysis-shell view" id="bmsView" hidden>
+    <section class="analysis-page" id="bmsContent"></section>
+  </main>
+
+  <main class="analysis-shell view" id="pedigreeView" hidden>
+    <section class="analysis-page" id="pedigreeContent"></section>
+  </main>
+
+  <main class="analysis-shell view" id="methodView" hidden>
+    <section class="analysis-page" id="methodContent"></section>
+  </main>
+
   <div class="drawer" id="drawer" aria-hidden="true">
     <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="close"></button>
     <aside class="drawer-panel">
@@ -141,6 +171,6 @@
   </div>
 
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260711c"></script>
+  <script src="app.js?v=20260714a"></script>
 </body>
 </html>

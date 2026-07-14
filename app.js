@@ -5,6 +5,7 @@ const state = {
   color: "",
   region: "",
   trainer: "",
+  broodmare_sire: "",
   female_family: "",
   bms_line: "",
   achievement: "",
@@ -23,6 +24,7 @@ const els = {
   color: document.querySelector("#color"),
   region: document.querySelector("#region"),
   trainer: document.querySelector("#trainer"),
+  broodmareSire: document.querySelector("#broodmareSire"),
   femaleFamily: document.querySelector("#femaleFamily"),
   bmsLine: document.querySelector("#bmsLine"),
   achievement: document.querySelector("#achievement"),
@@ -38,6 +40,12 @@ const els = {
   detail: document.querySelector("#detail"),
   closeDrawer: document.querySelector("#closeDrawer"),
   closeBackdrop: document.querySelector("#closeBackdrop"),
+  navButtons: document.querySelectorAll(".main-nav button"),
+  views: document.querySelectorAll(".view"),
+  sireContent: document.querySelector("#sireContent"),
+  bmsContent: document.querySelector("#bmsContent"),
+  pedigreeContent: document.querySelector("#pedigreeContent"),
+  methodContent: document.querySelector("#methodContent"),
 };
 
 function fmt(value) {
@@ -66,6 +74,7 @@ function escapeHtml(value) {
 const staticData = {
   summary: null,
   horses: null,
+  analytics: new Map(),
   details: new Map(),
 };
 
@@ -127,6 +136,7 @@ function staticHorseList(horses, params) {
     ["color", "color"],
     ["region", "trainer_region"],
     ["trainer", "trainer"],
+    ["broodmare_sire", "broodmare_sire"],
     ["female_family", "female_family"],
     ["bms_line", "bms_line"],
     ["achievement", "achievement_class"],
@@ -171,6 +181,9 @@ async function getStaticJson(url) {
     }
     return staticData.details.get(id);
   }
+  if (parsed.pathname.startsWith("/data/analytics/")) {
+    return fetchStaticData(parsed.pathname.replace(/^\/data\//, ""));
+  }
   throw new Error(`Static route not found: ${parsed.pathname}`);
 }
 
@@ -179,6 +192,13 @@ async function getJson(url) {
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Request failed: ${response.status}`);
   return response.json();
+}
+
+async function getAnalytics(name) {
+  if (!staticData.analytics.has(name)) {
+    staticData.analytics.set(name, await getJson(`/data/analytics/${encodeURIComponent(name)}.json`));
+  }
+  return staticData.analytics.get(name);
 }
 
 function debounce(fn, wait = 220) {
@@ -217,6 +237,7 @@ async function loadSummary() {
   fillFacet(els.region, summary.facets.regions);
   window.trainerFacets = summary.facets.trainers;
   fillTrainerFacet();
+  fillFacet(els.broodmareSire, summary.facets.broodmareSires || []);
   fillFacet(els.femaleFamily, summary.facets.femaleFamilies);
   fillFacet(els.bmsLine, summary.facets.bmsLines);
   fillFacet(els.achievement, summary.facets.achievements);
@@ -240,6 +261,294 @@ function fillTrainerFacet() {
   }
 }
 
+function formatNumber(value, digits = 0) {
+  if (value === null || value === undefined || value === "") return "—";
+  return Number(value).toLocaleString("ja-JP", { maximumFractionDigits: digits });
+}
+
+function formatRate(value) {
+  if (value === null || value === undefined) return "—";
+  return `${(Number(value) * 100).toFixed(1)}%`;
+}
+
+function representativeNames(row) {
+  const reps = row.representatives || [];
+  if (!reps.length) return "—";
+  return reps.map((rep) => [rep.name, rep.hkjc_name_zh ? `(${rep.hkjc_name_zh})` : "", rep.achievement_class].filter(Boolean).join(" ")).join(" / ");
+}
+
+function metricCard(label, value, sub = "") {
+  return `
+    <article class="metric-card">
+      <span>${escapeHtml(label)}</span>
+      <strong>${escapeHtml(value)}</strong>
+      ${sub ? `<small>${escapeHtml(sub)}</small>` : ""}
+    </article>
+  `;
+}
+
+function analysisTable(columns, rows, options = {}) {
+  const limit = options.limit || rows.length;
+  return `
+    <div class="analysis-table-wrap">
+      <table class="analysis-table">
+        <thead>
+          <tr>${columns.map((column) => `<th>${escapeHtml(column.label)}</th>`).join("")}</tr>
+        </thead>
+        <tbody>
+          ${rows.slice(0, limit).map((row) => `
+            <tr>
+              ${columns.map((column) => `<td>${column.html ? column.value(row) : escapeHtml(column.value(row))}</td>`).join("")}
+            </tr>
+          `).join("")}
+        </tbody>
+      </table>
+    </div>
+  `;
+}
+
+function sectionBlock(title, lead, body) {
+  return `
+    <section class="analysis-block">
+      <div class="analysis-block-head">
+        <h2>${escapeHtml(title)}</h2>
+        ${lead ? `<p>${escapeHtml(lead)}</p>` : ""}
+      </div>
+      ${body}
+    </section>
+  `;
+}
+
+function bmsFilterButton(label) {
+  return `<button class="link-button" type="button" data-bms-filter="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
+}
+
+function broodmareSireFilterButton(label) {
+  return `<button class="link-button" type="button" data-broodmare-sire-filter="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
+}
+
+function setSelectValue(select, value) {
+  if ([...select.options].some((option) => option.value === value)) {
+    select.value = value;
+    return true;
+  }
+  return false;
+}
+
+function applyBmsFilter(value) {
+  state.bms_line = value;
+  setSelectValue(els.bmsLine, value);
+  state.offset = 0;
+  showView("progeny");
+  loadHorses();
+}
+
+function applyBroodmareSireFilter(value) {
+  state.broodmare_sire = value;
+  setSelectValue(els.broodmareSire, value);
+  state.offset = 0;
+  showView("progeny");
+  loadHorses();
+}
+
+function wireAnalysisFilters(container) {
+  for (const button of container.querySelectorAll("[data-bms-filter]")) {
+    button.addEventListener("click", () => applyBmsFilter(button.dataset.bmsFilter));
+  }
+  for (const button of container.querySelectorAll("[data-broodmare-sire-filter]")) {
+    button.addEventListener("click", () => applyBroodmareSireFilter(button.dataset.broodmareSireFilter));
+  }
+}
+
+async function renderSireAnalysis() {
+  if (els.sireContent.dataset.loaded) return;
+  const [overview, crops, distanceSurface] = await Promise.all([
+    getAnalytics("overview"),
+    getAnalytics("crops"),
+    getAnalytics("distance_surface"),
+  ]);
+  const summary = overview.summary;
+  els.sireContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Sire Analysis</p>
+      <h1>種牡馬成績</h1>
+      <p>現在の静的スナップショット内で計算できる産駒成績を、世代・馬場・距離・性別に分けて表示します。</p>
+    </div>
+    <div class="metric-grid">
+      ${metricCard("Foals", formatNumber(summary.foals), summary.generation_range)}
+      ${metricCard("Runners", formatNumber(summary.runners), `出走率 ${formatRate(summary.runner_rate)}`)}
+      ${metricCard("Winners", formatNumber(summary.winners), `勝馬率 ${formatRate(summary.winner_foal_rate)}`)}
+      ${metricCard("Graded winners", formatNumber(summary.graded_winners), `対産駒 ${formatRate(summary.graded_foal_rate)}`)}
+      ${metricCard("G1 winners", formatNumber(summary.g1_winners), `対産駒 ${formatRate(summary.g1_foal_rate)}`)}
+      ${metricCard("AWD", summary.awd ? `${formatNumber(summary.awd)} m` : "—", `${formatNumber(summary.winning_distance_count)} 勝から算出`)}
+    </div>
+    ${sectionBlock("Crop-by-crop", "世代ごとの出走率、勝馬率、重賞勝馬数、賞金の比較です。",
+      analysisTable([
+        { label: "生年", value: (row) => row.label },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "平均賞金", value: (row) => money(row.avg_earnings_per_foal) },
+        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
+      ], crops)
+    )}
+    ${sectionBlock("Surface / Distance / Sex", "race_resultsに入っている全走レベルの集計です。",
+      `<div class="analysis-split">
+        ${analysisTable([
+          { label: "馬場", value: (row) => row.label },
+          { label: "出走", value: (row) => formatNumber(row.starts) },
+          { label: "勝利", value: (row) => formatNumber(row.wins) },
+          { label: "勝率", value: (row) => formatRate(row.win_rate) },
+          { label: "AWD", value: (row) => row.awd ? `${formatNumber(row.awd)} m` : "—" },
+        ], distanceSurface.by_surface)}
+        ${analysisTable([
+          { label: "区分", value: (row) => row.label },
+          { label: "出走", value: (row) => formatNumber(row.starts) },
+          { label: "勝利", value: (row) => formatNumber(row.wins) },
+          { label: "勝率", value: (row) => formatRate(row.win_rate) },
+        ], distanceSurface.by_distance)}
+      </div>`
+    )}
+    ${sectionBlock("Sex Split", "牡牝別の出走数・勝利数・勝率です。",
+      analysisTable([
+        { label: "性", value: (row) => row.label },
+        { label: "出走", value: (row) => formatNumber(row.starts) },
+        { label: "勝利", value: (row) => formatNumber(row.wins) },
+        { label: "勝率", value: (row) => formatRate(row.win_rate) },
+        { label: "総賞金", value: (row) => money(row.total_prize) },
+      ], distanceSurface.by_sex)
+    )}
+  `;
+  els.sireContent.dataset.loaded = "true";
+}
+
+async function renderBmsAnalysis() {
+  if (els.bmsContent.dataset.loaded) return;
+  const [overview, bmsLines, broodmareSires] = await Promise.all([
+    getAnalytics("overview"),
+    getAnalytics("bms_lines"),
+    getAnalytics("broodmare_sires"),
+  ]);
+  const totalFoals = overview.summary.foals || 0;
+  els.bmsContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Broodmare Sire Analysis</p>
+      <h1>母父分析</h1>
+      <p>母父大系の構成比と、具体的な母父別リーダーボードです。各行から産駒一覧へ戻って絞り込めます。</p>
+    </div>
+    <div class="lineage-summary">
+      ${bmsLines.map((row) => `
+        <article class="lineage-card">
+          <div>${bmsFilterButton(row.label)}</div>
+          <strong>${formatNumber(row.foals)}</strong>
+          <span>${formatRate(row.foals / totalFoals)} / 勝馬 ${formatNumber(row.winners)}</span>
+        </article>
+      `).join("")}
+    </div>
+    ${sectionBlock("BMS Line Composition", "8分類の母父系ごとの標本数、勝馬率、重賞勝馬率です。",
+      analysisTable([
+        { label: "母父系", value: (row) => bmsFilterButton(row.label), html: true },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "構成比", value: (row) => formatRate(row.foals / totalFoals) },
+        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "重賞勝馬", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
+        { label: "代表馬", value: representativeNames },
+      ], bmsLines)
+    )}
+    ${sectionBlock("Broodmare Sire Leaderboard", "母父名そのもののランキングです。標本数が小さい行は率を読むときに注意が必要です。",
+      analysisTable([
+        { label: "母父", value: (row) => broodmareSireFilterButton(row.label), html: true },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
+        { label: "代表馬", value: representativeNames },
+      ], broodmareSires, { limit: 80 })
+    )}
+  `;
+  wireAnalysisFilters(els.bmsContent);
+  els.bmsContent.dataset.loaded = "true";
+}
+
+async function renderPedigreeAnalysis() {
+  if (els.pedigreeContent.dataset.loaded) return;
+  const pedigree = await getAnalytics("pedigree");
+  els.pedigreeContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Pedigree Analysis</p>
+      <h1>血統分析</h1>
+      <p>現時点では登録済みのクロス文字列、牝系、母父系から安全に集計できる範囲だけを表示します。</p>
+    </div>
+    ${sectionBlock("Cross Ancestors", "クロス欄に現れる祖先名の頻度です。",
+      analysisTable([
+        { label: "祖先", value: (row) => row.label },
+        { label: "件数", value: (row) => formatNumber(row.count) },
+      ], pedigree.top_ancestors)
+    )}
+    ${sectionBlock("Cross Patterns", "S/M表記の組み合わせ別の頻度です。",
+      analysisTable([
+        { label: "Pattern", value: (row) => row.label },
+        { label: "件数", value: (row) => formatNumber(row.count) },
+      ], pedigree.cross_patterns)
+    )}
+    ${sectionBlock("Female Family Performance", "牝系ごとの産駒数と成績。未分類は今後の再調査対象です。",
+      analysisTable([
+        { label: "牝系", value: (row) => row.label },
+        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
+        { label: "総賞金", value: (row) => money(row.total_earnings) },
+        { label: "代表馬", value: representativeNames },
+      ], pedigree.female_families)
+    )}
+  `;
+  els.pedigreeContent.dataset.loaded = "true";
+}
+
+async function renderMethodology() {
+  if (els.methodContent.dataset.loaded) return;
+  const method = await getAnalytics("methodology");
+  els.methodContent.innerHTML = `
+    <div class="analysis-title">
+      <p class="kicker">Data & Method</p>
+      <h1>データ・方法</h1>
+      <p>この公開静的版での計算口径と、まだ外部データが必要な項目です。</p>
+    </div>
+    <section class="analysis-block">
+      <div class="method-list">
+        ${Object.entries(method).filter(([key]) => key !== "last_updated").map(([key, value]) => `
+          <article>
+            <strong>${escapeHtml(key)}</strong>
+            <p>${escapeHtml(value)}</p>
+          </article>
+        `).join("")}
+      </div>
+      <p class="method-updated">Last updated: ${escapeHtml(method.last_updated)}</p>
+    </section>
+  `;
+  els.methodContent.dataset.loaded = "true";
+}
+
+async function showView(name) {
+  for (const view of els.views) {
+    const active = view.id === `${name}View`;
+    view.hidden = !active;
+    view.classList.toggle("active", active);
+  }
+  for (const button of els.navButtons) {
+    button.classList.toggle("active", button.dataset.view === name);
+  }
+  if (name === "sire") await renderSireAnalysis();
+  if (name === "bms") await renderBmsAnalysis();
+  if (name === "pedigree") await renderPedigreeAnalysis();
+  if (name === "method") await renderMethodology();
+}
+
 function horseQuery() {
   const params = new URLSearchParams({
     q: state.q,
@@ -248,6 +557,7 @@ function horseQuery() {
     color: state.color,
     region: state.region,
     trainer: state.trainer,
+    broodmare_sire: state.broodmare_sire,
     female_family: state.female_family,
     bms_line: state.bms_line,
     achievement: state.achievement,
@@ -608,6 +918,10 @@ function bindControls() {
     state.trainer = els.trainer.value;
     refresh();
   });
+  els.broodmareSire.addEventListener("change", () => {
+    state.broodmare_sire = els.broodmareSire.value;
+    refresh();
+  });
   els.femaleFamily.addEventListener("change", () => {
     state.female_family = els.femaleFamily.value;
     refresh();
@@ -645,6 +959,14 @@ function bindControls() {
   });
   els.closeDrawer.addEventListener("click", closeDrawer);
   els.closeBackdrop.addEventListener("click", closeDrawer);
+  for (const button of els.navButtons) {
+    button.addEventListener("click", () => {
+      showView(button.dataset.view).catch((error) => {
+        const content = els[`${button.dataset.view}Content`];
+        if (content) content.innerHTML = `<p class="muted">${escapeHtml(error.message)}</p>`;
+      });
+    });
+  }
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") closeDrawer();
   });
