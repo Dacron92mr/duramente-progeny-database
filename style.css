@@ -923,6 +923,14 @@ td {
   margin-bottom: 18px;
 }
 
+.chart-grid.single-chart {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.chart-grid > .analysis-block {
+  margin: 0;
+}
+
 .chart-card {
   border: 1px solid var(--line);
   border-radius: 8px;
@@ -962,7 +970,8 @@ td {
   font-weight: 800;
 }
 
-.sire-note {
+.sire-note,
+.source-note {
   margin-top: 12px;
   color: var(--muted);
   font-size: 13px;
@@ -1015,6 +1024,8 @@ td {
 .analysis-controls {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 12px;
   margin-bottom: 12px;
 }
 
@@ -1027,7 +1038,8 @@ td {
   font-weight: 900;
 }
 
-.analysis-controls select {
+.analysis-controls select,
+.analysis-controls input {
   width: auto;
   min-width: 150px;
 }
