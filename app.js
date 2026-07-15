@@ -101,6 +101,57 @@ const CROP_COLORS = {
   "2022": "#2f7d6b",
 };
 
+const LEADING_CATEGORY_CATALOG = [
+  {
+    category: "jra_overall",
+    label: "年度别中央（JRA）",
+    source_url: "https://db.netkeiba.com/horse/sire_leading_jra.html",
+  },
+  {
+    category: "jra_nar_overall",
+    label: "年度别全部（JRA+NAR）",
+    source_url: "https://www.jbis.or.jp/ranking/result/?ranking=1&kind=1&division=1&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
+  },
+  {
+    category: "two_year_all",
+    label: "两岁全部",
+    source_url: "https://www.jbis.or.jp/ranking/result/?ranking=2&racetype1=1&racetype2=1",
+  },
+  {
+    category: "two_year_jra",
+    label: "两岁中央",
+    source_url: "https://www.jbis.or.jp/ranking/result/?ranking=2&kind=1&division=2&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
+  },
+  {
+    category: "first_crop_all",
+    label: "初年度全部",
+    source_url: "https://www.jbis.or.jp/ranking/result/?ranking=3&kind=1&division=1&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
+  },
+  {
+    category: "first_crop_jra",
+    label: "初年度中央",
+    source_url: "https://www.jbis.or.jp/ranking/result/?ranking=3&kind=1&division=2&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
+  },
+];
+
+function normalizeLeadingCategories(payload) {
+  const existing = new Map((payload.categories || []).map((row) => [row.category, row]));
+  return {
+    ...payload,
+    categories: LEADING_CATEGORY_CATALOG.map((item) => {
+      const current = existing.get(item.category);
+      return {
+        ...item,
+        ...current,
+        label: item.label,
+        source_url: item.source_url,
+        status: current?.status || (item.category === "jra_overall" ? "available" : "missing"),
+        note: current?.note || (item.category === "jra_overall" ? "" : "已保留来源入口，尚未抓取为结构化Top10数据；不使用本库自行推算全日本排名。"),
+      };
+    }),
+  };
+}
+
 function cropColor(crop) {
   return CROP_COLORS[String(crop)] || COLORS.gray;
 }
@@ -155,6 +206,7 @@ function searchText(horse) {
     horse.dam,
     horse.pedigree_crosses,
     horse.broodmare_sire,
+    horse.owner,
     horse.trainer,
     horse.breeder,
   ].filter(Boolean).join(" ").toLowerCase();
@@ -633,34 +685,36 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     ],
   });
 
-  const cropMetric = document.querySelector("#sireCropMetric")?.value || "total_earnings";
-  const cropMeta = sireCropMetricMeta(cropMetric);
-  renderChart("sireCropMetricChart", {
-    color: [COLORS.duramente],
-    tooltip: {
-      trigger: "axis",
-      formatter: (items) => {
-        const item = items[0];
-        const row = item.data.raw;
-        return `${row.label}年生<br>${cropMeta.label}: ${cropMeta.format(row[cropMetric])}<br>样本: Foals ${row.foals} / Runners ${row.runners}`;
+  const renderCropBar = (id, metric, title, unit, formatter, isRate = false, color = COLORS.duramente) => {
+    renderChart(id, {
+      color: [color],
+      tooltip: {
+        trigger: "axis",
+        axisPointer: { type: "shadow" },
+        formatter: (items) => {
+          const item = items[0];
+          const row = item.data.raw;
+          return `${row.label}年生<br>${title}: ${formatter(row[metric])}<br>Foals ${row.foals} / Runners ${row.runners}`;
+        },
       },
-    },
-    grid: { left: 64, right: 24, top: 26, bottom: 42 },
-    xAxis: { type: "category", data: cropLabels },
-    yAxis: { type: "value", name: cropMeta.unit },
-    series: [{
-      name: cropMeta.label,
-      type: "bar",
-      data: crops.map((row) => ({
-        value: cropMetric.includes("rate") ? Number(((row[cropMetric] || 0) * 100).toFixed(1)) : row[cropMetric],
-        raw: row,
-      })),
-      label: { show: true, position: "top", formatter: (params) => {
-        const row = params.data.raw;
-        return cropMetric.includes("rate") ? `${params.value}%\nn=${row.foals}` : `${formatNumber(params.value, 1)}\nn=${row.foals}`;
-      } },
-    }],
-  });
+      grid: { left: 48, right: 18, top: 20, bottom: 32, containLabel: true },
+      xAxis: { type: "category", data: cropLabels },
+      yAxis: { type: "value", name: unit },
+      series: [{
+        name: title,
+        type: "bar",
+        barWidth: 18,
+        data: crops.map((row) => ({
+          value: isRate ? Number(((row[metric] || 0) * 100).toFixed(1)) : row[metric],
+          raw: row,
+          itemStyle: { color },
+        })),
+      }],
+    });
+  };
+  renderCropBar("sireCropEarningsChart", "total_earnings", "总奖金", "万円", money, false, COLORS.gold);
+  renderCropBar("sireCropWinnersChart", "winners", "胜马数", "匹", (value) => formatNumber(value), false, COLORS.duramente);
+  renderCropBar("sireCropGradedRateChart", "graded_foal_rate", "重赏马率", "%", formatRate, true, COLORS.gold);
 
   const ages = ["2", "3", "4", "5", "6+"];
   const cropSet = [...new Set(profile.crop_development.map((row) => String(row.crop)))].sort();
@@ -700,9 +754,15 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   const missingBox = document.querySelector("#leadingMissingMessage");
   if (missingBox) missingBox.textContent = missing ? `${categoryInfo.label}：${categoryInfo.note || "暂无可靠来源。"} ` : "";
   renderChart("sireLeadingRankChart", missing ? { title: { text: "该分类暂无可靠来源", left: "center", top: "middle" } } : {
-    color: [COLORS.duramente, COLORS.gold],
-    tooltip: { trigger: "axis" },
-    grid: { left: 44, right: 24, top: 24, bottom: 36, containLabel: true },
+    color: [COLORS.duramente],
+    tooltip: {
+      trigger: "axis",
+      formatter: (items) => {
+        const item = items.find((entry) => entry.seriesName === "ドゥラメンテ排名") || items[0];
+        return `${item.axisValue}<br>ドゥラメンテ排名：${item.value}`;
+      },
+    },
+    grid: { left: 44, right: 24, top: 68, bottom: 36, containLabel: true },
     xAxis: { type: "category", name: "年份", data: history.map((row) => row.year) },
     yAxis: { type: "value", name: "排名", inverse: true, min: 1 },
     series: [
@@ -717,20 +777,21 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
           itemStyle: { color: "rgba(216, 155, 43, 0.10)" },
           data: [[{ xAxis: "2023" }, { xAxis: "2023" }]],
         },
-      },
-      {
-        name: "2023 Leading Sire",
-        type: "scatter",
-        symbolSize: 18,
-        data: history.map((row) => Number(row.year) === 2023 ? row.rank : null),
-        itemStyle: { color: COLORS.gold },
-        label: {
-          show: true,
-          formatter: "2023\nLeading Sire\n第1位",
-          position: "top",
-          color: COLORS.gold,
-          fontWeight: 900,
-          lineHeight: 16,
+        markPoint: {
+          symbol: "circle",
+          symbolSize: 22,
+          itemStyle: { color: COLORS.gold },
+          label: {
+            show: true,
+            formatter: "2023\n第1位",
+            position: "top",
+            color: COLORS.gold,
+            fontWeight: 900,
+            lineHeight: 16,
+          },
+          data: history
+            .filter((row) => Number(row.year) === 2023)
+            .map((row) => ({ coord: [String(row.year), row.rank], value: row.rank })),
         },
       },
     ],
@@ -763,7 +824,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
 
 async function renderSireAnalysis() {
   if (els.sireContent.dataset.loaded) return;
-  const [overview, sireProfile, market, leadingHistory, leadingTop10, categories] = await Promise.all([
+  const [overview, sireProfile, market, leadingHistory, leadingTop10, rawCategories] = await Promise.all([
     getAnalytics("overview"),
     getAnalytics("sire_profile"),
     getAnalytics("sire_market"),
@@ -771,6 +832,7 @@ async function renderSireAnalysis() {
     getAnalytics("leading_sire_top10"),
     getAnalytics("sire_category_rankings"),
   ]);
+  const categories = normalizeLeadingCategories(rawCategories);
   const profile = sireProfile.summary;
   const years = [...new Set((leadingHistory.history || [])
     .filter((row) => Number(row.year) >= 2020 && Number(row.year) <= 2025)
@@ -791,16 +853,28 @@ async function renderSireAnalysis() {
     )}
     ${sectionBlock("出生世代表现", "比较各出生世代的当前成绩和年龄发展轨迹。",
       `<div class="chart-grid cohort-grid">
-        ${controlledChartBlock("各出生世代表现", "每次只看一个指标；图中保留样本量。", "sireCropMetricChart", `
-          <label><span>指标</span><select id="sireCropMetric">
-            <option value="total_earnings">总奖金</option>
-            <option value="earnings_per_foal">每匹平均奖金</option>
-            <option value="winners">胜马数</option>
-            <option value="winner_foal_rate">胜马率</option>
-            <option value="graded_winners">重赏胜马数</option>
-            <option value="graded_foal_rate">重赏马率</option>
-          </select></label>
-        `)}
+        <article class="chart-card">
+          <div class="chart-card-head">
+            <div>
+              <h3>各出生世代表现</h3>
+              <p>拆成三个核心指标；具体数值放在Tooltip里。</p>
+            </div>
+          </div>
+          <div class="mini-crop-grid">
+            <div>
+              <h4>总奖金</h4>
+              <div class="chart-canvas mini-chart" id="sireCropEarningsChart"></div>
+            </div>
+            <div>
+              <h4>胜马数</h4>
+              <div class="chart-canvas mini-chart" id="sireCropWinnersChart"></div>
+            </div>
+            <div>
+              <h4>重赏马率</h4>
+              <div class="chart-canvas mini-chart" id="sireCropGradedRateChart"></div>
+            </div>
+          </div>
+        </article>
         ${controlledChartBlock("产驹成长曲线", "未达到的年龄使用缺失值，线条直接停止。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
             <option value="cumulative_wins">原始累计胜场</option>
@@ -862,7 +936,7 @@ async function renderSireAnalysis() {
   `;
   wireExpandableTables(els.sireContent);
   const rerender = () => renderSireCharts(sireProfile, market, leadingHistory, leadingTop10, categories);
-  for (const id of ["sireCropMetric", "sireDevelopmentMetric", "sireLeadingCategory", "sireTop10Year"]) {
+  for (const id of ["sireDevelopmentMetric", "sireLeadingCategory", "sireTop10Year"]) {
     els.sireContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
   }
   renderSireCharts(sireProfile, market, leadingHistory, leadingTop10, categories);
@@ -1401,11 +1475,6 @@ async function renderProductionAnalysis() {
     const panel = els.productionContent.querySelector("#productionPanel");
     if (tab === "dam") {
       panel.innerHTML = `
-        <div class="metric-grid compact-metrics">
-          ${metricCard("精确母龄", formatNumber(damAge.summary.exact), formatRate(damAge.summary.exact_rate))}
-          ${metricCard("年份推算", formatNumber(damAge.summary.year_only), formatRate(damAge.summary.year_only_rate))}
-          ${metricCard("未知", formatNumber(damAge.summary.unknown), formatRate(damAge.summary.unknown_rate))}
-        </div>
         <div class="chart-grid">
           ${chartBlock("母马生产本胎时的年龄", "横轴为母龄，纵轴为产驹数。", "damAgeHistogramChart")}
           ${chartBlock("不同母龄组的产驹胜马率", "显示Winners/Foals。", "damAgeWinRateChart")}
@@ -1414,7 +1483,7 @@ async function renderProductionAnalysis() {
           ${chartBlock("不同母龄组的重赏马率", "显示重赏马/Foals。", "damAgeGradedRateChart")}
           ${chartBlock("胎次与表现", "柱为Foals，线为胜马率。", "damFoalOrderChart")}
         </div>
-        ${sectionBlock("母龄分组明细", "母龄按精确日期或年份推算；unknown不填0。",
+        ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
           analysisTable([
             { label: "母龄组", value: (row) => row.label },
             { label: "Foals", value: (row) => formatNumber(row.foals) },
@@ -1723,8 +1792,22 @@ function crossItems(value) {
 
 function damAgeText(horse) {
   if (horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined) return "unknown";
-  const suffix = horse.dam_age_precision === "exact" ? "精确日期" : horse.dam_age_precision === "year_only" ? "按年份估算" : "unknown";
-  return `${horse.dam_age_at_foaling}岁（${suffix}）`;
+  return `${horse.dam_age_at_foaling}岁`;
+}
+
+function isLocalHorse(horse) {
+  return horse.trainer_region === "地方" || String(horse.affiliation || "").includes("地方");
+}
+
+function ownerCell(horse) {
+  const owner = escapeHtml(horse.owner || "—");
+  const colorUrl = horse.owner_color_url && !isLocalHorse(horse) ? String(horse.owner_color_url) : "";
+  return `
+    <div class="owner-cell">
+      ${colorUrl ? `<img class="owner-silk" src="${escapeHtml(colorUrl)}" alt="${owner}">` : ""}
+      <span>${owner}</span>
+    </div>
+  `;
 }
 
 function finishBadge(finish) {
@@ -1734,7 +1817,7 @@ function finishBadge(finish) {
 }
 
 async function loadHorses() {
-  els.horseRows.innerHTML = `<tr><td colspan="11" class="muted">Loading...</td></tr>`;
+  els.horseRows.innerHTML = `<tr><td colspan="12" class="muted">Loading...</td></tr>`;
   const data = await getJson(horseQuery());
   state.total = data.total;
   els.resultCount.textContent = `${data.total.toLocaleString("ja-JP")} 件`;
@@ -1750,7 +1833,6 @@ async function loadHorses() {
       <td>${regionBadge(horse.trainer_region)}</td>
       <td class="dam-name">
         <div>${escapeHtml(horse.dam)}</div>
-        <div class="muted">${horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined ? "母龄 unknown" : `母龄 ${escapeHtml(horse.dam_age_at_foaling)}岁`}</div>
       </td>
       <td>${lineageBadge(horse.female_family)}</td>
       <td class="bms-cell">
@@ -1759,6 +1841,7 @@ async function loadHorses() {
           ${lineageBadge(horse.bms_line)}
         </div>
       </td>
+      <td class="owner-name">${ownerCell(horse)}</td>
       <td class="trainer-name">${escapeHtml(horse.trainer)}</td>
       <td class="money">${escapeHtml(prize(horse))}</td>
       <td class="record-cell">
@@ -1766,7 +1849,7 @@ async function loadHorses() {
         <div class="muted">${escapeHtml(horse.career_summary || "")}</div>
       </td>
     </tr>
-  `).join("") || `<tr><td colspan="11" class="muted">No results</td></tr>`;
+  `).join("") || `<tr><td colspan="12" class="muted">No results</td></tr>`;
 
   for (const row of els.horseRows.querySelectorAll("tr[data-id]")) {
     row.addEventListener("click", () => openHorse(row.dataset.id));
@@ -2002,12 +2085,11 @@ async function openHorse(id) {
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分類")}</strong></div>
       <div class="fact fact-cross"><span>クロス</span><strong>${crossItems(horse.pedigree_crosses)}</strong></div>
+      <div class="fact"><span>馬主</span><strong>${ownerCell(horse)}</strong></div>
       <div class="fact"><span>調教師</span><strong>${escapeHtml(horse.trainer)}</strong></div>
       <div class="fact"><span>生産牧場</span><strong>${escapeHtml(horse.breeder)}</strong></div>
       <div class="fact"><span>産地</span><strong>${escapeHtml(horse.birthplace)}</strong></div>
       <div class="fact"><span>通算成績</span><strong>${escapeHtml(horse.career_summary)}</strong></div>
-      <div class="fact"><span>母马成绩</span><strong>${escapeHtml(horse.dam_career_summary || "unknown")}</strong></div>
-      <div class="fact"><span>母马奖金</span><strong>${escapeHtml(money(horse.dam_earnings))}</strong></div>
       <div class="fact"><span>最高戦績</span><strong>${escapeHtml(horse.achievement_class)}</strong></div>
       <div class="fact"><span>賞金</span><strong>${escapeHtml(prize(horse))}</strong></div>
       <div class="fact"><span>主な勝鞍</span><strong>${escapeHtml(horse.major_win)}</strong></div>
