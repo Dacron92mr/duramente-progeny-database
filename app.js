@@ -144,9 +144,9 @@ function normalizeLeadingCategories(payload) {
         ...item,
         ...current,
         label: item.label,
-        source_url: item.source_url,
+        source_url: current?.source_url || item.source_url,
         status: current?.status || (item.category === "jra_overall" ? "available" : "missing"),
-        note: current?.note || (item.category === "jra_overall" ? "" : "已保留来源入口，尚未抓取为结构化Top10数据；不使用本库自行推算全日本排名。"),
+        note: current?.note || (item.category === "jra_overall" ? "" : "该分类暂无可解析排行；不使用本库自行推算全日本排名。"),
       };
     }),
   };
@@ -747,13 +747,37 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
 
   const category = document.querySelector("#sireLeadingCategory")?.value || "jra_overall";
   const categoryInfo = (categories.categories || []).find((item) => item.category === category);
-  const history = (leadingHistory.history || [])
-    .filter((row) => row.category === category && Number(row.year) >= 2020 && Number(row.year) <= 2025)
+  const completeJraYear = (year) => Number(year) >= 2020 && Number(year) <= 2025;
+  const leadingRowsForCategory = (leadingHistory.history || []).filter((row) => (
+    row.category === category && (category === "jra_overall" ? completeJraYear(row.year) : true)
+  ));
+  const history = leadingRowsForCategory
     .sort((a, b) => Number(a.year) - Number(b.year));
+  const availableYears = [...new Set([
+    ...((leadingTop10.rows || [])
+      .filter((row) => row.category === category)
+      .map((row) => Number(row.year))),
+    ...history.map((row) => Number(row.year)),
+  ])]
+    .filter((year) => !Number.isNaN(year) && (category === "jra_overall" ? completeJraYear(year) : true))
+    .sort((a, b) => b - a);
+  const yearSelect = document.querySelector("#sireTop10Year");
+  const defaultYear = category === "jra_overall" && availableYears.includes(2023) ? 2023 : availableYears[0];
+  const previousYear = Number(yearSelect?.value || defaultYear);
+  const selectedYear = availableYears.includes(previousYear) ? previousYear : defaultYear;
+  if (yearSelect) {
+    const nextOptions = availableYears.map((year) => `<option value="${year}" ${year === selectedYear ? "selected" : ""}>${year}</option>`).join("");
+    if (yearSelect.dataset.category !== category || yearSelect.innerHTML !== nextOptions) {
+      yearSelect.innerHTML = nextOptions;
+      yearSelect.dataset.category = category;
+    }
+    if (selectedYear) yearSelect.value = String(selectedYear);
+  }
   const missing = categoryInfo && categoryInfo.status !== "available";
   const missingBox = document.querySelector("#leadingMissingMessage");
   if (missingBox) missingBox.textContent = missing ? `${categoryInfo.label}：${categoryInfo.note || "暂无可靠来源。"} ` : "";
-  renderChart("sireLeadingRankChart", missing ? { title: { text: "该分类暂无可靠来源", left: "center", top: "middle" } } : {
+  const rankEmptyTitle = missing ? "该分类暂无可靠来源" : "ドゥラメンテ未进入该分类排行";
+  renderChart("sireLeadingRankChart", (missing || !history.length) ? { title: { text: rankEmptyTitle, left: "center", top: "middle" } } : {
     color: [COLORS.duramente],
     tooltip: {
       trigger: "axis",
@@ -772,12 +796,12 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
         smooth: true,
         symbolSize: 7,
         data: history.map((row) => row.rank),
-        markArea: {
+        markArea: category === "jra_overall" ? {
           silent: true,
           itemStyle: { color: "rgba(216, 155, 43, 0.10)" },
           data: [[{ xAxis: "2023" }, { xAxis: "2023" }]],
-        },
-        markPoint: {
+        } : undefined,
+        markPoint: category === "jra_overall" ? {
           symbol: "circle",
           symbolSize: 22,
           itemStyle: { color: COLORS.gold },
@@ -792,27 +816,51 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
           data: history
             .filter((row) => Number(row.year) === 2023)
             .map((row) => ({ coord: [String(row.year), row.rank], value: row.rank })),
-        },
+        } : undefined,
       },
     ],
   });
-  const yearSelect = document.querySelector("#sireTop10Year");
-  const selectedYear = Number(yearSelect?.value || 2023);
   const topRows = (leadingTop10.rows || []).filter((row) => row.category === category && Number(row.year) === selectedYear);
   const durRow = history.find((row) => Number(row.year) === selectedYear);
-  const chartRows = durRow && !topRows.some((row) => row.sire === "ドゥラメンテ") ? [...topRows, durRow] : topRows;
-  chartRows.sort((a, b) => (b.earnings || 0) - (a.earnings || 0));
-  renderChart("sireTop10Chart", missing ? { title: { text: "该分类暂无可靠来源", left: "center", top: "middle" } } : {
+  const sortedTopRows = [...topRows]
+    .sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999))
+    .slice(0, 10);
+  const chartRows = durRow && !sortedTopRows.some((row) => row.sire === "ドゥラメンテ")
+    ? [...sortedTopRows, durRow].sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999))
+    : sortedTopRows;
+  const topMetric = chartRows.some((row) => row.earnings != null)
+    ? { key: "earnings", label: "賞金", unit: "万円" }
+    : chartRows.some((row) => row.wins != null)
+      ? { key: "wins", label: "胜利回数", unit: "胜" }
+      : { key: "runners", label: "出走头数", unit: "头" };
+  renderChart("sireTop10Chart", (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂无可靠来源" : "该年份暂无Top10数据", left: "center", top: "middle" } } : {
     color: [COLORS.muted],
-    tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "shadow" },
+      formatter: (items) => {
+        const item = items[0];
+        const row = item.data.raw;
+        return [
+          `${row.year} ${row.category_label || row.category}`,
+          `${row.rank}位 ${escapeHtml(row.sire)}`,
+          `${topMetric.label}：${formatNumber(row[topMetric.key], 1)} ${topMetric.unit}`,
+          `出走头数：${formatNumber(row.runners || 0)}`,
+          `胜马：${formatNumber(row.winners || 0)} / 胜利：${formatNumber(row.wins || 0)}`,
+          `重赏胜马：${formatNumber(row.graded_winners || 0)}`,
+          `代表产驹：${escapeHtml(row.representative || "—")}`,
+        ].join("<br>");
+      },
+    },
     grid: horizontalGrid(22, 26, 40),
-    xAxis: { type: "value", name: "万円" },
+    xAxis: { type: "value", name: topMetric.unit },
     yAxis: longCategoryAxis(chartRows.map((row) => `${row.rank}. ${row.sire}`)),
     series: [{
-      name: "入着賞金",
+      name: topMetric.label,
       type: "bar",
       data: chartRows.map((row) => ({
-        value: row.earnings || 0,
+        value: row[topMetric.key] || 0,
+        raw: row,
         itemStyle: row.sire === "ドゥラメンテ"
           ? { color: selectedYear === 2023 ? COLORS.gold : "#c98991" }
           : { color: COLORS.muted },
@@ -896,7 +944,7 @@ async function renderSireAnalysis() {
       <p class="source-note" id="leadingMissingMessage"></p>
       <div class="chart-grid">
         ${chartBlock("年度Leading Sire排名", "完整年度2020-2025；2023年第1位用金色标注。", "sireLeadingRankChart")}
-        ${chartBlock("2023年度Top10", "默认展示2023年；切换年份时只轻度标记Duramente。", "sireTop10Chart")}
+        ${chartBlock("分类Top10", "默认展示2023年JRA榜；切换分类后自动使用该分类可用年份。", "sireTop10Chart")}
       </div>
       ${analysisTable([
         { label: "年份", value: (row) => row.year },
@@ -907,7 +955,7 @@ async function renderSireAnalysis() {
         { label: "榜首", value: (row) => row.leader_sire || "—" },
         { label: "距榜首差距", value: (row) => row.earnings_gap_to_leader == null ? "—" : money(row.earnings_gap_to_leader) },
         { label: "来源", value: (row) => `<a href="${escapeHtml(row.source_url)}" target="_blank" rel="noreferrer">来源</a>`, html: true },
-      ], (leadingHistory.history || []).filter((row) => Number(row.year) >= 2020 && Number(row.year) <= 2025), { initialLimit: 8 })}`
+      ], (leadingHistory.history || []), { initialLimit: 8 })}`
     )}
     <div class="metric-grid compact-metrics">
       ${metricCard("累计总奖金", money(profile.total_earnings), "马匹级累计")}
