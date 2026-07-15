@@ -5,6 +5,7 @@ const state = {
   color: "",
   region: "",
   trainer: "",
+  owner: "",
   broodmare_sire: "",
   female_family: "",
   dam_age_bucket: "",
@@ -25,6 +26,7 @@ const els = {
   color: document.querySelector("#color"),
   region: document.querySelector("#region"),
   trainer: document.querySelector("#trainer"),
+  owner: document.querySelector("#owner"),
   broodmareSire: document.querySelector("#broodmareSire"),
   femaleFamily: document.querySelector("#femaleFamily"),
   damAgeBucket: document.querySelector("#damAgeBucket"),
@@ -233,6 +235,7 @@ function staticHorseList(horses, params) {
     ["color", "color"],
     ["region", "trainer_region"],
     ["trainer", "trainer"],
+    ["owner", "owner"],
     ["broodmare_sire", "broodmare_sire"],
     ["female_family", "female_family"],
     ["bms_line", "bms_line"],
@@ -336,6 +339,7 @@ async function loadSummary() {
   fillFacet(els.region, summary.facets.regions);
   window.trainerFacets = summary.facets.trainers;
   fillTrainerFacet();
+  fillFacet(els.owner, summary.facets.owners || []);
   fillFacet(els.broodmareSire, summary.facets.broodmareSires || []);
   fillFacet(els.femaleFamily, summary.facets.femaleFamilies);
   fillFacet(els.damAgeBucket, summary.facets.damAgeBuckets || []);
@@ -685,36 +689,85 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     ],
   });
 
-  const renderCropBar = (id, metric, title, unit, formatter, isRate = false, color = COLORS.duramente) => {
-    renderChart(id, {
-      color: [color],
-      tooltip: {
-        trigger: "axis",
-        axisPointer: { type: "shadow" },
-        formatter: (items) => {
-          const item = items[0];
-          const row = item.data.raw;
-          return `${row.label}年生<br>${title}: ${formatter(row[metric])}<br>Foals ${row.foals} / Runners ${row.runners}`;
-        },
-      },
-      grid: { left: 48, right: 18, top: 20, bottom: 32, containLabel: true },
-      xAxis: { type: "category", data: cropLabels },
-      yAxis: { type: "value", name: unit },
-      series: [{
-        name: title,
-        type: "bar",
-        barWidth: 18,
-        data: crops.map((row) => ({
-          value: isRate ? Number(((row[metric] || 0) * 100).toFixed(1)) : row[metric],
-          raw: row,
-          itemStyle: { color },
-        })),
-      }],
-    });
+  const cropTooltip = (items) => {
+    const row = items[0]?.data?.raw;
+    if (!row) return "";
+    return [
+      `${row.label}年生`,
+      `Foals：${formatNumber(row.foals)} / Runners：${formatNumber(row.runners)}`,
+      `总奖金：${money(row.total_earnings)}`,
+      `每匹平均奖金：${money(row.earnings_per_foal)}`,
+      `胜马：${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})`,
+      `重赏胜马：${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})`,
+    ].join("<br>");
   };
-  renderCropBar("sireCropEarningsChart", "total_earnings", "总奖金", "万円", money, false, COLORS.gold);
-  renderCropBar("sireCropWinnersChart", "winners", "胜马数", "匹", (value) => formatNumber(value), false, COLORS.duramente);
-  renderCropBar("sireCropGradedRateChart", "graded_foal_rate", "重赏马率", "%", formatRate, true, COLORS.gold);
+  renderChart("sireCropMoneyComboChart", {
+    color: [COLORS.duramente, COLORS.gold],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: cropTooltip },
+    legend: { top: 0, data: ["总奖金", "每匹平均奖金"] },
+    grid: { left: 54, right: 52, top: 54, bottom: 38, containLabel: true },
+    xAxis: { type: "category", data: cropLabels },
+    yAxis: [
+      { type: "value", name: "总奖金（億円）" },
+      { type: "value", name: "平均（万円）" },
+    ],
+    series: [
+      {
+        name: "总奖金",
+        type: "bar",
+        barWidth: 14,
+        data: crops.map((row) => ({ value: Number(((row.total_earnings || 0) / 10000).toFixed(2)), raw: row })),
+      },
+      {
+        name: "每匹平均奖金",
+        type: "bar",
+        yAxisIndex: 1,
+        barWidth: 14,
+        data: crops.map((row) => ({ value: Number(row.earnings_per_foal || 0), raw: row })),
+      },
+    ],
+  });
+  renderChart("sireCropResultComboChart", {
+    color: [COLORS.duramente, COLORS.gold, "#386fa4", "#2f7d6b"],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: cropTooltip },
+    legend: { top: 0, data: ["胜马数", "重赏胜马数", "胜马率", "重赏马率"] },
+    grid: { left: 46, right: 48, top: 54, bottom: 38, containLabel: true },
+    xAxis: { type: "category", data: cropLabels },
+    yAxis: [
+      { type: "value", name: "匹" },
+      { type: "value", name: "%" },
+    ],
+    series: [
+      {
+        name: "胜马数",
+        type: "bar",
+        barWidth: 13,
+        data: crops.map((row) => ({ value: row.winners || 0, raw: row })),
+      },
+      {
+        name: "重赏胜马数",
+        type: "bar",
+        barWidth: 13,
+        data: crops.map((row) => ({ value: row.graded_winners || 0, raw: row })),
+      },
+      {
+        name: "胜马率",
+        type: "line",
+        yAxisIndex: 1,
+        smooth: true,
+        symbolSize: 8,
+        data: crops.map((row) => ({ value: Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), raw: row })),
+      },
+      {
+        name: "重赏马率",
+        type: "line",
+        yAxisIndex: 1,
+        smooth: true,
+        symbolSize: 8,
+        data: crops.map((row) => ({ value: Number(((row.graded_foal_rate || 0) * 100).toFixed(1)), raw: row })),
+      },
+    ],
+  });
 
   const ages = ["2", "3", "4", "5", "6+"];
   const cropSet = [...new Set(profile.crop_development.map((row) => String(row.crop)))].sort();
@@ -901,28 +954,10 @@ async function renderSireAnalysis() {
     )}
     ${sectionBlock("出生世代表现", "比较各出生世代的当前成绩和年龄发展轨迹。",
       `<div class="chart-grid cohort-grid">
-        <article class="chart-card">
-          <div class="chart-card-head">
-            <div>
-              <h3>各出生世代表现</h3>
-              <p>拆成三个核心指标；具体数值放在Tooltip里。</p>
-            </div>
-          </div>
-          <div class="mini-crop-grid">
-            <div>
-              <h4>总奖金</h4>
-              <div class="chart-canvas mini-chart" id="sireCropEarningsChart"></div>
-            </div>
-            <div>
-              <h4>胜马数</h4>
-              <div class="chart-canvas mini-chart" id="sireCropWinnersChart"></div>
-            </div>
-            <div>
-              <h4>重赏马率</h4>
-              <div class="chart-canvas mini-chart" id="sireCropGradedRateChart"></div>
-            </div>
-          </div>
-        </article>
+        ${chartBlock("奖金表现", "细柱并排显示总奖金与每匹平均奖金；单位分别为億円和万円。", "sireCropMoneyComboChart")}
+        ${chartBlock("胜马与重赏表现", "胜马数和重赏胜马数用柱；胜马率和重赏马率用折线。", "sireCropResultComboChart")}
+      </div>
+      <div class="chart-grid single-chart">
         ${controlledChartBlock("产驹成长曲线", "未达到的年龄使用缺失值，线条直接停止。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
             <option value="cumulative_wins">原始累计胜场</option>
@@ -1799,6 +1834,7 @@ function horseQuery() {
     color: state.color,
     region: state.region,
     trainer: state.trainer,
+    owner: state.owner,
     broodmare_sire: state.broodmare_sire,
     female_family: state.female_family,
     dam_age_bucket: state.dam_age_bucket,
@@ -2186,6 +2222,10 @@ function bindControls() {
   });
   els.trainer.addEventListener("change", () => {
     state.trainer = els.trainer.value;
+    refresh();
+  });
+  els.owner.addEventListener("change", () => {
+    state.owner = els.owner.value;
     refresh();
   });
   els.broodmareSire.addEventListener("change", () => {
