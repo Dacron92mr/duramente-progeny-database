@@ -237,7 +237,7 @@ button:focus-visible {
 table {
   width: 100%;
   border-collapse: collapse;
-  min-width: 1120px;
+  min-width: 1220px;
 }
 
 th,
@@ -283,6 +283,29 @@ td {
 .trainer-name {
   min-width: 96px;
   white-space: nowrap;
+}
+
+.owner-name {
+  min-width: 150px;
+  white-space: nowrap;
+}
+
+.owner-cell {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  font-weight: 800;
+}
+
+.owner-silk {
+  width: 34px;
+  height: 24px;
+  flex: 0 0 auto;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: #fff;
+  object-fit: contain;
 }
 
 .sex-cell,
@@ -922,6 +945,23 @@ td {
 
 .cohort-grid .chart-canvas {
   height: 300px;
+}
+
+.mini-crop-grid {
+  display: grid;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.mini-crop-grid h4 {
+  margin: 0 0 2px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.mini-crop-grid .mini-chart {
+  height: 132px;
 }
 
 #ancestorFormChart {
