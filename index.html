@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260715d">
+  <link rel="stylesheet" href="/style.css?v=20260716a">
 </head>
 <body>
   <header class="topbar">
@@ -29,91 +29,103 @@
         <input id="search" type="search" placeholder="馬名・母・馬主・調教師・牧場">
       </label>
 
-      <div class="filter-row">
+      <details class="filter-group" open>
+        <summary>基础</summary>
+        <div class="filter-row">
+          <label>
+            <span>生年</span>
+            <select id="year">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>性別</span>
+            <select id="sex">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
+        <div class="filter-row">
+          <label>
+            <span>毛色</span>
+            <select id="color">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>所属</span>
+            <select id="region">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
+      </details>
+
+      <details class="filter-group">
+        <summary>关系人</summary>
         <label>
-          <span>生年</span>
-          <select id="year">
+          <span>調教師</span>
+          <select id="trainer">
             <option value="">すべて</option>
           </select>
         </label>
         <label>
-          <span>性別</span>
-          <select id="sex">
-            <option value="">すべて</option>
-          </select>
-        </label>
-      </div>
-
-      <div class="filter-row">
-        <label>
-          <span>毛色</span>
-          <select id="color">
+          <span>馬主</span>
+          <select id="owner">
             <option value="">すべて</option>
           </select>
         </label>
         <label>
-          <span>所属</span>
-          <select id="region">
+          <span>牧場</span>
+          <select id="breeder">
             <option value="">すべて</option>
           </select>
         </label>
-      </div>
+      </details>
 
-      <label>
-        <span>調教師</span>
-        <select id="trainer">
-          <option value="">すべて</option>
-        </select>
-      </label>
+      <details class="filter-group" open>
+        <summary>血统</summary>
+        <label>
+          <span>母父系</span>
+          <select id="bmsLine">
+            <option value="">すべて</option>
+          </select>
+        </label>
+        <label>
+          <span>母父</span>
+          <select id="broodmareSire">
+            <option value="">すべて</option>
+          </select>
+        </label>
+        <label>
+          <span>牝系</span>
+          <select id="femaleFamily">
+            <option value="">すべて</option>
+          </select>
+        </label>
+      </details>
 
-      <label>
-        <span>馬主</span>
-        <select id="owner">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>最高戦績</span>
-        <select id="achievement">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>繁殖成績</span>
-        <select id="breeding">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>母父系</span>
-        <select id="bmsLine">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>母父</span>
-        <select id="broodmareSire">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>牝系</span>
-        <select id="femaleFamily">
-          <option value="">すべて</option>
-        </select>
-      </label>
-
-      <label>
-        <span>母龄</span>
-        <select id="damAgeBucket">
-          <option value="">全部</option>
-        </select>
-      </label>
+      <details class="filter-group">
+        <summary>成绩与繁殖</summary>
+        <label>
+          <span>最高戦績</span>
+          <select id="achievement">
+            <option value="">すべて</option>
+          </select>
+        </label>
+        <label>
+          <span>母龄</span>
+          <select id="damAgeBucket">
+            <option value="">全部</option>
+          </select>
+        </label>
+        <label>
+          <span>繁殖成績</span>
+          <select id="breeding">
+            <option value="">すべて</option>
+          </select>
+        </label>
+      </details>
     </aside>
 
     <section class="content">
@@ -191,7 +203,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
-  <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260715d"></script>
+  <script src="/app.js?v=20260716a"></script>
 </body>
 </html>

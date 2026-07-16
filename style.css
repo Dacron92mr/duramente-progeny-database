@@ -153,6 +153,25 @@ button:focus-visible {
   gap: 10px;
 }
 
+.filter-group {
+  border-top: 1px solid rgba(143, 29, 44, 0.12);
+  padding-top: 10px;
+}
+
+.filter-group summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.filter-group label + label,
+.filter-group .filter-row + .filter-row,
+.filter-group .filter-row + label,
+.filter-group label + .filter-row {
+  margin-top: 8px;
+}
+
 .panel {
   margin-top: 20px;
 }
@@ -1042,12 +1061,21 @@ td {
   background: #f5f0e8;
 }
 
-.analysis-table td:first-child,
-.analysis-table td:nth-child(2) {
+.analysis-table td:first-child {
   min-width: 180px;
   white-space: normal;
   word-break: keep-all;
   line-break: strict;
+}
+
+.analysis-table .name-column,
+.analysis-table .cross-column,
+.analysis-table .entity-column {
+  min-width: 180px;
+  white-space: normal;
+  word-break: keep-all;
+  line-break: strict;
+  text-align: left;
 }
 
 .analysis-table th:not(:first-child),
