@@ -1008,9 +1008,163 @@ td {
   height: 360px;
 }
 
-#racecourseMapJra,
-#racecourseMapNar {
-  height: 430px;
+#racecourseJapanMap {
+  height: 680px;
+}
+
+.race-map-block .compact-control {
+  justify-content: flex-start;
+  margin-bottom: 14px;
+}
+
+.race-map-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 292px;
+  gap: 16px;
+  align-items: stretch;
+}
+
+.race-map-card {
+  min-width: 0;
+}
+
+.race-map-panel {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #fffdf9;
+  padding: 16px;
+  box-shadow: 0 14px 28px rgba(65, 45, 36, 0.05);
+}
+
+.race-map-panel-section + .race-map-panel-section {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(122, 104, 91, 0.16);
+}
+
+.race-map-panel strong {
+  display: block;
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 1.1;
+}
+
+.race-map-panel p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.45;
+}
+
+.mini-label {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+}
+
+.size-legend {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.size-legend span,
+.system-legend span {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.size-legend i,
+.jra-dot,
+.nar-dot {
+  display: inline-block;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: #9b315d;
+  border: 1.5px solid #fff;
+  box-shadow: 0 0 0 1px rgba(84, 37, 68, 0.22);
+}
+
+.rate-legend {
+  margin-top: 10px;
+}
+
+.rate-legend span {
+  display: block;
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ead2ce, #c75870, #7c1f46);
+  border: 1px solid rgba(84, 37, 68, 0.12);
+}
+
+.legend-scale {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.system-legend {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.jra-dot,
+.nar-dot {
+  width: 16px;
+  height: 16px;
+}
+
+.nar-dot {
+  box-shadow: 0 0 0 3px rgba(92, 45, 77, 0.38);
+}
+
+.race-map-ranking {
+  display: grid;
+  gap: 8px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.race-map-ranking li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: baseline;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 850;
+}
+
+.race-map-ranking li span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.race-map-ranking li strong {
+  display: inline;
+  margin: 0;
+  color: var(--accent);
+  font-size: 13px;
+}
+
+.race-map-ranking li small {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 850;
 }
 
 .cohort-grid .chart-canvas {
@@ -1511,8 +1665,13 @@ details.analysis-block summary {
   .analysis-split,
   .chart-grid,
   .cross-detail-grid,
+  .race-map-layout,
   .method-list {
     grid-template-columns: 1fr;
+  }
+
+  #racecourseJapanMap {
+    height: 560px;
   }
 
   .chart-card-head.with-controls {
@@ -1559,5 +1718,15 @@ details.analysis-block summary {
 
   .detail-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  #racecourseJapanMap {
+    height: 460px;
+  }
+
+  .race-map-panel {
+    padding: 14px;
   }
 }
