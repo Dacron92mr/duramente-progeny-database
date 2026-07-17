@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260717d">
+  <link rel="stylesheet" href="style.css?v=20260717e">
 </head>
 <body>
   <header class="topbar">
@@ -67,32 +67,36 @@
         </div>
       </details>
 
-      <details class="filter-group">
-        <summary>关系人</summary>
-        <label>
-          <span>所属</span>
-          <select id="region">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>調教師</span>
-          <select id="trainer">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>馬主</span>
-          <select id="owner">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>牧場</span>
-          <select id="breeder">
-            <option value="">すべて</option>
-          </select>
-        </label>
+      <details class="filter-group" open>
+        <summary>关系者</summary>
+        <div class="filter-row">
+          <label>
+            <span>所属</span>
+            <select id="region">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>調教師</span>
+            <select id="trainer">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
+        <div class="filter-row">
+          <label>
+            <span>馬主</span>
+            <select id="owner">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>牧場</span>
+            <select id="breeder">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
       </details>
 
       <details class="filter-group" open>
@@ -214,6 +218,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260717d"></script>
+  <script src="app.js?v=20260717e"></script>
 </body>
 </html>

@@ -1071,9 +1071,6 @@ async function renderSireAnalysis() {
     .filter((row) => Number(row.year) >= 2020 && Number(row.year) <= 2025)
     .map((row) => Number(row.year)))]
     .sort((a, b) => b - a);
-  const firstCropRows = (leadingHistory.history || [])
-    .filter((row) => FIRST_CROP_LEADING_CATEGORIES.has(row.category) && (row.sire === "ドゥラメンテ" || row.sire_id === "2012104511"))
-    .sort((a, b) => String(a.category).localeCompare(String(b.category), "ja"));
   els.sireContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">种牡马分析</p>
@@ -1115,19 +1112,6 @@ async function renderSireAnalysis() {
         ${chartBlock("年度Leading Sire排名", "", "sireLeadingRankChart")}
         ${chartBlock("分类Top10", "", "sireTop10Chart")}
       </div>
-      <details class="analysis-block">
-        <summary>首年度荣誉</summary>
-        ${analysisTable([
-          { label: "分类", className: "name-column", value: (row) => row.category_label || row.category },
-          { label: "年份", value: (row) => row.year },
-          { label: "排名", value: (row) => row.rank },
-          { label: "出赛马", value: (row) => formatNumber(row.runners) },
-          { label: "胜马", value: (row) => formatNumber(row.winners) },
-          { label: "奖金", value: (row) => money(row.earnings) },
-          { label: "EI", value: (row) => row.ei == null ? "—" : formatNumber(row.ei, 2) },
-          { label: "来源", value: (row) => `<a href="${escapeHtml(row.source_url)}" target="_blank" rel="noreferrer">来源</a>`, html: true },
-        ], firstCropRows, { initialLimit: 6 })}
-      </details>
       ${analysisTable([
         { label: "年份", value: (row) => row.year },
         { label: "分类", value: (row) => row.category_label || row.category },
