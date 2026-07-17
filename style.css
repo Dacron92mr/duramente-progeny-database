@@ -2,13 +2,13 @@
   color-scheme: light;
   --ink: #20201d;
   --muted: #6d6a62;
-  --line: #d9d4ca;
-  --paper: #fbfaf7;
+  --line: #ded6ce;
+  --paper: #fbf8f4;
   --panel: #ffffff;
-  --accent: #8f1d2c;
-  --accent-2: #9a3f2f;
-  --gold: #b1842f;
-  --soft: #eef4f1;
+  --accent: #9b315d;
+  --accent-2: #d94b68;
+  --gold: #f0b45f;
+  --soft: #f6efe9;
   --shadow: 0 18px 60px rgba(31, 30, 24, 0.14);
 }
 
@@ -49,7 +49,7 @@ button {
   gap: 24px;
   padding: 28px 34px 22px;
   border-bottom: 1px solid var(--line);
-  background: linear-gradient(90deg, #f7f3ec 0%, #eef4f1 48%, #f8f6f1 100%);
+  background: linear-gradient(90deg, #fbf2ed 0%, #f7eef1 48%, #fff7ea 100%);
 }
 
 .kicker {
@@ -114,7 +114,7 @@ h2 {
 .filters {
   border-right: 1px solid var(--line);
   padding: 22px;
-  background: #f6f1e9;
+  background: #fbf2ed;
 }
 
 .filters label {
@@ -144,7 +144,7 @@ input:focus,
 select:focus,
 button:focus-visible {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(143, 29, 44, 0.14);
+  box-shadow: 0 0 0 3px rgba(155, 49, 93, 0.14);
 }
 
 .filter-row {
@@ -154,7 +154,7 @@ button:focus-visible {
 }
 
 .filter-group {
-  border-top: 1px solid rgba(143, 29, 44, 0.12);
+  border-top: 1px solid rgba(155, 49, 93, 0.14);
   padding-top: 10px;
 }
 
@@ -455,35 +455,35 @@ td {
 }
 
 .lineage-sunday-silence {
-  background: #bfeef4;
+  background: #f4c7d3;
 }
 
 .lineage-turn-to {
-  background: #bdfaa3;
+  background: #f7d6b8;
 }
 
 .lineage-northern-dancer {
-  background: #d8aff7;
+  background: #e7c2d4;
 }
 
 .lineage-nasrullah {
-  background: #f49ad7;
+  background: #f2b1c0;
 }
 
 .lineage-native-dancer {
-  background: #ffd18c;
+  background: #f3c26f;
 }
 
 .lineage-hampton {
-  background: #e8b98f;
+  background: #e8a77c;
 }
 
 .lineage-st-simon {
-  background: #fff789;
+  background: #f6dfa6;
 }
 
 .lineage-other {
-  background: #dddddd;
+  background: #ded8d2;
 }
 
 .external-links {
@@ -522,8 +522,8 @@ td {
 }
 
 .finish.second {
-  background: #d8e6f7;
-  color: #245a9d;
+  background: #ead0da;
+  color: #6d335f;
 }
 
 .finish.third {
@@ -735,12 +735,17 @@ td {
   min-height: 30px;
   border-radius: 999px;
   padding: 4px 11px;
-  background: #dceee8;
+  background: #f7e4d1;
   color: var(--accent);
   font-size: 13px;
   font-weight: 900;
   text-decoration: none;
   white-space: nowrap;
+}
+
+.stud-chip.aus-chip {
+  background: #f6d29e;
+  color: #6d335f;
 }
 
 .stud-news a {

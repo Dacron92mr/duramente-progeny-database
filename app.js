@@ -89,20 +89,23 @@ let tableCounter = 0;
 const chartRegistry = new Map();
 let chartResizeBound = false;
 const COLORS = {
-  duramente: "#8f1d2c",
-  average: "#7b4fb3",
-  gold: "#d89b2b",
-  blue: "#386fa4",
-  muted: "#c9b07a",
-  soft: "#f3eee6",
+  duramente: "#9b315d",
+  plum: "#542544",
+  rose: "#d94b68",
+  coral: "#e96c4c",
+  gold: "#f0b45f",
+  average: "#c95d77",
+  blue: "#6d335f",
+  muted: "#d9d1c8",
+  soft: "#f6efe9",
   gray: "#d8d5cf",
 };
 const CROP_COLORS = {
-  "2018": "#8f1d2c",
-  "2019": "#d89b2b",
-  "2020": "#386fa4",
-  "2021": "#7b4fb3",
-  "2022": "#2f7d6b",
+  "2018": "#542544",
+  "2019": "#9b315d",
+  "2020": "#d94b68",
+  "2021": "#e96c4c",
+  "2022": "#f0b45f",
 };
 
 const LEADING_CATEGORY_CATALOG = [
@@ -683,7 +686,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   });
 
   renderChart("sireStudFeeChart", {
-    color: [COLORS.duramente, "#e3a640"],
+    color: [COLORS.duramente, COLORS.gold],
     tooltip: { trigger: "axis" },
     legend: { top: 0, data: ["ドゥラメンテ", "同期社台平均"] },
     grid: { left: 56, right: 28, top: 54, bottom: 42 },
@@ -783,7 +786,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     return cumulative;
   });
   renderChart("gradedWinsTimelineChart", {
-    color: ["#386fa4", COLORS.duramente, "#2f7d6b", COLORS.gold],
+    color: [COLORS.plum, COLORS.rose, COLORS.coral, COLORS.gold],
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "shadow" },
@@ -980,7 +983,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
         value: row[topMetric.key] || 0,
         raw: row,
         itemStyle: row.sire === "ドゥラメンテ"
-          ? { color: Number(row.rank) === 1 ? COLORS.gold : "#c98991" }
+          ? { color: Number(row.rank) === 1 ? COLORS.gold : COLORS.rose }
           : { color: COLORS.muted },
       })),
       label: { show: true, position: "right", formatter: (params) => formatNumber(params.value, 1) },
@@ -1356,7 +1359,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
 
 function renderDamAgeCharts(damAge) {
   renderChart("damAgeHistogramChart", {
-    color: ["#8f1d2c"],
+    color: [COLORS.duramente],
     tooltip: { trigger: "axis" },
     grid: { left: 48, right: 22, top: 24, bottom: 36 },
     xAxis: { type: "category", name: "母龄", data: damAge.histogram.map((row) => row.age) },
@@ -1364,7 +1367,7 @@ function renderDamAgeCharts(damAge) {
     series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals) }],
   });
   renderChart("damAgePerformanceChart", {
-    color: ["#8f1d2c", "#b1842f", "#9a3f2f"],
+    color: [COLORS.duramente, COLORS.gold, COLORS.coral],
     tooltip: { trigger: "axis" },
     legend: { top: 0, data: ["出赛率", "胜马率", "重赏马率"] },
     grid: { left: 48, right: 22, top: 52, bottom: 36 },
@@ -1393,7 +1396,7 @@ function renderDamAgeCharts(damAge) {
     grid: { left: 70, right: 24, top: 24, bottom: 54 },
     xAxis: { type: "category", data: orders, name: "胎次" },
     yAxis: { type: "category", data: ageBuckets, name: "母龄" },
-    visualMap: { min: 0, max: Math.max(...heatData.map((row) => row[2]), 1), orient: "horizontal", left: "center", bottom: 0, inRange: { color: ["#f3eee6", "#b1842f", "#8f1d2c"] } },
+    visualMap: { min: 0, max: Math.max(...heatData.map((row) => row[2]), 1), orient: "horizontal", left: "center", bottom: 0, inRange: { color: [COLORS.soft, COLORS.gold, COLORS.duramente] } },
     series: [{ type: "heatmap", data: heatData, label: { show: true, formatter: (params) => params.value[2] || "—" } }],
   });
 }
@@ -2124,6 +2127,18 @@ function studbookHref(profile) {
   return "https://www.studbook.jp/";
 }
 
+function profileExternalLinks(profile) {
+  const raw = profile?.external_links_json;
+  if (!raw) return [];
+  if (Array.isArray(raw)) return raw;
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
 function normalizedStudName(value) {
   return String(value || "").replace(/[\s　]/g, "").replace(/（/g, "(").replace(/）/g, ")");
 }
@@ -2148,6 +2163,9 @@ function studSection(studProfiles, horse) {
           <div class="stud-head">
             <div class="stud-links">
               <a class="stud-chip" href="${escapeHtml(studbookHref(profile))}" target="_blank" rel="noreferrer">血統書Studbook</a>
+              ${profileExternalLinks(profile).map((link) => `
+                <a class="stud-chip aus-chip" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label || "Australia")}</a>
+              `).join("")}
               ${profile.own_netkeiba_url ? `<a class="stud-chip" href="${escapeHtml(profile.own_netkeiba_url)}" target="_blank" rel="noreferrer">Netkeiba Owners</a>` : ""}
             </div>
           </div>
