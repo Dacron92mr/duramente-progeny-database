@@ -1008,6 +1008,11 @@ td {
   height: 360px;
 }
 
+#racecourseMapJra,
+#racecourseMapNar {
+  height: 430px;
+}
+
 .cohort-grid .chart-canvas {
   height: 300px;
 }
