@@ -1277,9 +1277,98 @@ td {
   height: 260px;
 }
 
+#bmsLineBubbleChart,
+#sireAchievementStepChart,
+#sireAwdDumbbellChart,
+#breederScaleEfficiencyChart {
+  height: 380px;
+}
+
+#broodmareSireRankingChart {
+  min-height: 360px;
+}
+
 #bmsLineChart,
 #femaleFamilyChart {
-  height: 300px;
+  min-height: 340px;
+}
+
+.graded-timeline-list {
+  display: grid;
+  gap: 14px;
+}
+
+.graded-timeline-group {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fffdf9;
+}
+
+.graded-timeline-group h4 {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--accent);
+  font-size: 15px;
+}
+
+.graded-timeline-group h4 span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.graded-events {
+  display: grid;
+}
+
+.graded-event {
+  display: grid;
+  grid-template-columns: 48px 92px minmax(180px, 1fr) minmax(120px, auto) 90px;
+  gap: 10px;
+  align-items: center;
+  padding: 10px 14px;
+  border-bottom: 1px solid rgba(155, 49, 93, 0.10);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.graded-event:last-child {
+  border-bottom: 0;
+}
+
+.grade-pill {
+  display: inline-flex;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 3px 8px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 950;
+}
+
+.grade-g1 {
+  background: #2f6fa7;
+}
+
+.grade-g2 {
+  background: #9b315d;
+}
+
+.grade-g3 {
+  background: #e96c4c;
+}
+
+.event-date,
+.event-meeting {
+  color: var(--muted);
+}
+
+.event-race {
+  min-width: 0;
 }
 
 .compact-table-card .analysis-table {
