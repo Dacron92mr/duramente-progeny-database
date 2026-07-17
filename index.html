@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260717a">
+  <link rel="stylesheet" href="style.css?v=20260717b">
 </head>
 <body>
   <header class="topbar">
@@ -27,10 +27,13 @@
 
   <main class="layout view active" id="progenyView">
     <aside class="filters">
-      <label class="search">
-        <span>検索</span>
-        <input id="search" type="search" placeholder="馬名・母・馬主・調教師・牧場">
-      </label>
+      <div class="filter-search-row">
+        <label class="search">
+          <span>検索</span>
+          <input id="search" type="search" placeholder="馬名・母・馬主・調教師・牧場">
+        </label>
+        <button id="resetFilters" class="reset-filters" type="button">重置</button>
+      </div>
 
       <details class="filter-group" open>
         <summary>基础</summary>
@@ -115,7 +118,7 @@
         <label>
           <span>生产时母龄</span>
           <select id="damAgeBucket">
-            <option value="">全部</option>
+            <option value="">すべて</option>
           </select>
         </label>
       </details>
@@ -207,6 +210,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260717a"></script>
+  <script src="app.js?v=20260717b"></script>
 </body>
 </html>

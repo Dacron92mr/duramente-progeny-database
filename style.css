@@ -131,6 +131,28 @@ h2 {
   font-weight: 700;
 }
 
+.filter-search-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.filter-search-row .search {
+  margin-bottom: 0;
+}
+
+.reset-filters {
+  height: 42px;
+  border-radius: 8px;
+  padding: 0 13px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
 input,
 select {
   width: 100%;
@@ -455,35 +477,35 @@ td {
 }
 
 .lineage-sunday-silence {
-  background: #f4c7d3;
+  background: #bfeef4;
 }
 
 .lineage-turn-to {
-  background: #f7d6b8;
+  background: #bdfaa3;
 }
 
 .lineage-northern-dancer {
-  background: #e7c2d4;
+  background: #d8aff7;
 }
 
 .lineage-nasrullah {
-  background: #f2b1c0;
+  background: #f49ad7;
 }
 
 .lineage-native-dancer {
-  background: #f3c26f;
+  background: #ffd18c;
 }
 
 .lineage-hampton {
-  background: #e8a77c;
+  background: #e8b98f;
 }
 
 .lineage-st-simon {
-  background: #f6dfa6;
+  background: #fff789;
 }
 
 .lineage-other {
-  background: #ded8d2;
+  background: #dddddd;
 }
 
 .external-links {
@@ -522,8 +544,8 @@ td {
 }
 
 .finish.second {
-  background: #ead0da;
-  color: #6d335f;
+  background: #d8e6f7;
+  color: #245a9d;
 }
 
 .finish.third {
@@ -654,7 +676,7 @@ td {
 
 .race-section summary {
   cursor: pointer;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 900;
   line-height: 1.15;
   list-style: none;
@@ -989,7 +1011,7 @@ td {
 }
 
 #ancestorFormChart {
-  height: 250px;
+  height: 230px;
 }
 
 .cross-detail-grid {
@@ -1000,6 +1022,11 @@ td {
 
 #gradedWinsTimelineChart {
   height: 260px;
+}
+
+#bmsLineChart,
+#femaleFamilyChart {
+  height: 300px;
 }
 
 .compact-table-card .analysis-table {
