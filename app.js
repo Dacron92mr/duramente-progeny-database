@@ -22,6 +22,7 @@ const state = {
 
 const els = {
   search: document.querySelector("#search"),
+  resetFilters: document.querySelector("#resetFilters"),
   year: document.querySelector("#year"),
   sex: document.querySelector("#sex"),
   color: document.querySelector("#color"),
@@ -94,6 +95,7 @@ const COLORS = {
   rose: "#d94b68",
   coral: "#e96c4c",
   gold: "#f0b45f",
+  raceLine: "#2f6fa7",
   average: "#c95d77",
   blue: "#6d335f",
   muted: "#d9d1c8",
@@ -159,6 +161,13 @@ function normalizeLeadingCategories(payload) {
       };
     }),
   };
+}
+
+function isLeadingYearVisible(category, year) {
+  const numericYear = Number(year);
+  if (category === "jra_overall") return numericYear >= 2020 && numericYear <= 2025;
+  if (category === "two_year_all" || category === "two_year_jra") return numericYear <= 2024;
+  return true;
 }
 
 function cropColor(crop) {
@@ -857,9 +866,8 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   const category = document.querySelector("#sireLeadingCategory")?.value || "jra_overall";
   const activeCategory = ANNUAL_LEADING_CATEGORIES.has(category) ? category : "jra_overall";
   const categoryInfo = (categories.categories || []).find((item) => item.category === activeCategory);
-  const completeJraYear = (year) => Number(year) >= 2020 && Number(year) <= 2025;
   const leadingRowsForCategory = (leadingHistory.history || []).filter((row) => (
-    row.category === activeCategory && (activeCategory === "jra_overall" ? completeJraYear(row.year) : true)
+    row.category === activeCategory && isLeadingYearVisible(activeCategory, row.year)
   ));
   const history = leadingRowsForCategory
     .sort((a, b) => Number(a.year) - Number(b.year));
@@ -869,7 +877,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
       .map((row) => Number(row.year))),
     ...history.map((row) => Number(row.year)),
   ])]
-    .filter((year) => !Number.isNaN(year) && (activeCategory === "jra_overall" ? completeJraYear(year) : true))
+    .filter((year) => !Number.isNaN(year) && isLeadingYearVisible(activeCategory, year))
     .sort((a, b) => b - a);
   const rankYears = [...availableYears].sort((a, b) => a - b);
   const historyByYear = new Map(history.map((row) => [Number(row.year), row]));
@@ -1215,6 +1223,12 @@ function chartMetricDisplay(row, metric) {
   return value;
 }
 
+function paddedAxisMax(value) {
+  const max = Number(value?.max || 0);
+  if (!max) return 1;
+  return Math.ceil(max * 1.14);
+}
+
 function renderPedigreeCharts(pedigree, bmsLines) {
   const charts = pedigree.charts || {};
   const ancestorRows = [...(charts.cross_bubble || [])].sort((a, b) => b.foals - a.foals);
@@ -1224,11 +1238,12 @@ function renderPedigreeCharts(pedigree, bmsLines) {
   const countChart = renderChart("crossAncestorCountChart", {
     color: [COLORS.duramente],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(18, 34, 40),
-    xAxis: { type: "value", name: "Foals" },
+    grid: horizontalGrid(18, 34, 86),
+    xAxis: { type: "value", name: "Foals", max: paddedAxisMax },
     yAxis: longCategoryAxis(countRows.map((row) => row.label)),
     series: [{
       type: "bar",
+      barMaxWidth: 18,
       data: countRows.map((row) => ({ value: row.foals, raw: row })),
       label: { show: true, position: "right", formatter: (params) => `${formatNumber(params.value)}匹` },
     }],
@@ -1251,11 +1266,12 @@ function renderPedigreeCharts(pedigree, bmsLines) {
         return `${escapeHtml(row.label)}<br>Foals ${row.foals}<br>Winners ${row.winners} / 重赏 ${row.graded_winners}<br>胜马率 ${formatRate(row.winner_foal_rate)} / 重赏率 ${formatRate(row.graded_foal_rate)}<br>中位奖金 ${money(row.median_earnings_per_runner)}<br>代表马 ${escapeHtml(representativeNames(row))}`;
       },
     },
-    grid: horizontalGrid(18, 34, 40),
-    xAxis: { type: "value", name: crossMetric.includes("rate") ? "%" : "万円" },
+    grid: horizontalGrid(18, 34, 104),
+    xAxis: { type: "value", name: crossMetric.includes("rate") ? "%" : "万円", max: crossMetric.includes("rate") ? 110 : paddedAxisMax },
     yAxis: longCategoryAxis(performanceRows.map((row) => row.label)),
     series: [{
       type: "bar",
+      barMaxWidth: 18,
       data: performanceRows.map((row) => ({ value: chartMetricDisplay(row, crossMetric), raw: row })),
       label: { show: true, position: "right", formatter: (params) => {
         const row = params.data.raw;
@@ -1280,12 +1296,16 @@ function renderPedigreeCharts(pedigree, bmsLines) {
   const formChart = renderChart("ancestorFormChart", {
     color: [COLORS.duramente],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(18, 30, 40),
-    xAxis: { type: "value", name: formMetric === "foals" ? "Foals" : formIsRate ? "%" : "万円" },
+    grid: horizontalGrid(18, 30, 92),
+    xAxis: {
+      type: "value",
+      name: formMetric === "foals" ? "Foals" : formIsRate ? "%" : "万円",
+      max: formIsRate ? 110 : undefined,
+    },
     yAxis: longCategoryAxis(formRows.map((row) => row.pattern || row.label.split("|")[1]), { width: 120 }),
     series: [{
       type: "bar",
-      barMaxWidth: 18,
+      barMaxWidth: 14,
       data: formRows.map((row) => ({ value: chartMetricDisplay(row, formMetric), raw: row })),
       label: { show: true, position: "right", formatter: (params) => {
         const row = params.data.raw;
@@ -1313,11 +1333,12 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
     const chart = renderChart("bmsLineChart", {
       color: [COLORS.duramente],
       tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-      grid: horizontalGrid(18, 34, 40),
-      xAxis: { type: "value", name: metric.includes("rate") ? "%" : metric === "total_earnings" ? "万円" : "匹" },
+      grid: horizontalGrid(18, 34, 86),
+      xAxis: { type: "value", name: metric.includes("rate") ? "%" : metric === "total_earnings" ? "万円" : "匹", max: metric.includes("rate") ? 110 : paddedAxisMax },
       yAxis: longCategoryAxis(rows.map((row) => row.label)),
       series: [{
         type: "bar",
+        barMaxWidth: 18,
         data: rows.map((row) => ({ value: metric.includes("rate") ? Number(((row[metric] || 0) * 100).toFixed(1)) : row[metric], raw: row })),
         label: { show: true, position: "right", formatter: (params) => {
           const row = params.data.raw;
@@ -1338,11 +1359,12 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
   const chart = renderChart("femaleFamilyChart", {
     color: [COLORS.blue],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(18, 34, 40),
-    xAxis: { type: "value", name: metric.includes("rate") ? "%" : metric === "total_earnings" ? "万円" : "匹" },
+    grid: horizontalGrid(18, 34, 86),
+    xAxis: { type: "value", name: metric.includes("rate") ? "%" : metric === "total_earnings" ? "万円" : "匹", max: metric.includes("rate") ? 110 : paddedAxisMax },
     yAxis: longCategoryAxis(rows.map((row) => row.label), { width: 120 }),
     series: [{
       type: "bar",
+      barMaxWidth: 18,
       data: rows.map((row) => ({ value: metric.includes("rate") ? Number(((row[metric] || 0) * 100).toFixed(1)) : row[metric], raw: row })),
       label: { show: true, position: "right", formatter: (params) => {
         const row = params.data.raw;
@@ -1778,7 +1800,7 @@ async function renderRacecourseAnalysis() {
         ${sectionBlock("主要距离表现", "选择赛马场后查看不同距离区间的胜率、前三率和出赛次数。",
           `<div class="analysis-controls">
             <label><span>赛马场</span><select id="racecourseDistanceCourse">
-              ${rows.slice(0, 30).map((row) => `<option value="${escapeHtml(row.label)}">${escapeHtml(row.label)} (${escapeHtml(row.jurisdiction)})</option>`).join("")}
+              ${rows.slice(0, 30).map((row) => `<option value="${escapeHtml(row.label)}">${escapeHtml(row.label)}</option>`).join("")}
             </select></label>
           </div>
           ${chartShell("racecourseDistanceChart")}`
@@ -1801,7 +1823,7 @@ async function renderRacecourseAnalysis() {
       )}
     `;
     renderChart("racecourseWinsChart", {
-      color: [COLORS.duramente, COLORS.blue],
+      color: [COLORS.coral, COLORS.raceLine],
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["胜场数", "胜率"] },
       grid: { left: 48, right: 58, top: 54, bottom: 54 },
@@ -1811,12 +1833,21 @@ async function renderRacecourseAnalysis() {
         { type: "value", name: "胜率", axisLabel: { formatter: (value) => `${value}%` } },
       ],
       series: [
-        { name: "胜场数", type: "bar", data: winRows.map((row) => row.wins_starts), label: { show: true, position: "top" } },
-        { name: "胜率", type: "line", yAxisIndex: 1, data: winRows.map((row) => Number(((row.win_start_rate || 0) * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
+        { name: "胜场数", type: "bar", barMaxWidth: 34, data: winRows.map((row) => row.wins_starts), label: { show: true, position: "top" } },
+        {
+          name: "胜率",
+          type: "line",
+          yAxisIndex: 1,
+          symbolSize: 8,
+          itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
+          lineStyle: { color: COLORS.raceLine, width: 3 },
+          data: winRows.map((row) => Number(((row.win_start_rate || 0) * 100).toFixed(1))),
+          label: { show: true, formatter: "{c}%" },
+        },
       ],
     });
     renderChart("racecourseStartsChart", {
-      color: [COLORS.gold, COLORS.blue],
+      color: [COLORS.gold, COLORS.raceLine],
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["有效出赛", "前三率"] },
       grid: { left: 56, right: 58, top: 54, bottom: 54 },
@@ -1826,8 +1857,17 @@ async function renderRacecourseAnalysis() {
         { type: "value", name: "前三率", axisLabel: { formatter: (value) => `${value}%` } },
       ],
       series: [
-        { name: "有效出赛", type: "bar", data: startRows.map((row) => row.starts), label: { show: true, position: "top" } },
-        { name: "前三率", type: "line", yAxisIndex: 1, data: startRows.map((row) => Number(((row.top3_rate || 0) * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
+        { name: "有效出赛", type: "bar", barMaxWidth: 34, data: startRows.map((row) => row.starts), label: { show: true, position: "top" } },
+        {
+          name: "前三率",
+          type: "line",
+          yAxisIndex: 1,
+          symbolSize: 8,
+          itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
+          lineStyle: { color: COLORS.raceLine, width: 3 },
+          data: startRows.map((row) => Number(((row.top3_rate || 0) * 100).toFixed(1))),
+          label: { show: true, formatter: "{c}%" },
+        },
       ],
     });
     renderChart("racecourseSurfaceChart", {
@@ -2116,7 +2156,7 @@ function raceRows(races) {
 
 function studTitle(studProfiles) {
   if (studProfiles.some((profile) => profile.role === "stallion")) return "Stud Record";
-  return "Progeny";
+  return "Progeny Record";
 }
 
 function studLinkName(profile, horse) {
@@ -2326,6 +2366,29 @@ function bindControls() {
     state.offset = 0;
     loadHorses();
   };
+  const resetFilters = () => {
+    for (const key of ["q", "sex", "year", "color", "region", "trainer", "owner", "breeder", "broodmare_sire", "female_family", "dam_age_bucket", "bms_line", "achievement", "breeding"]) {
+      state[key] = "";
+    }
+    state.offset = 0;
+    els.search.value = "";
+    els.year.value = "";
+    els.sex.value = "";
+    els.color.value = "";
+    els.region.value = "";
+    els.owner.value = "";
+    els.breeder.value = "";
+    els.broodmareSire.value = "";
+    els.femaleFamily.value = "";
+    els.damAgeBucket.value = "";
+    els.bmsLine.value = "";
+    els.achievement.value = "";
+    els.breeding.value = "";
+    fillTrainerFacet();
+    els.trainer.value = "";
+    loadHorses();
+  };
+  els.resetFilters?.addEventListener("click", resetFilters);
   els.search.addEventListener("input", debounce(() => {
     state.q = els.search.value.trim();
     refresh();
