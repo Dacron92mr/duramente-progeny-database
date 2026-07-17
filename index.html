@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260716b">
+  <link rel="stylesheet" href="style.css?v=20260717a">
 </head>
 <body>
   <header class="topbar">
@@ -56,8 +56,8 @@
             </select>
           </label>
           <label>
-            <span>所属</span>
-            <select id="region">
+            <span>最高戦績</span>
+            <select id="achievement">
               <option value="">すべて</option>
             </select>
           </label>
@@ -66,6 +66,12 @@
 
       <details class="filter-group">
         <summary>关系人</summary>
+        <label>
+          <span>所属</span>
+          <select id="region">
+            <option value="">すべて</option>
+          </select>
+        </label>
         <label>
           <span>調教師</span>
           <select id="trainer">
@@ -106,24 +112,18 @@
             <option value="">すべて</option>
           </select>
         </label>
-      </details>
-
-      <details class="filter-group">
-        <summary>成绩与繁殖</summary>
         <label>
-          <span>最高戦績</span>
-          <select id="achievement">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>母龄</span>
+          <span>生产时母龄</span>
           <select id="damAgeBucket">
             <option value="">全部</option>
           </select>
         </label>
+      </details>
+
+      <details class="filter-group">
+        <summary>第二马生</summary>
         <label>
-          <span>繁殖成績</span>
+          <span>第二马生</span>
           <select id="breeding">
             <option value="">すべて</option>
           </select>
@@ -207,6 +207,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260716b"></script>
+  <script src="app.js?v=20260717a"></script>
 </body>
 </html>
