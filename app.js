@@ -110,82 +110,61 @@ const CROP_COLORS = {
   "2022": "#f0b45f",
 };
 
-const JAPAN_LITE_GEOJSON = {
-  type: "FeatureCollection",
-  features: [
-    {
-      type: "Feature",
-      properties: { name: "北海道" },
-      geometry: { type: "Polygon", coordinates: [[
-        [140.7, 41.35], [142.1, 41.55], [143.6, 42.2], [145.8, 43.25],
-        [145.1, 44.4], [143.7, 45.45], [141.2, 45.25], [139.4, 44.25],
-        [140.0, 42.6], [140.7, 41.35],
-      ]] },
-    },
-    {
-      type: "Feature",
-      properties: { name: "本州" },
-      geometry: { type: "Polygon", coordinates: [[
-        [130.85, 34.3], [132.1, 34.8], [133.7, 35.1], [135.5, 35.55],
-        [136.7, 36.1], [138.2, 37.2], [139.8, 38.25], [140.95, 39.8],
-        [141.65, 40.8], [140.95, 41.45], [139.55, 40.45], [138.65, 38.65],
-        [137.25, 37.55], [136.25, 36.45], [135.0, 35.55], [133.3, 35.45],
-        [131.1, 35.0], [130.85, 34.3],
-      ]] },
-    },
-    {
-      type: "Feature",
-      properties: { name: "四国" },
-      geometry: { type: "Polygon", coordinates: [[
-        [132.0, 33.35], [134.0, 33.25], [134.75, 33.75],
-        [134.1, 34.35], [132.3, 34.25], [132.0, 33.35],
-      ]] },
-    },
-    {
-      type: "Feature",
-      properties: { name: "九州" },
-      geometry: { type: "Polygon", coordinates: [[
-        [129.4, 31.15], [130.9, 31.25], [131.9, 32.35], [131.55, 33.65],
-        [130.55, 34.0], [129.35, 33.45], [128.95, 32.25], [129.4, 31.15],
-      ]] },
-    },
-    {
-      type: "Feature",
-      properties: { name: "沖縄" },
-      geometry: { type: "Polygon", coordinates: [[
-        [127.35, 26.05], [128.15, 26.05], [128.25, 26.55],
-        [127.45, 26.55], [127.35, 26.05],
-      ]] },
-    },
-  ],
+const RACECOURSE_COORDINATES = {
+  東京: { lon: 139.485, lat: 35.6625, system: "JRA", prefecture: "東京都", aliases: ["東京競馬場"] },
+  中山: { lon: 139.9625, lat: 35.72555556, system: "JRA", prefecture: "千葉県", aliases: ["中山競馬場"] },
+  阪神: { lon: 135.363, lat: 34.781083333, system: "JRA", prefecture: "兵庫県", aliases: ["阪神競馬場"] },
+  京都: { lon: 135.725, lat: 34.906666666, system: "JRA", prefecture: "京都府", aliases: ["京都競馬場"] },
+  中京: { lon: 136.98944444, lat: 35.06673611, system: "JRA", prefecture: "愛知県", aliases: ["中京競馬場"] },
+  新潟: { lon: 139.186452, lat: 37.947638, system: "JRA", prefecture: "新潟県", aliases: ["新潟競馬場"] },
+  福島: { lon: 140.48252778, lat: 37.76455556, system: "JRA", prefecture: "福島県", aliases: ["福島競馬場"] },
+  小倉: { lon: 130.87275, lat: 33.843, system: "JRA", prefecture: "福岡県", aliases: ["小倉競馬場"] },
+  札幌: { lon: 141.32555556, lat: 43.07777778, system: "JRA", prefecture: "北海道", aliases: ["札幌競馬場"] },
+  函館: { lon: 140.77533333, lat: 41.78063889, system: "JRA", prefecture: "北海道", aliases: ["函館競馬場"] },
+  名古屋: { lon: 136.783733348, lat: 35.05244857, system: "NAR", prefecture: "愛知県", aliases: ["名古屋競馬場"] },
+  門別: { lon: 142.002972, lat: 42.537944, system: "NAR", prefecture: "北海道", aliases: ["門別競馬場"] },
+  園田: { lon: 135.445194, lat: 34.766583, system: "NAR", prefecture: "兵庫県", aliases: ["園田競馬場"] },
+  高知: { lon: 133.530556, lat: 33.503194, system: "NAR", prefecture: "高知県", aliases: ["高知競馬場"] },
+  大井: { lon: 139.74260833, lat: 35.59133889, system: "NAR", prefecture: "東京都", aliases: ["大井競馬場"] },
+  盛岡: { lon: 141.220067, lat: 39.690822, system: "NAR", prefecture: "岩手県", aliases: ["盛岡競馬場"] },
+  笠松: { lon: 136.767527777, lat: 35.372166666, system: "NAR", prefecture: "岐阜県", aliases: ["笠松競馬場"] },
+  佐賀: { lon: 130.470861, lat: 33.349361, system: "NAR", prefecture: "佐賀県", aliases: ["佐賀競馬場"] },
+  金沢: { lon: 136.67475, lat: 36.636444444, system: "NAR", prefecture: "石川県", aliases: ["金沢競馬場"] },
+  水沢: { lon: 141.170333, lat: 39.129944, system: "NAR", prefecture: "岩手県", aliases: ["水沢競馬場"] },
+  川崎: { lon: 139.710667, lat: 35.532361, system: "NAR", prefecture: "神奈川県", aliases: ["川崎競馬場"] },
+  船橋: { lon: 139.99777778, lat: 35.68472222, system: "NAR", prefecture: "千葉県", aliases: ["船橋競馬場"] },
+  浦和: { lon: 139.670389, lat: 35.857806, system: "NAR", prefecture: "埼玉県", aliases: ["浦和競馬場"] },
+  姫路: { lon: 134.701222, lat: 34.856278, system: "NAR", prefecture: "兵庫県", aliases: ["姫路競馬場"] },
 };
 
-const RACECOURSE_COORDINATES = {
-  東京: [139.4858, 35.6627],
-  中山: [139.9626, 35.7259],
-  阪神: [135.3619, 34.7806],
-  京都: [135.7267, 34.9446],
-  中京: [136.9972, 35.0663],
-  新潟: [139.1862, 37.9457],
-  福島: [140.4805, 37.7608],
-  小倉: [130.8771, 33.8425],
-  札幌: [141.3264, 43.0754],
-  函館: [140.7661, 41.7687],
-  名古屋: [136.755, 35.07],
-  門別: [142.43, 42.47],
-  園田: [135.43, 34.76],
-  高知: [133.58, 33.56],
-  大井: [139.75, 35.59],
-  盛岡: [141.2, 39.76],
-  笠松: [136.77, 35.37],
-  佐賀: [130.47, 33.37],
-  金沢: [136.66, 36.59],
-  水沢: [141.14, 39.14],
-  川崎: [139.7, 35.53],
-  船橋: [139.99, 35.7],
-  浦和: [139.65, 35.88],
-  姫路: [134.68, 34.86],
+const RACECOURSE_LABEL_LAYOUT = {
+  東京: { position: "left", offset: [-10, 0], leader: [-0.23, 0.03] },
+  中山: { position: "right", offset: [8, 8], leader: [0.23, 0.05] },
+  札幌: { position: "top", offset: [0, -6] },
+  函館: { position: "bottom", offset: [0, 8] },
+  福島: { position: "right", offset: [8, -4] },
+  新潟: { position: "left", offset: [-8, 0] },
+  中京: { position: "right", offset: [8, 4], leader: [0.22, 0.03] },
+  京都: { position: "top", offset: [0, -8], leader: [0.17, 0.08] },
+  阪神: { position: "bottom", offset: [0, 8], leader: [-0.16, -0.07] },
+  小倉: { position: "left", offset: [-8, 0] },
+  大井: { position: "bottom", offset: [0, 8], leader: [-0.18, -0.1] },
+  川崎: { position: "left", offset: [-8, 2], leader: [-0.25, -0.02] },
+  船橋: { position: "right", offset: [8, -2], leader: [0.25, 0.02] },
+  浦和: { position: "top", offset: [0, -8], leader: [-0.16, 0.14] },
+  園田: { position: "right", offset: [8, 6], leader: [0.19, -0.04] },
+  姫路: { position: "left", offset: [-8, 0], leader: [-0.17, 0.04] },
 };
+
+const RACECOURSE_ALIAS_TO_CANONICAL = Object.fromEntries(
+  Object.entries(RACECOURSE_COORDINATES).flatMap(([name, info]) => [
+    [name, name],
+    [`${name}競馬場`, name],
+    ...((info.aliases || []).map((alias) => [alias, name])),
+  ]),
+);
+
+let japanGeoJsonPromise = null;
 
 const LEADING_CATEGORY_CATALOG = [
   {
@@ -528,105 +507,313 @@ function renderChart(id, option) {
   return chart;
 }
 
-function renderRacecourseMap(id, rows, title) {
-  if (!window.echarts) return renderChart(id, {});
-  window.echarts.registerMap("japan-lite", JAPAN_LITE_GEOJSON);
-  const points = rows
-    .filter((row) => RACECOURSE_COORDINATES[row.label])
-    .map((row) => {
-      const [lng, lat] = RACECOURSE_COORDINATES[row.label];
-      return {
-        name: row.label,
-        value: [
-          lng,
-          lat,
-          Number(row.wins_starts || 0),
-          Number(((row.win_start_rate || 0) * 100).toFixed(1)),
-          Number(row.starts || 0),
-          Number(row.top3 || 0),
-          Number(((row.top3_rate || 0) * 100).toFixed(1)),
-        ],
-        raw: row,
-      };
+function canonicalRacecourseName(value) {
+  const text = String(value || "").replace(/\s+/g, "").replace(/\(.*?\)/g, "");
+  return RACECOURSE_ALIAS_TO_CANONICAL[text] || RACECOURSE_ALIAS_TO_CANONICAL[text.replace(/競馬場$/, "")] || text;
+}
+
+function racecourseCoordinate(row) {
+  return RACECOURSE_COORDINATES[canonicalRacecourseName(row.label)];
+}
+
+function racecourseSymbolDiameter(wins, maxWins) {
+  const minRadius = 4.5;
+  const scaleRange = 17;
+  return (minRadius + Math.sqrt(Math.max(Number(wins) || 0, 0) / Math.max(maxWins, 1)) * scaleRange) * 2;
+}
+
+function racecoursePoint(row, maxWins, options = {}) {
+  const name = canonicalRacecourseName(row.label);
+  const coord = RACECOURSE_COORDINATES[name];
+  if (!coord) return null;
+  const wins = Number(row.wins_starts || 0);
+  const winRate = Number(((row.win_start_rate || 0) * 100).toFixed(1));
+  const top3Rate = Number(((row.top3_rate || 0) * 100).toFixed(1));
+  const layout = RACECOURSE_LABEL_LAYOUT[name] || {};
+  return {
+    name,
+    value: [coord.lon, coord.lat, wins, winRate, Number(row.starts || 0), Number(row.top3 || 0), top3Rate],
+    symbolSize: racecourseSymbolDiameter(wins, maxWins),
+    raw: row,
+    system: coord.system,
+    prefecture: coord.prefecture,
+    leader: options.showLabel && layout.leader ? layout.leader : null,
+    label: {
+      show: Boolean(options.showLabel && !layout.leader),
+      position: layout.position || "right",
+      offset: layout.offset || [6, 0],
+    },
+  };
+}
+
+async function getJapanGeoJson() {
+  if (!japanGeoJsonPromise) {
+    const base = window.STATIC_DATA_BASE || "/data";
+    japanGeoJsonPromise = fetch(`${base}/japan-prefectures.geojson`).then((response) => {
+      if (!response.ok) throw new Error(`Japan GeoJSON加载失败：${response.status}`);
+      return response.json();
     });
-  const maxWins = Math.max(...points.map((item) => item.value[2]), 1);
-  return renderChart(id, {
-    tooltip: {
-      trigger: "item",
-      formatter(params) {
-        if (params.seriesType !== "scatter") return params.name || "";
-        const [, , wins, winRate, starts, top3, top3Rate] = params.value;
-        return [
-          `<strong>${escapeHtml(params.name)}競馬場</strong>`,
-          `勝場数：${formatNumber(wins)}`,
-          `有效出赛：${formatNumber(starts)}`,
-          `胜率：${formatNumber(winRate, 1)}%`,
-          `前三：${formatNumber(top3)}（${formatNumber(top3Rate, 1)}%）`,
-        ].join("<br>");
+  }
+  return japanGeoJsonPromise;
+}
+
+function racecourseMapTooltip(params) {
+  if (params.seriesType !== "scatter" || params.seriesName.includes("外环")) return params.name || "";
+  const [, , wins, winRate, starts, top3, top3Rate] = params.value;
+  const system = params.data?.system || "—";
+  return [
+    `<strong>${escapeHtml(params.name)}競馬場</strong>`,
+    `所属系统：${escapeHtml(system)}`,
+    `勝場数：${formatNumber(wins)}`,
+    `有效出赛：${formatNumber(starts)}`,
+    `胜率：${formatNumber(winRate, 1)}%`,
+    `前三率：${formatNumber(top3Rate, 1)}%（${formatNumber(top3)}/${formatNumber(starts)}）`,
+  ].join("<br>");
+}
+
+function mapGeoComponent(name, layout) {
+  return {
+    map: "japan-prefectures",
+    name,
+    roam: false,
+    layoutCenter: layout.layoutCenter,
+    layoutSize: layout.layoutSize,
+    center: layout.center,
+    zoom: layout.zoom,
+    label: { show: false },
+    itemStyle: {
+      areaColor: "#f4f0eb",
+      borderColor: "#d8d0c8",
+      borderWidth: 0.55,
+    },
+    emphasis: {
+      disabled: true,
+      label: { show: false },
+      itemStyle: { areaColor: "#eee7e0" },
+    },
+  };
+}
+
+function racecourseScatterSeries(name, geoIndex, points, options = {}) {
+  return {
+    name,
+    type: "scatter",
+    coordinateSystem: "geo",
+    geoIndex,
+    data: points,
+    zlevel: options.zlevel || 2,
+    silent: Boolean(options.silent),
+    symbol: "circle",
+    symbolSize(value, params) {
+      return params?.data?.symbolSize || racecourseSymbolDiameter(value?.[2], options.maxWins || 1);
+    },
+    itemStyle: options.itemStyle || {
+      borderColor: "#fff",
+      borderWidth: 1.6,
+    },
+    label: options.label || {
+      formatter: "{b}",
+      color: "#302a27",
+      fontSize: 11,
+      fontWeight: 800,
+      textBorderColor: "#fff",
+      textBorderWidth: 3,
+    },
+    emphasis: {
+      scale: true,
+      label: {
+        show: true,
+        formatter: "{b}",
+        color: "#1f1f1f",
+        fontWeight: 900,
+        textBorderColor: "#fff",
+        textBorderWidth: 4,
       },
     },
+  };
+}
+
+function racecourseLeaderLabelPoints(points) {
+  return points.filter((point) => point.leader).map((point) => {
+    const [lon, lat, wins, winRate, starts, top3, top3Rate] = point.value;
+    const [dx, dy] = point.leader;
+    return {
+      ...point,
+      value: [lon + dx, lat + dy, wins, winRate, starts, top3, top3Rate],
+      symbolSize: 0,
+      label: {
+        show: true,
+        formatter: "{b}",
+        color: "#302a27",
+        fontSize: 11,
+        fontWeight: 850,
+        textBorderColor: "#fff",
+        textBorderWidth: 3,
+      },
+      itemStyle: { color: "rgba(0,0,0,0)" },
+    };
+  });
+}
+
+function racecourseLeaderLineSeries(name, geoIndex, points) {
+  const data = points.filter((point) => point.leader).map((point) => {
+    const [lon, lat] = point.value;
+    const [dx, dy] = point.leader;
+    return { coords: [[lon, lat], [lon + dx, lat + dy]], name: point.name };
+  });
+  return {
+    name,
+    type: "lines",
+    coordinateSystem: "geo",
+    geoIndex,
+    data,
+    zlevel: 1,
+    silent: true,
+    symbol: ["none", "none"],
+    lineStyle: {
+      color: "rgba(94, 82, 75, 0.42)",
+      width: 0.8,
+      type: "solid",
+    },
+  };
+}
+
+function renderRacecourseMapLegend(scope, rows, maxWins, maxWinRate) {
+  const visibleRows = rows.filter((row) => ["JRA", "NAR"].includes(row.jurisdiction) && racecourseCoordinate(row));
+  const rankRows = visibleRows.slice()
+    .sort((a, b) => b.wins_starts - a.wins_starts || b.starts - a.starts)
+    .slice(0, 8);
+  const legendWins = [10, 50, 100].filter((value) => value <= Math.max(maxWins, 10));
+  if (!legendWins.includes(maxWins) && maxWins < 100) legendWins.push(maxWins);
+  const label = scope === "All" ? "全部" : scope;
+  const totalWins = visibleRows.reduce((sum, row) => sum + Number(row.wins_starts || 0), 0);
+  const totalStarts = visibleRows.reduce((sum, row) => sum + Number(row.starts || 0), 0);
+  const totalTop3 = visibleRows.reduce((sum, row) => sum + Number(row.top3 || 0), 0);
+  const top = rankRows[0];
+  const panel = document.querySelector("#racecourseMapLegend");
+  if (!panel) return;
+  panel.innerHTML = `
+    <div class="race-map-panel-section">
+      <span class="mini-label">当前范围</span>
+      <strong>${escapeHtml(label)}</strong>
+      <p>${formatNumber(visibleRows.length)} 个赛马场，${formatNumber(totalWins)} 胜 / ${formatNumber(totalStarts)} 有效出赛。</p>
+    </div>
+    <div class="race-map-panel-section">
+      <span class="mini-label">圆圈面积</span>
+      <div class="size-legend">
+        ${legendWins.map((wins) => {
+          const diameter = racecourseSymbolDiameter(wins, maxWins);
+          return `<span><i style="width:${diameter}px;height:${diameter}px"></i>${formatNumber(wins)}胜</span>`;
+        }).join("")}
+      </div>
+    </div>
+    <div class="race-map-panel-section">
+      <span class="mini-label">胜率色阶</span>
+      <div class="rate-legend"><span></span></div>
+      <div class="legend-scale"><small>0%</small><small>${formatNumber(maxWinRate, 1)}%</small></div>
+    </div>
+    <div class="race-map-panel-section">
+      <span class="mini-label">系统标记</span>
+      <div class="system-legend">
+        <span><i class="jra-dot"></i>JRA</span>
+        <span><i class="nar-dot"></i>NAR 外环</span>
+      </div>
+    </div>
+    <div class="race-map-panel-section">
+      <span class="mini-label">胜场排行</span>
+      <ol class="race-map-ranking">
+        ${rankRows.map((row) => `<li><span>${escapeHtml(row.label)}</span><strong>${formatNumber(row.wins_starts)}</strong><small>${formatRate(row.win_start_rate)}</small></li>`).join("")}
+      </ol>
+      ${top ? `<p class="source-note">最多胜场：${escapeHtml(top.label)}，${formatNumber(top.wins_starts)}胜。</p>` : ""}
+    </div>
+  `;
+}
+
+async function renderRacecourseMap(scope, rows, allRows) {
+  const geoJson = await getJapanGeoJson();
+  if (!window.echarts) return renderChart("racecourseJapanMap", {});
+  window.echarts.registerMap("japan-prefectures", geoJson);
+
+  const allJapanRows = allRows.filter((row) => ["JRA", "NAR"].includes(row.jurisdiction) && racecourseCoordinate(row));
+  const maxWins = Math.max(...allJapanRows.map((row) => Number(row.wins_starts || 0)), 1);
+  const maxWinRate = Math.max(...allJapanRows.map((row) => Number((row.win_start_rate || 0) * 100)), 1);
+  const visibleRows = rows.filter((row) => ["JRA", "NAR"].includes(row.jurisdiction) && racecourseCoordinate(row));
+  const topNames = new Set(visibleRows.slice().sort((a, b) => b.wins_starts - a.wins_starts).slice(0, 7).map((row) => canonicalRacecourseName(row.label)));
+  const mainPoints = visibleRows.map((row) => {
+    const name = canonicalRacecourseName(row.label);
+    const showLabel = window.innerWidth > 760 && (scope === "JRA" || RACECOURSE_COORDINATES[name]?.system === "JRA" || topNames.has(name));
+    return racecoursePoint(row, maxWins, { showLabel });
+  }).filter(Boolean);
+  const kantoNames = new Set(["東京", "中山", "大井", "川崎", "船橋", "浦和"]);
+  const kansaiNames = new Set(["京都", "阪神", "園田", "姫路", "中京"]);
+  const kantoPoints = visibleRows
+    .filter((row) => kantoNames.has(canonicalRacecourseName(row.label)))
+    .map((row) => racecoursePoint(row, maxWins, { showLabel: true }))
+    .filter(Boolean);
+  const kansaiPoints = visibleRows
+    .filter((row) => kansaiNames.has(canonicalRacecourseName(row.label)))
+    .map((row) => racecoursePoint(row, maxWins, { showLabel: true }))
+    .filter(Boolean);
+  const narPoints = (points) => points.filter((point) => point.system === "NAR").map((point) => ({
+    ...point,
+    symbolSize: (point.symbolSize || 0) + 5,
+    itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 },
+    label: { show: false },
+  }));
+  const chart = renderChart("racecourseJapanMap", {
+    tooltip: { trigger: "item", formatter: racecourseMapTooltip },
     visualMap: {
       min: 0,
-      max: Math.max(...points.map((item) => item.value[3]), 1),
+      max: Math.ceil(maxWinRate),
       dimension: 3,
-      orient: "horizontal",
-      left: 16,
-      bottom: 10,
-      itemWidth: 110,
-      itemHeight: 8,
+      seriesIndex: [1, 5, 9],
+      orient: "vertical",
+      right: 22,
+      bottom: 26,
+      itemWidth: 10,
+      itemHeight: 92,
       text: ["高胜率", "低胜率"],
-      textStyle: { color: "#6f6762", fontWeight: 700 },
-      inRange: { color: ["#f4c979", "#e96c4c", "#9b315d"] },
+      textGap: 8,
+      textStyle: { color: "#675c56", fontWeight: 700, fontSize: 11 },
+      inRange: { color: ["#ead2ce", "#c75870", "#7c1f46"] },
+      calculable: false,
     },
-    geo: {
-      map: "japan-lite",
-      roam: false,
-      center: [136.9, 36.5],
-      zoom: 1.12,
-      aspectScale: 0.9,
-      label: { show: false },
-      itemStyle: {
-        areaColor: "#f5eee8",
-        borderColor: "#d9cfc5",
-        borderWidth: 1,
-      },
-      emphasis: {
-        disabled: true,
-        label: { show: false },
-        itemStyle: { areaColor: "#f0e5dd" },
-      },
-    },
+    geo: [
+      mapGeoComponent("全国", { layoutCenter: ["36%", "54%"], layoutSize: "94%" }),
+      mapGeoComponent("関東 inset", { layoutCenter: ["82%", "26%"], layoutSize: "285%", center: [139.77, 35.68], zoom: 8.5 }),
+      mapGeoComponent("近畿 inset", { layoutCenter: ["82%", "67%"], layoutSize: "300%", center: [135.58, 34.84], zoom: 8.2 }),
+    ],
+    graphic: [
+      { type: "text", right: 20, top: 18, style: { text: "関東 inset", fill: "#6b615b", font: "700 12px sans-serif" } },
+      { type: "text", right: 20, top: 356, style: { text: "近畿 inset", fill: "#6b615b", font: "700 12px sans-serif" } },
+      { type: "rect", right: 16, top: 40, shape: { width: 278, height: 200 }, style: { fill: "rgba(255,255,255,0)", stroke: "#d5ccc4", lineWidth: 1 } },
+      { type: "rect", right: 16, top: 378, shape: { width: 278, height: 200 }, style: { fill: "rgba(255,255,255,0)", stroke: "#d5ccc4", lineWidth: 1 } },
+    ],
     series: [
-      {
-        name: title,
-        type: "scatter",
-        coordinateSystem: "geo",
-        data: points,
-        symbolSize(value) {
-          return 9 + Math.sqrt(Math.max(Number(value[2]) || 0, 0)) * (maxWins > 80 ? 2.1 : 2.7);
-        },
-        itemStyle: {
-          borderColor: "#fff",
-          borderWidth: 2,
-          shadowBlur: 10,
-          shadowColor: "rgba(84, 47, 57, 0.24)",
-        },
-        label: {
-          show: true,
-          formatter: "{b}",
-          position: "right",
-          color: "#332c29",
-          fontWeight: 800,
-          textBorderColor: "#fff",
-          textBorderWidth: 3,
-        },
-        emphasis: {
-          scale: true,
-          label: { show: true },
-        },
-      },
+      racecourseScatterSeries("NAR外环", 0, narPoints(mainPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
+      racecourseScatterSeries("赛马场", 0, mainPoints, { maxWins }),
+      racecourseLeaderLineSeries("全国标签引导线", 0, mainPoints),
+      racecourseScatterSeries("全国标签", 0, racecourseLeaderLabelPoints(mainPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
+      racecourseScatterSeries("関東 NAR外环", 1, narPoints(kantoPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
+      racecourseScatterSeries("関東", 1, kantoPoints, { maxWins }),
+      racecourseLeaderLineSeries("関東标签引导线", 1, kantoPoints),
+      racecourseScatterSeries("関東标签", 1, racecourseLeaderLabelPoints(kantoPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
+      racecourseScatterSeries("近畿 NAR外环", 2, narPoints(kansaiPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
+      racecourseScatterSeries("近畿", 2, kansaiPoints, { maxWins }),
+      racecourseLeaderLineSeries("近畿标签引导线", 2, kansaiPoints),
+      racecourseScatterSeries("近畿标签", 2, racecourseLeaderLabelPoints(kansaiPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
     ],
   });
+  if (chart) {
+    chart.off("click");
+    chart.on("click", (params) => {
+      if (params.seriesType === "scatter" && !params.seriesName.includes("外环")) {
+        console.log("racecourse-map-click", params.name);
+      }
+    });
+  }
+  renderRacecourseMapLegend(scope, visibleRows, maxWins, maxWinRate);
+  return { maxWins, maxWinRate, visibleRows };
 }
 
 function chartBlock(title, lead, id) {
@@ -2035,14 +2222,25 @@ async function renderRacecourseAnalysis() {
       ${metricCard("赛马场数", formatNumber(data.summary.courses), "标准化后")}
       ${metricCard("图表门槛", `${formatNumber(data.summary.main_chart_min_starts)}+`, "出走次数")}
     </div>
-    <section class="analysis-block">
+    <section class="analysis-block race-map-block">
       <div class="section-heading">
-        <h2>日本赛马场胜场地图</h2>
-        <p>圆圈大小表示胜场数，颜色表示胜率；JRA 与 NAR 分开显示。</p>
+        <h2>日本赛马场胜场分布</h2>
+        <p>圆圈面积表示胜场数，颜色深浅表示胜率；点位依据赛马场真实经纬度。</p>
       </div>
-      <div class="chart-grid">
-        ${chartBlock("JRA勝場分布", "中央10场。圆越大胜场越多，颜色越深胜率越高。", "racecourseMapJra")}
-        ${chartBlock("NAR勝場分布", "地方赛马场。圆越大胜场越多，颜色越深胜率越高。", "racecourseMapNar")}
+      <div class="segment-control compact-control" id="racecourseMapScope">
+        <button class="active" type="button" data-map-scope="All">全部</button>
+        <button type="button" data-map-scope="JRA">JRA</button>
+        <button type="button" data-map-scope="NAR">NAR</button>
+      </div>
+      <div class="race-map-layout">
+        <article class="chart-card race-map-card">
+          <div class="chart-card-head">
+            <h3>全国主地图 + 局部放大</h3>
+            <p>右侧 inset 放大关东与近畿密集区域；圆点保持真实经纬度。</p>
+          </div>
+          ${chartShell("racecourseJapanMap")}
+        </article>
+        <aside class="race-map-panel" id="racecourseMapLegend" aria-label="赛马场地图图例"></aside>
       </div>
     </section>
     <div class="segment-control" id="racecourseScope">
@@ -2053,14 +2251,25 @@ async function renderRacecourseAnalysis() {
     </div>
     <div id="racecourseDynamic"></div>
   `;
-  const jraMapRows = data.table
-    .filter((row) => row.jurisdiction === "JRA")
-    .sort((a, b) => b.wins_starts - a.wins_starts || b.starts - a.starts);
-  const narMapRows = data.table
-    .filter((row) => row.jurisdiction === "NAR")
-    .sort((a, b) => b.wins_starts - a.wins_starts || b.starts - a.starts);
-  renderRacecourseMap("racecourseMapJra", jraMapRows, "JRA勝場分布");
-  renderRacecourseMap("racecourseMapNar", narMapRows, "NAR勝場分布");
+  const renderMapScope = async (scope) => {
+    const mapRows = data.table
+      .filter((row) => ["JRA", "NAR"].includes(row.jurisdiction) && (scope === "All" || row.jurisdiction === scope))
+      .sort((a, b) => b.wins_starts - a.wins_starts || b.starts - a.starts);
+    await renderRacecourseMap(scope, mapRows, data.table);
+  };
+  for (const button of els.racecourseContent.querySelectorAll("#racecourseMapScope button")) {
+    button.addEventListener("click", () => {
+      for (const peer of els.racecourseContent.querySelectorAll("#racecourseMapScope button")) {
+        peer.classList.toggle("active", peer === button);
+      }
+      renderMapScope(button.dataset.mapScope).catch((error) => {
+        console.error(error);
+        const panel = document.querySelector("#racecourseMapLegend");
+        if (panel) panel.innerHTML = `<p class="source-note">地图数据加载失败：${escapeHtml(error.message || String(error))}</p>`;
+      });
+    });
+  }
+  await renderMapScope("All");
   const renderRacecourseScope = (scope) => {
     const rows = data.table
       .filter((row) => scope === "All" || row.jurisdiction === scope)
