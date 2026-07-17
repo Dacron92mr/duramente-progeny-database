@@ -7,7 +7,7 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
   <title>Duramente Progeny Database</title>
-  <link rel="stylesheet" href="style.css?v=20260717c">
+  <link rel="stylesheet" href="style.css?v=20260717d">
 </head>
 <body>
   <header class="topbar">
@@ -97,36 +97,40 @@
 
       <details class="filter-group" open>
         <summary>血统</summary>
-        <label>
-          <span>母父系</span>
-          <select id="bmsLine">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>母父</span>
-          <select id="broodmareSire">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>牝系</span>
-          <select id="femaleFamily">
-            <option value="">すべて</option>
-          </select>
-        </label>
-        <label>
-          <span>生产时母龄</span>
-          <select id="damAgeBucket">
-            <option value="">すべて</option>
-          </select>
-        </label>
+        <div class="filter-row">
+          <label>
+            <span>母父系</span>
+            <select id="bmsLine">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>母父</span>
+            <select id="broodmareSire">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
+        <div class="filter-row">
+          <label>
+            <span>牝系</span>
+            <select id="femaleFamily">
+              <option value="">すべて</option>
+            </select>
+          </label>
+          <label>
+            <span>生产时母龄</span>
+            <select id="damAgeBucket">
+              <option value="">すべて</option>
+            </select>
+          </label>
+        </div>
       </details>
 
-      <details class="filter-group">
+      <details class="filter-group" open>
         <summary>第二马生</summary>
         <label>
-          <span>第二马生</span>
+          <span>繁殖状态</span>
           <select id="breeding">
             <option value="">すべて</option>
           </select>
@@ -210,6 +214,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script>window.STATIC_DATA_BASE = "data";</script>
-  <script src="app.js?v=20260717c"></script>
+  <script src="app.js?v=20260717d"></script>
 </body>
 </html>
