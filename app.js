@@ -166,6 +166,13 @@ const RACECOURSE_ALIAS_TO_CANONICAL = Object.fromEntries(
 
 let japanGeoJsonPromise = null;
 
+const JAPAN_RACING_MAP_BOUNDS = {
+  west: 128,
+  south: 30,
+  east: 146.5,
+  north: 46.2,
+};
+
 const LEADING_CATEGORY_CATALOG = [
   {
     category: "jra_overall",
@@ -557,6 +564,43 @@ async function getJapanGeoJson() {
   return japanGeoJsonPromise;
 }
 
+function coordinateInRacingMapBounds(coord) {
+  const [lon, lat] = coord;
+  return lon >= JAPAN_RACING_MAP_BOUNDS.west
+    && lon <= JAPAN_RACING_MAP_BOUNDS.east
+    && lat >= JAPAN_RACING_MAP_BOUNDS.south
+    && lat <= JAPAN_RACING_MAP_BOUNDS.north;
+}
+
+function ringTouchesRacingMapBounds(ring) {
+  return Array.isArray(ring) && ring.some(coordinateInRacingMapBounds);
+}
+
+function polygonTouchesRacingMapBounds(polygon) {
+  return Array.isArray(polygon) && polygon.some(ringTouchesRacingMapBounds);
+}
+
+function geometryForRacingMap(geometry) {
+  if (!geometry) return null;
+  if (geometry.type === "Polygon") {
+    return polygonTouchesRacingMapBounds(geometry.coordinates) ? geometry : null;
+  }
+  if (geometry.type === "MultiPolygon") {
+    const polygons = geometry.coordinates.filter(polygonTouchesRacingMapBounds);
+    return polygons.length ? { ...geometry, coordinates: polygons } : null;
+  }
+  return null;
+}
+
+function racingMapGeoJson(geoJson) {
+  return {
+    ...geoJson,
+    features: geoJson.features
+      .map((feature) => ({ ...feature, geometry: geometryForRacingMap(feature.geometry) }))
+      .filter((feature) => feature.geometry),
+  };
+}
+
 function racecourseMapTooltip(params) {
   if (params.seriesType !== "scatter" || params.seriesName.includes("外环")) return params.name || "";
   const [, , wins, winRate, starts, top3, top3Rate] = params.value;
@@ -573,7 +617,7 @@ function racecourseMapTooltip(params) {
 
 function mapGeoComponent(name, layout) {
   return {
-    map: "japan-prefectures",
+    map: "japan-racing-main",
     name,
     roam: false,
     layoutCenter: layout.layoutCenter,
@@ -732,7 +776,7 @@ function renderRacecourseMapLegend(scope, rows, maxWins, maxWinRate) {
 async function renderRacecourseMap(scope, rows, allRows) {
   const geoJson = await getJapanGeoJson();
   if (!window.echarts) return renderChart("racecourseJapanMap", {});
-  window.echarts.registerMap("japan-prefectures", geoJson);
+  window.echarts.registerMap("japan-racing-main", racingMapGeoJson(geoJson));
 
   const allJapanRows = allRows.filter((row) => ["JRA", "NAR"].includes(row.jurisdiction) && racecourseCoordinate(row));
   const maxWins = Math.max(...allJapanRows.map((row) => Number(row.wins_starts || 0)), 1);
@@ -744,16 +788,6 @@ async function renderRacecourseMap(scope, rows, allRows) {
     const showLabel = window.innerWidth > 760 && (scope === "JRA" || RACECOURSE_COORDINATES[name]?.system === "JRA" || topNames.has(name));
     return racecoursePoint(row, maxWins, { showLabel });
   }).filter(Boolean);
-  const kantoNames = new Set(["東京", "中山", "大井", "川崎", "船橋", "浦和"]);
-  const kansaiNames = new Set(["京都", "阪神", "園田", "姫路", "中京"]);
-  const kantoPoints = visibleRows
-    .filter((row) => kantoNames.has(canonicalRacecourseName(row.label)))
-    .map((row) => racecoursePoint(row, maxWins, { showLabel: true }))
-    .filter(Boolean);
-  const kansaiPoints = visibleRows
-    .filter((row) => kansaiNames.has(canonicalRacecourseName(row.label)))
-    .map((row) => racecoursePoint(row, maxWins, { showLabel: true }))
-    .filter(Boolean);
   const narPoints = (points) => points.filter((point) => point.system === "NAR").map((point) => ({
     ...point,
     symbolSize: (point.symbolSize || 0) + 5,
@@ -766,7 +800,7 @@ async function renderRacecourseMap(scope, rows, allRows) {
       min: 0,
       max: Math.ceil(maxWinRate),
       dimension: 3,
-      seriesIndex: [1, 5, 9],
+      seriesIndex: [1],
       orient: "vertical",
       right: 22,
       bottom: 26,
@@ -778,30 +812,15 @@ async function renderRacecourseMap(scope, rows, allRows) {
       inRange: { color: ["#ead2ce", "#c75870", "#7c1f46"] },
       calculable: false,
     },
-    geo: [
-      mapGeoComponent("全国", { layoutCenter: ["36%", "54%"], layoutSize: "94%" }),
-      mapGeoComponent("関東 inset", { layoutCenter: ["82%", "26%"], layoutSize: "285%", center: [139.77, 35.68], zoom: 8.5 }),
-      mapGeoComponent("近畿 inset", { layoutCenter: ["82%", "67%"], layoutSize: "300%", center: [135.58, 34.84], zoom: 8.2 }),
-    ],
-    graphic: [
-      { type: "text", right: 20, top: 18, style: { text: "関東 inset", fill: "#6b615b", font: "700 12px sans-serif" } },
-      { type: "text", right: 20, top: 356, style: { text: "近畿 inset", fill: "#6b615b", font: "700 12px sans-serif" } },
-      { type: "rect", right: 16, top: 40, shape: { width: 278, height: 200 }, style: { fill: "rgba(255,255,255,0)", stroke: "#d5ccc4", lineWidth: 1 } },
-      { type: "rect", right: 16, top: 378, shape: { width: 278, height: 200 }, style: { fill: "rgba(255,255,255,0)", stroke: "#d5ccc4", lineWidth: 1 } },
-    ],
+    geo: mapGeoComponent("日本", {
+      layoutCenter: ["48%", "52%"],
+      layoutSize: "96%",
+    }),
     series: [
       racecourseScatterSeries("NAR外环", 0, narPoints(mainPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
       racecourseScatterSeries("赛马场", 0, mainPoints, { maxWins }),
       racecourseLeaderLineSeries("全国标签引导线", 0, mainPoints),
       racecourseScatterSeries("全国标签", 0, racecourseLeaderLabelPoints(mainPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
-      racecourseScatterSeries("関東 NAR外环", 1, narPoints(kantoPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
-      racecourseScatterSeries("関東", 1, kantoPoints, { maxWins }),
-      racecourseLeaderLineSeries("関東标签引导线", 1, kantoPoints),
-      racecourseScatterSeries("関東标签", 1, racecourseLeaderLabelPoints(kantoPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
-      racecourseScatterSeries("近畿 NAR外环", 2, narPoints(kansaiPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
-      racecourseScatterSeries("近畿", 2, kansaiPoints, { maxWins }),
-      racecourseLeaderLineSeries("近畿标签引导线", 2, kansaiPoints),
-      racecourseScatterSeries("近畿标签", 2, racecourseLeaderLabelPoints(kansaiPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
     ],
   });
   if (chart) {
@@ -2235,8 +2254,8 @@ async function renderRacecourseAnalysis() {
       <div class="race-map-layout">
         <article class="chart-card race-map-card">
           <div class="chart-card-head">
-            <h3>全国主地图 + 局部放大</h3>
-            <p>右侧 inset 放大关东与近畿密集区域；圆点保持真实经纬度。</p>
+            <h3>日本全国地图</h3>
+            <p>真实都道府县边界；北海道、本州、四国、九州按实际空间关系显示。</p>
           </div>
           ${chartShell("racecourseJapanMap")}
         </article>
