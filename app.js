@@ -220,7 +220,7 @@ function normalizeLeadingCategories(payload) {
         label: item.label,
         source_url: current?.source_url || item.source_url,
         status: current?.status || (item.category === "jra_overall" ? "available" : "missing"),
-        note: current?.note || (item.category === "jra_overall" ? "" : "该分类暂无可解析排行；不使用本库自行推算全日本排名。"),
+        note: current?.note || (item.category === "jra_overall" ? "" : "该分类暂缺可靠公开榜单。"),
       };
     }),
   };
@@ -458,7 +458,7 @@ function formatRate(value) {
 
 function horseDamAgeBucket(horse) {
   const age = horse.dam_age_at_foaling;
-  if (age === null || age === undefined || age === "") return "unknown";
+  if (age === null || age === undefined || age === "") return "未知";
   const n = Number(age);
   if (n <= 6) return "3-6";
   if (n <= 10) return "7-10";
@@ -485,7 +485,7 @@ function methodLabel(key) {
     breeder: "牧场口径",
     racecourse: "赛马场口径",
     awd: "平均胜距",
-    missing_data: "暂未计算的数据",
+    missing_data: "数据局限",
   };
   return labels[key] || key;
 }
@@ -498,7 +498,7 @@ function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
   if (!window.echarts) {
-    el.innerHTML = `<div class="chart-fallback">图表库加载失败，表格数据仍可查看。</div>`;
+    el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
     return null;
   }
   if (chartRegistry.has(id)) chartRegistry.get(id).dispose();
@@ -557,7 +557,7 @@ async function getJapanGeoJson() {
   if (!japanGeoJsonPromise) {
     const base = window.STATIC_DATA_BASE || "/data";
     japanGeoJsonPromise = fetch(`${base}/japan-prefectures.geojson`).then((response) => {
-      if (!response.ok) throw new Error(`Japan GeoJSON加载失败：${response.status}`);
+      if (!response.ok) throw new Error("地图数据暂时无法加载");
       return response.json();
     });
   }
@@ -609,7 +609,7 @@ function racecourseMapTooltip(params) {
     `<strong>${escapeHtml(params.name)}競馬場</strong>`,
     `所属系统：${escapeHtml(system)}`,
     `勝場数：${formatNumber(wins)}`,
-    `有效出赛：${formatNumber(starts)}`,
+    `出赛：${formatNumber(starts)}`,
     `胜率：${formatNumber(winRate, 1)}%`,
     `前三率：${formatNumber(top3Rate, 1)}%（${formatNumber(top3)}/${formatNumber(starts)}）`,
   ].join("<br>");
@@ -738,9 +738,9 @@ function renderRacecourseMapLegend(scope, rows, maxWins, maxWinRate) {
   if (!panel) return;
   panel.innerHTML = `
     <div class="race-map-panel-section">
-      <span class="mini-label">当前范围</span>
+      <span class="mini-label">显示范围</span>
       <strong>${escapeHtml(label)}</strong>
-      <p>${formatNumber(visibleRows.length)} 个赛马场，${formatNumber(totalWins)} 胜 / ${formatNumber(totalStarts)} 有效出赛。</p>
+      <p>${formatNumber(visibleRows.length)} 个赛马场，${formatNumber(totalWins)} 胜 / ${formatNumber(totalStarts)} 出赛。</p>
     </div>
     <div class="race-map-panel-section">
       <span class="mini-label">圆圈面积</span>
@@ -1077,7 +1077,7 @@ function renderCropComboChart(id, crops, config) {
         if (!row) return "";
         return [
           `${row.label}年生`,
-          `Foals：${formatNumber(row.foals)} / Runners：${formatNumber(row.runners)}`,
+          `产驹数：${formatNumber(row.foals)} / 出赛马：${formatNumber(row.runners)}`,
           `${config.barName}：${config.barFormatter(row[config.barKey])}`,
           `${config.lineName}：${config.lineFormatter(row[config.lineKey], row)}`,
         ].join("<br>");
@@ -1337,12 +1337,12 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   const missingBox = document.querySelector("#leadingMissingMessage");
   if (missingBox) {
     const messages = [];
-    if (missing) messages.push("该分类暂无可靠来源。");
-    if (availableYears.includes(2026)) messages.push("2026年为进行中数据，截至2026-07-16。");
-    if (rankYears.length === 1) messages.push("该分类仅有单年度数据，不绘制趋势线。");
+    if (missing) messages.push("该分类暂缺可靠公开榜单。");
+    if (availableYears.includes(2026)) messages.push("2026年赛季仍在进行，排名会继续变化。");
+    if (rankYears.length === 1) messages.push("该分类目前只有单年资料。");
     missingBox.textContent = messages.join(" ");
   }
-  const rankEmptyTitle = missing ? "该分类暂无可靠来源" : "ドゥラメンテ未进入该分类排行";
+  const rankEmptyTitle = missing ? "该分类暂缺公开榜单" : "ドゥラメンテ未进入该分类排行";
   renderChart("sireLeadingRankChart", (missing || !rankYears.length) ? { title: { text: rankEmptyTitle, left: "center", top: "middle" } } : {
     color: [COLORS.duramente],
     tooltip: {
@@ -1402,7 +1402,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     : chartRows.some((row) => row.wins != null)
       ? { key: "wins", label: "胜利回数", unit: "胜" }
       : { key: "runners", label: "出走头数", unit: "头" };
-  renderChart("sireTop10Chart", (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂无可靠来源" : "该年份暂无Top10数据", left: "center", top: "middle" } } : {
+  renderChart("sireTop10Chart", (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂缺公开榜单" : "该年份暂缺榜单资料", left: "center", top: "middle" } } : {
     color: [COLORS.muted],
     tooltip: {
       trigger: "axis",
@@ -1463,17 +1463,17 @@ async function renderSireAnalysis() {
     </div>
     ${sectionBlock("配种与市场评价", "前两个配种年度数量明显高于同期社台平均，2019年后种付费快速上升。",
       `<div class="chart-grid">
-        ${chartBlock("配种规模变化", "Duramente每年配种牝马数与同期社台种牡马平均值。", "sireMaresCoveredChart")}
-        ${chartBlock("市场定价变化", "种付费单位为万円；对照同期社台种牡马前五年平均值。", "sireStudFeeChart")}
+        ${chartBlock("配种规模变化", "比较配种热度与同期社台平均水平。", "sireMaresCoveredChart")}
+        ${chartBlock("市场定价变化", "观察种付费随市场评价的变化。", "sireStudFeeChart")}
       </div>
       <p class="source-note">配种与种付费来源：${escapeHtml(market.source)}；更新：${escapeHtml(market.retrieved_at)}</p>`
     )}
-    ${sectionBlock("出生世代表现", "用柱状图看数量或金额，用折线看对应效率。",
+    ${sectionBlock("出生世代表现", "比较各出生世代的成绩积累与成长轨迹。",
       `<div class="chart-grid cohort-grid">
-        ${chartBlock("奖金规模与平均奖金", "柱为总奖金，线为每匹平均奖金。", "sireCropEarningsChart")}
-        ${chartBlock("胜马数与胜马率", "柱为胜马数，线为胜马率。", "sireCropWinnersChart")}
-        ${chartBlock("重赏胜马数与重赏马率", "柱为重赏胜马数，线为重赏马率。", "sireCropGradedChart")}
-        ${controlledChartBlock("产驹成长曲线", "未达到的年龄使用缺失值，线条直接停止。", "sireDevelopmentChart", `
+        ${chartBlock("奖金表现", "比较各世代的总奖金与平均表现。", "sireCropEarningsChart")}
+        ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
+        ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
+        ${controlledChartBlock("产驹成长曲线", "观察各世代从两岁起的胜场积累。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
             <option value="cumulative_wins">原始累计胜场</option>
             <option value="cumulative_wins_per_100_foals">每100匹产驹</option>
@@ -1485,7 +1485,7 @@ async function renderSireAnalysis() {
     ${sectionBlock("Leading Sire Career", "",
       `<div class="analysis-controls">
         <label><span>分类</span><select id="sireLeadingCategory">
-          ${(categories.categories || []).filter((row) => ANNUAL_LEADING_CATEGORIES.has(row.category)).map((row) => `<option value="${escapeHtml(row.category)}">${escapeHtml(row.label)}${row.status === "available" ? "" : "（缺失）"}</option>`).join("")}
+          ${(categories.categories || []).filter((row) => ANNUAL_LEADING_CATEGORIES.has(row.category)).map((row) => `<option value="${escapeHtml(row.category)}">${escapeHtml(row.label)}${row.status === "available" ? "" : "（暂无）"}</option>`).join("")}
         </select></label>
         <label><span>Top10年份</span><select id="sireTop10Year">
           ${years.map((year) => `<option value="${year}" ${year === 2023 ? "selected" : ""}>${year}</option>`).join("")}
@@ -1508,13 +1508,13 @@ async function renderSireAnalysis() {
       ], (leadingHistory.history || []), { initialLimit: 8 })}`
     )}
     <div class="metric-grid compact-metrics">
-      ${metricCard("累计总奖金", money(profile.total_earnings), "马匹级累计")}
-      ${metricCard("Foals", formatNumber(profile.foals), "当前静态库")}
-      ${metricCard("Winners", `${formatNumber(profile.winners)} (${formatRate(profile.winner_foal_rate)})`, "胜马/产驹")}
+      ${metricCard("累计总奖金", money(profile.total_earnings), "产驹累计")}
+      ${metricCard("产驹数", formatNumber(profile.foals), "收录马匹")}
+      ${metricCard("胜马", `${formatNumber(profile.winners)} (${formatRate(profile.winner_foal_rate)})`, "占收录产驹")}
       ${metricCard("重赏胜马", formatNumber(profile.graded_winners), `G1 ${formatNumber(profile.g1_horses)}`)}
     </div>
-    ${sectionBlock("重賞勝利の推移｜重赏胜利时间线", "按年度查看ドゥラメンテ产驹的G1、G2和G3胜场分布。这里统计的是重赏胜场数，同一匹马多次获胜会重复计入。",
-      `${chartBlock("年度重赏胜场数", "2026为进行中数据，截至2026-07-16。", "gradedWinsTimelineChart")}
+    ${sectionBlock("重賞勝利の推移｜重赏胜利时间线", "按年度查看G1、G2和G3胜利的出现节奏。",
+      `${chartBlock("年度重赏胜场数", "观察重赏胜利随年份的积累。", "gradedWinsTimelineChart")}
       <article class="chart-card">
         <div class="chart-card-head">
           <h3>重赏胜利事件列表</h3>
@@ -1522,20 +1522,20 @@ async function renderSireAnalysis() {
         <div id="gradedWinsEventList"></div>
       </article>`
     )}
-    ${sectionBlock("生产年度明细", "按出生年份比较出赛率、胜马率、2胜/3胜率、重赏胜马、平均奖金与芝/泥平均胜距。",
+    ${sectionBlock("生产年度明细", "按出生年份查看各世代成绩。",
       analysisTable([
         { label: "生年", value: (row) => row.label },
-        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "产驹数", value: (row) => formatNumber(row.foals) },
         { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.debut_rate)})` },
-        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
         { label: "2胜以上", value: (row) => `${formatNumber(row.two_win_horses)} (${formatRate(row.two_win_rate)})` },
         { label: "3胜以上", value: (row) => `${formatNumber(row.three_win_horses)} (${formatRate(row.three_win_rate)})` },
         { label: "重赏胜马", value: (row) => formatNumber(row.graded_winners) },
         { label: "G1/G2/G3", value: (row) => `${formatNumber(row.g1_horses)}/${formatNumber(row.g2_horses)}/${formatNumber(row.g3_horses)}` },
         { label: "总奖金", value: (row) => money(row.total_earnings) },
         { label: "每匹平均", value: (row) => money(row.earnings_per_foal) },
-        { label: "芝AWD", value: (row) => row.turf_awd ? `${formatNumber(row.turf_awd)} m` : "—" },
-        { label: "泥AWD", value: (row) => row.dirt_awd ? `${formatNumber(row.dirt_awd)} m` : "—" },
+        { label: "芝平均胜距", value: (row) => row.turf_awd ? `${formatNumber(row.turf_awd)} m` : "—" },
+        { label: "泥平均胜距", value: (row) => row.dirt_awd ? `${formatNumber(row.dirt_awd)} m` : "—" },
         { label: "代表马", value: representativeNames },
       ], sireProfile.crops, { initialLimit: 10 })
     )}
@@ -1561,7 +1561,7 @@ async function renderBmsAnalysis() {
     <div class="analysis-title">
       <p class="kicker">母父分析</p>
       <h1>母父分析</h1>
-      <p>这里同时看母父大系统构成和具体母父排名。母父名可以点击回到产驹列表筛选。</p>
+      <p>比较母父大系统与具体母父对ドゥラメンテ产驹表现的影响。</p>
     </div>
     <div class="lineage-summary">
       ${bmsLines.map((row) => `
@@ -1572,18 +1572,18 @@ async function renderBmsAnalysis() {
         </article>
       `).join("")}
     </div>
-    ${sectionBlock("母父大系统构成", "8个母父大系统的样本数、胜马率和重赏胜马率。",
+    ${sectionBlock("母父大系统构成", "观察主要母父系的规模和成绩。",
       analysisTable([
         { label: "母父系", value: (row) => bmsFilterButton(row.label), html: true },
-        { label: "Foals", value: (row) => formatNumber(row.foals) },
+        { label: "产驹数", value: (row) => formatNumber(row.foals) },
         { label: "構成比", value: (row) => formatRate(row.foals / totalFoals) },
-        { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+        { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
         { label: "重賞勝馬", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
         { label: "代表馬", value: representativeNames },
       ], bmsLines)
     )}
-    ${sectionBlock("具体母父排行榜", "默认按产驹数量排序，也可以切换成总奖金、胜马率、重赏率或中位奖金。小样本的百分比要结合Foals一起看。",
+    ${sectionBlock("具体母父排行榜", "从规模、奖金和胜马表现比较具体母父。",
       `<div class="analysis-controls">
         <label>
           <span>排序</span>
@@ -1610,9 +1610,9 @@ async function renderBmsAnalysis() {
     });
     els.bmsContent.querySelector("#broodmareSireLeaderboard").innerHTML = analysisTable([
       { label: "母父", value: (row) => broodmareSireFilterButton(row.label), html: true },
-      { label: "Foals", value: (row) => formatNumber(row.foals) },
-      { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-      { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+      { label: "产驹数", value: (row) => formatNumber(row.foals) },
+      { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+      { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
       { label: "重赏胜马", value: (row) => formatNumber(row.graded_winners) },
       { label: "总奖金", value: (row) => money(row.total_earnings) },
       { label: "中位数", value: (row) => money(row.median_earnings_per_runner) },
@@ -1656,7 +1656,7 @@ function renderPedigreeCharts(pedigree, bmsLines) {
     color: [COLORS.duramente],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
     grid: horizontalGrid(18, 34, 86),
-    xAxis: { type: "value", name: "Foals", max: paddedAxisMax },
+    xAxis: { type: "value", name: "产驹数", max: paddedAxisMax },
     yAxis: longCategoryAxis(countRows.map((row) => row.label)),
     series: [{
       type: "bar",
@@ -1680,7 +1680,7 @@ function renderPedigreeCharts(pedigree, bmsLines) {
       axisPointer: { type: "shadow" },
       formatter: (items) => {
         const row = items[0].data.raw;
-        return `${escapeHtml(row.label)}<br>Foals ${row.foals}<br>Winners ${row.winners} / 重赏 ${row.graded_winners}<br>胜马率 ${formatRate(row.winner_foal_rate)} / 重赏率 ${formatRate(row.graded_foal_rate)}<br>中位奖金 ${money(row.median_earnings_per_runner)}<br>代表马 ${escapeHtml(representativeNames(row))}`;
+        return `${escapeHtml(row.label)}<br>产驹数 ${row.foals}<br>胜马 ${row.winners} / 重赏 ${row.graded_winners}<br>胜马率 ${formatRate(row.winner_foal_rate)} / 重赏率 ${formatRate(row.graded_foal_rate)}<br>中位奖金 ${money(row.median_earnings_per_runner)}<br>代表马 ${escapeHtml(representativeNames(row))}`;
       },
     },
     grid: horizontalGrid(18, 34, 104),
@@ -1696,7 +1696,7 @@ function renderPedigreeCharts(pedigree, bmsLines) {
           const numerator = crossMetric === "graded_foal_rate" ? row.graded_winners : row.winners;
           return `${params.value}% (${numerator}/${row.foals})`;
         }
-        return `${formatNumber(params.value, 1)} n=${row.foals}`;
+        return `${formatNumber(params.value, 1)}（${row.foals}匹）`;
       } },
     }],
   });
@@ -1753,9 +1753,9 @@ function renderAncestorGroupedTable(charts) {
           <details class="ancestor-group" ${index < 8 || search ? "open" : ""}>
             <summary>
               <span class="ancestor-title">${escapeHtml(group.ancestor)}</span>
-              <span>${formatNumber(total)} foals</span>
+              <span>${formatNumber(total)}匹</span>
               <span>${escapeHtml(main?.pattern || "—")} · ${formatRate((main?.foals || 0) / total)}</span>
-              <span>${rows.length} Cross</span>
+              <span>${rows.length}种形式</span>
             </summary>
             <div class="ancestor-cross-rows">
               ${rows.map((row) => {
@@ -1844,7 +1844,7 @@ function renderDamAgeCharts(damAge) {
     tooltip: { trigger: "axis" },
     grid: { left: 48, right: 22, top: 24, bottom: 36 },
     xAxis: { type: "category", name: "母龄", data: damAge.histogram.map((row) => row.age) },
-    yAxis: { type: "value", name: "Foals" },
+    yAxis: { type: "value", name: "产驹数" },
     series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals) }],
   });
   renderChart("damAgePerformanceChart", {
@@ -1853,15 +1853,15 @@ function renderDamAgeCharts(damAge) {
     legend: { top: 0, data: ["出赛率", "胜马率", "重赏马率"] },
     grid: { left: 48, right: 22, top: 52, bottom: 36 },
     xAxis: { type: "category", data: damAge.buckets.map((row) => row.label) },
-    yAxis: { type: "value", name: "Rate", axisLabel: { formatter: (value) => `${value}%` } },
+    yAxis: { type: "value", name: "比例", axisLabel: { formatter: (value) => `${value}%` } },
     series: [
       { name: "出赛率", type: "bar", data: damAge.buckets.map((row) => Number(((row.runner_rate || 0) * 100).toFixed(1))) },
       { name: "胜马率", type: "bar", data: damAge.buckets.map((row) => Number(((row.winner_foal_rate || 0) * 100).toFixed(1))) },
       { name: "重赏马率", type: "bar", data: damAge.buckets.map((row) => Number(((row.graded_foal_rate || 0) * 100).toFixed(1))) },
     ],
   });
-  const ageBuckets = ["3-6", "7-10", "11-14", "15-18", "19+", "unknown"];
-  const orders = ["1", "2", "3", "4", "5", "6", "7+", "unknown"];
+  const ageBuckets = ["3-6", "7-10", "11-14", "15-18", "19+"];
+  const orders = ["1", "2", "3", "4", "5", "6", "7+"];
   const heatData = [];
   for (const [y, age] of ageBuckets.entries()) {
     for (const [x, order] of orders.entries()) {
@@ -1872,7 +1872,7 @@ function renderDamAgeCharts(damAge) {
   renderChart("damAgeOrderHeatChart", {
     tooltip: { formatter: (params) => {
       const [x, y, foals, winners, graded] = params.value;
-      return `母龄 ${ageBuckets[y]} / 胎次 ${orders[x]}<br>Foals ${foals}<br>胜马 ${winners} / 重赏 ${graded}`;
+      return `母龄 ${ageBuckets[y]} / 胎次 ${orders[x]}<br>产驹数 ${foals}<br>胜马 ${winners} / 重赏 ${graded}`;
     } },
     grid: { left: 70, right: 24, top: 24, bottom: 54 },
     xAxis: { type: "category", data: orders, name: "胎次" },
@@ -1896,11 +1896,11 @@ async function renderPedigreeAnalysis() {
     <div class="analysis-title">
       <p class="kicker">血统分析</p>
       <h1>血統分析</h1>
-      <p>从Cross祖先、具体Cross形式、母父系和牝系观察ドゥラメンテ的主要血统组合。</p>
+      <p>从交叉祖先、母父系和牝系观察ドゥラメンテ的主要血统组合。</p>
     </div>
     <div class="chart-grid">
-      ${chartBlock("最常见的Cross祖先", "按具有该Cross的独立产驹数排序；同一匹马在同一祖先组只计一次。", "crossAncestorCountChart")}
-      ${sectionBlock("主要Cross祖先的产驹表现", "只显示样本量充足的祖先；百分比旁边保留分子/分母。",
+      ${chartBlock("最常见的Cross祖先", "观察哪些祖先最常出现在交叉组合中。", "crossAncestorCountChart")}
+      ${sectionBlock("主要Cross祖先的产驹表现", "比较主要交叉祖先的成绩表现。",
         `<div class="analysis-controls">
           <label><span>指标</span><select id="crossPerformanceMetric">
             <option value="winner_foal_rate">胜马率</option>
@@ -1908,7 +1908,7 @@ async function renderPedigreeAnalysis() {
             <option value="median_earnings_per_runner">中位奖金</option>
             <option value="avg_earnings_per_foal">平均奖金</option>
           </select></label>
-          <label><span>最低Foals</span><input id="crossMinFoals" type="number" min="1" max="50" value="10"></label>
+          <label><span>最少产驹</span><input id="crossMinFoals" type="number" min="1" max="50" value="10"></label>
         </div>
         ${chartShell("crossAncestorPerformanceChart")}`
       )}
@@ -1919,7 +1919,7 @@ async function renderPedigreeAnalysis() {
           <div class="chart-card-head with-controls">
             <div>
               <h3>祖先分组Cross表</h3>
-              <p>祖先为主组，Cross形式附在同一组下；点击Cross可回到产驹检索。</p>
+              <p>按祖先归纳常见交叉形式。</p>
             </div>
             <div class="analysis-controls inline-controls">
               <label><span>搜索祖先</span><input id="ancestorGroupSearch" type="search" list="ancestorOptions" placeholder="Northern Dancer"></label>
@@ -1927,7 +1927,7 @@ async function renderPedigreeAnalysis() {
                 ${ancestorOptions.map((name) => `<option value="${escapeHtml(name)}"></option>`).join("")}
               </datalist>
               <label><span>指标</span><select id="ancestorGroupMetric">
-                <option value="foals">Foals</option>
+                <option value="foals">产驹数</option>
                 <option value="winner_foal_rate">胜马率</option>
                 <option value="graded_foal_rate">重赏率</option>
                 <option value="median_earnings_per_runner">中位奖金</option>
@@ -1945,11 +1945,11 @@ async function renderPedigreeAnalysis() {
         <article class="chart-card compact-table-card">
           <div class="chart-card-head">
             <h3>Cross结构分布</h3>
-            <p>同一结构按独立产驹数统计。</p>
+            <p>比较常见结构的成绩表现。</p>
           </div>
           ${analysisTable([
             { label: "Cross结构", className: "cross-column", value: (row) => row.label },
-            { label: "Foals", value: (row) => formatNumber(row.foals) },
+            { label: "产驹数", value: (row) => formatNumber(row.foals) },
             { label: "胜马率", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
             { label: "重赏率", value: (row) => rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals) },
             { label: "代表马", value: representativeNames },
@@ -1957,7 +1957,7 @@ async function renderPedigreeAnalysis() {
         </article>
       </div>`
     )}
-    ${sectionBlock("母父系与牝系", "母父系看八大系统构成，牝系看主要牝系贡献。点击柱子可回到产驹检索。",
+    ${sectionBlock("母父系与牝系", "从母父系统和牝系观察血统来源。",
       `<div class="segment-control" id="pedigreeLineageTab">
         <button class="active" type="button" data-tab="bms">母父系</button>
         <button type="button" data-tab="family">牝系</button>
@@ -1979,14 +1979,14 @@ async function renderPedigreeAnalysis() {
       <div id="pedigreeLineagePanel"></div>`
     )}
     <details class="analysis-block">
-      <summary>查看完整Cross数据</summary>
+      <summary>查看完整Cross明细</summary>
       <div class="detail-table-stack">
         <h3>Cross祖先明细</h3>
         ${analysisTable([
           { label: "祖先", className: "name-column", value: (row) => row.label },
-          { label: "Foals", value: (row) => formatNumber(row.foals) },
-          { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-          { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+          { label: "产驹数", value: (row) => formatNumber(row.foals) },
+          { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+          { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
           { label: "重賞勝馬", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
           { label: "G1", value: (row) => formatNumber(row.g1_winners) },
           { label: "総賞金", value: (row) => money(row.total_earnings) },
@@ -1998,7 +1998,7 @@ async function renderPedigreeAnalysis() {
         ${analysisTable([
           { label: "祖先", className: "name-column", value: (row) => row.ancestor || row.label.split("|")[0] },
           { label: "Cross形式", className: "cross-column", value: (row) => row.pattern || row.label.split("|")[1] },
-          { label: "Foals", value: (row) => formatNumber(row.foals) },
+          { label: "产驹数", value: (row) => formatNumber(row.foals) },
           { label: "勝馬率", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
           { label: "重賞馬率", value: (row) => rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals) },
           { label: "総賞金", value: (row) => money(row.total_earnings) },
@@ -2013,8 +2013,8 @@ async function renderPedigreeAnalysis() {
       <summary>查看牝系详细表</summary>
       ${analysisTable([
         { label: "牝系", className: "entity-column", value: (row) => row.label },
-        { label: "Foals", value: (row) => formatNumber(row.foals) },
-        { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+        { label: "产驹数", value: (row) => formatNumber(row.foals) },
+        { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
         { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
         { label: "総賞金", value: (row) => money(row.total_earnings) },
         { label: "代表馬", value: representativeNames },
@@ -2042,15 +2042,15 @@ function renderBreederCharts(breeders) {
   renderChart("breederMainChart", {
     color: [COLORS.duramente, COLORS.blue],
     tooltip: { trigger: "axis" },
-    legend: { top: 0, data: ["Foals", "胜马率"] },
+    legend: { top: 0, data: ["产驹数", "胜马率"] },
     grid: { left: 56, right: 58, top: 54, bottom: 86 },
     xAxis: { type: "category", data: topRows.map((row) => row.label), axisLabel: { rotate: 35 } },
     yAxis: [
-      { type: "value", name: "Foals" },
+      { type: "value", name: "产驹数" },
       { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
     ],
     series: [
-      { name: "Foals", type: "bar", data: topRows.map((row) => row.foals), label: { show: true, position: "top" } },
+      { name: "产驹数", type: "bar", data: topRows.map((row) => row.foals), label: { show: true, position: "top" } },
       { name: "胜马率", type: "line", yAxisIndex: 1, smooth: true, data: topRows.map((row) => Number(((row.winner_foal_rate || 0) * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
     ],
   });
@@ -2074,7 +2074,7 @@ function renderBreederCharts(breeders) {
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
     legend: { top: 0, data: years },
     grid: horizontalGrid(52, 30, 40),
-    xAxis: { type: "value", name: "Foals" },
+    xAxis: { type: "value", name: "产驹数" },
     yAxis: longCategoryAxis(cropRows.map((row) => row.label)),
     series: years.map((year) => ({
       name: year,
@@ -2093,7 +2093,7 @@ function renderDamAgeProductionCharts(damAge) {
     tooltip: { trigger: "axis" },
     grid: { left: 48, right: 22, top: 24, bottom: 36 },
     xAxis: { type: "category", name: "母龄", data: damAge.histogram.map((row) => row.age) },
-    yAxis: { type: "value", name: "Foals" },
+    yAxis: { type: "value", name: "产驹数" },
     series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals), label: { show: true, position: "top" } }],
   });
   renderChart("damAgeWinRateChart", {
@@ -2118,7 +2118,7 @@ function renderDamAgeProductionCharts(damAge) {
       return `${params.value}% (${row.graded_winners}/${row.foals})`;
     } } }],
   });
-  const orders = ["1", "2", "3", "4", "5", "6", "7+", "unknown"];
+  const orders = ["1", "2", "3", "4", "5", "6", "7+"];
   const orderRows = orders.map((order) => {
     const items = damAge.foal_order_heatmap.filter((row) => row.foal_order === order);
     const foals = items.reduce((sum, row) => sum + row.foals, 0);
@@ -2129,15 +2129,15 @@ function renderDamAgeProductionCharts(damAge) {
   renderChart("damFoalOrderChart", {
     color: [COLORS.duramente, COLORS.gold],
     tooltip: { trigger: "axis" },
-    legend: { top: 0, data: ["Foals", "胜马率"] },
+    legend: { top: 0, data: ["产驹数", "胜马率"] },
     grid: { left: 48, right: 58, top: 52, bottom: 36 },
     xAxis: { type: "category", name: "胎次", data: orderRows.map((row) => row.label) },
     yAxis: [
-      { type: "value", name: "Foals" },
+      { type: "value", name: "产驹数" },
       { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
     ],
     series: [
-      { name: "Foals", type: "bar", data: orderRows.map((row) => row.foals), label: { show: true, position: "top" } },
+      { name: "产驹数", type: "bar", data: orderRows.map((row) => row.foals), label: { show: true, position: "top" } },
       { name: "胜马率", type: "line", yAxisIndex: 1, data: orderRows.map((row) => row.winner_rate == null ? null : Number((row.winner_rate * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
     ],
   });
@@ -2167,19 +2167,19 @@ async function renderProductionAnalysis() {
     if (tab === "dam") {
       panel.innerHTML = `
         <div class="chart-grid">
-          ${chartBlock("母马生产本胎时的年龄", "横轴为母龄，纵轴为产驹数。", "damAgeHistogramChart")}
-          ${chartBlock("不同母龄组的产驹胜马率", "显示Winners/Foals。", "damAgeWinRateChart")}
+          ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
+          ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
         </div>
         <div class="chart-grid">
-          ${chartBlock("不同母龄组的重赏马率", "显示重赏马/Foals。", "damAgeGradedRateChart")}
-          ${chartBlock("胎次与表现", "柱为Foals，线为胜马率。", "damFoalOrderChart")}
+          ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
+          ${chartBlock("胎次与表现", "比较不同胎次的规模与胜马表现。", "damFoalOrderChart")}
         </div>
         ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
           analysisTable([
             { label: "母龄组", value: (row) => row.label },
-            { label: "Foals", value: (row) => formatNumber(row.foals) },
-            { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-            { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+            { label: "产驹数", value: (row) => formatNumber(row.foals) },
+            { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+            { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
             { label: "重赏马", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
             { label: "平均奖金", value: (row) => money(row.avg_earnings_per_foal) },
             { label: "中位奖金", value: (row) => money(row.median_earnings_per_runner) },
@@ -2193,18 +2193,18 @@ async function renderProductionAnalysis() {
     }
     panel.innerHTML = `
       <div class="chart-grid">
-        ${chartBlock("主要生产牧场", "柱形表示产驹数量，折线表示产驹胜马率。", "breederMainChart")}
-        ${chartBlock("重赏胜马生产牧场分布", "按独立重赏马匹数统计，不按重赏胜场数重复计算。", "breederGradedChart")}
+        ${chartBlock("主要生产牧场", "比较主要牧场的产驹规模和胜马表现。", "breederMainChart")}
+        ${chartBlock("重赏胜马生产牧场分布", "观察重赏胜马来自哪些牧场。", "breederGradedChart")}
       </div>
       <div class="chart-grid single-chart">
-        ${chartBlock("各牧场出生世代构成", "颜色为2018-2022出生世代。", "breederCropChart")}
+        ${chartBlock("各牧场出生世代构成", "观察主要牧场的世代分布。", "breederCropChart")}
       </div>
-      ${sectionBlock("牧场综合表", "胜马率（对产驹）=胜马/产驹；胜率（对出走）=1着次数/有效出走次数。",
+      ${sectionBlock("牧场综合表", "详细查看各牧场产驹成绩。",
         analysisTable([
           { label: "牧場", value: (row) => row.label },
-          { label: "Foals", value: (row) => formatNumber(row.foals) },
-          { label: "Runners", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-          { label: "Winners", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+          { label: "产驹数", value: (row) => formatNumber(row.foals) },
+          { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+          { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
           { label: "重赏马", value: (row) => formatNumber(row.graded_winners) },
           { label: "G1马", value: (row) => formatNumber(row.g1_winners) },
           { label: "总奖金", value: (row) => money(row.total_earnings) },
@@ -2230,21 +2230,22 @@ async function renderRacecourseAnalysis() {
   const data = await getAnalytics("racecourses");
   const surfaceColumns = ["芝", "ダ", "障"];
   const distanceColumns = ["1200以下", "1400-1600", "1800-2000", "2200-2400", "2500以上"];
+  const topRacecourse = [...(data.table || [])].sort((a, b) => b.wins_starts - a.wins_starts)[0];
   els.racecourseContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">赛马场分析</p>
       <h1>競馬場分析</h1>
-      <p>把 meeting 标准化到赛马场层级，只用 finish 为有效数字的出走计算胜率、连对率和前三率。默认显示 JRA，可以切换 NAR、海外或全部。</p>
+      <p>比较ドゥラメンテ产驹在不同赛马场的胜场、胜率和上名表现。</p>
     </div>
     <div class="metric-grid compact-metrics">
-      ${metricCard("有效出走", formatNumber(data.summary.valid_starts), "finish为数字")}
-      ${metricCard("赛马场数", formatNumber(data.summary.courses), "标准化后")}
-      ${metricCard("图表门槛", `${formatNumber(data.summary.main_chart_min_starts)}+`, "出走次数")}
+      ${metricCard("总出赛", formatNumber(data.summary.valid_starts), "比赛记录")}
+      ${metricCard("赛马场数", formatNumber(data.summary.courses), "国内外合计")}
+      ${metricCard("胜场最多", topRacecourse ? `${escapeHtml(topRacecourse.label)} ${formatNumber(topRacecourse.wins_starts)}胜` : "—", "赛马场")}
     </div>
     <section class="analysis-block race-map-block">
       <div class="section-heading">
         <h2>日本赛马场胜场分布</h2>
-        <p>圆圈面积表示胜场数，颜色深浅表示胜率；点位依据赛马场真实经纬度。</p>
+        <p>观察JRA与地方赛马场的胜场集中度和取胜效率。</p>
       </div>
       <div class="segment-control compact-control" id="racecourseMapScope">
         <button class="active" type="button" data-map-scope="All">全部</button>
@@ -2255,7 +2256,7 @@ async function renderRacecourseAnalysis() {
         <article class="chart-card race-map-card">
           <div class="chart-card-head">
             <h3>日本全国地图</h3>
-            <p>真实都道府县边界；北海道、本州、四国、九州按实际空间关系显示。</p>
+            <p>以赛马场所在地呈现全国分布。</p>
           </div>
           ${chartShell("racecourseJapanMap")}
         </article>
@@ -2284,7 +2285,7 @@ async function renderRacecourseAnalysis() {
       renderMapScope(button.dataset.mapScope).catch((error) => {
         console.error(error);
         const panel = document.querySelector("#racecourseMapLegend");
-        if (panel) panel.innerHTML = `<p class="source-note">地图数据加载失败：${escapeHtml(error.message || String(error))}</p>`;
+        if (panel) panel.innerHTML = `<p class="source-note">地图暂时无法显示，请稍后再试。</p>`;
       });
     });
   }
@@ -2308,12 +2309,12 @@ async function renderRacecourseAnalysis() {
       .slice(0, 10);
     els.racecourseContent.querySelector("#racecourseDynamic").innerHTML = `
       <div class="chart-grid">
-        ${chartBlock("各赛马场胜场数与胜率", "柱为胜场数，线为胜率；只显示有效出赛达到门槛的赛马场。", "racecourseWinsChart")}
-        ${chartBlock("出赛数与前三率", "柱为有效出赛次数，线为前三率。", "racecourseStartsChart")}
+        ${chartBlock("各赛马场胜场数与胜率", "比较赛场胜利积累与取胜效率。", "racecourseWinsChart")}
+        ${chartBlock("出赛数与前三率", "观察出赛集中度与上名稳定性。", "racecourseStartsChart")}
       </div>
       <div class="chart-grid">
-        ${chartBlock("草地与泥地表现", "小样本请结合Tooltip中的分子/分母查看。", "racecourseSurfaceChart")}
-        ${sectionBlock("主要距离表现", "选择赛马场后查看不同距离区间的胜率、前三率和出赛次数。",
+        ${chartBlock("草地与泥地表现", "比较不同场地条件下的取胜表现。", "racecourseSurfaceChart")}
+        ${sectionBlock("主要距离表现", "选择赛马场查看距离适性。",
           `<div class="analysis-controls">
             <label><span>赛马场</span><select id="racecourseDistanceCourse">
               ${rows.slice(0, 30).map((row) => `<option value="${escapeHtml(row.label)}">${escapeHtml(row.label)}</option>`).join("")}
@@ -2322,7 +2323,7 @@ async function renderRacecourseAnalysis() {
           ${chartShell("racecourseDistanceChart")}`
         )}
       </div>
-      ${sectionBlock("赛马场综合表", "胜率=1着/有效出走；连对率=(1着+2着)/有效出走；前三率=(1-3着)/有效出走。",
+      ${sectionBlock("赛马场综合表", "详细查看各赛马场成绩。",
         analysisTable([
           { label: "赛马场", value: (row) => row.label },
           { label: "区分", value: (row) => row.jurisdiction },
@@ -2365,7 +2366,7 @@ async function renderRacecourseAnalysis() {
     renderChart("racecourseStartsChart", {
       color: [COLORS.gold, COLORS.raceLine],
       tooltip: { trigger: "axis" },
-      legend: { top: 0, data: ["有效出赛", "前三率"] },
+      legend: { top: 0, data: ["出赛次数", "前三率"] },
       grid: { left: 56, right: 58, top: 54, bottom: 54 },
       xAxis: { type: "category", data: startRows.map((row) => row.label), axisLabel: { rotate: 25 } },
       yAxis: [
@@ -2373,7 +2374,7 @@ async function renderRacecourseAnalysis() {
         { type: "value", name: "前三率", axisLabel: { formatter: (value) => `${value}%` } },
       ],
       series: [
-        { name: "有效出赛", type: "bar", barMaxWidth: 34, data: startRows.map((row) => row.starts), label: { show: true, position: "top" } },
+        { name: "出赛次数", type: "bar", barMaxWidth: 34, data: startRows.map((row) => row.starts), label: { show: true, position: "top" } },
         {
           name: "前三率",
           type: "line",
@@ -2451,7 +2452,7 @@ async function renderMethodology() {
     <div class="analysis-title">
       <p class="kicker">数据口径</p>
       <h1>データ・方法</h1>
-      <p>这里说明公开静态版的计算口径，以及哪些数据目前还不能安全计算。</p>
+      <p>说明收录范围、统计口径和当前数据仍需留意的地方。</p>
     </div>
     <section class="analysis-block">
       <div class="method-list">
@@ -2463,11 +2464,11 @@ async function renderMethodology() {
         `).join("")}
       </div>
       <div class="quality-panel">
-        <h2>赛次奖金质量检查</h2>
+        <h2>单场奖金资料</h2>
         <div class="metric-grid compact-metrics">
-          ${metricCard("比赛记录", formatNumber(prize.race_rows), "race_results")}
-          ${metricCard("非零奖金记录", formatNumber(prize.nonzero_prize_rows), `覆盖率 ${formatRate(prize.coverage_rate)}`)}
-          ${metricCard("原始奖金合计", money(prize.sum_raw_prize), "单位未验证")}
+          ${metricCard("已收录赛果", formatNumber(prize.race_rows), "比赛记录")}
+          ${metricCard("含奖金记录", formatNumber(prize.nonzero_prize_rows), `占比 ${formatRate(prize.coverage_rate)}`)}
+          ${metricCard("可核对奖金", money(prize.sum_raw_prize), "暂不展示图表")}
         </div>
         <p>${escapeHtml(prize.decision || "")}</p>
       </div>
@@ -2543,7 +2544,7 @@ function crossItems(value) {
 }
 
 function damAgeText(horse) {
-  if (horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined) return "unknown";
+  if (horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined) return "未知";
   return `${horse.dam_age_at_foaling}岁`;
 }
 
@@ -2569,7 +2570,7 @@ function finishBadge(finish) {
 }
 
 async function loadHorses() {
-  els.horseRows.innerHTML = `<tr><td colspan="12" class="muted">Loading...</td></tr>`;
+  els.horseRows.innerHTML = `<tr><td colspan="12" class="muted">正在载入产驹资料...</td></tr>`;
   const data = await getJson(horseQuery());
   state.total = data.total;
   els.resultCount.textContent = `${data.total.toLocaleString("ja-JP")} 件`;
@@ -2601,7 +2602,7 @@ async function loadHorses() {
         <div class="muted">${escapeHtml(horse.career_summary || "")}</div>
       </td>
     </tr>
-  `).join("") || `<tr><td colspan="12" class="muted">No results</td></tr>`;
+  `).join("") || `<tr><td colspan="12" class="muted">没有找到符合条件的产驹。</td></tr>`;
 
   for (const row of els.horseRows.querySelectorAll("tr[data-id]")) {
     row.addEventListener("click", () => openHorse(row.dataset.id));
@@ -2845,9 +2846,9 @@ async function openHorse(id) {
 
     <div class="detail-grid">
       <div class="fact"><span>母</span><strong>${escapeHtml(horse.dam)}</strong></div>
-      <div class="fact"><span>母出生年</span><strong>${escapeHtml(horse.dam_birth_year || "unknown")}</strong></div>
+      <div class="fact"><span>母出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
       <div class="fact"><span>产本胎年龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
-      <div class="fact"><span>胎次</span><strong>${escapeHtml(horse.foal_order || "unknown")}</strong></div>
+      <div class="fact"><span>胎次</span><strong>${escapeHtml(horse.foal_order || "未知")}</strong></div>
       <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分類")}</strong></div>
@@ -3003,5 +3004,5 @@ async function init() {
 }
 
 init().catch((error) => {
-  els.horseRows.innerHTML = `<tr><td colspan="11">${escapeHtml(error.message)}</td></tr>`;
+  els.horseRows.innerHTML = `<tr><td colspan="11">资料暂时无法载入，请稍后再试。</td></tr>`;
 });
