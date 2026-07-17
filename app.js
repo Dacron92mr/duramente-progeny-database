@@ -473,6 +473,23 @@ function representativeNames(row) {
   return reps.map((rep) => [rep.name, rep.hkjc_name_zh ? `(${rep.hkjc_name_zh})` : "", rep.achievement_class].filter(Boolean).join(" ")).join(" / ");
 }
 
+function representativeCell(row) {
+  const reps = row.representatives || [];
+  if (!reps.length) return "—";
+  const repText = (rep) => [rep.name, rep.hkjc_name_zh ? `(${rep.hkjc_name_zh})` : "", rep.achievement_class].filter(Boolean).join(" ");
+  const first = reps.slice(0, 2).map((rep) => `<span class="rep-chip">${escapeHtml(repText(rep))}</span>`).join("");
+  const rest = reps.slice(2).map((rep) => `<span class="rep-chip">${escapeHtml(repText(rep))}</span>`).join("");
+  if (!rest) return `<span class="rep-list">${first}</span>`;
+  const id = `rep-${++tableCounter}`;
+  return `
+    <span class="rep-list" id="${id}">
+      ${first}
+      <span class="rep-more" hidden>${rest}</span>
+      <button class="rep-toggle" type="button" data-rep-toggle="${id}" aria-expanded="false" data-open-label="+${reps.length - 2}" data-close-label="收起">+${reps.length - 2}</button>
+    </span>
+  `;
+}
+
 function methodLabel(key) {
   const labels = {
     population: "收录范围",
@@ -491,19 +508,21 @@ function methodLabel(key) {
 }
 
 function chartShell(id) {
-  return `<div class="chart-canvas" id="${escapeHtml(id)}"></div>`;
+  return `<div class="chart-canvas" id="${escapeHtml(id)}"><div class="chart-loading">图表加载中</div></div>`;
 }
 
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
+  el.classList.remove("is-rendered");
   if (!window.echarts) {
     el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
     return null;
   }
   if (chartRegistry.has(id)) chartRegistry.get(id).dispose();
   const chart = window.echarts.init(el);
-  chart.setOption(option);
+  chart.setOption({ animationDuration: 450, ...option });
+  el.classList.add("is-rendered");
   chartRegistry.set(id, chart);
   if (!chartResizeBound) {
     window.addEventListener("resize", () => {
@@ -1005,6 +1024,8 @@ function analysisTable(columns, rows, options = {}) {
 
 function wireExpandableTables(container) {
   for (const button of container.querySelectorAll("[data-expand-table]")) {
+    if (button.dataset.tableWired === "true") continue;
+    button.dataset.tableWired = "true";
     button.addEventListener("click", () => {
       const id = button.dataset.expandTable;
       const expanded = button.dataset.expanded === "true";
@@ -1017,6 +1038,7 @@ function wireExpandableTables(container) {
       button.textContent = expanded ? button.dataset.openLabel : button.dataset.closeLabel;
     });
   }
+  wireAnalysisFilters(container);
 }
 
 function sectionBlock(title, lead, body) {
@@ -1103,22 +1125,47 @@ async function openHorseDetailFromChart(name) {
 
 function wireAnalysisFilters(container) {
   for (const button of container.querySelectorAll("[data-bms-filter]")) {
+    if (button.dataset.bmsWired === "true") continue;
+    button.dataset.bmsWired = "true";
     button.addEventListener("click", () => applyBmsFilter(button.dataset.bmsFilter));
   }
   for (const button of container.querySelectorAll("[data-broodmare-sire-filter]")) {
+    if (button.dataset.broodmareSireWired === "true") continue;
+    button.dataset.broodmareSireWired = "true";
     button.addEventListener("click", () => applyBroodmareSireFilter(button.dataset.broodmareSireFilter));
   }
   for (const button of container.querySelectorAll("[data-search-filter]")) {
+    if (button.dataset.searchWired === "true") continue;
+    button.dataset.searchWired = "true";
     button.addEventListener("click", () => applySearchFilter(button.dataset.searchFilter));
   }
   for (const button of container.querySelectorAll("[data-female-family-filter]")) {
+    if (button.dataset.familyWired === "true") continue;
+    button.dataset.familyWired = "true";
     button.addEventListener("click", () => applyFemaleFamilyFilter(button.dataset.femaleFamilyFilter));
   }
   for (const button of container.querySelectorAll("[data-breeder-filter]")) {
+    if (button.dataset.breederWired === "true") continue;
+    button.dataset.breederWired = "true";
     button.addEventListener("click", () => applyBreederFilter(button.dataset.breederFilter));
   }
   for (const button of container.querySelectorAll("[data-horse-name]")) {
+    if (button.dataset.horseWired === "true") continue;
+    button.dataset.horseWired = "true";
     button.addEventListener("click", () => openHorseDetailFromChart(button.dataset.horseName));
+  }
+  for (const button of container.querySelectorAll("[data-rep-toggle]")) {
+    if (button.dataset.repWired === "true") continue;
+    button.dataset.repWired = "true";
+    button.addEventListener("click", () => {
+      const target = container.querySelector(`#${CSS.escape(button.dataset.repToggle)}`);
+      const more = target?.querySelector(".rep-more");
+      if (!more) return;
+      const expanded = button.getAttribute("aria-expanded") === "true";
+      more.hidden = expanded;
+      button.setAttribute("aria-expanded", expanded ? "false" : "true");
+      button.textContent = expanded ? button.dataset.openLabel : button.dataset.closeLabel;
+    });
   }
 }
 
@@ -1207,8 +1254,10 @@ function renderCropAchievementChart(crops) {
           ...items.map((item) => {
             const row = item.data.raw;
             const count = stage.count(row);
-            const rate = row.foals ? count / row.foals : 0;
-            return `${item.marker}${row.label}年生：${formatNumber(count)}匹（${formatRate(rate)}）`;
+            const foalRate = row.foals ? count / row.foals : 0;
+            const runnerRate = row.runners ? count / row.runners : null;
+            const runnerText = stage.key !== "foals" && row.runners ? ` / 占出赛马 ${formatRate(runnerRate)}` : "";
+            return `${item.marker}${row.label}年生：${formatNumber(count)}匹 / 占产驹 ${formatRate(foalRate)}${runnerText}`;
           }),
         ].join("<br>");
       },
@@ -1235,8 +1284,10 @@ function renderCropAchievementChart(crops) {
 
 function renderCropAwdDumbbellChart(crops) {
   const rows = crops.filter((row) => row.turf_awd || row.dirt_awd);
+  const turfColor = "#4f8a62";
+  const dirtColor = "#9a6b45";
   renderChart("sireAwdDumbbellChart", {
-    color: [COLORS.duramente, COLORS.raceLine],
+    color: [turfColor, dirtColor],
     tooltip: {
       trigger: "item",
       formatter: (params) => {
@@ -1275,6 +1326,7 @@ function renderCropAwdDumbbellChart(crops) {
         name: "芝",
         type: "scatter",
         symbolSize: 12,
+        itemStyle: { color: turfColor },
         data: rows.map((row) => ({ value: [row.turf_awd || null, row.label], raw: row })),
         label: { show: true, position: "left", formatter: (params) => params.value[0] ? `${formatNumber(params.value[0], 0)}m` : "" },
       },
@@ -1282,6 +1334,7 @@ function renderCropAwdDumbbellChart(crops) {
         name: "泥地",
         type: "scatter",
         symbolSize: 12,
+        itemStyle: { color: dirtColor },
         data: rows.map((row) => ({ value: [row.dirt_awd || null, row.label], raw: row })),
         label: { show: true, position: "right", formatter: (params) => params.value[0] ? `${formatNumber(params.value[0], 0)}m` : "" },
       },
@@ -1307,11 +1360,20 @@ function renderGradedWinsTimelineList(rows, mode = "year") {
     groups.get(key).push(row);
   }
   const groupRows = [...groups.entries()].sort((a, b) => mode === "horse" ? b[1].length - a[1].length || a[0].localeCompare(b[0], "ja") : Number(b[0]) - Number(a[0]));
+  const showAll = target.dataset.timelineShowAll === "true";
+  const defaultLimit = mode === "year" ? 2 : 6;
+  const visibleGroups = showAll ? groupRows : groupRows.slice(0, defaultLimit);
+  const toggleText = mode === "year"
+    ? (showAll ? "收起较早年份" : "查看全部年份")
+    : (showAll ? "收起更多胜马" : "查看全部胜马");
   target.innerHTML = `
     <div class="graded-timeline-list">
-      ${groupRows.map(([group, events]) => `
-        <section class="graded-timeline-group">
-          <h4>${escapeHtml(group)}<span>${formatNumber(events.length)}胜</span></h4>
+      ${visibleGroups.map(([group, events], index) => `
+        <details class="graded-timeline-group" ${mode === "year" && index < 2 ? "open" : ""}>
+          <summary aria-expanded="${mode === "year" && index < 2 ? "true" : "false"}">
+            <span>${escapeHtml(group)}</span>
+            <em>${formatNumber(events.length)}胜</em>
+          </summary>
           <div class="graded-events">
             ${events.map((row) => `
               <article class="graded-event">
@@ -1319,14 +1381,29 @@ function renderGradedWinsTimelineList(rows, mode = "year") {
                 <span class="event-date">${escapeHtml(row.race_date)}</span>
                 <span class="event-race">${row.race_url ? `<a href="${escapeHtml(row.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(row.race_name)}</a>` : escapeHtml(row.race_name)}</span>
                 <button type="button" class="link-button event-horse" data-horse-name="${escapeHtml(row.horse)}">${escapeHtml(row.horse)}</button>
-                <span class="event-meeting">${escapeHtml(row.meeting || "—")}</span>
+                <span class="event-meeting">${escapeHtml(row.distance_m ? `${row.meeting || "—"} ${row.distance_m}m` : row.meeting || "—")}</span>
               </article>
             `).join("")}
           </div>
-        </section>
+        </details>
       `).join("")}
     </div>
+    ${groupRows.length > defaultLimit ? `
+      <div class="table-toggle-row">
+        <button class="table-toggle" type="button" data-toggle-graded-events aria-expanded="${showAll ? "true" : "false"}">${toggleText}</button>
+      </div>
+    ` : ""}
   `;
+  for (const details of target.querySelectorAll(".graded-timeline-group")) {
+    details.addEventListener("toggle", () => {
+      details.querySelector("summary")?.setAttribute("aria-expanded", details.open ? "true" : "false");
+    });
+  }
+  target.querySelector("[data-toggle-graded-events]")?.addEventListener("click", (event) => {
+    target.dataset.timelineShowAll = target.dataset.timelineShowAll === "true" ? "false" : "true";
+    event.currentTarget.setAttribute("aria-expanded", target.dataset.timelineShowAll);
+    renderGradedWinsTimelineList(rows, mode);
+  });
   wireAnalysisFilters(target);
 }
 
@@ -1519,6 +1596,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     for (const button of document.querySelectorAll("#gradedWinsEventMode button")) {
       button.onclick = () => {
         for (const peer of document.querySelectorAll("#gradedWinsEventMode button")) peer.classList.toggle("active", peer === button);
+        eventTarget.dataset.timelineShowAll = "false";
         renderGradedWinsTimelineList(timelineRows, button.dataset.mode);
       };
     }
@@ -1682,29 +1760,12 @@ async function renderSireAnalysis() {
       <h1>種牡馬成績</h1>
       <p>从配种数量、种付费和各出生世代表现观察ドゥラメンテ的种马生涯。</p>
     </div>
-    ${sectionBlock("配种与市场评价", "前两个配种年度数量明显高于同期社台平均，2019年后种付费快速上升。",
-      `<div class="chart-grid">
-        ${chartBlock("配种规模变化", "比较配种热度与同期社台平均水平。", "sireMaresCoveredChart")}
-        ${chartBlock("市场定价变化", "观察种付费随市场评价的变化。", "sireStudFeeChart")}
-      </div>
-      <p class="source-note">配种与种付费来源：${escapeHtml(market.source)}；更新：${escapeHtml(market.retrieved_at)}</p>`
-    )}
-    ${sectionBlock("出生世代表现", "比较各出生世代的成绩积累与成长轨迹。",
-      `<div class="chart-grid cohort-grid">
-        ${chartBlock("奖金表现", "比较各世代的总奖金与平均表现。", "sireCropEarningsChart")}
-        ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
-        ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
-        ${chartBlock("成绩转化路径", "观察各世代从出生到高水平胜出的转化。", "sireAchievementStepChart")}
-        ${chartBlock("芝地与泥地平均胜距", "比较各世代在不同场地的距离倾向。", "sireAwdDumbbellChart")}
-        ${controlledChartBlock("产驹成长曲线", "观察各世代从两岁起的胜场积累。", "sireDevelopmentChart", `
-          <label><span>标准化</span><select id="sireDevelopmentMetric">
-            <option value="cumulative_wins">原始累计胜场</option>
-            <option value="cumulative_wins_per_100_foals">每100匹产驹</option>
-            <option value="cumulative_wins_per_100_runners">每100匹出赛马</option>
-          </select></label>
-        `)}
-      </div>`
-    )}
+    <div class="metric-grid compact-metrics sire-metrics">
+      ${metricCard("累计总奖金", money(profile.total_earnings), "产驹累计")}
+      ${metricCard("产驹数", formatNumber(profile.foals), "收录马匹")}
+      ${metricCard("胜马", `${formatNumber(profile.winners)} (${formatRate(profile.winner_foal_rate)})`, "占收录产驹")}
+      ${metricCard("重赏胜马", formatNumber(profile.graded_winners), `G1 ${formatNumber(profile.g1_horses)}`)}
+    </div>
     ${sectionBlock("Leading Sire Career", "",
       `<div class="analysis-controls">
         <label><span>分类</span><select id="sireLeadingCategory">
@@ -1730,18 +1791,36 @@ async function renderSireAnalysis() {
         { label: "来源", value: (row) => `<a href="${escapeHtml(row.source_url)}" target="_blank" rel="noreferrer">来源</a>`, html: true },
       ], (leadingHistory.history || []), { initialLimit: 8 })}`
     )}
-    <div class="metric-grid compact-metrics">
-      ${metricCard("累计总奖金", money(profile.total_earnings), "产驹累计")}
-      ${metricCard("产驹数", formatNumber(profile.foals), "收录马匹")}
-      ${metricCard("胜马", `${formatNumber(profile.winners)} (${formatRate(profile.winner_foal_rate)})`, "占收录产驹")}
-      ${metricCard("重赏胜马", formatNumber(profile.graded_winners), `G1 ${formatNumber(profile.g1_horses)}`)}
-    </div>
+    ${sectionBlock("出生世代表现", "比较各出生世代的成绩积累与成长轨迹。",
+      `<div class="chart-grid cohort-grid">
+        ${chartBlock("奖金表现", "比较各世代的总奖金与平均表现。", "sireCropEarningsChart")}
+        ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
+        ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
+        ${chartBlock("各出生世代的成就转化", "观察各世代从出赛到高水平胜出的过程。", "sireAchievementStepChart")}
+        ${chartBlock("各世代的芝・泥平均胜距", "比较各出生世代在不同场地的距离倾向。", "sireAwdDumbbellChart")}
+        ${controlledChartBlock("产驹成长曲线", "观察各世代从两岁起的胜场积累。", "sireDevelopmentChart", `
+          <label><span>标准化</span><select id="sireDevelopmentMetric">
+            <option value="cumulative_wins">原始累计胜场</option>
+            <option value="cumulative_wins_per_100_foals">每100匹产驹</option>
+            <option value="cumulative_wins_per_100_runners">每100匹出赛马</option>
+          </select></label>
+        `)}
+      </div>`
+      + `<p class="source-note">较年轻世代的成绩仍在积累中。</p>`
+    )}
+    ${sectionBlock("配种与市场评价", "前两个配种年度数量明显高于同期社台平均，2019年后种付费快速上升。",
+      `<div class="chart-grid">
+        ${chartBlock("配种规模变化", "比较配种热度与同期社台平均水平。", "sireMaresCoveredChart")}
+        ${chartBlock("市场定价变化", "观察种付费随市场评价的变化。", "sireStudFeeChart")}
+      </div>
+      <p class="source-note">配种与种付费来源：${escapeHtml(market.source)}；更新：${escapeHtml(market.retrieved_at)}</p>`
+    )}
     ${sectionBlock("重賞勝利の推移｜重赏胜利时间线", "按年度查看G1、G2和G3胜利的出现节奏。",
       `${chartBlock("年度重赏胜场数", "观察重赏胜利随年份的积累。", "gradedWinsTimelineChart")}
       <article class="chart-card">
         <div class="chart-card-head with-controls">
           <div>
-            <h3>重赏胜利事件</h3>
+            <h3>重赏胜利时间轴</h3>
             <p>按年份或胜马查看每一场重赏胜利。</p>
           </div>
           <div class="segment-control compact-control" id="gradedWinsEventMode">
@@ -1766,7 +1845,7 @@ async function renderSireAnalysis() {
         { label: "每匹平均", value: (row) => money(row.earnings_per_foal) },
         { label: "芝平均胜距", value: (row) => row.turf_awd ? `${formatNumber(row.turf_awd)} m` : "—" },
         { label: "泥平均胜距", value: (row) => row.dirt_awd ? `${formatNumber(row.dirt_awd)} m` : "—" },
-        { label: "代表马", value: representativeNames },
+        { label: "代表马", className: "name-column", value: representativeCell, html: true },
       ], sireProfile.crops, { initialLimit: 10 })
     )}
   `;
@@ -1811,7 +1890,7 @@ async function renderBmsAnalysis() {
         { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
         { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
         { label: "重賞勝馬", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
-        { label: "代表馬", value: representativeNames },
+        { label: "代表馬", className: "name-column", value: representativeCell, html: true },
       ], bmsLines)}`
     )}
     ${sectionBlock("具体母父排行榜", "从规模、奖金和胜马表现比较具体母父。",
@@ -1852,7 +1931,7 @@ async function renderBmsAnalysis() {
       { label: "重赏胜马", value: (row) => formatNumber(row.graded_winners) },
       { label: "总奖金", value: (row) => money(row.total_earnings) },
       { label: "中位数", value: (row) => money(row.median_earnings_per_runner) },
-      { label: "代表马", value: representativeNames },
+      { label: "代表马", className: "name-column", value: representativeCell, html: true },
     ], sorted, { initialLimit: 20 });
     wireAnalysisFilters(els.bmsContent);
     wireExpandableTables(els.bmsContent);
@@ -1956,23 +2035,29 @@ function renderBroodmareSireRankingChart(rows) {
   const metric = document.querySelector("#broodmareSireSort")?.value || "foals";
   const minFoals = Number(document.querySelector("#broodmareSireMinFoals")?.value || 10);
   const meta = rankingMetricMeta(metric);
-  const chartRows = sortedBroodmareSireRows(rows, metric, minFoals).slice(0, 20).reverse();
+  const chartRows = sortedBroodmareSireRows(rows, metric, minFoals).slice(0, 20);
   const el = document.querySelector("#broodmareSireRankingChart");
   if (el) el.style.height = `${rankingChartHeight(chartRows, 360)}px`;
   const isRate = metric === "winner_foal_rate" || metric === "graded_foal_rate";
+  const isPoint = isRate || metric === "median_earnings_per_runner";
+  const rateAverage = metric === "winner_foal_rate"
+    ? weightedRate(rows, "winners", "foals")
+    : metric === "graded_foal_rate"
+      ? weightedRate(rows, "graded_winners", "foals")
+      : null;
   const chart = renderChart("broodmareSireRankingChart", {
-    color: [meta.type === "point" ? COLORS.gold : COLORS.duramente],
+    color: [isPoint ? COLORS.gold : COLORS.duramente],
     tooltip: {
-      trigger: "axis",
+      trigger: "item",
       axisPointer: { type: "shadow" },
-      formatter: (items) => {
-        const row = items[0].data.raw;
+      formatter: (params) => {
+        const row = params.data.raw;
         return [
           escapeHtml(row.label),
           `产驹数：${formatNumber(row.foals)}`,
           `出赛马：${formatNumber(row.runners)}`,
           `胜马：${formatNumber(row.winners)} / 重赏马：${formatNumber(row.graded_winners)}`,
-          `${meta.label}：${meta.formatter(items[0].data.value, row)}`,
+          `${meta.label}：${meta.formatter(params.data.value[0] ?? params.data.value, row)}`,
           `总奖金：${money(row.total_earnings)}`,
           `代表马：${escapeHtml(representativeNames(row))}`,
         ].join("<br>");
@@ -1983,19 +2068,23 @@ function renderBroodmareSireRankingChart(rows) {
     yAxis: longCategoryAxis(chartRows.map((row) => row.label), { width: 150 }),
     series: [{
       name: meta.label,
-      type: "bar",
+      type: isPoint ? "scatter" : "bar",
+      symbolSize: isPoint ? 12 : undefined,
       barMaxWidth: 16,
-      data: chartRows.map((row) => ({ value: meta.value(row), raw: row })),
+      data: chartRows.map((row) => ({ value: isPoint ? [meta.value(row), row.label] : meta.value(row), raw: row })),
+      itemStyle: isPoint ? { color: COLORS.gold, borderColor: "#fff", borderWidth: 1.5 } : undefined,
+      markLine: rateAverage == null ? undefined : ratioLine(rateAverage, "整体平均", "xAxis"),
       label: {
         show: true,
         position: "right",
         formatter: (params) => {
           const row = params.data.raw;
+          const value = Array.isArray(params.value) ? params.value[0] : params.value;
           if (isRate) {
             const numerator = metric === "graded_foal_rate" ? row.graded_winners : row.winners;
-            return `${params.value}% (${numerator}/${row.foals})`;
+            return `${value}% (${numerator}/${row.foals})`;
           }
-          return meta.formatter(params.value, row);
+          return meta.formatter(value, row);
         },
       },
     }],
@@ -2014,7 +2103,7 @@ function renderBroodmareSireLeaderboardTable(rows, container) {
     { label: "重赏胜马", value: (row) => formatNumber(row.graded_winners) },
     { label: "总奖金", value: (row) => money(row.total_earnings) },
     { label: "中位数", value: (row) => money(row.median_earnings_per_runner) },
-    { label: "代表马", className: "name-column", value: representativeNames },
+      { label: "代表马", className: "name-column", value: representativeCell, html: true },
   ], rows, { initialLimit: 20 });
   wireAnalysisFilters(container);
   wireExpandableTables(container);
@@ -2109,6 +2198,13 @@ function renderAncestorGroupedTable(charts) {
   const search = (document.querySelector("#ancestorGroupSearch")?.value || "").trim().toLowerCase();
   const metric = document.querySelector("#ancestorGroupMetric")?.value || "foals";
   const sortMode = document.querySelector("#ancestorGroupSort")?.value || "total_desc";
+  const showSmall = document.querySelector("#ancestorShowSmall")?.checked || false;
+  const showAll = target.dataset.showAll === "true" || Boolean(search);
+  const rowMetricValue = (row) => {
+    if (metric === "winner_foal_rate" || metric === "graded_foal_rate") return Number(row[metric] || 0);
+    if (metric === "median_earnings_per_runner" || metric === "total_earnings") return Number(row[metric] || 0);
+    return Number(row.foals || 0);
+  };
   const ancestorStats = new Map((charts.cross_bubble || []).map((row) => [row.label, row]));
   const groups = new Map();
   for (const row of charts.ancestor_form_comparison || []) {
@@ -2131,22 +2227,31 @@ function renderAncestorGroupedTable(charts) {
     if (sortMode === "metric_desc") return (b.metricValue || 0) - (a.metricValue || 0);
     return (b.totalFoals || 0) - (a.totalFoals || 0);
   });
+  const visibleGroups = showAll ? sortedGroups : sortedGroups.slice(0, 10);
   target.innerHTML = `
     <div class="ancestor-group-table">
-      ${sortedGroups.map((group, index) => {
-        const rows = [...group.rows].sort((a, b) => (b.foals || 0) - (a.foals || 0));
+      ${visibleGroups.map((group) => {
+        const allRows = [...group.rows].sort((a, b) => (b.foals || 0) - (a.foals || 0));
+        const rows = allRows
+          .filter((row) => showSmall || Number(row.foals || 0) >= 5)
+          .sort((a, b) => {
+            if (sortMode === "name_asc") return String(a.pattern || "").localeCompare(String(b.pattern || ""), "ja");
+            if (sortMode === "metric_desc") return rowMetricValue(b) - rowMetricValue(a);
+            return (b.foals || 0) - (a.foals || 0);
+          });
         const total = group.totalFoals || rows.reduce((sum, row) => sum + (row.foals || 0), 0) || 1;
-        const main = rows[0];
+        const main = allRows[0];
         return `
-          <details class="ancestor-group" ${index < 8 || search ? "open" : ""}>
-            <summary>
+          <details class="ancestor-group">
+            <summary aria-expanded="false">
+              <span class="ancestor-arrow" aria-hidden="true"></span>
               <span class="ancestor-title">${escapeHtml(group.ancestor)}</span>
               <span>${formatNumber(total)}匹</span>
               <span>${escapeHtml(main?.pattern || "—")} · ${formatRate((main?.foals || 0) / total)}</span>
-              <span>${rows.length}种形式</span>
+              <span>${allRows.length}种形式</span>
             </summary>
             <div class="ancestor-cross-rows">
-              ${rows.map((row) => {
+              ${rows.length ? rows.map((row) => {
                 const share = total ? (row.foals || 0) / total : 0;
                 return `
                   <button type="button" class="ancestor-cross-row" data-cross-search="${escapeHtml(`${group.ancestor} ${row.pattern || ""}`)}">
@@ -2154,19 +2259,34 @@ function renderAncestorGroupedTable(charts) {
                     <span class="cross-count">${formatNumber(row.foals)}匹</span>
                     <span class="cross-share"><i style="width:${Math.max(3, share * 100)}%"></i></span>
                     <span class="cross-percent">${formatRate(share)}</span>
-                    <span class="cross-metric">${escapeHtml(ancestorMetricLabel(row, metric))}</span>
+                    <span class="cross-metric">${Number(row.foals || 0) < 10 ? `<em class="sample-badge">n&lt;10</em>` : ""}${escapeHtml(ancestorMetricLabel(row, metric))}</span>
                   </button>
                 `;
-              }).join("")}
+              }).join("") : `<p class="ancestor-empty">小样本组合已隐藏。</p>`}
             </div>
           </details>
         `;
       }).join("")}
     </div>
+    ${!search && sortedGroups.length > 10 ? `
+      <div class="table-toggle-row">
+        <button class="table-toggle" type="button" data-toggle-ancestors aria-expanded="${showAll ? "true" : "false"}">${showAll ? "收起" : "显示全部祖先"}</button>
+      </div>
+    ` : ""}
   `;
   for (const button of target.querySelectorAll("[data-cross-search]")) {
     button.addEventListener("click", () => applySearchFilter(button.dataset.crossSearch));
   }
+  for (const details of target.querySelectorAll(".ancestor-group")) {
+    details.addEventListener("toggle", () => {
+      details.querySelector("summary")?.setAttribute("aria-expanded", details.open ? "true" : "false");
+    });
+  }
+  target.querySelector("[data-toggle-ancestors]")?.addEventListener("click", (event) => {
+    target.dataset.showAll = target.dataset.showAll === "true" ? "false" : "true";
+    event.currentTarget.setAttribute("aria-expanded", target.dataset.showAll);
+    renderAncestorGroupedTable(charts);
+  });
 }
 
 function renderPedigreeLineageTab(pedigree, bmsLines) {
@@ -2204,6 +2324,12 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
   const minFoals = Number(document.querySelector("#familyMinFoals")?.value || 5);
   const meta = rankingMetricMeta(metric);
   const needsSample = metric === "winner_foal_rate" || metric === "graded_foal_rate";
+  const isPoint = needsSample || metric === "median_earnings_per_runner";
+  const rateAverage = metric === "winner_foal_rate"
+    ? weightedRate(pedigree.female_families || [], "winners", "foals")
+    : metric === "graded_foal_rate"
+      ? weightedRate(pedigree.female_families || [], "graded_winners", "foals")
+      : null;
   const rows = [...(pedigree.female_families || [])]
     .filter((row) => !needsSample || Number(row.foals || 0) >= minFoals)
     .sort((a, b) => (meta.value(b) || 0) - (meta.value(a) || 0))
@@ -2212,7 +2338,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
   const el = document.querySelector("#femaleFamilyChart");
   if (el) el.style.height = `${rankingChartHeight(rows, 360)}px`;
   const chart = renderChart("femaleFamilyChart", {
-    color: [COLORS.blue],
+    color: [isPoint ? COLORS.gold : COLORS.blue],
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "shadow" },
@@ -2232,16 +2358,22 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
     xAxis: { type: "value", name: meta.unit, max: metric.includes("rate") ? 110 : paddedAxisMax },
     yAxis: longCategoryAxis(rows.map((row) => row.label), { width: 120 }),
     series: [{
-      type: "bar",
+      type: isPoint ? "scatter" : "bar",
+      symbolSize: isPoint ? 12 : undefined,
       barMaxWidth: 18,
-      data: rows.map((row) => ({ value: meta.value(row), raw: row })),
+      data: rows.map((row) => ({ value: isPoint ? [meta.value(row), row.label] : meta.value(row), raw: row })),
+      itemStyle: isPoint ? { color: COLORS.gold, borderColor: "#fff", borderWidth: 1.5 } : undefined,
+      markLine: rateAverage == null ? undefined : ratioLine(rateAverage, "整体平均", "xAxis"),
       label: { show: true, position: "right", formatter: (params) => {
         const row = params.data.raw;
-        if (metric === "foals") return `${formatNumber(params.value)}匹`;
-        if (metric === "total_earnings") return `${formatNumber(params.value, 1)}万円`;
-        if (metric === "winner_foal_rate") return `${params.value}% (${row.winners}/${row.foals})`;
-        if (metric === "graded_foal_rate") return `${params.value}% (${row.graded_winners}/${row.foals})`;
-        return formatNumber(params.value, 1);
+        const value = Array.isArray(params.value) ? params.value[0] : params.value;
+        if (metric === "foals") return `${formatNumber(value)}匹`;
+        if (metric === "total_earnings") return `${formatNumber(value, 1)}万円`;
+        if (metric === "graded_winners") return `${formatNumber(value)}匹`;
+        if (metric === "median_earnings_per_runner") return money(value);
+        if (metric === "winner_foal_rate") return `${value}% (${row.winners}/${row.foals})`;
+        if (metric === "graded_foal_rate") return `${value}% (${row.graded_winners}/${row.foals})`;
+        return formatNumber(value, 1);
       } },
     }],
   });
@@ -2348,6 +2480,7 @@ async function renderPedigreeAnalysis() {
                 <option value="metric_desc">指标 ↓</option>
                 <option value="name_asc">祖先名</option>
               </select></label>
+              <label class="inline-check"><input id="ancestorShowSmall" type="checkbox">显示小样本组合</label>
             </div>
           </div>
           <div id="ancestorGroupedTable"></div>
@@ -2362,7 +2495,7 @@ async function renderPedigreeAnalysis() {
             { label: "产驹数", value: (row) => formatNumber(row.foals) },
             { label: "胜马率", value: (row) => rateWithCount(row.winner_foal_rate, row.winners, row.foals) },
             { label: "重赏率", value: (row) => rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals) },
-            { label: "代表马", value: representativeNames },
+            { label: "代表马", className: "name-column", value: representativeCell, html: true },
           ], cross.structures, { initialLimit: 10 })}
         </article>
       </div>`
@@ -2409,7 +2542,9 @@ async function renderPedigreeAnalysis() {
           <option value="foals">产驹数</option>
           <option value="total_earnings">总奖金</option>
           <option value="winner_foal_rate">胜马率</option>
+          <option value="graded_winners">重赏胜马数</option>
           <option value="graded_foal_rate">重赏马率</option>
+          <option value="median_earnings_per_runner">中位奖金</option>
         </select></label>
         <label><span>牝系样本</span><select id="familyMinFoals">
           <option value="5" selected>5匹以上</option>
@@ -2433,7 +2568,7 @@ async function renderPedigreeAnalysis() {
           { label: "総賞金", value: (row) => money(row.total_earnings) },
           { label: "平均", value: (row) => money(row.avg_earnings_per_foal) },
           { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
-          { label: "代表馬", value: representativeNames },
+          { label: "代表馬", className: "name-column", value: representativeCell, html: true },
         ], cross.ancestors, { initialLimit: 10 })}
         <h3>祖先 + 具体Cross形式明细</h3>
         ${analysisTable([
@@ -2446,7 +2581,7 @@ async function renderPedigreeAnalysis() {
           { label: "平均", value: (row) => money(row.avg_earnings_per_foal) },
           { label: "中央値", value: (row) => money(row.median_earnings_per_runner) },
           { label: "Max", value: (row) => money(row.max_earnings) },
-          { label: "代表馬", value: representativeNames },
+          { label: "代表馬", className: "name-column", value: representativeCell, html: true },
         ], cross.ancestor_patterns, { initialLimit: 10 })}
       </div>
     </details>
@@ -2458,13 +2593,13 @@ async function renderPedigreeAnalysis() {
         { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
         { label: "重賞勝馬", value: (row) => formatNumber(row.graded_winners) },
         { label: "総賞金", value: (row) => money(row.total_earnings) },
-        { label: "代表馬", value: representativeNames },
+        { label: "代表馬", className: "name-column", value: representativeCell, html: true },
       ], pedigree.female_families, { initialLimit: 10 })}
     </details>
   `;
   wireExpandableTables(els.pedigreeContent);
   const rerender = () => renderPedigreeCharts(pedigree, bmsLines);
-  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorGroupMetric", "ancestorGroupSort", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
+  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorGroupMetric", "ancestorGroupSort", "ancestorShowSmall", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("input", debounce(rerender));
   }
@@ -2486,7 +2621,9 @@ async function renderPedigreeAnalysis() {
 
 function renderBreederScatterChart(breeders) {
   const rows = (breeders.scatter || breeders.table || []).filter((row) => Number(row.foals || 0) >= Number(document.querySelector("#breederScatterMinFoals")?.value || 5));
-  const maxFoals = Math.max(...rows.map((row) => Number(row.foals || 0)), 1);
+  const maxGraded = Math.max(...rows.map((row) => Number(row.graded_winners || 0)), 0);
+  const sizeKey = maxGraded > 0 ? "graded_winners" : "total_earnings";
+  const maxSizeValue = Math.max(...rows.map((row) => Number(row[sizeKey] || 0)), 1);
   const avgRate = weightedRate(rows, "winners", "foals");
   const chart = renderChart("breederScaleEfficiencyChart", {
     color: [COLORS.duramente],
@@ -2512,9 +2649,9 @@ function renderBreederScatterChart(breeders) {
       type: "scatter",
       data: rows.map((row) => ({
         name: row.label,
-        value: [row.foals, Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), row.total_earnings],
+        value: [row.foals, Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), row[sizeKey] || 0],
         raw: row,
-        symbolSize: sqrtSymbolSize(row.foals, maxFoals, 12, 48),
+        symbolSize: sqrtSymbolSize(row[sizeKey], maxSizeValue, 12, 48),
         label: { show: row.foals >= 15 || row.graded_winners > 0, position: "right", formatter: row.label, fontWeight: 850, color: "#4a4038" },
       })),
       itemStyle: { color: COLORS.duramente, opacity: 0.76, borderColor: "#fff", borderWidth: 1.4 },
@@ -2672,7 +2809,7 @@ async function renderProductionAnalysis() {
             { label: "重赏马", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
             { label: "平均奖金", value: (row) => money(row.avg_earnings_per_foal) },
             { label: "中位奖金", value: (row) => money(row.median_earnings_per_runner) },
-            { label: "代表马", value: representativeNames },
+            { label: "代表马", className: "name-column", value: representativeCell, html: true },
           ], damAgeBucketRows)
         )}
       `;
@@ -2684,9 +2821,9 @@ async function renderProductionAnalysis() {
       <div class="chart-grid single-chart">
         ${controlledChartBlock("牧场规模与表现", "比较主要牧场的产驹规模和胜马表现。", "breederScaleEfficiencyChart", `
           <label><span>最少产驹</span><select id="breederScatterMinFoals">
-            <option value="3">3匹以上</option>
             <option value="5" selected>5匹以上</option>
             <option value="10">10匹以上</option>
+            <option value="20">20匹以上</option>
           </select></label>
         `)}
       </div>
@@ -2706,7 +2843,7 @@ async function renderProductionAnalysis() {
           { label: "重赏马", value: (row) => formatNumber(row.graded_winners) },
           { label: "G1马", value: (row) => formatNumber(row.g1_winners) },
           { label: "总奖金", value: (row) => money(row.total_earnings) },
-          { label: "代表马", value: representativeNames },
+          { label: "代表马", className: "name-column", value: representativeCell, html: true },
         ], breeders.table, { initialLimit: 15 })
       )}
     `;
