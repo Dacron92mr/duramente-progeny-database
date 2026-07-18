@@ -1101,7 +1101,7 @@ td {
   display: block;
   height: 12px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #ead2ce, #c75870, #7c1f46);
+  background: linear-gradient(90deg, #fde7a9, #f7c65d, #f39a3d, #e85d3f, #a92f4f);
   border: 1px solid rgba(84, 37, 68, 0.12);
 }
 
@@ -1264,10 +1264,6 @@ td {
   background: #efe8df;
 }
 
-.ancestor-stack span {
-  min-width: 2px;
-}
-
 .ancestor-stack .segment-1 { background: #a3264f; }
 .ancestor-stack .segment-2 { background: #d35368; }
 .ancestor-stack .segment-3 { background: #ee9b72; }
@@ -1354,14 +1350,9 @@ td {
   height: 260px;
 }
 
-#bmsLineBubbleChart,
 #sireAchievementStepChart,
 #sireAwdDumbbellChart {
   height: 380px;
-}
-
-#broodmareSireRankingChart {
-  min-height: 360px;
 }
 
 #bmsLineChart,
@@ -1438,6 +1429,55 @@ td {
   background: #e96c4c;
 }
 
+.grade-listed {
+  background: #f0b45f;
+  color: #321d13;
+}
+
+.grade-other {
+  background: #8b8078;
+}
+
+.representative-list,
+.rep-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.representative-horse-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  max-width: 100%;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(169, 47, 93, 0.08);
+  color: var(--ink);
+  white-space: normal;
+}
+
+.representative-horse-name {
+  line-height: 1.3;
+}
+
+.rep-more {
+  display: contents;
+}
+
+.rep-toggle-pill,
+.rep-toggle {
+  border: 1px solid rgba(169, 47, 93, 0.18);
+  border-radius: 999px;
+  padding: 3px 8px;
+  background: rgba(169, 47, 93, 0.08);
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
 .event-date,
 .event-meeting {
   color: var(--muted);
@@ -1460,6 +1500,49 @@ td {
 .detail-table-stack h3 {
   margin: 0;
   font-size: 16px;
+}
+
+.detail-source-section {
+  margin-top: 24px;
+}
+
+.detail-source-section h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.detail-source-section ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.detail-source-section a {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 7px 11px;
+  background: rgba(169, 47, 93, 0.09);
+  color: var(--accent);
+  font-weight: 850;
+  text-decoration: none;
+}
+
+.source-details {
+  margin-top: 14px;
+}
+
+.source-details summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.source-detail-table {
+  margin-top: 10px;
 }
 
 .chart-fallback {
