@@ -490,6 +490,78 @@ function representativeCell(row) {
   `;
 }
 
+function compactRepresentativeCell(row) {
+  return representativeCell(row);
+}
+
+function crossPatternText(pattern) {
+  return String(pattern || "—").replaceAll("x", "×");
+}
+
+function percentText(value) {
+  if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
+  return `${Number(value).toFixed(1)}%`;
+}
+
+function sortedRepresentativesForHorses(horses) {
+  return [...horses]
+    .sort((a, b) => Number(b.earnings_netkeiba || b.earnings_jbis || 0) - Number(a.earnings_netkeiba || a.earnings_jbis || 0))
+    .slice(0, 6)
+    .map((horse) => ({
+      name: horse.name,
+      hkjc_name_zh: horse.hkjc_name_zh,
+      achievement_class: horse.achievement_class,
+      major_win: horse.major_win,
+      earnings: horse.earnings_netkeiba ?? horse.earnings_jbis,
+    }));
+}
+
+async function broodmareRowsFromLoadedHorses() {
+  const horses = isStaticMode()
+    ? await getStaticHorses()
+    : (await getJson("/api/horses?limit=1000&offset=0")).horses || [];
+  const groups = new Map();
+  for (const horse of horses) {
+    const dam = horse.dam || "—";
+    if (!dam || dam === "—") continue;
+    if (!groups.has(dam)) {
+      groups.set(dam, {
+        label: dam,
+        foals: 0,
+        runners: 0,
+        winners: 0,
+        graded_winners: 0,
+        g1_winners: 0,
+        total_earnings: 0,
+        broodmare_sire: horse.broodmare_sire || "—",
+        representatives: [],
+        _horses: [],
+      });
+    }
+    const group = groups.get(dam);
+    group.foals += 1;
+    const summary = String(horse.career_summary || "");
+    const winsMatch = summary.match(/(\d+)勝/);
+    const wins = winsMatch ? Number(winsMatch[1]) : 0;
+    if (summary || Number(horse.earnings_netkeiba || horse.earnings_jbis || 0) > 0) group.runners += 1;
+    if (wins > 0) group.winners += 1;
+    if (["G1", "G2", "G3"].includes(horse.achievement_class)) group.graded_winners += 1;
+    if (horse.achievement_class === "G1") group.g1_winners += 1;
+    group.total_earnings += Number(horse.earnings_netkeiba ?? horse.earnings_jbis ?? 0);
+    group._horses.push(horse);
+  }
+  return [...groups.values()]
+    .map((row) => {
+      row.winner_foal_rate = row.foals ? row.winners / row.foals : 0;
+      row.graded_foal_rate = row.foals ? row.graded_winners / row.foals : 0;
+      row.representatives = sortedRepresentativesForHorses(row._horses);
+      delete row._horses;
+      return row;
+    })
+    .sort((a, b) => b.foals - a.foals || b.total_earnings - a.total_earnings)
+    .slice(0, 30);
+}
+
 function methodLabel(key) {
   const labels = {
     population: "收录范围",
@@ -2192,19 +2264,44 @@ function ancestorMetricLabel(row, metric) {
   return `${formatNumber(row.foals)}匹`;
 }
 
+function ancestorDetailValue(row, key, total) {
+  if (key === "share") return total ? (row.foals || 0) / total : 0;
+  if (key === "winner") return Number(row.winner_foal_rate || 0);
+  if (key === "graded") return Number(row.graded_foal_rate || 0);
+  if (key === "median") return Number(row.median_earnings_per_runner || 0);
+  return Number(row.foals || 0);
+}
+
+function ancestorSummarySegments(rows, total) {
+  const visible = rows.slice(0, 3).map((row, index) => ({
+    label: crossPatternText(row.pattern),
+    foals: row.foals || 0,
+    share: total ? ((row.foals || 0) / total) * 100 : 0,
+    className: `segment-${index + 1}`,
+  }));
+  const visibleFoals = visible.reduce((sum, item) => sum + item.foals, 0);
+  const restFoals = Math.max(0, (total || 0) - visibleFoals);
+  if (restFoals > 0) {
+    visible.push({
+      label: "其他",
+      foals: restFoals,
+      share: total ? (restFoals / total) * 100 : 0,
+      className: "segment-other",
+    });
+  }
+  return visible;
+}
+
 function renderAncestorGroupedTable(charts) {
   const target = document.querySelector("#ancestorGroupedTable");
   if (!target) return;
   const search = (document.querySelector("#ancestorGroupSearch")?.value || "").trim().toLowerCase();
-  const metric = document.querySelector("#ancestorGroupMetric")?.value || "foals";
-  const sortMode = document.querySelector("#ancestorGroupSort")?.value || "total_desc";
+  const sortMode = target.dataset.sortMode || "foals";
   const showSmall = document.querySelector("#ancestorShowSmall")?.checked || false;
   const showAll = target.dataset.showAll === "true" || Boolean(search);
-  const rowMetricValue = (row) => {
-    if (metric === "winner_foal_rate" || metric === "graded_foal_rate") return Number(row[metric] || 0);
-    if (metric === "median_earnings_per_runner" || metric === "total_earnings") return Number(row[metric] || 0);
-    return Number(row.foals || 0);
-  };
+  const expanded = new Set(String(target.dataset.expanded || "").split(",").filter(Boolean));
+  const detailSort = target.dataset.detailSort || "share_desc";
+  const [detailKey, detailDir] = detailSort.split("_");
   const ancestorStats = new Map((charts.cross_bubble || []).map((row) => [row.label, row]));
   const groups = new Map();
   for (const row of charts.ancestor_form_comparison || []) {
@@ -2216,55 +2313,92 @@ function renderAncestorGroupedTable(charts) {
         ancestor,
         stats,
         totalFoals: stats.foals || 0,
-        metricValue: chartMetricDisplay(stats, metric) || 0,
         rows: [],
       });
     }
     groups.get(ancestor).rows.push(row);
   }
+  for (const group of groups.values()) {
+    group.rows.sort((a, b) => (b.foals || 0) - (a.foals || 0));
+    group.totalFoals = group.totalFoals || group.rows.reduce((sum, row) => sum + (row.foals || 0), 0);
+    group.formCount = group.rows.length;
+    group.topShare = group.totalFoals ? (group.rows[0]?.foals || 0) / group.totalFoals : 0;
+  }
   const sortedGroups = [...groups.values()].sort((a, b) => {
-    if (sortMode === "name_asc") return a.ancestor.localeCompare(b.ancestor, "ja");
-    if (sortMode === "metric_desc") return (b.metricValue || 0) - (a.metricValue || 0);
+    if (sortMode === "concentration") return (b.topShare || 0) - (a.topShare || 0) || (b.totalFoals || 0) - (a.totalFoals || 0);
+    if (sortMode === "forms") return (b.formCount || 0) - (a.formCount || 0) || (b.totalFoals || 0) - (a.totalFoals || 0);
     return (b.totalFoals || 0) - (a.totalFoals || 0);
   });
   const visibleGroups = showAll ? sortedGroups : sortedGroups.slice(0, 10);
   target.innerHTML = `
     <div class="ancestor-group-table">
       ${visibleGroups.map((group) => {
+        const key = encodeURIComponent(group.ancestor);
+        const total = group.totalFoals || 1;
         const allRows = [...group.rows].sort((a, b) => (b.foals || 0) - (a.foals || 0));
-        const rows = allRows
+        const detailRows = allRows
           .filter((row) => showSmall || Number(row.foals || 0) >= 5)
           .sort((a, b) => {
-            if (sortMode === "name_asc") return String(a.pattern || "").localeCompare(String(b.pattern || ""), "ja");
-            if (sortMode === "metric_desc") return rowMetricValue(b) - rowMetricValue(a);
-            return (b.foals || 0) - (a.foals || 0);
+            const diff = ancestorDetailValue(b, detailKey, total) - ancestorDetailValue(a, detailKey, total);
+            return detailDir === "asc" ? -diff : diff;
           });
-        const total = group.totalFoals || rows.reduce((sum, row) => sum + (row.foals || 0), 0) || 1;
-        const main = allRows[0];
+        const segments = ancestorSummarySegments(allRows, total);
+        const isOpen = expanded.has(key);
         return `
-          <details class="ancestor-group">
-            <summary aria-expanded="false">
-              <span class="ancestor-arrow" aria-hidden="true"></span>
-              <span class="ancestor-title">${escapeHtml(group.ancestor)}</span>
-              <span>${formatNumber(total)}匹</span>
-              <span>${escapeHtml(main?.pattern || "—")} · ${formatRate((main?.foals || 0) / total)}</span>
-              <span>${allRows.length}种形式</span>
-            </summary>
-            <div class="ancestor-cross-rows">
-              ${rows.length ? rows.map((row) => {
-                const share = total ? (row.foals || 0) / total : 0;
-                return `
-                  <button type="button" class="ancestor-cross-row" data-cross-search="${escapeHtml(`${group.ancestor} ${row.pattern || ""}`)}">
-                    <span class="cross-name">${escapeHtml(row.pattern || "—")}</span>
-                    <span class="cross-count">${formatNumber(row.foals)}匹</span>
-                    <span class="cross-share"><i style="width:${Math.max(3, share * 100)}%"></i></span>
-                    <span class="cross-percent">${formatRate(share)}</span>
-                    <span class="cross-metric">${Number(row.foals || 0) < 10 ? `<em class="sample-badge">n&lt;10</em>` : ""}${escapeHtml(ancestorMetricLabel(row, metric))}</span>
-                  </button>
-                `;
-              }).join("") : `<p class="ancestor-empty">小样本组合已隐藏。</p>`}
+          <article class="ancestor-group${isOpen ? " is-open" : ""}" data-ancestor-key="${key}">
+            <button class="ancestor-summary" type="button" data-toggle-ancestor="${key}" aria-expanded="${isOpen ? "true" : "false"}">
+              <span class="ancestor-info">
+                <strong>${escapeHtml(group.ancestor)}</strong>
+                <em>${formatNumber(total)}匹 · ${formatNumber(allRows.length)}种形式</em>
+              </span>
+              <span class="ancestor-composition">
+                <span class="ancestor-stack" aria-label="${escapeHtml(group.ancestor)} Cross构成">
+                  ${segments.map((segment) => `
+                    <span class="${segment.className}" style="width:${Math.max(segment.share, 1)}%" title="${escapeHtml(segment.label)}：${formatNumber(segment.foals)}匹，${percentText(segment.share)}"></span>
+                  `).join("")}
+                </span>
+                <span class="ancestor-segment-summary">
+                  ${segments.map((segment) => `${escapeHtml(segment.label)} ${percentText(segment.share)}`).join(" · ")}
+                </span>
+              </span>
+              <span class="ancestor-toggle-label">${isOpen ? "收起" : "展开"}⌄</span>
+            </button>
+            <div class="ancestor-detail" ${isOpen ? "" : "hidden"}>
+              ${detailRows.length ? `
+                <table class="ancestor-detail-table">
+                  <thead>
+                    <tr>
+                      ${[
+                        ["pattern", "Cross形式"],
+                        ["foals", "产驹数"],
+                        ["share", "构成比"],
+                        ["winner", "胜马率"],
+                        ["graded", "重赏率"],
+                        ["median", "中位奖金"],
+                        ["representatives", "代表马"],
+                      ].map(([keyName, label]) => `<th>${["pattern", "representatives"].includes(keyName) ? escapeHtml(label) : `<button type="button" data-ancestor-detail-sort="${keyName}">${escapeHtml(label)}</button>`}</th>`).join("")}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${detailRows.map((row) => {
+                      const share = total ? ((row.foals || 0) / total) * 100 : 0;
+                      return `
+                        <tr>
+                          <td><button type="button" class="link-button" data-cross-search="${escapeHtml(`${group.ancestor} ${row.pattern || ""}`)}">${escapeHtml(crossPatternText(row.pattern))}</button>${Number(row.foals || 0) < 10 ? `<em class="sample-badge">n&lt;10</em>` : ""}</td>
+                          <td>${formatNumber(row.foals)}</td>
+                          <td class="share-cell"><span class="mini-share"><i style="width:${Math.max(2, share)}%"></i></span><strong>${percentText(share)}</strong></td>
+                          <td>${rateWithCount(row.winner_foal_rate, row.winners, row.foals)}</td>
+                          <td>${rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals)}</td>
+                          <td>${money(row.median_earnings_per_runner)}</td>
+                          <td>${compactRepresentativeCell(row)}</td>
+                        </tr>
+                      `;
+                    }).join("")}
+                  </tbody>
+                </table>
+              ` : `<p class="ancestor-empty">小样本组合已合并到摘要中的“其他”。</p>`}
             </div>
-          </details>
+          </article>
         `;
       }).join("")}
     </div>
@@ -2277,9 +2411,22 @@ function renderAncestorGroupedTable(charts) {
   for (const button of target.querySelectorAll("[data-cross-search]")) {
     button.addEventListener("click", () => applySearchFilter(button.dataset.crossSearch));
   }
-  for (const details of target.querySelectorAll(".ancestor-group")) {
-    details.addEventListener("toggle", () => {
-      details.querySelector("summary")?.setAttribute("aria-expanded", details.open ? "true" : "false");
+  for (const button of target.querySelectorAll("[data-toggle-ancestor]")) {
+    button.addEventListener("click", () => {
+      const key = button.dataset.toggleAncestor;
+      const current = new Set(String(target.dataset.expanded || "").split(",").filter(Boolean));
+      if (current.has(key)) current.delete(key); else current.add(key);
+      target.dataset.expanded = [...current].join(",");
+      renderAncestorGroupedTable(charts);
+    });
+  }
+  for (const button of target.querySelectorAll("[data-ancestor-detail-sort]")) {
+    button.addEventListener("click", () => {
+      const key = button.dataset.ancestorDetailSort;
+      const [currentKey, currentDir] = (target.dataset.detailSort || "share_desc").split("_");
+      const nextDir = currentKey === key && currentDir === "desc" ? "asc" : "desc";
+      target.dataset.detailSort = `${key}_${nextDir}`;
+      renderAncestorGroupedTable(charts);
     });
   }
   target.querySelector("[data-toggle-ancestors]")?.addEventListener("click", (event) => {
@@ -2287,6 +2434,7 @@ function renderAncestorGroupedTable(charts) {
     event.currentTarget.setAttribute("aria-expanded", target.dataset.showAll);
     renderAncestorGroupedTable(charts);
   });
+  wireExpandableTables(target);
 }
 
 function renderPedigreeLineageTab(pedigree, bmsLines) {
@@ -2450,7 +2598,7 @@ async function renderPedigreeAnalysis() {
             <option value="median_earnings_per_runner">中位奖金</option>
             <option value="avg_earnings_per_foal">平均奖金</option>
           </select></label>
-          <label><span>最少产驹</span><input id="crossMinFoals" type="number" min="1" max="50" value="10"></label>
+          <label><span>样本下限</span><input id="crossMinFoals" type="number" min="1" max="50" value="10"></label>
         </div>
         ${chartShell("crossAncestorPerformanceChart")}`
       )}
@@ -2468,19 +2616,12 @@ async function renderPedigreeAnalysis() {
               <datalist id="ancestorOptions">
                 ${ancestorOptions.map((name) => `<option value="${escapeHtml(name)}"></option>`).join("")}
               </datalist>
-              <label><span>指标</span><select id="ancestorGroupMetric">
-                <option value="foals">产驹数</option>
-                <option value="winner_foal_rate">胜马率</option>
-                <option value="graded_foal_rate">重赏率</option>
-                <option value="median_earnings_per_runner">中位奖金</option>
-                <option value="total_earnings">总奖金</option>
-              </select></label>
-              <label><span>排序</span><select id="ancestorGroupSort">
-                <option value="total_desc">总数 ↓</option>
-                <option value="metric_desc">指标 ↓</option>
-                <option value="name_asc">祖先名</option>
-              </select></label>
-              <label class="inline-check"><input id="ancestorShowSmall" type="checkbox">显示小样本组合</label>
+              <div class="segmented-sort" id="ancestorSortButtons" aria-label="祖先排序">
+                <button class="active" type="button" data-ancestor-sort="foals">产驹数</button>
+                <button type="button" data-ancestor-sort="concentration">最高集中度</button>
+                <button type="button" data-ancestor-sort="forms">形式数</button>
+              </div>
+              <label class="inline-check"><input id="ancestorShowSmall" type="checkbox" checked>显示小样本组合</label>
             </div>
           </div>
           <div id="ancestorGroupedTable"></div>
@@ -2599,9 +2740,17 @@ async function renderPedigreeAnalysis() {
   `;
   wireExpandableTables(els.pedigreeContent);
   const rerender = () => renderPedigreeCharts(pedigree, bmsLines);
-  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorGroupMetric", "ancestorGroupSort", "ancestorShowSmall", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
+  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorShowSmall", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("input", debounce(rerender));
+  }
+  for (const button of els.pedigreeContent.querySelectorAll("[data-ancestor-sort]")) {
+    button.addEventListener("click", () => {
+      const target = els.pedigreeContent.querySelector("#ancestorGroupedTable");
+      if (target) target.dataset.sortMode = button.dataset.ancestorSort || "foals";
+      for (const peer of els.pedigreeContent.querySelectorAll("[data-ancestor-sort]")) peer.classList.toggle("active", peer === button);
+      renderAncestorGroupedTable(pedigree.charts || {});
+    });
   }
   const renderBmsRanking = () => renderVisibleBroodmareSireRanking(broodmareSires);
   for (const id of ["broodmareSireSort", "broodmareSireMinFoals"]) {
@@ -2619,51 +2768,7 @@ async function renderPedigreeAnalysis() {
   els.pedigreeContent.dataset.loaded = "true";
 }
 
-function renderBreederScatterChart(breeders) {
-  const rows = (breeders.scatter || breeders.table || []).filter((row) => Number(row.foals || 0) >= Number(document.querySelector("#breederScatterMinFoals")?.value || 5));
-  const maxGraded = Math.max(...rows.map((row) => Number(row.graded_winners || 0)), 0);
-  const sizeKey = maxGraded > 0 ? "graded_winners" : "total_earnings";
-  const maxSizeValue = Math.max(...rows.map((row) => Number(row[sizeKey] || 0)), 1);
-  const avgRate = weightedRate(rows, "winners", "foals");
-  const chart = renderChart("breederScaleEfficiencyChart", {
-    color: [COLORS.duramente],
-    tooltip: {
-      trigger: "item",
-      formatter: (params) => {
-        const row = params.data.raw;
-        return [
-          escapeHtml(row.label),
-          `产驹数：${formatNumber(row.foals)}`,
-          `出赛马：${formatNumber(row.runners)}`,
-          `胜马率：${formatRate(row.winner_foal_rate)}（${formatNumber(row.winners)}/${formatNumber(row.foals)}）`,
-          `重赏马：${formatNumber(row.graded_winners)}`,
-          `总奖金：${money(row.total_earnings)}`,
-          `代表马：${escapeHtml(representativeNames(row))}`,
-        ].join("<br>");
-      },
-    },
-    grid: { left: 56, right: 34, top: 28, bottom: 52, containLabel: true },
-    xAxis: { type: "value", name: "产驹数" },
-    yAxis: { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
-    series: [{
-      type: "scatter",
-      data: rows.map((row) => ({
-        name: row.label,
-        value: [row.foals, Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), row[sizeKey] || 0],
-        raw: row,
-        symbolSize: sqrtSymbolSize(row[sizeKey], maxSizeValue, 12, 48),
-        label: { show: row.foals >= 15 || row.graded_winners > 0, position: "right", formatter: row.label, fontWeight: 850, color: "#4a4038" },
-      })),
-      itemStyle: { color: COLORS.duramente, opacity: 0.76, borderColor: "#fff", borderWidth: 1.4 },
-      markLine: ratioLine(avgRate, "整体胜马率", "yAxis"),
-    }],
-  });
-  chart?.off("click");
-  chart?.on("click", (params) => applyBreederFilter(params.data.raw.label));
-}
-
 function renderBreederCharts(breeders) {
-  renderBreederScatterChart(breeders);
   const topRows = [...(breeders.top_foals || [])].slice(0, 15);
   renderChart("breederMainChart", {
     color: [COLORS.duramente, COLORS.blue],
@@ -2771,9 +2876,10 @@ function renderDamAgeProductionCharts(damAge) {
 
 async function renderProductionAnalysis() {
   if (els.productionContent.dataset.loaded) return;
-  const [breeders, damAge] = await Promise.all([
+  const [breeders, damAge, broodmares] = await Promise.all([
     getAnalytics("breeders"),
     getAnalytics("dam_age"),
+    broodmareRowsFromLoadedHorses(),
   ]);
   const damAgeBucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
   els.productionContent.innerHTML = `
@@ -2782,50 +2888,14 @@ async function renderProductionAnalysis() {
       <h1>生産・繁殖｜牧场与繁殖母马</h1>
       <p>观察ドゥラメンテ产驹主要由哪些牧场生产，以及繁殖牝马年龄和胎次与产驹表现的关系。</p>
     </div>
-    <div class="segment-control" id="productionTab">
-      <button class="active" type="button" data-tab="breeder">牧場分析</button>
-      <button type="button" data-tab="dam">繁殖牝馬分析</button>
-    </div>
-    <div id="productionPanel"></div>
-  `;
-  const renderTab = (tab) => {
-    const panel = els.productionContent.querySelector("#productionPanel");
-    if (tab === "dam") {
-      panel.innerHTML = `
-        <div class="chart-grid">
-          ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
-          ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
-        </div>
-        <div class="chart-grid">
-          ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
-          ${chartBlock("胎次与表现", "比较不同胎次的规模与胜马表现。", "damFoalOrderChart")}
-        </div>
-        ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
-          analysisTable([
-            { label: "母龄组", value: (row) => row.label },
-            { label: "产驹数", value: (row) => formatNumber(row.foals) },
-            { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
-            { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
-            { label: "重赏马", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
-            { label: "平均奖金", value: (row) => money(row.avg_earnings_per_foal) },
-            { label: "中位奖金", value: (row) => money(row.median_earnings_per_runner) },
-            { label: "代表马", className: "name-column", value: representativeCell, html: true },
-          ], damAgeBucketRows)
-        )}
-      `;
-      wireExpandableTables(els.productionContent);
-      renderDamAgeProductionCharts(damAge);
-      return;
-    }
-    panel.innerHTML = `
-      <div class="chart-grid single-chart">
-        ${controlledChartBlock("牧场规模与表现", "比较主要牧场的产驹规模和胜马表现。", "breederScaleEfficiencyChart", `
-          <label><span>最少产驹</span><select id="breederScatterMinFoals">
-            <option value="5" selected>5匹以上</option>
-            <option value="10">10匹以上</option>
-            <option value="20">20匹以上</option>
-          </select></label>
-        `)}
+    <nav class="page-anchor-nav" aria-label="生産・繁殖页面导航">
+      <a href="#farm-analysis">牧场分析</a>
+      <a href="#broodmare-analysis">繁殖牝马分析</a>
+    </nav>
+    <section class="analysis-block production-section" id="farm-analysis">
+      <div class="section-heading">
+        <h2>牧場分析｜牧场分析</h2>
+        <p>比较主要牧场的产驹规模、重赏马来源和出生世代构成。</p>
       </div>
       <div class="chart-grid">
         ${chartBlock("主要生产牧场", "比较主要牧场的产驹规模和胜马表现。", "breederMainChart")}
@@ -2846,18 +2916,52 @@ async function renderProductionAnalysis() {
           { label: "代表马", className: "name-column", value: representativeCell, html: true },
         ], breeders.table, { initialLimit: 15 })
       )}
-    `;
-    wireExpandableTables(els.productionContent);
-    els.productionContent.querySelector("#breederScatterMinFoals")?.addEventListener("change", () => renderBreederScatterChart(breeders));
-    renderBreederCharts(breeders);
-  };
-  for (const button of els.productionContent.querySelectorAll("#productionTab button")) {
-    button.addEventListener("click", () => {
-      for (const peer of els.productionContent.querySelectorAll("#productionTab button")) peer.classList.toggle("active", peer === button);
-      renderTab(button.dataset.tab);
-    });
-  }
-  renderTab("breeder");
+      <p class="source-note">${escapeHtml(breeders.method || "牧场统计根据产驹资料汇总。")}</p>
+    </section>
+    <section class="analysis-block production-section" id="broodmare-analysis">
+      <div class="section-heading">
+        <h2>繁殖牝馬分析｜繁殖牝马分析</h2>
+        <p>从生产时母龄、胎次及繁殖牝马个体观察ドゥラメンテ产驹的生产结构与成绩表现。</p>
+      </div>
+      <div class="chart-grid">
+        ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
+        ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
+      </div>
+      <div class="chart-grid">
+        ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
+        ${chartBlock("胎次与表现", "比较不同胎次的规模与胜马表现。", "damFoalOrderChart")}
+      </div>
+      ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
+        analysisTable([
+          { label: "母龄组", value: (row) => row.label },
+          { label: "产驹数", value: (row) => formatNumber(row.foals) },
+          { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
+          { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+          { label: "重赏马", value: (row) => `${formatNumber(row.graded_winners)} (${formatRate(row.graded_foal_rate)})` },
+          { label: "平均奖金", value: (row) => money(row.avg_earnings_per_foal) },
+          { label: "中位奖金", value: (row) => money(row.median_earnings_per_runner) },
+          { label: "代表马", className: "name-column", value: representativeCell, html: true },
+        ], damAgeBucketRows)
+      )}
+      ${sectionBlock("繁殖牝马明细", "按母马汇总ドゥラメンテ产驹。",
+        analysisTable([
+          { label: "繁殖牝马", className: "name-column", value: (row) => row.label },
+          { label: "母父", className: "name-column", value: (row) => row.broodmare_sire },
+          { label: "产驹数", value: (row) => formatNumber(row.foals) },
+          { label: "出赛马", value: (row) => formatNumber(row.runners) },
+          { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
+          { label: "重赏马", value: (row) => formatNumber(row.graded_winners) },
+          { label: "G1马", value: (row) => formatNumber(row.g1_winners) },
+          { label: "总奖金", value: (row) => money(row.total_earnings) },
+          { label: "代表产驹", className: "name-column", value: representativeCell, html: true },
+        ], broodmares, { initialLimit: 15 })
+      )}
+      <p class="source-note">${escapeHtml(damAge.source || "母马年龄和胎次根据已整理产驹资料汇总。")}</p>
+    </section>
+  `;
+  wireExpandableTables(els.productionContent);
+  renderBreederCharts(breeders);
+  renderDamAgeProductionCharts(damAge);
   els.productionContent.dataset.loaded = "true";
 }
 
