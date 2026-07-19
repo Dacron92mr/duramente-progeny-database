@@ -2756,7 +2756,10 @@ function renderDamAgeCharts(damAge) {
     ],
   });
   const ageBuckets = ["3-6", "7-10", "11-14", "15-18", "19+"];
-  const orders = ["1", "2", "3", "4", "5", "6", "7+"];
+  const orders = [...new Set((damAge.foal_order_heatmap || [])
+    .map((row) => row.foal_order)
+    .filter((value) => value && value !== "unknown"))]
+    .sort((a, b) => Number(a) - Number(b));
   const heatData = [];
   for (const [y, age] of ageBuckets.entries()) {
     for (const [x, order] of orders.entries()) {
@@ -2992,7 +2995,8 @@ function renderBreederCharts(breeders) {
 
 function renderParityProductionChart(parity) {
   const basis = document.querySelector("#parityBasis")?.value || "biological";
-  const rows = basis === "registered" ? (parity.registered_foal_order || []) : (parity.biological_parity || []);
+  const sourceRows = basis === "registered" ? (parity.registered_foal_order || []) : (parity.biological_parity || []);
+  const rows = sourceRows.filter((row) => row.label !== "unknown");
   const summary = parity.summary || {};
   const known = basis === "registered" ? summary.registered_known : summary.biological_known;
   const unknown = basis === "registered" ? summary.registered_unknown : summary.biological_unknown;
@@ -3760,21 +3764,7 @@ function raceRows(races) {
 }
 
 function detailSources(sources) {
-  if (!sources || !sources.length) return "";
-  const items = sources.map((source) => {
-    const label = source.source === "jbis_dam"
-      ? `${source.name || "母"} JBIS`
-      : source.source === "breednet"
-        ? "Daiya Breednet"
-        : source.source;
-    return `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(label)}</a></li>`;
-  }).join("");
-  return `
-    <section class="detail-source-section">
-      <h2>资料来源</h2>
-      <ul>${items}</ul>
-    </section>
-  `;
+  return "";
 }
 
 function studTitle(studProfiles) {
