@@ -2990,7 +2990,72 @@ function renderBreederCharts(breeders) {
   });
 }
 
-function renderDamAgeProductionCharts(damAge) {
+function renderParityProductionChart(parity) {
+  const basis = document.querySelector("#parityBasis")?.value || "biological";
+  const rows = basis === "registered" ? (parity.registered_foal_order || []) : (parity.biological_parity || []);
+  const summary = parity.summary || {};
+  const known = basis === "registered" ? summary.registered_known : summary.biological_known;
+  const unknown = basis === "registered" ? summary.registered_unknown : summary.biological_unknown;
+  const total = summary.total_foals || 0;
+  const definition = basis === "registered"
+    ? parity.definitions?.registered_foal_order
+    : parity.definitions?.biological_parity;
+  const coverage = document.querySelector("#parityCoverage");
+  if (coverage) {
+    coverage.textContent = basis === "registered"
+      ? `登记产驹序次已确认 ${formatNumber(known)} / ${formatNumber(total)}，未知 ${formatNumber(unknown)}。`
+      : `真实生产胎次已确认 ${formatNumber(known)} / ${formatNumber(total)}，未知 ${formatNumber(unknown)}。`;
+  }
+  const note = document.querySelector("#parityDefinition");
+  if (note) note.textContent = definition || "";
+  const label = basis === "registered" ? "登记产驹序次" : "真实生产胎次";
+  renderChart("damParityChart", {
+    color: [COLORS.duramente, COLORS.coral],
+    tooltip: {
+      trigger: "axis",
+      formatter(items) {
+        const row = items[0]?.data?.raw;
+        if (!row) return "";
+        return [
+          `${label}：${escapeHtml(row.label)}`,
+          `产驹数：${formatNumber(row.foals)}`,
+          `出赛马：${formatNumber(row.runners)}`,
+          `胜马：${formatNumber(row.winners)}`,
+          `重赏马：${formatNumber(row.graded_winners)}`,
+          `胜马率：${formatRate(row.winner_foal_rate)}`,
+          `样本量：${formatNumber(row.foals)}`,
+        ].join("<br>");
+      },
+    },
+    legend: { top: 0, data: ["产驹数", "胜马率"] },
+    grid: { left: 48, right: 58, top: 52, bottom: 42 },
+    xAxis: { type: "category", name: label, data: rows.map((row) => row.label) },
+    yAxis: [
+      { type: "value", name: "产驹数" },
+      { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
+    ],
+    series: [
+      {
+        name: "产驹数",
+        type: "bar",
+        itemStyle: { color: COLORS.duramente },
+        data: rows.map((row) => ({ value: row.foals, raw: row })),
+        label: { show: true, position: "top" },
+      },
+      {
+        name: "胜马率",
+        type: "line",
+        yAxisIndex: 1,
+        itemStyle: { color: COLORS.coral },
+        lineStyle: { color: COLORS.coral },
+        data: rows.map((row) => ({ value: row.winner_foal_rate == null ? null : Number((row.winner_foal_rate * 100).toFixed(1)), raw: row })),
+        label: { show: true, formatter: (params) => params.value == null ? "" : `${params.value}%` },
+      },
+    ],
+  });
+}
+
+function renderDamAgeProductionCharts(damAge, parity) {
   const bucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
   const totalFoals = bucketRows.reduce((sum, row) => sum + Number(row.foals || 0), 0);
   const totalWinners = bucketRows.reduce((sum, row) => sum + Number(row.winners || 0), 0);
@@ -3036,36 +3101,15 @@ function renderDamAgeProductionCharts(damAge) {
       return `${params.value}% (${row.graded_winners}/${row.foals})`;
     } } }],
   });
-  const orders = ["1", "2", "3", "4", "5", "6", "7+"];
-  const orderRows = orders.map((order) => {
-    const items = damAge.foal_order_heatmap.filter((row) => row.foal_order === order);
-    const foals = items.reduce((sum, row) => sum + row.foals, 0);
-    const winners = items.reduce((sum, row) => sum + row.winners, 0);
-    const graded = items.reduce((sum, row) => sum + row.graded_winners, 0);
-    return { label: order, foals, winners, graded, winner_rate: foals ? winners / foals : null, graded_rate: foals ? graded / foals : null };
-  }).filter((row) => row.foals > 0);
-  renderChart("damFoalOrderChart", {
-    color: [COLORS.teal, COLORS.coral],
-    tooltip: { trigger: "axis" },
-    legend: { top: 0, data: ["产驹数", "胜马率"] },
-    grid: { left: 48, right: 58, top: 52, bottom: 36 },
-    xAxis: { type: "category", name: "胎次", data: orderRows.map((row) => row.label) },
-    yAxis: [
-      { type: "value", name: "产驹数" },
-      { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
-    ],
-    series: [
-      { name: "产驹数", type: "bar", itemStyle: { color: COLORS.teal }, data: orderRows.map((row) => row.foals), label: { show: true, position: "top" } },
-      { name: "胜马率", type: "line", yAxisIndex: 1, itemStyle: { color: COLORS.coral }, lineStyle: { color: COLORS.coral }, data: orderRows.map((row) => row.winner_rate == null ? null : Number((row.winner_rate * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
-    ],
-  });
+  renderParityProductionChart(parity);
 }
 
 async function renderProductionAnalysis() {
   if (els.productionContent.dataset.loaded) return;
-  const [breeders, damAge, broodmares] = await Promise.all([
+  const [breeders, damAge, parity, broodmares] = await Promise.all([
     getAnalytics("breeders"),
     getAnalytics("dam_age"),
+    getAnalytics("parity"),
     broodmareRowsFromLoadedHorses(),
   ]);
   const damAgeBucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
@@ -3116,7 +3160,23 @@ async function renderProductionAnalysis() {
       </div>
       <div class="chart-grid">
         ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
-        ${chartBlock("胎次与表现", "比较不同胎次的规模与胜马表现。", "damFoalOrderChart")}
+        <article class="chart-card">
+          <div class="chart-card-head with-controls">
+            <div>
+              <h3>胎次与表现</h3>
+              <p>区分真实生产胎次与登记产驹序次。</p>
+            </div>
+            <div class="analysis-controls inline-controls">
+              <label><span>口径</span><select id="parityBasis">
+                <option value="biological" selected>真实生产胎次</option>
+                <option value="registered">登记产驹序次</option>
+              </select></label>
+            </div>
+          </div>
+          <p class="source-note" id="parityCoverage"></p>
+          ${chartShell("damParityChart")}
+          <p class="source-note" id="parityDefinition"></p>
+        </article>
       </div>
       ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
         analysisTable([
@@ -3147,8 +3207,9 @@ async function renderProductionAnalysis() {
     </section>
   `;
   wireExpandableTables(els.productionContent);
+  els.productionContent.querySelector("#parityBasis")?.addEventListener("change", () => renderParityProductionChart(parity));
   renderBreederCharts(breeders);
-  renderDamAgeProductionCharts(damAge);
+  renderDamAgeProductionCharts(damAge, parity);
   els.productionContent.dataset.loaded = "true";
 }
 
@@ -3473,6 +3534,26 @@ function crossItems(value) {
 function damAgeText(horse) {
   if (horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined) return "未知";
   return `${horse.dam_age_at_foaling}岁`;
+}
+
+function parityFactBlocks(horse) {
+  const rows = [];
+  if (horse.dam_biological_parity !== null && horse.dam_biological_parity !== undefined && horse.dam_biological_parity !== "") {
+    rows.push(`<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>`);
+  }
+  if (horse.dam_registered_foal_order !== null && horse.dam_registered_foal_order !== undefined && horse.dam_registered_foal_order !== "") {
+    rows.push(`<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>`);
+  }
+  if (horse.parity_source_url) {
+    rows.push(`
+      <div class="fact">
+        <span>胎次来源</span>
+        <strong><a href="${escapeHtml(horse.parity_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(horse.parity_source_name || "来源")}</a></strong>
+      </div>
+    `);
+  }
+  if (!rows.length) rows.push(`<div class="fact"><span>真实生产胎次</span><strong>未知</strong></div>`);
+  return rows.join("");
 }
 
 function isLocalHorse(horse) {
@@ -3873,7 +3954,7 @@ async function openHorse(id) {
       <div class="fact"><span>母</span><strong>${horseDamCell(horse)}</strong></div>
       <div class="fact"><span>母出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
       <div class="fact"><span>产本胎年龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
-      <div class="fact"><span>胎次</span><strong>${escapeHtml(horse.foal_order || "未知")}</strong></div>
+      ${parityFactBlocks(horse)}
       <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分類")}</strong></div>
