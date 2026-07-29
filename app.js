@@ -251,20 +251,109 @@ function cropColor(crop) {
   return CROP_COLORS[String(crop)] || COLORS.gray;
 }
 
+function chartViewportWidth() {
+  return Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0);
+}
+
+function getResponsiveGrid(options = {}) {
+  const width = chartViewportWidth();
+  const horizontal = Boolean(options.horizontal);
+  const top = options.top ?? (horizontal ? 24 : 36);
+  const bottom = options.bottom ?? (horizontal ? 34 : 42);
+  const minRight = horizontal ? (width < 520 ? 28 : 92) : (width < 520 ? 22 : 40);
+  const right = Math.max(options.right ?? 40, minRight);
+  return {
+    left: options.left ?? 12,
+    right,
+    top,
+    bottom,
+    containLabel: true,
+  };
+}
+
 function horizontalGrid(top = 20, bottom = 34, right = 40) {
-  return { left: 12, right, top, bottom, containLabel: true };
+  return getResponsiveGrid({ horizontal: true, top, bottom, right });
 }
 
 function longCategoryAxis(labels, options = {}) {
+  const width = chartViewportWidth();
   return {
     type: "category",
     inverse: options.inverse !== false,
     data: labels,
     axisLabel: {
-      width: options.width || 190,
+      width: options.width || (width < 520 ? 118 : 190),
       overflow: "break",
       lineHeight: 16,
     },
+  };
+}
+
+function safeHorizontalBarLabel(formatter, options = {}) {
+  return {
+    show: true,
+    position: "right",
+    distance: 8,
+    color: options.color || "#3b3530",
+    fontSize: chartViewportWidth() < 520 ? 10 : 11,
+    fontWeight: options.fontWeight || 650,
+    formatter,
+  };
+}
+
+function safeTopBarLabel(formatter = (params) => formatNumber(params.value), options = {}) {
+  return {
+    show: true,
+    position: "top",
+    distance: 6,
+    color: options.color || "#3b3530",
+    fontSize: chartViewportWidth() < 520 ? 10 : 11,
+    fontWeight: options.fontWeight || 650,
+    formatter,
+  };
+}
+
+function safeAverageMarkLine(value, label = "全体", axis = "xAxis", options = {}) {
+  const numeric = Number(value);
+  if (!Number.isFinite(numeric)) return undefined;
+  const display = options.isPercent === false ? numeric : Number(numeric.toFixed(1));
+  const color = options.color || COLORS.plum;
+  return {
+    silent: true,
+    symbol: ["none", "none"],
+    lineStyle: {
+      type: "dashed",
+      width: 1.5,
+      color,
+    },
+    label: {
+      show: options.showLabel !== false,
+      formatter: options.formatter || `${label} ${display}${options.unit ?? "%"}`,
+      position: axis === "xAxis" ? "insideEndTop" : "end",
+      distance: 8,
+      padding: [4, 7],
+      borderRadius: 4,
+      backgroundColor: "rgba(255,255,255,0.92)",
+      color,
+      fontSize: 12,
+      fontWeight: 700,
+    },
+    data: [{ [axis]: display }],
+  };
+}
+
+function lineEndpointLabel(count, formatter) {
+  return {
+    show: true,
+    formatter(params) {
+      if (params.dataIndex === 0 || params.dataIndex === count - 1) {
+        return formatter(params);
+      }
+      return "";
+    },
+    color: "#3b3530",
+    fontSize: chartViewportWidth() < 520 ? 10 : 11,
+    fontWeight: 650,
   };
 }
 
@@ -634,11 +723,21 @@ function renderChart(id, option) {
     el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
     return null;
   }
-  if (chartRegistry.has(id)) chartRegistry.get(id).dispose();
+  if (chartRegistry.has(id)) {
+    const oldChart = chartRegistry.get(id);
+    oldChart.__resizeObserver?.disconnect?.();
+    oldChart.dispose();
+  }
   const chart = window.echarts.init(el);
-  chart.setOption({ animationDuration: 450, ...option });
+  chart.setOption({ animationDuration: 450, labelLayout: { hideOverlap: true }, ...option });
   el.classList.add("is-rendered");
   chartRegistry.set(id, chart);
+  if (!el.dataset.resizeObserved && window.ResizeObserver) {
+    const observer = new ResizeObserver(() => chart.resize());
+    observer.observe(el);
+    el.dataset.resizeObserved = "true";
+    chart.__resizeObserver = observer;
+  }
   if (!chartResizeBound) {
     window.addEventListener("resize", () => {
       for (const item of chartRegistry.values()) item.resize();
@@ -1027,13 +1126,7 @@ function sqrtSymbolSize(value, maxValue, minSize = 10, maxSize = 44) {
 }
 
 function ratioLine(value, label, axis = "xAxis") {
-  return {
-    silent: true,
-    symbol: "none",
-    lineStyle: { color: COLORS.muted, type: "dashed", width: 1.2 },
-    label: { formatter: label, color: "#6b625b", fontSize: 11, fontWeight: 800 },
-    data: [{ [axis]: Number((value * 100).toFixed(1)) }],
-  };
+  return safeAverageMarkLine(Number(value || 0) * 100, label, axis, { color: COLORS.muted });
 }
 
 function rateTooltip(label, value, numerator, denominator) {
@@ -1360,7 +1453,7 @@ function renderCropComboChart(id, crops, config) {
       },
     },
     legend: { top: 0, data: [config.barName, config.lineName] },
-    grid: { left: 46, right: 58, top: 54, bottom: 38, containLabel: true },
+    grid: getResponsiveGrid({ left: 46, right: 70, top: 58, bottom: 38 }),
     xAxis: { type: "category", data: labels },
     yAxis: [
       { type: "value", name: config.barUnit, minInterval: config.barInteger ? 1 : undefined },
@@ -1372,7 +1465,7 @@ function renderCropComboChart(id, crops, config) {
         type: "bar",
         barMaxWidth: 24,
         data: crops.map((row, index) => ({ value: barValues[index], raw: row })),
-        label: { show: true, position: "top", formatter: (params) => config.barLabel(params.data.raw) },
+        label: safeTopBarLabel((params) => config.barLabel(params.data.raw)),
       },
       {
         name: config.lineName,
@@ -1381,7 +1474,7 @@ function renderCropComboChart(id, crops, config) {
         symbolSize: 8,
         lineStyle: { width: 3 },
         data: crops.map((row, index) => ({ value: lineValues[index], raw: row })),
-        label: { show: true, formatter: (params) => config.lineLabel(params.data.raw), color: "#1f1e18" },
+        label: lineEndpointLabel(crops.length, (params) => config.lineLabel(params.data.raw)),
       },
     ],
   });
@@ -2070,7 +2163,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
           ? { color: Number(row.rank) === 1 ? COLORS.gold : COLORS.rose }
           : { color: COLORS.muted },
       })),
-      label: { show: true, position: "right", formatter: (params) => formatNumber(params.value, 1) },
+      label: safeHorizontalBarLabel((params) => formatNumber(params.value, 1)),
     }],
   });
 }
@@ -2306,7 +2399,7 @@ function renderBmsOverviewCharts(bmsLines, broodmareSires, totalFoals, overallWi
       type: "bar",
       barMaxWidth: 16,
       data: lineRows.map((row) => ({ value: row.foals, raw: row })),
-      label: { show: true, position: "right", formatter: (params) => `${formatNumber(params.value)}匹` },
+      label: safeHorizontalBarLabel((params) => `${formatNumber(params.value)}匹`),
     }],
   })?.on("click", (params) => applyBmsFilter(params.data.raw.label));
 
@@ -2332,8 +2425,8 @@ function renderBmsOverviewCharts(bmsLines, broodmareSires, totalFoals, overallWi
       type: "bar",
       barMaxWidth: 16,
       data: relativeRows.map((row) => ({ value: row.diff, raw: row, itemStyle: { color: row.diff >= 0 ? COLORS.coral : COLORS.muted } })),
-      markLine: { silent: true, symbol: "none", lineStyle: { color: COLORS.negative, width: 1 }, data: [{ xAxis: 0 }] },
-      label: { show: true, position: "right", formatter: (params) => `${params.value > 0 ? "+" : ""}${params.value}%` },
+      markLine: safeAverageMarkLine(0, "", "xAxis", { isPercent: false, unit: "", showLabel: false, color: COLORS.negative }),
+      label: safeHorizontalBarLabel((params) => `${params.value > 0 ? "+" : ""}${params.value}%`),
     }],
   })?.on("click", (params) => applyBmsFilter(params.data.raw.label));
 
@@ -2352,7 +2445,7 @@ function renderBmsOverviewCharts(bmsLines, broodmareSires, totalFoals, overallWi
       type: "bar",
       barMaxWidth: 16,
       data: contributionRows.map((row) => ({ value: row.total_earnings || 0, raw: row })),
-      label: { show: true, position: "right", formatter: (params) => formatNumber(params.value, 0) },
+      label: safeHorizontalBarLabel((params) => formatNumber(params.value, 0)),
     }],
   })?.on("click", (params) => applyBroodmareSireFilter(params.data.raw.label));
 
@@ -2373,7 +2466,7 @@ function renderBmsOverviewCharts(bmsLines, broodmareSires, totalFoals, overallWi
       type: "bar",
       barMaxWidth: 16,
       data: efficiencyRows.map((row) => ({ value: Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), raw: row })),
-      label: { show: true, position: "right", formatter: (params) => `${params.value}%` },
+      label: safeHorizontalBarLabel((params) => `${params.value}%`),
     }],
   })?.on("click", (params) => applyBroodmareSireFilter(params.data.raw.label));
 }
@@ -2412,7 +2505,7 @@ function renderPedigreeCharts(pedigree, bmsLines) {
       type: "bar",
       barMaxWidth: 18,
       data: countRows.map((row) => ({ value: row.foals, raw: row })),
-      label: { show: true, position: "right", formatter: (params) => `${formatNumber(params.value)}匹` },
+      label: safeHorizontalBarLabel((params) => `${formatNumber(params.value)}匹`),
     }],
   });
   countChart?.on("click", (params) => params.data.raw.label !== "其他" && applySearchFilter(params.data.raw.label));
@@ -2440,14 +2533,14 @@ function renderPedigreeCharts(pedigree, bmsLines) {
       type: "bar",
       barMaxWidth: 18,
       data: performanceRows.map((row) => ({ value: chartMetricDisplay(row, crossMetric), raw: row })),
-      label: { show: true, position: "right", formatter: (params) => {
+      label: safeHorizontalBarLabel((params) => {
         const row = params.data.raw;
         if (crossMetric.includes("rate")) {
           const numerator = crossMetric === "graded_foal_rate" ? row.graded_winners : row.winners;
           return `${params.value}% (${numerator}/${row.foals})`;
         }
         return `${formatNumber(params.value, 1)}（${row.foals}匹）`;
-      } },
+      }),
     }],
   });
   performanceChart?.on("click", (params) => applySearchFilter(params.data.raw.label));
@@ -2660,14 +2753,14 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
         type: "bar",
         barMaxWidth: 18,
         data: rows.map((row) => ({ value: metric.includes("rate") ? Number(((row[metric] || 0) * 100).toFixed(1)) : row[metric], raw: row })),
-        label: { show: true, position: "right", formatter: (params) => {
+        label: safeHorizontalBarLabel((params) => {
           const row = params.data.raw;
           if (metric.includes("rate")) {
             const numerator = metric === "graded_foal_rate" ? row.graded_winners : row.winners;
             return `${params.value}% (${numerator}/${row.foals})`;
           }
           return metric === "total_earnings" ? `${formatNumber(params.value, 1)}万円` : `${formatNumber(params.value, 1)}匹`;
-        } },
+        }),
       }],
     });
     chart?.on("click", (params) => applyBmsFilter(params.data.raw.label));
@@ -2717,7 +2810,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
       data: rows.map((row) => ({ value: isPoint ? [meta.value(row), row.label] : meta.value(row), raw: row })),
       itemStyle: isPoint ? { color: COLORS.gold, borderColor: "#fff", borderWidth: 1.5 } : undefined,
       markLine: rateAverage == null ? undefined : ratioLine(rateAverage, "整体平均", "xAxis"),
-      label: { show: true, position: "right", formatter: (params) => {
+      label: safeHorizontalBarLabel((params) => {
         const row = params.data.raw;
         const value = Array.isArray(params.value) ? params.value[0] : params.value;
         if (metric === "foals") return `${formatNumber(value)}匹`;
@@ -2727,7 +2820,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
         if (metric === "winner_foal_rate") return `${value}% (${row.winners}/${row.foals})`;
         if (metric === "graded_foal_rate") return `${value}% (${row.graded_winners}/${row.foals})`;
         return formatNumber(value, 1);
-      } },
+      }),
     }],
   });
   chart?.on("click", (params) => applyFemaleFamilyFilter(params.data.raw.label));
@@ -2737,7 +2830,7 @@ function renderDamAgeCharts(damAge) {
   renderChart("damAgeHistogramChart", {
     color: [COLORS.duramente],
     tooltip: { trigger: "axis" },
-    grid: { left: 48, right: 22, top: 24, bottom: 36 },
+    grid: getResponsiveGrid({ left: 48, right: 24, top: 38, bottom: 36 }),
     xAxis: { type: "category", name: "母龄", data: damAge.histogram.map((row) => row.age) },
     yAxis: { type: "value", name: "产驹数" },
     series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals) }],
@@ -2757,7 +2850,7 @@ function renderDamAgeCharts(damAge) {
   });
   const ageBuckets = ["3-6", "7-10", "11-14", "15-18", "19+"];
   const orders = [...new Set((damAge.foal_order_heatmap || [])
-    .map((row) => row.foal_order)
+    .map((row) => String(row.foal_order || "unknown"))
     .filter((value) => value && value !== "unknown"))]
     .sort((a, b) => Number(a) - Number(b));
   const heatData = [];
@@ -2950,15 +3043,15 @@ function renderBreederCharts(breeders) {
     color: [COLORS.duramente, COLORS.blue],
     tooltip: { trigger: "axis" },
     legend: { top: 0, data: ["产驹数", "胜马率"] },
-    grid: { left: 56, right: 58, top: 54, bottom: 86 },
+    grid: getResponsiveGrid({ left: 56, right: 64, top: 58, bottom: 86 }),
     xAxis: { type: "category", data: topRows.map((row) => row.label), axisLabel: { rotate: 35 } },
     yAxis: [
       { type: "value", name: "产驹数" },
       { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
     ],
     series: [
-      { name: "产驹数", type: "bar", data: topRows.map((row) => row.foals), label: { show: true, position: "top" } },
-      { name: "胜马率", type: "line", yAxisIndex: 1, smooth: true, data: topRows.map((row) => Number(((row.winner_foal_rate || 0) * 100).toFixed(1))), label: { show: true, formatter: "{c}%" } },
+      { name: "产驹数", type: "bar", data: topRows.map((row) => row.foals), label: safeTopBarLabel((params) => formatNumber(params.value)) },
+      { name: "胜马率", type: "line", yAxisIndex: 1, smooth: true, data: topRows.map((row) => Number(((row.winner_foal_rate || 0) * 100).toFixed(1))), label: lineEndpointLabel(topRows.length, (params) => `${params.value}%`) },
     ],
   });
   const gradedRows = [...(breeders.graded_sources || [])].slice(0, 12);
@@ -2970,8 +3063,8 @@ function renderBreederCharts(breeders) {
     xAxis: { type: "value", name: "匹" },
     yAxis: longCategoryAxis(gradedRows.map((row) => row.label)),
     series: [
-      { name: "重赏马", type: "bar", data: gradedRows.map((row) => row.graded_winners), label: { show: true, position: "right" } },
-      { name: "G1马", type: "bar", data: gradedRows.map((row) => row.g1_winners), label: { show: true, position: "right" } },
+      { name: "重赏马", type: "bar", data: gradedRows.map((row) => row.graded_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value)) },
+      { name: "G1马", type: "bar", data: gradedRows.map((row) => row.g1_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value)) },
     ],
   });
   const cropRows = [...(breeders.crop_composition || [])].slice(0, 10);
@@ -2993,73 +3086,11 @@ function renderBreederCharts(breeders) {
   });
 }
 
-function renderParityProductionChart(parity) {
-  const basis = document.querySelector("#parityBasis")?.value || "biological";
-  const sourceRows = basis === "registered" ? (parity.registered_foal_order || []) : (parity.biological_parity || []);
-  const rows = sourceRows.filter((row) => row.label !== "unknown");
-  const summary = parity.summary || {};
-  const known = basis === "registered" ? summary.registered_known : summary.biological_known;
-  const unknown = basis === "registered" ? summary.registered_unknown : summary.biological_unknown;
-  const total = summary.total_foals || 0;
-  const definition = basis === "registered"
-    ? parity.definitions?.registered_foal_order
-    : parity.definitions?.biological_parity;
-  const coverage = document.querySelector("#parityCoverage");
-  if (coverage) {
-    coverage.textContent = basis === "registered"
-      ? `登记产驹序次已确认 ${formatNumber(known)} / ${formatNumber(total)}，未知 ${formatNumber(unknown)}。`
-      : `真实生产胎次已确认 ${formatNumber(known)} / ${formatNumber(total)}，未知 ${formatNumber(unknown)}。`;
-  }
-  const note = document.querySelector("#parityDefinition");
-  if (note) note.textContent = definition || "";
-  const label = basis === "registered" ? "登记产驹序次" : "真实生产胎次";
-  renderChart("damParityChart", {
-    color: [COLORS.duramente, COLORS.coral],
-    tooltip: {
-      trigger: "axis",
-      formatter(items) {
-        const row = items[0]?.data?.raw;
-        if (!row) return "";
-        return [
-          `${label}：${escapeHtml(row.label)}`,
-          `产驹数：${formatNumber(row.foals)}`,
-          `出赛马：${formatNumber(row.runners)}`,
-          `胜马：${formatNumber(row.winners)}`,
-          `重赏马：${formatNumber(row.graded_winners)}`,
-          `胜马率：${formatRate(row.winner_foal_rate)}`,
-          `样本量：${formatNumber(row.foals)}`,
-        ].join("<br>");
-      },
-    },
-    legend: { top: 0, data: ["产驹数", "胜马率"] },
-    grid: { left: 48, right: 58, top: 52, bottom: 42 },
-    xAxis: { type: "category", name: label, data: rows.map((row) => row.label) },
-    yAxis: [
-      { type: "value", name: "产驹数" },
-      { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
-    ],
-    series: [
-      {
-        name: "产驹数",
-        type: "bar",
-        itemStyle: { color: COLORS.duramente },
-        data: rows.map((row) => ({ value: row.foals, raw: row })),
-        label: { show: true, position: "top" },
-      },
-      {
-        name: "胜马率",
-        type: "line",
-        yAxisIndex: 1,
-        itemStyle: { color: COLORS.coral },
-        lineStyle: { color: COLORS.coral },
-        data: rows.map((row) => ({ value: row.winner_foal_rate == null ? null : Number((row.winner_foal_rate * 100).toFixed(1)), raw: row })),
-        label: { show: true, formatter: (params) => params.value == null ? "" : `${params.value}%` },
-      },
-    ],
-  });
-}
-
-function renderDamAgeProductionCharts(damAge, parity) {
+function renderDamAgeProductionCharts(damAge) {
+  const parityModes = damAge.parity_modes || {};
+  const parityButtons = document.querySelectorAll("[data-parity-mode]");
+  let currentParityMode = [...parityButtons].find((button) => button.classList.contains("active"))?.dataset.parityMode || "biological";
+  if (!parityModes[currentParityMode]) currentParityMode = "biological";
   const bucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
   const totalFoals = bucketRows.reduce((sum, row) => sum + Number(row.foals || 0), 0);
   const totalWinners = bucketRows.reduce((sum, row) => sum + Number(row.winners || 0), 0);
@@ -3070,50 +3101,130 @@ function renderDamAgeProductionCharts(damAge, parity) {
     grid: { left: 48, right: 22, top: 24, bottom: 36 },
     xAxis: { type: "category", name: "母龄", data: damAge.histogram.map((row) => row.age) },
     yAxis: { type: "value", name: "产驹数" },
-    series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals), label: { show: true, position: "top" } }],
+    series: [{ type: "bar", data: damAge.histogram.map((row) => row.foals), label: safeTopBarLabel((params) => formatNumber(params.value)) }],
   });
   renderChart("damAgeWinRateChart", {
     color: [COLORS.coral],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(24, 36, 40),
+    grid: horizontalGrid(36, 36, 118),
     xAxis: { type: "value", name: "%" },
     yAxis: longCategoryAxis(bucketRows.map((row) => row.label), { width: 90 }),
     series: [{
       type: "bar",
       data: bucketRows.map((row) => ({ value: Number(((row.winner_foal_rate || 0) * 100).toFixed(1)), raw: row })),
       itemStyle: { color: COLORS.coral },
-      label: { show: true, position: "right", formatter: (params) => {
+      label: safeHorizontalBarLabel((params) => {
         const row = params.data.raw;
         return `${params.value}% (${row.winners}/${row.foals})`;
-      } },
-      markLine: overallWinnerRate == null ? undefined : {
-        symbol: "none",
-        lineStyle: { color: COLORS.plum, type: "dashed", width: 1.5 },
-        label: { formatter: `全体 ${overallWinnerRate}%`, color: COLORS.plum },
-        data: [{ xAxis: overallWinnerRate }],
-      },
+      }),
+      markLine: safeAverageMarkLine(overallWinnerRate, "全体", "xAxis", { color: COLORS.plum }),
     }],
   });
   renderChart("damAgeGradedRateChart", {
     color: [COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(24, 36, 40),
+    grid: horizontalGrid(36, 36, 118),
     xAxis: { type: "value", name: "%" },
     yAxis: longCategoryAxis(bucketRows.map((row) => row.label), { width: 90 }),
-    series: [{ type: "bar", data: bucketRows.map((row) => ({ value: Number(((row.graded_foal_rate || 0) * 100).toFixed(1)), raw: row })), label: { show: true, position: "right", formatter: (params) => {
+    series: [{ type: "bar", data: bucketRows.map((row) => ({ value: Number(((row.graded_foal_rate || 0) * 100).toFixed(1)), raw: row })), label: safeHorizontalBarLabel((params) => {
       const row = params.data.raw;
       return `${params.value}% (${row.graded_winners}/${row.foals})`;
-    } } }],
+    }) }],
   });
-  renderParityProductionChart(parity);
+  const orderSort = (label) => label === "unknown" ? 99 : Number(label || 0);
+  const selectedParity = parityModes[currentParityMode] || { heatmap: damAge.foal_order_heatmap || [], label: "真实生产胎次", confirmed: 0, total: damAge.summary?.total || 0 };
+  const heatmap = selectedParity.heatmap || damAge.foal_order_heatmap || [];
+  const orders = [...new Set(heatmap.map((row) => row.foal_order))]
+    .filter((label) => label !== undefined && label !== null)
+    .sort((a, b) => orderSort(a) - orderSort(b));
+  const orderRows = orders.map((order) => {
+    const items = heatmap.filter((row) => row.foal_order === order);
+    const foals = items.reduce((sum, row) => sum + row.foals, 0);
+    const winners = items.reduce((sum, row) => sum + row.winners, 0);
+    const graded = items.reduce((sum, row) => sum + row.graded_winners, 0);
+    const horses = items.flatMap((row) => row.horses || []);
+    return { label: order, foals, winners, graded, winner_rate: foals ? winners / foals : null, graded_rate: foals ? graded / foals : null, horses };
+  }).filter((row) => row.foals > 0);
+  const chartNode = document.querySelector("#damFoalOrderChart");
+  if (chartNode && !document.querySelector("#damParityCoverage")) {
+    chartNode.insertAdjacentHTML("afterend", `
+      <p class="source-note" id="damParityCoverage"></p>
+      <div class="parity-detail-panel" id="damParityDetailPanel"></div>
+    `);
+  }
+  const coverageNode = document.querySelector("#damParityCoverage");
+  if (coverageNode) {
+    const confirmed = Number(selectedParity.confirmed || 0);
+    const total = Number(selectedParity.total || damAge.summary?.total || 0);
+    const label = selectedParity.label || "胎次";
+    coverageNode.textContent = `数据覆盖率：已确认 ${formatNumber(confirmed)} / 总计 ${formatNumber(total)}。${label === "登记产驹序次" ? "该口径不等同于真实生产胎次。" : "空胎、流产和未配种不计入生产胎次。"}`;
+  }
+  const detailNode = document.querySelector("#damParityDetailPanel");
+  const renderParityDetail = (row) => {
+    if (!detailNode || !row) return;
+    const horses = (row.horses || []).slice(0, 18);
+    detailNode.innerHTML = `
+      <h4>${escapeHtml(selectedParity.label || "胎次")} ${escapeHtml(row.label === "unknown" ? "未知" : row.label)}</h4>
+      <p>${formatNumber(row.foals)}匹产驹，胜马 ${formatNumber(row.winners)}，重赏马 ${formatNumber(row.graded)}。</p>
+      <div class="parity-horse-list">
+        ${horses.map((horse) => `
+          <button type="button" class="link-button" data-horse-name="${escapeHtml(horse.name)}">
+            ${escapeHtml(horse.name)}${horse.hkjc_name_zh ? `（${escapeHtml(horse.hkjc_name_zh)}）` : ""}
+            <span>${escapeHtml(horse.birth_year || "")}${horse.achievement_class ? ` · ${escapeHtml(horse.achievement_class)}` : ""}</span>
+          </button>
+        `).join("")}
+      </div>
+    `;
+    wireAnalysisFilters(detailNode);
+  };
+  for (const button of parityButtons) {
+    if (button.dataset.parityWired === "true") continue;
+    button.dataset.parityWired = "true";
+    button.addEventListener("click", () => {
+      for (const item of parityButtons) item.classList.toggle("active", item === button);
+      renderDamAgeProductionCharts(damAge);
+    });
+  }
+  renderChart("damFoalOrderChart", {
+    color: [COLORS.teal, COLORS.coral],
+    tooltip: { trigger: "axis", formatter: (items) => {
+      const row = items[0]?.data?.raw;
+      if (!row) return "";
+      return [
+        `${escapeHtml(selectedParity.label || "胎次")}：${escapeHtml(row.label === "unknown" ? "未知" : row.label)}`,
+        `产驹数：${formatNumber(row.foals)}`,
+        `胜马：${formatNumber(row.winners)}`,
+        `重赏马：${formatNumber(row.graded)}`,
+        `胜马率：${formatRate(row.winner_rate)}`,
+        `重赏率：${formatRate(row.graded_rate)}`,
+      ].join("<br>");
+    } },
+    legend: { top: 0, data: ["产驹数", "胜马率"] },
+    grid: getResponsiveGrid({ left: 48, right: 70, top: 58, bottom: 36 }),
+    xAxis: { type: "category", name: selectedParity.label || "胎次", data: orderRows.map((row) => row.label === "unknown" ? "未知" : row.label) },
+    yAxis: [
+      { type: "value", name: "产驹数" },
+      { type: "value", name: "胜马率", axisLabel: { formatter: (value) => `${value}%` } },
+    ],
+    series: [
+      { name: "产驹数", type: "bar", itemStyle: { color: COLORS.teal }, data: orderRows.map((row) => ({ value: row.foals, raw: row })), label: safeTopBarLabel((params) => formatNumber(params.value)) },
+      { name: "胜马率", type: "line", yAxisIndex: 1, itemStyle: { color: COLORS.coral }, lineStyle: { color: COLORS.coral }, data: orderRows.map((row) => ({ value: row.winner_rate == null ? null : Number((row.winner_rate * 100).toFixed(1)), raw: row })), label: lineEndpointLabel(orderRows.length, (params) => `${params.value}%`) },
+    ],
+  });
+  const chart = chartRegistry.get("damFoalOrderChart");
+  chart?.off("click");
+  chart?.on("click", (params) => {
+    const row = params?.data?.raw;
+    renderParityDetail(row);
+  });
+  renderParityDetail(orderRows[0]);
 }
 
 async function renderProductionAnalysis() {
   if (els.productionContent.dataset.loaded) return;
-  const [breeders, damAge, parity, broodmares] = await Promise.all([
+  const [breeders, damAge, broodmares] = await Promise.all([
     getAnalytics("breeders"),
     getAnalytics("dam_age"),
-    getAnalytics("parity"),
     broodmareRowsFromLoadedHorses(),
   ]);
   const damAgeBucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
@@ -3164,23 +3275,12 @@ async function renderProductionAnalysis() {
       </div>
       <div class="chart-grid">
         ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
-        <article class="chart-card">
-          <div class="chart-card-head with-controls">
-            <div>
-              <h3>胎次与表现</h3>
-              <p>区分真实生产胎次与登记产驹序次。</p>
-            </div>
-            <div class="analysis-controls inline-controls">
-              <label><span>口径</span><select id="parityBasis">
-                <option value="biological" selected>真实生产胎次</option>
-                <option value="registered">登记产驹序次</option>
-              </select></label>
-            </div>
+        ${controlledChartBlock("胎次与表现", "比较母马生产履历与产驹表现。", "damFoalOrderChart", `
+          <div class="segmented-sort" aria-label="胎次口径">
+            <button type="button" class="active" data-parity-mode="biological">真实生产胎次</button>
+            <button type="button" data-parity-mode="registered">登记产驹序次</button>
           </div>
-          <p class="source-note" id="parityCoverage"></p>
-          ${chartShell("damParityChart")}
-          <p class="source-note" id="parityDefinition"></p>
-        </article>
+        `)}
       </div>
       ${sectionBlock("母龄分组明细", "按生产本胎时母马年龄分组。",
         analysisTable([
@@ -3211,9 +3311,8 @@ async function renderProductionAnalysis() {
     </section>
   `;
   wireExpandableTables(els.productionContent);
-  els.productionContent.querySelector("#parityBasis")?.addEventListener("change", () => renderParityProductionChart(parity));
   renderBreederCharts(breeders);
-  renderDamAgeProductionCharts(damAge, parity);
+  renderDamAgeProductionCharts(damAge);
   els.productionContent.dataset.loaded = "true";
 }
 
@@ -3335,14 +3434,14 @@ async function renderRacecourseAnalysis() {
       color: [COLORS.coral, COLORS.raceLine],
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["胜场数", "胜率"] },
-      grid: { left: 48, right: 58, top: 54, bottom: 54 },
+      grid: getResponsiveGrid({ left: 48, right: 64, top: 58, bottom: 54 }),
       xAxis: { type: "category", data: winRows.map((row) => row.label), axisLabel: { rotate: 25 } },
       yAxis: [
         { type: "value", name: "胜场数" },
         { type: "value", name: "胜率", axisLabel: { formatter: (value) => `${value}%` } },
       ],
       series: [
-        { name: "胜场数", type: "bar", barMaxWidth: 34, data: winRows.map((row) => row.wins_starts), label: { show: true, position: "top" } },
+        { name: "胜场数", type: "bar", barMaxWidth: 34, data: winRows.map((row) => row.wins_starts), label: safeTopBarLabel((params) => formatNumber(params.value)) },
         {
           name: "胜率",
           type: "line",
@@ -3351,7 +3450,7 @@ async function renderRacecourseAnalysis() {
           itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
           lineStyle: { color: COLORS.raceLine, width: 3 },
           data: winRows.map((row) => Number(((row.win_start_rate || 0) * 100).toFixed(1))),
-          label: { show: true, formatter: "{c}%" },
+          label: lineEndpointLabel(winRows.length, (params) => `${params.value}%`),
         },
       ],
     });
@@ -3359,14 +3458,14 @@ async function renderRacecourseAnalysis() {
       color: [COLORS.gold, COLORS.raceLine],
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["出赛次数", "前三率"] },
-      grid: { left: 56, right: 58, top: 54, bottom: 54 },
+      grid: getResponsiveGrid({ left: 56, right: 64, top: 58, bottom: 54 }),
       xAxis: { type: "category", data: startRows.map((row) => row.label), axisLabel: { rotate: 25 } },
       yAxis: [
         { type: "value", name: "出赛" },
         { type: "value", name: "前三率", axisLabel: { formatter: (value) => `${value}%` } },
       ],
       series: [
-        { name: "出赛次数", type: "bar", barMaxWidth: 34, data: startRows.map((row) => row.starts), label: { show: true, position: "top" } },
+        { name: "出赛次数", type: "bar", barMaxWidth: 34, data: startRows.map((row) => row.starts), label: safeTopBarLabel((params) => formatNumber(params.value)) },
         {
           name: "前三率",
           type: "line",
@@ -3375,7 +3474,7 @@ async function renderRacecourseAnalysis() {
           itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
           lineStyle: { color: COLORS.raceLine, width: 3 },
           data: startRows.map((row) => Number(((row.top3_rate || 0) * 100).toFixed(1))),
-          label: { show: true, formatter: "{c}%" },
+          label: lineEndpointLabel(startRows.length, (params) => `${params.value}%`),
         },
       ],
     });
@@ -3408,16 +3507,16 @@ async function renderRacecourseAnalysis() {
         color: [COLORS.duramente, COLORS.blue, COLORS.gold],
         tooltip: { trigger: "axis" },
         legend: { top: 0, data: ["胜率", "前三率", "出赛次数"] },
-        grid: { left: 58, right: 58, top: 54, bottom: 42 },
+        grid: getResponsiveGrid({ left: 58, right: 64, top: 58, bottom: 42 }),
         xAxis: { type: "category", data: buckets.map((item) => item.label) },
         yAxis: [
           { type: "value", name: "%" },
           { type: "value", name: "出赛", position: "right" },
         ],
         series: [
-          { name: "胜率", type: "bar", data: buckets.map((item) => Number(((item.win_rate || 0) * 100).toFixed(1))), label: { show: true, position: "top", formatter: "{c}%" } },
+          { name: "胜率", type: "bar", data: buckets.map((item) => Number(((item.win_rate || 0) * 100).toFixed(1))), label: safeTopBarLabel((params) => `${params.value}%`) },
           { name: "前三率", type: "bar", data: buckets.map((item) => Number(((item.top3_rate || 0) * 100).toFixed(1))) },
-          { name: "出赛次数", type: "line", yAxisIndex: 1, data: buckets.map((item) => item.starts || 0), label: { show: true, formatter: "{c}" } },
+          { name: "出赛次数", type: "line", yAxisIndex: 1, data: buckets.map((item) => item.starts || 0), label: lineEndpointLabel(buckets.length, (params) => formatNumber(params.value)) },
         ],
       });
     };
@@ -3538,26 +3637,6 @@ function crossItems(value) {
 function damAgeText(horse) {
   if (horse.dam_age_at_foaling === null || horse.dam_age_at_foaling === undefined) return "未知";
   return `${horse.dam_age_at_foaling}岁`;
-}
-
-function parityFactBlocks(horse) {
-  const rows = [];
-  if (horse.dam_biological_parity !== null && horse.dam_biological_parity !== undefined && horse.dam_biological_parity !== "") {
-    rows.push(`<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>`);
-  }
-  if (horse.dam_registered_foal_order !== null && horse.dam_registered_foal_order !== undefined && horse.dam_registered_foal_order !== "") {
-    rows.push(`<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>`);
-  }
-  if (horse.parity_source_url) {
-    rows.push(`
-      <div class="fact">
-        <span>胎次来源</span>
-        <strong><a href="${escapeHtml(horse.parity_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(horse.parity_source_name || "来源")}</a></strong>
-      </div>
-    `);
-  }
-  if (!rows.length) rows.push(`<div class="fact"><span>真实生产胎次</span><strong>未知</strong></div>`);
-  return rows.join("");
 }
 
 function isLocalHorse(horse) {
@@ -3944,7 +4023,9 @@ async function openHorse(id) {
       <div class="fact"><span>母</span><strong>${horseDamCell(horse)}</strong></div>
       <div class="fact"><span>母出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
       <div class="fact"><span>产本胎年龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
-      ${parityFactBlocks(horse)}
+      ${horse.dam_biological_parity != null ? `<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>` : ""}
+      ${horse.dam_registered_foal_order != null ? `<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>` : ""}
+      ${horse.parity_source_url ? `<div class="fact"><span>胎次来源</span><strong><a href="${escapeHtml(horse.parity_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(horse.parity_source_name || "来源")}</a></strong></div>` : ""}
       <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分類")}</strong></div>
