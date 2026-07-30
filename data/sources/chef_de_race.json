@@ -1,0 +1,751 @@
+{
+  "version": "international-2026-04",
+  "source": "https://chef-de-race.com.au/international-chef-de-race",
+  "retrieved_at": "2026-07-29T10:02:52.799Z",
+  "formula": {
+    "generation_weights": {
+      "1": 16,
+      "2": 8,
+      "3": 4,
+      "4": 2
+    },
+    "profile_order": [
+      "B",
+      "I",
+      "C",
+      "S",
+      "P"
+    ],
+    "di": "(B + I + C/2) / (S + P + C/2)",
+    "cd": "(2B + I - S - 2P) / total_points"
+  },
+  "chefs": [
+    {
+      "jbis_id": "0000339653",
+      "name_jbis": "A.P. Indy(USA)",
+      "name_pedigreequery": "A.P. INDY",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/shonan+vajra"
+    },
+    {
+      "jbis_id": "0000333910",
+      "name_jbis": "Ack Ack(USA)",
+      "name_pedigreequery": "ACK ACK",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/golden+maria3"
+    },
+    {
+      "jbis_id": "0000335203",
+      "name_jbis": "Alleged(USA)",
+      "name_pedigreequery": "ALLEGED",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/matenro+proud"
+    },
+    {
+      "jbis_id": "0000336305",
+      "name_jbis": "Alydar(USA)",
+      "name_pedigreequery": "ALYDAR",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/henrietta26"
+    },
+    {
+      "jbis_id": "0000369802",
+      "name_jbis": "Arch(USA)",
+      "name_pedigreequery": "ARCH",
+      "classification": "C",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000369512",
+      "name_jbis": "Awesome Again(CAN)",
+      "name_pedigreequery": "AWESOME AGAIN",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/mikki+lucky"
+    },
+    {
+      "jbis_id": "0000337244",
+      "name_jbis": "Baldski(USA)",
+      "name_pedigreequery": "BALDSKI",
+      "classification": "BI",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000335970",
+      "name_jbis": "Best Turn(USA)",
+      "name_pedigreequery": "BEST TURN",
+      "classification": "C",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000335274",
+      "name_jbis": "Blushing Groom(FR)",
+      "name_pedigreequery": "BLUSHING GROOM",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/mikki+go+go"
+    },
+    {
+      "jbis_id": "0000339781",
+      "name_jbis": "Bold Ruckus(USA)",
+      "name_pedigreequery": "BOLD RUCKUS",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/rouge+viola"
+    },
+    {
+      "jbis_id": "0000343734",
+      "name_jbis": "Broad Brush(USA)",
+      "name_pedigreequery": "BROAD BRUSH",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/golden+maria3"
+    },
+    {
+      "jbis_id": "0000336423",
+      "name_jbis": "Buckaroo(USA)",
+      "name_pedigreequery": "BUCKAROO",
+      "classification": "BI",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000334012",
+      "name_jbis": "Buckpasser(USA)",
+      "name_pedigreequery": "BUCKPASSER",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/highland+lynx"
+    },
+    {
+      "jbis_id": "0000334011",
+      "name_jbis": "Busted(GB)",
+      "name_pedigreequery": "BUSTED",
+      "classification": "S",
+      "source_url": "https://www.pedigreequery.com/tycoon26"
+    },
+    {
+      "jbis_id": "0000965271",
+      "name_jbis": "Candy Ride(ARG)",
+      "name_pedigreequery": "CANDY RIDE",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/jimmy+barows"
+    },
+    {
+      "jbis_id": "0000363470",
+      "name_jbis": "Cape Cross(IRE)",
+      "name_pedigreequery": "CAPE CROSS",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/couperin3"
+    },
+    {
+      "jbis_id": "0000334731",
+      "name_jbis": "Caro(IRE)",
+      "name_pedigreequery": "CARO",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/roman+theatre3"
+    },
+    {
+      "jbis_id": "0000341849",
+      "name_jbis": "Carson City(USA)",
+      "name_pedigreequery": "CARSON CITY",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/valle+de+la+luna3"
+    },
+    {
+      "jbis_id": "0000337339",
+      "name_jbis": "Chief's Crown(USA)",
+      "name_pedigreequery": "CHIEF'S CROWN",
+      "classification": "IS",
+      "source_url": "https://www.pedigreequery.com/trans+am3"
+    },
+    {
+      "jbis_id": "0000337423",
+      "name_jbis": "Cozzene(USA)",
+      "name_pedigreequery": "COZZENE",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/sydney+light"
+    },
+    {
+      "jbis_id": "0001051353",
+      "name_jbis": "Curlin(USA)",
+      "name_pedigreequery": "CURLIN",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/allegrissimo2"
+    },
+    {
+      "jbis_id": "0000334660",
+      "name_jbis": "Damascus(USA)",
+      "name_pedigreequery": "DAMASCUS",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/do+my+thing2"
+    },
+    {
+      "jbis_id": "0000336082",
+      "name_jbis": "Danzig(USA)",
+      "name_pedigreequery": "DANZIG",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/mikki+pretty"
+    },
+    {
+      "jbis_id": "0000336887",
+      "name_jbis": "Darshaan(GB)",
+      "name_pedigreequery": "DARSHAAN",
+      "classification": "S",
+      "source_url": "https://www.pedigreequery.com/mystic+queen4"
+    },
+    {
+      "jbis_id": "0000365171",
+      "name_jbis": "Distorted Humor(USA)",
+      "name_pedigreequery": "DISTORTED HUMOR",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/thalberg5"
+    },
+    {
+      "jbis_id": "0000334860",
+      "name_jbis": "Dr. Fager(USA)",
+      "name_pedigreequery": "DR. FAGER",
+      "classification": "I",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0001111493",
+      "name_jbis": "Dubawi(IRE)",
+      "name_pedigreequery": "DUBAWI",
+      "classification": "IS",
+      "source_url": "https://www.pedigreequery.com/artwork10"
+    },
+    {
+      "jbis_id": "0000342430",
+      "name_jbis": "Dynaformer(USA)",
+      "name_pedigreequery": "DYNAFORMER",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/variamente"
+    },
+    {
+      "jbis_id": "0000340508",
+      "name_jbis": "El Prado(IRE)",
+      "name_pedigreequery": "EL PRADO",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/lievemente"
+    },
+    {
+      "jbis_id": "0000336370",
+      "name_jbis": "Ela-Mana-Mou(IRE)",
+      "name_pedigreequery": "ELA-MANA-MOU",
+      "classification": "P",
+      "source_url": "https://www.pedigreequery.com/ho+o+musashi"
+    },
+    {
+      "jbis_id": "0000364615",
+      "name_jbis": "Elusive Quality(USA)",
+      "name_pedigreequery": "ELUSIVE QUALITY",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/shonan+vajra"
+    },
+    {
+      "jbis_id": "0000334242",
+      "name_jbis": "Exclusive Native(USA)",
+      "name_pedigreequery": "EXCLUSIVE NATIVE",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/k+two+kuna"
+    },
+    {
+      "jbis_id": "0000336225",
+      "name_jbis": "Fappiano(USA)",
+      "name_pedigreequery": "FAPPIANO",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/wellington+arch2"
+    },
+    {
+      "jbis_id": "0000372671",
+      "name_jbis": "Forestry(USA)",
+      "name_pedigreequery": "FORESTRY",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/shonan+vajra"
+    },
+    {
+      "jbis_id": "0000334262",
+      "name_jbis": "Forli(ARG)",
+      "name_pedigreequery": "FORLI",
+      "classification": "C",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000714343",
+      "name_jbis": "Galileo(IRE)",
+      "name_pedigreequery": "GALILEO",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/press+junket"
+    },
+    {
+      "jbis_id": "0000372708",
+      "name_jbis": "Giant's Causeway(USA)",
+      "name_pedigreequery": "GIANTS CAUSEWAY",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/shorea+dolce"
+    },
+    {
+      "jbis_id": "0000337432",
+      "name_jbis": "Gone West(USA)",
+      "name_pedigreequery": "GONE WEST",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/lievemente"
+    },
+    {
+      "jbis_id": "0000334999",
+      "name_jbis": "Graustark(USA)",
+      "name_pedigreequery": "GRAUSTARK",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/k+two+kuna"
+    },
+    {
+      "jbis_id": "0000337135",
+      "name_jbis": "Great Above(USA)",
+      "name_pedigreequery": "GREAT ABOVE",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/shah+zaman"
+    },
+    {
+      "jbis_id": "0000334282",
+      "name_jbis": "Grey Dawn(FR)",
+      "name_pedigreequery": "GREY DAWN",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/mozu+olympic"
+    },
+    {
+      "jbis_id": "0000334285",
+      "name_jbis": "Habitat(USA)",
+      "name_pedigreequery": "HABITAT",
+      "classification": "B",
+      "source_url": "https://www.pedigreequery.com/trans+am3"
+    },
+    {
+      "jbis_id": "0000334286",
+      "name_jbis": "Hail to Reason(USA)",
+      "name_pedigreequery": "HAIL TO REASON",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/k+two+kuna"
+    },
+    {
+      "jbis_id": "0000335154",
+      "name_jbis": "Halo(USA)",
+      "name_pedigreequery": "HALO",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/red+fermata"
+    },
+    {
+      "jbis_id": "0000335937",
+      "name_jbis": "High Top(GB)",
+      "name_pedigreequery": "HIGH TOP",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/mystic+queen4"
+    },
+    {
+      "jbis_id": "0000335990",
+      "name_jbis": "His Majesty(USA)",
+      "name_pedigreequery": "HIS MAJESTY",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/mater8"
+    },
+    {
+      "jbis_id": "0000334747",
+      "name_jbis": "Icecapade(USA)",
+      "name_pedigreequery": "ICECAPADE",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/annabelle22"
+    },
+    {
+      "jbis_id": "0000339710",
+      "name_jbis": "In Excess(IRE)",
+      "name_pedigreequery": "IN EXCESS",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/pledge18"
+    },
+    {
+      "jbis_id": "0000334720",
+      "name_jbis": "In Reality(USA)",
+      "name_pedigreequery": "IN REALITY",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/fairy+presto"
+    },
+    {
+      "jbis_id": "0000341850",
+      "name_jbis": "In The Wings(GB)",
+      "name_pedigreequery": "IN THE WINGS",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/feel+paradise"
+    },
+    {
+      "jbis_id": "0000342656",
+      "name_jbis": "Indian Ridge(IRE)",
+      "name_pedigreequery": "INDIAN RIDGE",
+      "classification": "I",
+      "source_url": "https://www.pedigreequery.com/press+junket"
+    },
+    {
+      "jbis_id": "0001084779",
+      "name_jbis": "Into Mischief(USA)",
+      "name_pedigreequery": "INTO MISCHIEF",
+      "classification": "BC",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000334745",
+      "name_jbis": "Key to the Mint(USA)",
+      "name_pedigreequery": "KEY TO THE MINT",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/allegrissimo2"
+    },
+    {
+      "jbis_id": "0000347989",
+      "name_jbis": "Kingmambo(USA)",
+      "name_pedigreequery": "KINGMAMBO",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/red+fermata"
+    },
+    {
+      "jbis_id": "0000979726",
+      "name_jbis": "Kitten's Joy(USA)",
+      "name_pedigreequery": "KITTEN'S JOY",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/gracilistyla2"
+    },
+    {
+      "jbis_id": "0000334064",
+      "name_jbis": "Le Fabuleux(FR)",
+      "name_pedigreequery": "LE FABULEUX",
+      "classification": "P",
+      "source_url": "https://www.pedigreequery.com/plavi"
+    },
+    {
+      "jbis_id": "0000341901",
+      "name_jbis": "Linamix(FR)",
+      "name_pedigreequery": "LINAMIX",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/feel+paradise"
+    },
+    {
+      "jbis_id": "0000335915",
+      "name_jbis": "Lord Avie(USA)",
+      "name_pedigreequery": "LORD AVIE",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/keraunos3"
+    },
+    {
+      "jbis_id": "0000334968",
+      "name_jbis": "Lyphard(USA)",
+      "name_pedigreequery": "LYPHARD",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/henrietta26"
+    },
+    {
+      "jbis_id": "0000721553",
+      "name_jbis": "Medaglia d'Oro(USA)",
+      "name_pedigreequery": "MEDAGLIA D'ORO",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/drammatico"
+    },
+    {
+      "jbis_id": "0000334047",
+      "name_jbis": "Mill Reef(USA)",
+      "name_pedigreequery": "MILL REEF",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/mystic+queen4"
+    },
+    {
+      "jbis_id": "0000361091",
+      "name_jbis": "Monsun(GER)",
+      "name_pedigreequery": "MONSUN",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/la+mia+mente"
+    },
+    {
+      "jbis_id": "0000369845",
+      "name_jbis": "Montjeu(IRE)",
+      "name_pedigreequery": "MONTJEU",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/winda3"
+    },
+    {
+      "jbis_id": "0000372626",
+      "name_jbis": "More Than Ready(USA)",
+      "name_pedigreequery": "MORE THAN READY",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/cumberland15"
+    },
+    {
+      "jbis_id": "0000335975",
+      "name_jbis": "Mr. Prospector(USA)",
+      "name_pedigreequery": "MR. PROSPECTOR",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/red+fermata"
+    },
+    {
+      "jbis_id": "0000334001",
+      "name_jbis": "Never Bend(USA)",
+      "name_pedigreequery": "NEVER BEND",
+      "classification": "BI",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000333996",
+      "name_jbis": "Nijinsky(CAN)",
+      "name_pedigreequery": "NIJINSKY",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/greatest+game2"
+    },
+    {
+      "jbis_id": "0000336870",
+      "name_jbis": "Niniski(USA)",
+      "name_pedigreequery": "NINISKI",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/dolphin+through2"
+    },
+    {
+      "jbis_id": "0000334002",
+      "name_jbis": "Northern Dancer(CAN)",
+      "name_pedigreequery": "NORTHERN DANCER",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/henrietta26"
+    },
+    {
+      "jbis_id": "0000336085",
+      "name_jbis": "Nureyev(USA)",
+      "name_pedigreequery": "NUREYEV",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/spanish+song3"
+    },
+    {
+      "jbis_id": "0000365118",
+      "name_jbis": "Pivotal(GB)",
+      "name_pedigreequery": "PIVOTAL",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/satono+beats"
+    },
+    {
+      "jbis_id": "0000335991",
+      "name_jbis": "Pleasant Colony(USA)",
+      "name_pedigreequery": "PLEASANT COLONY",
+      "classification": "I",
+      "source_url": "https://www.pedigreequery.com/grand+line2"
+    },
+    {
+      "jbis_id": "0000337958",
+      "name_jbis": "Pulpit(USA)",
+      "name_pedigreequery": "PULPIT",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/longing+baby"
+    },
+    {
+      "jbis_id": "0000341573",
+      "name_jbis": "Quiet American(USA)",
+      "name_pedigreequery": "QUIET AMERICAN",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/antwerk"
+    },
+    {
+      "jbis_id": "0000337286",
+      "name_jbis": "Rainbow Quest(USA)",
+      "name_pedigreequery": "RAINBOW QUEST",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/dolphin+through2"
+    },
+    {
+      "jbis_id": "0000334066",
+      "name_jbis": "Raise a Native(USA)",
+      "name_pedigreequery": "RAISE A NATIVE",
+      "classification": "B",
+      "source_url": "https://www.pedigreequery.com/flower+drum5"
+    },
+    {
+      "jbis_id": "0000346241",
+      "name_jbis": "Reliance(FR)",
+      "name_pedigreequery": "RELIANCE",
+      "classification": "SP",
+      "source_url": "https://www.pedigreequery.com/empire+waist"
+    },
+    {
+      "jbis_id": "0000334067",
+      "name_jbis": "Reviewer(USA)",
+      "name_pedigreequery": "REVIEWER",
+      "classification": "BC",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000334457",
+      "name_jbis": "Ribot(GB)",
+      "name_pedigreequery": "RIBOT",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/mater8"
+    },
+    {
+      "jbis_id": "0000335664",
+      "name_jbis": "Riverman(USA)",
+      "name_pedigreequery": "RIVERMAN",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/daimei+mirai"
+    },
+    {
+      "jbis_id": "0000335167",
+      "name_jbis": "Roberto(USA)",
+      "name_pedigreequery": "ROBERTO",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/hiro+shige+heart"
+    },
+    {
+      "jbis_id": "0000345057",
+      "name_jbis": "Round Table(USA)",
+      "name_pedigreequery": "ROUND TABLE",
+      "classification": "S",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000341457",
+      "name_jbis": "ロイヤルアカデミーⅡ(USA)",
+      "name_pedigreequery": "ROYAL ACADEMY",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/riversleigh"
+    },
+    {
+      "jbis_id": "0000336572",
+      "name_jbis": "Sadler's Wells(USA)",
+      "name_pedigreequery": "SADLERS WELLS",
+      "classification": "CS",
+      "source_url": "https://www.pedigreequery.com/lievemente"
+    },
+    {
+      "jbis_id": "0001003260",
+      "name_jbis": "Scat Daddy(USA)",
+      "name_pedigreequery": "SCAT DADDY",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/auriga+tesoro"
+    },
+    {
+      "jbis_id": "0000335964",
+      "name_jbis": "Seattle Slew(USA)",
+      "name_pedigreequery": "SEATTLE SLEW",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/lievemente"
+    },
+    {
+      "jbis_id": "0000333978",
+      "name_jbis": "Secretariat(USA)",
+      "name_pedigreequery": "SECRETARIAT",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/do+my+thing2"
+    },
+    {
+      "jbis_id": "0000336086",
+      "name_jbis": "Sharpen Up(GB)",
+      "name_pedigreequery": "SHARPEN UP",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/mikki+pretty"
+    },
+    {
+      "jbis_id": "0000335305",
+      "name_jbis": "Shirley Heights(GB)",
+      "name_pedigreequery": "SHIRLEY HEIGHTS",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/mystic+queen4"
+    },
+    {
+      "jbis_id": "0000333957",
+      "name_jbis": "Sir Ivor(USA)",
+      "name_pedigreequery": "SIR IVOR",
+      "classification": "IC",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000336745",
+      "name_jbis": "Slewpy(USA)",
+      "name_pedigreequery": "SLEWPY",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/exodus26"
+    },
+    {
+      "jbis_id": "0000365210",
+      "name_jbis": "Smart Strike(CAN)",
+      "name_pedigreequery": "SMART STRIKE",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/allegrissimo2"
+    },
+    {
+      "jbis_id": "0000719250",
+      "name_jbis": "Speightstown(USA)",
+      "name_pedigreequery": "SPEIGHTSTOWN",
+      "classification": "BI",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000621983",
+      "name_jbis": "Street Cry(IRE)",
+      "name_pedigreequery": "STREET CRY",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/justin+dunk"
+    },
+    {
+      "jbis_id": "0001031979",
+      "name_jbis": "ストリートセンス(USA)",
+      "name_pedigreequery": "STREET SENSE",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/get+a+million"
+    },
+    {
+      "jbis_id": "0000849372",
+      "name_jbis": "Tapit(USA)",
+      "name_pedigreequery": "TAPIT",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/pledge18"
+    },
+    {
+      "jbis_id": "0000361977",
+      "name_jbis": "サンダーガルチ(USA)",
+      "name_pedigreequery": "THUNDER GULCH",
+      "classification": "C",
+      "source_url": "https://www.pedigreequery.com/shonan+akidon"
+    },
+    {
+      "jbis_id": "0000621100",
+      "name_jbis": "Tiznow(USA)",
+      "name_pedigreequery": "TIZNOW",
+      "classification": "IC",
+      "source_url": "https://www.pedigreequery.com/luminosity12"
+    },
+    {
+      "jbis_id": "0000334546",
+      "name_jbis": "Tom Rolfe(USA)",
+      "name_pedigreequery": "TOM ROLFE",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/hiro+shige+heart"
+    },
+    {
+      "jbis_id": "0001164410",
+      "name_jbis": "Twirling Candy(USA)",
+      "name_pedigreequery": "TWIRLING CANDY",
+      "classification": "BI",
+      "source_url": "https://chef-de-race.com.au/international-chef-de-race"
+    },
+    {
+      "jbis_id": "0000340629",
+      "name_jbis": "Unbridled(USA)",
+      "name_pedigreequery": "UNBRIDLED",
+      "classification": "BI",
+      "source_url": "https://www.pedigreequery.com/rouge+viola"
+    },
+    {
+      "jbis_id": "0000361396",
+      "name_jbis": "Unbridled's Song(USA)",
+      "name_pedigreequery": "UNBRIDLEDS SONG",
+      "classification": "BC",
+      "source_url": "https://www.pedigreequery.com/rouge+viola"
+    },
+    {
+      "jbis_id": "0000333923",
+      "name_jbis": "Vaguely Noble(GB)",
+      "name_pedigreequery": "VAGUELY NOBLE",
+      "classification": "CP",
+      "source_url": "https://www.pedigreequery.com/martius5"
+    }
+  ],
+  "derivation_issues": [
+    {
+      "horse": "Daiya",
+      "issue": "missing_jbis_cache"
+    }
+  ]
+}

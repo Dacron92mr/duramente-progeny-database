@@ -1,0 +1,4647 @@
+{
+  "retrieved_at": "2026-07-29T10:02:52.799Z",
+  "source": "https://www.pedigreequery.com/progeny/duramente",
+  "chef_list": "Roman-Miller",
+  "samples": [
+    {
+      "name": "A SHIN DUELER",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/a+shin+dueler",
+      "dp": "6-9-14-3-0",
+      "points": 32,
+      "di": 2.2,
+      "cd": 0.56,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "IC",
+          "generation": 2,
+          "name": "PULPIT",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "A.P. INDY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "BI",
+          "generation": 3,
+          "name": "UNBRIDLED",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "SEATTLE SLEW",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "FAPPIANO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "NIJINSKY",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ABILITY21",
+      "year": "2023",
+      "url": "https://www.pedigreequery.com/ability21",
+      "dp": "2-0-4-2-0",
+      "points": 8,
+      "di": 1,
+      "cd": 0.25,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "FRENCH DEPUTY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DEPUTY MINISTER",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DR DEVIOUS",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "VICE REGENT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "HOLD YOUR PEACE",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AHONOORA",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "NORTHERN TASTE",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ADMIRE SAGE",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/admire+sage",
+      "dp": "3-1-16-2-0",
+      "points": 22,
+      "di": 1.2,
+      "cd": 0.23,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "C",
+          "generation": 2,
+          "name": "CAPE CROSS",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "GREEN DESERT",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "MACHIAVELLIAN",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AHONOORA",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "NUREYEV",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "AINO SENSHI",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/aino+senshi",
+      "dp": "2-0-11-5-0",
+      "points": 18,
+      "di": 0.71,
+      "cd": -0.06,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "SEA THE STARS",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "C",
+          "generation": 3,
+          "name": "CAPE CROSS",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "GALILEO",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "GREEN DESERT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "MISWAKI",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "SADLERS WELLS",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANEHILL",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ALL YOURS10",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/all+yours10",
+      "dp": "4-1-6-3-0",
+      "points": 14,
+      "di": 1.33,
+      "cd": 0.43,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "FALBRAV",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "FAIRY KING",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "EL CONDOR PASA",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "NORTHERN DANCER",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "BI",
+          "generation": 4,
+          "name": "SLEWPY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "KINGMAMBO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SUNDAY SILENCE",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ALLEGRISSIMO2",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/allegrissimo2",
+      "dp": "4-2-16-2-0",
+      "points": 24,
+      "di": 1.4,
+      "cd": 0.33,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "C",
+          "generation": 2,
+          "name": "CURLIN",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "SMART STRIKE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "STORM CAT",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEPUTY MINISTER",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM BIRD",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "KEY TO THE MINT",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ALOHI ALII",
+      "year": "2022",
+      "url": "https://www.pedigreequery.com/alohi+alii",
+      "dp": "2-0-4-2-0",
+      "points": 8,
+      "di": 1,
+      "cd": 0.25,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "ORFEVRE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "STAY GOLD",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SYMBOLI KRIS S",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SUNDAY SILENCE",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "MEJIRO MCQUEEN",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "KRIS S",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ANNABELLE22",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/annabelle22",
+      "dp": "3-1-6-2-0",
+      "points": 12,
+      "di": 1.4,
+      "cd": 0.42,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "WILD RUSH",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "WILD AGAIN",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "STORM CAT",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "ICECAPADE",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "PLUGGED NICKLE",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM BIRD",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "FAPPIANO",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ANTWERK",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/antwerk",
+      "dp": "4-2-10-2-0",
+      "points": 18,
+      "di": 1.57,
+      "cd": 0.44,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "BERNARDINI",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "A.P. INDY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "HAWKSTER",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "SEATTLE SLEW",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "QUIET AMERICAN",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SILVER HAWK",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "SEATTLE SLEW",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "AOI SHICHIFUKU",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/aoi+shichifuku",
+      "dp": "5-3-6-2-0",
+      "points": 16,
+      "di": 2.2,
+      "cd": 0.69,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "CHEROKEE RUN",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "RUNAWAY GROOM",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "BI",
+          "generation": 3,
+          "name": "UNBRIDLED",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "BLUSHING GROOM",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SILVER SABER",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "FAPPIANO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "BOLD FORBES",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ARRIVO5",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/arrivo5",
+      "dp": "3-1-4-2-0",
+      "points": 10,
+      "di": 1.5,
+      "cd": 0.5,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "HARLAN'S HOLIDAY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "HARLAN",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SPANISH STEPS",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM CAT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AFFIRMED",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BI",
+          "generation": 4,
+          "name": "UNBRIDLED",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "RELAUNCH",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ARTWORK10",
+      "year": "2021",
+      "url": "https://www.pedigreequery.com/artwork10",
+      "dp": "2-8-4-6-0",
+      "points": 20,
+      "di": 1.5,
+      "cd": 0.3,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "IS",
+          "generation": 2,
+          "name": "DUBAWI",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DUBAI MILLENNIUM",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "I",
+          "generation": 3,
+          "name": "INDIAN RIDGE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SEEKING THE GOLD",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEPLOY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AHONOORA",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "BELMEZ",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ASCOLTARE",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/ascoltare",
+      "dp": "4-1-9-4-0",
+      "points": 18,
+      "di": 1.12,
+      "cd": 0.28,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "DANEHILL DANCER",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DANEHILL",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "SADLERS WELLS",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "SHARPEN UP",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "NORTHERN DANCER",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "IRISH RIVER",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ASK DURAMENTE",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/ask+duramente",
+      "dp": "3-3-8-2-0",
+      "points": 16,
+      "di": 1.67,
+      "cd": 0.44,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "PROUD CITIZEN",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "GONE WEST",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "LANGFUHR",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "GREEN FOREST",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "ENCINO",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ASK ME WHY7",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/ask+me+why7",
+      "dp": "3-0-5-2-0",
+      "points": 10,
+      "di": 1.22,
+      "cd": 0.4,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "FRENCH DEPUTY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DEPUTY MINISTER",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "VICE REGENT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "HOLD YOUR PEACE",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DICTUS",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ASK MOVIE ON",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/ask+movie+on",
+      "dp": "3-0-5-2-0",
+      "points": 10,
+      "di": 1.22,
+      "cd": 0.4,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "MANHATTAN CAFE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "TAIKI SHUTTLE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAW SOCIETY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEVILS BAG",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANEHILL",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "ASK STEIN",
+      "year": "2022",
+      "url": "https://www.pedigreequery.com/ask+stein",
+      "dp": "3-1-5-3-0",
+      "points": 12,
+      "di": 1.18,
+      "cd": 0.33,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "BELLAMY ROAD",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "CONCERTO",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "WOODMAN",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IS",
+          "generation": 4,
+          "name": "CHIEF'S CROWN",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEPUTED TESTAMONY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "OLDEN TIMES",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "AURIGA TESORO",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/auriga+tesoro",
+      "dp": "4-4-10-2-0",
+      "points": 20,
+      "di": 1.86,
+      "cd": 0.5,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "IC",
+          "generation": 2,
+          "name": "SCAT DADDY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "JOHANNESBURG",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SAINT BALLADO",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "HENNESSY",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SLEW O' GOLD",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "AVVERARE",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/avverare",
+      "dp": "4-4-6-2-0",
+      "points": 16,
+      "di": 2.2,
+      "cd": 0.63,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "HARLAN'S HOLIDAY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "HARLAN",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "BI",
+          "generation": 3,
+          "name": "UNBRIDLED",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM CAT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AFFIRMED",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "FAPPIANO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BADENWEILER2",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/badenweiler2",
+      "dp": "2-0-6-2-0",
+      "points": 10,
+      "di": 1,
+      "cd": 0.2,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "FRENCH DEPUTY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DEPUTY MINISTER",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DANCING BRAVE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "VICE REGENT",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "HOLD YOUR PEACE",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "LYPHARD",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "BRAVEST ROMAN",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BALLONZOLARE",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/ballonzolare",
+      "dp": "4-2-13-3-0",
+      "points": 22,
+      "di": 1.32,
+      "cd": 0.32,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "C",
+          "generation": 2,
+          "name": "KITTEN'S JOY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "BI",
+          "generation": 3,
+          "name": "EL PRADO",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "CATIENUS",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "SADLERS WELLS",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LEAR FAN",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM CAT",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "RED RANSOM",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BATTLE HARDEN",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/battle+harden",
+      "dp": "7-1-10-2-0",
+      "points": 20,
+      "di": 1.86,
+      "cd": 0.65,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "STORM CAT",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "STORM BIRD",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 3,
+          "name": "MR. PROSPECTOR",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "NORTHERN DANCER",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "SECRETARIAT",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "B",
+          "generation": 4,
+          "name": "RAISE A NATIVE",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "NUREYEV",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BELLA ALBA",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/bella+alba",
+      "dp": "2-2-6-2-0",
+      "points": 12,
+      "di": 1.4,
+      "cd": 0.33,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "ANABAA BLUE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "ANABAA",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "PLATINI",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "RIVERMAN",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SURUMU",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SURE BLADE",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BELLE CRESTA",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/belle+cresta",
+      "dp": "6-0-7-3-0",
+      "points": 16,
+      "di": 1.46,
+      "cd": 0.56,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "NUMEROUS",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 3,
+          "name": "MR. PROSPECTOR",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "KENMARE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "B",
+          "generation": 4,
+          "name": "RAISE A NATIVE",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "NIJINSKY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "KALAMOUN",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "IRISH RIVER",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BEST FEELING",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/best+feeling",
+      "dp": "3-1-6-2-0",
+      "points": 12,
+      "di": 1.4,
+      "cd": 0.42,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "ORPEN",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "LURE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "LODE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEVILS BAG",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "FITZCARRALDO",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BRAVE ROCKER",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/brave+rocker",
+      "dp": "4-1-8-3-0",
+      "points": 16,
+      "di": 1.29,
+      "cd": 0.38,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "ELUSIVE CITY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 3,
+          "name": "ELUSIVE QUALITY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "CLODOVIL",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "GONE WEST",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DAYJUR",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANEHILL",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "CS",
+          "generation": 4,
+          "name": "RAINBOW QUEST",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BRUCE BAROWS2",
+      "year": "2022",
+      "url": "https://www.pedigreequery.com/bruce+barows2",
+      "dp": "7-2-13-2-0",
+      "points": 24,
+      "di": 1.82,
+      "cd": 0.58,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "BC",
+          "generation": 2,
+          "name": "ELUSIVE QUALITY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "GONE WEST",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "ZILZAL",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "HERO'S HONOR",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "NUREYEV",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "GAY MECENE",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "BURGUNDY20",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/burgundy20",
+      "dp": "3-0-7-2-0",
+      "points": 12,
+      "di": 1.18,
+      "cd": 0.33,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "MANHATTAN CAFE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DARE AND GO",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAW SOCIETY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "ALYDAR",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "EMPERY",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CALL ME25",
+      "year": "2022",
+      "url": "https://www.pedigreequery.com/call+me25",
+      "dp": "6-3-11-2-0",
+      "points": 22,
+      "di": 1.93,
+      "cd": 0.59,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "BC",
+          "generation": 2,
+          "name": "STREET SENSE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "STREET CRY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "FOREST WILDCAT",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "MACHIAVELLIAN",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DIXIELAND BAND",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM CAT",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "A.P. INDY",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CARINO23",
+      "year": "2021",
+      "url": "https://www.pedigreequery.com/carino23",
+      "dp": "3-0-5-2-0",
+      "points": 10,
+      "di": 1.22,
+      "cd": 0.4,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "HARBINGER",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DANSILI",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANEHILL",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "BERING",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CHAMPAGNE COLOR",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/champagne+color",
+      "dp": "2-1-5-2-0",
+      "points": 10,
+      "di": 1.22,
+      "cd": 0.3,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "RECKLESS ABANDON",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "EXCHANGE RATE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "TALE OF THE CAT",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "EFISIO",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "STORM CAT",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "PISTOLET BLEU",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CHERRY ON TOP9",
+      "year": "2019",
+      "url": "https://www.pedigreequery.com/cherry+on+top9",
+      "dp": "5-0-11-2-0",
+      "points": 18,
+      "di": 1.4,
+      "cd": 0.44,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "MANHATTAN CAFE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": "C",
+          "generation": 3,
+          "name": "NUREYEV",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAW SOCIETY",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "NORTHERN DANCER",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "BLUSHING GROOM",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CHIARAMENTE",
+      "year": "2022",
+      "url": "https://www.pedigreequery.com/chiaramente",
+      "dp": "3-0-5-2-0",
+      "points": 10,
+      "di": 1.22,
+      "cd": 0.4,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "SNITZEL",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "REDOUTE'S CHOICE",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SEEKING THE GOLD",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANEHILL",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SNIPPETS",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LORD AT WAR",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CHONDRITE",
+      "year": "2021",
+      "url": "https://www.pedigreequery.com/chondrite",
+      "dp": "2-0-6-2-0",
+      "points": 10,
+      "di": 1,
+      "cd": 0.2,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KUROFUNE",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "FRENCH DEPUTY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "NEO UNIVERSE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEPUTY MINISTER",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "CLASSIC GO GO",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SUNDAY SILENCE",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "NUREYEV",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CLAPPERBOARD2",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/clapperboard2",
+      "dp": "5-2-7-2-0",
+      "points": 16,
+      "di": 1.91,
+      "cd": 0.63,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "ROCKPORT HARBOR",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 3,
+          "name": "UNBRIDLEDS SONG",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "MR GREELEY",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BI",
+          "generation": 4,
+          "name": "UNBRIDLED",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "COPELAN",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "GONE WEST",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "POLISH NUMBERS",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CLEAN SWEEP17",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/clean+sweep17",
+      "dp": "3-0-7-2-0",
+      "points": 12,
+      "di": 1.18,
+      "cd": 0.33,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "END SWEEP",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "FORTY NINER",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "DANCING BRAVE",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DANCE SPELL",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "C",
+          "generation": 4,
+          "name": "LYPHARD",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TOSHO BOY",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CLUTCH PLAYER4",
+      "year": "2021",
+      "url": "https://www.pedigreequery.com/clutch+player4",
+      "dp": "2-0-4-2-0",
+      "points": 8,
+      "di": 1,
+      "cd": 0.25,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "SKIPSHOT",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SKIP AWAY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "MARQUETRY",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SKIP TRIAL",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SUNNY'S HALO",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "CONQUISTADOR CIELO",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TOPSIDER",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "COSTA REI",
+      "year": "2020",
+      "url": "https://www.pedigreequery.com/costa+rei",
+      "dp": "2-3-7-2-0",
+      "points": 14,
+      "di": 1.55,
+      "cd": 0.36,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "TIZWAY",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "IC",
+          "generation": 3,
+          "name": "TIZNOW",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "MALIBU MOON",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "CEES TIZZY",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DAYJUR",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "A.P. INDY",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LOMITAS",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "COUPERIN3",
+      "year": "2018",
+      "url": "https://www.pedigreequery.com/couperin3",
+      "dp": "2-1-13-2-0",
+      "points": 18,
+      "di": 1.12,
+      "cd": 0.17,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": "C",
+          "generation": 2,
+          "name": "CAPE CROSS",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "GREEN DESERT",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "GENEROUS",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": "IC",
+          "generation": 4,
+          "name": "DANZIG",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "AHONOORA",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "CAERLEON",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "ACATENANGO",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    },
+    {
+      "name": "CUMBERLAND15",
+      "year": "2021",
+      "url": "https://www.pedigreequery.com/cumberland15",
+      "dp": "5-1-6-2-0",
+      "points": 14,
+      "di": 1.8,
+      "cd": 0.64,
+      "sires": [
+        {
+          "code": null,
+          "generation": 1,
+          "name": "DURAMENTE",
+          "position": 0,
+          "row_span": 16
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "KING KAMEHAMEHA",
+          "position": 0,
+          "row_span": 8
+        },
+        {
+          "code": null,
+          "generation": 2,
+          "name": "CUSTOM FOR CARLOS",
+          "position": 2,
+          "row_span": 8
+        },
+        {
+          "code": "CS",
+          "generation": 3,
+          "name": "KINGMAMBO",
+          "position": 0,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "SUNDAY SILENCE",
+          "position": 2,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 3,
+          "name": "MORE THAN READY",
+          "position": 4,
+          "row_span": 4
+        },
+        {
+          "code": null,
+          "generation": 3,
+          "name": "BROKEN VOW",
+          "position": 6,
+          "row_span": 4
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "MR. PROSPECTOR",
+          "position": 0,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "LAST TYCOON",
+          "position": 2,
+          "row_span": 2
+        },
+        {
+          "code": "BC",
+          "generation": 4,
+          "name": "HALO",
+          "position": 4,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "TONY BIN",
+          "position": 6,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "SOUTHERN HALO",
+          "position": 8,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "MEADOWLAKE",
+          "position": 10,
+          "row_span": 2
+        },
+        {
+          "code": "BI",
+          "generation": 4,
+          "name": "UNBRIDLED",
+          "position": 12,
+          "row_span": 2
+        },
+        {
+          "code": null,
+          "generation": 4,
+          "name": "DEHERE",
+          "position": 14,
+          "row_span": 2
+        }
+      ]
+    }
+  ]
+}

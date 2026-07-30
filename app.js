@@ -2489,7 +2489,7 @@ function paddedAxisMax(value) {
   return Math.ceil(max * 1.14);
 }
 
-function renderPedigreeCharts(pedigree, bmsLines) {
+function renderPedigreeCharts(pedigree, bmsLines, dosage) {
   const charts = pedigree.charts || {};
   const ancestorRows = [...(charts.cross_bubble || [])].sort((a, b) => b.foals - a.foals);
   const topAncestors = ancestorRows.slice(0, 15);
@@ -2548,6 +2548,57 @@ function renderPedigreeCharts(pedigree, bmsLines) {
   renderAncestorGroupedTable(charts);
 
   renderPedigreeLineageTab(pedigree, bmsLines);
+  renderDosageCharts(dosage);
+}
+
+function dosageStatusLabel(status) {
+  if (status === "verified") return "已核验";
+  if (status === "calculated") return "计算值";
+  return "待复核";
+}
+
+function renderDosageCharts(dosage) {
+  const records = (dosage?.records || []).filter((row) => row.dosage_index != null && row.center_of_distribution != null);
+  const scatter = renderChart("dosageScatterChart", {
+    color: [COLORS.duramente],
+    tooltip: {
+      trigger: "item",
+      formatter: (params) => {
+        const row = params.data.raw;
+        return `${escapeHtml(row.name)}${row.name_en ? ` / ${escapeHtml(row.name_en)}` : ""}<br>DP ${escapeHtml(row.dosage_profile_text)} (${row.dosage_points})<br>DI ${formatNumber(row.dosage_index, 2)} / CD ${formatNumber(row.center_of_distribution, 2)}<br>${dosageStatusLabel(row.status)}`;
+      },
+    },
+    grid: { left: 62, right: 28, top: 28, bottom: 54, containLabel: true },
+    xAxis: { type: "value", name: "DI", nameLocation: "middle", nameGap: 34, scale: true },
+    yAxis: { type: "value", name: "CD", nameLocation: "middle", nameGap: 44, scale: true },
+    series: [{
+      type: "scatter",
+      data: records.map((row) => ({
+        value: [row.dosage_index, row.center_of_distribution, row.dosage_points],
+        raw: row,
+        symbolSize: Math.max(7, Math.min(24, 5 + Math.sqrt(row.dosage_points || 0) * 2.4)),
+        itemStyle: { opacity: row.status === "verified" ? 0.86 : 0.55 },
+      })),
+    }],
+  });
+  scatter?.on("click", (params) => openHorse(params.data.raw.horse_id));
+
+  const labels = ["B", "I", "C", "S", "P"];
+  const totals = labels.map((_, index) => records.reduce((sum, row) => sum + Number(row.dosage_profile?.[index] || 0), 0));
+  renderChart("dosageProfileChart", {
+    color: [COLORS.duramente, COLORS.coral, COLORS.gold, COLORS.blue, COLORS.plum],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
+    grid: { left: 52, right: 24, top: 24, bottom: 48, containLabel: true },
+    xAxis: { type: "category", data: labels, name: "DP分类" },
+    yAxis: { type: "value", name: "平均点数" },
+    series: [{
+      type: "bar",
+      barMaxWidth: 42,
+      data: totals.map((value) => records.length ? Number((value / records.length).toFixed(2)) : 0),
+      itemStyle: { color: (params) => [COLORS.duramente, COLORS.coral, COLORS.gold, COLORS.blue, COLORS.plum][params.dataIndex] },
+      label: safeTopBarLabel((params) => formatNumber(params.value, 2)),
+    }],
+  });
 }
 
 function ancestorMetricLabel(row, metric) {
@@ -2875,10 +2926,11 @@ function renderDamAgeCharts(damAge) {
 
 async function renderPedigreeAnalysis() {
   if (els.pedigreeContent.dataset.loaded) return;
-  const [pedigree, bmsLines, broodmareSires] = await Promise.all([
+  const [pedigree, bmsLines, broodmareSires, dosage] = await Promise.all([
     getAnalytics("pedigree"),
     getAnalytics("bms_lines"),
     getAnalytics("broodmare_sires"),
+    getAnalytics("dosage"),
   ]);
   const cross = pedigree.cross;
   const ancestorOptions = [...new Set((pedigree.charts?.ancestor_form_comparison || []).map((row) => row.ancestor).filter(Boolean))]
@@ -2970,6 +3022,32 @@ async function renderPedigreeAnalysis() {
       </div>
       <div id="pedigreeLineagePanel"></div>`
     )}
+    ${sectionBlock("DP・DI・CD", "从速度到耐力观察四代父系祖先的倾向分布。",
+      `<div class="metric-grid dosage-metrics">
+        ${metricCard("已计算", formatNumber(dosage.coverage?.with_values || 0), `全库 ${formatNumber(dosage.coverage?.horses || 0)} 匹`)}
+        ${metricCard("外部核验", formatNumber(dosage.coverage?.verified || 0), "与 PedigreeQuery 一致")}
+        ${metricCard("DI 中位数", formatNumber(dosage.summary?.di_median, 2), "速度／耐力比")}
+        ${metricCard("CD 中位数", formatNumber(dosage.summary?.cd_median, 2), "分布中心")}
+      </div>
+      <div class="chart-grid">
+        ${chartBlock("DI 与 CD 分布", "每个点代表一匹产驹，点的大小反映DP总点数。", "dosageScatterChart")}
+        ${chartBlock("平均DP构成", "比较Brilliant至Professional五类倾向。", "dosageProfileChart")}
+      </div>
+      <details class="analysis-block dosage-detail-table">
+        <summary>查看DP・DI・CD明细</summary>
+        ${analysisTable([
+          { label: "马名", className: "name-column", value: (row) => `<button type="button" class="link-button" data-open-horse="${row.horse_id}">${escapeHtml(row.name)}</button>`, html: true },
+          { label: "English", className: "name-column", value: (row) => row.name_en || "—" },
+          { label: "DP", value: (row) => row.dosage_profile_text || "—" },
+          { label: "总点数", value: (row) => row.dosage_points ?? "—" },
+          { label: "DI", value: (row) => row.dosage_index == null ? "—" : formatNumber(row.dosage_index, 2) },
+          { label: "CD", value: (row) => row.center_of_distribution == null ? "—" : formatNumber(row.center_of_distribution, 2) },
+          { label: "状态", value: (row) => dosageStatusLabel(row.status) },
+          { label: "核验", value: (row) => row.source_url ? `<a href="${escapeHtml(row.source_url)}" target="_blank" rel="noopener noreferrer">PedigreeQuery</a>` : "—", html: true },
+        ], dosage.records || [], { initialLimit: 10 })}
+      </details>
+      <p class="chart-note">Chef-de-Race ${escapeHtml(dosage.chef_version || "")}；DI与CD公式及缺失记录见数据与方法。</p>`
+    )}
     <details class="analysis-block">
       <summary>查看完整Cross明细</summary>
       <div class="detail-table-stack">
@@ -3014,7 +3092,7 @@ async function renderPedigreeAnalysis() {
     </details>
   `;
   wireExpandableTables(els.pedigreeContent);
-  const rerender = () => renderPedigreeCharts(pedigree, bmsLines);
+  const rerender = () => renderPedigreeCharts(pedigree, bmsLines, dosage);
   for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorShowSmall", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("input", debounce(rerender));
@@ -3033,7 +3111,10 @@ async function renderPedigreeAnalysis() {
       renderPedigreeLineageTab(pedigree, bmsLines);
     });
   }
-  renderPedigreeCharts(pedigree, bmsLines);
+  for (const button of els.pedigreeContent.querySelectorAll("[data-open-horse]")) {
+    button.addEventListener("click", () => openHorse(button.dataset.openHorse));
+  }
+  renderPedigreeCharts(pedigree, bmsLines, dosage);
   els.pedigreeContent.dataset.loaded = "true";
 }
 
@@ -4030,6 +4111,10 @@ async function openHorse(id) {
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分類")}</strong></div>
       <div class="fact fact-cross"><span>クロス</span><strong>${crossItems(horse.pedigree_crosses)}</strong></div>
+      ${horse.dosage_profile ? `<div class="fact"><span>DP</span><strong>${escapeHtml(horse.dosage_profile)} (${escapeHtml(horse.dosage_points)})</strong></div>` : ""}
+      ${horse.dosage_index != null ? `<div class="fact"><span>DI</span><strong>${escapeHtml(formatNumber(horse.dosage_index, 2))}</strong></div>` : ""}
+      ${horse.center_of_distribution != null ? `<div class="fact"><span>CD</span><strong>${escapeHtml(formatNumber(horse.center_of_distribution, 2))}</strong></div>` : ""}
+      ${horse.dosage_profile ? `<div class="fact"><span>Dosage状态</span><strong>${horse.dosage_source_url ? `<a href="${escapeHtml(horse.dosage_source_url)}" target="_blank" rel="noopener noreferrer">${dosageStatusLabel(horse.dosage_status)}</a>` : dosageStatusLabel(horse.dosage_status)}</strong></div>` : ""}
       <div class="fact"><span>馬主</span><strong>${ownerCell(horse)}</strong></div>
       <div class="fact"><span>調教師</span><strong>${escapeHtml(horse.trainer)}</strong></div>
       <div class="fact"><span>生産牧場</span><strong>${escapeHtml(horse.breeder)}</strong></div>

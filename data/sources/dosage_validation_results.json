@@ -1,0 +1,1217 @@
+{
+  "sample_count": 40,
+  "matched_sample_count": 39,
+  "verified_count": 39,
+  "review_count": 0,
+  "records": [
+    {
+      "horse_id": 13,
+      "name": "シャンパンカラー",
+      "name_en": "Champagne Color",
+      "source_url": "https://www.pedigreequery.com/champagne+color",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          1,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.3
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          1,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.3
+      }
+    },
+    {
+      "horse_id": 15,
+      "name": "バーデンヴァイラー",
+      "name_en": "Badenweiler",
+      "source_url": "https://www.pedigreequery.com/badenweiler2",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1,
+        "center_of_distribution": 0.2
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.0,
+        "center_of_distribution": 0.2
+      }
+    },
+    {
+      "horse_id": 17,
+      "name": "アリーヴォ",
+      "name_en": "Arrivo",
+      "source_url": "https://www.pedigreequery.com/arrivo5",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          1,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.5,
+        "center_of_distribution": 0.5
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          1,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.5,
+        "center_of_distribution": 0.5
+      }
+    },
+    {
+      "horse_id": 21,
+      "name": "アヴェラーレ",
+      "name_en": "Avverare",
+      "source_url": "https://www.pedigreequery.com/avverare",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          4,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.63
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          4,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.63
+      }
+    },
+    {
+      "horse_id": 23,
+      "name": "ブレイヴロッカー",
+      "name_en": "Brave Rocker",
+      "source_url": "https://www.pedigreequery.com/brave+rocker",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          1,
+          8,
+          3,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.29,
+        "center_of_distribution": 0.38
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          1,
+          8,
+          3,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.29,
+        "center_of_distribution": 0.38
+      }
+    },
+    {
+      "horse_id": 51,
+      "name": "アスクシュタイン",
+      "name_en": "Ask Stein",
+      "source_url": "https://www.pedigreequery.com/ask+stein",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          1,
+          5,
+          3,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          1,
+          5,
+          3,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      }
+    },
+    {
+      "horse_id": 60,
+      "name": "ベルクレスタ",
+      "name_en": "Belle Cresta",
+      "source_url": "https://www.pedigreequery.com/belle+cresta",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          6,
+          0,
+          7,
+          3,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.46,
+        "center_of_distribution": 0.56
+      },
+      "calculated": {
+        "dosage_profile": [
+          6,
+          0,
+          7,
+          3,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.46,
+        "center_of_distribution": 0.56
+      }
+    },
+    {
+      "horse_id": 68,
+      "name": "カリーニョ",
+      "name_en": "Carino",
+      "source_url": "https://www.pedigreequery.com/carino23",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      }
+    },
+    {
+      "horse_id": 76,
+      "name": "アスクドゥラメンテ",
+      "name_en": "Ask Duramente",
+      "source_url": "https://www.pedigreequery.com/ask+duramente",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          3,
+          8,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.67,
+        "center_of_distribution": 0.44
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          3,
+          8,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.67,
+        "center_of_distribution": 0.44
+      }
+    },
+    {
+      "horse_id": 83,
+      "name": "アスコルターレ",
+      "name_en": "Ascoltare",
+      "source_url": "https://www.pedigreequery.com/ascoltare",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          1,
+          9,
+          4,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.12,
+        "center_of_distribution": 0.28
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          1,
+          9,
+          4,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.12,
+        "center_of_distribution": 0.28
+      }
+    },
+    {
+      "horse_id": 88,
+      "name": "バトルハーデン",
+      "name_en": "Battle Harden",
+      "source_url": "https://www.pedigreequery.com/battle+harden",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          7,
+          1,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.86,
+        "center_of_distribution": 0.65
+      },
+      "calculated": {
+        "dosage_profile": [
+          7,
+          1,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.86,
+        "center_of_distribution": 0.65
+      }
+    },
+    {
+      "horse_id": 113,
+      "name": "アドマイヤザーゲ",
+      "name_en": "Admire Sage",
+      "source_url": "https://www.pedigreequery.com/admire+sage",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          1,
+          16,
+          2,
+          0
+        ],
+        "dosage_points": 22,
+        "dosage_index": 1.2,
+        "center_of_distribution": 0.23
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          1,
+          16,
+          2,
+          0
+        ],
+        "dosage_points": 22,
+        "dosage_index": 1.2,
+        "center_of_distribution": 0.23
+      }
+    },
+    {
+      "horse_id": 130,
+      "name": "ベッラアルバ",
+      "name_en": "Bella Alba",
+      "source_url": "https://www.pedigreequery.com/bella+alba",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          2,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.33
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          2,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.33
+      }
+    },
+    {
+      "horse_id": 131,
+      "name": "ベストフィーリング",
+      "name_en": "Best Feeling",
+      "source_url": "https://www.pedigreequery.com/best+feeling",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.42
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.42
+      }
+    },
+    {
+      "horse_id": 136,
+      "name": "クリーンスイープ",
+      "name_en": "Clean Sweep",
+      "source_url": "https://www.pedigreequery.com/clean+sweep17",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      }
+    },
+    {
+      "horse_id": 139,
+      "name": "アウリガテソーロ",
+      "name_en": "Auriga Tesoro",
+      "source_url": "https://www.pedigreequery.com/auriga+tesoro",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          4,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.86,
+        "center_of_distribution": 0.5
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          4,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.86,
+        "center_of_distribution": 0.5
+      }
+    },
+    {
+      "horse_id": 152,
+      "name": "コスタレイ",
+      "name_en": "Costa Rei",
+      "source_url": "https://www.pedigreequery.com/costa+rei",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          3,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.55,
+        "center_of_distribution": 0.36
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          3,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.55,
+        "center_of_distribution": 0.36
+      }
+    },
+    {
+      "horse_id": 162,
+      "name": "アロヒアリイ",
+      "name_en": "Alohi Alii",
+      "source_url": "https://www.pedigreequery.com/alohi+alii",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1,
+        "center_of_distribution": 0.25
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1.0,
+        "center_of_distribution": 0.25
+      }
+    },
+    {
+      "horse_id": 175,
+      "name": "アイノセンシ",
+      "name_en": "Aino Senshi",
+      "source_url": "https://www.pedigreequery.com/aino+senshi",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          11,
+          5,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 0.71,
+        "center_of_distribution": -0.06
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          11,
+          5,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 0.71,
+        "center_of_distribution": -0.06
+      }
+    },
+    {
+      "horse_id": 194,
+      "name": "キアラメンテ",
+      "name_en": "Chiaramente",
+      "source_url": "https://www.pedigreequery.com/chiaramente",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      }
+    },
+    {
+      "horse_id": 201,
+      "name": "エイシンデュエラー",
+      "name_en": "A Shin Dueler",
+      "source_url": "https://www.pedigreequery.com/a+shin+dueler",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          6,
+          9,
+          14,
+          3,
+          0
+        ],
+        "dosage_points": 32,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.56
+      },
+      "calculated": {
+        "dosage_profile": [
+          6,
+          9,
+          14,
+          3,
+          0
+        ],
+        "dosage_points": 32,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.56
+      }
+    },
+    {
+      "horse_id": 203,
+      "name": "クラッチプレイヤー",
+      "name_en": "Clutch Player",
+      "source_url": "https://www.pedigreequery.com/clutch+player4",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1,
+        "center_of_distribution": 0.25
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1.0,
+        "center_of_distribution": 0.25
+      }
+    },
+    {
+      "horse_id": 214,
+      "name": "クープラン",
+      "name_en": "Couperin",
+      "source_url": "https://www.pedigreequery.com/couperin3",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          1,
+          13,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.12,
+        "center_of_distribution": 0.17
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          1,
+          13,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.12,
+        "center_of_distribution": 0.17
+      }
+    },
+    {
+      "horse_id": 240,
+      "name": "アオイシチフク",
+      "name_en": "Aoi Shichifuku",
+      "source_url": "https://www.pedigreequery.com/aoi+shichifuku",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          5,
+          3,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.69
+      },
+      "calculated": {
+        "dosage_profile": [
+          5,
+          3,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 2.2,
+        "center_of_distribution": 0.69
+      }
+    },
+    {
+      "horse_id": 255,
+      "name": "カンバーランド",
+      "name_en": "Cumberland",
+      "source_url": "https://www.pedigreequery.com/cumberland15",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          5,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.8,
+        "center_of_distribution": 0.64
+      },
+      "calculated": {
+        "dosage_profile": [
+          5,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.8,
+        "center_of_distribution": 0.64
+      }
+    },
+    {
+      "horse_id": 278,
+      "name": "コンドライト",
+      "name_en": "Chondrite",
+      "source_url": "https://www.pedigreequery.com/chondrite",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1,
+        "center_of_distribution": 0.2
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.0,
+        "center_of_distribution": 0.2
+      }
+    },
+    {
+      "horse_id": 303,
+      "name": "アスクムービーオン",
+      "name_en": "Ask Movie On",
+      "source_url": "https://www.pedigreequery.com/ask+movie+on",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      }
+    },
+    {
+      "horse_id": 376,
+      "name": "アナベル",
+      "name_en": "Annabelle",
+      "source_url": "https://www.pedigreequery.com/annabelle22",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.42
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          1,
+          6,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.42
+      }
+    },
+    {
+      "horse_id": 381,
+      "name": "バロンゾラーレ",
+      "name_en": "Ballonzolare",
+      "source_url": "https://www.pedigreequery.com/ballonzolare",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          2,
+          13,
+          3,
+          0
+        ],
+        "dosage_points": 22,
+        "dosage_index": 1.32,
+        "center_of_distribution": 0.32
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          2,
+          13,
+          3,
+          0
+        ],
+        "dosage_points": 22,
+        "dosage_index": 1.32,
+        "center_of_distribution": 0.32
+      }
+    },
+    {
+      "horse_id": 384,
+      "name": "バーガンディ",
+      "name_en": "Burgundy",
+      "source_url": "https://www.pedigreequery.com/burgundy20",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 12,
+        "dosage_index": 1.18,
+        "center_of_distribution": 0.33
+      }
+    },
+    {
+      "horse_id": 389,
+      "name": "ブルースバローズ",
+      "name_en": "Bruce Barows",
+      "source_url": "https://www.pedigreequery.com/bruce+barows2",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          7,
+          2,
+          13,
+          2,
+          0
+        ],
+        "dosage_points": 24,
+        "dosage_index": 1.82,
+        "center_of_distribution": 0.58
+      },
+      "calculated": {
+        "dosage_profile": [
+          7,
+          2,
+          13,
+          2,
+          0
+        ],
+        "dosage_points": 24,
+        "dosage_index": 1.82,
+        "center_of_distribution": 0.58
+      }
+    },
+    {
+      "horse_id": 404,
+      "name": "アレグリッシモ",
+      "name_en": "Allegrissimo",
+      "source_url": "https://www.pedigreequery.com/allegrissimo2",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          2,
+          16,
+          2,
+          0
+        ],
+        "dosage_points": 24,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.33
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          2,
+          16,
+          2,
+          0
+        ],
+        "dosage_points": 24,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.33
+      }
+    },
+    {
+      "horse_id": 432,
+      "name": "オールユアーズ",
+      "name_en": "All Yours",
+      "source_url": "https://www.pedigreequery.com/all+yours10",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          1,
+          6,
+          3,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.33,
+        "center_of_distribution": 0.43
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          1,
+          6,
+          3,
+          0
+        ],
+        "dosage_points": 14,
+        "dosage_index": 1.33,
+        "center_of_distribution": 0.43
+      }
+    },
+    {
+      "horse_id": 439,
+      "name": "アスクミーホワイ",
+      "name_en": "Ask Me Why",
+      "source_url": "https://www.pedigreequery.com/ask+me+why7",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      },
+      "calculated": {
+        "dosage_profile": [
+          3,
+          0,
+          5,
+          2,
+          0
+        ],
+        "dosage_points": 10,
+        "dosage_index": 1.22,
+        "center_of_distribution": 0.4
+      }
+    },
+    {
+      "horse_id": 447,
+      "name": "チェリーオントップ",
+      "name_en": "Cherry on Top",
+      "source_url": "https://www.pedigreequery.com/cherry+on+top9",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          5,
+          0,
+          11,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.44
+      },
+      "calculated": {
+        "dosage_profile": [
+          5,
+          0,
+          11,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.4,
+        "center_of_distribution": 0.44
+      }
+    },
+    {
+      "horse_id": 495,
+      "name": "クラッパーボード",
+      "name_en": "Clapperboard",
+      "source_url": "https://www.pedigreequery.com/clapperboard2",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          5,
+          2,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.91,
+        "center_of_distribution": 0.63
+      },
+      "calculated": {
+        "dosage_profile": [
+          5,
+          2,
+          7,
+          2,
+          0
+        ],
+        "dosage_points": 16,
+        "dosage_index": 1.91,
+        "center_of_distribution": 0.63
+      }
+    },
+    {
+      "horse_id": 723,
+      "name": "アビリティ",
+      "name_en": "Ability",
+      "source_url": "https://www.pedigreequery.com/ability21",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1,
+        "center_of_distribution": 0.25
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          0,
+          4,
+          2,
+          0
+        ],
+        "dosage_points": 8,
+        "dosage_index": 1.0,
+        "center_of_distribution": 0.25
+      }
+    },
+    {
+      "horse_id": 588,
+      "name": "アントワーク",
+      "name_en": "Antwerk",
+      "source_url": "https://www.pedigreequery.com/antwerk",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          4,
+          2,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.57,
+        "center_of_distribution": 0.44
+      },
+      "calculated": {
+        "dosage_profile": [
+          4,
+          2,
+          10,
+          2,
+          0
+        ],
+        "dosage_points": 18,
+        "dosage_index": 1.57,
+        "center_of_distribution": 0.44
+      }
+    },
+    {
+      "horse_id": 698,
+      "name": "アートワーク",
+      "name_en": "Artwork",
+      "source_url": "https://www.pedigreequery.com/artwork10",
+      "status": "verified",
+      "expected": {
+        "dosage_profile": [
+          2,
+          8,
+          4,
+          6,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.5,
+        "center_of_distribution": 0.3
+      },
+      "calculated": {
+        "dosage_profile": [
+          2,
+          8,
+          4,
+          6,
+          0
+        ],
+        "dosage_points": 20,
+        "dosage_index": 1.5,
+        "center_of_distribution": 0.3
+      }
+    }
+  ]
+}

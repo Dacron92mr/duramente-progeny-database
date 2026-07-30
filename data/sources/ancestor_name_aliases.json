@@ -1,0 +1,829 @@
+{
+  "version": "international-2026-04",
+  "aliases": [
+    {
+      "jbis_id": "0000339653",
+      "canonical": "A.P. INDY",
+      "aliases": [
+        "A.P. INDY",
+        "A.P. Indy(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000333910",
+      "canonical": "ACK ACK",
+      "aliases": [
+        "ACK ACK",
+        "Ack Ack(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335203",
+      "canonical": "ALLEGED",
+      "aliases": [
+        "ALLEGED",
+        "Alleged(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336305",
+      "canonical": "ALYDAR",
+      "aliases": [
+        "ALYDAR",
+        "Alydar(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000369802",
+      "canonical": "ARCH",
+      "aliases": [
+        "ARCH",
+        "Arch(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000369512",
+      "canonical": "AWESOME AGAIN",
+      "aliases": [
+        "AWESOME AGAIN",
+        "Awesome Again(CAN)"
+      ]
+    },
+    {
+      "jbis_id": "0000337244",
+      "canonical": "BALDSKI",
+      "aliases": [
+        "BALDSKI",
+        "Baldski(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335970",
+      "canonical": "BEST TURN",
+      "aliases": [
+        "BEST TURN",
+        "Best Turn(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335274",
+      "canonical": "BLUSHING GROOM",
+      "aliases": [
+        "BLUSHING GROOM",
+        "Blushing Groom(FR)"
+      ]
+    },
+    {
+      "jbis_id": "0000339781",
+      "canonical": "BOLD RUCKUS",
+      "aliases": [
+        "BOLD RUCKUS",
+        "Bold Ruckus(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000343734",
+      "canonical": "BROAD BRUSH",
+      "aliases": [
+        "BROAD BRUSH",
+        "Broad Brush(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336423",
+      "canonical": "BUCKAROO",
+      "aliases": [
+        "BUCKAROO",
+        "Buckaroo(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334012",
+      "canonical": "BUCKPASSER",
+      "aliases": [
+        "BUCKPASSER",
+        "Buckpasser(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334011",
+      "canonical": "BUSTED",
+      "aliases": [
+        "BUSTED",
+        "Busted(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000965271",
+      "canonical": "CANDY RIDE",
+      "aliases": [
+        "CANDY RIDE",
+        "Candy Ride(ARG)"
+      ]
+    },
+    {
+      "jbis_id": "0000363470",
+      "canonical": "CAPE CROSS",
+      "aliases": [
+        "CAPE CROSS",
+        "Cape Cross(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000334731",
+      "canonical": "CARO",
+      "aliases": [
+        "CARO",
+        "Caro(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000341849",
+      "canonical": "CARSON CITY",
+      "aliases": [
+        "CARSON CITY",
+        "Carson City(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337339",
+      "canonical": "CHIEF'S CROWN",
+      "aliases": [
+        "CHIEF'S CROWN",
+        "Chief's Crown(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337423",
+      "canonical": "COZZENE",
+      "aliases": [
+        "COZZENE",
+        "Cozzene(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0001051353",
+      "canonical": "CURLIN",
+      "aliases": [
+        "CURLIN",
+        "Curlin(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334660",
+      "canonical": "DAMASCUS",
+      "aliases": [
+        "DAMASCUS",
+        "Damascus(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336082",
+      "canonical": "DANZIG",
+      "aliases": [
+        "DANZIG",
+        "Danzig(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336887",
+      "canonical": "DARSHAAN",
+      "aliases": [
+        "DARSHAAN",
+        "Darshaan(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000365171",
+      "canonical": "DISTORTED HUMOR",
+      "aliases": [
+        "DISTORTED HUMOR",
+        "Distorted Humor(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334860",
+      "canonical": "DR. FAGER",
+      "aliases": [
+        "DR. FAGER",
+        "Dr. Fager(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0001111493",
+      "canonical": "DUBAWI",
+      "aliases": [
+        "DUBAWI",
+        "Dubawi(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000342430",
+      "canonical": "DYNAFORMER",
+      "aliases": [
+        "DYNAFORMER",
+        "Dynaformer(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000340508",
+      "canonical": "EL PRADO",
+      "aliases": [
+        "EL PRADO",
+        "El Prado(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000336370",
+      "canonical": "ELA-MANA-MOU",
+      "aliases": [
+        "ELA-MANA-MOU",
+        "Ela-Mana-Mou(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000364615",
+      "canonical": "ELUSIVE QUALITY",
+      "aliases": [
+        "ELUSIVE QUALITY",
+        "Elusive Quality(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334242",
+      "canonical": "EXCLUSIVE NATIVE",
+      "aliases": [
+        "EXCLUSIVE NATIVE",
+        "Exclusive Native(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336225",
+      "canonical": "FAPPIANO",
+      "aliases": [
+        "FAPPIANO",
+        "Fappiano(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000372671",
+      "canonical": "FORESTRY",
+      "aliases": [
+        "FORESTRY",
+        "Forestry(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334262",
+      "canonical": "FORLI",
+      "aliases": [
+        "FORLI",
+        "Forli(ARG)"
+      ]
+    },
+    {
+      "jbis_id": "0000714343",
+      "canonical": "GALILEO",
+      "aliases": [
+        "GALILEO",
+        "Galileo(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000372708",
+      "canonical": "GIANTS CAUSEWAY",
+      "aliases": [
+        "GIANTS CAUSEWAY",
+        "Giant's Causeway(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337432",
+      "canonical": "GONE WEST",
+      "aliases": [
+        "GONE WEST",
+        "Gone West(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334999",
+      "canonical": "GRAUSTARK",
+      "aliases": [
+        "GRAUSTARK",
+        "Graustark(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337135",
+      "canonical": "GREAT ABOVE",
+      "aliases": [
+        "GREAT ABOVE",
+        "Great Above(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334282",
+      "canonical": "GREY DAWN",
+      "aliases": [
+        "GREY DAWN",
+        "Grey Dawn(FR)"
+      ]
+    },
+    {
+      "jbis_id": "0000334285",
+      "canonical": "HABITAT",
+      "aliases": [
+        "HABITAT",
+        "Habitat(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334286",
+      "canonical": "HAIL TO REASON",
+      "aliases": [
+        "HAIL TO REASON",
+        "Hail to Reason(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335154",
+      "canonical": "HALO",
+      "aliases": [
+        "HALO",
+        "Halo(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335937",
+      "canonical": "HIGH TOP",
+      "aliases": [
+        "HIGH TOP",
+        "High Top(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000335990",
+      "canonical": "HIS MAJESTY",
+      "aliases": [
+        "HIS MAJESTY",
+        "His Majesty(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334747",
+      "canonical": "ICECAPADE",
+      "aliases": [
+        "ICECAPADE",
+        "Icecapade(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000339710",
+      "canonical": "IN EXCESS",
+      "aliases": [
+        "IN EXCESS",
+        "In Excess(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000334720",
+      "canonical": "IN REALITY",
+      "aliases": [
+        "IN REALITY",
+        "In Reality(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000341850",
+      "canonical": "IN THE WINGS",
+      "aliases": [
+        "IN THE WINGS",
+        "In The Wings(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000342656",
+      "canonical": "INDIAN RIDGE",
+      "aliases": [
+        "INDIAN RIDGE",
+        "Indian Ridge(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0001084779",
+      "canonical": "INTO MISCHIEF",
+      "aliases": [
+        "INTO MISCHIEF",
+        "Into Mischief(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334745",
+      "canonical": "KEY TO THE MINT",
+      "aliases": [
+        "KEY TO THE MINT",
+        "Key to the Mint(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000347989",
+      "canonical": "KINGMAMBO",
+      "aliases": [
+        "KINGMAMBO",
+        "Kingmambo(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000979726",
+      "canonical": "KITTEN'S JOY",
+      "aliases": [
+        "KITTEN'S JOY",
+        "Kitten's Joy(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334064",
+      "canonical": "LE FABULEUX",
+      "aliases": [
+        "LE FABULEUX",
+        "Le Fabuleux(FR)"
+      ]
+    },
+    {
+      "jbis_id": "0000341901",
+      "canonical": "LINAMIX",
+      "aliases": [
+        "LINAMIX",
+        "Linamix(FR)"
+      ]
+    },
+    {
+      "jbis_id": "0000335915",
+      "canonical": "LORD AVIE",
+      "aliases": [
+        "LORD AVIE",
+        "Lord Avie(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334968",
+      "canonical": "LYPHARD",
+      "aliases": [
+        "LYPHARD",
+        "Lyphard(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000721553",
+      "canonical": "MEDAGLIA D'ORO",
+      "aliases": [
+        "MEDAGLIA D'ORO",
+        "Medaglia d'Oro(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334047",
+      "canonical": "MILL REEF",
+      "aliases": [
+        "MILL REEF",
+        "Mill Reef(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000361091",
+      "canonical": "MONSUN",
+      "aliases": [
+        "MONSUN",
+        "Monsun(GER)"
+      ]
+    },
+    {
+      "jbis_id": "0000369845",
+      "canonical": "MONTJEU",
+      "aliases": [
+        "MONTJEU",
+        "Montjeu(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0000372626",
+      "canonical": "MORE THAN READY",
+      "aliases": [
+        "MORE THAN READY",
+        "More Than Ready(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335975",
+      "canonical": "MR. PROSPECTOR",
+      "aliases": [
+        "MR. PROSPECTOR",
+        "Mr. Prospector(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334001",
+      "canonical": "NEVER BEND",
+      "aliases": [
+        "NEVER BEND",
+        "Never Bend(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000333996",
+      "canonical": "NIJINSKY",
+      "aliases": [
+        "NIJINSKY",
+        "Nijinsky(CAN)"
+      ]
+    },
+    {
+      "jbis_id": "0000336870",
+      "canonical": "NINISKI",
+      "aliases": [
+        "NINISKI",
+        "Niniski(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334002",
+      "canonical": "NORTHERN DANCER",
+      "aliases": [
+        "NORTHERN DANCER",
+        "Northern Dancer(CAN)"
+      ]
+    },
+    {
+      "jbis_id": "0000336085",
+      "canonical": "NUREYEV",
+      "aliases": [
+        "NUREYEV",
+        "Nureyev(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000365118",
+      "canonical": "PIVOTAL",
+      "aliases": [
+        "PIVOTAL",
+        "Pivotal(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000335991",
+      "canonical": "PLEASANT COLONY",
+      "aliases": [
+        "PLEASANT COLONY",
+        "Pleasant Colony(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337958",
+      "canonical": "PULPIT",
+      "aliases": [
+        "PULPIT",
+        "Pulpit(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000341573",
+      "canonical": "QUIET AMERICAN",
+      "aliases": [
+        "QUIET AMERICAN",
+        "Quiet American(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000337286",
+      "canonical": "RAINBOW QUEST",
+      "aliases": [
+        "RAINBOW QUEST",
+        "Rainbow Quest(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334066",
+      "canonical": "RAISE A NATIVE",
+      "aliases": [
+        "RAISE A NATIVE",
+        "Raise a Native(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000346241",
+      "canonical": "RELIANCE",
+      "aliases": [
+        "RELIANCE",
+        "Reliance(FR)"
+      ]
+    },
+    {
+      "jbis_id": "0000334067",
+      "canonical": "REVIEWER",
+      "aliases": [
+        "REVIEWER",
+        "Reviewer(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334457",
+      "canonical": "RIBOT",
+      "aliases": [
+        "RIBOT",
+        "Ribot(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000335664",
+      "canonical": "RIVERMAN",
+      "aliases": [
+        "RIVERMAN",
+        "Riverman(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335167",
+      "canonical": "ROBERTO",
+      "aliases": [
+        "ROBERTO",
+        "Roberto(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000345057",
+      "canonical": "ROUND TABLE",
+      "aliases": [
+        "ROUND TABLE",
+        "Round Table(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000341457",
+      "canonical": "ROYAL ACADEMY",
+      "aliases": [
+        "ROYAL ACADEMY",
+        "ロイヤルアカデミーⅡ(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336572",
+      "canonical": "SADLERS WELLS",
+      "aliases": [
+        "SADLERS WELLS",
+        "Sadler's Wells(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0001003260",
+      "canonical": "SCAT DADDY",
+      "aliases": [
+        "SCAT DADDY",
+        "Scat Daddy(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000335964",
+      "canonical": "SEATTLE SLEW",
+      "aliases": [
+        "SEATTLE SLEW",
+        "Seattle Slew(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000333978",
+      "canonical": "SECRETARIAT",
+      "aliases": [
+        "SECRETARIAT",
+        "Secretariat(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336086",
+      "canonical": "SHARPEN UP",
+      "aliases": [
+        "SHARPEN UP",
+        "Sharpen Up(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000335305",
+      "canonical": "SHIRLEY HEIGHTS",
+      "aliases": [
+        "SHIRLEY HEIGHTS",
+        "Shirley Heights(GB)"
+      ]
+    },
+    {
+      "jbis_id": "0000333957",
+      "canonical": "SIR IVOR",
+      "aliases": [
+        "SIR IVOR",
+        "Sir Ivor(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000336745",
+      "canonical": "SLEWPY",
+      "aliases": [
+        "SLEWPY",
+        "Slewpy(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000365210",
+      "canonical": "SMART STRIKE",
+      "aliases": [
+        "SMART STRIKE",
+        "Smart Strike(CAN)"
+      ]
+    },
+    {
+      "jbis_id": "0000719250",
+      "canonical": "SPEIGHTSTOWN",
+      "aliases": [
+        "SPEIGHTSTOWN",
+        "Speightstown(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000621983",
+      "canonical": "STREET CRY",
+      "aliases": [
+        "STREET CRY",
+        "Street Cry(IRE)"
+      ]
+    },
+    {
+      "jbis_id": "0001031979",
+      "canonical": "STREET SENSE",
+      "aliases": [
+        "STREET SENSE",
+        "ストリートセンス(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000849372",
+      "canonical": "TAPIT",
+      "aliases": [
+        "TAPIT",
+        "Tapit(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000361977",
+      "canonical": "THUNDER GULCH",
+      "aliases": [
+        "THUNDER GULCH",
+        "サンダーガルチ(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000621100",
+      "canonical": "TIZNOW",
+      "aliases": [
+        "TIZNOW",
+        "Tiznow(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000334546",
+      "canonical": "TOM ROLFE",
+      "aliases": [
+        "TOM ROLFE",
+        "Tom Rolfe(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0001164410",
+      "canonical": "TWIRLING CANDY",
+      "aliases": [
+        "TWIRLING CANDY",
+        "Twirling Candy(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000340629",
+      "canonical": "UNBRIDLED",
+      "aliases": [
+        "UNBRIDLED",
+        "Unbridled(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000361396",
+      "canonical": "UNBRIDLEDS SONG",
+      "aliases": [
+        "UNBRIDLEDS SONG",
+        "Unbridled's Song(USA)"
+      ]
+    },
+    {
+      "jbis_id": "0000333923",
+      "canonical": "VAGUELY NOBLE",
+      "aliases": [
+        "VAGUELY NOBLE",
+        "Vaguely Noble(GB)"
+      ]
+    }
+  ]
+}

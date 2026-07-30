@@ -1,0 +1,165 @@
+{
+  "records": {
+    "2371": {
+      "horse": "Daiya",
+      "dam": "Bulbinella",
+      "dam_jbis_id": "0001187588",
+      "status": "downloaded",
+      "basis": "horse_record",
+      "source_url": "https://www.jbis.or.jp/horse/0001187588/pedigree/"
+    },
+    "603": {
+      "horse": "アンブラッセモワの2018",
+      "dam": "アンブラッセモワ",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2018106323/"
+    },
+    "645": {
+      "horse": "エステフの2019",
+      "dam": "エステフ",
+      "dam_jbis_id": "0001180262",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001180262/pedigree/"
+    },
+    "693": {
+      "horse": "オンディナドバイの2021",
+      "dam": "オンディナドバイ",
+      "dam_jbis_id": "0001328107",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001328107/pedigree/"
+    },
+    "716": {
+      "horse": "オータムライラック",
+      "dam": "オータムフラワー",
+      "dam_jbis_id": "0001251734",
+      "status": "downloaded",
+      "basis": "horse_record",
+      "source_url": "https://www.jbis.or.jp/horse/0001251734/pedigree/"
+    },
+    "707": {
+      "horse": "コールミー",
+      "dam": "コールバック",
+      "dam_jbis_id": "0001300549",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001300549/pedigree/"
+    },
+    "694": {
+      "horse": "サバンナズチョイスの2021",
+      "dam": "サバンナズチョイス",
+      "dam_jbis_id": "0001113658",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001113658/pedigree/"
+    },
+    "643": {
+      "horse": "シガレットの2019",
+      "dam": "シガレット",
+      "dam_jbis_id": "0001179448",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001179448/pedigree/"
+    },
+    "574": {
+      "horse": "シードル",
+      "dam": "エキゾチックエレガンス",
+      "dam_jbis_id": "0000904534",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0000904534/pedigree/"
+    },
+    "717": {
+      "horse": "スタイルプレッサの2022",
+      "dam": "スタイルプレッサ",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2022105372/"
+    },
+    "659": {
+      "horse": "パレスルーマーの2020",
+      "dam": "パレスルーマー",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2020103533/"
+    },
+    "632": {
+      "horse": "ベルロワイヤルの2019",
+      "dam": "ベルロワイヤル",
+      "dam_jbis_id": "0001177703",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001177703/pedigree/"
+    },
+    "683": {
+      "horse": "メイデイローズの2021",
+      "dam": "メイデイローズ",
+      "dam_jbis_id": "0001133009",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001133009/pedigree/"
+    },
+    "661": {
+      "horse": "モヒニの2020",
+      "dam": "モヒニ",
+      "dam_jbis_id": "0001251695",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001251695/pedigree/"
+    },
+    "597": {
+      "horse": "ラシャンスダムール",
+      "dam": "メダリアダムール",
+      "dam_jbis_id": "0001157822",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001157822/pedigree/"
+    },
+    "618": {
+      "horse": "ラブリースターの2019",
+      "dam": "ラブリースター",
+      "dam_jbis_id": "0001109967",
+      "status": "downloaded",
+      "basis": "jbis_search_exact_name_and_sire",
+      "source_url": "https://www.jbis.or.jp/horse/0001109967/pedigree/"
+    },
+    "682": {
+      "horse": "リトルブックの2021",
+      "dam": "リトルブック",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2021104199/"
+    },
+    "719": {
+      "horse": "ルージュシャルム",
+      "dam": "ノンザ",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2022105437/"
+    },
+    "599": {
+      "horse": "レディシャツィの2018",
+      "dam": "レディシャツィ",
+      "dam_jbis_id": "0001165008",
+      "status": "downloaded",
+      "basis": "jbis_search_normalized_name",
+      "source_url": "https://www.jbis.or.jp/horse/0001165008/pedigree/"
+    },
+    "664": {
+      "horse": "レディドーヴィルの2020",
+      "dam": "レディドーヴィル",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2020103709/"
+    },
+    "630": {
+      "horse": "ワンダーフィリーの2019",
+      "dam": "ワンダーフィリー",
+      "status": "downloaded_netkeiba",
+      "basis": "netkeiba_five_generation_pedigree",
+      "source_url": "https://db.netkeiba.com/horse/ped/2019104105/"
+    }
+  }
+}
