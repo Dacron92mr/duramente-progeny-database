@@ -949,6 +949,37 @@ td {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.mini-chart-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.annual-mini-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.club-win-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mini-chart-grid .chart-card {
+  padding: 14px;
+}
+
+.mini-chart-grid .chart-canvas {
+  height: 290px;
+}
+
+.mini-chart-grid .chart-card-head h3 {
+  font-size: 16px;
+}
+
+.club-summary-metrics {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .chart-grid > .analysis-block {
   margin: 0;
 }
@@ -2091,10 +2122,15 @@ details.analysis-block summary {
   .lineage-summary,
   .analysis-split,
   .chart-grid,
+  .mini-chart-grid,
   .cross-detail-grid,
   .race-map-layout,
   .method-list {
     grid-template-columns: 1fr;
+  }
+
+  .mini-chart-grid .chart-canvas {
+    height: 320px;
   }
 
   #racecourseJapanMap {
@@ -2165,4 +2201,11 @@ details.analysis-block summary {
   .race-map-panel {
     padding: 14px;
   }
+}
+.load-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 24px;
 }

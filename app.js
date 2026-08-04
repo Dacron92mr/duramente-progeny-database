@@ -51,7 +51,6 @@ const els = {
   views: document.querySelectorAll(".view"),
   sireContent: document.querySelector("#sireContent"),
   pedigreeContent: document.querySelector("#pedigreeContent"),
-  clubContent: document.querySelector("#clubContent"),
   productionContent: document.querySelector("#productionContent"),
   racecourseContent: document.querySelector("#racecourseContent"),
   methodContent: document.querySelector("#methodContent"),
@@ -346,6 +345,8 @@ function safeAverageMarkLine(value, label = "全体", axis = "xAxis", options = 
 function lineEndpointLabel(count, formatter) {
   return {
     show: true,
+    position: "bottom",
+    distance: 10,
     formatter(params) {
       if (params.dataIndex === 0 || params.dataIndex === count - 1) {
         return formatter(params);
@@ -353,6 +354,9 @@ function lineEndpointLabel(count, formatter) {
       return "";
     },
     color: "#3b3530",
+    backgroundColor: "rgba(255,255,255,0.88)",
+    borderRadius: 3,
+    padding: [2, 4],
     fontSize: chartViewportWidth() < 520 ? 10 : 11,
     fontWeight: 650,
   };
@@ -367,9 +371,24 @@ function isStaticMode() {
 }
 
 async function fetchStaticData(path) {
-  const response = await fetch(`${staticBase()}/${path}`);
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-  return response.json();
+  const version = String(window.STATIC_DATA_VERSION || "");
+  let lastError;
+
+  for (let attempt = 0; attempt < 3; attempt += 1) {
+    const query = version ? `?v=${encodeURIComponent(version)}${attempt ? `-${attempt}` : ""}` : "";
+    try {
+      const response = await fetch(`${staticBase()}/${path}${query}`, {
+        cache: attempt === 0 ? "default" : "reload",
+      });
+      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
+      return await response.json();
+    } catch (error) {
+      lastError = error;
+      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 350 * (attempt + 1)));
+    }
+  }
+
+  throw lastError;
 }
 
 async function getStaticSummary() {
@@ -730,7 +749,12 @@ function renderChart(id, option) {
     oldChart.dispose();
   }
   const chart = window.echarts.init(el);
-  chart.setOption({ animationDuration: 450, labelLayout: { hideOverlap: true }, ...option });
+  const series = (option.series || []).map((item) => item.type === "bar" ? {
+    ...item,
+    barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
+    barCategoryGap: item.barCategoryGap || "48%",
+  } : item);
+  chart.setOption({ animationDuration: 450, labelLayout: { hideOverlap: true, moveOverlap: "shiftY" }, ...option, series });
   el.classList.add("is-rendered");
   chartRegistry.set(id, chart);
   if (!el.dataset.resizeObserved && window.ResizeObserver) {
@@ -1794,31 +1818,22 @@ function annualSeriesForMetric(metric, rows) {
 
 function renderAnnualPerformanceCharts(annualPerformance) {
   const rows = [...(annualPerformance?.annual || [])].sort((a, b) => Number(a.year) - Number(b.year));
-  const metric = document.querySelector("#annualPerformanceMetric button.active")?.dataset.metric || "wins";
-  const config = annualSeriesForMetric(metric, rows);
-  renderChart("annualPerformanceChart", {
-    color: config.legend.map((name) => ({
-      JRA: COLORS.duramente,
-      NAR: COLORS.coral,
-      海外: COLORS.gold,
-      G1: COLORS.raceLine,
-      G2: COLORS.duramente,
-      G3: COLORS.green,
-      年度奖金: COLORS.duramente,
-      出赛次数: COLORS.teal,
-      出赛马: COLORS.gold,
-    }[name] || COLORS.duramente)),
-    tooltip: {
-      trigger: "axis",
-      axisPointer: { type: "shadow" },
-      formatter: (items) => annualChartTooltip(items[0]?.data?.raw || {}),
-    },
-    legend: { top: 0, data: config.legend },
-    grid: { left: 56, right: 24, top: 54, bottom: 38, containLabel: true },
-    xAxis: { type: "category", name: "年", data: rows.map((row) => row.year) },
-    yAxis: config.yAxis,
-    series: config.series,
-  });
+  for (const metric of ["wins", "starts", "graded", "earnings"]) {
+    const config = annualSeriesForMetric(metric, rows);
+    renderChart(`annualPerformance-${metric}`, {
+      color: config.legend.map((name) => ({
+        JRA: COLORS.duramente, NAR: COLORS.coral, 海外: COLORS.gold,
+        G1: COLORS.raceLine, G2: COLORS.duramente, G3: COLORS.green,
+        年度奖金: COLORS.duramente, 出赛次数: COLORS.teal, 出赛马: COLORS.gold,
+      }[name] || COLORS.duramente)),
+      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => annualChartTooltip(items[0]?.data?.raw || {}) },
+      legend: { top: 0, data: config.legend, itemWidth: 12, itemHeight: 8, textStyle: { fontSize: 10 } },
+      grid: { left: 38, right: 12, top: 48, bottom: 32, containLabel: true },
+      xAxis: { type: "category", data: rows.map((row) => row.year), axisLabel: { fontSize: 10 } },
+      yAxis: config.yAxis.map((axis) => ({ ...axis, name: "", axisLabel: { ...(axis.axisLabel || {}), fontSize: 10 } })),
+      series: config.series.map((item) => ({ ...item, label: { ...(item.label || {}), fontSize: 9 } })),
+    });
+  }
 
   renderAnnualMilestoneTimeline(annualPerformance);
 
@@ -2199,21 +2214,12 @@ async function renderSireAnalysis() {
       ${metricCard("重赏胜马", formatNumber(profile.graded_winners), `G1 ${formatNumber(profile.g1_horses)}`)}
     </div>
     ${sectionBlock("年度別産駒成績｜年度产驹成绩", "按比赛年份观察胜场、出赛和重赏表现。",
-      `<article class="chart-card">
-        <div class="chart-card-head with-controls">
-          <div>
-            <h3>年度产驹成绩</h3>
-            <p>比赛发生年份与出生世代分开统计。</p>
-          </div>
-          <div class="segment-control compact-control" id="annualPerformanceMetric">
-            <button class="active" type="button" data-metric="wins">胜场</button>
-            <button type="button" data-metric="starts">出赛</button>
-            <button type="button" data-metric="graded">重赏</button>
-            <button type="button" data-metric="earnings">奖金</button>
-          </div>
-        </div>
-        ${chartShell("annualPerformanceChart")}
-      </article>
+      `<div class="mini-chart-grid annual-mini-grid">
+        ${chartBlock("胜场", "JRA／NAR／海外", "annualPerformance-wins")}
+        ${chartBlock("出赛", "出赛次数／出赛马", "annualPerformance-starts")}
+        ${chartBlock("重赏", "G1／G2／G3", "annualPerformance-graded")}
+        ${chartBlock("奖金", "年度奖金（万円）", "annualPerformance-earnings")}
+      </div>
       <article class="chart-card table-card">
         <div class="chart-card-head"><h3>年度明细</h3></div>
         <div id="annualPerformanceTable"></div>
@@ -2315,12 +2321,6 @@ async function renderSireAnalysis() {
   const rerender = () => renderSireCharts(sireProfile, market, leadingHistory, leadingTop10, categories, annualPerformance);
   for (const id of ["sireDevelopmentMetric", "sireLeadingCategory", "sireTop10Year"]) {
     els.sireContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
-  }
-  for (const button of els.sireContent.querySelectorAll("#annualPerformanceMetric button")) {
-    button.addEventListener("click", () => {
-      for (const peer of els.sireContent.querySelectorAll("#annualPerformanceMetric button")) peer.classList.toggle("active", peer === button);
-      renderAnnualPerformanceCharts(annualPerformance);
-    });
   }
   renderSireCharts(sireProfile, market, leadingHistory, leadingTop10, categories, annualPerformance);
   els.sireContent.dataset.loaded = "true";
@@ -3268,7 +3268,6 @@ function renderDamAgeProductionCharts(damAge) {
   if (chartNode && !document.querySelector("#damParityCoverage")) {
     chartNode.insertAdjacentHTML("afterend", `
       <p class="source-note" id="damParityCoverage"></p>
-      <div class="parity-detail-panel" id="damParityDetailPanel"></div>
     `);
   }
   const coverageNode = document.querySelector("#damParityCoverage");
@@ -3278,24 +3277,6 @@ function renderDamAgeProductionCharts(damAge) {
     const label = selectedParity.label || "胎次";
     coverageNode.textContent = `数据覆盖率：已确认 ${formatNumber(confirmed)} / 总计 ${formatNumber(total)}。${label === "登记产驹序次" ? "该口径不等同于真实生产胎次。" : "空胎、流产和未配种不计入生产胎次。"}`;
   }
-  const detailNode = document.querySelector("#damParityDetailPanel");
-  const renderParityDetail = (row) => {
-    if (!detailNode || !row) return;
-    const horses = (row.horses || []).slice(0, 18);
-    detailNode.innerHTML = `
-      <h4>${escapeHtml(selectedParity.label || "胎次")} ${escapeHtml(row.label === "unknown" ? "未知" : row.label)}</h4>
-      <p>${formatNumber(row.foals)}匹产驹，胜马 ${formatNumber(row.winners)}，重赏马 ${formatNumber(row.graded)}。</p>
-      <div class="parity-horse-list">
-        ${horses.map((horse) => `
-          <button type="button" class="link-button" data-horse-name="${escapeHtml(horse.name)}">
-            ${escapeHtml(horse.name)}${horse.hkjc_name_zh ? `（${escapeHtml(horse.hkjc_name_zh)}）` : ""}
-            <span>${escapeHtml(horse.birth_year || "")}${horse.achievement_class ? ` · ${escapeHtml(horse.achievement_class)}` : ""}</span>
-          </button>
-        `).join("")}
-      </div>
-    `;
-    wireAnalysisFilters(detailNode);
-  };
   for (const button of parityButtons) {
     if (button.dataset.parityWired === "true") continue;
     button.dataset.parityWired = "true";
@@ -3330,22 +3311,19 @@ function renderDamAgeProductionCharts(damAge) {
       { name: "胜马率", type: "line", yAxisIndex: 1, itemStyle: { color: COLORS.coral }, lineStyle: { color: COLORS.coral }, data: orderRows.map((row) => ({ value: row.winner_rate == null ? null : Number((row.winner_rate * 100).toFixed(1)), raw: row })), label: lineEndpointLabel(orderRows.length, (params) => `${params.value}%`) },
     ],
   });
-  const chart = chartRegistry.get("damFoalOrderChart");
-  chart?.off("click");
-  chart?.on("click", (params) => {
-    const row = params?.data?.raw;
-    renderParityDetail(row);
-  });
-  renderParityDetail(orderRows[0]);
 }
 
 async function renderProductionAnalysis() {
   if (els.productionContent.dataset.loaded) return;
-  const [breeders, damAge, broodmares] = await Promise.all([
+  const [breeders, damAge, broodmares, horses, coveringMonths] = await Promise.all([
     getAnalytics("breeders"),
     getAnalytics("dam_age"),
     broodmareRowsFromLoadedHorses(),
+    getStaticHorses(),
+    getAnalytics("covering_months"),
   ]);
+  const clubHorses = horses.filter(isClubHorse);
+  const matchedOwners = [...new Set(clubHorses.map((horse) => horse.owner))].sort((a, b) => a.localeCompare(b, "ja"));
   const damAgeBucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
   els.productionContent.innerHTML = `
     <div class="analysis-title">
@@ -3369,6 +3347,20 @@ async function renderProductionAnalysis() {
       <div class="chart-grid single-chart">
         ${chartBlock("各牧场出生世代构成", "观察主要牧场的世代分布。", "breederCropChart")}
       </div>
+      ${sectionBlock("俱乐部马分析", "俱乐部马与牧场／马主结构放在同一区域观察。",
+        `<div class="metric-grid compact-metrics club-summary-metrics">
+          ${metricCard("俱乐部马", formatNumber(clubHorses.length), `全库 ${formatNumber(horses.length)} 匹`)}
+          ${metricCard("俱乐部占比", formatRate(clubHorses.length / horses.length), `${matchedOwners.length}个匹配马主名`)}
+          ${metricCard("俱乐部胜马率", formatRate(clubHorses.filter((horse) => horseWins(horse) > 0).length / clubHorses.length), "独立胜马／俱乐部马")}
+        </div>
+        <div class="chart-grid single-chart">${chartBlock("五世代性别构成", "牡、牝、骟分色；骟马占比即骟马率。", "clubSexShareChart")}</div>
+        <div class="mini-chart-grid club-win-grid">
+          ${chartBlock("牡", "五世代俱乐部马 vs 全产驹", "clubWinCompare-牡")}
+          ${chartBlock("牝", "五世代俱乐部马 vs 全产驹", "clubWinCompare-牝")}
+          ${chartBlock("骟", "五世代俱乐部马 vs 全产驹", "clubWinCompare-セン")}
+        </div>
+        <p class="source-note">俱乐部定义依据 <a href="https://ja.wikipedia.org/wiki/%E4%B8%80%E5%8F%A3%E9%A6%AC%E4%B8%BB" target="_blank" rel="noopener noreferrer">Wikipedia「一口馬主クラブの一覧」</a> 的现存クラブ法人（中央／地方），按马主登记名匹配。</p>`
+      )}
       ${sectionBlock("牧场综合表", "详细查看各牧场产驹成绩。",
         analysisTable([
           { label: "牧場", value: (row) => row.label },
@@ -3388,6 +3380,10 @@ async function renderProductionAnalysis() {
         <h2>繁殖牝馬分析｜繁殖牝马分析</h2>
         <p>从生产时母龄、胎次及繁殖牝马个体观察ドゥラメンテ产驹的生产结构与成绩表现。</p>
       </div>
+      ${sectionBlock("配种月份／生产月份", "骟马并入牡；配种月采用实际种付年月日，生产月采用登记出生日期。",
+        `<div class="analysis-controls"><label><span>指标</span><select id="monthMetric"><option value="winner">胜马率</option><option value="graded">重赏马率</option></select></label></div>
+        <div class="chart-grid">${chartBlock("实际配种月份", `Japan Stud Book匹配 ${formatNumber(coveringMonths.coverage?.matched || 0)} / ${formatNumber(coveringMonths.coverage?.horses || 0)} 匹。`, "coverMonthChart")}${chartBlock("生产月份", "按登记出生日期统计。", "foalMonthChart")}</div>`
+      )}
       <div class="chart-grid">
         ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
         ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
@@ -3432,6 +3428,15 @@ async function renderProductionAnalysis() {
   wireExpandableTables(els.productionContent);
   renderBreederCharts(breeders);
   renderDamAgeProductionCharts(damAge);
+  renderClubSexChart(horses);
+  renderClubWinChart(horses);
+  const renderMonths = () => {
+    const metric = els.productionContent.querySelector("#monthMetric")?.value || "winner";
+    renderMonthChart("coverMonthChart", coveringMonths.months || [], metric);
+    renderMonthChart("foalMonthChart", monthPerformanceRows(horses), metric);
+  };
+  els.productionContent.querySelector("#monthMetric")?.addEventListener("change", renderMonths);
+  renderMonths();
   els.productionContent.dataset.loaded = "true";
 }
 
@@ -3761,20 +3766,23 @@ function renderClubSexChart(horses) {
 
 function renderClubWinChart(horses) {
   const sexes = ["牡", "牝", "セン"];
-  const buckets = [2018, 2019, 2020, 2021, 2022].flatMap((year) => sexes.map((sex) => ({ year, sex, label: `${year} ${sex === "セン" ? "骟" : sex}` })));
-  const values = (clubOnly) => buckets.map((bucket) => {
-    const rows = horses.filter((horse) => Number(horse.birth_year) === bucket.year && horse.sex === bucket.sex && (!clubOnly || isClubHorse(horse)));
-    return { value: ratePercent(rows.filter((horse) => horseWins(horse) > 0).length, rows.length), winners: rows.filter((horse) => horseWins(horse) > 0).length, total: rows.length };
-  });
-  renderChart("clubWinCompareChart", {
-    color: [COLORS.duramente, COLORS.muted],
-    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}%（${item.data.winners}/${item.data.total}）`).join("<br>")}` },
-    legend: { top: 0 },
-    grid: getResponsiveGrid({ left: 48, right: 20, top: 52, bottom: 74 }),
-    xAxis: { type: "category", data: buckets.map((row) => row.label), axisLabel: { rotate: 45 } },
-    yAxis: { type: "value", max: 100, name: "胜马率", axisLabel: { formatter: "{value}%" } },
-    series: [{ name: "俱乐部马", type: "bar", data: values(true) }, { name: "全产驹", type: "bar", data: values(false) }],
-  });
+  for (const sex of sexes) {
+    const years = [2018, 2019, 2020, 2021, 2022];
+    const values = (clubOnly) => years.map((year) => {
+      const rows = horses.filter((horse) => Number(horse.birth_year) === year && horse.sex === sex && (!clubOnly || isClubHorse(horse)));
+      const winners = rows.filter((horse) => horseWins(horse) > 0).length;
+      return { value: ratePercent(winners, rows.length), winners, total: rows.length };
+    });
+    renderChart(`clubWinCompare-${sex}`, {
+      color: [COLORS.duramente, COLORS.muted],
+      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}年<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}%（${item.data.winners}/${item.data.total}）`).join("<br>")}` },
+      legend: { top: 0, itemWidth: 14, itemHeight: 9 },
+      grid: getResponsiveGrid({ left: 38, right: 12, top: 48, bottom: 32 }),
+      xAxis: { type: "category", data: years },
+      yAxis: { type: "value", max: 100, axisLabel: { formatter: "{value}%" } },
+      series: [{ name: "俱乐部马", type: "bar", data: values(true) }, { name: "全产驹", type: "bar", data: values(false) }],
+    });
+  }
 }
 
 function renderMonthChart(id, rows, metric) {
@@ -3801,37 +3809,6 @@ function renderMonthChart(id, rows, metric) {
   });
 }
 
-async function renderClubAnalysis() {
-  if (els.clubContent.dataset.loaded) return;
-  const [horses, coveringMonths] = await Promise.all([getStaticHorses(), getAnalytics("covering_months")]);
-  const clubHorses = horses.filter(isClubHorse);
-  const matchedOwners = [...new Set(clubHorses.map((horse) => horse.owner))].sort((a, b) => a.localeCompare(b, "ja"));
-  els.clubContent.innerHTML = `
-    <div class="analysis-title"><p class="kicker">马主与繁殖月份</p><h1>クラブ馬・月別分析</h1><p>比较五个出生世代的俱乐部马构成与成绩，并观察配种／生产月份和成绩率的关系。</p></div>
-    <div class="metric-grid">
-      ${metricCard("俱乐部马", formatNumber(clubHorses.length), `全库 ${formatNumber(horses.length)} 匹`)}
-      ${metricCard("俱乐部占比", formatRate(clubHorses.length / horses.length), `${matchedOwners.length}个匹配马主名`)}
-      ${metricCard("俱乐部胜马率", formatRate(clubHorses.filter((horse) => horseWins(horse) > 0).length / clubHorses.length), "独立胜马／俱乐部马")}
-    </div>
-    ${sectionBlock("俱乐部马的性别构成", "每个世代独立计算；骟马占俱乐部马的比例即骟马率。", chartShell("clubSexShareChart"))}
-    ${sectionBlock("俱乐部马 vs 全产驹", "按五世代与牡、牝、骟拆分；胜率采用独立胜马数／产驹数。", chartShell("clubWinCompareChart"))}
-    ${sectionBlock("配种月份／生产月份", "骟马并入牡；配种月采用Japan Stud Book的实际种付年月日，生产月采用登记出生日期。",
-      `<div class="analysis-controls"><label><span>指标</span><select id="monthMetric"><option value="winner">胜马率</option><option value="graded">重赏马率</option></select></label></div><div class="chart-grid">${chartBlock("实际配种月份", `Japan Stud Book匹配 ${formatNumber(coveringMonths.coverage?.matched || 0)} / ${formatNumber(coveringMonths.coverage?.horses || 0)} 匹。`, "coverMonthChart")}${chartBlock("生产月份", "按登记出生日期统计。", "foalMonthChart")}</div>`
-    )}
-    <p class="source-note">俱乐部定义依据 <a href="https://ja.wikipedia.org/wiki/%E4%B8%80%E5%8F%A3%E9%A6%AC%E4%B8%BB" target="_blank" rel="noopener noreferrer">Wikipedia「一口馬主クラブの一覧」</a> 的现存クラブ法人（中央／地方）；本站按马主登记名匹配。已匹配：${matchedOwners.map(escapeHtml).join("、")}。</p>
-  `;
-  renderClubSexChart(horses);
-  renderClubWinChart(horses);
-  const renderMonths = () => {
-    const metric = document.querySelector("#monthMetric")?.value || "winner";
-    renderMonthChart("coverMonthChart", coveringMonths.months || [], metric);
-    renderMonthChart("foalMonthChart", monthPerformanceRows(horses), metric);
-  };
-  els.clubContent.querySelector("#monthMetric")?.addEventListener("change", renderMonths);
-  renderMonths();
-  els.clubContent.dataset.loaded = "true";
-}
-
 async function showView(name) {
   for (const view of els.views) {
     const active = view.id === `${name}View`;
@@ -3843,7 +3820,6 @@ async function showView(name) {
   }
   if (name === "sire") await renderSireAnalysis();
   if (name === "pedigree") await renderPedigreeAnalysis();
-  if (name === "club") await renderClubAnalysis();
   if (name === "production") await renderProductionAnalysis();
   if (name === "racecourse") await renderRacecourseAnalysis();
   if (name === "method") await renderMethodology();
@@ -4450,5 +4426,6 @@ async function init() {
 }
 
 init().catch((error) => {
-  els.horseRows.innerHTML = `<tr><td colspan="11">资料暂时无法载入，请稍后再试。</td></tr>`;
+  console.error("Database load failed", error);
+  els.horseRows.innerHTML = `<tr><td colspan="11"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
 });
