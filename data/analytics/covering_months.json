@@ -1,0 +1,195 @@
+{
+  "source": "https://www.studbook.jp/users/ja/SearchChichiShushibaList?hid=3171846768480&kid=",
+  "source_name": "Japan Stud Book / 種雄馬別種付け雌馬一覧",
+  "retrieved_at": "2026-08-04",
+  "definition": "実際の種付年月日の月。セン馬は牡に合算。勝馬率・重賞馬率は独立産駒数ベース。",
+  "coverage": {
+    "horses": 726,
+    "matched": 723,
+    "rate": 0.9959,
+    "source_rows": 1071,
+    "ambiguous": 0,
+    "unmatched": 3
+  },
+  "months": [
+    {
+      "month": 1,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 2,
+      "male": {
+        "foals": 50,
+        "winners": 35,
+        "graded_winners": 2
+      },
+      "female": {
+        "foals": 64,
+        "winners": 43,
+        "graded_winners": 2
+      }
+    },
+    {
+      "month": 3,
+      "male": {
+        "foals": 107,
+        "winners": 69,
+        "graded_winners": 7
+      },
+      "female": {
+        "foals": 101,
+        "winners": 56,
+        "graded_winners": 4
+      }
+    },
+    {
+      "month": 4,
+      "male": {
+        "foals": 91,
+        "winners": 59,
+        "graded_winners": 4
+      },
+      "female": {
+        "foals": 78,
+        "winners": 47,
+        "graded_winners": 3
+      }
+    },
+    {
+      "month": 5,
+      "male": {
+        "foals": 66,
+        "winners": 48,
+        "graded_winners": 4
+      },
+      "female": {
+        "foals": 85,
+        "winners": 42,
+        "graded_winners": 1
+      }
+    },
+    {
+      "month": 6,
+      "male": {
+        "foals": 36,
+        "winners": 24,
+        "graded_winners": 1
+      },
+      "female": {
+        "foals": 42,
+        "winners": 18,
+        "graded_winners": 1
+      }
+    },
+    {
+      "month": 7,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 2,
+        "winners": 2,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 8,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 9,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 10,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 11,
+      "male": {
+        "foals": 1,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    },
+    {
+      "month": 12,
+      "male": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      },
+      "female": {
+        "foals": 0,
+        "winners": 0,
+        "graded_winners": 0
+      }
+    }
+  ],
+  "review": {
+    "unmatched": [
+      {
+        "horse_id": 212,
+        "name": "フォレクラフト",
+        "dam": "ディトナイト",
+        "birth_year": 2019
+      },
+      {
+        "horse_id": 299,
+        "name": "プリーミー",
+        "dam": "アトミカオロ",
+        "birth_year": 2019
+      },
+      {
+        "horse_id": 2371,
+        "name": "Daiya",
+        "dam": "Bulbinella",
+        "birth_year": 2019
+      }
+    ],
+    "ambiguous": []
+  }
+}

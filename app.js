@@ -51,6 +51,7 @@ const els = {
   views: document.querySelectorAll(".view"),
   sireContent: document.querySelector("#sireContent"),
   pedigreeContent: document.querySelector("#pedigreeContent"),
+  clubContent: document.querySelector("#clubContent"),
   productionContent: document.querySelector("#productionContent"),
   racecourseContent: document.querySelector("#racecourseContent"),
   methodContent: document.querySelector("#methodContent"),
@@ -2877,6 +2878,63 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
   chart?.on("click", (params) => applyFemaleFamilyFilter(params.data.raw.label));
 }
 
+const ACHIEVEMENT_STAGES = ["未出道", "未胜利", "1胜", "2胜", "3胜＋", "OP／L", "重赏"];
+const ACHIEVEMENT_STAGE_COLORS = ["#d8d5cf", "#a9a1a4", "#7b8fa8", "#4f9f8d", "#f0b44d", "#e56b45", "#a92f5d"];
+
+function horseAchievementStage(horse) {
+  const summary = String(horse.career_summary || "");
+  const starts = Number(summary.match(/(\d+)戦/)?.[1] || 0);
+  const wins = Number(summary.match(/(\d+)勝/)?.[1] || 0);
+  if (!starts) return "未出道";
+  if (["G1", "G2", "G3"].includes(horse.achievement_class)) return "重赏";
+  if (["Open", "Listed"].includes(horse.achievement_class)) return "OP／L";
+  if (!wins) return "未胜利";
+  if (wins === 1) return "1胜";
+  if (wins === 2) return "2胜";
+  return "3胜＋";
+}
+
+function lineageStageRows(horses, key, minFoals) {
+  const groups = new Map();
+  for (const horse of horses) {
+    const label = horse[key] || (key === "bms_line" ? "Other" : "未分類");
+    if (!groups.has(label)) groups.set(label, Object.fromEntries(ACHIEVEMENT_STAGES.map((stage) => [stage, 0])));
+    groups.get(label)[horseAchievementStage(horse)] += 1;
+  }
+  return [...groups.entries()]
+    .map(([label, stages]) => ({ label, stages, foals: Object.values(stages).reduce((sum, value) => sum + value, 0) }))
+    .filter((row) => row.foals >= minFoals)
+    .sort((a, b) => b.foals - a.foals)
+    .slice(0, 20);
+}
+
+function renderLineageStageChart(id, horses, key, minFoals) {
+  const rows = lineageStageRows(horses, key, minFoals);
+  const el = document.getElementById(id);
+  if (el) el.style.height = `${Math.max(400, rows.length * 34 + 120)}px`;
+  const chart = renderChart(id, {
+    color: ACHIEVEMENT_STAGE_COLORS,
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "shadow" },
+      formatter: (items) => `${escapeHtml(items[0]?.axisValue || "")}<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}匹`).join("<br>")}`,
+    },
+    legend: { top: 0, data: ACHIEVEMENT_STAGES },
+    grid: horizontalGrid(56, 32, key === "female_family" ? 92 : 118),
+    xAxis: { type: "value", name: "产驹数" },
+    yAxis: longCategoryAxis(rows.map((row) => row.label), { width: key === "female_family" ? 92 : 118 }),
+    series: ACHIEVEMENT_STAGES.map((stage, index) => ({
+      name: stage,
+      type: "bar",
+      stack: "achievement",
+      barMaxWidth: 22,
+      itemStyle: { color: ACHIEVEMENT_STAGE_COLORS[index] },
+      data: rows.map((row) => ({ value: row.stages[stage], raw: row })),
+    })),
+  });
+  chart?.on("click", (params) => key === "bms_line" ? applyBmsFilter(params.data.raw.label) : applyFemaleFamilyFilter(params.data.raw.label));
+}
+
 function renderDamAgeCharts(damAge) {
   renderChart("damAgeHistogramChart", {
     color: [COLORS.duramente],
@@ -2926,11 +2984,12 @@ function renderDamAgeCharts(damAge) {
 
 async function renderPedigreeAnalysis() {
   if (els.pedigreeContent.dataset.loaded) return;
-  const [pedigree, bmsLines, broodmareSires, dosage] = await Promise.all([
+  const [pedigree, bmsLines, broodmareSires, dosage, horses] = await Promise.all([
     getAnalytics("pedigree"),
     getAnalytics("bms_lines"),
     getAnalytics("broodmare_sires"),
     getAnalytics("dosage"),
+    getStaticHorses(),
   ]);
   const cross = pedigree.cross;
   const ancestorOptions = [...new Set((pedigree.charts?.ancestor_form_comparison || []).map((row) => row.ancestor).filter(Boolean))]
@@ -2994,33 +3053,11 @@ async function renderPedigreeAnalysis() {
         </article>
       </div>`
     )}
-    ${sectionBlock("母父系与牝系", "从母父系统和牝系观察血统来源。",
-      `<div class="segment-control" id="pedigreeLineageTab">
-        <button class="active" type="button" data-tab="bms">母父系</button>
-        <button type="button" data-tab="family">牝系</button>
-      </div>
-      <div class="analysis-controls">
-        <label><span>母父系指标</span><select id="bmsLineMetric">
-          <option value="foals">产驹数</option>
-          <option value="winner_foal_rate">胜马率</option>
-          <option value="graded_foal_rate">重赏马率</option>
-          <option value="total_earnings">总奖金</option>
-        </select></label>
-        <label><span>牝系指标</span><select id="familyMetric">
-          <option value="foals">产驹数</option>
-          <option value="total_earnings">总奖金</option>
-          <option value="winner_foal_rate">胜马率</option>
-          <option value="graded_winners">重赏胜马数</option>
-          <option value="graded_foal_rate">重赏马率</option>
-          <option value="median_earnings_per_runner">中位奖金</option>
-        </select></label>
-        <label><span>牝系样本</span><select id="familyMinFoals">
-          <option value="5" selected>5匹以上</option>
-          <option value="10">10匹以上</option>
-          <option value="20">20匹以上</option>
-        </select></label>
-      </div>
-      <div id="pedigreeLineagePanel"></div>`
+    ${sectionBlock("母父系", "每根横条按未出道、未胜利、1胜、2胜、3胜＋、OP／Listed和重赏分色。",
+      `<div class="analysis-controls"><label><span>样本下限</span><select id="bmsStageMin"><option value="1">全部</option><option value="5" selected>5匹以上</option><option value="10">10匹以上</option></select></label></div>${chartShell("bmsStageChart")}`
+    )}
+    ${sectionBlock("牝系", "牝系独立成表；同样用颜色显示各成绩阶段。",
+      `<div class="analysis-controls"><label><span>样本下限</span><select id="familyStageMin"><option value="1">全部</option><option value="5" selected>5匹以上</option><option value="10">10匹以上</option></select></label></div>${chartShell("familyStageChart")}`
     )}
     ${sectionBlock("DP・DI・CD", "从速度到耐力观察四代父系祖先的倾向分布。",
       `<div class="metric-grid dosage-metrics">
@@ -3093,7 +3130,7 @@ async function renderPedigreeAnalysis() {
   `;
   wireExpandableTables(els.pedigreeContent);
   const rerender = () => renderPedigreeCharts(pedigree, bmsLines, dosage);
-  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorShowSmall", "bmsLineMetric", "familyMetric", "familyMinFoals"]) {
+  for (const id of ["crossPerformanceMetric", "crossMinFoals", "ancestorGroupSearch", "ancestorShowSmall"]) {
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
     els.pedigreeContent.querySelector(`#${id}`)?.addEventListener("input", debounce(rerender));
   }
@@ -3105,16 +3142,17 @@ async function renderPedigreeAnalysis() {
       renderAncestorGroupedTable(pedigree.charts || {});
     });
   }
-  for (const button of els.pedigreeContent.querySelectorAll("#pedigreeLineageTab button")) {
-    button.addEventListener("click", () => {
-      for (const peer of els.pedigreeContent.querySelectorAll("#pedigreeLineageTab button")) peer.classList.toggle("active", peer === button);
-      renderPedigreeLineageTab(pedigree, bmsLines);
-    });
-  }
+  const renderStages = () => {
+    renderLineageStageChart("bmsStageChart", horses, "bms_line", Number(document.querySelector("#bmsStageMin")?.value || 5));
+    renderLineageStageChart("familyStageChart", horses, "female_family", Number(document.querySelector("#familyStageMin")?.value || 5));
+  };
+  els.pedigreeContent.querySelector("#bmsStageMin")?.addEventListener("change", renderStages);
+  els.pedigreeContent.querySelector("#familyStageMin")?.addEventListener("change", renderStages);
   for (const button of els.pedigreeContent.querySelectorAll("[data-open-horse]")) {
     button.addEventListener("click", () => openHorse(button.dataset.openHorse));
   }
   renderPedigreeCharts(pedigree, bmsLines, dosage);
+  renderStages();
   els.pedigreeContent.dataset.loaded = "true";
 }
 
@@ -3650,6 +3688,150 @@ async function renderMethodology() {
   els.methodContent.dataset.loaded = "true";
 }
 
+const CLUB_OWNER_NAMES = [
+  "インゼルレーシング", "ウイン", "キャロットファーム", "京都ホースレーシング", "グリーンファーム",
+  "ゴールドレーシング", "ライオンレースホース", "社台レースホース", "サンデーレーシング", "シルクレーシング",
+  "G1レーシング", "ターフ・スポート", "大樹ファーム", "DMMドリームクラブ", "東京ホースレーシング",
+  "ノルマンディーサラブレッドレーシング", "広尾レース", "Blooming Racing", "友駿ホースクラブ",
+  "ヒダカ・ブリーダーズ・ユニオン", "サラブレッドクラブ・ラフィアン", "ロードホースクラブ",
+  "ローレルレーシング", "YGGホースクラブ", "フクキタル",
+];
+
+function normalizedOwnerName(value) {
+  return String(value || "").normalize("NFKC").replaceAll(" ", "").toUpperCase();
+}
+
+const CLUB_OWNER_SET = new Set(CLUB_OWNER_NAMES.map(normalizedOwnerName));
+
+function isClubHorse(horse) {
+  return CLUB_OWNER_SET.has(normalizedOwnerName(horse.owner));
+}
+
+function horseWins(horse) {
+  return Number(String(horse.career_summary || "").match(/(\d+)勝/)?.[1] || 0);
+}
+
+function horseIsGraded(horse) {
+  return ["G1", "G2", "G3"].includes(horse.achievement_class);
+}
+
+function parseFoalDate(horse) {
+  const value = horse.foal_birth_date || String(horse.birth_date || "").replace(/年|月/g, "-").replace("日", "");
+  const date = new Date(`${value}T00:00:00`);
+  return Number.isNaN(date.getTime()) ? null : date;
+}
+
+function monthPerformanceRows(horses) {
+  const rows = [];
+  for (let month = 1; month <= 12; month += 1) {
+    const item = { month, male: [], female: [] };
+    rows.push(item);
+  }
+  for (const horse of horses) {
+    const foalDate = parseFoalDate(horse);
+    if (!foalDate) continue;
+    const date = foalDate;
+    const sex = horse.sex === "牝" ? "female" : "male";
+    rows[date.getMonth()][sex].push(horse);
+  }
+  return rows;
+}
+
+function ratePercent(numerator, denominator) {
+  return denominator ? Number((numerator / denominator * 100).toFixed(1)) : 0;
+}
+
+function renderClubSexChart(horses) {
+  const years = [2018, 2019, 2020, 2021, 2022];
+  const sexes = ["牡", "牝", "セン"];
+  const rows = years.map((year) => {
+    const club = horses.filter((horse) => Number(horse.birth_year) === year && isClubHorse(horse));
+    return { year, total: club.length, counts: Object.fromEntries(sexes.map((sex) => [sex, club.filter((horse) => horse.sex === sex).length])) };
+  });
+  renderChart("clubSexShareChart", {
+    color: [COLORS.blue, COLORS.rose, COLORS.gold],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}年（俱乐部马 ${items[0].data.raw.total}匹）<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.data.count}匹 / ${item.value}%`).join("<br>")}` },
+    legend: { top: 0 },
+    grid: getResponsiveGrid({ left: 48, right: 24, top: 52, bottom: 42 }),
+    xAxis: { type: "category", data: years.map(String) },
+    yAxis: { type: "value", max: 100, name: "俱乐部马性别占比", axisLabel: { formatter: "{value}%" } },
+    series: sexes.map((sex) => ({ name: sex === "セン" ? "骟" : sex, type: "bar", stack: "share", data: rows.map((row) => ({ value: ratePercent(row.counts[sex], row.total), count: row.counts[sex], raw: row })) })),
+  });
+}
+
+function renderClubWinChart(horses) {
+  const sexes = ["牡", "牝", "セン"];
+  const buckets = [2018, 2019, 2020, 2021, 2022].flatMap((year) => sexes.map((sex) => ({ year, sex, label: `${year} ${sex === "セン" ? "骟" : sex}` })));
+  const values = (clubOnly) => buckets.map((bucket) => {
+    const rows = horses.filter((horse) => Number(horse.birth_year) === bucket.year && horse.sex === bucket.sex && (!clubOnly || isClubHorse(horse)));
+    return { value: ratePercent(rows.filter((horse) => horseWins(horse) > 0).length, rows.length), winners: rows.filter((horse) => horseWins(horse) > 0).length, total: rows.length };
+  });
+  renderChart("clubWinCompareChart", {
+    color: [COLORS.duramente, COLORS.muted],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}%（${item.data.winners}/${item.data.total}）`).join("<br>")}` },
+    legend: { top: 0 },
+    grid: getResponsiveGrid({ left: 48, right: 20, top: 52, bottom: 74 }),
+    xAxis: { type: "category", data: buckets.map((row) => row.label), axisLabel: { rotate: 45 } },
+    yAxis: { type: "value", max: 100, name: "胜马率", axisLabel: { formatter: "{value}%" } },
+    series: [{ name: "俱乐部马", type: "bar", data: values(true) }, { name: "全产驹", type: "bar", data: values(false) }],
+  });
+}
+
+function renderMonthChart(id, rows, metric) {
+  const isGraded = metric === "graded";
+  const seriesFor = (sex) => rows.map((row) => {
+    if (Array.isArray(row[sex])) {
+      const horses = row[sex];
+      const hits = horses.filter((horse) => isGraded ? horseIsGraded(horse) : horseWins(horse) > 0).length;
+      return { value: ratePercent(hits, horses.length), hits, total: horses.length };
+    }
+    const counts = row[sex] || {};
+    const hits = Number(isGraded ? counts.graded_winners : counts.winners) || 0;
+    const total = Number(counts.foals) || 0;
+    return { value: ratePercent(hits, total), hits, total };
+  });
+  renderChart(id, {
+    color: [COLORS.blue, COLORS.rose],
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}月<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}%（${item.data.hits}/${item.data.total}）`).join("<br>")}` },
+    legend: { top: 0 },
+    grid: getResponsiveGrid({ left: 50, right: 22, top: 52, bottom: 42 }),
+    xAxis: { type: "category", data: rows.map((row) => `${row.month}月`) },
+    yAxis: { type: "value", max: isGraded ? undefined : 100, name: isGraded ? "重赏马率" : "胜马率", axisLabel: { formatter: "{value}%" } },
+    series: [{ name: "牡＋骟", type: "bar", data: seriesFor("male") }, { name: "牝", type: "bar", data: seriesFor("female") }],
+  });
+}
+
+async function renderClubAnalysis() {
+  if (els.clubContent.dataset.loaded) return;
+  const [horses, coveringMonths] = await Promise.all([getStaticHorses(), getAnalytics("covering_months")]);
+  const clubHorses = horses.filter(isClubHorse);
+  const matchedOwners = [...new Set(clubHorses.map((horse) => horse.owner))].sort((a, b) => a.localeCompare(b, "ja"));
+  els.clubContent.innerHTML = `
+    <div class="analysis-title"><p class="kicker">马主与繁殖月份</p><h1>クラブ馬・月別分析</h1><p>比较五个出生世代的俱乐部马构成与成绩，并观察配种／生产月份和成绩率的关系。</p></div>
+    <div class="metric-grid">
+      ${metricCard("俱乐部马", formatNumber(clubHorses.length), `全库 ${formatNumber(horses.length)} 匹`)}
+      ${metricCard("俱乐部占比", formatRate(clubHorses.length / horses.length), `${matchedOwners.length}个匹配马主名`)}
+      ${metricCard("俱乐部胜马率", formatRate(clubHorses.filter((horse) => horseWins(horse) > 0).length / clubHorses.length), "独立胜马／俱乐部马")}
+    </div>
+    ${sectionBlock("俱乐部马的性别构成", "每个世代独立计算；骟马占俱乐部马的比例即骟马率。", chartShell("clubSexShareChart"))}
+    ${sectionBlock("俱乐部马 vs 全产驹", "按五世代与牡、牝、骟拆分；胜率采用独立胜马数／产驹数。", chartShell("clubWinCompareChart"))}
+    ${sectionBlock("配种月份／生产月份", "骟马并入牡；配种月采用Japan Stud Book的实际种付年月日，生产月采用登记出生日期。",
+      `<div class="analysis-controls"><label><span>指标</span><select id="monthMetric"><option value="winner">胜马率</option><option value="graded">重赏马率</option></select></label></div><div class="chart-grid">${chartBlock("实际配种月份", `Japan Stud Book匹配 ${formatNumber(coveringMonths.coverage?.matched || 0)} / ${formatNumber(coveringMonths.coverage?.horses || 0)} 匹。`, "coverMonthChart")}${chartBlock("生产月份", "按登记出生日期统计。", "foalMonthChart")}</div>`
+    )}
+    <p class="source-note">俱乐部定义依据 <a href="https://ja.wikipedia.org/wiki/%E4%B8%80%E5%8F%A3%E9%A6%AC%E4%B8%BB" target="_blank" rel="noopener noreferrer">Wikipedia「一口馬主クラブの一覧」</a> 的现存クラブ法人（中央／地方）；本站按马主登记名匹配。已匹配：${matchedOwners.map(escapeHtml).join("、")}。</p>
+  `;
+  renderClubSexChart(horses);
+  renderClubWinChart(horses);
+  const renderMonths = () => {
+    const metric = document.querySelector("#monthMetric")?.value || "winner";
+    renderMonthChart("coverMonthChart", coveringMonths.months || [], metric);
+    renderMonthChart("foalMonthChart", monthPerformanceRows(horses), metric);
+  };
+  els.clubContent.querySelector("#monthMetric")?.addEventListener("change", renderMonths);
+  renderMonths();
+  els.clubContent.dataset.loaded = "true";
+}
+
 async function showView(name) {
   for (const view of els.views) {
     const active = view.id === `${name}View`;
@@ -3661,6 +3843,7 @@ async function showView(name) {
   }
   if (name === "sire") await renderSireAnalysis();
   if (name === "pedigree") await renderPedigreeAnalysis();
+  if (name === "club") await renderClubAnalysis();
   if (name === "production") await renderProductionAnalysis();
   if (name === "racecourse") await renderRacecourseAnalysis();
   if (name === "method") await renderMethodology();
