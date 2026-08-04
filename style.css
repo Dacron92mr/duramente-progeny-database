@@ -964,6 +964,18 @@ td {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.club-analysis-grid,
+.milestone-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.club-analysis-grid .chart-canvas {
+  height: 310px;
+}
+
 .mini-chart-grid .chart-card {
   padding: 14px;
 }
@@ -1526,6 +1538,30 @@ td {
 
 .milestone-timeline-card {
   overflow: hidden;
+}
+
+.milestone-compact-card .milestone-track {
+  min-width: 520px;
+  height: 164px;
+}
+
+.milestone-compact-card .milestone-detail {
+  align-items: start;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+}
+
+.milestone-total-details {
+  margin-top: 0;
+}
+
+.milestone-total-details > summary {
+  cursor: pointer;
+  font-weight: 850;
+}
+
+.milestone-total-details[open] > summary {
+  margin-bottom: 14px;
 }
 
 .milestone-scroll {
@@ -2160,6 +2196,11 @@ details.analysis-block summary {
 
   .mini-chart-grid .chart-canvas {
     height: 320px;
+  }
+
+  .club-analysis-grid,
+  .milestone-grid {
+    grid-template-columns: 1fr;
   }
 
   #racecourseJapanMap {

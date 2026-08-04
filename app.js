@@ -347,7 +347,7 @@ function safeAverageMarkLine(value, label = "全体", axis = "xAxis", options = 
 
 function lineEndpointLabel(count, formatter) {
   return {
-    show: true,
+    show: false,
     position: "bottom",
     distance: 10,
     formatter(params) {
@@ -1723,10 +1723,19 @@ function annualChartTooltip(metric, row) {
   return lines.join("<br>");
 }
 
-function renderAnnualMilestoneTimeline(annualPerformance) {
-  const target = document.querySelector("#cumulativeMilestoneTimeline");
+function milestonePoints(events, jurisdiction) {
+  const rows = [...(events || [])]
+    .filter((row) => !jurisdiction || row.jurisdiction === jurisdiction)
+    .sort((a, b) => raceDateValue(a.race_date) - raceDateValue(b.race_date));
+  return rows
+    .map((row, index) => ({ ...row, cumulative_wins: index + 1 }))
+    .filter((row) => row.cumulative_wins % 100 === 0);
+}
+
+function renderMilestoneTimeline(targetId, inputPoints) {
+  const target = document.querySelector(`#${targetId}`);
   if (!target) return;
-  const points = [...(annualPerformance?.milestones || [])].sort((a, b) => raceDateValue(a.race_date) - raceDateValue(b.race_date));
+  const points = [...(inputPoints || [])].sort((a, b) => raceDateValue(a.race_date) - raceDateValue(b.race_date));
   if (!points.length) {
     target.innerHTML = `<p class="empty-note">暂无累计胜场里程碑。</p>`;
     return;
@@ -1735,7 +1744,8 @@ function renderAnnualMilestoneTimeline(annualPerformance) {
   const minDate = Math.min(...dates);
   const maxDate = Math.max(...dates);
   const span = Math.max(maxDate - minDate, 1);
-  const width = Math.max(860, points.length * 138);
+  const compact = target.closest(".milestone-compact-card");
+  const width = Math.max(compact ? 520 : 860, points.length * (compact ? 118 : 138));
   const nodes = points.map((row, index) => {
     const left = 54 + ((raceDateValue(row.race_date) - minDate) / span) * (width - 108);
     const side = index % 2 === 0 ? "above" : "below";
@@ -1776,6 +1786,13 @@ function renderAnnualMilestoneTimeline(annualPerformance) {
     });
   }
   target.querySelector("[data-milestone-index]")?.classList.add("is-active");
+}
+
+function renderAnnualMilestoneTimeline(annualPerformance) {
+  const events = annualPerformance?.win_events || [];
+  renderMilestoneTimeline("jraMilestoneTimeline", milestonePoints(events, "JRA"));
+  renderMilestoneTimeline("narMilestoneTimeline", milestonePoints(events, "NAR"));
+  renderMilestoneTimeline("cumulativeMilestoneTimeline", annualPerformance?.milestones || milestonePoints(events));
 }
 
 function annualSeriesForMetric(metric, rows) {
@@ -2240,15 +2257,23 @@ async function renderSireAnalysis() {
         <div class="chart-card-head"><h3>年度明细</h3></div>
         <div id="annualPerformanceTable"></div>
       </article>
-      <article class="chart-card milestone-timeline-card">
-        <div class="chart-card-head">
-          <div>
-            <h3>累计胜场里程碑</h3>
-            <p>每100胜的代表节点。</p>
-          </div>
-        </div>
-        <div id="cumulativeMilestoneTimeline"></div>
-      </article>`
+      <div class="milestone-grid">
+        <article class="chart-card milestone-timeline-card milestone-compact-card">
+          <div class="chart-card-head"><h3>JRA 累计胜场</h3><p>每100胜的代表节点。</p></div>
+          <div id="jraMilestoneTimeline"></div>
+        </article>
+        <article class="chart-card milestone-timeline-card milestone-compact-card">
+          <div class="chart-card-head"><h3>NAR 累计胜场</h3><p>每100胜的代表节点。</p></div>
+          <div id="narMilestoneTimeline"></div>
+        </article>
+      </div>
+      <details class="analysis-block milestone-total-details">
+        <summary>查看总累计胜场（含海外）</summary>
+        <article class="chart-card milestone-timeline-card">
+          <div class="chart-card-head"><h3>全部累计胜场</h3><p>JRA、NAR及海外合计，每100胜的代表节点。</p></div>
+          <div id="cumulativeMilestoneTimeline"></div>
+        </article>
+      </details>`
     )}
     ${sectionBlock("Leading Sire Career", "",
       `<div class="analysis-controls">
@@ -3369,8 +3394,8 @@ async function renderProductionAnalysis() {
           ${metricCard("俱乐部占比", formatRate(clubHorses.length / horses.length), `${matchedOwners.length}个匹配马主名`)}
           ${metricCard("俱乐部胜马率", formatRate(clubHorses.filter((horse) => horseWins(horse) > 0).length / clubHorses.length), "独立胜马／俱乐部马")}
         </div>
-        <div class="chart-grid single-chart">${chartBlock("五世代性别构成", "牡、牝、骟分色；骟马占比即骟马率。", "clubSexShareChart")}</div>
-        <div class="mini-chart-grid club-win-grid">
+        <div class="mini-chart-grid club-analysis-grid">
+          ${chartBlock("五世代性别构成", "牡、牝、骟分色；骟马占比即骟马率。", "clubSexShareChart")}
           ${chartBlock("牡", "五世代俱乐部马 vs 全产驹", "clubWinCompare-牡")}
           ${chartBlock("牝", "五世代俱乐部马 vs 全产驹", "clubWinCompare-牝")}
           ${chartBlock("骟", "五世代俱乐部马 vs 全产驹", "clubWinCompare-セン")}
