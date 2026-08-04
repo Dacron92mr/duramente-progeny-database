@@ -297,7 +297,9 @@ function safeHorizontalBarLabel(formatter, options = {}) {
     color: options.color || "#3b3530",
     fontSize: chartViewportWidth() < 520 ? 10 : 11,
     fontWeight: options.fontWeight || 650,
-    formatter,
+    formatter(params) {
+      return Number(params.value) === 0 ? "" : formatter(params);
+    },
   };
 }
 
@@ -330,6 +332,7 @@ function safeAverageMarkLine(value, label = "全体", axis = "xAxis", options = 
       show: options.showLabel !== false,
       formatter: options.formatter || `${label} ${display}${options.unit ?? "%"}`,
       position: axis === "xAxis" ? "insideEndTop" : "end",
+      rotate: 0,
       distance: 8,
       padding: [4, 7],
       borderRadius: 4,
@@ -359,6 +362,16 @@ function lineEndpointLabel(count, formatter) {
     padding: [2, 4],
     fontSize: chartViewportWidth() < 520 ? 10 : 11,
     fontWeight: 650,
+  };
+}
+
+function fixedHorizontalGrid(labelWidth = 150, top = 48, bottom = 34, right = 54) {
+  return {
+    left: chartViewportWidth() < 520 ? Math.min(labelWidth, 118) : labelWidth,
+    right,
+    top,
+    bottom,
+    containLabel: false,
   };
 }
 
@@ -754,7 +767,8 @@ function renderChart(id, option) {
     barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
     barCategoryGap: item.barCategoryGap || "48%",
   } : item);
-  chart.setOption({ animationDuration: 450, labelLayout: { hideOverlap: true, moveOverlap: "shiftY" }, ...option, series });
+  const tooltip = option.tooltip ? { confine: true, ...option.tooltip } : undefined;
+  chart.setOption({ animationDuration: 450, ...option, tooltip, series });
   el.classList.add("is-rendered");
   chartRegistry.set(id, chart);
   if (!el.dataset.resizeObserved && window.ResizeObserver) {
@@ -1499,7 +1513,7 @@ function renderCropComboChart(id, crops, config) {
         symbolSize: 8,
         lineStyle: { width: 3 },
         data: crops.map((row, index) => ({ value: lineValues[index], raw: row })),
-        label: lineEndpointLabel(crops.length, (params) => config.lineLabel(params.data.raw)),
+        label: { show: false },
       },
     ],
   });
@@ -1693,17 +1707,19 @@ function annualEarningsHtml(row) {
   return `${escapeHtml(value)}${status !== "—" ? ` <span class="mini-status ${statusClass}">${escapeHtml(status)}</span>` : ""}`;
 }
 
-function annualChartTooltip(row) {
-  const lines = [
-    `${row.year}年`,
-    `出赛：${formatNumber(row.starts)}次 / 出赛马：${formatNumber(row.runners)}匹`,
-    `胜场：${formatNumber(row.wins)}（JRA ${formatNumber(row.jra_wins)} / NAR ${formatNumber(row.nar_wins)} / 海外 ${formatNumber(row.overseas_wins)}）`,
-    `胜率：${formatRate(row.win_rate)} / 前三率：${formatRate(row.top3_rate)}`,
-    `重赏：${formatNumber(row.graded_wins)}（G1 ${formatNumber(row.g1_wins)} / G2 ${formatNumber(row.g2_wins)} / G3 ${formatNumber(row.g3_wins)}）`,
-    `奖金：${row.earnings == null ? "—" : money(row.earnings)}`,
-  ];
-  if (row.earnings_source) lines.push(`奖金来源：${escapeHtml(row.earnings_source)}`);
-  if (row.earnings_status === "partial") lines.push("该年度仍在进行中。");
+function annualChartTooltip(metric, row) {
+  const lines = [`${row.year}年`];
+  if (metric === "wins") {
+    lines.push(`胜场：${formatNumber(row.wins)}（JRA ${formatNumber(row.jra_wins)} / NAR ${formatNumber(row.nar_wins)} / 海外 ${formatNumber(row.overseas_wins)}）`);
+  } else if (metric === "starts") {
+    lines.push(`出赛：${formatNumber(row.starts)}次`, `出赛马：${formatNumber(row.runners)}匹`);
+  } else if (metric === "graded") {
+    lines.push(`重赏：${formatNumber(row.graded_wins)}（G1 ${formatNumber(row.g1_wins)} / G2 ${formatNumber(row.g2_wins)} / G3 ${formatNumber(row.g3_wins)}）`);
+  } else {
+    lines.push(`奖金：${row.earnings == null ? "—" : money(row.earnings)}`);
+    if (row.earnings_source) lines.push(`来源：${escapeHtml(row.earnings_source)}`);
+    if (row.earnings_status === "partial") lines.push("该年度仍在进行中。");
+  }
   return lines.join("<br>");
 }
 
@@ -1719,12 +1735,12 @@ function renderAnnualMilestoneTimeline(annualPerformance) {
   const minDate = Math.min(...dates);
   const maxDate = Math.max(...dates);
   const span = Math.max(maxDate - minDate, 1);
-  const width = Math.max(980, points.length * 150);
+  const width = Math.max(860, points.length * 138);
   const nodes = points.map((row, index) => {
-    const left = ((raceDateValue(row.race_date) - minDate) / span) * 100;
+    const left = 54 + ((raceDateValue(row.race_date) - minDate) / span) * (width - 108);
     const side = index % 2 === 0 ? "above" : "below";
     return `
-      <button class="milestone-node ${side}" type="button" style="left:${left}%;" data-milestone-index="${index}" aria-label="第${formatNumber(row.cumulative_wins)}胜 ${escapeHtml(row.race_date || "")}">
+      <button class="milestone-node ${side}" type="button" style="left:${left}px;" data-milestone-index="${index}" aria-label="第${formatNumber(row.cumulative_wins)}胜 ${escapeHtml(row.race_date || "")}">
         <span class="milestone-dot"></span>
         <span class="milestone-label">第${formatNumber(row.cumulative_wins)}胜<br><small>${escapeHtml(row.race_date || "")}</small></span>
       </button>
@@ -1826,12 +1842,12 @@ function renderAnnualPerformanceCharts(annualPerformance) {
         G1: COLORS.raceLine, G2: COLORS.duramente, G3: COLORS.green,
         年度奖金: COLORS.duramente, 出赛次数: COLORS.teal, 出赛马: COLORS.gold,
       }[name] || COLORS.duramente)),
-      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => annualChartTooltip(items[0]?.data?.raw || {}) },
+      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, confine: true, formatter: (items) => annualChartTooltip(metric, items[0]?.data?.raw || {}) },
       legend: { top: 0, data: config.legend, itemWidth: 12, itemHeight: 8, textStyle: { fontSize: 10 } },
       grid: { left: 38, right: 12, top: 48, bottom: 32, containLabel: true },
       xAxis: { type: "category", data: rows.map((row) => row.year), axisLabel: { fontSize: 10 } },
       yAxis: config.yAxis.map((axis) => ({ ...axis, name: "", axisLabel: { ...(axis.axisLabel || {}), fontSize: 10 } })),
-      series: config.series.map((item) => ({ ...item, label: { ...(item.label || {}), fontSize: 9 } })),
+      series: config.series.map((item) => ({ ...item, label: { ...(item.label || {}), fontSize: 9 }, labelLayout: { hideOverlap: true, moveOverlap: "shiftY" } })),
     });
   }
 
@@ -2920,7 +2936,7 @@ function renderLineageStageChart(id, horses, key, minFoals) {
       formatter: (items) => `${escapeHtml(items[0]?.axisValue || "")}<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}匹`).join("<br>")}`,
     },
     legend: { top: 0, data: ACHIEVEMENT_STAGES },
-    grid: horizontalGrid(56, 32, key === "female_family" ? 92 : 118),
+    grid: fixedHorizontalGrid(key === "female_family" ? 118 : 164, 56, 34, 54),
     xAxis: { type: "value", name: "产驹数" },
     yAxis: longCategoryAxis(rows.map((row) => row.label), { width: key === "female_family" ? 92 : 118 }),
     series: ACHIEVEMENT_STAGES.map((stage, index) => ({
@@ -3178,7 +3194,7 @@ function renderBreederCharts(breeders) {
     color: [COLORS.duramente, COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
     legend: { top: 0, data: ["重赏马", "G1马"] },
-    grid: horizontalGrid(52, 30, 40),
+    grid: fixedHorizontalGrid(164, 52, 34, 48),
     xAxis: { type: "value", name: "匹" },
     yAxis: longCategoryAxis(gradedRows.map((row) => row.label)),
     series: [
@@ -3192,7 +3208,7 @@ function renderBreederCharts(breeders) {
     color: years.map(cropColor),
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
     legend: { top: 0, data: years },
-    grid: horizontalGrid(52, 30, 40),
+    grid: fixedHorizontalGrid(164, 52, 34, 48),
     xAxis: { type: "value", name: "产驹数" },
     yAxis: longCategoryAxis(cropRows.map((row) => row.label)),
     series: years.map((year) => ({
@@ -3225,7 +3241,7 @@ function renderDamAgeProductionCharts(damAge) {
   renderChart("damAgeWinRateChart", {
     color: [COLORS.coral],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(36, 36, 118),
+    grid: fixedHorizontalGrid(96, 36, 42, 132),
     xAxis: { type: "value", name: "%" },
     yAxis: longCategoryAxis(bucketRows.map((row) => row.label), { width: 90 }),
     series: [{
@@ -3242,7 +3258,7 @@ function renderDamAgeProductionCharts(damAge) {
   renderChart("damAgeGradedRateChart", {
     color: [COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
-    grid: horizontalGrid(36, 36, 118),
+    grid: fixedHorizontalGrid(96, 36, 42, 132),
     xAxis: { type: "value", name: "%" },
     yAxis: longCategoryAxis(bucketRows.map((row) => row.label), { width: 90 }),
     series: [{ type: "bar", data: bucketRows.map((row) => ({ value: Number(((row.graded_foal_rate || 0) * 100).toFixed(1)), raw: row })), label: safeHorizontalBarLabel((params) => {

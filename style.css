@@ -1530,7 +1530,9 @@ td {
 
 .milestone-scroll {
   overflow-x: auto;
+  max-width: 100%;
   padding: 26px 8px 14px;
+  overscroll-behavior-x: contain;
 }
 
 .milestone-track {
@@ -1613,12 +1615,39 @@ td {
   border-radius: 12px;
   background: rgba(169, 47, 93, 0.06);
   color: var(--ink);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .milestone-detail span,
 .milestone-detail a {
   color: var(--muted);
   font-weight: 800;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 640px) {
+  .chart-card {
+    padding: 14px 10px;
+  }
+
+  .chart-canvas,
+  .mini-chart-grid .chart-canvas {
+    min-width: 0;
+    height: 310px;
+  }
+
+  .milestone-label {
+    width: 84px;
+    font-size: 11px;
+  }
+
+  .milestone-detail {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 5px;
+  }
 }
 
 .rep-toggle-pill,
