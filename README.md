@@ -47,6 +47,33 @@ Cross 统计使用独立产驹数口径；同一匹马可以同时进入多个 C
 
 因为是 GitHub Pages 静态站点，朋友打开链接即可使用，不需要安装 Python、SQLite 或任何本地环境。
 
+## 自己修改 JSON 数据
+
+仓库中的 JSON 已统一使用 UTF-8 和两空格缩进，方便直接在 GitHub 网页版 VS Code（`github.dev`）中阅读和修改。
+
+打开 JSON 文件后可以直接编辑字段。仓库自带的 `.vscode/settings.json` 会在保存时自动格式化 JSON。如果格式没有自动变化，可以打开命令面板，执行 `Format Document`。
+
+在本地批量检查 JSON 格式：
+
+```bash
+python3 scripts/format_json.py --check
+```
+
+在本地批量格式化 `data/` 下的所有 JSON：
+
+```bash
+python3 scripts/format_json.py
+```
+
+也可以只格式化一个文件或目录：
+
+```bash
+python3 scripts/format_json.py data/summary.json
+python3 scripts/format_json.py data/analytics
+```
+
+修改马匹数据时请注意：`data/horses.json` 是列表资料，`data/horses/{id}.json` 是单匹详情，`data/summary.json` 保存总数和筛选选项。新增或删除马匹时，这些文件需要保持一致。
+
 ## 注意
 
 资料仅供参考与交流，不建议用于商业用途或作为投注依据。
