@@ -1,4 +1,6 @@
 const state = {
+  view: "progeny",
+  horse: "",
   q: "",
   sex: "",
   year: "",
@@ -18,10 +20,31 @@ const state = {
   limit: 50,
   offset: 0,
   total: 0,
+  allTotal: 0,
 };
+
+const FILTER_META = {
+  q: { label: "検索", element: "search" },
+  year: { label: "生年", element: "year" },
+  sex: { label: "性別", element: "sex" },
+  color: { label: "毛色", element: "color" },
+  region: { label: "所属", element: "region" },
+  trainer: { label: "調教師", element: "trainer" },
+  owner: { label: "馬主", element: "owner" },
+  breeder: { label: "生産牧場", element: "breeder" },
+  broodmare_sire: { label: "母父", element: "broodmareSire" },
+  female_family: { label: "牝系", element: "femaleFamily" },
+  dam_age_bucket: { label: "母齢", element: "damAgeBucket" },
+  bms_line: { label: "母父系", element: "bmsLine" },
+  achievement: { label: "戦績", element: "achievement" },
+  breeding: { label: "退役後", element: "breeding" },
+};
+const FILTER_KEYS = Object.keys(FILTER_META);
+const VALID_VIEWS = new Set(["progeny", "sire", "pedigree", "production", "racecourse", "method"]);
 
 const els = {
   search: document.querySelector("#search"),
+  mobileSearch: document.querySelector("#mobileSearch"),
   resetFilters: document.querySelector("#resetFilters"),
   year: document.querySelector("#year"),
   sex: document.querySelector("#sex"),
@@ -39,14 +62,25 @@ const els = {
   sort: document.querySelector("#sort"),
   direction: document.querySelector("#direction"),
   resultCount: document.querySelector("#resultCount"),
+  activeFilters: document.querySelector("#activeFilters"),
   horseRows: document.querySelector("#horseRows"),
+  horseCards: document.querySelector("#horseCards"),
   prev: document.querySelector("#prev"),
   next: document.querySelector("#next"),
   pageLabel: document.querySelector("#pageLabel"),
   drawer: document.querySelector("#drawer"),
+  drawerPanel: document.querySelector("#drawerPanel"),
   detail: document.querySelector("#detail"),
   closeDrawer: document.querySelector("#closeDrawer"),
   closeBackdrop: document.querySelector("#closeBackdrop"),
+  previousHorse: document.querySelector("#previousHorse"),
+  nextHorse: document.querySelector("#nextHorse"),
+  filtersPanel: document.querySelector("#filtersPanel"),
+  filterOpen: document.querySelector("#filterOpen"),
+  filterClose: document.querySelector("#filterClose"),
+  filterBackdrop: document.querySelector("#filterBackdrop"),
+  filterCountBadge: document.querySelector("#filterCountBadge"),
+  tableSortButtons: document.querySelectorAll("[data-table-sort]"),
   navButtons: document.querySelectorAll(".main-nav button"),
   views: document.querySelectorAll(".view"),
   sireContent: document.querySelector("#sireContent"),
@@ -527,6 +561,82 @@ function debounce(fn, wait = 220) {
   };
 }
 
+function urlForState() {
+  const params = new URLSearchParams();
+  if (state.view !== "progeny") params.set("view", state.view);
+  for (const key of FILTER_KEYS) {
+    if (state[key]) params.set(key === "horse" ? "horse" : key, state[key]);
+  }
+  if (state.sort !== "earnings_netkeiba") params.set("sort", state.sort);
+  if (state.dir !== (state.sort === "name" ? "asc" : "desc")) params.set("dir", state.dir);
+  if (state.offset) params.set("offset", String(state.offset));
+  if (state.horse) params.set("horse", String(state.horse));
+  const query = params.toString();
+  return `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
+}
+
+function writeUrlState(mode = "push") {
+  const url = urlForState();
+  if (`${window.location.pathname}${window.location.search}${window.location.hash}` === url) return;
+  window.history[mode === "replace" ? "replaceState" : "pushState"]({ duramente: true }, "", url);
+}
+
+function readUrlState() {
+  const params = new URLSearchParams(window.location.search);
+  state.view = VALID_VIEWS.has(params.get("view")) ? params.get("view") : "progeny";
+  for (const key of FILTER_KEYS) state[key] = params.get(key) || "";
+  state.sort = ["earnings_netkeiba", "birth_year", "name"].includes(params.get("sort")) ? params.get("sort") : "earnings_netkeiba";
+  state.dir = ["asc", "desc"].includes(params.get("dir")) ? params.get("dir") : (state.sort === "name" ? "asc" : "desc");
+  state.offset = Math.max(0, Number(params.get("offset") || 0));
+  state.horse = params.get("horse") || "";
+}
+
+function syncControlsFromState() {
+  els.search.value = state.q;
+  els.mobileSearch.value = state.q;
+  for (const [key, meta] of Object.entries(FILTER_META)) {
+    if (key === "q") continue;
+    const select = els[meta.element];
+    if (select) setSelectValue(select, state[key]);
+  }
+  fillTrainerFacet();
+  setSelectValue(els.trainer, state.trainer);
+  els.sort.value = state.sort;
+  updateDirectionButton();
+  renderActiveFilters();
+}
+
+function activeFilterCount() {
+  return FILTER_KEYS.filter((key) => Boolean(state[key])).length;
+}
+
+function renderActiveFilters() {
+  const active = FILTER_KEYS.filter((key) => state[key]);
+  els.filterCountBadge.textContent = String(active.length);
+  els.filterOpen?.classList.toggle("has-filters", active.length > 0);
+  els.activeFilters.innerHTML = active.map((key) => `
+    <button class="filter-chip" type="button" data-remove-filter="${key}" title="${escapeHtml(FILTER_META[key].label)}を解除">
+      ${escapeHtml(FILTER_META[key].label)}: ${escapeHtml(state[key])}
+    </button>
+  `).join("") + (active.length ? `<button class="clear-filter-chips" type="button" data-clear-filters>すべて解除</button>` : "");
+}
+
+function clearAllFilters() {
+  for (const key of FILTER_KEYS) state[key] = "";
+  state.offset = 0;
+  syncControlsFromState();
+}
+
+function removeFilter(key) {
+  if (!FILTER_META[key]) return;
+  state[key] = "";
+  state.offset = 0;
+  if (key === "region") fillTrainerFacet();
+  syncControlsFromState();
+  writeUrlState("push");
+  loadHorses();
+}
+
 function fillFacet(select, rows) {
   for (const row of rows) {
     const option = document.createElement("option");
@@ -537,12 +647,20 @@ function fillFacet(select, rows) {
 }
 
 function updateDirectionButton() {
-  const descendingOnScreen = state.sort === "name" ? state.dir === "asc" : state.dir === "desc";
-  els.direction.textContent = descendingOnScreen ? "↓" : "↑";
+  const arrow = state.dir === "asc" ? "↑" : "↓";
+  els.direction.textContent = arrow;
+  els.direction.setAttribute("aria-label", `排序方向：${state.dir === "asc" ? "升序" : "降序"}`);
+  for (const button of els.tableSortButtons) {
+    const active = button.dataset.tableSort === state.sort;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+    button.querySelector("span").textContent = active ? arrow : "";
+  }
 }
 
 async function loadSummary() {
   const summary = await getJson("/api/summary");
+  state.allTotal = Number(summary.horses || 0);
 
   for (const year of summary.facets.years) {
     const option = document.createElement("option");
@@ -748,6 +866,26 @@ function chartShell(id) {
   return `<div class="chart-canvas" id="${escapeHtml(id)}"><div class="chart-loading">图表加载中</div></div>`;
 }
 
+const CHART_DRILLDOWNS = {
+  sireCropEarningsChart: (params) => ({ year: params.name }),
+  sireCropWinnersChart: (params) => ({ year: params.name }),
+  sireCropGradedChart: (params) => ({ year: params.name }),
+  sireAchievementStepChart: (params) => ({ year: params.name }),
+  sireAwdDumbbellChart: (params) => ({ year: params.name }),
+  bmsLineScaleChart: (params) => ({ bms_line: params.name }),
+  bmsLineRelativeChart: (params) => ({ bms_line: params.name }),
+  bmsLineChart: (params) => ({ bms_line: params.name }),
+  bmsSireContributionChart: (params) => ({ broodmare_sire: params.name }),
+  bmsSireEfficiencyChart: (params) => ({ broodmare_sire: params.name }),
+  breederMainChart: (params) => ({ breeder: params.name }),
+  breederGradedChart: (params) => ({ breeder: params.name }),
+  breederCropChart: (params) => ({ breeder: params.name, year: params.seriesName }),
+  clubSexShareChart: (params) => ({ year: params.name }),
+  "clubWinCompare-牡": (params) => ({ year: params.name, sex: "牡" }),
+  "clubWinCompare-牝": (params) => ({ year: params.name, sex: "牝" }),
+  "clubWinCompare-セン": (params) => ({ year: params.name, sex: "セン" }),
+};
+
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
@@ -762,13 +900,26 @@ function renderChart(id, option) {
     oldChart.dispose();
   }
   const chart = window.echarts.init(el);
-  const series = (option.series || []).map((item) => item.type === "bar" ? {
+  const normalizedSeries = (option.series || []).map((item) => item.type === "bar" ? {
     ...item,
     barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
     barCategoryGap: item.barCategoryGap || "48%",
   } : item);
+  const series = window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries;
+  const axes = window.DuramenteAnimation?.enhanceEChartsAxes(option) || {};
   const tooltip = option.tooltip ? { confine: true, ...option.tooltip } : undefined;
-  chart.setOption({ animationDuration: 450, ...option, tooltip, series });
+  const grid = Array.isArray(option.grid)
+    ? option.grid.map((item) => ({ containLabel: true, ...item }))
+    : option.grid ? { containLabel: true, ...option.grid } : option.grid;
+  chart.setOption({ animation: true, animationDurationUpdate: 300, ...option, ...axes, grid, tooltip, series });
+  const drilldown = CHART_DRILLDOWNS[id];
+  if (drilldown) {
+    el.classList.add("is-drilldown");
+    chart.on("click", (params) => {
+      const filters = drilldown(params);
+      if (filters && Object.values(filters).some(Boolean)) navigateToProgeny(filters);
+    });
+  }
   el.classList.add("is-rendered");
   chartRegistry.set(id, chart);
   if (!el.dataset.resizeObserved && window.ResizeObserver) {
@@ -1348,6 +1499,10 @@ function broodmareSireFilterButton(label) {
   return `<button class="link-button" type="button" data-broodmare-sire-filter="${escapeHtml(label)}">${escapeHtml(label)}</button>`;
 }
 
+function progenyFilterButton(key, value, label = value) {
+  return `<button class="link-button" type="button" data-progeny-filter-key="${escapeHtml(key)}" data-progeny-filter-value="${escapeHtml(value)}">${escapeHtml(label)}</button>`;
+}
+
 function setSelectValue(select, value) {
   if ([...select.options].some((option) => option.value === value)) {
     select.value = value;
@@ -1356,51 +1511,55 @@ function setSelectValue(select, value) {
   return false;
 }
 
-function applyBmsFilter(value) {
-  state.bms_line = value;
-  setSelectValue(els.bmsLine, value);
+function closeFilters() {
+  els.filtersPanel?.classList.remove("open");
+  els.filterBackdrop?.classList.remove("open");
+  if (els.filterBackdrop) els.filterBackdrop.hidden = true;
+  els.filterOpen?.setAttribute("aria-expanded", "false");
+}
+
+function navigateToProgeny(filters = {}) {
+  for (const key of FILTER_KEYS) state[key] = "";
+  for (const [key, value] of Object.entries(filters)) {
+    if (FILTER_META[key] && value !== null && value !== undefined) state[key] = String(value);
+  }
+  state.view = "progeny";
+  state.horse = "";
   state.offset = 0;
-  showView("progeny");
+  syncControlsFromState();
+  closeFilters();
+  writeUrlState("push");
+  showView("progeny", { updateHistory: false });
   loadHorses();
+}
+
+window.navigateToProgeny = navigateToProgeny;
+
+function applyBmsFilter(value) {
+  navigateToProgeny({ bms_line: value });
 }
 
 function applyBroodmareSireFilter(value) {
-  state.broodmare_sire = value;
-  setSelectValue(els.broodmareSire, value);
-  state.offset = 0;
-  showView("progeny");
-  loadHorses();
+  navigateToProgeny({ broodmare_sire: value });
 }
 
 function applySearchFilter(value) {
-  state.q = value;
-  els.search.value = value;
-  state.offset = 0;
-  showView("progeny");
-  loadHorses();
+  navigateToProgeny({ q: value });
 }
 
 function applyFemaleFamilyFilter(value) {
-  state.female_family = value;
-  setSelectValue(els.femaleFamily, value);
-  state.offset = 0;
-  showView("progeny");
-  loadHorses();
+  navigateToProgeny({ female_family: value });
 }
 
 function applyBreederFilter(value) {
-  state.breeder = value;
-  setSelectValue(els.breeder, value);
-  state.offset = 0;
-  showView("progeny");
-  loadHorses();
+  navigateToProgeny({ breeder: value });
 }
 
 async function openHorseDetailFromChart(name) {
   const query = String(name || "").trim();
   if (!query) return;
   const result = await getJson(`/api/horses?q=${encodeURIComponent(query)}&limit=20&offset=0`);
-  const horses = result.horses || [];
+  const horses = result.horses || result.items || [];
   const exact = horses.find((horse) => [horse.name, horse.name_en, horse.hkjc_name_zh].filter(Boolean).some((item) => String(item) === query));
   const target = exact || horses[0];
   if (target?.id) {
@@ -1411,6 +1570,13 @@ async function openHorseDetailFromChart(name) {
 }
 
 function wireAnalysisFilters(container) {
+  for (const button of container.querySelectorAll("[data-progeny-filter-key]")) {
+    if (button.dataset.progenyFilterWired === "true") continue;
+    button.dataset.progenyFilterWired = "true";
+    button.addEventListener("click", () => navigateToProgeny({
+      [button.dataset.progenyFilterKey]: button.dataset.progenyFilterValue,
+    }));
+  }
   for (const button of container.querySelectorAll("[data-bms-filter]")) {
     if (button.dataset.bmsWired === "true") continue;
     button.dataset.bmsWired = "true";
@@ -2342,7 +2508,7 @@ async function renderSireAnalysis() {
     )}
     ${sectionBlock("生产年度明细", "按出生年份查看各世代成绩。",
       analysisTable([
-        { label: "生年", value: (row) => row.label },
+        { label: "生年", value: (row) => progenyFilterButton("year", row.label), html: true },
         { label: "产驹数", value: (row) => formatNumber(row.foals) },
         { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.debut_rate)})` },
         { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
@@ -3366,6 +3532,11 @@ async function renderProductionAnalysis() {
   const clubHorses = horses.filter(isClubHorse);
   const matchedOwners = [...new Set(clubHorses.map((horse) => horse.owner))].sort((a, b) => a.localeCompare(b, "ja"));
   const damAgeBucketRows = (damAge.buckets || []).filter((row) => row.label !== "unknown" && Number(row.foals || 0) > 0);
+  const topRelations = (field) => [...horses.reduce((map, horse) => {
+    const value = String(horse[field] || "").trim();
+    if (value) map.set(value, (map.get(value) || 0) + 1);
+    return map;
+  }, new Map()).entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0], "ja")).slice(0, 12);
   els.productionContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">生産・繁殖</p>
@@ -3402,9 +3573,15 @@ async function renderProductionAnalysis() {
         </div>
         <p class="source-note">俱乐部定义依据 <a href="https://ja.wikipedia.org/wiki/%E4%B8%80%E5%8F%A3%E9%A6%AC%E4%B8%BB" target="_blank" rel="noopener noreferrer">Wikipedia「一口馬主クラブの一覧」</a> 的现存クラブ法人（中央／地方），按马主登记名匹配。</p>`
       )}
+      ${sectionBlock("関係者から産駒を探す", "項目を選ぶと産駒一覧へ移動し、その条件で絞り込みます。", `
+        <div class="drilldown-groups">
+          <div><strong>調教師</strong><div class="drilldown-chips">${topRelations("trainer").map(([name, count]) => progenyFilterButton("trainer", name, `${name} ${count}`)).join("")}</div></div>
+          <div><strong>馬主</strong><div class="drilldown-chips">${topRelations("owner").map(([name, count]) => progenyFilterButton("owner", name, `${name} ${count}`)).join("")}</div></div>
+        </div>
+      `)}
       ${sectionBlock("牧场综合表", "详细查看各牧场产驹成绩。",
         analysisTable([
-          { label: "牧場", value: (row) => row.label },
+          { label: "牧場", value: (row) => progenyFilterButton("breeder", row.label), html: true },
           { label: "产驹数", value: (row) => formatNumber(row.foals) },
           { label: "出赛马", value: (row) => `${formatNumber(row.runners)} (${formatRate(row.runner_rate)})` },
           { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
@@ -3453,7 +3630,7 @@ async function renderProductionAnalysis() {
       ${sectionBlock("繁殖牝马明细", "按母马汇总ドゥラメンテ产驹。",
         analysisTable([
           { label: "繁殖牝马", className: "name-column", value: (row) => row.label },
-          { label: "母父", className: "name-column", value: (row) => row.broodmare_sire },
+          { label: "母父", className: "name-column", value: (row) => broodmareSireFilterButton(row.broodmare_sire), html: true },
           { label: "产驹数", value: (row) => formatNumber(row.foals) },
           { label: "出赛马", value: (row) => formatNumber(row.runners) },
           { label: "胜马", value: (row) => `${formatNumber(row.winners)} (${formatRate(row.winner_foal_rate)})` },
@@ -3850,7 +4027,10 @@ function renderMonthChart(id, rows, metric) {
   });
 }
 
-async function showView(name) {
+async function showView(name, { updateHistory = true } = {}) {
+  if (!VALID_VIEWS.has(name)) name = "progeny";
+  state.view = name;
+  if (name !== "progeny" && state.horse) closeDrawer({ updateHistory: false });
   for (const view of els.views) {
     const active = view.id === `${name}View`;
     view.hidden = !active;
@@ -3858,7 +4038,9 @@ async function showView(name) {
   }
   for (const button of els.navButtons) {
     button.classList.toggle("active", button.dataset.view === name);
+    button.setAttribute("aria-current", button.dataset.view === name ? "page" : "false");
   }
+  if (updateHistory) writeUrlState("push");
   if (name === "sire") await renderSireAnalysis();
   if (name === "pedigree") await renderPedigreeAnalysis();
   if (name === "production") await renderProductionAnalysis();
@@ -3941,13 +4123,68 @@ function finishBadge(finish) {
   return `<span class="finish ${cls}">${escapeHtml(finish)}</span>`;
 }
 
+let currentHorseIds = [];
+let horseSequenceCache = { key: "", ids: [] };
+let lastFocusedElement = null;
+
+function horseSequenceKey() {
+  const params = new URL(horseQuery(), window.location.href).searchParams;
+  params.delete("limit");
+  params.delete("offset");
+  return params.toString();
+}
+
+async function ensureHorseSequence() {
+  const key = horseSequenceKey();
+  if (horseSequenceCache.key === key && horseSequenceCache.ids.length) return horseSequenceCache.ids;
+  const ids = [];
+  let offset = 0;
+  let total = Infinity;
+  while (offset < total) {
+    const params = new URLSearchParams(key);
+    params.set("limit", "100");
+    params.set("offset", String(offset));
+    const data = await getJson(`/api/horses?${params.toString()}`);
+    const items = data.items || data.horses || [];
+    total = Number(data.total ?? items.length);
+    ids.push(...items.map((horse) => String(horse.id)));
+    if (!items.length) break;
+    offset += items.length;
+  }
+  horseSequenceCache = { key, ids };
+  currentHorseIds = ids;
+  updateHorseNavigation();
+  return ids;
+}
+
+function bindHorseOpeners(container) {
+  for (const target of container.querySelectorAll("[data-id]")) {
+    const activate = () => openHorse(target.dataset.id, { trigger: target });
+    target.addEventListener("click", activate);
+    if (target.tagName === "BUTTON") continue;
+    target.addEventListener("keydown", (event) => {
+      if (event.key !== "Enter" && event.key !== " ") return;
+      event.preventDefault();
+      activate();
+    });
+  }
+}
+
 async function loadHorses() {
   els.horseRows.innerHTML = `<tr><td colspan="12" class="muted">正在载入产驹资料...</td></tr>`;
+  els.horseCards.innerHTML = `<p class="muted">正在载入产驹资料...</p>`;
   const data = await getJson(horseQuery());
+  const items = data.items || data.horses || [];
   state.total = data.total;
-  els.resultCount.textContent = `${data.total.toLocaleString("ja-JP")} 件`;
-  els.horseRows.innerHTML = data.items.map((horse) => `
-    <tr data-id="${horse.id}">
+  if (state.offset >= state.total && state.total > 0) {
+    state.offset = Math.max(0, Math.floor((state.total - 1) / state.limit) * state.limit);
+    writeUrlState("replace");
+    return loadHorses();
+  }
+  els.resultCount.textContent = `${Number(data.total).toLocaleString("ja-JP")} / ${Number(state.allTotal || data.total).toLocaleString("ja-JP")} 頭`;
+  renderActiveFilters();
+  els.horseRows.innerHTML = items.map((horse) => `
+    <tr data-id="${horse.id}" tabindex="0" role="button" aria-label="${escapeHtml(horse.name)}の詳細を開く">
       <td class="horse-column">
         <div class="horse-name">${escapeHtml(horse.name)}</div>
         ${horse.hkjc_name_zh ? `<div class="hk-name">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
@@ -3975,10 +4212,29 @@ async function loadHorses() {
       </td>
     </tr>
   `).join("") || `<tr><td colspan="12" class="muted">没有找到符合条件的产驹。</td></tr>`;
+  els.horseCards.innerHTML = items.map((horse) => `
+    <button class="horse-card" type="button" data-id="${horse.id}" aria-label="${escapeHtml(horse.name)}の詳細を開く">
+      <span class="horse-card-head">
+        <span><span class="horse-card-name">${escapeHtml(horse.name)}</span>${horse.hkjc_name_zh ? `<span class="horse-card-hk">${escapeHtml(horse.hkjc_name_zh)}</span>` : ""}</span>
+        ${regionBadge(horse.trainer_region)}
+      </span>
+      <span class="horse-card-meta"><span>${escapeHtml(horse.birth_year)}年</span><span>${escapeHtml(horse.sex)}</span><span>${escapeHtml(horse.color)}</span></span>
+      <span class="horse-card-pedigree">
+        <span><small>母</small><strong>${escapeHtml(horse.dam)}</strong></span>
+        <span><small>母父</small><strong>${escapeHtml(horse.broodmare_sire)}</strong></span>
+      </span>
+      <span class="horse-card-footer">
+        <span class="horse-card-summary"><small>主な勝鞍 / 通算</small><span>${escapeHtml(horse.major_win || horse.career_summary || "—")}</span>${horse.major_win && horse.career_summary ? `<span class="muted">${escapeHtml(horse.career_summary)}</span>` : ""}</span>
+        <span class="horse-card-prize">${escapeHtml(prize(horse))}</span>
+      </span>
+    </button>
+  `).join("") || `<p class="muted">没有找到符合条件的产驹。</p>`;
 
-  for (const row of els.horseRows.querySelectorAll("tr[data-id]")) {
-    row.addEventListener("click", () => openHorse(row.dataset.id));
-  }
+  currentHorseIds = items.map((horse) => String(horse.id));
+  horseSequenceCache = { key: "", ids: [] };
+  bindHorseOpeners(els.horseRows);
+  bindHorseOpeners(els.horseCards);
+  ensureHorseSequence().catch((error) => console.warn("Unable to prepare detail sequence", error));
   updatePager();
 }
 
@@ -4277,14 +4533,42 @@ function studSection(studProfiles, horse) {
   `;
 }
 
-async function openHorse(id) {
+function updateHorseNavigation() {
+  const index = currentHorseIds.indexOf(String(state.horse));
+  els.previousHorse.disabled = index <= 0;
+  els.nextHorse.disabled = index < 0 || index >= currentHorseIds.length - 1;
+  els.previousHorse.title = index > 0 ? `${index} / ${currentHorseIds.length}` : "先頭の産駒です";
+  els.nextHorse.title = index >= 0 && index < currentHorseIds.length - 1 ? `${index + 2} / ${currentHorseIds.length}` : "最後の産駒です";
+}
+
+async function openAdjacentHorse(direction) {
+  const ids = await ensureHorseSequence();
+  const index = ids.indexOf(String(state.horse));
+  const nextId = ids[index + direction];
+  if (nextId) openHorse(nextId, { preserveFocus: true });
+}
+
+async function openHorse(id, { trigger = null, updateHistory = true, preserveFocus = false } = {}) {
+  if (!id) return;
+  const requestedId = String(id);
+  const wasOpen = els.drawer.classList.contains("open");
+  if (!preserveFocus && !wasOpen) lastFocusedElement = trigger || document.activeElement;
+  state.horse = String(id);
+  if (updateHistory) writeUrlState("push");
+  els.detail.innerHTML = `<p class="muted">詳細を読み込み中...</p>`;
+  els.drawer.classList.add("open");
+  els.drawer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("drawer-open");
+  updateHorseNavigation();
+  if (!preserveFocus && !wasOpen) els.drawerPanel.focus();
   const data = await getJson(`/api/horse?id=${encodeURIComponent(id)}`);
+  if (state.horse !== requestedId) return;
   const horse = data.horse;
   window.currentDetailHorse = horse;
   els.detail.innerHTML = `
     <div class="detail-head">
       <p class="kicker">${escapeHtml(horse.sire || "Duramente")}</p>
-      <h2>${escapeHtml(horse.name)}</h2>
+      <h2 id="drawerTitle">${escapeHtml(horse.name)}</h2>
       ${horse.name_en ? `<div class="english-name">${escapeHtml(horse.name_en)}</div>` : ""}
       ${horse.hkjc_name_zh ? `<div class="hk-name detail-hk">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
       <div class="tag-row">
@@ -4332,47 +4616,39 @@ async function openHorse(id) {
     ${studSection(data.stud, horse)}
     ${detailSources(data.sources)}
   `;
-  els.drawer.classList.add("open");
-  els.drawer.setAttribute("aria-hidden", "false");
+  updateHorseNavigation();
 }
 
-function closeDrawer() {
+function closeDrawer({ updateHistory = true, restoreFocus = true } = {}) {
+  if (!els.drawer.classList.contains("open") && !state.horse) return;
   els.drawer.classList.remove("open");
   els.drawer.setAttribute("aria-hidden", "true");
+  document.body.classList.remove("drawer-open");
+  state.horse = "";
+  if (updateHistory) writeUrlState("push");
+  if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus();
 }
 
 function bindControls() {
   const refresh = () => {
     state.offset = 0;
+    renderActiveFilters();
+    writeUrlState("push");
     loadHorses();
   };
   const resetFilters = () => {
-    for (const key of ["q", "sex", "year", "color", "region", "trainer", "owner", "breeder", "broodmare_sire", "female_family", "dam_age_bucket", "bms_line", "achievement", "breeding"]) {
-      state[key] = "";
-    }
-    state.offset = 0;
-    els.search.value = "";
-    els.year.value = "";
-    els.sex.value = "";
-    els.color.value = "";
-    els.region.value = "";
-    els.owner.value = "";
-    els.breeder.value = "";
-    els.broodmareSire.value = "";
-    els.femaleFamily.value = "";
-    els.damAgeBucket.value = "";
-    els.bmsLine.value = "";
-    els.achievement.value = "";
-    els.breeding.value = "";
-    fillTrainerFacet();
-    els.trainer.value = "";
+    clearAllFilters();
+    writeUrlState("push");
     loadHorses();
   };
   els.resetFilters?.addEventListener("click", resetFilters);
-  els.search.addEventListener("input", debounce(() => {
-    state.q = els.search.value.trim();
+  const updateSearch = debounce((value, peer) => {
+    state.q = value.trim();
+    peer.value = value;
     refresh();
-  }));
+  });
+  els.search.addEventListener("input", () => updateSearch(els.search.value, els.mobileSearch));
+  els.mobileSearch.addEventListener("input", () => updateSearch(els.mobileSearch.value, els.search));
   els.year.addEventListener("change", () => {
     state.year = els.year.value;
     refresh();
@@ -4439,14 +4715,45 @@ function bindControls() {
   });
   els.prev.addEventListener("click", () => {
     state.offset = Math.max(0, state.offset - state.limit);
+    writeUrlState("push");
     loadHorses();
   });
   els.next.addEventListener("click", () => {
     state.offset += state.limit;
+    writeUrlState("push");
     loadHorses();
   });
-  els.closeDrawer.addEventListener("click", closeDrawer);
-  els.closeBackdrop.addEventListener("click", closeDrawer);
+  for (const button of els.tableSortButtons) {
+    button.addEventListener("click", () => {
+      const sort = button.dataset.tableSort;
+      if (state.sort === sort) state.dir = state.dir === "asc" ? "desc" : "asc";
+      else {
+        state.sort = sort;
+        state.dir = sort === "name" ? "asc" : "desc";
+      }
+      els.sort.value = state.sort;
+      updateDirectionButton();
+      refresh();
+    });
+  }
+  els.activeFilters.addEventListener("click", (event) => {
+    const remove = event.target.closest("[data-remove-filter]");
+    if (remove) removeFilter(remove.dataset.removeFilter);
+    if (event.target.closest("[data-clear-filters]")) resetFilters();
+  });
+  els.filterOpen.addEventListener("click", () => {
+    els.filtersPanel.classList.add("open");
+    els.filterBackdrop.hidden = false;
+    els.filterBackdrop.classList.add("open");
+    els.filterOpen.setAttribute("aria-expanded", "true");
+    els.filterClose.focus();
+  });
+  els.filterClose.addEventListener("click", closeFilters);
+  els.filterBackdrop.addEventListener("click", closeFilters);
+  els.closeDrawer.addEventListener("click", () => closeDrawer());
+  els.closeBackdrop.addEventListener("click", () => closeDrawer());
+  els.previousHorse.addEventListener("click", () => openAdjacentHorse(-1));
+  els.nextHorse.addEventListener("click", () => openAdjacentHorse(1));
   for (const button of els.navButtons) {
     button.addEventListener("click", () => {
       showView(button.dataset.view).catch((error) => {
@@ -4456,17 +4763,53 @@ function bindControls() {
     });
   }
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape") closeDrawer();
+    if (event.key === "Escape") {
+      if (els.filtersPanel.classList.contains("open")) closeFilters();
+      else if (els.drawer.classList.contains("open")) closeDrawer();
+      return;
+    }
+    if (!els.drawer.classList.contains("open")) return;
+    if (event.key === "ArrowLeft" && !event.target.matches("input, select, textarea")) openAdjacentHorse(-1);
+    if (event.key === "ArrowRight" && !event.target.matches("input, select, textarea")) openAdjacentHorse(1);
+    if (event.key !== "Tab") return;
+    const focusable = [...els.drawerPanel.querySelectorAll('button:not([disabled]), a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+      .filter((element) => !element.hidden && element.getClientRects().length);
+    if (!focusable.length) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
   });
+  window.addEventListener("popstate", restoreFromUrl);
+}
+
+async function restoreFromUrl() {
+  readUrlState();
+  syncControlsFromState();
+  await showView(state.view, { updateHistory: false });
+  if (state.view === "progeny") await loadHorses();
+  if (state.horse) await openHorse(state.horse, { updateHistory: false });
+  else closeDrawer({ updateHistory: false, restoreFocus: false });
 }
 
 async function init() {
   bindControls();
   await loadSummary();
-  await loadHorses();
+  readUrlState();
+  syncControlsFromState();
+  writeUrlState("replace");
+  await showView(state.view, { updateHistory: false });
+  if (state.view === "progeny") await loadHorses();
+  if (state.horse) await openHorse(state.horse, { updateHistory: false });
 }
 
 init().catch((error) => {
   console.error("Database load failed", error);
   els.horseRows.innerHTML = `<tr><td colspan="11"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
+  els.horseCards.innerHTML = `<div class="load-error">资料暂时无法载入。</div>`;
 });
