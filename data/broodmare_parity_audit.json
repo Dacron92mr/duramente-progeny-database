@@ -1,9 +1,9 @@
 {
   "generated_at": "2026-07-29",
   "rules": {
-    "biological_parity": "活产和明确记载的死产计入；空胎、流产、未配种不计入。",
-    "registered_foal_order": "登记产驹序次与真实生产胎次分开，不用于推定真实生产胎次。",
-    "uncertainty": "记录不完整、含义不明或来源冲突时保留unknown。"
+    "biological_parity": "出生后存活的产驹和明确记载的死产计入；空胎、流产、未配种不计入。",
+    "registered_foal_order": "登记产驹序次与真实生产胎次分开计算",
+    "uncertainty": "记录不完整或来源冲突时保留unknown。"
   },
   "summary": {
     "total_foals": 726,
