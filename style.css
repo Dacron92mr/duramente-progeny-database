@@ -1028,6 +1028,319 @@ td {
   line-height: 1.6;
 }
 
+.pedigree-title {
+  margin-bottom: 16px;
+}
+
+.pedigree-section-nav {
+  position: sticky;
+  top: 10px;
+  z-index: 12;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin: 0 0 22px;
+  padding: 8px;
+  border: 1px solid rgba(116, 61, 90, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 251, 247, 0.94);
+  box-shadow: 0 12px 32px rgba(84, 47, 57, 0.1);
+  backdrop-filter: blur(12px);
+}
+
+.pedigree-section-nav button {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+  width: 100%;
+  min-height: 62px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  padding: 10px 12px;
+  background: transparent;
+  color: var(--ink);
+  text-align: left;
+}
+
+.pedigree-section-nav button > span {
+  grid-row: 1 / 3;
+  align-self: center;
+  color: rgba(116, 61, 90, 0.54);
+  font-family: Georgia, serif;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.pedigree-section-nav strong {
+  align-self: end;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.pedigree-section-nav small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1.3;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pedigree-section-nav button:hover {
+  border-color: rgba(169, 47, 93, 0.24);
+  background: #fff;
+}
+
+.pedigree-section-nav button.active {
+  border-color: var(--accent);
+  background: linear-gradient(135deg, #8e244d, var(--accent));
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(143, 29, 76, 0.2);
+}
+
+.pedigree-section-nav button.active > span,
+.pedigree-section-nav button.active small {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.pedigree-panel[hidden] {
+  display: none;
+}
+
+.pedigree-panel-intro {
+  margin: 0 0 18px;
+  border-left: 4px solid var(--accent);
+  padding: 2px 0 2px 16px;
+}
+
+.pedigree-panel-intro h2 {
+  margin: 3px 0 8px;
+  font-size: 25px;
+}
+
+.pedigree-panel-intro > p:not(.kicker) {
+  max-width: 980px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.bms-family-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bms-family-card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8px 1fr auto;
+  grid-template-rows: auto auto auto;
+  gap: 4px 10px;
+  width: 100%;
+  min-height: 118px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  background: #fff;
+  color: var(--ink);
+  text-align: left;
+  box-shadow: 0 8px 26px rgba(65, 45, 36, 0.05);
+}
+
+.bms-family-card:hover {
+  border-color: var(--lineage-color);
+  transform: translateY(-1px);
+}
+
+.bms-family-swatch {
+  grid-row: 1 / 4;
+  width: 8px;
+  height: 100%;
+  min-height: 76px;
+  border-radius: 99px;
+  background: var(--lineage-color);
+}
+
+.bms-family-card strong {
+  font-size: 15px;
+}
+
+.bms-family-card em {
+  color: var(--lineage-color);
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.bms-family-card small {
+  grid-column: 2 / 4;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.bms-family-card .card-action {
+  grid-column: 2 / 4;
+  color: var(--accent);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.pedigree-feature-grid {
+  margin-top: 18px;
+}
+
+.strategy-card {
+  display: flex;
+  min-height: 360px;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px;
+  background:
+    radial-gradient(circle at 88% 14%, rgba(240, 180, 77, 0.22), transparent 36%),
+    linear-gradient(145deg, #fff9f1, #fff);
+}
+
+.strategy-card .kicker {
+  color: var(--accent);
+}
+
+.strategy-card > p {
+  color: var(--ink);
+  font-family: Georgia, "Yu Mincho", serif;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.strategy-card > small {
+  display: block;
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.55;
+}
+
+.family-signal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.family-signal-card {
+  display: flex;
+  width: 100%;
+  min-height: 128px;
+  flex-direction: column;
+  align-items: flex-start;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  background: linear-gradient(180deg, #fff, #fff9f4);
+  color: var(--ink);
+  text-align: left;
+}
+
+.family-signal-card:hover {
+  border-color: var(--accent);
+}
+
+.family-signal-card strong {
+  color: var(--accent);
+  font-size: 17px;
+}
+
+.family-signal-card span {
+  margin-top: 8px;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.family-signal-card small {
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 750;
+  line-height: 1.45;
+}
+
+.family-signal-card em {
+  margin-top: auto;
+  padding-top: 9px;
+  color: var(--accent);
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 900;
+}
+
+.pedigree-explorer > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  list-style: none;
+}
+
+.pedigree-explorer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.pedigree-explorer > summary span,
+.pedigree-explorer > summary small {
+  display: block;
+}
+
+.pedigree-explorer > summary small {
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.pedigree-explorer > summary em {
+  flex: 0 0 auto;
+  color: var(--accent);
+  font-size: 12px;
+  font-style: normal;
+}
+
+.pedigree-explorer[open] > summary em {
+  font-size: 0;
+}
+
+.pedigree-explorer[open] > summary em::after {
+  content: "收起 ↑";
+  font-size: 12px;
+}
+
+.pedigree-explorer-controls {
+  justify-content: flex-start;
+  margin: 18px 0 14px;
+}
+
+.compact-detail .detail-table-stack {
+  margin-top: 18px;
+}
+
+.dosage-intro {
+  padding-right: 18px;
+}
+
+.inline-reference {
+  display: inline-flex;
+  margin-top: 9px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+}
+
 .metric-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -2340,6 +2653,16 @@ details.analysis-block summary {
     padding: 22px;
   }
 
+  .pedigree-section-nav {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .bms-family-grid,
+  .family-signal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .metric-grid,
   .compact-metrics,
   .sire-eval-grid,
@@ -2524,6 +2847,68 @@ details.analysis-block summary {
 
   h1 {
     font-size: 30px;
+  }
+
+  .analysis-shell {
+    padding: 18px 14px 28px;
+  }
+
+  .pedigree-section-nav {
+    display: flex;
+    margin-right: -14px;
+    margin-left: -14px;
+    padding: 7px 14px 9px;
+    overflow-x: auto;
+    border-right: 0;
+    border-left: 0;
+    border-radius: 0;
+    scrollbar-width: none;
+  }
+
+  .pedigree-section-nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pedigree-section-nav button {
+    flex: 0 0 154px;
+    min-height: 56px;
+    padding: 8px 10px;
+  }
+
+  .pedigree-panel-intro h2 {
+    font-size: 21px;
+  }
+
+  .bms-family-grid,
+  .family-signal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bms-family-card {
+    min-height: 104px;
+  }
+
+  .strategy-card {
+    min-height: 250px;
+    padding: 22px;
+  }
+
+  .strategy-card > p {
+    font-size: 18px;
+  }
+
+  .pedigree-explorer > summary {
+    align-items: flex-start;
+  }
+
+  .pedigree-explorer-controls {
+    align-items: stretch;
+  }
+
+  .pedigree-explorer-controls label,
+  .pedigree-explorer-controls select,
+  .pedigree-explorer-controls input {
+    width: 100%;
   }
 
   .main-nav {
