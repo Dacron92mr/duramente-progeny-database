@@ -1,8 +1,8 @@
 {
   "source": "https://www.studbook.jp/users/ja/SearchChichiShushibaList?hid=3171846768480&kid=",
-  "source_name": "Japan Stud Book / 種雄馬別種付け雌馬一覧",
+  "source_name": "Japan Stud Book 种牡马配种母马资料",
   "retrieved_at": "2026-08-04",
-  "definition": "実際の種付年月日の月。セン馬は牡に合算。勝馬率・重賞馬率は独立産駒数ベース。",
+  "definition": "配种月份按实际配种日期统计，骟马并入牡马；胜马率和重赏马率均按独立产驹数计算。",
   "coverage": {
     "horses": 726,
     "matched": 723,

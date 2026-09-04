@@ -1,42 +1,42 @@
 <!doctype html>
-<html lang="ja">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <title>Duramente Progeny Database</title>
+  <title>ドゥラメンテ产驹数据库</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css?v=20260903a">
+  <link rel="stylesheet" href="style.css?v=20260904a">
 </head>
 <body>
   <header class="topbar">
     <div>
-      <p class="kicker">Local Database</p>
-      <h1>ドゥラメンテ産駒</h1>
+      <p class="kicker">RACING DATABASE</p>
+      <h1>ドゥラメンテ产驹数据库</h1>
     </div>
-    <nav class="main-nav" aria-label="sections">
-      <button class="active" type="button" data-view="progeny" title="产驹检索">産駒一覧</button>
-      <button type="button" data-view="sire" title="种牡马表现">種牡馬成績</button>
-      <button type="button" data-view="pedigree" title="血统分析">血統分析</button>
-      <button type="button" data-view="production" title="牧场与繁殖母马">生産・繁殖</button>
-      <button type="button" data-view="racecourse" title="赛马场表现">競馬場分析</button>
-      <button type="button" data-view="method" title="数据与方法">データ・方法</button>
+    <nav class="main-nav" aria-label="主导航">
+      <button class="active" type="button" data-view="progeny">产驹列表</button>
+      <button type="button" data-view="sire">种牡马生涯</button>
+      <button type="button" data-view="pedigree">血统分析</button>
+      <button type="button" data-view="production">生产与繁殖</button>
+      <button type="button" data-view="racecourse">赛马场</button>
+      <button type="button" data-view="method">数据与方法</button>
     </nav>
   </header>
 
   <main class="layout view active" id="progenyView">
-    <button class="filter-backdrop" id="filterBackdrop" type="button" aria-label="筛选面板を閉じる" hidden></button>
-    <aside class="filters" id="filtersPanel" aria-label="産駒フィルター">
+    <button class="filter-backdrop" id="filterBackdrop" type="button" aria-label="关闭筛选面板" hidden></button>
+    <aside class="filters" id="filtersPanel" aria-label="产驹筛选">
       <div class="filters-head">
-        <div><strong>絞り込み</strong><small>条件を選択</small></div>
-        <button class="icon-button filter-close" id="filterClose" type="button" aria-label="筛选面板を閉じる">×</button>
+        <div><strong>筛选</strong><small>选择筛选条件</small></div>
+        <button class="icon-button filter-close" id="filterClose" type="button" aria-label="关闭筛选面板">×</button>
       </div>
       <div class="filter-search-row">
         <label class="search">
-          <span>検索</span>
-          <input id="search" type="search" placeholder="馬名・母・馬主・調教師・牧場">
+          <span>搜索</span>
+          <input id="search" type="search" placeholder="马名、母马、马主、练马师、生产牧场">
         </label>
         <button id="resetFilters" class="reset-filters" type="button">重置</button>
       </div>
@@ -45,15 +45,15 @@
         <summary>基础</summary>
         <div class="filter-row">
           <label>
-            <span>生年</span>
+            <span>出生年</span>
             <select id="year">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
-            <span>性別</span>
+            <span>性别</span>
             <select id="sex">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
@@ -61,45 +61,45 @@
           <label>
             <span>毛色</span>
             <select id="color">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
-            <span>最高戦績</span>
+            <span>最高成就</span>
             <select id="achievement">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
       </details>
 
       <details class="filter-group" open>
-        <summary>关系者</summary>
+        <summary>相关人员</summary>
         <div class="filter-row">
           <label>
             <span>所属</span>
             <select id="region">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
-            <span>調教師</span>
+            <span>练马师</span>
             <select id="trainer">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
         <div class="filter-row">
           <label>
-            <span>馬主</span>
+            <span>马主</span>
             <select id="owner">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
-            <span>牧場</span>
+            <span>生产牧场</span>
             <select id="breeder">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
@@ -111,13 +111,13 @@
           <label>
             <span>母父系</span>
             <select id="bmsLine">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
             <span>母父</span>
             <select id="broodmareSire">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
@@ -125,24 +125,24 @@
           <label>
             <span>牝系</span>
             <select id="femaleFamily">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
           <label>
             <span>生产时母龄</span>
             <select id="damAgeBucket">
-              <option value="">すべて</option>
+              <option value="">全部</option>
             </select>
           </label>
         </div>
       </details>
 
       <details class="filter-group" open>
-        <summary>退役後・繁殖</summary>
+        <summary>退役后与繁殖</summary>
         <label>
           <span>繁殖状态</span>
           <select id="breeding">
-            <option value="">すべて</option>
+            <option value="">全部</option>
           </select>
         </label>
       </details>
@@ -151,23 +151,23 @@
     <section class="content">
       <div class="mobile-query-bar">
         <label class="mobile-search">
-          <span class="sr-only">検索</span>
-          <input id="mobileSearch" type="search" placeholder="馬名・母・馬主・調教師・牧場">
+          <span class="sr-only">搜索</span>
+          <input id="mobileSearch" type="search" placeholder="马名、母马、马主、练马师、生产牧场">
         </label>
-        <button id="filterOpen" class="filter-open" type="button" aria-controls="filtersPanel" aria-expanded="false">絞り込み <span id="filterCountBadge">0</span></button>
+        <button id="filterOpen" class="filter-open" type="button" aria-controls="filtersPanel" aria-expanded="false">筛选 <span id="filterCountBadge">0</span></button>
       </div>
       <div class="toolbar">
         <div>
-          <h2>産駒一覧</h2>
+          <h2>产驹列表</h2>
           <p id="resultCount"></p>
         </div>
         <div class="toolbar-actions">
           <select id="sort">
-            <option value="earnings_netkeiba">賞金</option>
-            <option value="birth_year">生年</option>
-            <option value="name">馬名</option>
+            <option value="earnings_netkeiba">奖金</option>
+            <option value="birth_year">出生年</option>
+            <option value="name">马名</option>
           </select>
-          <button id="direction" type="button" aria-label="sort direction">↓</button>
+          <button id="direction" type="button" aria-label="排序方向">↓</button>
         </div>
       </div>
 
@@ -177,18 +177,18 @@
         <table>
           <thead>
             <tr>
-              <th class="sticky-horse-head"><button class="sort-heading" type="button" data-table-sort="name">馬名 <span aria-hidden="true"></span></button></th>
-              <th><button class="sort-heading" type="button" data-table-sort="birth_year">生年 <span aria-hidden="true"></span></button></th>
-              <th>性</th>
+              <th class="sticky-horse-head"><button class="sort-heading" type="button" data-table-sort="name">马名 <span aria-hidden="true"></span></button></th>
+              <th><button class="sort-heading" type="button" data-table-sort="birth_year">出生年 <span aria-hidden="true"></span></button></th>
+              <th>性别</th>
               <th>毛色</th>
               <th>所属</th>
-              <th>母</th>
+              <th>母马</th>
               <th>牝系</th>
               <th>母父</th>
-              <th>馬主</th>
-              <th>調教師</th>
-              <th><button class="sort-heading" type="button" data-table-sort="earnings_netkeiba">賞金 <span aria-hidden="true"></span></button></th>
-              <th>主な勝鞍</th>
+              <th>马主</th>
+              <th>练马师</th>
+              <th><button class="sort-heading" type="button" data-table-sort="earnings_netkeiba">奖金 <span aria-hidden="true"></span></button></th>
+              <th>主要胜鞍</th>
             </tr>
           </thead>
           <tbody id="horseRows"></tbody>
@@ -197,9 +197,9 @@
       <div class="horse-cards" id="horseCards" aria-live="polite"></div>
 
       <div class="pager">
-        <button id="prev" type="button">‹</button>
+        <button id="prev" type="button" aria-label="上一页">‹</button>
         <span id="pageLabel"></span>
-        <button id="next" type="button">›</button>
+        <button id="next" type="button" aria-label="下一页">›</button>
       </div>
     </section>
   </main>
@@ -225,9 +225,9 @@
   </main>
 
   <div class="drawer" id="drawer" aria-hidden="true">
-    <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="close"></button>
+    <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="关闭详情"></button>
     <aside class="drawer-panel" id="drawerPanel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" tabindex="-1">
-      <button class="icon-button close" id="closeDrawer" type="button" aria-label="close">×</button>
+      <button class="icon-button close" id="closeDrawer" type="button" aria-label="关闭详情">×</button>
       <div class="drawer-nav" aria-label="产驹连续浏览">
         <button id="previousHorse" type="button">← 前一匹</button>
         <button id="nextHorse" type="button">后一匹 →</button>
@@ -238,7 +238,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script src="chart-animation.js?v=20260805b"></script>
-  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260804b";</script>
-  <script src="app.js?v=20260903a"></script>
+  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260904a";</script>
+  <script src="app.js?v=20260904a"></script>
 </body>
 </html>

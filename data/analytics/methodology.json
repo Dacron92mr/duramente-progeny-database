@@ -4,10 +4,10 @@
   "runners": "出赛马指已有正式比赛记录的产驹。",
   "winners": "胜马指生涯至少取得一场胜利的独立产驹。",
   "graded_winners": "重赏胜马包括G1、G2、G3胜马；Listed马另行保留，不并入重赏胜马。",
-  "earnings": "奖金优先采用netkeiba资料，必要时以JBIS资料补充；金额单位为万円。",
-  "cross": "Cross统计按祖先和代际位置归纳；同一匹马可能同时进入多个祖先或形式分组。",
-  "dosage": "DP按前四代父系祖先中的Chef-de-Race分类计算，顺序为Brilliant、Intermediate、Classic、Solid、Professional。DI=(B+I+C/2)/(S+P+C/2)，CD=(2B+I-S-2P)/总点数；采用international-2026-04版本分类表。已核验记录与PedigreeQuery公开结果一致，其余记录由同一公式和五代血统资料计算。",
-  "breeder": "牧场名称尽量保持原始登记写法，常见写法差异会合并到同一牧场名下。",
+  "earnings": "奖金优先采用 netkeiba 资料，必要时以 JBIS 资料补充；金额单位为万日元。",
+  "cross": "Cross 统计按祖先和代际位置归纳；同一匹马可能同时进入多个祖先或形式分组。",
+  "dosage": "DP 按前四代父系祖先中的 Chef-de-Race 分类计算，顺序为 Brilliant、Intermediate、Classic、Solid、Professional。DI=(B+I+C/2)/(S+P+C/2)，CD=(2B+I-S-2P)/总点数；采用 international-2026-04 版本分类表。已核验记录与 PedigreeQuery 公开结果一致，其余记录由同一公式和五代血统资料计算。",
+  "breeder": "生产牧场名称尽量保持原始登记写法，常见写法差异会合并到同一牧场名下。",
   "racecourse": "赛马场成绩以已取得正式名次的出赛为基础，统计胜率、连对率和前三率。",
   "awd": "平均胜距只统计已取得胜利且能够确认距离的比赛。",
   "race_prize_quality": {
@@ -17,6 +17,6 @@
     "sum_raw_prize": 2275.3,
     "decision": "单场比赛奖金资料覆盖不足，因此本站暂不展示按赛次汇总的奖金图表。"
   },
-  "missing_data": "CI、AEI和部分全体种马分类榜仍待补充；全日本榜单只采用可靠公开来源。",
+  "missing_data": "CI、AEI及部分种牡马分类榜仍待补充；全日本榜单只采用可靠公开来源。",
   "last_updated": "2026-07-30"
 }
