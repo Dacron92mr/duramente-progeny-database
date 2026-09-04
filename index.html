@@ -8,7 +8,17 @@
   <meta http-equiv="Expires" content="0">
   <title>ドゥラメンテ产驹数据库</title>
   <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="style.css?v=20260904a">
+  <script>
+    (() => {
+      const preference = localStorage.getItem("duramente-theme") || "system";
+      const resolved = preference === "system"
+        ? (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")
+        : preference;
+      document.documentElement.dataset.theme = resolved;
+      document.documentElement.dataset.themePreference = preference;
+    })();
+  </script>
+  <link rel="stylesheet" href="style.css?v=20260904b">
 </head>
 <body>
   <header class="topbar">
@@ -16,14 +26,24 @@
       <p class="kicker">RACING DATABASE</p>
       <h1>ドゥラメンテ产驹数据库</h1>
     </div>
-    <nav class="main-nav" aria-label="主导航">
-      <button class="active" type="button" data-view="progeny">产驹列表</button>
-      <button type="button" data-view="sire">种牡马生涯</button>
-      <button type="button" data-view="pedigree">血统分析</button>
-      <button type="button" data-view="production">生产与繁殖</button>
-      <button type="button" data-view="racecourse">赛马场</button>
-      <button type="button" data-view="method">数据与方法</button>
-    </nav>
+    <div class="topbar-actions">
+      <nav class="main-nav" aria-label="主导航">
+        <button class="active" type="button" data-view="progeny">产驹列表</button>
+        <button type="button" data-view="sire">种牡马生涯</button>
+        <button type="button" data-view="pedigree">血统分析</button>
+        <button type="button" data-view="production">生产与繁殖</button>
+        <button type="button" data-view="racecourse">赛马场</button>
+        <button type="button" data-view="method">数据与方法</button>
+      </nav>
+      <label class="theme-picker">
+        <span>外观</span>
+        <select id="themeMode" aria-label="外观模式">
+          <option value="system">跟随系统</option>
+          <option value="light">浅色</option>
+          <option value="dark">深色</option>
+        </select>
+      </label>
+    </div>
   </header>
 
   <main class="layout view active" id="progenyView">
@@ -238,7 +258,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script src="chart-animation.js?v=20260805b"></script>
-  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260904a";</script>
-  <script src="app.js?v=20260904a"></script>
+  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260904b";</script>
+  <script src="app.js?v=20260904b"></script>
 </body>
 </html>
