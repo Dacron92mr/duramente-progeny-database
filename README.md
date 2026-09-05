@@ -47,7 +47,7 @@ Cross 统计使用独立产驹数口径；同一匹马可以同时进入多个 C
 
 因为是 GitHub Pages 静态站点，朋友打开链接即可使用，不需要安装 Python、SQLite 或任何本地环境。
 
-## 自己修改 JSON 数据
+## 可修改 JSON 数据
 
 仓库中的 JSON 已统一使用 UTF-8 和两空格缩进，方便直接在 GitHub 网页版 VS Code（`github.dev`）中阅读和修改。
 
