@@ -363,10 +363,24 @@ function longCategoryAxis(labels, options = {}) {
     inverse: options.inverse !== false,
     data: labels,
     axisLabel: {
-      width: options.width || (width < 520 ? 118 : 190),
+      width: width < 520 ? Math.min(options.width || 142, 142) : (options.width || 190),
       overflow: "break",
       lineHeight: 16,
+      interval: 0,
+      hideOverlap: false,
     },
+  };
+}
+
+function chartThemeColors() {
+  const dark = document.documentElement.dataset.theme === "dark";
+  return {
+    dark,
+    text: dark ? "#f2e9ed" : "#3b3530",
+    muted: dark ? "#b9aab1" : "#6d6a62",
+    line: dark ? "#4b3742" : "#ded6ce",
+    surface: dark ? "rgba(33,24,32,.96)" : "rgba(255,255,255,.96)",
+    pointBorder: dark ? "#211820" : "#ffffff",
   };
 }
 
@@ -375,7 +389,8 @@ function safeHorizontalBarLabel(formatter, options = {}) {
     show: true,
     position: "right",
     distance: 8,
-    color: options.color || (document.documentElement.dataset.theme === "dark" ? "#f2e9ed" : "#3b3530"),
+    color: options.color || chartThemeColors().text,
+    offset: options.offset,
     fontSize: chartViewportWidth() < 520 ? 10 : 11,
     fontWeight: options.fontWeight || 650,
     formatter(params) {
@@ -389,7 +404,7 @@ function safeTopBarLabel(formatter = (params) => formatNumber(params.value), opt
     show: true,
     position: "top",
     distance: 6,
-    color: options.color || (document.documentElement.dataset.theme === "dark" ? "#f2e9ed" : "#3b3530"),
+    color: options.color || chartThemeColors().text,
     fontSize: chartViewportWidth() < 520 ? 10 : 11,
     fontWeight: options.fontWeight || 650,
     formatter,
@@ -401,6 +416,7 @@ function safeAverageMarkLine(value, label = "总体", axis = "xAxis", options = 
   if (!Number.isFinite(numeric)) return undefined;
   const display = options.isPercent === false ? numeric : Number(numeric.toFixed(1));
   const color = options.color || COLORS.plum;
+  const theme = chartThemeColors();
   return {
     silent: true,
     symbol: ["none", "none"],
@@ -417,8 +433,10 @@ function safeAverageMarkLine(value, label = "总体", axis = "xAxis", options = 
       distance: 8,
       padding: [4, 7],
       borderRadius: 4,
-      backgroundColor: "rgba(255,255,255,0.92)",
-      color,
+      backgroundColor: theme.surface,
+      borderColor: theme.line,
+      borderWidth: 1,
+      color: theme.text,
       fontSize: 12,
       fontWeight: 700,
     },
@@ -448,7 +466,7 @@ function lineEndpointLabel(count, formatter) {
 
 function fixedHorizontalGrid(labelWidth = 150, top = 48, bottom = 34, right = 54) {
   return {
-    left: chartViewportWidth() < 520 ? Math.min(labelWidth, 118) : labelWidth,
+    left: chartViewportWidth() < 520 ? Math.min(labelWidth, 150) : labelWidth,
     right,
     top,
     bottom,
@@ -665,11 +683,7 @@ function resolvedTheme(preference) {
 }
 
 function refreshChartTheme() {
-  const dark = document.documentElement.dataset.theme === "dark";
-  const text = dark ? "#eadfe4" : "#4f4a45";
-  const muted = dark ? "#a997a0" : "#817970";
-  const line = dark ? "#473540" : "#e8dfd7";
-  const tooltipBackground = dark ? "rgba(34, 24, 30, .97)" : "rgba(255, 255, 255, .97)";
+  const { text, muted, line, surface } = chartThemeColors();
   for (const chart of chartRegistry.values()) {
     const option = chart.getOption();
     const axisTheme = (axes = []) => axes.map(() => ({
@@ -679,19 +693,31 @@ function refreshChartTheme() {
       nameTextStyle: { color: muted },
     }));
     chart.setOption({
-      textStyle: { color },
-      legend: (option.legend || []).map(() => ({ textStyle: { color } })),
+      textStyle: { color: text },
+      legend: (option.legend || []).map(() => ({
+        inactiveColor: muted,
+        textStyle: { color: text },
+      })),
       xAxis: axisTheme(option.xAxis),
       yAxis: axisTheme(option.yAxis),
       tooltip: (option.tooltip || []).map(() => ({
-        backgroundColor: tooltipBackground,
+        backgroundColor: surface,
         borderColor: line,
-        textStyle: { color },
+        textStyle: { color: text },
       })),
-      series: (option.series || []).map(() => ({
-        label: { color },
-        endLabel: { color },
-        markLine: { label: { color, backgroundColor: tooltipBackground } },
+      title: (option.title || []).map(() => ({
+        textStyle: { color: text },
+        subtextStyle: { color: muted },
+      })),
+      visualMap: (option.visualMap || []).map(() => ({ textStyle: { color: muted } })),
+      dataZoom: (option.dataZoom || []).map(() => ({ textStyle: { color: muted } })),
+      series: (option.series || []).map((series) => ({
+        label: { color: text },
+        endLabel: { color: text },
+        markLine: series.markLine ? {
+          label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
+        } : undefined,
+        markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
     });
     chart.resize();
@@ -1018,12 +1044,30 @@ function renderChart(id, option) {
     oldChart.dispose();
   }
   const chart = window.echarts.init(el);
-  const valueAxisFormatter = (value) => Number.isInteger(Number(value)) ? formatNumber(value, 0) : formatNumber(value, 2);
+  const isIntegerAxis = (axis) => {
+    if (!axis || axis.type !== "value") return false;
+    if (Number(axis.minInterval) >= 1) return true;
+    const name = String(axis.name || "");
+    if (/万日元|奖金|金额|价格|距离|指数|比例|%|率|m(?:\/|$)/i.test(name)) return false;
+    return /(数量|数|次数|胜场|出赛|排名|匹|头|场)$/.test(name);
+  };
+  const valueAxisFormatter = (value, integer = false) => integer
+    ? formatNumber(value, 0)
+    : (Number.isInteger(Number(value)) ? formatNumber(value, 0) : formatNumber(value, 2));
   const normalizeAxes = (axes) => {
     const rows = Array.isArray(axes) ? axes : axes ? [axes] : [];
-    const normalized = rows.map((axis) => axis?.type === "value" && !axis.axisLabel?.formatter
-      ? { ...axis, axisLabel: { ...(axis.axisLabel || {}), formatter: valueAxisFormatter } }
-      : axis);
+    const normalized = rows.map((axis) => {
+      if (axis?.type !== "value") return axis;
+      const integer = isIntegerAxis(axis);
+      return {
+        ...axis,
+        minInterval: integer ? Math.max(1, Number(axis.minInterval || 0)) : axis.minInterval,
+        axisLabel: {
+          ...(axis.axisLabel || {}),
+          formatter: axis.axisLabel?.formatter || ((value) => valueAxisFormatter(value, integer)),
+        },
+      };
+    });
     return Array.isArray(axes) ? normalized : normalized[0];
   };
   const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis), yAxis: normalizeAxes(option.yAxis) };
@@ -3428,7 +3472,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
       symbolSize: isPoint ? 12 : undefined,
       barMaxWidth: 18,
       data: rows.map((row) => ({ value: isPoint ? [meta.value(row), row.label] : meta.value(row), raw: row })),
-      itemStyle: isPoint ? { color: COLORS.gold, borderColor: "#fff", borderWidth: 1.5 } : undefined,
+      itemStyle: isPoint ? { color: COLORS.gold, borderColor: chartThemeColors().pointBorder, borderWidth: 1.5 } : undefined,
       markLine: rateAverage == null ? undefined : ratioLine(rateAverage, "整体平均", "xAxis"),
       label: safeHorizontalBarLabel((params) => {
         const row = params.data.raw;
@@ -3887,12 +3931,12 @@ function renderBreederCharts(breeders) {
     color: [COLORS.duramente, COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" } },
     legend: { top: 0, data: ["重赏马", "G1马"] },
-    grid: fixedHorizontalGrid(164, 52, 34, 48),
-    xAxis: { type: "value", name: "匹" },
-    yAxis: longCategoryAxis(gradedRows.map((row) => row.label)),
+    grid: fixedHorizontalGrid(244, 52, 34, 58),
+    xAxis: { type: "value", name: "匹", minInterval: 1 },
+    yAxis: longCategoryAxis(gradedRows.map((row) => row.label), { width: 226 }),
     series: [
-      { name: "重赏马", type: "bar", data: gradedRows.map((row) => row.graded_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value)) },
-      { name: "G1马", type: "bar", data: gradedRows.map((row) => row.g1_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value)) },
+      { name: "重赏马", type: "bar", barGap: "18%", data: gradedRows.map((row) => row.graded_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value), { offset: [0, -2] }) },
+      { name: "G1马", type: "bar", data: gradedRows.map((row) => row.g1_winners), label: safeHorizontalBarLabel((params) => formatNumber(params.value), { offset: [0, 2] }) },
     ],
   });
   const cropRows = [...(breeders.crop_composition || [])].slice(0, 10);
@@ -4177,17 +4221,11 @@ async function renderRacecourseAnalysis() {
   const data = await getAnalytics("racecourses");
   const surfaceColumns = ["芝", "ダ", "障"];
   const distanceColumns = ["1200以下", "1400-1600", "1800-2000", "2200-2400", "2500以上"];
-  const topRacecourse = [...(data.table || [])].sort((a, b) => b.wins_starts - a.wins_starts)[0];
   els.racecourseContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">RACECOURSE</p>
       <h1>赛马场表现</h1>
       <p>比较ドゥラメンテ产驹在不同赛马场的出赛、胜场、胜率、前三率和距离适性。</p>
-    </div>
-    <div class="metric-grid compact-metrics">
-      ${metricCard("总出赛", formatNumber(data.summary.valid_starts), "查看赛马场明细", `${window.location.pathname}?view=racecourse#racecourse-results`)}
-      ${metricCard("赛马场数", formatNumber(data.summary.courses), "查看全国分布", `${window.location.pathname}?view=racecourse#racecourse-map`)}
-      ${metricCard("胜场最多", topRacecourse ? `${escapeHtml(topRacecourse.label)} ${formatNumber(topRacecourse.wins_starts)}胜` : "—", "查看赛马场明细", `${window.location.pathname}?view=racecourse#racecourse-results`)}
     </div>
     <section class="analysis-block race-map-block" id="racecourse-map">
       <div class="section-heading">
@@ -4263,7 +4301,7 @@ async function renderRacecourseAnalysis() {
       </div>
       <div class="chart-grid">
         ${chartBlock("芝地与泥地表现", "比较不同场地条件下的取胜表现。", "racecourseSurfaceChart")}
-        ${sectionBlock("主要距离表现", "按赛马场比较不同距离区间的胜率、前三率和出赛次数。",
+        ${sectionBlock("主要距离表现", "按赛马场比较不同距离区间的出赛次数、出赛率和前三率。",
           `<div class="analysis-controls">
             <label><span>赛马场</span><select id="racecourseDistanceCourse">
               ${rows.slice(0, 30).map((row) => `<option value="${escapeHtml(row.label)}">${escapeHtml(row.label)}</option>`).join("")}
@@ -4305,7 +4343,7 @@ async function renderRacecourseAnalysis() {
           type: "line",
           yAxisIndex: 1,
           symbolSize: 8,
-          itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
+          itemStyle: { color: COLORS.raceLine, borderColor: chartThemeColors().pointBorder, borderWidth: 2 },
           lineStyle: { color: COLORS.raceLine, width: 3 },
           data: winRows.map((row) => Number(((row.win_start_rate || 0) * 100).toFixed(1))),
           label: lineEndpointLabel(winRows.length, (params) => `${params.value}%`),
@@ -4329,7 +4367,7 @@ async function renderRacecourseAnalysis() {
           type: "line",
           yAxisIndex: 1,
           symbolSize: 8,
-          itemStyle: { color: COLORS.raceLine, borderColor: "#fff", borderWidth: 2 },
+          itemStyle: { color: COLORS.raceLine, borderColor: chartThemeColors().pointBorder, borderWidth: 2 },
           lineStyle: { color: COLORS.raceLine, width: 3 },
           data: startRows.map((row) => Number(((row.top3_rate || 0) * 100).toFixed(1))),
           label: lineEndpointLabel(startRows.length, (params) => `${params.value}%`),
@@ -4361,20 +4399,62 @@ async function renderRacecourseAnalysis() {
       const selected = els.racecourseContent.querySelector("#racecourseDistanceCourse")?.value || rows[0]?.label;
       const row = rows.find((item) => item.label === selected) || rows[0];
       const buckets = distanceColumns.map((bucket) => ({ label: bucket, ...(row?.distance?.[bucket] || { starts: 0, wins: 0, top3: 0, win_rate: null, top3_rate: null }) }));
+      const distanceStarts = buckets.reduce((sum, item) => sum + Number(item.starts || 0), 0);
       renderChart("racecourseDistanceChart", {
-        color: [COLORS.duramente, COLORS.blue, COLORS.gold],
-        tooltip: { trigger: "axis" },
-        legend: { top: 0, data: ["胜率", "前三率", "出赛次数"] },
-        grid: getResponsiveGrid({ left: 58, right: 64, top: 58, bottom: 42 }),
-        xAxis: { type: "category", data: buckets.map((item) => item.label) },
+        color: [COLORS.gold, COLORS.duramente, COLORS.blue],
+        tooltip: {
+          trigger: "axis",
+          formatter: (items) => {
+            const bucket = buckets[items[0]?.dataIndex];
+            if (!bucket) return "";
+            const startRate = distanceStarts ? (Number(bucket.starts || 0) / distanceStarts) * 100 : 0;
+            return [
+              bucket.label,
+              `出赛次数：${formatNumber(bucket.starts || 0)}`,
+              `出赛率：${formatNumber(startRate, 1)}%`,
+              `前三率：${formatNumber(Number(bucket.top3_rate || 0) * 100, 1)}%（${formatNumber(bucket.top3 || 0)}/${formatNumber(bucket.starts || 0)}）`,
+            ].join("<br>");
+          },
+        },
+        legend: { top: 0, data: ["出赛次数", "出赛率", "前三率"] },
+        grid: getResponsiveGrid({
+          left: chartViewportWidth() < 520 ? 4 : 58,
+          right: chartViewportWidth() < 520 ? 4 : 64,
+          top: 58,
+          bottom: chartViewportWidth() < 520 ? 58 : 42,
+        }),
+        xAxis: {
+          type: "category",
+          data: buckets.map((item) => item.label),
+          axisLabel: {
+            rotate: chartViewportWidth() < 520 ? 36 : 0,
+            fontSize: chartViewportWidth() < 520 ? 8 : 12,
+            interval: 0,
+            hideOverlap: false,
+          },
+        },
         yAxis: [
-          { type: "value", name: "%" },
-          { type: "value", name: "出赛", position: "right" },
+          { type: "value", name: "出赛次数", minInterval: 1 },
+          { type: "value", name: "%", position: "right", axisLabel: { formatter: (value) => `${value}%` } },
         ],
         series: [
-          { name: "胜率", type: "bar", data: buckets.map((item) => Number(((item.win_rate || 0) * 100).toFixed(1))), label: safeTopBarLabel((params) => `${params.value}%`) },
-          { name: "前三率", type: "bar", data: buckets.map((item) => Number(((item.top3_rate || 0) * 100).toFixed(1))) },
-          { name: "出赛次数", type: "line", yAxisIndex: 1, data: buckets.map((item) => item.starts || 0), label: lineEndpointLabel(buckets.length, (params) => formatNumber(params.value)) },
+          { name: "出赛次数", type: "bar", data: buckets.map((item) => item.starts || 0), label: safeTopBarLabel((params) => formatNumber(params.value)) },
+          {
+            name: "出赛率",
+            type: "line",
+            yAxisIndex: 1,
+            smooth: true,
+            symbolSize: 8,
+            data: buckets.map((item) => distanceStarts ? Number(((Number(item.starts || 0) / distanceStarts) * 100).toFixed(1)) : 0),
+          },
+          {
+            name: "前三率",
+            type: "line",
+            yAxisIndex: 1,
+            smooth: true,
+            symbolSize: 8,
+            data: buckets.map((item) => Number(((item.top3_rate || 0) * 100).toFixed(1))),
+          },
         ],
       });
     };

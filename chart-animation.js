@@ -123,7 +123,8 @@
       max: axis.max ?? ((range) => {
         if (!Number.isFinite(range.max) || range.max <= 0) return range.max;
         const floor = Math.min(0, Number(range.min) || 0);
-        return range.max + (range.max - floor) * 0.18;
+        const padded = range.max + (range.max - floor) * 0.18;
+        return Number(axis.minInterval) >= 1 ? Math.ceil(padded) : padded;
       }),
       axisLabel: { hideOverlap: true, ...(axis.axisLabel || {}) },
     };

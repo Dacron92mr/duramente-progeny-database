@@ -13,6 +13,9 @@
   --input-bg: #ffffff;
   --overlay-panel: rgba(255, 251, 247, 0.94);
   --metric-bg: #f3e9ed;
+  --neutral-surface: #f5f0e8;
+  --neutral-track: #ece7dd;
+  --neutral-chip: #efe8dc;
   --accent: #9b315d;
   --accent-2: #d94b68;
   --gold: #f0b45f;
@@ -35,6 +38,9 @@
   --input-bg: #291e26;
   --overlay-panel: rgba(32, 23, 29, 0.96);
   --metric-bg: #2b1c24;
+  --neutral-surface: #2b2228;
+  --neutral-track: #493842;
+  --neutral-chip: #382c33;
   --accent: #e46b9a;
   --accent-2: #f17891;
   --gold: #d9a658;
@@ -301,7 +307,7 @@ button:focus-visible {
   padding: 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.68);
+  background: var(--panel);
 }
 
 .stat-item strong {
@@ -478,7 +484,7 @@ tbody tr[data-id] > .horse-column {
 tbody tr[data-id] > .horse-column {
   z-index: 2;
   background: var(--panel);
-  box-shadow: 1px 0 0 #ece7dd;
+  box-shadow: 1px 0 0 var(--line);
 }
 
 tbody tr[data-id]:hover > .horse-column {
@@ -616,7 +622,7 @@ td {
   min-height: 24px;
   border-radius: 999px;
   padding: 2px 9px;
-  background: #efe8dc;
+  background: var(--neutral-chip);
   color: var(--muted);
   font-size: 12px;
   font-weight: 700;
@@ -1082,6 +1088,24 @@ td {
   color: var(--muted);
   font-weight: 650;
   line-height: 1.6;
+}
+
+.section-heading {
+  margin-bottom: 18px;
+}
+
+.section-heading h2 {
+  margin: 3px 0 8px;
+  font-size: 25px;
+}
+
+.section-heading > p:not(.kicker) {
+  max-width: 980px;
+  color: var(--muted);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  line-height: 1.65;
 }
 
 .pedigree-title {
@@ -1633,6 +1657,10 @@ td {
   height: 680px;
 }
 
+#breederGradedChart {
+  height: 500px;
+}
+
 .race-map-block .compact-control {
   justify-content: flex-start;
   margin-bottom: 14px;
@@ -1895,7 +1923,7 @@ td {
   height: 18px;
   overflow: hidden;
   border-radius: 999px;
-  background: #efe8df;
+  background: var(--neutral-track);
 }
 
 .ancestor-stack .segment-1 { background: #a3264f; }
@@ -1941,7 +1969,7 @@ td {
 }
 
 .ancestor-detail-table th {
-  background: #f4eee7;
+  background: var(--neutral-surface);
   color: var(--muted);
   font-size: 12px;
   font-weight: 900;
@@ -1969,7 +1997,7 @@ td {
   margin-right: 8px;
   overflow: hidden;
   border-radius: 999px;
-  background: #eee7dd;
+  background: var(--neutral-track);
   vertical-align: middle;
 }
 
@@ -2095,6 +2123,8 @@ td {
 }
 
 .representative-horse-name {
+  font-size: 12px;
+  font-weight: 850;
   line-height: 1.3;
 }
 
@@ -2361,7 +2391,7 @@ td {
   place-content: center;
   height: 100%;
   border-radius: 8px;
-  background: #f5f0e8;
+  background: var(--neutral-surface);
   color: var(--muted);
   font-weight: 800;
 }
@@ -2402,7 +2432,7 @@ td {
 
 .analysis-table th:first-child {
   z-index: 3;
-  background: #f5f0e8;
+  background: var(--neutral-surface);
 }
 
 .analysis-table td:first-child {
@@ -2622,7 +2652,7 @@ td {
 .bar-track {
   height: 16px;
   border-radius: 999px;
-  background: #ece7dd;
+  background: var(--neutral-track);
   overflow: hidden;
 }
 
@@ -2867,7 +2897,7 @@ details.analysis-block summary {
     margin: -22px -22px 18px;
     padding: 16px 18px;
     border-bottom: 1px solid var(--line);
-    background: #fbf2ed;
+    background: var(--filter-bg);
   }
 
   .filters-head small {
@@ -3189,6 +3219,10 @@ details.analysis-block summary {
 
   #racecourseJapanMap {
     height: 460px;
+  }
+
+  #breederGradedChart {
+    height: 560px;
   }
 
   .race-map-panel {
