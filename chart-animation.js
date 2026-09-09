@@ -118,14 +118,26 @@
 
   function addValueAxisHeadroom(axis) {
     if (!axis || axis.type !== "value") return axis;
+    const niceCeiling = (value) => {
+      if (!Number.isFinite(value) || value <= 0) return value;
+      const roughStep = value / 8;
+      const magnitude = Math.pow(10, Math.floor(Math.log10(roughStep)));
+      const normalized = roughStep / magnitude;
+      const step = (normalized <= 1 ? 1
+        : normalized <= 2 ? 2
+          : normalized <= 2.5 ? 2.5
+            : normalized <= 5 ? 5
+              : 10) * magnitude;
+      return Number((Math.ceil((value * 1.06) / step) * step).toPrecision(12));
+    };
     return {
       ...axis,
       max: axis.max ?? ((range) => {
         if (!Number.isFinite(range.max) || range.max <= 0) return range.max;
-        const floor = Math.min(0, Number(range.min) || 0);
-        const padded = range.max + (range.max - floor) * 0.18;
-        return Number(axis.minInterval) >= 1 ? Math.ceil(padded) : padded;
+        const ceiling = niceCeiling(range.max);
+        return Number(axis.minInterval) >= 1 ? Math.ceil(ceiling) : ceiling;
       }),
+      splitNumber: axis.splitNumber ?? 5,
       axisLabel: { hideOverlap: true, ...(axis.axisLabel || {}) },
     };
   }

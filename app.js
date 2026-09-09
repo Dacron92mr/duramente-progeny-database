@@ -1054,15 +1054,26 @@ function renderChart(id, option) {
   const valueAxisFormatter = (value, integer = false) => integer
     ? formatNumber(value, 0)
     : (Number.isInteger(Number(value)) ? formatNumber(value, 0) : formatNumber(value, 2));
-  const normalizeAxes = (axes) => {
+  const normalizeAxes = (axes, dimension) => {
     const rows = Array.isArray(axes) ? axes : axes ? [axes] : [];
     const normalized = rows.map((axis) => {
-      if (axis?.type !== "value") return axis;
+      if (!axis) return axis;
+      if (axis.type !== "value") {
+        return {
+          ...axis,
+          axisTick: { alignWithLabel: true, ...(axis.axisTick || {}) },
+          axisLabel: { hideOverlap: true, ...(axis.axisLabel || {}) },
+        };
+      }
       const integer = isIntegerAxis(axis);
       return {
         ...axis,
         minInterval: integer ? Math.max(1, Number(axis.minInterval || 0)) : axis.minInterval,
+        axisLine: dimension === "y" ? { show: false, ...(axis.axisLine || {}) } : axis.axisLine,
+        axisTick: { show: false, ...(axis.axisTick || {}) },
+        splitLine: { show: true, ...(axis.splitLine || {}), lineStyle: { type: "dashed", opacity: 0.72, ...(axis.splitLine?.lineStyle || {}) } },
         axisLabel: {
+          hideOverlap: true,
           ...(axis.axisLabel || {}),
           formatter: axis.axisLabel?.formatter || ((value) => valueAxisFormatter(value, integer)),
         },
@@ -1070,19 +1081,63 @@ function renderChart(id, option) {
     });
     return Array.isArray(axes) ? normalized : normalized[0];
   };
-  const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis), yAxis: normalizeAxes(option.yAxis) };
-  const normalizedSeries = (normalizedOption.series || []).map((item) => item.type === "bar" ? {
-    ...item,
-    barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
-    barCategoryGap: item.barCategoryGap || "48%",
-  } : item);
+  const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
+  const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
+  const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
+  const normalizedSeries = (normalizedOption.series || []).map((item) => {
+    const emphasis = { focus: "series", ...(item.emphasis || {}) };
+    if (item.type === "bar") {
+      const horizontal = xAxes[Number(item.xAxisIndex || 0)]?.type === "value"
+        && yAxes[Number(item.yAxisIndex || 0)]?.type === "category";
+      const defaultRadius = horizontal ? [0, 5, 5, 0] : [5, 5, 2, 2];
+      return {
+        ...item,
+        barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
+        barCategoryGap: item.barCategoryGap || "48%",
+        itemStyle: {
+          borderRadius: item.stack ? 0 : defaultRadius,
+          ...(item.itemStyle || {}),
+        },
+        emphasis,
+      };
+    }
+    if (item.type === "line") {
+      return {
+        symbol: "circle",
+        symbolSize: 7,
+        ...item,
+        lineStyle: { width: 2.5, cap: "round", join: "round", ...(item.lineStyle || {}) },
+        emphasis,
+      };
+    }
+    return { ...item, emphasis };
+  });
   const series = window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries;
   const axes = window.DuramenteAnimation?.enhanceEChartsAxes(normalizedOption) || {};
-  const tooltip = normalizedOption.tooltip ? { confine: true, ...normalizedOption.tooltip } : undefined;
+  const hasBar = normalizedSeries.some((item) => item.type === "bar");
+  const tooltip = normalizedOption.tooltip ? {
+    confine: true,
+    order: "valueDesc",
+    transitionDuration: 0.15,
+    ...normalizedOption.tooltip,
+    axisPointer: normalizedOption.tooltip.trigger === "axis"
+      ? { type: hasBar ? "shadow" : "line", ...(normalizedOption.tooltip.axisPointer || {}) }
+      : normalizedOption.tooltip.axisPointer,
+  } : undefined;
   const grid = Array.isArray(normalizedOption.grid)
     ? normalizedOption.grid.map((item) => ({ containLabel: true, ...item }))
     : normalizedOption.grid ? { containLabel: true, ...normalizedOption.grid } : normalizedOption.grid;
-  chart.setOption({ animation: true, animationDurationUpdate: 300, ...normalizedOption, ...axes, grid, tooltip, series });
+  chart.setOption({
+    animation: true,
+    animationDurationUpdate: 300,
+    textStyle: { fontFamily: "Inter, 'Noto Sans SC', 'Noto Sans JP', sans-serif" },
+    aria: { enabled: true, decal: { show: false } },
+    ...normalizedOption,
+    ...axes,
+    grid,
+    tooltip,
+    series,
+  });
   chartRegistry.set(id, chart);
   refreshChartTheme();
   const drilldown = CHART_DRILLDOWNS[id];
@@ -2112,6 +2167,19 @@ function renderAnnualMilestoneTimeline(annualPerformance) {
 }
 
 function annualSeriesForMetric(metric, rows) {
+  const stackedAnnualData = (keys, key, color) => {
+    const currentIndex = keys.indexOf(key);
+    return rows.map((row) => {
+      const value = Number(row[key] || 0);
+      const hasValueBelow = keys.slice(0, currentIndex).some((item) => Number(row[item] || 0) > 0);
+      const hasValueAbove = keys.slice(currentIndex + 1).some((item) => Number(row[item] || 0) > 0);
+      let borderRadius = 0;
+      if (value > 0 && !hasValueBelow && !hasValueAbove) borderRadius = [4, 4, 4, 4];
+      else if (value > 0 && !hasValueAbove) borderRadius = [4, 4, 0, 0];
+      else if (value > 0 && !hasValueBelow) borderRadius = [0, 0, 4, 4];
+      return { value, raw: row, itemStyle: { color, borderRadius } };
+    });
+  };
   const barBase = {
     type: "bar",
     barMaxWidth: 24,
@@ -2120,7 +2188,7 @@ function annualSeriesForMetric(metric, rows) {
   if (metric === "earnings") {
     return {
       legend: ["年度奖金"],
-      yAxis: [{ type: "value", name: "万日元" }],
+      yAxis: [{ type: "value", name: "万日元", minInterval: 1 }],
       series: [{
         ...barBase,
         name: "年度奖金",
@@ -2136,7 +2204,7 @@ function annualSeriesForMetric(metric, rows) {
   if (metric === "starts") {
     return {
       legend: ["出赛次数", "出赛马"],
-      yAxis: [{ type: "value", name: "次数 / 匹" }],
+      yAxis: [{ type: "value", name: "次数 / 匹", minInterval: 1 }],
       series: [
         { ...barBase, name: "出赛次数", itemStyle: { color: COLORS.teal, borderRadius: [4, 4, 0, 0] }, data: rows.map((row) => ({ value: row.starts, raw: row })) },
         { ...barBase, name: "出赛马", itemStyle: { color: COLORS.gold, borderRadius: [4, 4, 0, 0] }, data: rows.map((row) => ({ value: row.runners, raw: row })) },
@@ -2146,21 +2214,21 @@ function annualSeriesForMetric(metric, rows) {
   if (metric === "graded") {
     return {
       legend: ["G1", "G2", "G3"],
-      yAxis: [{ type: "value", name: "胜场" }],
+      yAxis: [{ type: "value", name: "胜场", minInterval: 1 }],
       series: [
-        { ...barBase, name: "G1", stack: "graded", itemStyle: { color: COLORS.raceLine, borderRadius: [0, 0, 0, 0] }, data: rows.map((row) => ({ value: row.g1_wins, raw: row })) },
-        { ...barBase, name: "G2", stack: "graded", itemStyle: { color: COLORS.duramente, borderRadius: [0, 0, 0, 0] }, data: rows.map((row) => ({ value: row.g2_wins, raw: row })) },
-        { ...barBase, name: "G3", stack: "graded", itemStyle: { color: COLORS.green, borderRadius: [4, 4, 0, 0] }, data: rows.map((row) => ({ value: row.g3_wins, raw: row })) },
+        { ...barBase, name: "G1", stack: "graded", itemStyle: { color: COLORS.raceLine }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g1_wins", COLORS.raceLine) },
+        { ...barBase, name: "G2", stack: "graded", itemStyle: { color: COLORS.duramente }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g2_wins", COLORS.duramente) },
+        { ...barBase, name: "G3", stack: "graded", itemStyle: { color: COLORS.green }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g3_wins", COLORS.green) },
       ],
     };
   }
   return {
     legend: ["JRA", "NAR", "海外"],
-    yAxis: [{ type: "value", name: "胜场" }],
+    yAxis: [{ type: "value", name: "胜场", minInterval: 1 }],
     series: [
-      { ...barBase, name: "JRA", stack: "wins", itemStyle: { color: COLORS.duramente, borderRadius: [0, 0, 0, 0] }, data: rows.map((row) => ({ value: row.jra_wins, raw: row })) },
-      { ...barBase, name: "NAR", stack: "wins", itemStyle: { color: COLORS.coral, borderRadius: [0, 0, 0, 0] }, data: rows.map((row) => ({ value: row.nar_wins, raw: row })) },
-      { ...barBase, name: "海外", stack: "wins", itemStyle: { color: COLORS.gold, borderRadius: [4, 4, 0, 0] }, data: rows.map((row) => ({ value: row.overseas_wins, raw: row })) },
+      { ...barBase, name: "JRA", stack: "wins", itemStyle: { color: COLORS.duramente }, data: stackedAnnualData(["jra_wins", "nar_wins", "overseas_wins"], "jra_wins", COLORS.duramente) },
+      { ...barBase, name: "NAR", stack: "wins", itemStyle: { color: COLORS.coral }, data: stackedAnnualData(["jra_wins", "nar_wins", "overseas_wins"], "nar_wins", COLORS.coral) },
+      { ...barBase, name: "海外", stack: "wins", itemStyle: { color: COLORS.gold }, data: stackedAnnualData(["jra_wins", "nar_wins", "overseas_wins"], "overseas_wins", COLORS.gold) },
     ],
   };
 }
@@ -2205,31 +2273,43 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   const crops = [...profile.crops].sort((a, b) => Number(a.label) - Number(b.label));
   const cropLabels = crops.map((row) => row.label);
   const marketRows = market.rows || [];
+  const marketTooltip = (items, metric) => {
+    const row = marketRows[Number(items?.[0]?.dataIndex || 0)] || {};
+    const unit = metric === "fee" ? "万日元" : "匹";
+    const sampleKey = metric === "fee" ? "public_fee_peer_stallions" : "peer_stallions";
+    return [
+      `<strong>${escapeHtml(String(row.year || ""))} 年 · ${escapeHtml(row.season_label || "")}</strong>`,
+      ...(items || []).map((item) => {
+        const sample = item.seriesName === "社台其他种牡马平均" ? `（${formatNumber(row[sampleKey])}匹种牡马）` : "";
+        return `${item.marker}${escapeHtml(item.seriesName)}：${formatNumber(item.value)}${unit}${sample}`;
+      }),
+    ].join("<br>");
+  };
   renderAnnualPerformanceCharts(annualPerformance);
 
   renderChart("sireMaresCoveredChart", {
     color: [COLORS.duramente, COLORS.average],
-    tooltip: { trigger: "axis" },
-    legend: { top: 0, data: ["ドゥラメンテ", "同期社台平均"] },
+    tooltip: { trigger: "axis", formatter: (items) => marketTooltip(items, "mares") },
+    legend: { top: 0, data: ["ドゥラメンテ", "社台其他种牡马平均"] },
     grid: { left: 48, right: 28, top: 54, bottom: 42 },
     xAxis: { type: "category", data: marketRows.map((row) => `${row.year}\n${row.season_label}`) },
-    yAxis: { type: "value", name: "配种母马数" },
+    yAxis: { type: "value", name: "配种母马数", minInterval: 1 },
     series: [
       { name: "ドゥラメンテ", type: "line", smooth: false, symbolSize: 9, label: { show: true, formatter: "{c}", position: "top" }, data: marketRows.map((row) => row.mares_covered) },
-      { name: "同期社台平均", type: "line", smooth: false, symbolSize: 8, label: { show: true, formatter: "{c}", position: "bottom" }, data: marketRows.map((row) => row.shadai_avg_mares_covered) },
+      { name: "社台其他种牡马平均", type: "line", smooth: false, symbolSize: 8, label: { show: true, formatter: "{c}", position: "bottom" }, data: marketRows.map((row) => row.shadai_avg_mares_covered) },
     ],
   });
 
   renderChart("sireStudFeeChart", {
     color: [COLORS.duramente, COLORS.gold],
-    tooltip: { trigger: "axis" },
-    legend: { top: 0, data: ["ドゥラメンテ", "同期社台平均"] },
+    tooltip: { trigger: "axis", formatter: (items) => marketTooltip(items, "fee") },
+    legend: { top: 0, data: ["ドゥラメンテ", "社台其他种牡马平均"] },
     grid: { left: 56, right: 28, top: 54, bottom: 42 },
     xAxis: { type: "category", data: marketRows.map((row) => row.year) },
     yAxis: { type: "value", name: "万日元" },
     series: [
       { name: "ドゥラメンテ", type: "line", smooth: false, symbolSize: 9, label: { show: true, formatter: "{c}", position: "top" }, data: marketRows.map((row) => row.stud_fee) },
-      { name: "同期社台平均", type: "line", smooth: false, symbolSize: 8, label: { show: true, formatter: "{c}", position: "bottom" }, data: marketRows.map((row) => row.shadai_avg_stud_fee) },
+      { name: "社台其他种牡马平均", type: "line", smooth: false, symbolSize: 8, label: { show: true, formatter: "{c}", position: "bottom" }, data: marketRows.map((row) => row.shadai_avg_stud_fee) },
     ],
   });
 
@@ -2675,11 +2755,12 @@ async function renderSireAnalysis() {
     `, "AVERAGE WINNING DISTANCE")}
     </div>
     <div class="analysis-subpanel" data-sire-panel="market">
-    ${sectionBlock("配种规模与市场评价", "通过配种母马数和配种费变化，观察市场对种牡马的需求与定价。",
+    ${sectionBlock("配种规模与市场评价", "比较ドゥラメンテ与当年社台其他种牡马的配种数量和公开配种费平均值。",
       `<div class="chart-grid">
-        ${chartBlock("配种规模变化", "比较配种热度与同期社台平均水平。", "sireMaresCoveredChart")}
-        ${chartBlock("市场定价变化", "观察配种费随市场评价的变化。", "sireStudFeeChart")}
-      </div>`
+        ${chartBlock("配种规模变化", "比较每年配种母马数。", "sireMaresCoveredChart")}
+        ${chartBlock("市场定价变化", "比较每年公开配种费，单位为万日元。", "sireStudFeeChart")}
+      </div>
+      <p class="source-note">${escapeHtml(market.source || "")}</p>`
     , "BREEDING MARKET")}
     </div>
     <div class="analysis-subpanel" data-sire-panel="graded">

@@ -4,48 +4,58 @@
       "year": 2017,
       "season_label": "第1年",
       "mares_covered": 284,
-      "shadai_avg_mares_covered": 197,
+      "shadai_avg_mares_covered": 132,
       "stud_fee": 400,
-      "shadai_avg_stud_fee": 343
+      "shadai_avg_stud_fee": 371,
+      "peer_stallions": 29,
+      "public_fee_peer_stallions": 29
     },
     {
       "year": 2018,
       "season_label": "第2年",
-      "mares_covered": 294,
-      "shadai_avg_mares_covered": 180,
+      "mares_covered": 290,
+      "shadai_avg_mares_covered": 137,
       "stud_fee": 400,
-      "shadai_avg_stud_fee": 341
+      "shadai_avg_stud_fee": 451,
+      "peer_stallions": 28,
+      "public_fee_peer_stallions": 28
     },
     {
       "year": 2019,
       "season_label": "第3年",
       "mares_covered": 184,
-      "shadai_avg_mares_covered": 155,
+      "shadai_avg_mares_covered": 134,
       "stud_fee": 600,
-      "shadai_avg_stud_fee": 358
+      "shadai_avg_stud_fee": 470,
+      "peer_stallions": 29,
+      "public_fee_peer_stallions": 26
     },
     {
       "year": 2020,
       "season_label": "第4年",
       "mares_covered": 178,
-      "shadai_avg_mares_covered": 153,
+      "shadai_avg_mares_covered": 127,
       "stud_fee": 700,
-      "shadai_avg_stud_fee": 354
+      "shadai_avg_stud_fee": 400,
+      "peer_stallions": 29,
+      "public_fee_peer_stallions": 28
     },
     {
       "year": 2021,
       "season_label": "第5年",
       "mares_covered": 131,
-      "shadai_avg_mares_covered": 164,
+      "shadai_avg_mares_covered": 131,
       "stud_fee": 1000,
-      "shadai_avg_stud_fee": 554
+      "shadai_avg_stud_fee": 404,
+      "peer_stallions": 29,
+      "public_fee_peer_stallions": 28
     }
   ],
   "summary": {
-    "max_mares_covered": 294,
+    "max_mares_covered": 290,
     "max_stud_fee": 1000,
-    "updated_at": "2026-07-29"
+    "updated_at": "2026-09-09"
   },
-  "source": "配种数、配种费及同期社台种牡马前五年平均值。",
-  "retrieved_at": "2026-07-29"
+  "source": "2017–2021 年社台种牡马配种费与配种母马数表。比较均值不含ドゥラメンテ；Private 配种费不计入配种费均值。",
+  "retrieved_at": "2026-09-07"
 }
