@@ -201,6 +201,25 @@ const CROP_COLORS = {
   "2022": "#f0b45f",
 };
 
+// Lieflat Charts · color system. These hues are taken directly from the site's
+// established Duramente palette, so chart styling stays consistent with the UI.
+const LIEFLAT_COLOR = Object.freeze({
+  light: {
+    paper: "#fffaf7",
+    ink: "#3b3530",
+    muted: "#6d6a62",
+    grid: "#ded6ce",
+    palette: [COLORS.duramente, COLORS.gold, COLORS.blue, COLORS.green, COLORS.orange, COLORS.red, COLORS.negative],
+  },
+  dark: {
+    paper: "#211820",
+    ink: "#f2e9ed",
+    muted: "#b9aab1",
+    grid: "#4b3742",
+    palette: [COLORS.rose, COLORS.gold, "#8d75b0", "#65ad96", COLORS.orange, COLORS.red, "#9a85a1"],
+  },
+});
+
 const RACECOURSE_COORDINATES = {
   東京: { lon: 139.485, lat: 35.6625, system: "JRA", prefecture: "東京都", aliases: ["東京競馬場"] },
   中山: { lon: 139.9625, lat: 35.72555556, system: "JRA", prefecture: "千葉県", aliases: ["中山競馬場"] },
@@ -374,13 +393,16 @@ function longCategoryAxis(labels, options = {}) {
 
 function chartThemeColors() {
   const dark = document.documentElement.dataset.theme === "dark";
+  const theme = dark ? LIEFLAT_COLOR.dark : LIEFLAT_COLOR.light;
   return {
     dark,
-    text: dark ? "#f2e9ed" : "#3b3530",
-    muted: dark ? "#b9aab1" : "#6d6a62",
-    line: dark ? "#4b3742" : "#ded6ce",
-    surface: dark ? "rgba(33,24,32,.96)" : "rgba(255,255,255,.96)",
-    pointBorder: dark ? "#211820" : "#ffffff",
+    text: theme.ink,
+    muted: theme.muted,
+    line: theme.grid,
+    surface: theme.paper,
+    paper: theme.paper,
+    pointBorder: theme.paper,
+    data: theme.palette,
   };
 }
 
@@ -712,12 +734,12 @@ function refreshChartTheme() {
       visualMap: (option.visualMap || []).map(() => ({ textStyle: { color: muted } })),
       dataZoom: (option.dataZoom || []).map(() => ({ textStyle: { color: muted } })),
       series: (option.series || []).map((series) => ({
-        label: { color: text },
-        endLabel: { color: text },
-        markLine: series.markLine ? {
-          label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
-        } : undefined,
-        markPoint: series.markPoint ? { label: { color: text } } : undefined,
+          label: { color: text },
+          endLabel: { color: text },
+          markLine: series.markLine ? {
+            label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
+          } : undefined,
+          markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
     });
     chart.resize();
@@ -1030,6 +1052,19 @@ const CHART_DRILLDOWNS = {
   "clubWinCompare-セン": (params) => ({ year: params.name, sex: "セン" }),
 };
 
+function lieflatBarDecal(theme, shade) {
+  return {
+    symbol: "rect",
+    symbolSize: 1,
+    dashArrayX: [1, 0],
+    dashArrayY: [1, 3],
+    color: theme.paper,
+    backgroundColor: shade,
+    maxTileWidth: 256,
+    maxTileHeight: 256,
+  };
+}
+
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
@@ -1041,9 +1076,12 @@ function renderChart(id, option) {
   if (chartRegistry.has(id)) {
     const oldChart = chartRegistry.get(id);
     oldChart.__resizeObserver?.disconnect?.();
+    oldChart.__revealObserver?.disconnect?.();
     oldChart.dispose();
+    delete el.dataset.resizeObserved;
   }
-  const chart = window.echarts.init(el);
+  el.replaceChildren();
+  const chart = window.echarts.init(el, null, { renderer: "svg" });
   const isIntegerAxis = (axis) => {
     if (!axis || axis.type !== "value") return false;
     if (Number(axis.minInterval) >= 1) return true;
@@ -1084,33 +1122,54 @@ function renderChart(id, option) {
   const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
   const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
   const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
-  const normalizedSeries = (normalizedOption.series || []).map((item) => {
+  const chartTheme = chartThemeColors();
+  const symbols = ["circle", "rect", "diamond", "triangle"];
+  const normalizedSeries = (normalizedOption.series || []).map((item, index) => {
     const emphasis = { focus: "series", ...(item.emphasis || {}) };
+    const explicitColor = [item.itemStyle?.color, item.lineStyle?.color].find((color) => typeof color === "string" && color !== "transparent");
+    const shade = explicitColor || chartTheme.data[index % chartTheme.data.length];
+    const invisible = item.itemStyle?.color === "transparent";
     if (item.type === "bar") {
       const horizontal = xAxes[Number(item.xAxisIndex || 0)]?.type === "value"
         && yAxes[Number(item.yAxisIndex || 0)]?.type === "category";
-      const defaultRadius = horizontal ? [0, 5, 5, 0] : [5, 5, 2, 2];
+      const defaultRadius = horizontal ? [0, 12, 12, 0] : [12, 12, 2, 2];
       return {
         ...item,
-        barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
-        barCategoryGap: item.barCategoryGap || "48%",
+        barMaxWidth: Math.min(Number(item.barMaxWidth || 22), 22),
+        barCategoryGap: item.barCategoryGap || "54%",
         itemStyle: {
           borderRadius: item.stack ? 0 : defaultRadius,
           ...(item.itemStyle || {}),
+          color: invisible ? "transparent" : (item.itemStyle?.color || shade),
+          decal: invisible || typeof shade !== "string" ? item.itemStyle?.decal : lieflatBarDecal(chartTheme, shade),
         },
+        label: item.label ? { color: chartTheme.text, fontSize: Math.max(10, Number(item.label.fontSize || 0)), fontWeight: 800, ...item.label } : item.label,
         emphasis,
       };
     }
     if (item.type === "line") {
       return {
-        symbol: "circle",
-        symbolSize: 7,
+        symbol: symbols[index % symbols.length],
+        symbolSize: 6 + Math.min(index, 2),
         ...item,
-        lineStyle: { width: 2.5, cap: "round", join: "round", ...(item.lineStyle || {}) },
+        itemStyle: { color: shade, borderColor: chartTheme.paper, borderWidth: 1.5, ...(item.itemStyle || {}) },
+        lineStyle: { width: index === 0 ? 2.2 : 1.4, cap: "round", join: "round", color: shade, ...(item.lineStyle || {}) },
+        label: item.label ? { color: chartTheme.text, fontSize: Math.max(10, Number(item.label.fontSize || 0)), fontWeight: 800, ...item.label } : item.label,
         emphasis,
       };
     }
-    return { ...item, emphasis };
+    if (["scatter", "effectScatter"].includes(item.type)) {
+      return {
+        ...item,
+        symbol: item.symbol || symbols[index % symbols.length],
+        itemStyle: item.itemStyle || { color: shade, borderColor: chartTheme.paper, borderWidth: 1 },
+        emphasis,
+      };
+    }
+    return {
+      ...item,
+      emphasis,
+    };
   });
   const series = window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries;
   const axes = window.DuramenteAnimation?.enhanceEChartsAxes(normalizedOption) || {};
@@ -1127,19 +1186,39 @@ function renderChart(id, option) {
   const grid = Array.isArray(normalizedOption.grid)
     ? normalizedOption.grid.map((item) => ({ containLabel: true, ...item }))
     : normalizedOption.grid ? { containLabel: true, ...normalizedOption.grid } : normalizedOption.grid;
-  chart.setOption({
-    animation: true,
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finalOption = {
+    animation: !prefersReducedMotion,
     animationDurationUpdate: 300,
     textStyle: { fontFamily: "Inter, 'Noto Sans SC', 'Noto Sans JP', sans-serif" },
     aria: { enabled: true, decal: { show: false } },
     ...normalizedOption,
+    color: chartTheme.data,
     ...axes,
     grid,
     tooltip,
     series,
-  });
+  };
+  chart.setOption({ ...finalOption, animation: false });
   chartRegistry.set(id, chart);
   refreshChartTheme();
+
+  const play = () => {
+    chart.clear();
+    chart.setOption(finalOption, { notMerge: true });
+    refreshChartTheme();
+  };
+  if (!prefersReducedMotion && window.IntersectionObserver) {
+    const observer = new IntersectionObserver((entries) => {
+      if (!entries[0]?.isIntersecting) return;
+      play();
+      observer.disconnect();
+    }, { threshold: 0.25 });
+    observer.observe(el);
+    chart.__revealObserver = observer;
+  } else {
+    play();
+  }
   const drilldown = CHART_DRILLDOWNS[id];
   if (drilldown) {
     el.classList.add("is-drilldown");

@@ -21,6 +21,10 @@
   --gold: #f0b45f;
   --soft: #f6efe9;
   --shadow: 0 18px 60px rgba(31, 30, 24, 0.14);
+  --chart-paper: linear-gradient(145deg, #fffaf7 0%, #fff4ee 100%);
+  --chart-ink: #3b3530;
+  --chart-muted: #6d6a62;
+  --chart-border: rgba(169, 47, 93, 0.14);
 }
 
 :root[data-theme="dark"] {
@@ -46,6 +50,10 @@
   --gold: #d9a658;
   --soft: #302229;
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+  --chart-paper: linear-gradient(145deg, #281b24 0%, #211820 100%);
+  --chart-ink: #f2e9ed;
+  --chart-muted: #b9aab1;
+  --chart-border: rgba(216, 92, 103, 0.22);
 }
 
 * {
@@ -1544,8 +1552,8 @@ td {
 .chart-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
-  margin-bottom: 18px;
+  gap: 22px;
+  margin-bottom: 22px;
 }
 
 .chart-grid.single-chart {
@@ -1602,28 +1610,28 @@ td {
 .chart-card {
   position: relative;
   overflow: hidden;
-  border: 0;
-  border-top: 1px solid var(--line);
-  border-radius: 0;
-  padding: 18px 0;
-  background: transparent;
-  box-shadow: none;
+  border: 1px solid var(--chart-border);
+  border-radius: 18px;
+  padding: 24px 24px 18px;
+  background: var(--chart-paper);
+  box-shadow: 0 12px 32px rgba(65, 45, 36, 0.06);
+  color: var(--chart-ink);
 }
 
 .chart-card::before {
-  content: none;
+  content: "";
   position: absolute;
   inset: 0 0 auto;
   height: 3px;
   background: linear-gradient(90deg, #a3264f, #f06b4f, #f1b95f);
-  opacity: 0.72;
+  opacity: 0.82;
   pointer-events: none;
 }
 
 .chart-card-head {
   position: relative;
   z-index: 1;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .chart-card-head.with-controls {
@@ -1635,15 +1643,20 @@ td {
 
 .chart-card h3 {
   margin: 0;
-  font-size: 19px;
-  line-height: 1.25;
+  color: var(--chart-ink);
+  font-family: Inter, "Noto Sans SC", "Noto Sans JP", sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
 }
 
 .chart-card p {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 13px;
-  font-weight: 800;
+  margin: 5px 0 0;
+  color: var(--chart-muted);
+  font-size: 11.5px;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
 .chart-canvas {
