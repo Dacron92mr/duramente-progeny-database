@@ -752,7 +752,22 @@ function applyTheme(preference, { persist = true } = {}) {
   document.documentElement.dataset.theme = resolvedTheme(next);
   if (persist) localStorage.setItem("duramente-theme", next);
   if (els.themeMode) els.themeMode.value = next;
-  requestAnimationFrame(refreshChartTheme);
+  requestAnimationFrame(() => {
+    refreshChartTheme();
+    // Lieflat custom geometry captures the palette at render time. Rebuild only
+    // the visible pedigree charts so their embedded labels and hairlines follow
+    // the newly selected light/dark palette as faithfully as standard ECharts.
+    if (state.view === "pedigree" && pedigreeRuntime) {
+      renderPedigreeCharts(
+        pedigreeRuntime.pedigree,
+        pedigreeRuntime.bmsLines,
+        pedigreeRuntime.broodmareSires,
+        pedigreeRuntime.dosage,
+        pedigreeRuntime.horses,
+        pedigreeRuntime.overview,
+      );
+    }
+  });
   if (state.view === "racecourse" && els.racecourseContent?.dataset.loaded) {
     delete els.racecourseContent.dataset.loaded;
     renderRacecourseAnalysis().catch(console.error);
@@ -1068,6 +1083,8 @@ function lieflatBarDecal(theme, shade) {
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
+  const lieflatTemplate = window.DuramentePedigreeLieflat?.TEMPLATE_BY_ID?.[id] || "";
+  if (lieflatTemplate) el.dataset.lieflatTemplate = lieflatTemplate;
   el.classList.remove("is-rendered");
   if (!window.echarts) {
     el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
@@ -1119,7 +1136,17 @@ function renderChart(id, option) {
     });
     return Array.isArray(axes) ? normalized : normalized[0];
   };
-  const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
+  const transformedOption = window.DuramentePedigreeLieflat?.transform?.(id, option, {
+    colors: COLORS,
+    bmsColors: BMS_CATEGORY_COLORS,
+    theme: chartThemeColors(),
+    formatNumber,
+  }) || option;
+  const normalizedOption = {
+    ...transformedOption,
+    xAxis: normalizeAxes(transformedOption.xAxis, "x"),
+    yAxis: normalizeAxes(transformedOption.yAxis, "y"),
+  };
   const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
   const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
   const chartTheme = chartThemeColors();
