@@ -10,10 +10,6 @@
     return 1 - Math.pow(1 - p, 3);
   }
 
-  function prefersReducedMotion() {
-    return global.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches === true;
-  }
-
   function lerp(start, end, progress) {
     return start + (end - start) * progress;
   }
@@ -34,11 +30,6 @@
     }
 
     function start() {
-      if (prefersReducedMotion()) {
-        onFrame(duration, 1);
-        onComplete?.();
-        return;
-      }
       const activeToken = ++token;
       const tick = (timestamp) => {
         if (activeToken !== token) return;
@@ -96,9 +87,9 @@
       } : item.label;
       if (item.type === "bar") {
         return {
-          animationDuration: prefersReducedMotion() ? 0 : 760,
-          animationDelay: prefersReducedMotion() ? 0 : (index) => Math.min(index * 85, 510),
-          animationEasing: "quarticOut",
+          animationDuration: 700,
+          animationDelay: (index) => Math.min(index * 65, 455),
+          animationEasing: "cubicOut",
           ...item,
           label,
           labelLayout,
@@ -106,18 +97,18 @@
       }
       if (item.type === "line") {
         return {
-          animationDuration: prefersReducedMotion() ? 0 : 1050,
-          animationDelay: prefersReducedMotion() ? 0 : (hasBar ? 520 : 100),
-          animationEasing: "quarticOut",
+          animationDuration: 1050,
+          animationDelay: hasBar ? 520 : 100,
+          animationEasing: "cubicOut",
           ...item,
           label,
           labelLayout,
         };
       }
       return {
-        animationDuration: prefersReducedMotion() ? 0 : 700,
-        animationDelay: prefersReducedMotion() ? 0 : (index) => Math.min(index * 40, 360),
-        animationEasing: "quarticOut",
+        animationDuration: 700,
+        animationDelay: (index) => Math.min(index * 40, 360),
+        animationEasing: "cubicOut",
         ...item,
         label,
         labelLayout,
@@ -179,7 +170,6 @@
   global.DuramenteAnimation = Object.freeze({
     clamp,
     easeOutCubic,
-    prefersReducedMotion,
     lerp,
     createTimeline,
     enhanceEChartsSeries,

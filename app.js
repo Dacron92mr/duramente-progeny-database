@@ -201,25 +201,6 @@ const CROP_COLORS = {
   "2022": "#f0b45f",
 };
 
-// Lieflat Charts · color system. These hues are taken directly from the site's
-// established Duramente palette, so chart styling stays consistent with the UI.
-const LIEFLAT_COLOR = Object.freeze({
-  light: {
-    paper: "#fffaf7",
-    ink: "#3b3530",
-    muted: "#6d6a62",
-    grid: "#ded6ce",
-    palette: [COLORS.duramente, COLORS.gold, COLORS.blue, COLORS.green, COLORS.orange, COLORS.red, COLORS.negative],
-  },
-  dark: {
-    paper: "#211820",
-    ink: "#f2e9ed",
-    muted: "#b9aab1",
-    grid: "#4b3742",
-    palette: [COLORS.rose, COLORS.gold, "#8d75b0", "#65ad96", COLORS.orange, COLORS.red, "#9a85a1"],
-  },
-});
-
 const RACECOURSE_COORDINATES = {
   東京: { lon: 139.485, lat: 35.6625, system: "JRA", prefecture: "東京都", aliases: ["東京競馬場"] },
   中山: { lon: 139.9625, lat: 35.72555556, system: "JRA", prefecture: "千葉県", aliases: ["中山競馬場"] },
@@ -393,16 +374,13 @@ function longCategoryAxis(labels, options = {}) {
 
 function chartThemeColors() {
   const dark = document.documentElement.dataset.theme === "dark";
-  const theme = dark ? LIEFLAT_COLOR.dark : LIEFLAT_COLOR.light;
   return {
     dark,
-    text: theme.ink,
-    muted: theme.muted,
-    line: theme.grid,
-    surface: theme.paper,
-    paper: theme.paper,
-    pointBorder: theme.paper,
-    data: theme.palette,
+    text: dark ? "#f2e9ed" : "#3b3530",
+    muted: dark ? "#b9aab1" : "#6d6a62",
+    line: dark ? "#4b3742" : "#ded6ce",
+    surface: dark ? "rgba(33,24,32,.96)" : "rgba(255,255,255,.96)",
+    pointBorder: dark ? "#211820" : "#ffffff",
   };
 }
 
@@ -443,10 +421,9 @@ function safeAverageMarkLine(value, label = "总体", axis = "xAxis", options = 
     silent: true,
     symbol: ["none", "none"],
     lineStyle: {
-      type: "solid",
-      width: 1,
-      color: options.color || theme.line,
-      opacity: 0.72,
+      type: "dashed",
+      width: 1.5,
+      color,
     },
     label: {
       show: options.showLabel !== false,
@@ -735,12 +712,12 @@ function refreshChartTheme() {
       visualMap: (option.visualMap || []).map(() => ({ textStyle: { color: muted } })),
       dataZoom: (option.dataZoom || []).map(() => ({ textStyle: { color: muted } })),
       series: (option.series || []).map((series) => ({
-          label: { color: text },
-          endLabel: { color: text },
-          markLine: series.markLine ? {
-            label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
-          } : undefined,
-          markPoint: series.markPoint ? { label: { color: text } } : undefined,
+        label: { color: text },
+        endLabel: { color: text },
+        markLine: series.markLine ? {
+          label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
+        } : undefined,
+        markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
     });
     chart.resize();
@@ -753,22 +730,7 @@ function applyTheme(preference, { persist = true } = {}) {
   document.documentElement.dataset.theme = resolvedTheme(next);
   if (persist) localStorage.setItem("duramente-theme", next);
   if (els.themeMode) els.themeMode.value = next;
-  requestAnimationFrame(() => {
-    refreshChartTheme();
-    // Lieflat custom geometry captures the palette at render time. Rebuild only
-    // the visible pedigree charts so their embedded labels and hairlines follow
-    // the newly selected light/dark palette as faithfully as standard ECharts.
-    if (state.view === "pedigree" && pedigreeRuntime) {
-      renderPedigreeCharts(
-        pedigreeRuntime.pedigree,
-        pedigreeRuntime.bmsLines,
-        pedigreeRuntime.broodmareSires,
-        pedigreeRuntime.dosage,
-        pedigreeRuntime.horses,
-        pedigreeRuntime.overview,
-      );
-    }
-  });
+  requestAnimationFrame(refreshChartTheme);
   if (state.view === "racecourse" && els.racecourseContent?.dataset.loaded) {
     delete els.racecourseContent.dataset.loaded;
     renderRacecourseAnalysis().catch(console.error);
@@ -1050,7 +1012,7 @@ const CHART_DRILLDOWNS = {
   sireCropEarningsChart: (params) => ({ year: params.name }),
   sireCropWinnersChart: (params) => ({ year: params.name }),
   sireCropGradedChart: (params) => ({ year: params.name }),
-  sireAchievementStepChart: (params) => ({ year: params.data?.crop || params.name }),
+  sireAchievementStepChart: (params) => ({ year: params.name }),
   sireAwdDumbbellChart: (params) => ({ year: params.name }),
   bmsLineScaleChart: (params) => ({ bms_line: params.name }),
   bmsLineRelativeChart: (params) => ({ bms_line: params.name }),
@@ -1059,104 +1021,29 @@ const CHART_DRILLDOWNS = {
   bmsSireEfficiencyChart: (params) => ({ broodmare_sire: params.name }),
   nickingLineChart: (params) => ({ bms_line: params.name }),
   nickingSireChart: (params) => ({ broodmare_sire: params.name }),
-  breederMainChart: (params) => params.data?.raw?.drilldown === false ? ({}) : ({ breeder: params.data?.raw?.label || params.name }),
+  breederMainChart: (params) => ({ breeder: params.name }),
   breederGradedChart: (params) => ({ breeder: params.name }),
-  breederCropChart: (params) => ({ breeder: params.data?.raw?.label || params.name, year: params.data?.year || params.seriesName }),
+  breederCropChart: (params) => ({ breeder: params.name, year: params.seriesName }),
   clubSexShareChart: (params) => ({ year: params.name }),
   "clubWinCompare-牡": (params) => ({ year: params.name, sex: "牡" }),
   "clubWinCompare-牝": (params) => ({ year: params.name, sex: "牝" }),
   "clubWinCompare-セン": (params) => ({ year: params.name, sex: "セン" }),
 };
 
-function validateChartRates(chartId, option) {
-  const checked = new WeakSet();
-  const rateSpecs = [
-    ["winner_foal_rate", "winners", "foals"],
-    ["graded_foal_rate", "graded_winners", "foals"],
-    ["runner_rate", "runners", "foals"],
-    ["debut_rate", "runners", "foals"],
-    ["two_win_rate", "two_win_horses", "foals"],
-    ["three_win_rate", "three_win_horses", "foals"],
-    ["win_start_rate", "wins_starts", "starts"],
-    ["start_win_rate", "wins_starts", "starts"],
-    ["win_rate", "wins", "starts"],
-    ["top3_rate", "top3", "starts"],
-    ["quinella_rate", null, "starts"],
-  ];
-  const report = (group, numerator, denominator, raw) => console.error(chartId, group, numerator, denominator, raw);
-  const inspect = (raw, group = "chart", descend = true, allowEmpty = false) => {
-    if (!raw || typeof raw !== "object" || checked.has(raw)) return;
-    checked.add(raw);
-    const label = raw.label || raw.name || raw.year || raw.month || group;
-    for (const [rateKey, numeratorKey, denominatorKey] of rateSpecs) {
-      if (!(rateKey in raw) || !(denominatorKey in raw)) continue;
-      const rate = Number(raw[rateKey]);
-      const denominator = Number(raw[denominatorKey]);
-      let numerator = numeratorKey ? Number(raw[numeratorKey]) : Number.NaN;
-      if (rateKey === "quinella_rate" && Number.isFinite(Number(raw.wins_starts)) && Number.isFinite(Number(raw.seconds))) {
-        numerator = Number(raw.wins_starts) + Number(raw.seconds);
-      }
-      const emptySample = allowEmpty && denominator === 0 && numerator === 0 && rate === 0;
-      const invalid = !emptySample && (!Number.isFinite(rate)
-        || rate < 0
-        || rate > 1
-        || !Number.isFinite(denominator)
-        || denominator <= 0
-        || !Number.isFinite(numerator)
-        || numerator < 0
-        || numerator > denominator
-        || Math.abs(rate - numerator / denominator) > 0.002);
-      if (invalid) report(`${label} · ${rateKey}`, numerator, denominator, raw);
-    }
-    if ("hits" in raw && "total" in raw && "value" in raw && raw.value != null) {
-      const numerator = Number(raw.hits);
-      const denominator = Number(raw.total);
-      const rate = Number(raw.value) / 100;
-      if (!Number.isFinite(rate) || rate < 0 || rate > 1 || denominator <= 0 || numerator < 0 || numerator > denominator || Math.abs(rate - numerator / denominator) > 0.002) {
-        report(`${label} · rate`, numerator, denominator, raw);
-      }
-    }
-    if ("winners" in raw && "total" in raw && "value" in raw && raw.value != null) {
-      const numerator = Number(raw.winners);
-      const denominator = Number(raw.total);
-      const rate = Number(raw.value) / 100;
-      if (!Number.isFinite(rate) || rate < 0 || rate > 1 || denominator <= 0 || numerator < 0 || numerator > denominator || Math.abs(rate - numerator / denominator) > 0.002) {
-        report(`${label} · winner rate`, numerator, denominator, raw);
-      }
-    }
-    if (!descend) return;
-    for (const [key, value] of Object.entries(raw)) {
-      if (key === "raw") {
-        const presentationIsEmpty = raw.value == null || (raw.intensity == null && Number(raw.share || 0) === 0);
-        inspect(value, String(label), false, presentationIsEmpty);
-      } else {
-        inspect(value, String(label));
-      }
-    }
-  };
-  inspect(option, chartId);
-}
-
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
-  const lieflatTemplate = window.DuramentePedigreeLieflat?.TEMPLATE_BY_ID?.[id] || "";
-  if (lieflatTemplate) el.dataset.lieflatTemplate = lieflatTemplate;
   el.classList.remove("is-rendered");
   if (!window.echarts) {
     el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
     return null;
   }
-  validateChartRates(id, option);
   if (chartRegistry.has(id)) {
     const oldChart = chartRegistry.get(id);
     oldChart.__resizeObserver?.disconnect?.();
-    oldChart.__revealObserver?.disconnect?.();
     oldChart.dispose();
-    delete el.dataset.resizeObserved;
   }
-  el.replaceChildren();
-  const chart = window.echarts.init(el, null, { renderer: "svg" });
+  const chart = window.echarts.init(el);
   const isIntegerAxis = (axis) => {
     if (!axis || axis.type !== "value") return false;
     if (Number(axis.minInterval) >= 1) return true;
@@ -1184,7 +1071,7 @@ function renderChart(id, option) {
         minInterval: integer ? Math.max(1, Number(axis.minInterval || 0)) : axis.minInterval,
         axisLine: dimension === "y" ? { show: false, ...(axis.axisLine || {}) } : axis.axisLine,
         axisTick: { show: false, ...(axis.axisTick || {}) },
-        splitLine: { show: false, ...(axis.splitLine || {}), lineStyle: { type: "solid", width: 1, opacity: 0.45, ...(axis.splitLine?.lineStyle || {}) } },
+        splitLine: { show: true, ...(axis.splitLine || {}), lineStyle: { type: "dashed", opacity: 0.72, ...(axis.splitLine?.lineStyle || {}) } },
         axisLabel: {
           hideOverlap: true,
           ...(axis.axisLabel || {}),
@@ -1194,66 +1081,36 @@ function renderChart(id, option) {
     });
     return Array.isArray(axes) ? normalized : normalized[0];
   };
-  const transformedOption = window.DuramentePedigreeLieflat?.transform?.(id, option, {
-    colors: COLORS,
-    bmsColors: BMS_CATEGORY_COLORS,
-    theme: chartThemeColors(),
-    formatNumber,
-  }) || option;
-  const normalizedOption = {
-    ...transformedOption,
-    xAxis: normalizeAxes(transformedOption.xAxis, "x"),
-    yAxis: normalizeAxes(transformedOption.yAxis, "y"),
-  };
+  const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
   const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
   const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
-  const chartTheme = chartThemeColors();
-  const symbols = ["circle", "rect", "diamond", "triangle"];
-  const normalizedSeries = (normalizedOption.series || []).map((item, index) => {
+  const normalizedSeries = (normalizedOption.series || []).map((item) => {
     const emphasis = { focus: "series", ...(item.emphasis || {}) };
-    const explicitColor = [item.itemStyle?.color, item.lineStyle?.color].find((color) => typeof color === "string" && color !== "transparent");
-    const shade = explicitColor || chartTheme.data[index % chartTheme.data.length];
-    const invisible = item.itemStyle?.color === "transparent";
     if (item.type === "bar") {
       const horizontal = xAxes[Number(item.xAxisIndex || 0)]?.type === "value"
         && yAxes[Number(item.yAxisIndex || 0)]?.type === "category";
-      const defaultRadius = horizontal ? [0, 12, 12, 0] : [12, 12, 2, 2];
+      const defaultRadius = horizontal ? [0, 5, 5, 0] : [5, 5, 2, 2];
       return {
         ...item,
-        barMaxWidth: Math.min(Number(item.barMaxWidth || 22), 22),
-        barCategoryGap: item.barCategoryGap || "54%",
+        barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
+        barCategoryGap: item.barCategoryGap || "48%",
         itemStyle: {
           borderRadius: item.stack ? 0 : defaultRadius,
           ...(item.itemStyle || {}),
-          color: invisible ? "transparent" : (item.itemStyle?.color || shade),
         },
-        label: item.label ? { color: chartTheme.text, fontSize: Math.max(10, Number(item.label.fontSize || 0)), fontWeight: 800, ...item.label } : item.label,
         emphasis,
       };
     }
     if (item.type === "line") {
       return {
-        symbol: symbols[index % symbols.length],
-        symbolSize: 6 + Math.min(index, 2),
+        symbol: "circle",
+        symbolSize: 7,
         ...item,
-        itemStyle: { color: shade, borderColor: chartTheme.paper, borderWidth: 1.5, ...(item.itemStyle || {}) },
-        lineStyle: { width: index === 0 ? 2.2 : 1.4, cap: "round", join: "round", color: shade, ...(item.lineStyle || {}) },
-        label: item.label ? { color: chartTheme.text, fontSize: Math.max(10, Number(item.label.fontSize || 0)), fontWeight: 800, ...item.label } : item.label,
+        lineStyle: { width: 2.5, cap: "round", join: "round", ...(item.lineStyle || {}) },
         emphasis,
       };
     }
-    if (["scatter", "effectScatter"].includes(item.type)) {
-      return {
-        ...item,
-        symbol: item.symbol || symbols[index % symbols.length],
-        itemStyle: item.itemStyle || { color: shade, borderColor: chartTheme.paper, borderWidth: 1 },
-        emphasis,
-      };
-    }
-    return {
-      ...item,
-      emphasis,
-    };
+    return { ...item, emphasis };
   });
   const series = window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries;
   const axes = window.DuramenteAnimation?.enhanceEChartsAxes(normalizedOption) || {};
@@ -1270,39 +1127,19 @@ function renderChart(id, option) {
   const grid = Array.isArray(normalizedOption.grid)
     ? normalizedOption.grid.map((item) => ({ containLabel: true, ...item }))
     : normalizedOption.grid ? { containLabel: true, ...normalizedOption.grid } : normalizedOption.grid;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finalOption = {
-    animation: !prefersReducedMotion,
+  chart.setOption({
+    animation: true,
     animationDurationUpdate: 300,
     textStyle: { fontFamily: "Inter, 'Noto Sans SC', 'Noto Sans JP', sans-serif" },
-    aria: { enabled: true },
+    aria: { enabled: true, decal: { show: false } },
     ...normalizedOption,
-    color: chartTheme.data,
     ...axes,
     grid,
     tooltip,
     series,
-  };
-  chart.setOption({ ...finalOption, animation: false });
+  });
   chartRegistry.set(id, chart);
   refreshChartTheme();
-
-  const play = () => {
-    chart.clear();
-    chart.setOption(finalOption, { notMerge: true });
-    refreshChartTheme();
-  };
-  if (!prefersReducedMotion && window.IntersectionObserver) {
-    const observer = new IntersectionObserver((entries) => {
-      if (!entries[0]?.isIntersecting) return;
-      play();
-      observer.disconnect();
-    }, { threshold: 0.25 });
-    observer.observe(el);
-    chart.__revealObserver = observer;
-  } else {
-    play();
-  }
   const drilldown = CHART_DRILLDOWNS[id];
   if (drilldown) {
     el.classList.add("is-drilldown");
@@ -1691,7 +1528,7 @@ function metricCard(label, value, sub = "", href = "") {
 }
 
 function rateWithCount(value, numerator, denominator) {
-  return `${formatRate(value)} · ${formatNumber(numerator)}/${formatNumber(denominator)}`;
+  return `${formatRate(value)} (${formatNumber(numerator)}/${formatNumber(denominator)})`;
 }
 
 function weightedRate(rows, numeratorKey, denominatorKey) {
@@ -2093,20 +1930,6 @@ function renderCropAchievementChart(crops) {
   ];
   renderChart("sireAchievementStepChart", {
     color: crops.map((row) => cropColor(row.label)),
-    lieflatData: {
-      stages: stages.map(({ key, label }) => ({ key, label })),
-      cohorts: crops.map((row) => ({
-        crop: row.label,
-        foals: Number(row.foals || 0),
-        raw: row,
-        stages: stages.map((stage) => ({
-          key: stage.key,
-          label: stage.label,
-          count: stage.count(row),
-          rate: row.foals ? stage.count(row) / row.foals : 0,
-        })),
-      })),
-    },
     tooltip: {
       trigger: "axis",
       formatter: (items) => {
@@ -2125,7 +1948,7 @@ function renderCropAchievementChart(crops) {
         ].join("<br>");
       },
     },
-    legend: { show: false },
+    legend: { top: 0, type: "scroll" },
     grid: { left: 48, right: 24, top: 52, bottom: 42, containLabel: true },
     xAxis: { type: "category", data: stages.map((stage) => stage.label) },
     yAxis: { type: "value", name: "%", axisLabel: { formatter: (value) => `${value}%` } },
@@ -2586,7 +2409,6 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   });
   renderChart("gradedWinsTimelineChart", {
     color: [COLORS.plum, COLORS.rose, COLORS.coral, COLORS.gold],
-    lieflatData: { events: timelineRows, years: timelineYears },
     tooltip: {
       trigger: "axis",
       axisPointer: { type: "shadow" },
@@ -2844,10 +2666,10 @@ async function renderSireAnalysis() {
     <div class="analysis-subpanel" data-sire-panel="annual">
     ${sectionBlock("年度表现", "按比赛年份查看胜场、出赛马、重赏胜利和奖金变化。",
       `<div class="mini-chart-grid annual-mini-grid">
-        ${chartBlock("胜场", "梯线分段 = JRA／NAR／海外胜场", "annualPerformance-wins")}
-        ${chartBlock("出赛", "双梯线 = 出赛次数／出赛马", "annualPerformance-starts")}
-        ${chartBlock("年度 G1・G2・G3", "圆面积 = 当年对应等级胜场数", "annualPerformance-graded")}
-        ${chartBlock("奖金", "细线节点 = 各年度奖金（万日元）", "annualPerformance-earnings")}
+        ${chartBlock("胜场", "JRA／NAR／海外", "annualPerformance-wins")}
+        ${chartBlock("出赛", "出赛次数／出赛马", "annualPerformance-starts")}
+        ${chartBlock("重赏", "G1／G2／G3", "annualPerformance-graded")}
+        ${chartBlock("奖金", "年度奖金（万日元）", "annualPerformance-earnings")}
       </div>
       <article class="chart-card table-card">
         <div class="chart-card-head"><h3>年度明细</h3></div>
@@ -2882,7 +2704,7 @@ async function renderSireAnalysis() {
       </div>
       <p class="source-note" id="leadingMissingMessage"></p>
       <div class="chart-grid">
-        ${chartBlock("年度排名", "色块深浅 = 排名高低 · 格内数字 = 精确名次", "sireLeadingRankChart")}
+        ${chartBlock("年度排名", "排名数字越小表示位置越高。", "sireLeadingRankChart")}
         ${chartBlock("同年 Top 10", "比较同一分类中的头部种牡马。", "sireTop10Chart")}
       </div>
       ${analysisTable([
@@ -2900,12 +2722,12 @@ async function renderSireAnalysis() {
     <div class="analysis-subpanel" data-sire-panel="crop">
     ${sectionBlock("出生世代表现", "比较不同出生世代的奖金、胜马和重赏表现。",
       `<div class="chart-grid cohort-grid">
-        ${chartBlock("奖金表现", "两组对齐 Tick Rows：总奖金与每匹平均奖金。", "sireCropEarningsChart")}
-        ${chartBlock("胜马表现", "横向位置 = 胜马率 · 点面积 = 胜马数。", "sireCropWinnersChart")}
-        ${chartBlock("重赏表现", "横向位置 = 重赏马率 · 点面积 = 重赏胜马数。", "sireCropGradedChart")}
-        ${chartBlock("各出生世代的成就转化", "流线宽度 = 占该世代产驹比例 · 节点数字 = 原始匹数 · 七个阶段与原范围不变", "sireAchievementStepChart")}
-        ${chartBlock("各出生世代的平均胜距", "空心端 = Turf · 实心端 = Dirt · 中点 = Overall。", "sireAwdDumbbellChart")}
-        ${controlledChartBlock("产驹成长曲线", "每条细线保留一个出生世代的原始累计轨迹。", "sireDevelopmentChart", `
+        ${chartBlock("奖金表现", "比较各世代的总奖金与平均表现。", "sireCropEarningsChart")}
+        ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
+        ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
+        ${chartBlock("各出生世代的成就转化", "观察各世代从出赛到高水平胜出的过程。", "sireAchievementStepChart")}
+        ${chartBlock("各出生世代的平均胜距", "比较 Overall、Turf 与 Dirt AWD。", "sireAwdDumbbellChart")}
+        ${controlledChartBlock("产驹成长曲线", "观察各世代从两岁起的胜场积累。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
             <option value="cumulative_wins">原始累计胜场</option>
             <option value="cumulative_wins_per_100_foals">每100匹产驹</option>
@@ -2935,15 +2757,15 @@ async function renderSireAnalysis() {
     <div class="analysis-subpanel" data-sire-panel="market">
     ${sectionBlock("配种规模与市场评价", "比较ドゥラメンテ与当年社台其他种牡马的配种数量和公开配种费平均值。",
       `<div class="chart-grid">
-        ${chartBlock("配种规模变化", "细线节点比较每年配种母马数。", "sireMaresCoveredChart")}
-        ${chartBlock("市场定价变化", "细线节点比较每年公开配种费，单位为万日元。", "sireStudFeeChart")}
+        ${chartBlock("配种规模变化", "比较每年配种母马数。", "sireMaresCoveredChart")}
+        ${chartBlock("市场定价变化", "比较每年公开配种费，单位为万日元。", "sireStudFeeChart")}
       </div>
       <p class="source-note">${escapeHtml(market.source || "")}</p>`
     , "BREEDING MARKET")}
     </div>
     <div class="analysis-subpanel" data-sire-panel="graded">
     ${sectionBlock("重赏胜利", "按年份和胜马查看每一场 G1、G2、G3 胜利，以及重赏成绩的累计过程。",
-      `${chartBlock("重赏马生涯时间轴", "每匹马一条赛季线；实心节点为实际重赏胜利，金色为 G1。", "gradedWinsTimelineChart")}
+      `${chartBlock("年度重赏胜场数", "观察重赏胜利随年份的积累。", "gradedWinsTimelineChart")}
       <article class="chart-card">
         <div class="chart-card-head with-controls">
           <div>
@@ -3019,14 +2841,14 @@ async function renderBmsAnalysis() {
     </div>
     ${sectionBlock("母父系构成", "观察八大母父系的规模与胜马表现。",
       `<div class="chart-grid">
-        ${chartBlock("母父系产驹规模", "Tick Rows 保留原排序与精确产驹数。", "bmsLineScaleChart")}
-        ${chartBlock("相对整体胜马率", "空心基准 = 整体 · 实心端 = 各母父系百分点偏差。", "bmsLineRelativeChart")}
+        ${chartBlock("母父系产驹规模", "比较主要母父系的构成。", "bmsLineScaleChart")}
+        ${chartBlock("相对整体胜马率", "观察各母父系相对整体水平的位置。", "bmsLineRelativeChart")}
       </div>`
     )}
     ${sectionBlock("具体母父表现", "比较具体母父的贡献与效率。",
       `<div class="chart-grid">
-        ${chartBlock("奖金贡献", "Tick Rows 按原 Top 15 总奖金排序。", "bmsSireContributionChart")}
-        ${chartBlock("胜马效率", "端点位置 = 胜马率，范围仍为原样本门槛与 Top 15。", "bmsSireEfficiencyChart")}
+        ${chartBlock("奖金贡献", "按总奖金查看主要母父。", "bmsSireContributionChart")}
+        ${chartBlock("胜马效率", "比较样本充足母父的胜马率。", "bmsSireEfficiencyChart")}
       </div>
       ${analysisTable([
         { label: "母父", className: "name-column", value: (row) => broodmareSireFilterButton(row.label), html: true },
@@ -3260,17 +3082,15 @@ function renderBmsSectionCharts(horses, broodmareSires) {
     color: [COLORS.duramente, COLORS.blue, COLORS.rose, COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${escapeHtml(items[0]?.axisValue || "")}<br>${items.map((item) => {
       const stats = item.data.raw;
-      return stats.foals
-        ? `${item.marker}${item.seriesName}: ${rateWithCount(pedigreeRateMetric(stats, metric), pedigreeRateCount(stats, metric), stats.foals)}`
-        : `${item.marker}${item.seriesName}: 无样本`;
+      return `${item.marker}${item.seriesName}: ${formatRate(pedigreeRateMetric(stats, metric))}（${pedigreeRateCount(stats, metric)}/${stats.foals}）`;
     }).join("<br>")}` },
     legend: { top: 0 },
     grid: getResponsiveGrid({ left: 54, right: 24, top: 52, bottom: 82 }),
     xAxis: { type: "category", data: rows.map((row) => row.label), axisLabel: { interval: 0, rotate: 24 } },
     yAxis: { type: "value", name: metric === "graded_foal_rate" ? "重赏马率" : "胜马率", max: 100, axisLabel: { formatter: "{value}%" } },
     series: [
-      { name: "总体", type: "line", smooth: true, symbolSize: 8, data: rows.map((row) => ({ value: row.foals ? ratePercent(pedigreeRateCount(row, metric), row.foals) : null, raw: row })) },
-      ...PEDIGREE_SEXES.map((sex) => ({ name: uiValue(sex, "sex"), type: "bar", data: rows.map((row) => ({ value: row.sexes[sex].foals ? ratePercent(pedigreeRateCount(row.sexes[sex], metric), row.sexes[sex].foals) : null, raw: row.sexes[sex] })) })),
+      { name: "总体", type: "line", smooth: true, symbolSize: 8, data: rows.map((row) => ({ value: ratePercent(pedigreeRateCount(row, metric), row.foals), raw: row })) },
+      ...PEDIGREE_SEXES.map((sex) => ({ name: uiValue(sex, "sex"), type: "bar", data: rows.map((row) => ({ value: ratePercent(pedigreeRateCount(row.sexes[sex], metric), row.sexes[sex].foals), raw: row.sexes[sex] })) })),
     ],
   });
 
@@ -3323,15 +3143,13 @@ function renderFemaleFamilyCharts(horses) {
     color: [COLORS.blue, COLORS.rose, COLORS.gold],
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0]?.axisValue || ""}<br>${items.map((item) => {
       const stats = item.data.raw;
-      return stats.foals
-        ? `${item.marker}${item.seriesName}: ${rateWithCount(pedigreeRateMetric(stats, sexMetric), pedigreeRateCount(stats, sexMetric), stats.foals)}`
-        : `${item.marker}${item.seriesName}: 无样本`;
+      return `${item.marker}${item.seriesName}: ${formatRate(pedigreeRateMetric(stats, sexMetric))}（${pedigreeRateCount(stats, sexMetric)}/${stats.foals}）`;
     }).join("<br>")}` },
     legend: { top: 0 },
     grid: fixedHorizontalGrid(84, 34, 44, 46),
     xAxis: { type: "value", max: 100, name: sexMetric === "graded_foal_rate" ? "重赏马率" : "胜马率", axisLabel: { formatter: "{value}%" } },
     yAxis: longCategoryAxis(sexRows.map((row) => row.label), { width: 88 }),
-    series: PEDIGREE_SEXES.map((sex) => ({ name: uiValue(sex, "sex"), type: "bar", data: sexRows.map((row) => ({ value: row.sexes[sex].foals ? ratePercent(pedigreeRateCount(row.sexes[sex], sexMetric), row.sexes[sex].foals) : null, raw: row.sexes[sex], family: row.label })) })),
+    series: PEDIGREE_SEXES.map((sex) => ({ name: uiValue(sex, "sex"), type: "bar", data: sexRows.map((row) => ({ value: ratePercent(pedigreeRateCount(row.sexes[sex], sexMetric), row.sexes[sex].foals), raw: row.sexes[sex], family: row.label })) })),
   })?.on("click", (params) => applyFemaleFamilyFilter(params.data.family));
 }
 
@@ -3965,7 +3783,7 @@ async function renderPedigreeAnalysis() {
       <p class="source-note">六大分类共 ${formatNumber(primaryBmsRows.reduce((sum, row) => sum + row.foals, 0))} 匹。</p>
       <div class="chart-grid pedigree-feature-grid">
         ${chartBlock("六大母父系规模", "比较各母父系的产驹数量。", "bmsCategoryScaleChart")}
-        ${controlledChartBlock("按性别表现", "四根独立梯线保留总体、牡马、牝马与骟马；比例仍以各组产驹数为分母。", "bmsSexPerformanceChart", `
+        ${controlledChartBlock("按性别表现", "比较同一母父系中牡马、牝马和骟马的成绩；比例以各性别产驹数为分母。", "bmsSexPerformanceChart", `
           <label><span>指标</span><select id="bmsSexMetric"><option value="winner_foal_rate">胜马率</option><option value="graded_foal_rate">重赏马率</option></select></label>
         `)}
         ${chartBlock("五个出生世代的母父系构成", "各年份合计为100%，用来观察配种选择的相对变化。", "bmsCropShareChart")}
@@ -4120,7 +3938,7 @@ async function renderPedigreeAnalysis() {
       </div>
       <div class="chart-grid" id="dosage-charts">
         ${chartBlock("DI 与 CD 分布", "每个点代表一匹产驹，点大小反映 DP 总点数；点击可打开详情。", "dosageScatterChart")}
-        ${chartBlock("平均 DP 构成", "横向棒棒糖保留 B、I、C、S、P 五类平均点数。", "dosageProfileChart")}
+        ${chartBlock("平均 DP 构成", "比较 B、I、C、S、P 五类的平均点数。", "dosageProfileChart")}
       </div>
       <details class="analysis-block dosage-detail-table" id="dosage-records">
         <summary>查看 DP・DI・CD 明细</summary>
@@ -4174,18 +3992,8 @@ async function renderPedigreeAnalysis() {
 
 function renderBreederCharts(breeders) {
   const topRows = [...(breeders.top_foals || [])].slice(0, 15);
-  const visibleFoals = topRows.reduce((sum, row) => sum + Number(row.foals || 0), 0);
   renderChart("breederMainChart", {
     color: [COLORS.duramente, COLORS.blue],
-    lieflatData: {
-      slices: topRows.map((row) => ({
-        name: row.label,
-        share: visibleFoals ? Number(row.foals || 0) / visibleFoals * 100 : 0,
-        intensity: Number(row.winner_foal_rate || 0) * 100,
-        raw: row,
-        tooltipHtml: `${escapeHtml(row.label)}<br>Top 15 图内产驹占比 ${formatNumber(visibleFoals ? Number(row.foals || 0) / visibleFoals * 100 : 0, 1)}% · ${formatNumber(row.foals)}匹<br>胜马率 ${rateWithCount(row.winner_foal_rate, row.winners, row.foals)}`,
-      })),
-    },
     tooltip: { trigger: "axis" },
     legend: { top: 0, data: ["产驹数", "胜马率"] },
     grid: getResponsiveGrid({ left: 56, right: 64, top: 58, bottom: 86 }),
@@ -4226,7 +4034,7 @@ function renderBreederCharts(breeders) {
       type: "bar",
       stack: "crop",
       itemStyle: { color: cropColor(year) },
-      data: cropRows.map((row) => ({ value: row.crop_counts?.[year] || 0, raw: row })),
+      data: cropRows.map((row) => row.crop_counts?.[year] || 0),
     })),
   });
 }
@@ -4397,11 +4205,11 @@ async function renderProductionAnalysis() {
         <p>比较主要生产牧场的产驹规模、胜马率、重赏马来源和出生世代构成。</p>
       </div>
       <div class="chart-grid">
-        ${chartBlock("生产规模与胜马效率", "保持原 Top 15 范围：角度 = 图内产驹占比 · 半径 = 胜马率", "breederMainChart")}
+        ${chartBlock("主要生产牧场", "比较主要牧场的产驹规模和胜马表现。", "breederMainChart")}
         ${chartBlock("重赏胜马生产牧场分布", "观察重赏胜马来自哪些牧场。", "breederGradedChart")}
       </div>
       <div class="chart-grid single-chart">
-        ${chartBlock("牧场 × 出生世代", "圆面积 = 该牧场该世代产驹数", "breederCropChart")}
+        ${chartBlock("各牧场出生世代构成", "观察主要牧场的世代分布。", "breederCropChart")}
       </div>
       ${sectionBlock("俱乐部马", "比较俱乐部马的规模、性别构成和胜马率，并与全部产驹的表现对照。",
         `<div class="metric-grid compact-metrics club-summary-metrics">
@@ -4410,10 +4218,10 @@ async function renderProductionAnalysis() {
           ${metricCard("俱乐部胜马率", formatRate(clubHorses.filter((horse) => horseWins(horse) > 0).length / clubHorses.length), "独立胜马／俱乐部马")}
         </div>
         <div class="mini-chart-grid club-analysis-grid">
-          ${chartBlock("五个出生世代的性别构成", "堆叠梯线保持各年度牡、牝、骟占比总和。", "clubSexShareChart")}
-          ${chartBlock("牡马", "双梯线比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-牡")}
-          ${chartBlock("牝马", "双梯线比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-牝")}
-          ${chartBlock("骟马", "双梯线比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-セン")}
+          ${chartBlock("五个出生世代的性别构成", "比较牡马、牝马和骟马在各出生世代中的占比。", "clubSexShareChart")}
+          ${chartBlock("牡马", "比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-牡")}
+          ${chartBlock("牝马", "比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-牝")}
+          ${chartBlock("骟马", "比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-セン")}
         </div>
         <p class="source-note">俱乐部范围参考 <a href="https://ja.wikipedia.org/wiki/%E4%B8%80%E5%8F%A3%E9%A6%AC%E4%B8%BB" target="_blank" rel="noopener noreferrer">Wikipedia：一口马主俱乐部列表</a>，按中央与地方现存俱乐部法人的马主登记名匹配。</p>`
       , "CLUB OWNERSHIP")}
@@ -4441,12 +4249,12 @@ async function renderProductionAnalysis() {
         <div class="chart-grid">${chartBlock("实际配种月份", `Japan Stud Book 匹配 ${formatNumber(coveringMonths.coverage?.matched || 0)} / ${formatNumber(coveringMonths.coverage?.horses || 0)} 匹。`, "coverMonthChart")}${chartBlock("生产月份", "按登记出生日期统计。", "foalMonthChart")}</div>`
       , "BREEDING CALENDAR")}
       <div class="chart-grid">
-        ${chartBlock("母马生产本胎时的年龄", "每个点代表一匹产驹，横向位置仍是原母龄。", "damAgeHistogramChart")}
+        ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
         ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
       </div>
       <div class="chart-grid">
         ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
-        ${controlledChartBlock("胎次与表现", "细线按胎次顺序连接胜马率 · 点面积 = 该胎次产驹数。", "damFoalOrderChart", `
+        ${controlledChartBlock("胎次与表现", "比较母马生产履历与产驹表现。", "damFoalOrderChart", `
           <div class="segmented-sort" aria-label="胎次口径">
             <button type="button" class="active" data-parity-mode="biological">真实生产胎次</button>
             <button type="button" data-parity-mode="registered">登记产驹序次</button>
@@ -4569,12 +4377,12 @@ async function renderRacecourseAnalysis() {
       .slice(0, 10);
     els.racecourseContent.querySelector("#racecourseDynamic").innerHTML = `
       <div class="chart-grid">
-        ${chartBlock("各赛马场胜场数与胜率", "横轴 = 胜场 · 纵轴 = 胜率 · 点面积 = 出赛数", "racecourseWinsChart")}
-        ${chartBlock("出赛数与前三率", "横轴 = 出赛数 · 纵轴 = 前三率 · 点面积 = 出赛数", "racecourseStartsChart")}
+        ${chartBlock("各赛马场胜场数与胜率", "比较赛场胜利积累与取胜效率。", "racecourseWinsChart")}
+        ${chartBlock("出赛数与前三率", "观察出赛集中度与上名稳定性。", "racecourseStartsChart")}
       </div>
       <div class="chart-grid">
-        ${chartBlock("芝地与泥地表现", "双梯线比较同一赛马场的芝地与泥地胜率。", "racecourseSurfaceChart")}
-        ${sectionBlock("主要距离表现", "角度 = 距离区间出赛占比 · 半径 = 前三率。",
+        ${chartBlock("芝地与泥地表现", "比较不同场地条件下的取胜表现。", "racecourseSurfaceChart")}
+        ${sectionBlock("主要距离表现", "按赛马场比较不同距离区间的出赛次数、出赛率和前三率。",
           `<div class="analysis-controls">
             <label><span>赛马场</span><select id="racecourseDistanceCourse">
               ${rows.slice(0, 30).map((row) => `<option value="${escapeHtml(row.label)}">${escapeHtml(row.label)}</option>`).join("")}
@@ -4601,7 +4409,6 @@ async function renderRacecourseAnalysis() {
     `;
     renderChart("racecourseWinsChart", {
       color: [COLORS.coral, COLORS.raceLine],
-      lieflatData: { rows: winRows },
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["胜场数", "胜率"] },
       grid: getResponsiveGrid({ left: 48, right: 64, top: 58, bottom: 54 }),
@@ -4626,7 +4433,6 @@ async function renderRacecourseAnalysis() {
     });
     renderChart("racecourseStartsChart", {
       color: [COLORS.gold, COLORS.raceLine],
-      lieflatData: { rows: startRows },
       tooltip: { trigger: "axis" },
       legend: { top: 0, data: ["出赛次数", "前三率"] },
       grid: getResponsiveGrid({ left: 56, right: 64, top: 58, bottom: 54 }),
@@ -4658,9 +4464,7 @@ async function renderRacecourseAnalysis() {
           const row = item.data.raw;
           const surface = item.seriesName === "芝地胜率" ? "芝" : "ダ";
           const stats = row.surface?.[surface] || {};
-          return Number(stats.starts || 0) > 0
-            ? `${item.marker}${item.seriesName}: ${item.value}% (${formatNumber(stats.wins || 0)}/${formatNumber(stats.starts || 0)})`
-            : `${item.marker}${item.seriesName}: 无样本`;
+          return `${item.marker}${item.seriesName}: ${item.value}% (${formatNumber(stats.wins || 0)}/${formatNumber(stats.starts || 0)})`;
         }).join("<br>"),
       },
       legend: { top: 0, data: ["芝地胜率", "泥地胜率"] },
@@ -4668,8 +4472,8 @@ async function renderRacecourseAnalysis() {
       xAxis: { type: "category", data: surfaceRows.map((row) => row.label), axisLabel: { rotate: 35 } },
       yAxis: { type: "value", name: "%", axisLabel: { formatter: (value) => `${value}%` } },
       series: [
-        { name: "芝地胜率", type: "bar", data: surfaceRows.map((row) => ({ value: Number(row.surface?.["芝"]?.starts || 0) > 0 ? Number(((row.surface?.["芝"]?.win_rate || 0) * 100).toFixed(1)) : null, raw: row })) },
-        { name: "泥地胜率", type: "bar", data: surfaceRows.map((row) => ({ value: Number(row.surface?.["ダ"]?.starts || 0) > 0 ? Number(((row.surface?.["ダ"]?.win_rate || 0) * 100).toFixed(1)) : null, raw: row })) },
+        { name: "芝地胜率", type: "bar", data: surfaceRows.map((row) => ({ value: Number(((row.surface?.["芝"]?.win_rate || 0) * 100).toFixed(1)), raw: row })) },
+        { name: "泥地胜率", type: "bar", data: surfaceRows.map((row) => ({ value: Number(((row.surface?.["ダ"]?.win_rate || 0) * 100).toFixed(1)), raw: row })) },
       ],
     });
     const renderDistanceChart = () => {
@@ -4679,16 +4483,6 @@ async function renderRacecourseAnalysis() {
       const distanceStarts = buckets.reduce((sum, item) => sum + Number(item.starts || 0), 0);
       renderChart("racecourseDistanceChart", {
         color: [COLORS.gold, COLORS.duramente, COLORS.blue],
-        lieflatData: {
-          slices: buckets.map((bucket) => ({
-            name: bucket.label,
-            share: distanceStarts ? Number(bucket.starts || 0) / distanceStarts * 100 : 0,
-            intensity: Number(bucket.starts || 0) > 0 && bucket.top3_rate != null ? Number(bucket.top3_rate) * 100 : null,
-            raw: bucket,
-            intensityLabel: Number(bucket.starts || 0) > 0 ? `前三率 ${formatNumber(Number(bucket.top3_rate || 0) * 100, 1)}%` : "前三率无样本",
-            tooltipHtml: `${escapeHtml(bucket.label)}<br>出赛占比 ${formatNumber(distanceStarts ? Number(bucket.starts || 0) / distanceStarts * 100 : 0, 1)}% · ${formatNumber(bucket.starts)}场<br>${Number(bucket.starts || 0) > 0 ? `前三率 ${formatNumber(Number(bucket.top3_rate || 0) * 100, 1)}% · ${formatNumber(bucket.top3)}/${formatNumber(bucket.starts)}` : "前三率：无样本"}`,
-          })),
-        },
         tooltip: {
           trigger: "axis",
           formatter: (items) => {
@@ -4872,11 +4666,11 @@ function renderClubWinChart(horses) {
     const values = (clubOnly) => years.map((year) => {
       const rows = horses.filter((horse) => Number(horse.birth_year) === year && horse.sex === sex && (!clubOnly || isClubHorse(horse)));
       const winners = rows.filter((horse) => horseWins(horse) > 0).length;
-      return { value: rows.length ? ratePercent(winners, rows.length) : null, winners, total: rows.length };
+      return { value: ratePercent(winners, rows.length), winners, total: rows.length };
     });
     renderChart(`clubWinCompare-${sex}`, {
       color: [COLORS.duramente, COLORS.muted],
-      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}年<br>${items.map((item) => item.data.total ? `${item.marker}${item.seriesName}: ${item.value}%（${item.data.winners}/${item.data.total}）` : `${item.marker}${item.seriesName}: 无样本`).join("<br>")}` },
+      tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => `${items[0].axisValue}年<br>${items.map((item) => `${item.marker}${item.seriesName}: ${item.value}%（${item.data.winners}/${item.data.total}）`).join("<br>")}` },
       legend: { top: 0, itemWidth: 14, itemHeight: 9 },
       grid: getResponsiveGrid({ left: 38, right: 12, top: 48, bottom: 32 }),
       xAxis: { type: "category", data: years },
@@ -4892,12 +4686,12 @@ function renderMonthChart(id, rows, metric) {
     if (Array.isArray(row[sex])) {
       const horses = row[sex];
       const hits = horses.filter((horse) => isGraded ? horseIsGraded(horse) : horseWins(horse) > 0).length;
-      return { value: horses.length ? ratePercent(hits, horses.length) : null, hits, total: horses.length };
+      return { value: ratePercent(hits, horses.length), hits, total: horses.length };
     }
     const counts = row[sex] || {};
     const hits = Number(isGraded ? counts.graded_winners : counts.winners) || 0;
     const total = Number(counts.foals) || 0;
-    return { value: total ? ratePercent(hits, total) : null, hits, total };
+    return { value: ratePercent(hits, total), hits, total };
   });
   renderChart(id, {
     color: [COLORS.blue, COLORS.rose],
