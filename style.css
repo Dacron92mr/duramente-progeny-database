@@ -1281,21 +1281,60 @@ td {
   display: flex;
   min-height: 0;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
+  align-items: stretch;
   padding: 18px 0;
   background: transparent;
+  text-align: left;
 }
 
 .strategy-card .kicker {
   color: var(--accent);
 }
 
-.strategy-card > p {
+.strategy-card > p,
+.strategy-period {
   color: var(--ink);
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 650;
   line-height: 1.6;
 }
+
+.strategy-insight-list {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.strategy-insight-list > div {
+  display: grid;
+  grid-template-columns: minmax(118px, 1fr) auto 58px;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 7px;
+  border-bottom: 1px solid rgba(155, 49, 93, 0.10);
+  font-size: 12px;
+}
+
+.strategy-insight-list span {
+  color: var(--lineage-color);
+  font-weight: 900;
+}
+
+.strategy-insight-list strong {
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
+.strategy-insight-list em {
+  color: var(--muted);
+  font-style: normal;
+  font-weight: 900;
+  text-align: right;
+}
+
+.strategy-insight-list em.is-up { color: var(--accent); }
+.strategy-insight-list em.is-down { color: #3f7d68; }
 
 .strategy-card > small {
   display: block;
@@ -1356,6 +1395,43 @@ td {
   font-size: 11px;
   font-style: normal;
   font-weight: 900;
+}
+
+.family-signal-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 0;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  text-align: left;
+}
+
+.family-signal-title em {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.family-signal-horses {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+}
+
+.family-signal-horses > b {
+  color: var(--muted);
+  font-size: 10px;
+}
+
+.family-signal-horses .representative-list {
+  align-items: flex-start;
 }
 
 .pedigree-explorer > summary {
@@ -1576,7 +1652,11 @@ td {
 }
 
 .annual-milestone-grid {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.annual-milestone-wide {
+  grid-column: 1 / -1;
 }
 
 .leading-ranking-group + .leading-ranking-group {
@@ -1587,6 +1667,18 @@ td {
 
 .leading-ranking-group > .chart-card-head {
   margin-bottom: 8px;
+}
+
+.leading-section-title h3 {
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+#firstSeasonSireChart {
+  height: 420px;
 }
 
 .club-analysis-grid .chart-canvas {
@@ -2006,6 +2098,27 @@ td {
 .sire-crop-table th:nth-child(11), .sire-crop-table td:nth-child(11),
 .sire-crop-table th:nth-child(12), .sire-crop-table td:nth-child(12) { width: 7%; }
 
+.sire-crop-table .representative-list {
+  display: grid;
+  align-items: start;
+}
+
+.sire-crop-table .representative-horse-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.sire-crop-table .grade-pill {
+  flex: 0 0 auto;
+  min-width: max-content;
+  padding: 2px 5px;
+  white-space: nowrap;
+  word-break: keep-all;
+}
+
 .mini-crop-grid {
   display: grid;
   gap: 10px;
@@ -2211,6 +2324,44 @@ td {
 .graded-timeline-list {
   display: grid;
   gap: 14px;
+}
+
+.graded-mobile-tabs {
+  display: none;
+}
+
+.graded-dual-timelines {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.graded-timeline-column {
+  min-width: 0;
+}
+
+.graded-timeline-column > h4 {
+  margin: 0 0 10px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.graded-timeline-column .graded-event {
+  grid-template-columns: 40px 78px minmax(0, 1fr);
+  gap: 7px;
+  padding: 8px 10px;
+  font-size: 12px;
+}
+
+.graded-timeline-column .event-horse,
+.graded-timeline-column .event-meeting {
+  grid-column: 3;
+  justify-self: start;
+}
+
+[data-graded-column="horse"] .event-horse {
+  display: none;
 }
 
 .graded-timeline-group {
@@ -2532,6 +2683,34 @@ td {
   .graded-event .event-meeting {
     grid-column: 3;
     justify-self: start;
+  }
+
+  .graded-mobile-tabs {
+    display: flex;
+  }
+
+  .graded-dual-timelines {
+    grid-template-columns: 1fr;
+  }
+
+  .graded-timeline-column {
+    display: none;
+  }
+
+  .graded-timeline-column.is-active {
+    display: block;
+  }
+
+  .graded-timeline-column > h4 {
+    display: none;
+  }
+
+  .dosage-summary-band {
+    grid-template-columns: 1fr;
+  }
+
+  #dosageScatterChart {
+    height: 470px;
   }
 }
 
@@ -3483,6 +3662,7 @@ details.analysis-block summary {
   background: var(--panel-soft);
   color: var(--ink);
   text-align: left;
+  align-content: start;
 }
 
 .nicking-entity-card > span,
@@ -3511,11 +3691,66 @@ details.analysis-block summary {
 .nicking-entity-card > em {
   grid-column: 2;
   grid-row: 1 / 3;
-  align-self: center;
+  align-self: start;
   color: var(--accent);
   font-size: 24px;
   font-style: normal;
   font-weight: 900;
+}
+
+.dosage-summary-band {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 4px 0 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--line);
+}
+
+.dosage-summary-band article {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: baseline;
+  gap: 6px 14px;
+  min-height: 138px;
+  padding: 18px 20px;
+  background: var(--panel-soft);
+}
+
+.dosage-summary-band span {
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+}
+
+.dosage-summary-band strong {
+  color: var(--ink);
+  font-size: 30px;
+  font-variant-numeric: tabular-nums;
+}
+
+.dosage-summary-band p {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.65;
+}
+
+.dosage-chart-layout {
+  grid-template-columns: minmax(0, 1.55fr) minmax(300px, 0.65fr);
+}
+
+#dosageScatterChart {
+  height: 540px;
+}
+
+#dosageProfileChart {
+  height: 400px;
 }
 
 .nicking-entity-card > small,
