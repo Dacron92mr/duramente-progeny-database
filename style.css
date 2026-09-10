@@ -21,7 +21,7 @@
   --gold: #f0b45f;
   --soft: #f6efe9;
   --shadow: 0 18px 60px rgba(31, 30, 24, 0.14);
-  --chart-paper: linear-gradient(145deg, #fffaf7 0%, #fff4ee 100%);
+  --chart-paper: #fffaf7;
   --chart-ink: #3b3530;
   --chart-muted: #6d6a62;
   --chart-border: rgba(169, 47, 93, 0.14);
@@ -50,7 +50,7 @@
   --gold: #d9a658;
   --soft: #302229;
   --shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
-  --chart-paper: linear-gradient(145deg, #281b24 0%, #211820 100%);
+  --chart-paper: #281b24;
   --chart-ink: #f2e9ed;
   --chart-muted: #b9aab1;
   --chart-border: rgba(216, 92, 103, 0.22);
@@ -1610,22 +1610,16 @@ td {
 .chart-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--chart-border);
-  border-radius: 18px;
+  border: 0;
+  border-radius: 24px;
   padding: 24px 24px 18px;
   background: var(--chart-paper);
-  box-shadow: 0 12px 32px rgba(65, 45, 36, 0.06);
+  box-shadow: none;
   color: var(--chart-ink);
 }
 
 .chart-card::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 3px;
-  background: linear-gradient(90deg, #a3264f, #f06b4f, #f1b95f);
-  opacity: 0.82;
-  pointer-events: none;
+  content: none;
 }
 
 .chart-card-head {
@@ -2022,7 +2016,7 @@ td {
 }
 
 #gradedWinsTimelineChart {
-  height: 260px;
+  height: 640px;
 }
 
 #sireAchievementStepChart,
