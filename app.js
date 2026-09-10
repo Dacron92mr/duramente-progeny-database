@@ -287,7 +287,7 @@ const LEADING_CATEGORY_CATALOG = [
   },
   {
     category: "first_crop_all",
-    label: "首批产驹综合",
+    label: "初年度种牡马（First Season Sire）",
     source_url: "https://www.jbis.or.jp/ranking/result/?ranking=3&kind=1&division=1&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
   },
   {
@@ -296,8 +296,8 @@ const LEADING_CATEGORY_CATALOG = [
     source_url: "https://www.jbis.or.jp/ranking/result/?ranking=3&kind=1&division=2&racetype1=1&racetype2=1&condition=1&horse=&match=prefix",
   },
 ];
-const ANNUAL_LEADING_CATEGORIES = new Set(["jra_overall", "jra_nar_overall", "two_year_jra", "two_year_all"]);
-const FIRST_CROP_LEADING_CATEGORIES = new Set(["first_crop_all", "first_crop_jra"]);
+const ANNUAL_LEADING_CATEGORIES = new Set(["jra_overall", "jra_nar_overall"]);
+const JUVENILE_LEADING_CATEGORIES = new Set(["two_year_all", "two_year_jra", "first_crop_all"]);
 
 function leadingCategoryLabel(category, fallback = "") {
   return LEADING_CATEGORY_CATALOG.find((item) => item.category === category)?.label || fallback || category;
@@ -1630,8 +1630,8 @@ function analysisTable(columns, rows, options = {}) {
   const shownRows = rows.slice(0, limit);
   const hasMore = shownRows.length > visibleLimit;
   return `
-    <div class="analysis-table-wrap">
-      <table class="analysis-table">
+    <div class="analysis-table-wrap${options.wrapperClass ? ` ${escapeHtml(options.wrapperClass)}` : ""}">
+      <table class="analysis-table${options.tableClass ? ` ${escapeHtml(options.tableClass)}` : ""}">
         <thead>
           <tr>${columns.map((column) => `<th class="${escapeHtml(column.className || "")}">${escapeHtml(column.label)}</th>`).join("")}</tr>
         </thead>
@@ -1684,43 +1684,30 @@ function sectionBlock(title, lead, body, kicker = "") {
   `;
 }
 
-function renderLeadingSourceDetails(rows) {
-  const seen = new Set();
-  const items = (rows || [])
-    .filter((row) => row.source_url)
-    .map((row) => ({
-      year: row.year,
-      category: leadingCategoryLabel(row.category, row.category_label),
-      source_url: row.source_url,
-      retrieved_at: row.retrieved_at,
-    }))
-    .filter((row) => {
-      const key = `${row.year}|${row.category}|${row.source_url}`;
-      if (seen.has(key)) return false;
-      seen.add(key);
-      return true;
-    })
-    .sort((a, b) => Number(a.year) - Number(b.year) || String(a.category).localeCompare(String(b.category), "ja"));
-  if (!items.length) return "";
+function awdDiscrepancyHighlights(rows, limit = 6) {
+  const highlights = [...(rows || [])]
+    .filter((row) => Number.isFinite(Number(row.stamina_gap)))
+    .sort((a, b) => Math.abs(Number(b.stamina_gap)) - Math.abs(Number(a.stamina_gap)))
+    .slice(0, limit);
+  if (!highlights.length) return `<p class="empty-note">暂无可展示的差异样本。</p>`;
   return `
-    <details class="source-details">
-      <summary>数据来源与口径</summary>
-      <div class="analysis-table-wrap source-detail-table">
-        <table class="analysis-table">
-          <thead><tr><th>年份</th><th>分类</th><th>来源</th><th>更新</th></tr></thead>
-          <tbody>
-            ${items.map((row) => `
-              <tr>
-                <td>${escapeHtml(row.year)}</td>
-                <td>${escapeHtml(row.category)}</td>
-                <td><a href="${escapeHtml(row.source_url)}" target="_blank" rel="noreferrer">查看来源</a></td>
-                <td>${escapeHtml(row.retrieved_at || "—")}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    </details>
+    <div class="awd-highlight-grid">
+      ${highlights.map((row, index) => {
+        const gap = Number(row.stamina_gap);
+        const direction = gap >= 0 ? "实际胜距更长" : "实际胜距更短";
+        return `
+          <article class="awd-highlight ${gap >= 0 ? "is-longer" : "is-shorter"}">
+            <div class="awd-highlight-rank">${String(index + 1).padStart(2, "0")}</div>
+            <div class="awd-highlight-copy">
+              <span>${direction}</span>
+              <button type="button" class="link-button" data-open-horse="${escapeHtml(row.horse_id)}">${escapeHtml(row.name)}</button>
+              <small>${formatNumber(row.wins)}胜 · AWD ${formatNumber(row.overall_awd, 0)}m · DI ${formatNumber(row.di, 2)} · CD ${formatNumber(row.cd, 2)}</small>
+            </div>
+            <strong>${gap > 0 ? "+" : ""}${formatNumber(gap, 2)}</strong>
+          </article>
+        `;
+      }).join("")}
+    </div>
   `;
 }
 
@@ -2018,17 +2005,15 @@ function renderGradedWinsTimelineList(rows, mode = "year") {
     groups.get(key).push(row);
   }
   const groupRows = [...groups.entries()].sort((a, b) => mode === "horse" ? b[1].length - a[1].length || a[0].localeCompare(b[0], "ja") : Number(b[0]) - Number(a[0]));
-  const showAll = target.dataset.timelineShowAll === "true";
-  const defaultLimit = mode === "year" ? 2 : 6;
+  const showAll = mode === "year" || target.dataset.timelineShowAll === "true";
+  const defaultLimit = mode === "year" ? groupRows.length : 6;
   const visibleGroups = showAll ? groupRows : groupRows.slice(0, defaultLimit);
-  const toggleText = mode === "year"
-    ? (showAll ? "收起较早年份" : "查看全部年份")
-    : (showAll ? "收起更多胜马" : "查看全部胜马");
+  const toggleText = showAll ? "收起更多胜马" : "查看全部胜马";
   target.innerHTML = `
     <div class="graded-timeline-list">
-      ${visibleGroups.map(([group, events], index) => `
-        <details class="graded-timeline-group" ${mode === "year" && index < 2 ? "open" : ""}>
-          <summary aria-expanded="${mode === "year" && index < 2 ? "true" : "false"}">
+      ${visibleGroups.map(([group, events]) => `
+        <details class="graded-timeline-group" ${mode === "year" ? "open" : ""}>
+          <summary aria-expanded="${mode === "year" ? "true" : "false"}">
             <span>${escapeHtml(group)}</span>
             <em>${formatNumber(events.length)}胜</em>
           </summary>
@@ -2046,7 +2031,7 @@ function renderGradedWinsTimelineList(rows, mode = "year") {
         </details>
       `).join("")}
     </div>
-    ${groupRows.length > defaultLimit ? `
+    ${mode === "horse" && groupRows.length > defaultLimit ? `
       <div class="table-toggle-row">
         <button class="table-toggle" type="button" data-toggle-graded-events aria-expanded="${showAll ? "true" : "false"}">${toggleText}</button>
       </div>
@@ -2063,19 +2048,6 @@ function renderGradedWinsTimelineList(rows, mode = "year") {
     renderGradedWinsTimelineList(rows, mode);
   });
   wireAnalysisFilters(target);
-}
-
-function annualEarningsStatusLabel(row) {
-  if (row.earnings_status === "complete") return "JBIS年度榜";
-  if (row.earnings_status === "partial") return "部分数据";
-  return "—";
-}
-
-function annualEarningsHtml(row) {
-  const value = row.earnings == null ? "—" : money(row.earnings);
-  const status = annualEarningsStatusLabel(row);
-  const statusClass = row.earnings_status === "partial" ? "status-partial" : "status-complete";
-  return `${escapeHtml(value)}${status !== "—" ? ` <span class="mini-status ${statusClass}">${escapeHtml(status)}</span>` : ""}`;
 }
 
 function annualChartTooltip(metric, row) {
@@ -2253,20 +2225,148 @@ function renderAnnualPerformanceCharts(annualPerformance) {
   }
 
   renderAnnualMilestoneTimeline(annualPerformance);
+}
 
-  const tableTarget = document.querySelector("#annualPerformanceTable");
-  if (tableTarget) {
-    tableTarget.innerHTML = analysisTable([
-      { label: "年份", value: (row) => row.year },
-      { label: "出赛", value: (row) => formatNumber(row.starts) },
-      { label: "胜场", value: (row) => `${formatNumber(row.wins)}（JRA ${formatNumber(row.jra_wins)} / NAR ${formatNumber(row.nar_wins)} / 海外 ${formatNumber(row.overseas_wins)}）` },
-      { label: "胜率", value: (row) => formatRate(row.win_rate) },
-      { label: "前三率", value: (row) => formatRate(row.top3_rate) },
-      { label: "重赏", value: (row) => `${formatNumber(row.graded_wins)}（G1 ${formatNumber(row.g1_wins)} / G2 ${formatNumber(row.g2_wins)} / G3 ${formatNumber(row.g3_wins)}）` },
-      { label: "奖金", value: annualEarningsHtml, html: true },
-    ], [...rows].reverse(), { initialLimit: 10 });
-    wireExpandableTables(tableTarget);
+function renderLeadingRankingGroup({
+  allowedCategories,
+  fallbackCategory,
+  categorySelectId,
+  yearSelectId,
+  messageId,
+  rankChartId,
+  topChartId,
+  categories,
+  leadingHistory,
+  leadingTop10,
+}) {
+  const selectedCategory = document.querySelector(`#${categorySelectId}`)?.value || fallbackCategory;
+  const activeCategory = allowedCategories.has(selectedCategory) ? selectedCategory : fallbackCategory;
+  const categoryInfo = (categories.categories || []).find((item) => item.category === activeCategory);
+  const history = (leadingHistory.history || [])
+    .filter((row) => row.category === activeCategory && isLeadingYearVisible(activeCategory, row.year))
+    .sort((a, b) => Number(a.year) - Number(b.year));
+  const availableYears = [...new Set([
+    ...(leadingTop10.rows || [])
+      .filter((row) => row.category === activeCategory)
+      .map((row) => Number(row.year)),
+    ...history.map((row) => Number(row.year)),
+  ])]
+    .filter((year) => !Number.isNaN(year) && isLeadingYearVisible(activeCategory, year))
+    .sort((a, b) => b - a);
+  const rankYears = [...availableYears].sort((a, b) => a - b);
+  const historyByYear = new Map(history.map((row) => [Number(row.year), row]));
+  const yearSelect = document.querySelector(`#${yearSelectId}`);
+  const preferredYear = activeCategory === "jra_overall" && availableYears.includes(2023) ? 2023 : availableYears[0];
+  const previousYear = Number(yearSelect?.value || preferredYear);
+  const selectedYear = availableYears.includes(previousYear) ? previousYear : preferredYear;
+  if (yearSelect) {
+    const nextOptions = availableYears.map((year) => `<option value="${year}" ${year === selectedYear ? "selected" : ""}>${year}</option>`).join("");
+    if (yearSelect.dataset.category !== activeCategory || yearSelect.innerHTML !== nextOptions) {
+      yearSelect.innerHTML = nextOptions;
+      yearSelect.dataset.category = activeCategory;
+    }
+    if (selectedYear) yearSelect.value = String(selectedYear);
   }
+
+  const missing = categoryInfo && categoryInfo.status !== "available";
+  const missingBox = document.querySelector(`#${messageId}`);
+  if (missingBox) {
+    const messages = [];
+    if (missing) messages.push("该分类暂缺可靠公开榜单。");
+    if (availableYears.includes(2026)) messages.push("2026年赛季仍在进行，排名会继续变化。");
+    if (rankYears.length === 1) messages.push("该分类目前只有单年资料。");
+    missingBox.textContent = messages.join(" ");
+  }
+
+  const rankEmptyTitle = missing ? "该分类暂缺公开榜单" : "ドゥラメンテ未进入该分类排行";
+  renderChart(rankChartId, (missing || !rankYears.length) ? { title: { text: rankEmptyTitle, left: "center", top: "middle" } } : {
+    color: [COLORS.duramente],
+    tooltip: {
+      trigger: "axis",
+      formatter: (items) => {
+        const item = items.find((entry) => entry.seriesName === "ドゥラメンテ排名") || items[0];
+        return `${item.axisValue}<br>ドゥラメンテ排名：${item.value == null ? "—" : item.value}`;
+      },
+    },
+    grid: { left: 44, right: 24, top: 68, bottom: 36, containLabel: true },
+    xAxis: { type: "category", name: "年份", data: rankYears },
+    yAxis: { type: "value", name: "排名", inverse: true, min: 1 },
+    series: [{
+      name: "ドゥラメンテ排名",
+      type: "line",
+      smooth: true,
+      symbolSize: 7,
+      connectNulls: false,
+      data: rankYears.map((year) => historyByYear.get(year)?.rank ?? null),
+      markArea: history.some((row) => Number(row.rank) === 1) ? {
+        silent: true,
+        itemStyle: { color: "rgba(216, 155, 43, 0.10)" },
+        data: history.filter((row) => Number(row.rank) === 1).map((row) => ([{ xAxis: String(row.year) }, { xAxis: String(row.year) }])),
+      } : undefined,
+      markPoint: history.some((row) => Number(row.rank) === 1) ? {
+        symbol: "circle",
+        symbolSize: 22,
+        itemStyle: { color: COLORS.gold },
+        label: {
+          show: true,
+          formatter: (params) => `${params.data.year}\n第1名`,
+          position: "top",
+          color: COLORS.gold,
+          fontWeight: 900,
+          lineHeight: 16,
+        },
+        data: history.filter((row) => Number(row.rank) === 1).map((row) => ({ coord: [String(row.year), row.rank], value: row.rank, year: row.year })),
+      } : undefined,
+    }],
+  });
+
+  const topRows = (leadingTop10.rows || []).filter((row) => row.category === activeCategory && Number(row.year) === selectedYear);
+  const durRow = history.find((row) => Number(row.year) === selectedYear);
+  const sortedTopRows = [...topRows]
+    .sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999))
+    .slice(0, 10);
+  const chartRows = durRow && !sortedTopRows.some((row) => row.sire === "ドゥラメンテ")
+    ? [...sortedTopRows, durRow].sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999))
+    : sortedTopRows;
+  const topMetric = chartRows.some((row) => row.earnings != null)
+    ? { key: "earnings", label: "奖金", unit: "万日元" }
+    : chartRows.some((row) => row.wins != null)
+      ? { key: "wins", label: "胜场", unit: "场" }
+      : { key: "runners", label: "出赛马", unit: "匹" };
+  renderChart(topChartId, (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂缺公开榜单" : "该年份暂缺榜单资料", left: "center", top: "middle" } } : {
+    color: [COLORS.muted],
+    tooltip: {
+      trigger: "axis",
+      axisPointer: { type: "shadow" },
+      formatter: (items) => {
+        const row = items[0].data.raw;
+        return [
+          `${row.year} ${leadingCategoryLabel(row.category, row.category_label)}`,
+          `第${row.rank}名 ${escapeHtml(row.sire)}`,
+          `${topMetric.label}：${formatNumber(row[topMetric.key], 1)} ${topMetric.unit}`,
+          `出赛马：${formatNumber(row.runners || 0)}匹`,
+          `胜马：${formatNumber(row.winners || 0)}匹 / 胜场：${formatNumber(row.wins || 0)}场`,
+          `重赏胜马：${formatNumber(row.graded_winners || 0)}`,
+          `代表产驹：${escapeHtml(row.representative || "—")}`,
+        ].join("<br>");
+      },
+    },
+    grid: horizontalGrid(22, 26, 40),
+    xAxis: { type: "value", name: topMetric.unit },
+    yAxis: longCategoryAxis(chartRows.map((row) => `${row.rank}. ${row.sire}`)),
+    series: [{
+      name: topMetric.label,
+      type: "bar",
+      data: chartRows.map((row) => ({
+        value: row[topMetric.key] || 0,
+        raw: row,
+        itemStyle: row.sire === "ドゥラメンテ"
+          ? { color: Number(row.rank) === 1 ? COLORS.gold : COLORS.rose }
+          : { color: COLORS.muted },
+      })),
+      label: safeHorizontalBarLabel((params) => formatNumber(params.value, 1)),
+    }],
+  });
 }
 
 function renderSireCharts(profile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd) {
@@ -2477,7 +2577,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     }
   }
 
-  const category = document.querySelector("#sireLeadingCategory")?.value || "jra_overall";
+  const category = document.querySelector("#sireLeadingAnnualCategory")?.value || "jra_overall";
   const activeCategory = ANNUAL_LEADING_CATEGORIES.has(category) ? category : "jra_overall";
   const categoryInfo = (categories.categories || []).find((item) => item.category === activeCategory);
   const leadingRowsForCategory = (leadingHistory.history || []).filter((row) => (
@@ -2495,7 +2595,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     .sort((a, b) => b - a);
   const rankYears = [...availableYears].sort((a, b) => a - b);
   const historyByYear = new Map(history.map((row) => [Number(row.year), row]));
-  const yearSelect = document.querySelector("#sireTop10Year");
+  const yearSelect = document.querySelector("#sireLeadingAnnualYear");
   const defaultYear = activeCategory === "jra_overall" && availableYears.includes(2023) ? 2023 : availableYears[0];
   const previousYear = Number(yearSelect?.value || defaultYear);
   const selectedYear = availableYears.includes(previousYear) ? previousYear : defaultYear;
@@ -2508,7 +2608,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     if (selectedYear) yearSelect.value = String(selectedYear);
   }
   const missing = categoryInfo && categoryInfo.status !== "available";
-  const missingBox = document.querySelector("#leadingMissingMessage");
+  const missingBox = document.querySelector("#leadingAnnualMessage");
   if (missingBox) {
     const messages = [];
     if (missing) messages.push("该分类暂缺可靠公开榜单。");
@@ -2517,7 +2617,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     missingBox.textContent = messages.join(" ");
   }
   const rankEmptyTitle = missing ? "该分类暂缺公开榜单" : "ドゥラメンテ未进入该分类排行";
-  renderChart("sireLeadingRankChart", (missing || !rankYears.length) ? { title: { text: rankEmptyTitle, left: "center", top: "middle" } } : {
+  renderChart("sireLeadingAnnualRankChart", (missing || !rankYears.length) ? { title: { text: rankEmptyTitle, left: "center", top: "middle" } } : {
     color: [COLORS.duramente],
     tooltip: {
       trigger: "axis",
@@ -2576,7 +2676,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     : chartRows.some((row) => row.wins != null)
       ? { key: "wins", label: "胜场", unit: "场" }
       : { key: "runners", label: "出赛马", unit: "匹" };
-  renderChart("sireTop10Chart", (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂缺公开榜单" : "该年份暂缺榜单资料", left: "center", top: "middle" } } : {
+  renderChart("sireLeadingAnnualTop10Chart", (missing || !chartRows.length) ? { title: { text: missing ? "该分类暂缺公开榜单" : "该年份暂缺榜单资料", left: "center", top: "middle" } } : {
     color: [COLORS.muted],
     tooltip: {
       trigger: "axis",
@@ -2611,6 +2711,18 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
       label: safeHorizontalBarLabel((params) => formatNumber(params.value, 1)),
     }],
   });
+  renderLeadingRankingGroup({
+    allowedCategories: JUVENILE_LEADING_CATEGORIES,
+    fallbackCategory: "two_year_all",
+    categorySelectId: "sireLeadingJuvenileCategory",
+    yearSelectId: "sireLeadingJuvenileYear",
+    messageId: "leadingJuvenileMessage",
+    rankChartId: "sireLeadingJuvenileRankChart",
+    topChartId: "sireLeadingJuvenileTop10Chart",
+    categories,
+    leadingHistory,
+    leadingTop10,
+  });
 }
 
 function activateSireSection(section, { updateHistory = true } = {}) {
@@ -2641,21 +2753,11 @@ async function renderSireAnalysis() {
   ]);
   const categories = normalizeLeadingCategories(rawCategories);
   const profile = sireProfile.summary;
-  const years = [...new Set((leadingHistory.history || [])
-    .filter((row) => Number(row.year) >= 2020 && Number(row.year) <= 2025)
-    .map((row) => Number(row.year)))]
-    .sort((a, b) => b - a);
   els.sireContent.innerHTML = `
     <div class="analysis-title">
       <p class="kicker">SIRE CAREER</p>
       <h1>种牡马生涯</h1>
       <p>从年度成绩、出生世代、配种规模和重赏胜利，观察ドゥラメンテ作为种牡马的整体表现。</p>
-    </div>
-    <div class="metric-grid compact-metrics sire-metrics">
-      ${metricCard("累计总奖金", money(profile.total_earnings), "查看奖金排序", `${window.location.pathname}?sort=earnings_netkeiba`)}
-      ${metricCard("产驹数", formatNumber(profile.foals), "查看全部产驹", window.location.pathname)}
-      ${metricCard("累计胜场", formatNumber(annualPerformance.summary?.total_wins || 0), `JRA ${formatNumber(annualPerformance.summary?.jra_wins || 0)} / NAR ${formatNumber(annualPerformance.summary?.nar_wins || 0)} / 海外 ${formatNumber(annualPerformance.summary?.overseas_wins || 0)}`, `${window.location.pathname}?view=sire&sire=annual`)}
-      ${metricCard("重赏胜马", formatNumber(profile.graded_winners), `G1 ${formatNumber(profile.g1_horses)}`, `${window.location.pathname}?view=sire&sire=graded`)}
     </div>
     <div class="pedigree-section-nav section-card-nav" role="tablist" aria-label="种牡马生涯分类">
       <button type="button" role="tab" data-sire-section="annual"><span>01</span><strong>年度相关</strong><small>胜场与 Leading Sire</small></button>
@@ -2671,11 +2773,7 @@ async function renderSireAnalysis() {
         ${chartBlock("重赏", "G1／G2／G3", "annualPerformance-graded")}
         ${chartBlock("奖金", "年度奖金（万日元）", "annualPerformance-earnings")}
       </div>
-      <article class="chart-card table-card">
-        <div class="chart-card-head"><h3>年度明细</h3></div>
-        <div id="annualPerformanceTable"></div>
-      </article>
-      <div class="milestone-grid">
+      <div class="milestone-grid annual-milestone-grid">
         <article class="chart-card milestone-timeline-card milestone-compact-card">
           <div class="chart-card-head"><h3>JRA 累计胜场</h3><p>每100胜的代表节点。</p></div>
           <div id="jraMilestoneTimeline"></div>
@@ -2684,39 +2782,41 @@ async function renderSireAnalysis() {
           <div class="chart-card-head"><h3>NAR 累计胜场</h3><p>每100胜的代表节点。</p></div>
           <div id="narMilestoneTimeline"></div>
         </article>
-      </div>
-      <details class="analysis-block milestone-total-details">
-        <summary>查看总累计胜场（含海外）</summary>
-        <article class="chart-card milestone-timeline-card">
+        <article class="chart-card milestone-timeline-card milestone-compact-card">
           <div class="chart-card-head"><h3>全部累计胜场</h3><p>JRA、NAR及海外合计，每100胜的代表节点。</p></div>
           <div id="cumulativeMilestoneTimeline"></div>
         </article>
-      </details>`
+      </div>`
     , "ANNUAL PERFORMANCE")}
     ${sectionBlock("年度种牡马排名", "查看ドゥラメンテ在不同榜单中的年度排名，并与同年头部种牡马比较。",
-      `<div class="analysis-controls">
-        <label><span>分类</span><select id="sireLeadingCategory">
+      `<article class="leading-ranking-group">
+        <div class="chart-card-head"><h3>年度排名</h3><p>在年度中央与年度综合之间切换。</p></div>
+        <div class="analysis-controls">
+        <label><span>分类</span><select id="sireLeadingAnnualCategory">
           ${(categories.categories || []).filter((row) => ANNUAL_LEADING_CATEGORIES.has(row.category)).map((row) => `<option value="${escapeHtml(row.category)}">${escapeHtml(row.label)}${row.status === "available" ? "" : "（暂无）"}</option>`).join("")}
         </select></label>
-        <label><span>Top 10 年份</span><select id="sireTop10Year">
-          ${years.map((year) => `<option value="${year}" ${year === 2023 ? "selected" : ""}>${year}</option>`).join("")}
-        </select></label>
-      </div>
-      <p class="source-note" id="leadingMissingMessage"></p>
-      <div class="chart-grid">
-        ${chartBlock("年度排名", "排名数字越小表示位置越高。", "sireLeadingRankChart")}
-        ${chartBlock("同年 Top 10", "比较同一分类中的头部种牡马。", "sireTop10Chart")}
-      </div>
-      ${analysisTable([
-        { label: "年份", value: (row) => row.year },
-        { label: "分类", value: (row) => leadingCategoryLabel(row.category, row.category_label) },
-        { label: "排名", value: (row) => row.rank },
-        { label: "种牡马", value: (row) => row.sire },
-        { label: "奖金", value: (row) => money(row.earnings) },
-        { label: "榜首", value: (row) => row.leader_sire || "—" },
-        { label: "距榜首差距", value: (row) => row.earnings_gap_to_leader == null ? "—" : money(row.earnings_gap_to_leader) },
-      ], (leadingHistory.history || []), { initialLimit: 8 })}
-      ${renderLeadingSourceDetails(leadingHistory.history || [])}`
+        <label><span>Top 10 年份</span><select id="sireLeadingAnnualYear"></select></label>
+        </div>
+        <p class="source-note" id="leadingAnnualMessage"></p>
+        <div class="chart-grid">
+          ${chartBlock("年度名次走势", "排名数字越小表示位置越高。", "sireLeadingAnnualRankChart")}
+          ${chartBlock("同年 Top 10", "比较同一分类中的头部种牡马。", "sireLeadingAnnualTop10Chart")}
+        </div>
+      </article>
+      <article class="leading-ranking-group">
+        <div class="chart-card-head"><h3>两岁马与初年度排名</h3><p>两岁马综合、两岁马中央及 First Season Sire 独立展示。</p></div>
+        <div class="analysis-controls">
+          <label><span>分类</span><select id="sireLeadingJuvenileCategory">
+            ${(categories.categories || []).filter((row) => JUVENILE_LEADING_CATEGORIES.has(row.category)).map((row) => `<option value="${escapeHtml(row.category)}">${escapeHtml(row.label)}${row.status === "available" ? "" : "（暂无）"}</option>`).join("")}
+          </select></label>
+          <label><span>Top 10 年份</span><select id="sireLeadingJuvenileYear"></select></label>
+        </div>
+        <p class="source-note" id="leadingJuvenileMessage"></p>
+        <div class="chart-grid">
+          ${chartBlock("年度名次走势", "排名数字越小表示位置越高。", "sireLeadingJuvenileRankChart")}
+          ${chartBlock("同年 Top 10", "比较同一分类中的头部种牡马。", "sireLeadingJuvenileTop10Chart")}
+        </div>
+      </article>`
     , "LEADING SIRE")}
     </div>
     <div class="analysis-subpanel" data-sire-panel="crop">
@@ -2737,21 +2837,16 @@ async function renderSireAnalysis() {
       </div>`
     , "CROP PERFORMANCE")}
     ${sectionBlock("平均胜距（AWD）", "AWD 来自实际获胜距离；DI 与 CD 描述血统中的速度与耐力结构。", `
-      <div class="metric-grid compact-metrics awd-metrics">
-        ${metricCard("Overall AWD", `${formatNumber(awd.summary?.overall_awd, 0)} m`, `${formatNumber(awd.summary?.overall_wins)} 场胜利`)}
-        ${metricCard("Turf AWD", `${formatNumber(awd.summary?.turf_awd, 0)} m`, `${formatNumber(awd.summary?.turf_wins)} 场胜利`)}
-        ${metricCard("Dirt AWD", `${formatNumber(awd.summary?.dirt_awd, 0)} m`, `${formatNumber(awd.summary?.dirt_wins)} 场胜利`)}
+      <div class="awd-summary-band" aria-label="平均胜距概览">
+        <div><span>OVERALL</span><strong>${formatNumber(awd.summary?.overall_awd, 0)} m</strong><small>${formatNumber(awd.summary?.overall_wins)} 场胜利</small></div>
+        <div><span>TURF</span><strong>${formatNumber(awd.summary?.turf_awd, 0)} m</strong><small>${formatNumber(awd.summary?.turf_wins)} 场胜利</small></div>
+        <div><span>DIRT</span><strong>${formatNumber(awd.summary?.dirt_awd, 0)} m</strong><small>${formatNumber(awd.summary?.dirt_wins)} 场胜利</small></div>
       </div>
-      <h3>实际表现与血统参数差异</h3>
-      <p class="section-inline-note">以 AWD 与 DI／CD 的耐力倾向百分位比较，正值表示实际胜距比血统参数所示更长。</p>
-      ${analysisTable([
-        { label: "马名", className: "name-column", value: (row) => `<button type="button" class="link-button" data-open-horse="${row.horse_id}">${escapeHtml(row.name)}</button>`, html: true },
-        { label: "胜场", value: (row) => formatNumber(row.wins) },
-        { label: "Overall AWD", value: (row) => `${formatNumber(row.overall_awd, 0)} m` },
-        { label: "DI", value: (row) => formatNumber(row.di, 2) },
-        { label: "CD", value: (row) => formatNumber(row.cd, 2) },
-        { label: "倾向差", value: (row) => `${row.stamina_gap > 0 ? "+" : ""}${formatNumber(row.stamina_gap, 2)}` },
-      ], awd.discrepancies || [], { initialLimit: 10 })}
+      <div class="awd-highlight-head">
+        <div><p class="kicker">WATCHLIST</p><h3>实际表现与血统参数差异最大</h3></div>
+        <p>从现有样本中按倾向差绝对值选出前6匹；正值表示实际胜距更长，负值表示更短。</p>
+      </div>
+      ${awdDiscrepancyHighlights(awd.discrepancies || [])}
     `, "AVERAGE WINNING DISTANCE")}
     </div>
     <div class="analysis-subpanel" data-sire-panel="market">
@@ -2797,7 +2892,7 @@ async function renderSireAnalysis() {
         { label: "芝地平均胜距", value: (row) => row.turf_awd ? `${formatNumber(row.turf_awd)} m` : "—" },
         { label: "泥地平均胜距", value: (row) => row.dirt_awd ? `${formatNumber(row.dirt_awd)} m` : "—" },
         { label: "代表马", className: "name-column", value: representativeCell, html: true },
-      ], sireProfile.crops, { initialLimit: 10 })
+      ], sireProfile.crops, { initialLimit: 10, wrapperClass: "sire-crop-table-wrap", tableClass: "sire-crop-table" })
     , "CROP DETAILS")}
     </div>
   `;
@@ -2805,7 +2900,7 @@ async function renderSireAnalysis() {
   wireExpandableTables(els.sireContent);
   sireRuntime = [sireProfile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd];
   const rerender = () => renderSireCharts(...sireRuntime);
-  for (const id of ["sireDevelopmentMetric", "sireLeadingCategory", "sireTop10Year"]) {
+  for (const id of ["sireDevelopmentMetric", "sireLeadingAnnualCategory", "sireLeadingAnnualYear", "sireLeadingJuvenileCategory", "sireLeadingJuvenileYear"]) {
     els.sireContent.querySelector(`#${id}`)?.addEventListener("change", rerender);
   }
   for (const button of els.sireContent.querySelectorAll("[data-sire-section]")) button.addEventListener("click", () => activateSireSection(button.dataset.sireSection));
