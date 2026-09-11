@@ -2104,11 +2104,15 @@ td {
 }
 
 .sire-crop-table .representative-horse-item {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: inline-flex;
   align-items: start;
-  width: 100%;
+  width: fit-content;
+  max-width: 100%;
   border-radius: 8px;
+}
+
+.sire-crop-table .representative-horse-name {
+  min-width: 0;
 }
 
 .sire-crop-table .grade-pill {
@@ -2886,6 +2890,11 @@ td {
   margin-bottom: 12px;
 }
 
+.leading-ranking-controls {
+  justify-content: flex-start;
+  margin: 0 0 12px;
+}
+
 .inline-controls {
   margin: 0;
   flex: 0 0 auto;
@@ -3635,7 +3644,94 @@ details.analysis-block summary {
 }
 
 .production-section-nav {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+#breederMainChart,
+#breederGradedChart {
+  height: 500px;
+}
+
+.club-comparison-card .chart-card-head {
+  gap: 18px;
+}
+
+.club-compare-controls {
+  align-items: flex-end;
+}
+
+.club-comparison-summary {
+  display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin: 4px 0 8px;
+}
+
+.club-comparison-summary article {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 5px 10px;
+  border-radius: 10px;
+  padding: 12px 14px;
+  background: var(--panel-soft);
+}
+
+.club-comparison-summary strong {
+  min-width: 0;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+
+.club-comparison-summary span {
+  color: var(--accent);
+  font-weight: 900;
+}
+
+.club-comparison-summary small {
+  grid-column: 1 / -1;
+  color: var(--muted);
+  font-weight: 800;
+}
+
+#clubComparisonChart {
+  height: 420px;
+}
+
+.club-sankey-scroll {
+  max-width: 100%;
+}
+
+.club-sankey-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding: 14px 0 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.club-sankey-legend strong {
+  color: var(--ink);
+}
+
+.club-sankey-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.club-sankey-legend i {
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  background: var(--sankey-color);
+}
+
+.club-sankey-legend b {
+  color: var(--ink);
+  font-weight: 900;
 }
 
 .section-inline-note {
@@ -3846,6 +3942,28 @@ a.representative-horse-item:hover .representative-horse-name {
 
   .production-section-nav {
     display: flex;
+  }
+
+  .club-compare-controls,
+  .club-compare-controls label,
+  .club-compare-controls select {
+    width: 100%;
+  }
+
+  .club-comparison-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .club-sankey-scroll {
+    overscroll-behavior-inline: contain;
+  }
+
+  .club-sankey-scroll .chart-card {
+    overflow-x: auto;
+  }
+
+  #clubBreederSankeyChart {
+    min-width: 820px;
   }
 
   .nicking-highlight-grid {
