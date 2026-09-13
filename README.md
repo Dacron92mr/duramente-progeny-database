@@ -77,3 +77,14 @@ python3 scripts/format_json.py data/analytics
 ## 注意
 
 资料仅供参考与交流，不建议用于商业用途或作为投注依据。
+
+## 图表派生数据
+
+奖金集中度和获胜距离分布从现有马匹奖金及草地、泥地获胜记录生成，不修改原始记录。更新原始资料后执行：
+
+```sh
+python3 scripts/build_chart_insights.py
+python3 scripts/verify_chart_insights.py
+```
+
+同龄累计胜场仅纳入数据最后更新年份之前已完整经历所选年龄年度的世代；每100匹的分母为该世代全部收录产驹。桑基图按“生产牧场 → 登记俱乐部马主”展示来源关系，不推断直接交易。

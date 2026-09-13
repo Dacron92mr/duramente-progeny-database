@@ -3981,3 +3981,48 @@ a.representative-horse-item:hover .representative-horse-name {
     padding: 12px;
   }
 }
+
+/* Chart readability and source-flow layout. */
+.topbar { flex-wrap: wrap; align-items: center; gap: 14px; }
+.topbar > :first-child { flex-shrink: 0; }
+.topbar h1 { font-size: clamp(25px, 3vw, 40px); line-height: 1.18; }
+.topbar-actions { flex: 1 1 660px; justify-content: space-between; }
+.data-context { margin-top: 14px !important; padding: 10px 12px; border-left: 3px solid var(--accent); font-size: 12px !important; line-height: 1.7; color: var(--muted); }
+.analysis-loading { padding: 38px 20px; color: var(--muted); }
+.sankey-viewport { overflow-x: auto; overscroll-behavior-inline: contain; }
+#clubBreederSankeyChart { min-width: 760px; }
+.sankey-details { margin-top: 16px; }
+.sankey-details summary { cursor: pointer; padding: 12px; color: var(--accent); }
+.sankey-details table { width: 100%; }
+.sankey-details td { white-space: normal; overflow-wrap: anywhere; }
+.sankey-viewport:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+#sireAchievementStepChart { height: 400px; }
+#bmsSireEfficiencyChart { height: 680px; }
+@media (max-width: 640px) {
+  .topbar > :first-child { flex-shrink: 1; min-width: 0; }
+  .topbar-actions { flex-basis: 100%; min-width: 0; }
+  .topbar h1 { font-size: clamp(22px, 6vw, 28px); }
+  .main-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); width: 100%; overflow: visible; gap: 6px; }
+  .main-nav button { width: 100%; min-width: 0; padding: 9px 5px; font-size: 12px; }
+  .theme-picker select { width: auto; min-width: 130px; }
+  .theme-picker { justify-content: flex-end; }
+  .section-card-nav, .production-section-nav { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; margin: 0 0 18px; padding: 6px; overflow: visible; }
+  .section-card-nav button, .production-section-nav button { width: 100%; min-width: 0; min-height: 56px; padding: 8px; }
+  .chart-card { padding: 14px 8px; min-width: 0; }
+  .chart-canvas { min-width: 0; }
+  .club-sankey-scroll .chart-card { overflow: visible; }
+  #clubBreederSankeyChart { min-width: 760px; }
+  .sankey-details .table-wrap { overflow: auto; }
+  .sankey-details th, .sankey-details td { font-size: 12px; padding: 10px 6px; }
+  .chart-card-head.with-controls { flex-direction: column; }
+  .analysis-controls select { min-height: 44px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chart-canvas { animation: none !important; transition: none !important; }
+}
+@media (max-width: 640px) {
+  .chart-card-head .analysis-controls, .chart-card-head .analysis-controls label { width: 100%; min-width: 0; }
+  .chart-card-head .analysis-controls label { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chart-card-head .analysis-controls select { width: 100%; min-width: 0; max-width: 100%; }
+  .club-sankey-scroll .chart-card { padding-right: 0; padding-left: 0; }
+}

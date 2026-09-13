@@ -1,0 +1,196 @@
+{
+  "concentrations": [
+    {
+      "year": 2018,
+      "total": 416998.0,
+      "foals": 189,
+      "values": [
+        106875.1,
+        41536.7,
+        268586.2
+      ]
+    },
+    {
+      "year": 2019,
+      "total": 432565.7,
+      "foals": 202,
+      "values": [
+        84098.1,
+        41792.5,
+        306675.1
+      ]
+    },
+    {
+      "year": 2020,
+      "total": 411098.3,
+      "foals": 122,
+      "values": [
+        74444.0,
+        86383.8,
+        250270.5
+      ]
+    },
+    {
+      "year": 2021,
+      "total": 147627.9,
+      "foals": 118,
+      "values": [
+        11773.7,
+        19415.2,
+        116439.0
+      ]
+    },
+    {
+      "year": 2022,
+      "total": 231721.2,
+      "foals": 95,
+      "values": [
+        75799.0,
+        44589.9,
+        111332.3
+      ]
+    }
+  ],
+  "distances": [
+    {
+      "distance": 800,
+      "turf": 0,
+      "dirt": 6
+    },
+    {
+      "distance": 820,
+      "turf": 0,
+      "dirt": 1
+    },
+    {
+      "distance": 850,
+      "turf": 0,
+      "dirt": 4
+    },
+    {
+      "distance": 900,
+      "turf": 0,
+      "dirt": 7
+    },
+    {
+      "distance": 920,
+      "turf": 0,
+      "dirt": 5
+    },
+    {
+      "distance": 1000,
+      "turf": 1,
+      "dirt": 27
+    },
+    {
+      "distance": 1150,
+      "turf": 0,
+      "dirt": 2
+    },
+    {
+      "distance": 1200,
+      "turf": 14,
+      "dirt": 101
+    },
+    {
+      "distance": 1230,
+      "turf": 0,
+      "dirt": 3
+    },
+    {
+      "distance": 1300,
+      "turf": 0,
+      "dirt": 60
+    },
+    {
+      "distance": 1400,
+      "turf": 24,
+      "dirt": 266
+    },
+    {
+      "distance": 1500,
+      "turf": 2,
+      "dirt": 104
+    },
+    {
+      "distance": 1600,
+      "turf": 59,
+      "dirt": 93
+    },
+    {
+      "distance": 1650,
+      "turf": 0,
+      "dirt": 1
+    },
+    {
+      "distance": 1700,
+      "turf": 2,
+      "dirt": 53
+    },
+    {
+      "distance": 1750,
+      "turf": 0,
+      "dirt": 2
+    },
+    {
+      "distance": 1800,
+      "turf": 110,
+      "dirt": 95
+    },
+    {
+      "distance": 1870,
+      "turf": 0,
+      "dirt": 2
+    },
+    {
+      "distance": 1900,
+      "turf": 0,
+      "dirt": 4
+    },
+    {
+      "distance": 2000,
+      "turf": 92,
+      "dirt": 11
+    },
+    {
+      "distance": 2100,
+      "turf": 0,
+      "dirt": 5
+    },
+    {
+      "distance": 2200,
+      "turf": 23,
+      "dirt": 0
+    },
+    {
+      "distance": 2300,
+      "turf": 2,
+      "dirt": 0
+    },
+    {
+      "distance": 2400,
+      "turf": 25,
+      "dirt": 3
+    },
+    {
+      "distance": 2500,
+      "turf": 6,
+      "dirt": 1
+    },
+    {
+      "distance": 2600,
+      "turf": 14,
+      "dirt": 0
+    },
+    {
+      "distance": 3000,
+      "turf": 3,
+      "dirt": 0
+    },
+    {
+      "distance": 3200,
+      "turf": 1,
+      "dirt": 0
+    }
+  ]
+}
