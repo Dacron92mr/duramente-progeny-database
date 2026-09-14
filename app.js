@@ -76,7 +76,7 @@ function careerSummaryText(value) {
   return String(value || "").replaceAll("戦", "战").replaceAll("勝", "胜");
 }
 const FILTER_KEYS = Object.keys(FILTER_META);
-const VALID_VIEWS = new Set(["progeny", "sire", "pedigree", "production", "racecourse", "method"]);
+const VALID_VIEWS = new Set(["progeny", "sire", "pedigree", "production", "racecourse"]);
 const VALID_PEDIGREE_SECTIONS = new Set(["bms", "family", "inbreeding", "dosage"]);
 const VALID_SIRE_SECTIONS = new Set(["annual", "crop", "graded", "market"]);
 const VALID_PRODUCTION_SECTIONS = new Set(["farm", "broodmare", "club"]);
@@ -126,7 +126,6 @@ const els = {
   pedigreeContent: document.querySelector("#pedigreeContent"),
   productionContent: document.querySelector("#productionContent"),
   racecourseContent: document.querySelector("#racecourseContent"),
-  methodContent: document.querySelector("#methodContent"),
   themeMode: document.querySelector("#themeMode"),
 };
 
@@ -172,33 +171,18 @@ let chartResizeBound = false;
 let pedigreeRuntime = null;
 let sireRuntime = null;
 let productionRuntime = null;
+// One shared family: burgundy, dusty rose, slate, sage and restrained gold.
 const COLORS = {
-  duramente: "#A92F5D",
-  primary: "#A92F5D",
-  secondary: "#D85C67",
-  plum: "#6F4768",
-  rose: "#D85C67",
-  coral: "#E56B45",
-  gold: "#F0B44D",
-  jra: "#9F2D55",
-  nar: "#E56B45",
-  overseas: "#F2B84B",
-  raceLine: "#2f6fa7",
-  average: "#c95d77",
-  blue: "#6d335f",
-  teal: "#4F9F8D",
-  green: "#3F8F68",
-  muted: "#D8D0C6",
-  soft: "#f6efe9",
-  gray: "#d8d5cf",
-  negative: "#76657B",
+  duramente: "#a34d70", primary: "#a34d70", secondary: "#c98c9f",
+  plum: "#79667e", rose: "#c98c9f", coral: "#b98983", gold: "#bca06b",
+  jra: "#a34d70", nar: "#849b94", overseas: "#bca06b",
+  raceLine: "#8497b0", average: "#9c939b", blue: "#8497b0",
+  teal: "#849b94", green: "#849b94", muted: "#b4aab0", soft: "#f1e9ed",
+  gray: "#b4aab0", negative: "#79667e",
 };
 const CROP_COLORS = {
-  "2018": "#542544",
-  "2019": "#9b315d",
-  "2020": "#d94b68",
-  "2021": "#e96c4c",
-  "2022": "#f0b45f",
+  "2018": "#79667e", "2019": "#a34d70", "2020": "#c98c9f",
+  "2021": "#849b94", "2022": "#bca06b",
 };
 
 const RACECOURSE_COORDINATES = {
@@ -685,6 +669,7 @@ function resolvedTheme(preference) {
 function refreshChartTheme() {
   const { text, muted, line, surface } = chartThemeColors();
   for (const chart of chartRegistry.values()) {
+    chart.resize();
     const option = chart.getOption();
     const axisTheme = (axes = []) => axes.map(() => ({
       axisLabel: { color: muted },
@@ -720,7 +705,6 @@ function refreshChartTheme() {
         markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
     });
-    chart.resize();
   }
 }
 
@@ -1071,6 +1055,67 @@ const CHART_DRILLDOWNS = {
   "clubWinCompare-セン": (params) => ({ year: params.name, sex: "セン" }),
 };
 
+let chartDialog;
+let chartDialogInstance;
+let chartDialogTrigger;
+const alignChartHeaders = debounce(() => {
+  for (const grid of document.querySelectorAll(".chart-grid, .mini-chart-grid, .club-analysis-grid")) {
+    const cards = [...grid.children].filter(card => card.matches(".chart-card") && card.offsetWidth);
+    cards.forEach(card => { const head = card.querySelector(":scope > .chart-card-head"); if (head) head.style.minHeight = ""; });
+    const rows = new Map();
+    for (const card of cards) {
+      const top = Math.round(card.getBoundingClientRect().top);
+      if (!rows.has(top)) rows.set(top, []);
+      rows.get(top).push(card.querySelector(":scope > .chart-card-head"));
+    }
+    for (const heads of rows.values()) {
+      const valid = heads.filter(Boolean);
+      if (valid.length < 2) continue;
+      const height = Math.max(...valid.map(head => head.getBoundingClientRect().height));
+      valid.forEach(head => { head.style.minHeight = `${height}px`; });
+    }
+  }
+}, 80);
+
+function showChartDialog(id, trigger) {
+  const source = chartRegistry.get(id);
+  if (!source) return;
+  if (!chartDialog) {
+    chartDialog = document.createElement("dialog");
+    chartDialog.className = "chart-dialog";
+    chartDialog.setAttribute("aria-labelledby", "chartDialogTitle");
+    chartDialog.innerHTML = '<header><h2 id="chartDialogTitle"></h2><button type="button" class="chart-dialog-close" aria-label="关闭放大图表">关闭 ×</button></header><div class="chart-dialog-scroll"><div class="chart-dialog-canvas"></div></div><p>点选图例可隐藏或显示系列，点选数据查看数值。</p>';
+    document.body.append(chartDialog);
+    chartDialog.querySelector("button").addEventListener("click", () => chartDialog.close());
+    chartDialog.addEventListener("close", () => { chartDialogInstance?.dispose(); chartDialogInstance = null; chartDialogTrigger?.focus(); });
+  }
+  chartDialogTrigger = trigger;
+  chartDialog.querySelector("h2").textContent = document.getElementById(id).closest(".chart-card")?.querySelector("h3")?.textContent || "图表";
+  chartDialog.showModal();
+  const option = source.getOption();
+  const canvas = chartDialog.querySelector(".chart-dialog-canvas");
+  const isSankey = option.series?.some(series => series.type === "sankey");
+  canvas.style.minWidth = isSankey ? "760px" : "0";
+  canvas.style.height = isSankey ? `${source.getHeight()}px` : "";
+  chartDialog.querySelector("p").textContent = isSankey ? "左右滑动查看完整流向，点选连线查看匹数。" : "点选图例可隐藏或显示系列，点选数据查看数值。";
+  chartDialogInstance = echarts.init(canvas);
+  chartDialogInstance.setOption({ ...option, animation: false, legend: (option.legend || []).map(legend => ({ ...legend, textStyle: { ...legend.textStyle, color: chartThemeColors().text } })) });
+}
+
+function addChartActions(el, id) {
+  const head = el.closest(".chart-card")?.querySelector(".chart-card-head");
+  if (!head || head.querySelector(".chart-actions")) return;
+  const actions = document.createElement("div");
+  actions.className = "chart-actions";
+  const button = document.createElement("button");
+  button.type = "button";
+  button.textContent = "放大 ↗";
+  button.setAttribute("aria-label", `放大${head.querySelector("h3")?.textContent || "图表"}`);
+  button.addEventListener("click", () => showChartDialog(id, button));
+  actions.append(button);
+  head.append(actions);
+}
+
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
@@ -1125,6 +1170,7 @@ function renderChart(id, option) {
   const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
   const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
   const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
+  const hasLine = (normalizedOption.series || []).some(item => item.type === "line");
   const normalizedSeries = (normalizedOption.series || []).map((item) => {
     const emphasis = { focus: "series", ...(item.emphasis || {}) };
     if (item.type === "bar") {
@@ -1139,6 +1185,7 @@ function renderChart(id, option) {
           borderRadius: item.stack ? 0 : defaultRadius,
           ...(item.itemStyle || {}),
         },
+        label: hasLine ? { ...(item.label || {}), show: false } : item.label,
         labelLayout: { hideOverlap: true, ...(item.labelLayout || {}) },
         emphasis,
       };
@@ -1149,6 +1196,9 @@ function renderChart(id, option) {
         symbolSize: 7,
         ...item,
         lineStyle: { width: 2.5, cap: "round", join: "round", ...(item.lineStyle || {}) },
+        label: { ...(item.label || {}), show: false },
+        endLabel: { show: false },
+        labelLayout: { hideOverlap: true },
         emphasis,
       };
     }
@@ -1198,6 +1248,8 @@ function renderChart(id, option) {
   };
   chart.setOption({ baseOption, media: [{ query: { maxWidth: 480 }, option: compactOption() }, { option: baseOption }] });
   chartRegistry.set(id, chart);
+  addChartActions(el, id);
+  alignChartHeaders();
   refreshChartTheme();
   const drilldown = CHART_DRILLDOWNS[id];
   if (drilldown) {
@@ -1217,6 +1269,9 @@ function renderChart(id, option) {
   if (!chartResizeBound) {
     window.addEventListener("resize", () => {
       for (const item of chartRegistry.values()) item.resize();
+      refreshChartTheme();
+      chartDialogInstance?.resize();
+      alignChartHeaders();
     });
     chartResizeBound = true;
   }
@@ -1520,7 +1575,7 @@ async function renderRacecourseMap(scope, rows, allRows) {
       text: ["高胜率", "低胜率"],
       textGap: 8,
       textStyle: { color: "#675c56", fontWeight: 700, fontSize: 11 },
-      inRange: { color: ["#FDE7A9", "#F7C65D", "#F39A3D", "#E85D3F", "#A92F4F"] },
+      inRange: { color: [COLORS.soft, COLORS.rose, COLORS.duramente, COLORS.plum] },
       calculable: false,
     },
     geo: mapGeoComponent("日本", {
@@ -2012,7 +2067,7 @@ function renderCropAchievementChart(crops) {
     grid: { left: 8, right: 12, top: 20, bottom: 76, containLabel: true },
     xAxis: { type: "category", data: crops.map(row => row.label), axisLabel: { interval: 0 } },
     yAxis: { type: "category", data: stages.map(stage => stage.label), inverse: true },
-    visualMap: { min: 0, max: 100, orient: "horizontal", left: "center", bottom: 0, itemWidth: 12, itemHeight: 130, inRange: { color: ["#f4e4ed", "#c77099", "#7c264d"] }, calculable: false },
+    visualMap: { min: 0, max: 100, orient: "horizontal", left: "center", bottom: 0, itemWidth: 12, itemHeight: 130, inRange: { color: [COLORS.soft, COLORS.rose, COLORS.duramente] }, calculable: false },
     series: [{ type: "heatmap", label: { show: true, fontSize: 10, formatter: ({data}) => `${data.value[2]}%` }, data: crops.flatMap((row, y) => stages.map((stage, x) => ({ value: [y, x, row.foals ? Number((stage.count(row)/row.foals*100).toFixed(1)) : 0], raw: row, stage, count: stage.count(row), label: { color: row.foals && stage.count(row) / row.foals >= 0.65 ? "#ffffff" : "#3b2532" } }))) }],
   });
 }
@@ -2020,8 +2075,8 @@ function renderCropAchievementChart(crops) {
 function renderCropAwdDumbbellChart(awd) {
   const rows = awd.by_crop || [];
   const overallColor = COLORS.duramente;
-  const turfColor = "#4f8a62";
-  const dirtColor = "#9a6b45";
+  const turfColor = COLORS.teal;
+  const dirtColor = COLORS.gold;
   renderChart("sireAwdDumbbellChart", {
     color: [overallColor, turfColor, dirtColor],
     tooltip: {
@@ -3241,21 +3296,10 @@ function paddedAxisMax(value) {
 const PEDIGREE_SEXES = ["牡", "牝", "セン"];
 const BMS_PRIMARY_LINES = ["Northern Dancer", "Sunday Silence", "Native Dancer", "Nasrullah", "Turn-to", "Other"];
 const BMS_CATEGORY_COLORS = {
-  "Northern Dancer": "#8d59ad",
-  "Sunday Silence": "#42a9b8",
-  "Native Dancer": "#e7a34d",
-  Nasrullah: "#d85c9e",
-  "Turn-to": "#78b95f",
-  Other: "#8b8580",
+  "Northern Dancer": COLORS.plum, "Sunday Silence": COLORS.duramente,
+  "Native Dancer": COLORS.gold, Nasrullah: COLORS.rose, "Turn-to": COLORS.teal, Other: COLORS.gray,
 };
-const BMS_CATEGORY_LIGHT_COLORS = {
-  "Northern Dancer": "#d9c2e7",
-  "Sunday Silence": "#b9e1e6",
-  "Native Dancer": "#f6d7ad",
-  Nasrullah: "#f0bfd9",
-  "Turn-to": "#cbe4bf",
-  Other: "#d8d3cf",
-};
+const BMS_CATEGORY_LIGHT_COLORS = Object.fromEntries(Object.keys(BMS_CATEGORY_COLORS).map(key => [key, COLORS.soft]));
 const FEMALE_FAMILY_COLORS = [COLORS.duramente, COLORS.rose, COLORS.plum, COLORS.coral, COLORS.gold, COLORS.blue, COLORS.green, COLORS.teal];
 
 function stablePaletteColor(label, palette) {
@@ -3917,7 +3961,7 @@ function renderPedigreeLineageTab(pedigree, bmsLines) {
 }
 
 const ACHIEVEMENT_STAGES = ["未出道", "未胜利", "1胜", "2胜", "3胜＋", "OP／L", "重赏"];
-const ACHIEVEMENT_STAGE_COLORS = ["#d8d5cf", "#a9a1a4", "#7b8fa8", "#4f9f8d", "#f0b44d", "#e56b45", "#a92f5d"];
+const ACHIEVEMENT_STAGE_COLORS = [COLORS.gray, COLORS.average, COLORS.blue, COLORS.teal, COLORS.gold, COLORS.rose, COLORS.duramente];
 
 function horseAchievementStage(horse) {
   const summary = String(horse.career_summary || "");
@@ -4954,40 +4998,6 @@ async function renderRacecourseAnalysis() {
   els.racecourseContent.dataset.loaded = "true";
 }
 
-async function renderMethodology() {
-  if (els.methodContent.dataset.loaded) return;
-  const method = await getAnalytics("methodology");
-  const methodEntries = Object.entries(method).filter(([key]) => key !== "last_updated" && key !== "race_prize_quality");
-  const prize = method.race_prize_quality || {};
-  els.methodContent.innerHTML = `
-    <div class="analysis-title">
-      <p class="kicker">DATA &amp; METHODS</p>
-      <h1>数据与方法</h1>
-      <p>说明收录范围、统计口径和当前数据仍需留意的地方。</p>
-    </div>
-    <section class="analysis-block">
-      <div class="method-list">
-        ${methodEntries.map(([key, value]) => `
-          <article>
-            <strong>${escapeHtml(methodLabel(key))}</strong>
-            <p>${escapeHtml(value)}</p>
-          </article>
-        `).join("")}
-      </div>
-      <div class="quality-panel">
-        <h2>单场奖金资料</h2>
-        <div class="metric-grid compact-metrics">
-          ${metricCard("已收录赛果", formatNumber(prize.race_rows), "比赛记录")}
-          ${metricCard("含奖金记录", formatNumber(prize.nonzero_prize_rows), `占比 ${formatRate(prize.coverage_rate)}`)}
-          ${metricCard("可核对奖金", money(prize.sum_raw_prize), "暂不展示图表")}
-        </div>
-        <p>${escapeHtml(prize.decision || "")}</p>
-      </div>
-      <p class="method-updated">最后更新：${escapeHtml(method.last_updated)}</p>
-    </section>
-  `;
-  els.methodContent.dataset.loaded = "true";
-}
 
 const CLUB_OWNER_NAMES = [
   "インゼルレーシング", "ウイン", "キャロットファーム", "京都ホースレーシング", "グリーンファーム",
@@ -5305,14 +5315,6 @@ async function showView(name, { updateHistory = true } = {}) {
     activateProductionSection(state.production, { updateHistory: false });
   }
   if (name === "racecourse") await renderRacecourseAnalysis();
-  if (name === "method") await renderMethodology();
-  if (content && ["sire", "pedigree", "production", "racecourse"].includes(name) && !content.querySelector(".data-context")) {
-    const date = staticData.analytics.get("methodology")?.last_updated;
-    const note = document.createElement("p");
-    note.className = "data-context";
-    note.textContent = `数据最后更新：${date || "未提供"}。当年为部分年度（*）；不同世代累计成绩的观察年限不同。胜马率按产驹数计算，另有说明的图表除外。`;
-    content.querySelector(".analysis-title")?.append(note);
-  }
   if (window.location.hash) requestAnimationFrame(() => document.querySelector(window.location.hash)?.scrollIntoView({ block: "start" }));
 }
 

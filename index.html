@@ -18,7 +18,7 @@
       document.documentElement.dataset.themePreference = preference;
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20260914-chart-review">
+  <link rel="stylesheet" href="style.css?v=20260915-refinement">
 </head>
 <body>
   <header class="topbar">
@@ -33,7 +33,6 @@
         <button type="button" data-view="pedigree">血统分析</button>
         <button type="button" data-view="production">生产与繁殖</button>
         <button type="button" data-view="racecourse">赛马场</button>
-        <button type="button" data-view="method">数据与方法</button>
       </nav>
       <label class="theme-picker">
         <span>外观</span>
@@ -240,9 +239,6 @@
     <section class="analysis-page" id="racecourseContent"></section>
   </main>
 
-  <main class="analysis-shell view" id="methodView" hidden>
-    <section class="analysis-page" id="methodContent"></section>
-  </main>
 
   <div class="drawer" id="drawer" aria-hidden="true">
     <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="关闭详情"></button>
@@ -258,7 +254,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
   <script src="chart-animation.js?v=20260907b"></script>
-  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260914-chart-review";</script>
-  <script src="app.js?v=20260914-chart-review"></script>
+  <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20260915-refinement";</script>
+  <script src="app.js?v=20260915-refinement"></script>
 </body>
 </html>
