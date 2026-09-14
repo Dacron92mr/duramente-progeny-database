@@ -1,0 +1,23 @@
+name: Data and chart checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --check app.js
+      - run: node scripts/verify_sankey.cjs
+      - run: python scripts/verify_chart_insights.py
+      - run: python -m unittest discover -s scripts/tests -v
+      - run: git diff --check

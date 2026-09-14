@@ -1,0 +1,70 @@
+name: Weekly data sync
+on:
+  schedule:
+    # Monday 08:23 Hong Kong / 00:23 UTC; weekly batch, not live streaming.
+    - cron: '23 0 * * 1'
+  workflow_dispatch:
+    inputs:
+      limit:
+        description: 'netkeiba horse limit; 0 refreshes all registered IDs'
+        default: '0'
+        type: string
+      apply:
+        description: 'Apply validated updates and publish'
+        default: false
+        type: boolean
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: weekly-data-sync
+  cancel-in-progress: false
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test parsers and safeguards
+        run: python -m unittest discover -s scripts/tests -v
+      - name: Fetch, stage and validate
+        env:
+          SYNC_LIMIT: ${{ inputs.limit || '0' }}
+          APPLY_UPDATES: ${{ github.event_name == 'schedule' || inputs.apply }}
+        shell: bash
+        run: |
+          args=(--limit "$SYNC_LIMIT" --source netkeiba --jbis-limit 0 --report "$RUNNER_TEMP/sync-report.json")
+          if [ "$APPLY_UPDATES" = "true" ]; then args+=(--apply); fi
+          python scripts/weekly_sync.py "${args[@]}"
+      - name: Save diagnostic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: weekly-sync-report
+          path: ${{ runner.temp }}/sync-report.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Commit validated data only
+        if: github.event_name == 'schedule' || inputs.apply
+        id: commit
+        shell: bash
+        run: |
+          git add data index.html .github/sync/state.json
+          if git diff --cached --quiet; then exit 0; fi
+          site_changed=false
+          if ! git diff --cached --quiet -- data index.html; then site_changed=true; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh validated weekly horse data'
+          git push origin HEAD:main
+          echo "changed=$site_changed" >> "$GITHUB_OUTPUT"
+      - name: Request existing GitHub Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --silent

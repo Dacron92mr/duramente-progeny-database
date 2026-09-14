@@ -7,6 +7,8 @@ from sync_sources import parse_races,parse_profile,money
 from weekly_sync import merge, Client, SourceUnavailable
 from unittest.mock import patch
 from urllib.error import HTTPError
+from http.client import IncompleteRead
+from urllib.robotparser import RobotFileParser
 from rebuild_synced_analytics import preserve_extra
 
 HORSE={'id':1,'name':'テストホース','netkeiba_id':'123','earnings_netkeiba':100.1,'achievement_class':'G3'}
@@ -71,6 +73,13 @@ class ClientTests(unittest.TestCase):
         with patch('weekly_sync.urlopen',side_effect=fetch), patch('weekly_sync.time.monotonic',side_effect=lambda:clock[0]), patch('weekly_sync.time.sleep',side_effect=lambda seconds:clock.__setitem__(0,clock[0]+seconds)):
             client=Client();client.get('https://www.jbis.or.jp/horse/1/');client.get('https://www.jbis.or.jp/horse/2/')
         self.assertEqual([t for url,t in requests if '/horse/' in url],[600,1200])
+    def test_interrupted_response_retains_existing_record(self):
+        client=Client();rules=RobotFileParser();rules.parse(['User-agent: *','Disallow:'])
+        client.rules['db.netkeiba.com']=rules
+        response=type('Response',(),{'url':'https://db.netkeiba.com/horse/1/', 'read':lambda self,n:(_ for _ in ()).throw(IncompleteRead(b'partial'))})()
+        with patch('weekly_sync.urlopen',return_value=response):
+            with self.assertRaisesRegex(SourceUnavailable,'incomplete source response'):
+                client.get(response.url)
     def test_access_restriction_stops_source(self):
         with patch('weekly_sync.urlopen',side_effect=HTTPError('https://db.netkeiba.com/robots.txt',403,'Forbidden',{},None)) as fetch:
             client=Client()

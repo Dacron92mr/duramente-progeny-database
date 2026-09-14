@@ -91,7 +91,7 @@ python3 scripts/verify_chart_insights.py
 
 ## 后台每周同步
 
-部署状态：同步程序已准备好；定时工作流尚待使用具备 `workflow` 写入权限的 GitHub 凭据上传。下述时间安排在工作流安装后生效，当前不会自动运行。
+部署状态：工作流权限已完成授权，定时任务随本次提交启用；每次运行结果见仓库 Actions。
 
 GitHub Actions 的 `Weekly data sync` 每周一香港时间 **08:23** 启动（UTC 00:23，平台繁忙时可能延迟），页面没有同步入口或管理界面。
 

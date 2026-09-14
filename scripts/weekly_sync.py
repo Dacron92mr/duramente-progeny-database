@@ -10,6 +10,7 @@ import shutil
 import tempfile
 import time
 from datetime import datetime, timezone, timedelta
+from http.client import HTTPException
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from urllib.robotparser import RobotFileParser
@@ -54,6 +55,8 @@ class Client:
         except HTTPError as exc:
             if exc.code in (401,403,429): self.blocked.add(host)
             raise SourceUnavailable(f'HTTP {exc.code}; old data retained') from exc
+        except HTTPException as exc:
+            raise SourceUnavailable('incomplete source response; old data retained') from exc
 
 def merge(horse,detail,patch,races=None):
     """Guard against identity/history loss and rounded or decreasing lifetime earnings."""
