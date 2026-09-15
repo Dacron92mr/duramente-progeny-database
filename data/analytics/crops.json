@@ -3,11 +3,11 @@
     "label": "2022",
     "foals": 95,
     "runners": 84,
-    "winners": 48,
+    "winners": 50,
     "graded_winners": 5,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 231721.2,
+    "total_earnings": 240337.2,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -46,16 +46,16 @@
       }
     ],
     "runner_rate": 0.8842,
-    "winner_foal_rate": 0.5053,
-    "winner_runner_rate": 0.5714,
+    "winner_foal_rate": 0.5263,
+    "winner_runner_rate": 0.5952,
     "graded_foal_rate": 0.0526,
     "graded_runner_rate": 0.0595,
     "g1_foal_rate": 0.0211,
-    "avg_earnings_per_foal": 2439.2,
-    "avg_earnings_per_runner": 2758.6,
-    "median_earnings_per_runner": 432.5,
+    "avg_earnings_per_foal": 2529.9,
+    "avg_earnings_per_runner": 2861.2,
+    "median_earnings_per_runner": 435.0,
     "earnings_q25": 0.0,
-    "earnings_q75": 1492.0,
+    "earnings_q75": 2231.5,
     "max_earnings": 75799.0
   },
   {
@@ -66,8 +66,15 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 147627.9,
+    "total_earnings": 154218.1,
     "representatives": [
+      {
+        "name": "ガイアメンテ",
+        "hkjc_name_zh": "心快意快",
+        "achievement_class": "Listed",
+        "major_win": "26'都大路S(L)",
+        "earnings": 11900.0
+      },
       {
         "name": "ニシノティアモ",
         "hkjc_name_zh": "悅君意",
@@ -76,18 +83,11 @@
         "earnings": 11773.7
       },
       {
-        "name": "ガイアメンテ",
-        "hkjc_name_zh": "心快意快",
-        "achievement_class": "Listed",
-        "major_win": "26'都大路S(L)",
-        "earnings": 11250.5
-      },
-      {
         "name": "ミアネーロ",
         "hkjc_name_zh": "心傾慕",
         "achievement_class": "G3",
         "major_win": "24'フラワーC(G3)",
-        "earnings": 8164.7
+        "earnings": 8769.0
       },
       {
         "name": "シュガークン",
@@ -110,12 +110,12 @@
     "graded_foal_rate": 0.0254,
     "graded_runner_rate": 0.0283,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 1251.1,
-    "avg_earnings_per_runner": 1392.7,
+    "avg_earnings_per_foal": 1306.9,
+    "avg_earnings_per_runner": 1454.9,
     "median_earnings_per_runner": 493.4,
     "earnings_q25": 13.6,
-    "earnings_q75": 1532.0,
-    "max_earnings": 11773.7
+    "earnings_q75": 1547.2,
+    "max_earnings": 11900.0
   },
   {
     "label": "2020",
@@ -125,7 +125,7 @@
     "graded_winners": 8,
     "stakes_winners": 9,
     "g1_winners": 5,
-    "total_earnings": 411098.3,
+    "total_earnings": 412415.2,
     "representatives": [
       {
         "name": "リバティアイランド",
@@ -153,7 +153,7 @@
         "hkjc_name_zh": "盡得真傳",
         "achievement_class": "G1",
         "major_win": "22'ホープフルS(G1)",
-        "earnings": 23424.4
+        "earnings": 23874.0
       },
       {
         "name": "シャンパンカラー",
@@ -169,11 +169,11 @@
     "graded_foal_rate": 0.0656,
     "graded_runner_rate": 0.0702,
     "g1_foal_rate": 0.041,
-    "avg_earnings_per_foal": 3369.7,
-    "avg_earnings_per_runner": 3606.1,
+    "avg_earnings_per_foal": 3380.5,
+    "avg_earnings_per_runner": 3617.7,
     "median_earnings_per_runner": 643.3,
     "earnings_q25": 75.9,
-    "earnings_q75": 3077.2,
+    "earnings_q75": 3142.7,
     "max_earnings": 74444.0
   },
   {
@@ -184,7 +184,7 @@
     "graded_winners": 6,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 432565.7,
+    "total_earnings": 433246.1,
     "representatives": [
       {
         "name": "スターズオンアース",
@@ -228,8 +228,8 @@
     "graded_foal_rate": 0.0297,
     "graded_runner_rate": 0.0326,
     "g1_foal_rate": 0.0099,
-    "avg_earnings_per_foal": 2141.4,
-    "avg_earnings_per_runner": 2350.9,
+    "avg_earnings_per_foal": 2144.8,
+    "avg_earnings_per_runner": 2354.6,
     "median_earnings_per_runner": 603.5,
     "earnings_q25": 65.0,
     "earnings_q75": 1997.2,
@@ -243,7 +243,7 @@
     "graded_winners": 7,
     "stakes_winners": 8,
     "g1_winners": 2,
-    "total_earnings": 416998.0,
+    "total_earnings": 417036.8,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -287,8 +287,8 @@
     "graded_foal_rate": 0.037,
     "graded_runner_rate": 0.0419,
     "g1_foal_rate": 0.0106,
-    "avg_earnings_per_foal": 2206.3,
-    "avg_earnings_per_runner": 2497.0,
+    "avg_earnings_per_foal": 2206.5,
+    "avg_earnings_per_runner": 2497.2,
     "median_earnings_per_runner": 450.0,
     "earnings_q25": 1.6,
     "earnings_q75": 1635.0,

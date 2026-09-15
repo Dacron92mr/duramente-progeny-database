@@ -1,11 +1,11 @@
 {
   "summary": {
-    "overall_awd": 1590.0,
-    "turf_awd": 1886.2,
-    "dirt_awd": 1459.2,
-    "overall_wins": 1234,
-    "turf_wins": 378,
-    "dirt_wins": 856
+    "overall_awd": 1589.8,
+    "turf_awd": 1884.6,
+    "dirt_awd": 1459.4,
+    "overall_wins": 1249,
+    "turf_wins": 383,
+    "dirt_wins": 866
   },
   "by_crop": [
     {
@@ -17,31 +17,31 @@
     },
     {
       "label": "2019",
-      "overall_awd": 1563.6,
+      "overall_awd": 1562.6,
       "turf_awd": 1876.5,
-      "dirt_awd": 1460.4,
-      "wins": 395
+      "dirt_awd": 1459.7,
+      "wins": 397
     },
     {
       "label": "2020",
-      "overall_awd": 1669.0,
+      "overall_awd": 1666.9,
       "turf_awd": 1908.9,
-      "dirt_awd": 1515.0,
-      "wins": 202
+      "dirt_awd": 1513.9,
+      "wins": 204
     },
     {
       "label": "2021",
-      "overall_awd": 1635.6,
-      "turf_awd": 1948.1,
+      "overall_awd": 1640.3,
+      "turf_awd": 1950.0,
       "dirt_awd": 1461.5,
-      "wins": 151
+      "wins": 153
     },
     {
       "label": "2022",
-      "overall_awd": 1767.3,
-      "turf_awd": 1947.2,
-      "dirt_awd": 1555.6,
-      "wins": 98
+      "overall_awd": 1748.6,
+      "turf_awd": 1928.6,
+      "dirt_awd": 1551.0,
+      "wins": 107
     }
   ],
   "discrepancies": [
@@ -56,7 +56,7 @@
       "di": 2.11,
       "cd": 0.68,
       "race_stamina_percentile": 0.989,
-      "pedigree_stamina_percentile": 0.017,
+      "pedigree_stamina_percentile": 0.016,
       "stamina_gap": 0.97
     },
     {
@@ -69,9 +69,9 @@
       "dirt_awd": 1100.0,
       "di": 0.62,
       "cd": -0.1,
-      "race_stamina_percentile": 0.018,
-      "pedigree_stamina_percentile": 0.975,
-      "stamina_gap": -0.96
+      "race_stamina_percentile": 0.017,
+      "pedigree_stamina_percentile": 0.972,
+      "stamina_gap": -0.95
     },
     {
       "horse_id": 5,
@@ -83,8 +83,8 @@
       "dirt_awd": null,
       "di": 1.86,
       "cd": 0.65,
-      "race_stamina_percentile": 0.971,
-      "pedigree_stamina_percentile": 0.051,
+      "race_stamina_percentile": 0.972,
+      "pedigree_stamina_percentile": 0.05,
       "stamina_gap": 0.92
     },
     {
@@ -98,7 +98,7 @@
       "di": 0.85,
       "cd": -0.08,
       "race_stamina_percentile": 0.008,
-      "pedigree_stamina_percentile": 0.932,
+      "pedigree_stamina_percentile": 0.923,
       "stamina_gap": -0.92
     },
     {
@@ -111,8 +111,8 @@
       "dirt_awd": null,
       "di": 1.93,
       "cd": 0.64,
-      "race_stamina_percentile": 0.957,
-      "pedigree_stamina_percentile": 0.041,
+      "race_stamina_percentile": 0.959,
+      "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.92
     },
     {
@@ -125,9 +125,9 @@
       "dirt_awd": null,
       "di": 1.91,
       "cd": 0.63,
-      "race_stamina_percentile": 0.957,
+      "race_stamina_percentile": 0.959,
       "pedigree_stamina_percentile": 0.053,
-      "stamina_gap": 0.9
+      "stamina_gap": 0.91
     },
     {
       "horse_id": 87,
@@ -139,8 +139,8 @@
       "dirt_awd": 1800.0,
       "di": 1.8,
       "cd": 0.64,
-      "race_stamina_percentile": 0.957,
-      "pedigree_stamina_percentile": 0.065,
+      "race_stamina_percentile": 0.959,
+      "pedigree_stamina_percentile": 0.064,
       "stamina_gap": 0.89
     },
     {
@@ -153,8 +153,8 @@
       "dirt_awd": 1200.0,
       "di": 0.71,
       "cd": -0.06,
-      "race_stamina_percentile": 0.061,
-      "pedigree_stamina_percentile": 0.951,
+      "race_stamina_percentile": 0.06,
+      "pedigree_stamina_percentile": 0.946,
       "stamina_gap": -0.89
     },
     {
@@ -168,22 +168,8 @@
       "di": 1.77,
       "cd": 0.56,
       "race_stamina_percentile": 0.976,
-      "pedigree_stamina_percentile": 0.11,
+      "pedigree_stamina_percentile": 0.108,
       "stamina_gap": 0.87
-    },
-    {
-      "horse_id": 44,
-      "name": "ヒビキ",
-      "hkjc_name_zh": null,
-      "wins": 5,
-      "overall_awd": 1190.0,
-      "turf_awd": null,
-      "dirt_awd": 1190.0,
-      "di": 0.87,
-      "cd": 0.07,
-      "race_stamina_percentile": 0.045,
-      "pedigree_stamina_percentile": 0.891,
-      "stamina_gap": -0.85
     },
     {
       "horse_id": 6,
@@ -195,9 +181,23 @@
       "dirt_awd": 1200.0,
       "di": 0.65,
       "cd": -0.07,
-      "race_stamina_percentile": 0.115,
-      "pedigree_stamina_percentile": 0.963,
+      "race_stamina_percentile": 0.113,
+      "pedigree_stamina_percentile": 0.959,
       "stamina_gap": -0.85
+    },
+    {
+      "horse_id": 44,
+      "name": "ヒビキ",
+      "hkjc_name_zh": null,
+      "wins": 5,
+      "overall_awd": 1190.0,
+      "turf_awd": null,
+      "dirt_awd": 1190.0,
+      "di": 0.87,
+      "cd": 0.07,
+      "race_stamina_percentile": 0.044,
+      "pedigree_stamina_percentile": 0.88,
+      "stamina_gap": -0.84
     },
     {
       "horse_id": 262,
@@ -209,22 +209,8 @@
       "dirt_awd": 1160.0,
       "di": 0.92,
       "cd": 0.13,
-      "race_stamina_percentile": 0.032,
-      "pedigree_stamina_percentile": 0.873,
-      "stamina_gap": -0.84
-    },
-    {
-      "horse_id": 196,
-      "name": "トーセンウォーリア",
-      "hkjc_name_zh": null,
-      "wins": 3,
-      "overall_awd": 1200.0,
-      "turf_awd": null,
-      "dirt_awd": 1200.0,
-      "di": 0.82,
-      "cd": 0.1,
-      "race_stamina_percentile": 0.061,
-      "pedigree_stamina_percentile": 0.895,
+      "race_stamina_percentile": 0.031,
+      "pedigree_stamina_percentile": 0.859,
       "stamina_gap": -0.83
     },
     {
@@ -237,7 +223,7 @@
       "dirt_awd": null,
       "di": 2.16,
       "cd": 0.6,
-      "race_stamina_percentile": 0.871,
+      "race_stamina_percentile": 0.873,
       "pedigree_stamina_percentile": 0.041,
       "stamina_gap": 0.83
     },
@@ -251,23 +237,23 @@
       "dirt_awd": 2000.0,
       "di": 1.93,
       "cd": 0.64,
-      "race_stamina_percentile": 0.871,
-      "pedigree_stamina_percentile": 0.041,
+      "race_stamina_percentile": 0.873,
+      "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.83
     },
     {
-      "horse_id": 358,
-      "name": "セントオブシン",
+      "horse_id": 196,
+      "name": "トーセンウォーリア",
       "hkjc_name_zh": null,
       "wins": 3,
-      "overall_awd": 1300.0,
+      "overall_awd": 1200.0,
       "turf_awd": null,
-      "dirt_awd": 1300.0,
-      "di": 0.85,
-      "cd": 0.0,
-      "race_stamina_percentile": 0.129,
-      "pedigree_stamina_percentile": 0.914,
-      "stamina_gap": -0.79
+      "dirt_awd": 1200.0,
+      "di": 0.82,
+      "cd": 0.1,
+      "race_stamina_percentile": 0.06,
+      "pedigree_stamina_percentile": 0.884,
+      "stamina_gap": -0.82
     },
     {
       "horse_id": 184,
@@ -280,8 +266,22 @@
       "di": 1.55,
       "cd": 0.5,
       "race_stamina_percentile": 0.981,
-      "pedigree_stamina_percentile": 0.195,
+      "pedigree_stamina_percentile": 0.192,
       "stamina_gap": 0.79
+    },
+    {
+      "horse_id": 54,
+      "name": "ジュタ",
+      "hkjc_name_zh": "聖地公園",
+      "wins": 3,
+      "overall_awd": 1933.3,
+      "turf_awd": 1933.3,
+      "dirt_awd": null,
+      "di": 1.93,
+      "cd": 0.59,
+      "race_stamina_percentile": 0.835,
+      "pedigree_stamina_percentile": 0.06,
+      "stamina_gap": 0.78
     },
     {
       "horse_id": 112,
@@ -293,9 +293,23 @@
       "dirt_awd": null,
       "di": 1.91,
       "cd": 0.69,
-      "race_stamina_percentile": 0.811,
-      "pedigree_stamina_percentile": 0.033,
+      "race_stamina_percentile": 0.813,
+      "pedigree_stamina_percentile": 0.032,
       "stamina_gap": 0.78
+    },
+    {
+      "horse_id": 358,
+      "name": "セントオブシン",
+      "hkjc_name_zh": null,
+      "wins": 3,
+      "overall_awd": 1300.0,
+      "turf_awd": null,
+      "dirt_awd": 1300.0,
+      "di": 0.85,
+      "cd": 0.0,
+      "race_stamina_percentile": 0.129,
+      "pedigree_stamina_percentile": 0.903,
+      "stamina_gap": -0.77
     },
     {
       "horse_id": 160,
@@ -308,22 +322,22 @@
       "di": 0.88,
       "cd": 0.0,
       "race_stamina_percentile": 0.129,
-      "pedigree_stamina_percentile": 0.905,
-      "stamina_gap": -0.78
+      "pedigree_stamina_percentile": 0.894,
+      "stamina_gap": -0.77
     },
     {
-      "horse_id": 54,
-      "name": "ジュタ",
-      "hkjc_name_zh": "聖地公園",
-      "wins": 3,
-      "overall_awd": 1933.3,
-      "turf_awd": 1933.3,
+      "horse_id": 284,
+      "name": "ラミアメンテ",
+      "hkjc_name_zh": null,
+      "wins": 2,
+      "overall_awd": 1300.0,
+      "turf_awd": 1300.0,
       "dirt_awd": null,
-      "di": 1.93,
-      "cd": 0.59,
-      "race_stamina_percentile": 0.833,
-      "pedigree_stamina_percentile": 0.061,
-      "stamina_gap": 0.77
+      "di": 0.82,
+      "cd": 0.1,
+      "race_stamina_percentile": 0.129,
+      "pedigree_stamina_percentile": 0.884,
+      "stamina_gap": -0.76
     },
     {
       "horse_id": 267,
@@ -335,22 +349,8 @@
       "dirt_awd": 1360.0,
       "di": 0.71,
       "cd": 0.0,
-      "race_stamina_percentile": 0.178,
-      "pedigree_stamina_percentile": 0.94,
-      "stamina_gap": -0.76
-    },
-    {
-      "horse_id": 450,
-      "name": "サトノセレナーデ",
-      "hkjc_name_zh": "里見情歌",
-      "wins": 4,
-      "overall_awd": 1200.0,
-      "turf_awd": null,
-      "dirt_awd": 1200.0,
-      "di": 1.0,
-      "cd": 0.17,
-      "race_stamina_percentile": 0.061,
-      "pedigree_stamina_percentile": 0.809,
+      "race_stamina_percentile": 0.179,
+      "pedigree_stamina_percentile": 0.933,
       "stamina_gap": -0.75
     },
     {
@@ -363,22 +363,22 @@
       "dirt_awd": 1800.0,
       "di": 1.8,
       "cd": 0.64,
-      "race_stamina_percentile": 0.811,
-      "pedigree_stamina_percentile": 0.065,
+      "race_stamina_percentile": 0.813,
+      "pedigree_stamina_percentile": 0.064,
       "stamina_gap": 0.75
     },
     {
-      "horse_id": 318,
-      "name": "ユーコバローズ",
-      "hkjc_name_zh": null,
-      "wins": 3,
-      "overall_awd": 1333.3,
+      "horse_id": 450,
+      "name": "サトノセレナーデ",
+      "hkjc_name_zh": "里見情歌",
+      "wins": 4,
+      "overall_awd": 1200.0,
       "turf_awd": null,
-      "dirt_awd": 1333.3,
-      "di": 0.85,
-      "cd": 0.08,
-      "race_stamina_percentile": 0.15,
-      "pedigree_stamina_percentile": 0.893,
+      "dirt_awd": 1200.0,
+      "di": 1.0,
+      "cd": 0.17,
+      "race_stamina_percentile": 0.06,
+      "pedigree_stamina_percentile": 0.796,
       "stamina_gap": -0.74
     },
     {
@@ -391,23 +391,23 @@
       "dirt_awd": null,
       "di": 1.89,
       "cd": 0.46,
-      "race_stamina_percentile": 0.871,
-      "pedigree_stamina_percentile": 0.139,
-      "stamina_gap": 0.73
+      "race_stamina_percentile": 0.873,
+      "pedigree_stamina_percentile": 0.137,
+      "stamina_gap": 0.74
     },
     {
-      "horse_id": 336,
-      "name": "コトル",
+      "horse_id": 318,
+      "name": "ユーコバローズ",
       "hkjc_name_zh": null,
-      "wins": 8,
-      "overall_awd": 1262.5,
+      "wins": 3,
+      "overall_awd": 1333.3,
       "turf_awd": null,
-      "dirt_awd": 1262.5,
-      "di": 1.0,
-      "cd": 0.14,
-      "race_stamina_percentile": 0.102,
-      "pedigree_stamina_percentile": 0.818,
-      "stamina_gap": -0.72
+      "dirt_awd": 1333.3,
+      "di": 0.85,
+      "cd": 0.08,
+      "race_stamina_percentile": 0.15,
+      "pedigree_stamina_percentile": 0.882,
+      "stamina_gap": -0.73
     },
     {
       "horse_id": 99,
@@ -420,36 +420,8 @@
       "di": 1.4,
       "cd": 0.5,
       "race_stamina_percentile": 0.976,
-      "pedigree_stamina_percentile": 0.256,
+      "pedigree_stamina_percentile": 0.252,
       "stamina_gap": 0.72
-    },
-    {
-      "horse_id": 218,
-      "name": "レイワプリンセス",
-      "hkjc_name_zh": null,
-      "wins": 2,
-      "overall_awd": 1200.0,
-      "turf_awd": null,
-      "dirt_awd": 1200.0,
-      "di": 1.0,
-      "cd": 0.2,
-      "race_stamina_percentile": 0.061,
-      "pedigree_stamina_percentile": 0.783,
-      "stamina_gap": -0.72
-    },
-    {
-      "horse_id": 433,
-      "name": "ナスノマイスター",
-      "hkjc_name_zh": null,
-      "wins": 3,
-      "overall_awd": 1400.0,
-      "turf_awd": null,
-      "dirt_awd": 1400.0,
-      "di": 0.75,
-      "cd": -0.14,
-      "race_stamina_percentile": 0.25,
-      "pedigree_stamina_percentile": 0.959,
-      "stamina_gap": -0.71
     },
     {
       "horse_id": 170,
@@ -461,9 +433,37 @@
       "dirt_awd": 1700.0,
       "di": 1.93,
       "cd": 0.59,
-      "race_stamina_percentile": 0.771,
-      "pedigree_stamina_percentile": 0.061,
-      "stamina_gap": 0.71
+      "race_stamina_percentile": 0.776,
+      "pedigree_stamina_percentile": 0.06,
+      "stamina_gap": 0.72
+    },
+    {
+      "horse_id": 336,
+      "name": "コトル",
+      "hkjc_name_zh": null,
+      "wins": 8,
+      "overall_awd": 1262.5,
+      "turf_awd": null,
+      "dirt_awd": 1262.5,
+      "di": 1.0,
+      "cd": 0.14,
+      "race_stamina_percentile": 0.1,
+      "pedigree_stamina_percentile": 0.806,
+      "stamina_gap": -0.71
+    },
+    {
+      "horse_id": 440,
+      "name": "アフロガル",
+      "hkjc_name_zh": null,
+      "wins": 3,
+      "overall_awd": 1400.0,
+      "turf_awd": null,
+      "dirt_awd": 1400.0,
+      "di": 0.65,
+      "cd": -0.07,
+      "race_stamina_percentile": 0.251,
+      "pedigree_stamina_percentile": 0.959,
+      "stamina_gap": -0.71
     }
   ],
   "method": "AWD is the arithmetic mean of recorded flat-race winning distances. The discrepancy compares percentile ranks for AWD and the inverse of DI/CD among horses with at least two wins."

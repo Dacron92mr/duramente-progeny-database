@@ -22,7 +22,7 @@
     "owner": "ケーエスＨＤ",
     "breeder": "前谷武志",
     "birthplace": "新ひだか町",
-    "career_summary": "0戦0勝 [ 0-0-0-0 ]",
+    "career_summary": "0戦0勝 [0-0-0-0]",
     "major_win": "",
     "earnings_netkeiba": 0.0,
     "earnings_jbis": 0.0,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.25,
     "dosage_status": "calculated",
     "dosage_source_url": null,
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
