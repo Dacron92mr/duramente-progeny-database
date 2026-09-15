@@ -180,10 +180,7 @@ const COLORS = {
   teal: "#849b94", green: "#849b94", muted: "#b4aab0", soft: "#f1e9ed",
   gray: "#b4aab0", negative: "#79667e",
 };
-const CROP_COLORS = {
-  "2018": "#79667e", "2019": "#a34d70", "2020": "#c98c9f",
-  "2021": "#849b94", "2022": "#bca06b",
-};
+const CROP_COLORS = window.DuramenteColors.crops;
 
 const RACECOURSE_COORDINATES = {
   東京: { lon: 139.485, lat: 35.6625, system: "JRA", prefecture: "東京都", aliases: ["東京競馬場"] },
@@ -666,10 +663,8 @@ function resolvedTheme(preference) {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
-function refreshChartTheme() {
+function applyChartTheme(chart) {
   const { text, muted, line, surface } = chartThemeColors();
-  for (const chart of chartRegistry.values()) {
-    chart.resize();
     const option = chart.getOption();
     const axisTheme = (axes = []) => axes.map(() => ({
       axisLabel: { color: muted },
@@ -699,12 +694,19 @@ function refreshChartTheme() {
       series: (option.series || []).map((series) => ({
         label: { color: text },
         endLabel: { color: text },
+        ...(["line", "bar"].includes(series.type) && series.label?.backgroundColor ? { label: { color: text, backgroundColor: surface } } : {}),
         markLine: series.markLine ? {
           label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
         } : undefined,
         markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
     });
+}
+
+function refreshChartTheme() {
+  for (const chart of chartRegistry.values()) {
+    chart.resize();
+    applyChartTheme(chart);
   }
 }
 
@@ -1096,10 +1098,12 @@ function showChartDialog(id, trigger) {
   const canvas = chartDialog.querySelector(".chart-dialog-canvas");
   const isSankey = option.series?.some(series => series.type === "sankey");
   canvas.style.minWidth = isSankey ? "760px" : "0";
+  canvas.parentElement.style.overflowX = isSankey ? "auto" : "hidden";
   canvas.style.height = isSankey ? `${source.getHeight()}px` : "";
   chartDialog.querySelector("p").textContent = isSankey ? "左右滑动查看完整流向，点选连线查看匹数。" : "点选图例可隐藏或显示系列，点选数据查看数值。";
   chartDialogInstance = echarts.init(canvas);
   chartDialogInstance.setOption({ ...option, animation: false, legend: (option.legend || []).map(legend => ({ ...legend, textStyle: { ...legend.textStyle, color: chartThemeColors().text } })) });
+  requestAnimationFrame(() => { if (chartDialogInstance) { chartDialogInstance.resize(); applyChartTheme(chartDialogInstance); } });
 }
 
 function addChartActions(el, id) {
@@ -1157,7 +1161,7 @@ function renderChart(id, option) {
         minInterval: integer ? Math.max(1, Number(axis.minInterval || 0)) : axis.minInterval,
         axisLine: dimension === "y" ? { show: false, ...(axis.axisLine || {}) } : axis.axisLine,
         axisTick: { show: false, ...(axis.axisTick || {}) },
-        splitLine: { show: true, ...(axis.splitLine || {}), lineStyle: { type: "dashed", opacity: 0.72, ...(axis.splitLine?.lineStyle || {}) } },
+        splitLine: { show: true, ...(axis.splitLine || {}), lineStyle: { type: "solid", opacity: 0.45, ...(axis.splitLine?.lineStyle || {}) } },
         axisLabel: {
           hideOverlap: true,
           ...(axis.axisLabel || {}),
@@ -1170,13 +1174,14 @@ function renderChart(id, option) {
   const normalizedOption = { ...option, xAxis: normalizeAxes(option.xAxis, "x"), yAxis: normalizeAxes(option.yAxis, "y") };
   const xAxes = Array.isArray(normalizedOption.xAxis) ? normalizedOption.xAxis : [normalizedOption.xAxis];
   const yAxes = Array.isArray(normalizedOption.yAxis) ? normalizedOption.yAxis : [normalizedOption.yAxis];
-  const hasLine = (normalizedOption.series || []).some(item => item.type === "line");
+  const lineCount = (normalizedOption.series || []).filter(item => item.type === "line").length;
+  const sparseLines = lineCount > 0 && lineCount <= 2 && (normalizedOption.series || []).every(item => (item.data?.length || 0) <= 10 && (item.type !== "line" || (item.data || []).every(point => point == null || typeof (point?.value ?? point) === "number")));
   const normalizedSeries = (normalizedOption.series || []).map((item) => {
     const emphasis = { focus: "series", ...(item.emphasis || {}) };
     if (item.type === "bar") {
       const horizontal = xAxes[Number(item.xAxisIndex || 0)]?.type === "value"
         && yAxes[Number(item.yAxisIndex || 0)]?.type === "category";
-      const defaultRadius = horizontal ? [0, 5, 5, 0] : [5, 5, 2, 2];
+      const defaultRadius = 0;
       return {
         ...item,
         barMaxWidth: Math.min(Number(item.barMaxWidth || 24), 24),
@@ -1185,7 +1190,7 @@ function renderChart(id, option) {
           borderRadius: item.stack ? 0 : defaultRadius,
           ...(item.itemStyle || {}),
         },
-        label: hasLine ? { ...(item.label || {}), show: false } : item.label,
+        label: lineCount && item.label?.show ? { ...item.label, backgroundColor: chartThemeColors().surface, padding: [2, 4] } : item.label,
         labelLayout: { hideOverlap: true, ...(item.labelLayout || {}) },
         emphasis,
       };
@@ -1193,10 +1198,11 @@ function renderChart(id, option) {
     if (item.type === "line") {
       return {
         symbol: "circle",
-        symbolSize: 7,
+        symbolSize: 5,
         ...item,
-        lineStyle: { width: 2.5, cap: "round", join: "round", ...(item.lineStyle || {}) },
-        label: { ...(item.label || {}), show: false },
+        smooth: false,
+        lineStyle: { ...(item.lineStyle || {}), width: 2 },
+        label: { ...(item.label || {}), show: sparseLines, position: item.label?.position || "top", distance: (normalizedOption.series || []).some(series => series.type === "bar") ? 20 : 10, fontSize: 11, fontWeight: 600, backgroundColor: chartThemeColors().surface, padding: [2, 4], formatter: item.label?.formatter || (params => `${formatNumber(params.value, 1)}${/率|比例/.test(item.name || "") ? "%" : ""}`) },
         endLabel: { show: false },
         labelLayout: { hideOverlap: true },
         emphasis,
@@ -1204,7 +1210,7 @@ function renderChart(id, option) {
     }
     return { ...item, emphasis };
   });
-  const series = window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries;
+  const series = (window.DuramenteAnimation?.enhanceEChartsSeries(normalizedSeries) || normalizedSeries).map(item => ({ ...item, labelLayout: { ...item.labelLayout, hideOverlap: true, moveOverlap: "shiftY" } }));
   const axes = window.DuramenteAnimation?.enhanceEChartsAxes(normalizedOption) || {};
   const hasBar = normalizedSeries.some((item) => item.type === "bar");
   const tooltip = normalizedOption.tooltip ? {
@@ -1270,7 +1276,7 @@ function renderChart(id, option) {
     window.addEventListener("resize", () => {
       for (const item of chartRegistry.values()) item.resize();
       refreshChartTheme();
-      chartDialogInstance?.resize();
+      if (chartDialogInstance) { chartDialogInstance.resize(); applyChartTheme(chartDialogInstance); }
       alignChartHeaders();
     });
     chartResizeBound = true;
@@ -1983,12 +1989,12 @@ function renderCohortInsights(profile) {
   });
   const names = ["最高1匹", "第2—3匹", "其余产驹"];
   renderChart("sireConcentrationChart", {
-    color: [COLORS.duramente, COLORS.gold, COLORS.teal], legend: { top: 0 },
+    color: ["#6b6066", "#a2989e", "#d5cdd1"], legend: { top: 0 },
     tooltip: { trigger: "axis", formatter: items => { const row = items[0].data.raw; return `${row.year}年出生 · 总奖金 ${money(row.total)}<br>${items.map(item => `${item.marker}${item.seriesName}：${formatNumber(item.value, 1)}%（${money(row.values[item.seriesIndex])}）`).join("<br>")}`; } },
     grid: { left: 8, right: 16, top: 45, bottom: 32, containLabel: true },
     xAxis: { type: "value", max: 100, axisLabel: { formatter: "{value}%" } },
     yAxis: { type: "category", data: insights.concentrations.map(row => String(row.year)) },
-    series: names.map((name, index) => ({ name, type: "bar", stack: "earnings", data: insights.concentrations.map(row => ({ value: row.total ? row.values[index]/row.total*100 : 0, raw: row })) })),
+    series: names.map((name, index) => ({ name, type: "bar", stack: "earnings", data: insights.concentrations.map(row => ({ value: row.total ? row.values[index]/row.total*100 : 0, raw: row, itemStyle: { color: window.DuramenteColors.tint(cropColor(row.year), [0, .28, .58][index]) } })) })),
   });
   const distances = insights.distances;
   renderChart("sireDistanceDistributionChart", {
@@ -2029,14 +2035,14 @@ function renderCropComboChart(id, crops, config) {
     xAxis: { type: "category", data: labels },
     yAxis: [
       { type: "value", name: config.barUnit === "万日元" ? "亿日元" : config.barUnit, axisLabel: config.barUnit === "万日元" ? { formatter: value => formatNumber(value / 10000, 1) } : {}, minInterval: config.barInteger ? 1 : undefined },
-      { type: "value", name: config.lineUnit, axisLabel: { formatter: config.lineRate ? (value) => `${value}%` : undefined } },
+      { type: "value", name: config.lineUnit, ...(config.lineRate ? {min: 0, max: 100} : {}), axisLabel: { formatter: config.lineRate ? (value) => `${value}%` : undefined } },
     ],
     series: [
       {
         name: config.barName,
         type: "bar",
         barMaxWidth: 24,
-        data: crops.map((row, index) => ({ value: barValues[index], raw: row })),
+        data: crops.map((row, index) => ({ value: barValues[index], raw: row, itemStyle: { color: cropColor(row.label) } })),
         label: safeTopBarLabel((params) => config.barLabel(params.data.raw)),
       },
       {
@@ -2046,7 +2052,7 @@ function renderCropComboChart(id, crops, config) {
         symbolSize: 8,
         lineStyle: { width: 3 },
         data: crops.map((row, index) => ({ value: lineValues[index], raw: row })),
-        label: { show: false },
+        label: { position: "top", formatter: params => config.lineLabel(params.data.raw) },
       },
     ],
   });
@@ -2067,8 +2073,8 @@ function renderCropAchievementChart(crops) {
     grid: { left: 8, right: 12, top: 20, bottom: 76, containLabel: true },
     xAxis: { type: "category", data: crops.map(row => row.label), axisLabel: { interval: 0 } },
     yAxis: { type: "category", data: stages.map(stage => stage.label), inverse: true },
-    visualMap: { min: 0, max: 100, orient: "horizontal", left: "center", bottom: 0, itemWidth: 12, itemHeight: 130, inRange: { color: [COLORS.soft, COLORS.rose, COLORS.duramente] }, calculable: false },
-    series: [{ type: "heatmap", label: { show: true, fontSize: 10, formatter: ({data}) => `${data.value[2]}%` }, data: crops.flatMap((row, y) => stages.map((stage, x) => ({ value: [y, x, row.foals ? Number((stage.count(row)/row.foals*100).toFixed(1)) : 0], raw: row, stage, count: stage.count(row), label: { color: row.foals && stage.count(row) / row.foals >= 0.65 ? "#ffffff" : "#3b2532" } }))) }],
+
+    series: [{ type: "heatmap", label: { show: true, fontSize: 10, formatter: ({data}) => `${data.value[2]}%` }, data: crops.flatMap((row, y) => stages.map((stage, x) => ({ value: [y, x, row.foals ? Number((stage.count(row)/row.foals*100).toFixed(1)) : 0], raw: row, stage, count: stage.count(row), itemStyle: { color: window.DuramenteColors.tint(cropColor(row.label), .94 * (1 - (row.foals ? stage.count(row) / row.foals : 0))), borderColor: "#ffffff", borderWidth: 3 }, label: { color: window.DuramenteColors.ink(window.DuramenteColors.tint(cropColor(row.label), .94 * (1 - (row.foals ? stage.count(row) / row.foals : 0)))) } }))) }],
   });
 }
 
@@ -2596,7 +2602,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     lineColor: COLORS.raceLine,
     barFormatter: money,
     lineFormatter: money,
-    barLabel: (row) => formatNumber(row.total_earnings, 0),
+    barLabel: (row) => `${formatNumber(row.total_earnings / 10000, 1)}亿`,
     lineLabel: (row) => formatNumber(row.earnings_per_foal, 0),
   });
   renderCropComboChart("sireCropWinnersChart", crops, {
@@ -3035,14 +3041,14 @@ async function renderSireAnalysis() {
     </div>
     <div class="analysis-subpanel" data-sire-panel="crop">
     ${sectionBlock("出生世代表现", "比较不同出生世代的奖金、胜马和重赏表现。",
-      `<div class="chart-grid cohort-grid">
+      `<div class="chart-color-key" aria-label="五世代固定代表色">${Object.entries(CROP_COLORS).map(([year,color]) => `<span><i style="background:${color}"></i>${year}年</span>`).join("")}<small>世代代表色 · 深浅表示组内比例</small></div><div class="chart-grid cohort-grid">
         ${chartBlock("奖金表现", "累计奖金；各世代观察年限不同。平均值以全部收录产驹为分母。", "sireCropEarningsChart")}
         ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
         ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
         ${controlledChartBlock("同龄累计胜场", "仅比较已经完整经历所选年龄年度的世代；每100匹以该世代全部产驹为分母。", "sireSameAgeChart", `<label><span>截至年龄</span><select id="sireSameAge"><option value="3">3岁末</option><option value="4">4岁末</option><option value="5">5岁末</option></select></label>`)}
-        ${chartBlock("世代奖金集中度", "将总奖金拆为最高1匹、第2—3匹与其余产驹；点击查看实际金额。", "sireConcentrationChart")}
+        ${chartBlock("世代奖金集中度", "每个世代固定代表色；由深至浅依次为最高1匹、第2—3匹、其余产驹。点击查看金额。", "sireConcentrationChart")}
         ${chartBlock("获胜距离分布", "草地、泥地分别统计实际获胜距离；不含障碍赛及距离缺失的记录。", "sireDistanceDistributionChart")}
-        ${chartBlock("各出生世代的成就分布", "比例均以该世代产驹数为分母；各列并非严格递进阶段，重赏马与3胜以上可能交叉。点击色块查看匹数。", "sireAchievementStepChart")}
+        ${chartBlock("各出生世代的成就分布", "每列使用该世代代表色，颜色越深表示比例越高（0–100%）；以产驹数为分母，成就可能交叉。点击查看匹数。", "sireAchievementStepChart")}
         ${chartBlock("各出生世代的平均胜距", "平均获胜距离（AWD）：整体、草地与泥地；整体按有距离记录的草地及泥地胜场加权。", "sireAwdDumbbellChart")}
         ${controlledChartBlock("产驹成长曲线", "按年龄观察胜场积累；空心点为尚未结束的年龄年度，6+为开放区间；缺失阶段不连线。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
@@ -3300,12 +3306,6 @@ const BMS_CATEGORY_COLORS = {
   "Native Dancer": COLORS.gold, Nasrullah: COLORS.rose, "Turn-to": COLORS.teal, Other: COLORS.gray,
 };
 const BMS_CATEGORY_LIGHT_COLORS = Object.fromEntries(Object.keys(BMS_CATEGORY_COLORS).map(key => [key, COLORS.soft]));
-const FEMALE_FAMILY_COLORS = [COLORS.duramente, COLORS.rose, COLORS.plum, COLORS.coral, COLORS.gold, COLORS.blue, COLORS.green, COLORS.teal];
-
-function stablePaletteColor(label, palette) {
-  const hash = [...String(label || "")].reduce((sum, character) => sum + character.codePointAt(0), 0);
-  return palette[hash % palette.length];
-}
 
 function horseStarts(horse) {
   return Number(String(horse.career_summary || "").match(/(\d+)戦/)?.[1] || 0);
@@ -3461,8 +3461,14 @@ function renderFemaleFamilyCharts(horses) {
   const rateAxisMax = metric === "graded_foal_rate"
     ? Math.min(100, Math.max(10, Math.ceil((maxMetricValue * 1.3) / 5) * 5))
     : Math.min(100, Math.max(20, Math.ceil((maxMetricValue * 1.18) / 10) * 10));
+  const head = document.getElementById("femaleFamilyOverallChart")?.closest(".chart-card")?.querySelector(".chart-card-head");
+  if (head) {
+    let guide = head.querySelector(".family-color-key");
+    if (!guide) { guide = document.createElement("div"); guide.className = "chart-color-key family-color-key"; head.append(guide); }
+    const families = [...new Set(rows.map(row => { const id = window.DuramenteColors.familyIdentity(row.label); return id ? `${id.prefix}${id.number}` : row.label; }))].sort((a,b) => a.localeCompare(b, "en", {numeric:true}));
+    guide.innerHTML = families.map(name => `<span><i style="background:${window.DuramenteColors.family(name)}"></i>${escapeHtml(name)}</span>`).join("") + '<small>同号同色系 · 字母分支微调深浅</small>';
+  }
   const chart = renderChart("femaleFamilyOverallChart", {
-    color: FEMALE_FAMILY_COLORS,
     tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, formatter: (items) => {
       const row = items[0].data.raw;
       return `${row.label}<br>产驹：${row.foals}匹<br>胜马率：${rateWithCount(row.winner_foal_rate, row.winners, row.foals)}<br>重赏马率：${rateWithCount(row.graded_foal_rate, row.graded_winners, row.foals)}<br>代表马：${escapeHtml(representativeNames(row))}`;
@@ -3473,7 +3479,7 @@ function renderFemaleFamilyCharts(horses) {
     series: [{ type: "bar", barMaxWidth: 18, data: rows.map((row) => ({
       value: meta.value(row),
       raw: row,
-      itemStyle: { color: stablePaletteColor(row.label, FEMALE_FAMILY_COLORS), borderRadius: [0, 5, 5, 0] },
+      itemStyle: { color: window.DuramenteColors.family(row.label), borderRadius: [0, 5, 5, 0] },
     })), label: safeHorizontalBarLabel((params) => metric.includes("rate") ? `${params.value}%` : meta.formatter(params.value, params.data.raw)) }],
   });
   chart?.on("click", (params) => applyFemaleFamilyFilter(params.data.raw.label));
@@ -3493,7 +3499,7 @@ function renderFemaleFamilyCharts(horses) {
     legend: { top: 0 },
     grid: fixedHorizontalGrid(84, 34, 44, 46),
     xAxis: { type: "value", max: 100, name: sexMetric === "graded_foal_rate" ? "重赏马率" : "胜马率", axisLabel: { formatter: "{value}%" } },
-    yAxis: longCategoryAxis(sexRows.map((row) => row.label), { width: 88 }),
+    yAxis: { ...longCategoryAxis(sexRows.map((row) => row.label), { width: 88 }), axisLabel: { ...longCategoryAxis([], { width: 88 }).axisLabel, formatter: name => `{family${sexRows.findIndex(row => row.label === name)}|●}  ${name}`, rich: Object.fromEntries(sexRows.map((row,index) => [`family${index}`, { color: window.DuramenteColors.family(row.label), fontSize: 13 }])) } },
     series: PEDIGREE_SEXES.map((sex) => ({ name: uiValue(sex, "sex"), type: "bar", data: sexRows.map((row) => ({ value: ratePercent(pedigreeRateCount(row.sexes[sex], sexMetric), row.sexes[sex].foals), raw: row.sexes[sex], family: row.label })) })),
   })?.on("click", (params) => applyFemaleFamilyFilter(params.data.family));
 }
@@ -4004,7 +4010,7 @@ function renderLineageStageChart(id, horses, key, minFoals) {
     legend: { top: 0, data: ACHIEVEMENT_STAGES },
     grid: fixedHorizontalGrid(key === "female_family" ? 118 : 164, 56, 34, 54),
     xAxis: { type: "value", name: "产驹数" },
-    yAxis: longCategoryAxis(rows.map((row) => row.label), { width: key === "female_family" ? 92 : 118 }),
+    yAxis: { ...longCategoryAxis(rows.map((row) => row.label), { width: key === "female_family" ? 92 : 118 }), ...(key === "female_family" ? { axisLabel: { ...longCategoryAxis([], { width: 92 }).axisLabel, formatter: name => `{family${rows.findIndex(row => row.label === name)}|●}  ${name}`, rich: Object.fromEntries(rows.map((row,index) => [`family${index}`, { color: window.DuramenteColors.family(row.label), fontSize: 13 }])) } } : {}) },
     series: ACHIEVEMENT_STAGES.map((stage, index) => ({
       name: stage,
       type: "bar",

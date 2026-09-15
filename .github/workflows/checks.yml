@@ -17,6 +17,7 @@ jobs:
         with:
           node-version: '22'
       - run: node --check app.js
+      - run: node scripts/verify_chart_colors.cjs
       - run: node scripts/verify_sankey.cjs
       - run: python scripts/verify_chart_insights.py
       - run: python -m unittest discover -s scripts/tests -v
