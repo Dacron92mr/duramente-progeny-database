@@ -25,7 +25,7 @@
     "career_summary": "17戦3勝 [ 3-4-1-9 ]",
     "major_win": "24'豊栄特別(2勝クラス)",
     "earnings_netkeiba": 5339.1,
-    "earnings_jbis": 5339.1,
+    "earnings_jbis": 5423.1,
     "last_race": "2026 福島 サラ系障害３歳上 未勝利",
     "last_finish": null,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.31,
     "dosage_status": "verified",
     "dosage_source_url": "https://www.pedigreequery.com/tramandare",
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
