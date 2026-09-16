@@ -25,7 +25,7 @@
     "career_summary": "51戦11勝 [ 11-8-3-29 ]",
     "major_win": "21'3歳以上1勝クラス",
     "earnings_netkeiba": 2746.0,
-    "earnings_jbis": 2746.0,
+    "earnings_jbis": 2806.0,
     "last_race": "2026 園田 C３一",
     "last_finish": 8,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.07,
     "dosage_status": "verified",
     "dosage_source_url": "https://www.pedigreequery.com/scallywag14",
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {

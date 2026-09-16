@@ -25,7 +25,7 @@
     "career_summary": "15戦2勝 [ 2-4-1-8 ]",
     "major_win": "26'4歳以上1勝クラス",
     "earnings_netkeiba": 2750.0,
-    "earnings_jbis": 2750.0,
+    "earnings_jbis": 2990.0,
     "last_race": "2026 福島 いわき特別 ２勝クラス",
     "last_finish": 4,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.61,
     "dosage_status": "calculated",
     "dosage_source_url": null,
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
