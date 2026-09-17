@@ -65,7 +65,9 @@
     "center_of_distribution": -0.3,
     "dosage_status": "verified",
     "dosage_source_url": "https://www.pedigreequery.com/maximilien3",
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {

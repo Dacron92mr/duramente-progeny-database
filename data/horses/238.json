@@ -25,7 +25,7 @@
     "career_summary": "13戦1勝 [ 1-5-3-4 ]",
     "major_win": "C2ー4",
     "earnings_netkeiba": 1109.0,
-    "earnings_jbis": 1109.0,
+    "earnings_jbis": 1149.0,
     "last_race": "2026 高知 C２－３ C２",
     "last_finish": 2,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.1,
     "dosage_status": "calculated",
     "dosage_source_url": null,
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
