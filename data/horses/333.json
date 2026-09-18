@@ -25,7 +25,7 @@
     "career_summary": "86戦2勝 [ 2-5-5-74 ]",
     "major_win": "C4組",
     "earnings_netkeiba": 518.7,
-    "earnings_jbis": 518.7,
+    "earnings_jbis": 523.2,
     "last_race": "2026 金沢 ホップステップぴんみんC C１５",
     "last_finish": 7,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.22,
     "dosage_status": "calculated",
     "dosage_source_url": null,
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
