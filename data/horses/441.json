@@ -25,7 +25,7 @@
     "career_summary": "30戦2勝 [ 2-4-5-19 ]",
     "major_win": "3歳B 3特編",
     "earnings_netkeiba": 203.6,
-    "earnings_jbis": 203.6,
+    "earnings_jbis": 267.7,
     "last_race": "2026 金沢 楽天競馬で馬券を買おう！楽天競馬特別 C２１",
     "last_finish": 7,
     "hkjc_name_zh": null,
@@ -65,7 +65,9 @@
     "center_of_distribution": 0.25,
     "dosage_status": "verified",
     "dosage_source_url": "https://www.pedigreequery.com/one+more+chance21",
-    "dosage_chef_version": "international-2026-04"
+    "dosage_chef_version": "international-2026-04",
+    "has_breeding": 0,
+    "breeding_role": "なし"
   },
   "sources": [
     {
