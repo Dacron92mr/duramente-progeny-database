@@ -209,8 +209,10 @@
         "time": "1:22.9",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ライブインステラ"
-      }
+        "winner_or_runner_up": "ライブインステラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:22.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "コズミックフロスト"
-      }
+        "winner_or_runner_up": "コズミックフロスト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:35.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "デコラシオン"
-      }
+        "winner_or_runner_up": "デコラシオン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:36.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "グランデレジーナ"
-      }
+        "winner_or_runner_up": "グランデレジーナ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

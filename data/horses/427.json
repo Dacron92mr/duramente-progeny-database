@@ -209,8 +209,10 @@
         "time": "1:58.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "スピードソルジャー"
-      }
+        "winner_or_runner_up": "スピードソルジャー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:39.9",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ショウナンダール"
-      }
+        "winner_or_runner_up": "ショウナンダール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -285,8 +285,10 @@
         "time": "2:15.3",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "メイショウタバル"
-      }
+        "winner_or_runner_up": "メイショウタバル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -348,8 +350,10 @@
         "time": "2:00.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "グランディア"
-      }
+        "winner_or_runner_up": "グランディア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -411,8 +415,10 @@
         "time": "2:25.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ダノンデサイル"
-      }
+        "winner_or_runner_up": "ダノンデサイル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -474,8 +480,10 @@
         "time": "2:24.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(ショウナンラプンタ)"
-      }
+        "winner_or_runner_up": "(ショウナンラプンタ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -537,8 +545,10 @@
         "time": "2:17.4",
         "track_condition": "重",
         "weather": "小雨",
-        "winner_or_runner_up": "(オールナット)"
-      }
+        "winner_or_runner_up": "(オールナット)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -600,8 +610,10 @@
         "time": "2:02.8",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "(サラトガチップス)"
-      }
+        "winner_or_runner_up": "(サラトガチップス)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -663,8 +675,10 @@
         "time": "1:37.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ワールズエンド"
-      }
+        "winner_or_runner_up": "ワールズエンド",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

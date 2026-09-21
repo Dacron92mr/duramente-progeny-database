@@ -209,8 +209,10 @@
         "time": "1:33.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アセンブリールーム"
-      }
+        "winner_or_runner_up": "アセンブリールーム",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:36.9",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ルナルーチェット"
-      }
+        "winner_or_runner_up": "ルナルーチェット",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

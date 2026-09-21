@@ -247,8 +247,10 @@
         "time": "1:49.7",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "オングライドパス"
-      }
+        "winner_or_runner_up": "オングライドパス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:39.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フォースゲイト"
-      }
+        "winner_or_runner_up": "フォースゲイト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:33.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "スターグリップ"
-      }
+        "winner_or_runner_up": "スターグリップ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:32.9",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ボーイハンター"
-      }
+        "winner_or_runner_up": "ボーイハンター",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:08.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "イツモニコニコ"
-      }
+        "winner_or_runner_up": "イツモニコニコ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:08.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ドゥアムール"
-      }
+        "winner_or_runner_up": "ドゥアムール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:10.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "セシリエプラージュ"
-      }
+        "winner_or_runner_up": "セシリエプラージュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:09.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トールキン"
-      }
+        "winner_or_runner_up": "トールキン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -751,8 +767,10 @@
         "time": "1:08.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(テンプーシャオン)"
-      }
+        "winner_or_runner_up": "(テンプーシャオン)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -814,8 +832,10 @@
         "time": "1:07.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カリーシ"
-      }
+        "winner_or_runner_up": "カリーシ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -877,8 +897,10 @@
         "time": "1:10.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "レザンノワール"
-      }
+        "winner_or_runner_up": "レザンノワール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -940,8 +962,10 @@
         "time": "1:50.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ウインアクトゥール"
-      }
+        "winner_or_runner_up": "ウインアクトゥール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1003,8 +1027,10 @@
         "time": "1:00.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ブレーザー"
-      }
+        "winner_or_runner_up": "ブレーザー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1066,8 +1092,10 @@
         "time": "0:56.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ニシノコニャック"
-      }
+        "winner_or_runner_up": "ニシノコニャック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1129,8 +1157,10 @@
         "time": "1:14.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "シルヴァーゴースト"
-      }
+        "winner_or_runner_up": "シルヴァーゴースト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1192,8 +1222,10 @@
         "time": "2:02.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シグナルファイアー"
-      }
+        "winner_or_runner_up": "シグナルファイアー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1255,8 +1287,10 @@
         "time": "1:18.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シラキヌ"
-      }
+        "winner_or_runner_up": "シラキヌ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1318,8 +1352,10 @@
         "time": "1:12.1",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "(ロジェ)"
-      }
+        "winner_or_runner_up": "(ロジェ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1381,8 +1417,10 @@
         "time": "1:23.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "セフィロ"
-      }
+        "winner_or_runner_up": "セフィロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1444,8 +1482,10 @@
         "time": "1:28.1",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "マーゴットレーヴ"
-      }
+        "winner_or_runner_up": "マーゴットレーヴ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

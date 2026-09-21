@@ -209,8 +209,10 @@
         "time": "1:26.0",
         "track_condition": "不",
         "weather": "晴",
-        "winner_or_runner_up": "モーニングマジック"
-      }
+        "winner_or_runner_up": "モーニングマジック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:14.8",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "パラサイコロジー"
-      }
+        "winner_or_runner_up": "パラサイコロジー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:20.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ワンダーイロネ"
-      }
+        "winner_or_runner_up": "ワンダーイロネ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

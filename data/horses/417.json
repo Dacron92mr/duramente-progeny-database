@@ -209,8 +209,10 @@
         "time": "2:03.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "タガノカイ"
-      }
+        "winner_or_runner_up": "タガノカイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:06.0",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "グロリアムンディ"
-      }
+        "winner_or_runner_up": "グロリアムンディ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

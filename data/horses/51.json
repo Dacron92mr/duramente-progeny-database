@@ -247,8 +247,10 @@
         "time": "1:59.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ペンナヴェローチェ)"
-      }
+        "winner_or_runner_up": "(ペンナヴェローチェ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:50.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(アラレタバシル)"
-      }
+        "winner_or_runner_up": "(アラレタバシル)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:46.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ファンダム"
-      }
+        "winner_or_runner_up": "ファンダム",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "2:01.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ファウストラーゼン"
-      }
+        "winner_or_runner_up": "ファウストラーゼン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "2:01.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "クロワデュノール"
-      }
+        "winner_or_runner_up": "クロワデュノール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:51.5",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "マジックサンズ"
-      }
+        "winner_or_runner_up": "マジックサンズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:49.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ゴーゴータカシ)"
-      }
+        "winner_or_runner_up": "(ゴーゴータカシ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:51.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(リアライズオーラム)"
-      }
+        "winner_or_runner_up": "(リアライズオーラム)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

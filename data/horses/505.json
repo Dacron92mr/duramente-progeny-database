@@ -209,8 +209,10 @@
         "time": "1:02.5",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "リアンスカイ"
-      }
+        "winner_or_runner_up": "リアンスカイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:03.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "クリノキューチャン"
-      }
+        "winner_or_runner_up": "クリノキューチャン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:02.3",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "サンドスピリット"
-      }
+        "winner_or_runner_up": "サンドスピリット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:08.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "マメコ"
-      }
+        "winner_or_runner_up": "マメコ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:03.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アルファヒディ"
-      }
+        "winner_or_runner_up": "アルファヒディ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:28.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ワックスリリカル"
-      }
+        "winner_or_runner_up": "ワックスリリカル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:57.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "タガノカンデラ"
-      }
+        "winner_or_runner_up": "タガノカンデラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:57.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "レタラ"
-      }
+        "winner_or_runner_up": "レタラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -713,8 +729,10 @@
         "time": "1:55.1",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "フロンタルジェダイ"
-      }
+        "winner_or_runner_up": "フロンタルジェダイ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

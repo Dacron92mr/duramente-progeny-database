@@ -209,8 +209,10 @@
         "time": "1:36.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ジャサルディア"
-      }
+        "winner_or_runner_up": "ジャサルディア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:19.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "レッドバンデ"
-      }
+        "winner_or_runner_up": "レッドバンデ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:04.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エナジーショット"
-      }
+        "winner_or_runner_up": "エナジーショット",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -209,8 +209,10 @@
         "time": "1:09.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "プロスペリダード"
-      }
+        "winner_or_runner_up": "プロスペリダード",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:36.4",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ハレアカラフラ"
-      }
+        "winner_or_runner_up": "ハレアカラフラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:36.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ダノンバビル"
-      }
+        "winner_or_runner_up": "ダノンバビル",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

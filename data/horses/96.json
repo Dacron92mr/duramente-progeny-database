@@ -247,8 +247,10 @@
         "time": "2:24.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "クロワデュノール"
-      }
+        "winner_or_runner_up": "クロワデュノール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "2:15.1",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ショウヘイ"
-      }
+        "winner_or_runner_up": "ショウヘイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "2:13.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ジェゼロ)"
-      }
+        "winner_or_runner_up": "(ジェゼロ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "2:03.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(フェアリーライク)"
-      }
+        "winner_or_runner_up": "(フェアリーライク)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

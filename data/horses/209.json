@@ -209,8 +209,10 @@
         "time": "1:57.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "メロウヴォイス"
-      }
+        "winner_or_runner_up": "メロウヴォイス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:12.4",
         "track_condition": "重",
         "weather": "小雨",
-        "winner_or_runner_up": "グロバーテソーロ"
-      }
+        "winner_or_runner_up": "グロバーテソーロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:52.9",
         "track_condition": "不",
         "weather": "小雨",
-        "winner_or_runner_up": "(ムーランブルー)"
-      }
+        "winner_or_runner_up": "(ムーランブルー)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:27.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "アドマイヤサジー"
-      }
+        "winner_or_runner_up": "アドマイヤサジー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:29.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シルバープリペット"
-      }
+        "winner_or_runner_up": "シルバープリペット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:19.1",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "(ホウオウアルマン)"
-      }
+        "winner_or_runner_up": "(ホウオウアルマン)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:01.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "イケイケドンドン"
-      }
+        "winner_or_runner_up": "イケイケドンドン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

@@ -209,8 +209,10 @@
         "time": "1:37.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "シャイニングローズ"
-      }
+        "winner_or_runner_up": "シャイニングローズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:37.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ゼファーバローズ"
-      }
+        "winner_or_runner_up": "ゼファーバローズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:39.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ゼンダンヤマト"
-      }
+        "winner_or_runner_up": "ゼンダンヤマト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:52.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "モディリアーニ"
-      }
+        "winner_or_runner_up": "モディリアーニ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:37.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ビーナオーカン)"
-      }
+        "winner_or_runner_up": "(ビーナオーカン)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:37.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ハクシュ"
-      }
+        "winner_or_runner_up": "ハクシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:35.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "リヤンドゥミラクル"
-      }
+        "winner_or_runner_up": "リヤンドゥミラクル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "2:04.0",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "キューティクローム"
-      }
+        "winner_or_runner_up": "キューティクローム",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

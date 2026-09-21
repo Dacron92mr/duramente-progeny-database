@@ -209,8 +209,10 @@
         "time": "1:49.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "スカイフォール"
-      }
+        "winner_or_runner_up": "スカイフォール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:05.3",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "アケルナルスター"
-      }
+        "winner_or_runner_up": "アケルナルスター",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:21.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "キャルレイ"
-      }
+        "winner_or_runner_up": "キャルレイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:48.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(イヴィステラ)"
-      }
+        "winner_or_runner_up": "(イヴィステラ)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

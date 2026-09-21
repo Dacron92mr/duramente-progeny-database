@@ -209,8 +209,10 @@
         "time": "1:13.6",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "スカイトライア"
-      }
+        "winner_or_runner_up": "スカイトライア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:12.3",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "ディーバサンライズ"
-      }
+        "winner_or_runner_up": "ディーバサンライズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:15.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "テオドラ"
-      }
+        "winner_or_runner_up": "テオドラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:14.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "カツノサンキュウ"
-      }
+        "winner_or_runner_up": "カツノサンキュウ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:14.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "トップヴィヴィット"
-      }
+        "winner_or_runner_up": "トップヴィヴィット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:42.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マサハヤサン"
-      }
+        "winner_or_runner_up": "マサハヤサン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:26.1",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ベッラノーヴァ"
-      }
+        "winner_or_runner_up": "ベッラノーヴァ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

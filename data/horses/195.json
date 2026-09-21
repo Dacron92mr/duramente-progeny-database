@@ -209,8 +209,10 @@
         "time": "1:21.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ビダーヤ)"
-      }
+        "winner_or_runner_up": "(ビダーヤ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:34.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シヴァース"
-      }
+        "winner_or_runner_up": "シヴァース",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:20.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サクセスカラー"
-      }
+        "winner_or_runner_up": "サクセスカラー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:23.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(シアター)"
-      }
+        "winner_or_runner_up": "(シアター)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:22.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ハクサンイーグル"
-      }
+        "winner_or_runner_up": "ハクサンイーグル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:03.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ウインアクトゥール"
-      }
+        "winner_or_runner_up": "ウインアクトゥール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:52.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "コスモディナー"
-      }
+        "winner_or_runner_up": "コスモディナー",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

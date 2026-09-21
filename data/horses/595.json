@@ -209,8 +209,10 @@
         "time": "2:15.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ボーンジーニアス"
-      }
+        "winner_or_runner_up": "ボーンジーニアス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:51.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "メイショウホオズキ"
-      }
+        "winner_or_runner_up": "メイショウホオズキ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:47.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ボーデン"
-      }
+        "winner_or_runner_up": "ボーデン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:49.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "グレートマジシャン"
-      }
+        "winner_or_runner_up": "グレートマジシャン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

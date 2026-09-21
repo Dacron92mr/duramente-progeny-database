@@ -209,8 +209,10 @@
         "time": "1:52.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ヴィクティファルス"
-      }
+        "winner_or_runner_up": "ヴィクティファルス",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

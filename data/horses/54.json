@@ -247,8 +247,10 @@
         "winner_or_runner_up": "アンパドゥ",
         "horse_id": 54,
         "horse_name": "ジュタ",
-        "netkeiba_id": "2022104813"
-      }
+        "netkeiba_id": "2022104813",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:59.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ファウストラーゼン"
-      }
+        "winner_or_runner_up": "ファウストラーゼン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:45.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トロヴァトーレ"
-      }
+        "winner_or_runner_up": "トロヴァトーレ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "2:01.5",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "(シャドウメテオ)"
-      }
+        "winner_or_runner_up": "(シャドウメテオ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:47.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フィーリウス"
-      }
+        "winner_or_runner_up": "フィーリウス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:58.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ミュージアムマイル"
-      }
+        "winner_or_runner_up": "ミュージアムマイル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "2:02.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ファウストラーゼン"
-      }
+        "winner_or_runner_up": "ファウストラーゼン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "2:02.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ミッキーゴールド)"
-      }
+        "winner_or_runner_up": "(ミッキーゴールド)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -751,8 +767,10 @@
         "time": "2:01.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "クロワデュノール"
-      }
+        "winner_or_runner_up": "クロワデュノール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -814,8 +832,10 @@
         "time": "1:48.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(オプレントジュエル)"
-      }
+        "winner_or_runner_up": "(オプレントジュエル)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

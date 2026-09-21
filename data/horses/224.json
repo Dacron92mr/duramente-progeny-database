@@ -209,8 +209,10 @@
         "time": "2:01.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エーデルブルーメ"
-      }
+        "winner_or_runner_up": "エーデルブルーメ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:49.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ポッドヴァイン"
-      }
+        "winner_or_runner_up": "ポッドヴァイン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:48.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ブルトンクール"
-      }
+        "winner_or_runner_up": "ブルトンクール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:26.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "シルブロン"
-      }
+        "winner_or_runner_up": "シルブロン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:02.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "スタッドリー"
-      }
+        "winner_or_runner_up": "スタッドリー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:01.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ペルソナデザイン"
-      }
+        "winner_or_runner_up": "ペルソナデザイン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:01.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(アースフレア)"
-      }
+        "winner_or_runner_up": "(アースフレア)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:49.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "メイショウオニユリ"
-      }
+        "winner_or_runner_up": "メイショウオニユリ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -713,8 +729,10 @@
         "time": "1:47.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ハイエログリフ"
-      }
+        "winner_or_runner_up": "ハイエログリフ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -776,8 +794,10 @@
         "time": "1:47.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トーホウディアス"
-      }
+        "winner_or_runner_up": "トーホウディアス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -839,8 +859,10 @@
         "time": "1:36.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ティフォーザ"
-      }
+        "winner_or_runner_up": "ティフォーザ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

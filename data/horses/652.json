@@ -209,8 +209,10 @@
         "time": "2:18.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ケイツークローン"
-      }
+        "winner_or_runner_up": "ケイツークローン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:04.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ウインネモフィラ"
-      }
+        "winner_or_runner_up": "ウインネモフィラ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

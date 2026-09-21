@@ -209,8 +209,10 @@
         "time": "1:17.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "リトムテール"
-      }
+        "winner_or_runner_up": "リトムテール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:03.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ルールーリマ"
-      }
+        "winner_or_runner_up": "ルールーリマ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:03.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ニホンピロデヴィン"
-      }
+        "winner_or_runner_up": "ニホンピロデヴィン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

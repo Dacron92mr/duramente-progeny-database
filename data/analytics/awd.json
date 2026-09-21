@@ -1,19 +1,19 @@
 {
   "summary": {
-    "overall_awd": 1589.7,
+    "overall_awd": 1589.3,
     "turf_awd": 1884.6,
-    "dirt_awd": 1459.7,
-    "overall_wins": 1252,
+    "dirt_awd": 1459.6,
+    "overall_wins": 1255,
     "turf_wins": 383,
-    "dirt_wins": 869
+    "dirt_wins": 872
   },
   "by_crop": [
     {
       "label": "2018",
-      "overall_awd": 1513.3,
+      "overall_awd": 1513.0,
       "turf_awd": 1807.4,
       "dirt_awd": 1419.2,
-      "wins": 388
+      "wins": 389
     },
     {
       "label": "2019",
@@ -31,10 +31,10 @@
     },
     {
       "label": "2021",
-      "overall_awd": 1636.2,
+      "overall_awd": 1633.8,
       "turf_awd": 1950.0,
-      "dirt_awd": 1456.8,
-      "wins": 154
+      "dirt_awd": 1456.7,
+      "wins": 156
     },
     {
       "label": "2022",

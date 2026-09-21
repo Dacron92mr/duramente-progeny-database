@@ -209,8 +209,10 @@
         "time": "2:02.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ダノンジャガー"
-      }
+        "winner_or_runner_up": "ダノンジャガー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:26.7",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ケイアイブイスリー"
-      }
+        "winner_or_runner_up": "ケイアイブイスリー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:47.8",
         "track_condition": "稍",
         "weather": "小雪",
-        "winner_or_runner_up": "テーオーマルコーニ"
-      }
+        "winner_or_runner_up": "テーオーマルコーニ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:56.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラマンシュ"
-      }
+        "winner_or_runner_up": "ラマンシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:02.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ネブラディスク"
-      }
+        "winner_or_runner_up": "ネブラディスク",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

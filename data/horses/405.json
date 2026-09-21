@@ -209,8 +209,10 @@
         "time": "1:33.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ワンリオン"
-      }
+        "winner_or_runner_up": "ワンリオン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:36.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ヤマタケメジャー"
-      }
+        "winner_or_runner_up": "ヤマタケメジャー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "アーテルレクス"
-      }
+        "winner_or_runner_up": "アーテルレクス",
+        "finish_note": "取"
+      },
+      "finish_note": "取"
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:36.4",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "レオンバローズ"
-      }
+        "winner_or_runner_up": "レオンバローズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:50.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラリベラ"
-      }
+        "winner_or_runner_up": "ラリベラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:30.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "オラヴェリタス"
-      }
+        "winner_or_runner_up": "オラヴェリタス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:23.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "パンドレア"
-      }
+        "winner_or_runner_up": "パンドレア",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

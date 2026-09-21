@@ -209,8 +209,10 @@
         "time": "1:11.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "イラーレ"
-      }
+        "winner_or_runner_up": "イラーレ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:38.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ミッキーフローガ"
-      }
+        "winner_or_runner_up": "ミッキーフローガ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

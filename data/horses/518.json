@@ -209,8 +209,10 @@
         "time": "2:16.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ギブンアンソート"
-      }
+        "winner_or_runner_up": "ギブンアンソート",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:48.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "フィアスプライド"
-      }
+        "winner_or_runner_up": "フィアスプライド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:31.0",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "サツキハピネス"
-      }
+        "winner_or_runner_up": "サツキハピネス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:57.8",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "ファーストソリスト"
-      }
+        "winner_or_runner_up": "ファーストソリスト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:07.5",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ルペルカーリア"
-      }
+        "winner_or_runner_up": "ルペルカーリア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:07.0",
         "track_condition": "稍",
         "weather": "雨",
-        "winner_or_runner_up": "ナギサ"
-      }
+        "winner_or_runner_up": "ナギサ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:04.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "テンバガー"
-      }
+        "winner_or_runner_up": "テンバガー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "2:06.9",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "ランドオブリバティ"
-      }
+        "winner_or_runner_up": "ランドオブリバティ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

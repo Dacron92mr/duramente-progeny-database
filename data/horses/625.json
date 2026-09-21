@@ -209,8 +209,10 @@
         "time": "2:00.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "テイエムファクター"
-      }
+        "winner_or_runner_up": "テイエムファクター",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

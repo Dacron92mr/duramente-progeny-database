@@ -209,8 +209,10 @@
         "time": "2:49.1",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "マイネルオーサム"
-      }
+        "winner_or_runner_up": "マイネルオーサム",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:40.7",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ファミリークレスト"
-      }
+        "winner_or_runner_up": "ファミリークレスト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:59.0",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ニシノスピカ"
-      }
+        "winner_or_runner_up": "ニシノスピカ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "アプサラー"
-      }
+        "winner_or_runner_up": "アプサラー",
+        "finish_note": "除"
+      },
+      "finish_note": "除"
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:52.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ブルトンクール"
-      }
+        "winner_or_runner_up": "ブルトンクール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:38.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "エリカヴィータ"
-      }
+        "winner_or_runner_up": "エリカヴィータ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

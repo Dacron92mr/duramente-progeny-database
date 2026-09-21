@@ -209,8 +209,10 @@
         "time": "2:03.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フェーングロッテン"
-      }
+        "winner_or_runner_up": "フェーングロッテン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:05.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "リブースト"
-      }
+        "winner_or_runner_up": "リブースト",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

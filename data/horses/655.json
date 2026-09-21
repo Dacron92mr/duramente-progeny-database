@@ -209,8 +209,10 @@
         "time": "2:03.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "グランベルナデット"
-      }
+        "winner_or_runner_up": "グランベルナデット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:51.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "レミージュ"
-      }
+        "winner_or_runner_up": "レミージュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:11.9",
         "track_condition": "良",
         "weather": "雨",
-        "winner_or_runner_up": "スピードオブライト"
-      }
+        "winner_or_runner_up": "スピードオブライト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "コーパスクリスティ"
-      }
+        "winner_or_runner_up": "コーパスクリスティ",
+        "finish_note": "除"
+      },
+      "finish_note": "除"
     }
   ],
   "stud": [

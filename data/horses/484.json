@@ -247,8 +247,10 @@
         "time": "1:27.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カリフォルニア"
-      }
+        "winner_or_runner_up": "カリフォルニア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:58.1",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "フラムブランシュ"
-      }
+        "winner_or_runner_up": "フラムブランシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:56.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラオラシオン"
-      }
+        "winner_or_runner_up": "ラオラシオン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:39.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ユニヴェール"
-      }
+        "winner_or_runner_up": "ユニヴェール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:59.3",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "カーマンライン"
-      }
+        "winner_or_runner_up": "カーマンライン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

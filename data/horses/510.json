@@ -209,8 +209,10 @@
         "time": "1:13.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "フェラーラ"
-      }
+        "winner_or_runner_up": "フェラーラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:13.5",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ペガサスハーツ"
-      }
+        "winner_or_runner_up": "ペガサスハーツ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:11.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "プラチナムレイアー"
-      }
+        "winner_or_runner_up": "プラチナムレイアー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:12.6",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "イルデレーヴ"
-      }
+        "winner_or_runner_up": "イルデレーヴ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:14.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ヴァガボンド"
-      }
+        "winner_or_runner_up": "ヴァガボンド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:14.4",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ベンチャーアウト"
-      }
+        "winner_or_runner_up": "ベンチャーアウト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:15.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "メイショウヒューマ"
-      }
+        "winner_or_runner_up": "メイショウヒューマ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:35.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "パタゴニア"
-      }
+        "winner_or_runner_up": "パタゴニア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -713,8 +729,10 @@
         "time": "1:40.9",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "エコロデイジー"
-      }
+        "winner_or_runner_up": "エコロデイジー",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

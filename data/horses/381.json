@@ -209,8 +209,10 @@
         "time": "1:54.7",
         "track_condition": "稍",
         "weather": "小雨",
-        "winner_or_runner_up": "ワイルドベティ"
-      }
+        "winner_or_runner_up": "ワイルドベティ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:50.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ロジシルバー"
-      }
+        "winner_or_runner_up": "ロジシルバー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:02.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "クインズカムイ"
-      }
+        "winner_or_runner_up": "クインズカムイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:04.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ヴァイルマティ"
-      }
+        "winner_or_runner_up": "ヴァイルマティ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:49.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラッジオ"
-      }
+        "winner_or_runner_up": "ラッジオ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

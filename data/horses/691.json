@@ -209,8 +209,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ジャヴァネ"
-      }
+        "winner_or_runner_up": "ジャヴァネ",
+        "finish_note": "除"
+      },
+      "finish_note": "除"
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:25.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "タイセイシップ"
-      }
+        "winner_or_runner_up": "タイセイシップ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

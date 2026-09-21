@@ -209,8 +209,10 @@
         "time": "1:37.3",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ゴールデンカガヤ"
-      }
+        "winner_or_runner_up": "ゴールデンカガヤ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:37.1",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ルートゥドゥピエ"
-      }
+        "winner_or_runner_up": "ルートゥドゥピエ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:35.9",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "(ナキムシヒカル)"
-      }
+        "winner_or_runner_up": "(ナキムシヒカル)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

@@ -209,8 +209,10 @@
         "time": "1:09.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アンジュソレイユ"
-      }
+        "winner_or_runner_up": "アンジュソレイユ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:09.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ルルルージュ"
-      }
+        "winner_or_runner_up": "ルルルージュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:09.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ナンヨーローズ"
-      }
+        "winner_or_runner_up": "ナンヨーローズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:24.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ロングトレーン"
-      }
+        "winner_or_runner_up": "ロングトレーン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:11.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "マウンテンムスメ"
-      }
+        "winner_or_runner_up": "マウンテンムスメ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:11.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "アンチエイジング"
-      }
+        "winner_or_runner_up": "アンチエイジング",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:26.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ヴェールクレール"
-      }
+        "winner_or_runner_up": "ヴェールクレール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

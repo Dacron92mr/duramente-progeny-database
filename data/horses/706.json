@@ -209,8 +209,10 @@
         "time": "1:21.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エイヘンハールト"
-      }
+        "winner_or_runner_up": "エイヘンハールト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:01.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フララナキラ"
-      }
+        "winner_or_runner_up": "フララナキラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:49.3",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "エーデルヴェーグ"
-      }
+        "winner_or_runner_up": "エーデルヴェーグ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

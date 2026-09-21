@@ -209,8 +209,10 @@
         "time": "1:13.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "キョウエイジョイ"
-      }
+        "winner_or_runner_up": "キョウエイジョイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:13.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ケイトポムドゥパン"
-      }
+        "winner_or_runner_up": "ケイトポムドゥパン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:40.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シルバーニース"
-      }
+        "winner_or_runner_up": "シルバーニース",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:39.1",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "グレイウェザーズ"
-      }
+        "winner_or_runner_up": "グレイウェザーズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:56.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ルルシュシュ"
-      }
+        "winner_or_runner_up": "ルルシュシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:19.5",
         "track_condition": "不",
         "weather": "晴",
-        "winner_or_runner_up": "スーパーリベロ"
-      }
+        "winner_or_runner_up": "スーパーリベロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:37.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "レイベリング"
-      }
+        "winner_or_runner_up": "レイベリング",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

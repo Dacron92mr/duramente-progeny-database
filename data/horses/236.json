@@ -209,8 +209,10 @@
         "time": "1:31.0",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ゴールドフライト"
-      }
+        "winner_or_runner_up": "ゴールドフライト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:25.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ロードアラビアン"
-      }
+        "winner_or_runner_up": "ロードアラビアン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:00.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カネコメシスター"
-      }
+        "winner_or_runner_up": "カネコメシスター",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:25.3",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "(マノンルージュ)"
-      }
+        "winner_or_runner_up": "(マノンルージュ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:25.7",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "ワンダーキサラ"
-      }
+        "winner_or_runner_up": "ワンダーキサラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:13.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マルモリスペシャル"
-      }
+        "winner_or_runner_up": "マルモリスペシャル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:13.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ペプチドヤマト"
-      }
+        "winner_or_runner_up": "ペプチドヤマト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:13.8",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "クレア"
-      }
+        "winner_or_runner_up": "クレア",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

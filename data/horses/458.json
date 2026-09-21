@@ -209,8 +209,10 @@
         "time": "1:30.3",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ロードアウォード"
-      }
+        "winner_or_runner_up": "ロードアウォード",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:56.7",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "コンティノアール"
-      }
+        "winner_or_runner_up": "コンティノアール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

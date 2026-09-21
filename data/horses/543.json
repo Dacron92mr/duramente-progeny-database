@@ -209,8 +209,10 @@
         "time": "1:18.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ファリードゥーン"
-      }
+        "winner_or_runner_up": "ファリードゥーン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:18.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "リュウノマジシャン"
-      }
+        "winner_or_runner_up": "リュウノマジシャン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:17.2",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "シーザーキック"
-      }
+        "winner_or_runner_up": "シーザーキック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:16.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フィールマイウェイ"
-      }
+        "winner_or_runner_up": "フィールマイウェイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:21.8",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ゴールデンスキーム"
-      }
+        "winner_or_runner_up": "ゴールデンスキーム",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:17.4",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ヤマトオーザー"
-      }
+        "winner_or_runner_up": "ヤマトオーザー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:16.0",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "レイブンナイト"
-      }
+        "winner_or_runner_up": "レイブンナイト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:38.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "インプロペリア"
-      }
+        "winner_or_runner_up": "インプロペリア",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

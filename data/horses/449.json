@@ -209,8 +209,10 @@
         "time": "1:27.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ボーダーオブライフ"
-      }
+        "winner_or_runner_up": "ボーダーオブライフ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:26.2",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "リンクスエルピス"
-      }
+        "winner_or_runner_up": "リンクスエルピス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:26.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ミルメルシー"
-      }
+        "winner_or_runner_up": "ミルメルシー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:27.9",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "トラストドーベル"
-      }
+        "winner_or_runner_up": "トラストドーベル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フォーカード"
-      }
+        "winner_or_runner_up": "フォーカード",
+        "finish_note": "取"
+      },
+      "finish_note": "取"
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:50.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "(ネロリビガラード)"
-      }
+        "winner_or_runner_up": "(ネロリビガラード)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:32.5",
         "track_condition": "不",
         "weather": "晴",
-        "winner_or_runner_up": "(エレメンタル)"
-      }
+        "winner_or_runner_up": "(エレメンタル)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:26.7",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "(シーピーエフペット)"
-      }
+        "winner_or_runner_up": "(シーピーエフペット)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -713,8 +729,10 @@
         "time": "1:36.8",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "フォーカード"
-      }
+        "winner_or_runner_up": "フォーカード",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -776,8 +794,10 @@
         "time": "0:59.5",
         "track_condition": "不",
         "weather": "小雨",
-        "winner_or_runner_up": "テイエムハヤテオー"
-      }
+        "winner_or_runner_up": "テイエムハヤテオー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -839,8 +859,10 @@
         "time": "1:26.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ゴールドフライト"
-      }
+        "winner_or_runner_up": "ゴールドフライト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -902,8 +924,10 @@
         "time": "2:07.8",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "グロリアムンディ"
-      }
+        "winner_or_runner_up": "グロリアムンディ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

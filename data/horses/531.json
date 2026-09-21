@@ -209,8 +209,10 @@
         "time": "1:16.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "シトラスダル"
-      }
+        "winner_or_runner_up": "シトラスダル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:17.2",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "レジェンドクリア"
-      }
+        "winner_or_runner_up": "レジェンドクリア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:02.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マーゴットリリー"
-      }
+        "winner_or_runner_up": "マーゴットリリー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:02.6",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "セイウンナナセマル"
-      }
+        "winner_or_runner_up": "セイウンナナセマル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:01.8",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "コスモサミット"
-      }
+        "winner_or_runner_up": "コスモサミット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:01.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(スワニーテソーロ)"
-      }
+        "winner_or_runner_up": "(スワニーテソーロ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:02.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "グッドフィーリング"
-      }
+        "winner_or_runner_up": "グッドフィーリング",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:24.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "メイショウイヌワシ"
-      }
+        "winner_or_runner_up": "メイショウイヌワシ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

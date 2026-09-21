@@ -209,8 +209,10 @@
         "time": "1:41.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "セイウンマカロン"
-      }
+        "winner_or_runner_up": "セイウンマカロン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:38.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ビターゼノビア"
-      }
+        "winner_or_runner_up": "ビターゼノビア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:00.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ゴールデンハインド"
-      }
+        "winner_or_runner_up": "ゴールデンハインド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:35.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ジョウショーホープ"
-      }
+        "winner_or_runner_up": "ジョウショーホープ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:50.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(スノードーム)"
-      }
+        "winner_or_runner_up": "(スノードーム)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

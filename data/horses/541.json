@@ -209,8 +209,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "グラッテンハーレ"
-      }
+        "winner_or_runner_up": "グラッテンハーレ",
+        "finish_note": "取"
+      },
+      "finish_note": "取"
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "0:50.1",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "(カサマツノライトオ)"
-      }
+        "winner_or_runner_up": "(カサマツノライトオ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "0:57.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ビップレジアス"
-      }
+        "winner_or_runner_up": "ビップレジアス",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

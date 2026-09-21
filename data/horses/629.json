@@ -209,8 +209,10 @@
         "time": "1:57.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マイネルサハラ"
-      }
+        "winner_or_runner_up": "マイネルサハラ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -209,8 +209,10 @@
         "time": "1:49.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カンバーランド"
-      }
+        "winner_or_runner_up": "カンバーランド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:44.6",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "セントラルヴァレー"
-      }
+        "winner_or_runner_up": "セントラルヴァレー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:51.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サトノオラシオン"
-      }
+        "winner_or_runner_up": "サトノオラシオン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:51.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アドマイヤベル"
-      }
+        "winner_or_runner_up": "アドマイヤベル",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

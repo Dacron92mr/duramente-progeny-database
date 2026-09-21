@@ -209,8 +209,10 @@
         "time": "",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ウォーターハウス"
-      }
+        "winner_or_runner_up": "ウォーターハウス",
+        "finish_note": "中"
+      },
+      "finish_note": "中"
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:54.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "リュクススティール"
-      }
+        "winner_or_runner_up": "リュクススティール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:47.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "パルクリチュード"
-      }
+        "winner_or_runner_up": "パルクリチュード",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -209,8 +209,10 @@
         "time": "1:27.5",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "ローズバルサム"
-      }
+        "winner_or_runner_up": "ローズバルサム",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

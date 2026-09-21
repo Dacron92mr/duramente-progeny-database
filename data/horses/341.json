@@ -209,8 +209,10 @@
         "time": "2:13.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ライフセービング"
-      }
+        "winner_or_runner_up": "ライフセービング",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:17.5",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ブロッケンボウ"
-      }
+        "winner_or_runner_up": "ブロッケンボウ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:01.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "インテグレイト"
-      }
+        "winner_or_runner_up": "インテグレイト",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

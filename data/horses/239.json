@@ -209,8 +209,10 @@
         "time": "2:01.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ネビュルーズ"
-      }
+        "winner_or_runner_up": "ネビュルーズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:28.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カフェグランデ"
-      }
+        "winner_or_runner_up": "カフェグランデ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:41.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ウインマイルート"
-      }
+        "winner_or_runner_up": "ウインマイルート",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:03.0",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "アイアゲート"
-      }
+        "winner_or_runner_up": "アイアゲート",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:27.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(スピアヘッド)"
-      }
+        "winner_or_runner_up": "(スピアヘッド)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:02.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ロジハービン"
-      }
+        "winner_or_runner_up": "ロジハービン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:03.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "レッドランメルト"
-      }
+        "winner_or_runner_up": "レッドランメルト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "2:03.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ファンタジア"
-      }
+        "winner_or_runner_up": "ファンタジア",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

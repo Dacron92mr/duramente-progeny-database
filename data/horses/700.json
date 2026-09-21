@@ -209,8 +209,10 @@
         "time": "1:57.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サッカレッロ"
-      }
+        "winner_or_runner_up": "サッカレッロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:29.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ジョイボーイ"
-      }
+        "winner_or_runner_up": "ジョイボーイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:17.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "サンライズバブル"
-      }
+        "winner_or_runner_up": "サンライズバブル",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

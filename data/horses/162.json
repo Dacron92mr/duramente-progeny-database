@@ -285,8 +285,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "",
-        "winner_or_runner_up": ""
-      }
+        "winner_or_runner_up": "",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -348,8 +350,10 @@
         "time": "",
         "track_condition": "重",
         "weather": "",
-        "winner_or_runner_up": ""
-      }
+        "winner_or_runner_up": "",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -411,8 +415,10 @@
         "time": "2:08.61",
         "track_condition": "重",
         "weather": "",
-        "winner_or_runner_up": "()"
-      }
+        "winner_or_runner_up": "()",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -474,8 +480,10 @@
         "time": "1:57.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ミュージアムマイル"
-      }
+        "winner_or_runner_up": "ミュージアムマイル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -537,8 +545,10 @@
         "time": "2:01.4",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ファウストラーゼン"
-      }
+        "winner_or_runner_up": "ファウストラーゼン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -600,8 +610,10 @@
         "time": "2:00.8",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "ゴーソーファー"
-      }
+        "winner_or_runner_up": "ゴーソーファー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -663,8 +675,10 @@
         "time": "2:02.1",
         "track_condition": "稍",
         "weather": "小雨",
-        "winner_or_runner_up": "(ディベルティスマン)"
-      }
+        "winner_or_runner_up": "(ディベルティスマン)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

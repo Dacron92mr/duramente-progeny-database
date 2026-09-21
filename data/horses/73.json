@@ -209,8 +209,10 @@
         "time": "2:25.4",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "(バラジ)"
-      }
+        "winner_or_runner_up": "(バラジ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:41.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マリノアズラ"
-      }
+        "winner_or_runner_up": "マリノアズラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:41.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "アスティ"
-      }
+        "winner_or_runner_up": "アスティ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:12.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ヴィトーリア)"
-      }
+        "winner_or_runner_up": "(ヴィトーリア)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:34.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ボーンジーニアス"
-      }
+        "winner_or_runner_up": "ボーンジーニアス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:25.4",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "ワンダフルタウン"
-      }
+        "winner_or_runner_up": "ワンダフルタウン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:01.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ネイチャーシップ)"
-      }
+        "winner_or_runner_up": "(ネイチャーシップ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:51.3",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "タウゼントシェーン"
-      }
+        "winner_or_runner_up": "タウゼントシェーン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total_wins": 1262,
+    "total_wins": 1265,
     "jra_wins": 583,
-    "nar_wins": 677,
+    "nar_wins": 680,
     "overseas_wins": 2,
     "other_wins": 0,
     "years": [
@@ -36,12 +36,12 @@
       "g2_wins": 0,
       "g3_wins": 0,
       "earnings": 40635.2,
-      "race_prize_earnings": 34782.6,
+      "race_prize_earnings": 40635.2,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2020&y2=2024&y3=2026&kind=1&division=1&racetype1=1&racetype2=1&y_f=2026&y_t=2026&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=4&order=A",
       "earnings_rank": 62,
-      "prize_rows": 107
+      "prize_rows": 126
     },
     {
       "year": 2021,
@@ -62,12 +62,12 @@
       "g2_wins": 1,
       "g3_wins": 0,
       "earnings": 161398.2,
-      "race_prize_earnings": 143732.0,
+      "race_prize_earnings": 161398.2,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2021&y2=2024&y3=2021&kind=1&division=1&racetype1=1&racetype2=1&y_f=2021&y_t=2021&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 11,
-      "prize_rows": 587
+      "prize_rows": 672
     },
     {
       "year": 2022,
@@ -88,12 +88,12 @@
       "g2_wins": 1,
       "g3_wins": 2,
       "earnings": 319378.6,
-      "race_prize_earnings": 294466.5,
+      "race_prize_earnings": 319378.7,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2022&y2=2024&y3=2022&kind=1&division=1&racetype1=1&racetype2=1&y_f=2022&y_t=2022&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 5,
-      "prize_rows": 878
+      "prize_rows": 1040
     },
     {
       "year": 2023,
@@ -114,12 +114,12 @@
       "g2_wins": 3,
       "g3_wins": 3,
       "earnings": 446028.8,
-      "race_prize_earnings": 395261.2,
+      "race_prize_earnings": 446223.1,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2023&y2=2024&y3=2023&kind=1&division=1&racetype1=1&racetype2=1&y_f=2023&y_t=2023&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 1,
-      "prize_rows": 867
+      "prize_rows": 1040
     },
     {
       "year": 2024,
@@ -140,12 +140,12 @@
       "g2_wins": 1,
       "g3_wins": 2,
       "earnings": 277033.6,
-      "race_prize_earnings": 211857.9,
+      "race_prize_earnings": 277658.6,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2024&y2=2024&y3=2024&kind=1&division=1&racetype1=1&racetype2=1&y_f=2024&y_t=2024&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 4,
-      "prize_rows": 813
+      "prize_rows": 1037
     },
     {
       "year": 2025,
@@ -166,38 +166,38 @@
       "g2_wins": 4,
       "g3_wins": 2,
       "earnings": 295333.4,
-      "race_prize_earnings": 198806.0,
+      "race_prize_earnings": 295333.4,
       "earnings_status": "complete",
       "earnings_source": "JBISサーチ 種牡馬ランキング",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2025&y2=2024&y3=2025&kind=1&division=1&racetype1=1&racetype2=1&y_f=2025&y_t=2025&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 4,
-      "prize_rows": 666
+      "prize_rows": 805
     },
     {
       "year": 2026,
-      "starts": 852,
-      "runners": 160,
-      "wins": 84,
-      "winners": 56,
+      "starts": 895,
+      "runners": 161,
+      "wins": 87,
+      "winners": 58,
       "jra_wins": 27,
-      "nar_wins": 57,
+      "nar_wins": 60,
       "overseas_wins": 0,
       "other_wins": 0,
-      "top3": 252,
-      "win_rate": 0.0986,
-      "top3_rate": 0.2958,
-      "winner_runner_rate": 0.35,
+      "top3": 261,
+      "win_rate": 0.0972,
+      "top3_rate": 0.2916,
+      "winner_runner_rate": 0.3602,
       "graded_wins": 2,
       "g1_wins": 0,
       "g2_wins": 2,
       "g3_wins": 0,
       "earnings": 103491.4,
-      "race_prize_earnings": 104247.0,
+      "race_prize_earnings": 119208.3,
       "earnings_status": "partial",
       "earnings_source": "JBISサーチ 種牡馬ランキング（进行中）",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2026&y2=2024&y3=2026&kind=1&division=1&racetype1=1&racetype2=1&y_f=2026&y_t=2026&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 9,
-      "prize_rows": 355
+      "prize_rows": 439
     }
   ],
   "win_events": [
@@ -266,7 +266,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 700.0,
       "cumulative_wins": 4
     },
     {
@@ -317,7 +317,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 510.0,
       "cumulative_wins": 7
     },
     {
@@ -453,7 +453,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1029.6,
       "cumulative_wins": 15
     },
     {
@@ -810,7 +810,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 510.0,
       "cumulative_wins": 36
     },
     {
@@ -878,7 +878,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 700.0,
       "cumulative_wins": 40
     },
     {
@@ -895,7 +895,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 730.0,
       "cumulative_wins": 41
     },
     {
@@ -1201,7 +1201,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 510.0,
       "cumulative_wins": 59
     },
     {
@@ -1337,7 +1337,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 150.0,
       "cumulative_wins": 67
     },
     {
@@ -1354,7 +1354,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 730.0,
       "cumulative_wins": 68
     },
     {
@@ -1541,7 +1541,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 760.0,
       "cumulative_wins": 79
     },
     {
@@ -1575,7 +1575,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 510.0,
       "cumulative_wins": 81
     },
     {
@@ -1643,7 +1643,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 510.0,
       "cumulative_wins": 85
     },
     {
@@ -1932,7 +1932,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 50.0,
       "cumulative_wins": 102
     },
     {
@@ -2187,7 +2187,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 117
     },
     {
@@ -2476,7 +2476,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 134
     },
     {
@@ -2646,7 +2646,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1529.4,
       "cumulative_wins": 144
     },
     {
@@ -2697,7 +2697,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 147
     },
     {
@@ -3309,7 +3309,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 700.0,
       "cumulative_wins": 183
     },
     {
@@ -3343,7 +3343,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 185
     },
     {
@@ -3411,7 +3411,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 760.0,
       "cumulative_wins": 189
     },
     {
@@ -3836,7 +3836,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 50.0,
       "cumulative_wins": 214
     },
     {
@@ -3972,7 +3972,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 520.0,
       "cumulative_wins": 222
     },
     {
@@ -4329,7 +4329,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1110.0,
       "cumulative_wins": 243
     },
     {
@@ -4516,7 +4516,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 65.0,
       "cumulative_wins": 254
     },
     {
@@ -4567,7 +4567,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 750.0,
       "cumulative_wins": 257
     },
     {
@@ -4822,7 +4822,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 770.0,
       "cumulative_wins": 272
     },
     {
@@ -4975,7 +4975,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 520.0,
       "cumulative_wins": 281
     },
     {
@@ -4992,7 +4992,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1870.1,
       "cumulative_wins": 282
     },
     {
@@ -5264,7 +5264,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 520.0,
       "cumulative_wins": 298
     },
     {
@@ -5468,7 +5468,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 770.0,
       "cumulative_wins": 310
     },
     {
@@ -5519,7 +5519,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 37.0,
       "cumulative_wins": 313
     },
     {
@@ -5808,7 +5808,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 33.0,
       "cumulative_wins": 330
     },
     {
@@ -5961,7 +5961,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 339
     },
     {
@@ -6165,7 +6165,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 120.0,
       "cumulative_wins": 351
     },
     {
@@ -6267,7 +6267,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 36.0,
       "cumulative_wins": 357
     },
     {
@@ -6335,7 +6335,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1092.4,
       "cumulative_wins": 361
     },
     {
@@ -6352,7 +6352,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 770.0,
       "cumulative_wins": 362
     },
     {
@@ -6369,7 +6369,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 50.0,
       "cumulative_wins": 363
     },
     {
@@ -6403,7 +6403,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 365
     },
     {
@@ -6488,7 +6488,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 140.0,
       "cumulative_wins": 370
     },
     {
@@ -6607,7 +6607,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 377
     },
     {
@@ -6726,7 +6726,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1539.4,
       "cumulative_wins": 384
     },
     {
@@ -6828,7 +6828,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 37.0,
       "cumulative_wins": 390
     },
     {
@@ -6845,7 +6845,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 36.0,
       "cumulative_wins": 391
     },
     {
@@ -6981,7 +6981,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 790.0,
       "cumulative_wins": 399
     },
     {
@@ -7100,7 +7100,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 406
     },
     {
@@ -7236,7 +7236,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 39.0,
       "cumulative_wins": 414
     },
     {
@@ -7253,7 +7253,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 36.0,
       "cumulative_wins": 415
     },
     {
@@ -7355,7 +7355,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 421
     },
     {
@@ -7449,7 +7449,7 @@
       "horse_id": 181,
       "horse": "ルージュブラゾン",
       "hkjc_name_zh": null,
-      "race_name": "C2五　六",
+      "race_name": "C2五 六",
       "race_url": "https://db.netkeiba.com/race/202242101905/",
       "meeting": "浦和",
       "raw_meeting": "浦和",
@@ -7457,7 +7457,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 427
     },
     {
@@ -7474,7 +7474,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 428
     },
     {
@@ -7542,7 +7542,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 432
     },
     {
@@ -7559,7 +7559,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 433
     },
     {
@@ -7712,7 +7712,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 442
     },
     {
@@ -7831,7 +7831,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 520.0,
       "cumulative_wins": 449
     },
     {
@@ -7882,7 +7882,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 700.0,
       "cumulative_wins": 452
     },
     {
@@ -8018,7 +8018,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 150.0,
       "cumulative_wins": 460
     },
     {
@@ -8171,7 +8171,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 469
     },
     {
@@ -8205,7 +8205,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 32.0,
       "cumulative_wins": 471
     },
     {
@@ -8290,7 +8290,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 110.0,
       "cumulative_wins": 476
     },
     {
@@ -8409,7 +8409,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 32.0,
       "cumulative_wins": 483
     },
     {
@@ -8460,7 +8460,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 486
     },
     {
@@ -8630,7 +8630,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 496
     },
     {
@@ -8715,7 +8715,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 30.0,
       "cumulative_wins": 501
     },
     {
@@ -8783,7 +8783,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 90.0,
       "cumulative_wins": 505
     },
     {
@@ -8800,7 +8800,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 506
     },
     {
@@ -8817,7 +8817,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 550.0,
       "cumulative_wins": 507
     },
     {
@@ -9038,7 +9038,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 520
     },
     {
@@ -9047,7 +9047,7 @@
       "horse_id": 267,
       "horse": "ヴァンクールシチー",
       "hkjc_name_zh": null,
-      "race_name": "C2七　八",
+      "race_name": "C2七 八",
       "race_url": "https://db.netkeiba.com/race/202345020206/",
       "meeting": "川崎",
       "raw_meeting": "川崎",
@@ -9055,7 +9055,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 521
     },
     {
@@ -9429,7 +9429,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 800.0,
       "cumulative_wins": 543
     },
     {
@@ -9514,7 +9514,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 548
     },
     {
@@ -9633,7 +9633,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 555
     },
     {
@@ -9701,7 +9701,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1084.7,
       "cumulative_wins": 559
     },
     {
@@ -9888,7 +9888,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 570
     },
     {
@@ -9990,7 +9990,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 576
     },
     {
@@ -10058,7 +10058,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 2021.0,
       "cumulative_wins": 580
     },
     {
@@ -10160,7 +10160,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1140.0,
       "cumulative_wins": 586
     },
     {
@@ -10381,7 +10381,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1571.7,
       "cumulative_wins": 599
     },
     {
@@ -10432,7 +10432,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 44.0,
       "cumulative_wins": 602
     },
     {
@@ -10670,7 +10670,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 616
     },
     {
@@ -10772,7 +10772,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 550.0,
       "cumulative_wins": 622
     },
     {
@@ -10823,7 +10823,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 46.0,
       "cumulative_wins": 625
     },
     {
@@ -11010,7 +11010,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 636
     },
     {
@@ -11112,7 +11112,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 43.0,
       "cumulative_wins": 642
     },
     {
@@ -11350,7 +11350,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1867.3,
       "cumulative_wins": 656
     },
     {
@@ -11418,7 +11418,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 35.0,
       "cumulative_wins": 660
     },
     {
@@ -11469,7 +11469,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 56.0,
       "cumulative_wins": 663
     },
     {
@@ -11571,7 +11571,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 669
     },
     {
@@ -11656,7 +11656,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 674
     },
     {
@@ -12047,7 +12047,7 @@
       "country": "Japan",
       "grade": "GI",
       "grade_group": "G1",
-      "prize": 0.0,
+      "prize": 22703.4,
       "cumulative_wins": 697
     },
     {
@@ -12064,7 +12064,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 80.0,
       "cumulative_wins": 698
     },
     {
@@ -12217,7 +12217,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 707
     },
     {
@@ -12268,7 +12268,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 710
     },
     {
@@ -12336,7 +12336,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 44.0,
       "cumulative_wins": 714
     },
     {
@@ -12353,7 +12353,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 715
     },
     {
@@ -12404,7 +12404,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1869.4,
       "cumulative_wins": 718
     },
     {
@@ -12472,7 +12472,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 722
     },
     {
@@ -12506,7 +12506,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 724
     },
     {
@@ -12557,7 +12557,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 727
     },
     {
@@ -12625,7 +12625,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 731
     },
     {
@@ -12642,7 +12642,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 85.0,
       "cumulative_wins": 732
     },
     {
@@ -12727,7 +12727,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 44.0,
       "cumulative_wins": 737
     },
     {
@@ -12812,7 +12812,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 742
     },
     {
@@ -12999,7 +12999,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 37.0,
       "cumulative_wins": 753
     },
     {
@@ -13033,7 +13033,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 85.0,
       "cumulative_wins": 755
     },
     {
@@ -13254,7 +13254,7 @@
       "country": "Japan",
       "grade": "GIII",
       "grade_group": "G3",
-      "prize": 0.0,
+      "prize": 4163.7,
       "cumulative_wins": 768
     },
     {
@@ -13271,7 +13271,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 790.0,
       "cumulative_wins": 769
     },
     {
@@ -13288,7 +13288,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 85.0,
       "cumulative_wins": 770
     },
     {
@@ -13390,7 +13390,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 37.0,
       "cumulative_wins": 776
     },
     {
@@ -13407,7 +13407,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 777
     },
     {
@@ -13475,7 +13475,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 110.0,
       "cumulative_wins": 781
     },
     {
@@ -13543,7 +13543,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 785
     },
     {
@@ -13645,7 +13645,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 220.0,
       "cumulative_wins": 791
     },
     {
@@ -13764,7 +13764,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 798
     },
     {
@@ -13815,7 +13815,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 400.0,
       "cumulative_wins": 801
     },
     {
@@ -13900,7 +13900,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 806
     },
     {
@@ -13985,7 +13985,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 811
     },
     {
@@ -14002,7 +14002,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 55.0,
       "cumulative_wins": 812
     },
     {
@@ -14053,7 +14053,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 815
     },
     {
@@ -14087,7 +14087,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 817
     },
     {
@@ -14189,7 +14189,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 823
     },
     {
@@ -14240,7 +14240,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 790.0,
       "cumulative_wins": 826
     },
     {
@@ -14274,7 +14274,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 828
     },
     {
@@ -14444,7 +14444,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 42.0,
       "cumulative_wins": 838
     },
     {
@@ -14512,7 +14512,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 842
     },
     {
@@ -14725,7 +14725,7 @@
       "horse_id": 441,
       "horse": "ワンモアチャンス",
       "hkjc_name_zh": null,
-      "race_name": "3歳B　3特編(3歳3)",
+      "race_name": "3歳B 3特編(3歳3)",
       "race_url": "https://db.netkeiba.com/race/202446051403/",
       "meeting": "金沢",
       "raw_meeting": "金沢",
@@ -14733,7 +14733,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 855
     },
     {
@@ -14835,7 +14835,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 550.0,
       "cumulative_wins": 861
     },
     {
@@ -14869,7 +14869,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 800.0,
       "cumulative_wins": 863
     },
     {
@@ -14903,7 +14903,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 41.0,
       "cumulative_wins": 865
     },
     {
@@ -14954,7 +14954,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 620.0,
       "cumulative_wins": 868
     },
     {
@@ -15022,7 +15022,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 872
     },
     {
@@ -15039,7 +15039,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 150.0,
       "cumulative_wins": 873
     },
     {
@@ -15073,7 +15073,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 875
     },
     {
@@ -15090,7 +15090,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 876
     },
     {
@@ -15175,7 +15175,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 42.0,
       "cumulative_wins": 881
     },
     {
@@ -15396,7 +15396,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 550.0,
       "cumulative_wins": 894
     },
     {
@@ -15447,7 +15447,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 897
     },
     {
@@ -15515,7 +15515,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 120.0,
       "cumulative_wins": 901
     },
     {
@@ -15549,7 +15549,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 903
     },
     {
@@ -15583,7 +15583,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 180.0,
       "cumulative_wins": 905
     },
     {
@@ -15617,7 +15617,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1589.2,
       "cumulative_wins": 907
     },
     {
@@ -15753,7 +15753,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 720.0,
       "cumulative_wins": 915
     },
     {
@@ -15787,7 +15787,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 917
     },
     {
@@ -15804,7 +15804,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 75.0,
       "cumulative_wins": 918
     },
     {
@@ -15940,7 +15940,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 400.0,
       "cumulative_wins": 926
     },
     {
@@ -16161,7 +16161,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1872.2,
       "cumulative_wins": 939
     },
     {
@@ -16195,7 +16195,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 941
     },
     {
@@ -16297,7 +16297,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 75.0,
       "cumulative_wins": 947
     },
     {
@@ -16331,7 +16331,7 @@
       "country": "Japan",
       "grade": "GI",
       "grade_group": "G1",
-      "prize": 0.0,
+      "prize": 17336.0,
       "cumulative_wins": 949
     },
     {
@@ -16348,7 +16348,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 950
     },
     {
@@ -16467,7 +16467,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 957
     },
     {
@@ -16484,7 +16484,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 49.0,
       "cumulative_wins": 958
     },
     {
@@ -16535,7 +16535,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1718.9,
       "cumulative_wins": 961
     },
     {
@@ -16637,7 +16637,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 50.0,
       "cumulative_wins": 967
     },
     {
@@ -16841,7 +16841,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 48.0,
       "cumulative_wins": 979
     },
     {
@@ -16858,7 +16858,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 110.0,
       "cumulative_wins": 980
     },
     {
@@ -16909,7 +16909,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 983
     },
     {
@@ -17079,7 +17079,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 80.0,
       "cumulative_wins": 993
     },
     {
@@ -17215,7 +17215,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 1001
     },
     {
@@ -17249,7 +17249,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 110.0,
       "cumulative_wins": 1003
     },
     {
@@ -17470,7 +17470,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 130.0,
       "cumulative_wins": 1016
     },
     {
@@ -17487,7 +17487,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 840.0,
       "cumulative_wins": 1017
     },
     {
@@ -17521,7 +17521,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 88.0,
       "cumulative_wins": 1019
     },
     {
@@ -17572,7 +17572,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 840.0,
       "cumulative_wins": 1022
     },
     {
@@ -17606,7 +17606,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 90.0,
       "cumulative_wins": 1024
     },
     {
@@ -17776,7 +17776,7 @@
       "country": "Japan",
       "grade": "GIII",
       "grade_group": "G3",
-      "prize": 0.0,
+      "prize": 4132.9,
       "cumulative_wins": 1034
     },
     {
@@ -17895,7 +17895,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 1041
     },
     {
@@ -17946,7 +17946,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 1044
     },
     {
@@ -18337,7 +18337,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 55.0,
       "cumulative_wins": 1067
     },
     {
@@ -18354,7 +18354,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 1068
     },
     {
@@ -18473,7 +18473,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1430.0,
       "cumulative_wins": 1075
     },
     {
@@ -18524,7 +18524,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 1078
     },
     {
@@ -18643,7 +18643,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 40.0,
       "cumulative_wins": 1085
     },
     {
@@ -18711,7 +18711,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 55.0,
       "cumulative_wins": 1089
     },
     {
@@ -18796,7 +18796,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 1094
     },
     {
@@ -18847,7 +18847,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1430.0,
       "cumulative_wins": 1097
     },
     {
@@ -18924,7 +18924,7 @@
       "horse_id": 334,
       "horse": "シュヴァイゲン",
       "hkjc_name_zh": null,
-      "race_name": "C3一　二",
+      "race_name": "C3一 二",
       "race_url": "https://db.netkeiba.com/race/202544061301/",
       "meeting": "大井",
       "raw_meeting": "大井",
@@ -18932,7 +18932,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 80.0,
       "cumulative_wins": 1102
     },
     {
@@ -19051,7 +19051,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 560.0,
       "cumulative_wins": 1109
     },
     {
@@ -19119,7 +19119,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 43.0,
       "cumulative_wins": 1113
     },
     {
@@ -19136,7 +19136,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 90.0,
       "cumulative_wins": 1114
     },
     {
@@ -19510,7 +19510,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 60.0,
       "cumulative_wins": 1136
     },
     {
@@ -19629,7 +19629,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 100.0,
       "cumulative_wins": 1143
     },
     {
@@ -19646,7 +19646,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 1430.0,
       "cumulative_wins": 1144
     },
     {
@@ -19867,7 +19867,7 @@
       "country": "Japan",
       "grade": "GI",
       "grade_group": "G1",
-      "prize": 0.0,
+      "prize": 30298.2,
       "cumulative_wins": 1157
     },
     {
@@ -20063,7 +20063,7 @@
       "horse_id": 228,
       "horse": "マクシミリアン",
       "hkjc_name_zh": null,
-      "race_name": "C15　特別編成(C1特別)",
+      "race_name": "C15 特別編成(C1特別)",
       "race_url": "https://db.netkeiba.com/race/202546120804/",
       "meeting": "金沢",
       "raw_meeting": "金沢",
@@ -20071,7 +20071,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 1169
     },
     {
@@ -20122,7 +20122,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 150.0,
       "cumulative_wins": 1172
     },
     {
@@ -20207,7 +20207,7 @@
       "country": "Japan",
       "grade": "GII",
       "grade_group": "G2",
-      "prize": 0.0,
+      "prize": 6816.2,
       "cumulative_wins": 1177
     },
     {
@@ -20224,7 +20224,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 50.0,
       "cumulative_wins": 1178
     },
     {
@@ -20428,7 +20428,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 1190
     },
     {
@@ -20479,7 +20479,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 70.0,
       "cumulative_wins": 1193
     },
     {
@@ -20513,7 +20513,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 90.0,
       "cumulative_wins": 1195
     },
     {
@@ -20581,7 +20581,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 90.0,
       "cumulative_wins": 1199
     },
     {
@@ -20632,7 +20632,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 80.0,
       "cumulative_wins": 1202
     },
     {
@@ -20666,7 +20666,7 @@
       "country": "Japan",
       "grade": "JGII",
       "grade_group": "G2",
-      "prize": 0.0,
+      "prize": 4535.0,
       "cumulative_wins": 1204
     },
     {
@@ -20734,7 +20734,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 45.0,
       "cumulative_wins": 1208
     },
     {
@@ -20887,7 +20887,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 820.0,
       "cumulative_wins": 1217
     },
     {
@@ -20904,7 +20904,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 80.0,
       "cumulative_wins": 1218
     },
     {
@@ -21006,7 +21006,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 200.0,
       "cumulative_wins": 1224
     },
     {
@@ -21074,7 +21074,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 840.0,
       "cumulative_wins": 1228
     },
     {
@@ -21176,7 +21176,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 140.0,
       "cumulative_wins": 1234
     },
     {
@@ -21261,7 +21261,7 @@
       "country": "Japan",
       "grade": null,
       "grade_group": null,
-      "prize": 0.0,
+      "prize": 43.0,
       "cumulative_wins": 1239
     },
     {
@@ -21418,6 +21418,23 @@
       "cumulative_wins": 1248
     },
     {
+      "race_date": "2026/07/28",
+      "year": 2026,
+      "horse_id": 334,
+      "horse": "シュヴァイゲン",
+      "hkjc_name_zh": null,
+      "race_name": "ペパーミント賞(C3)",
+      "race_url": "https://db.netkeiba.com/race/202645072803/",
+      "meeting": "川崎",
+      "raw_meeting": "川崎",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 90.0,
+      "cumulative_wins": 1249
+    },
+    {
       "race_date": "2026/07/29",
       "year": 2026,
       "horse_id": 440,
@@ -21432,7 +21449,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 100.0,
-      "cumulative_wins": 1249
+      "cumulative_wins": 1250
     },
     {
       "race_date": "2026/07/30",
@@ -21449,7 +21466,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 70.0,
-      "cumulative_wins": 1250
+      "cumulative_wins": 1251
     },
     {
       "race_date": "2026/08/02",
@@ -21466,7 +21483,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 60.0,
-      "cumulative_wins": 1251
+      "cumulative_wins": 1252
     },
     {
       "race_date": "2026/08/09",
@@ -21483,7 +21500,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 1598.2,
-      "cumulative_wins": 1252
+      "cumulative_wins": 1253
     },
     {
       "race_date": "2026/08/09",
@@ -21500,7 +21517,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 43.0,
-      "cumulative_wins": 1253
+      "cumulative_wins": 1254
     },
     {
       "race_date": "2026/08/16",
@@ -21517,7 +21534,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 1594.7,
-      "cumulative_wins": 1254
+      "cumulative_wins": 1255
     },
     {
       "race_date": "2026/08/19",
@@ -21534,7 +21551,24 @@
       "grade": null,
       "grade_group": null,
       "prize": 100.0,
-      "cumulative_wins": 1255
+      "cumulative_wins": 1256
+    },
+    {
+      "race_date": "2026/08/20",
+      "year": 2026,
+      "horse_id": 150,
+      "horse": "スカリーワグ",
+      "hkjc_name_zh": null,
+      "race_name": "C3三",
+      "race_url": "https://db.netkeiba.com/race/202650082001/",
+      "meeting": "園田",
+      "raw_meeting": "園田",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 60.0,
+      "cumulative_wins": 1257
     },
     {
       "race_date": "2026/08/23",
@@ -21551,7 +21585,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 43.0,
-      "cumulative_wins": 1256
+      "cumulative_wins": 1258
     },
     {
       "race_date": "2026/08/24",
@@ -21568,7 +21602,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 70.0,
-      "cumulative_wins": 1257
+      "cumulative_wins": 1259
     },
     {
       "race_date": "2026/09/02",
@@ -21585,7 +21619,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 70.0,
-      "cumulative_wins": 1258
+      "cumulative_wins": 1260
     },
     {
       "race_date": "2026/09/06",
@@ -21602,7 +21636,24 @@
       "grade": null,
       "grade_group": null,
       "prize": 820.0,
-      "cumulative_wins": 1259
+      "cumulative_wins": 1261
+    },
+    {
+      "race_date": "2026/09/08",
+      "year": 2026,
+      "horse_id": 441,
+      "horse": "ワンモアチャンス",
+      "hkjc_name_zh": null,
+      "race_name": "C16",
+      "race_url": "https://db.netkeiba.com/race/202646090806/",
+      "meeting": "金沢",
+      "raw_meeting": "金沢",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 45.0,
+      "cumulative_wins": 1262
     },
     {
       "race_date": "2026/09/16",
@@ -21619,7 +21670,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 100.0,
-      "cumulative_wins": 1260
+      "cumulative_wins": 1263
     },
     {
       "race_date": "2026/09/17",
@@ -21636,7 +21687,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 480.0,
-      "cumulative_wins": 1261
+      "cumulative_wins": 1264
     },
     {
       "race_date": "2026/09/18",
@@ -21653,7 +21704,7 @@
       "grade": null,
       "grade_group": null,
       "prize": 320.0,
-      "cumulative_wins": 1262
+      "cumulative_wins": 1265
     }
   ],
   "milestones": [

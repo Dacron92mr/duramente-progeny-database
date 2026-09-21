@@ -247,8 +247,10 @@
         "winner_or_runner_up": "コックオーヴァン",
         "horse_id": 450,
         "horse_name": "サトノセレナーデ",
-        "netkeiba_id": "2021103440"
-      }
+        "netkeiba_id": "2021103440",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:27.2",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "エムティエスターテ"
-      }
+        "winner_or_runner_up": "エムティエスターテ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:13.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "タイセイルヴァン"
-      }
+        "winner_or_runner_up": "タイセイルヴァン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:26.4",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "チェイスザウェイ"
-      }
+        "winner_or_runner_up": "チェイスザウェイ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:15.0",
         "track_condition": "重",
         "weather": "晴",
-        "winner_or_runner_up": "(マッターホルン)"
-      }
+        "winner_or_runner_up": "(マッターホルン)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:14.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ハヤブサアポチャン)"
-      }
+        "winner_or_runner_up": "(ハヤブサアポチャン)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:13.9",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "(キタノヒコボシ)"
-      }
+        "winner_or_runner_up": "(キタノヒコボシ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:15.8",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "(ビービーダイゴ)"
-      }
+        "winner_or_runner_up": "(ビービーダイゴ)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

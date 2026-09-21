@@ -209,8 +209,10 @@
         "time": "2:04.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "オリーブグリーン"
-      }
+        "winner_or_runner_up": "オリーブグリーン",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -209,8 +209,10 @@
         "time": "1:54.6",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "バルミラクル"
-      }
+        "winner_or_runner_up": "バルミラクル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:54.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "オリジナルファイン"
-      }
+        "winner_or_runner_up": "オリジナルファイン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:54.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アイブリンク"
-      }
+        "winner_or_runner_up": "アイブリンク",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:48.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ヴォルクメア"
-      }
+        "winner_or_runner_up": "ヴォルクメア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:55.9",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "フクキタテーラー"
-      }
+        "winner_or_runner_up": "フクキタテーラー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:51.2",
         "track_condition": "不",
         "weather": "曇",
-        "winner_or_runner_up": "ジュルナール"
-      }
+        "winner_or_runner_up": "ジュルナール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:48.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エイカイカッシーナ"
-      }
+        "winner_or_runner_up": "エイカイカッシーナ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "2:02.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サヴォンリンナ"
-      }
+        "winner_or_runner_up": "サヴォンリンナ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -713,8 +729,10 @@
         "time": "1:35.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラージギャラリー"
-      }
+        "winner_or_runner_up": "ラージギャラリー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -776,8 +794,10 @@
         "time": "1:49.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ウォータークラーク"
-      }
+        "winner_or_runner_up": "ウォータークラーク",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

@@ -209,8 +209,10 @@
         "time": "1:47.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(オラヴェリタス)"
-      }
+        "winner_or_runner_up": "(オラヴェリタス)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:59.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "マリアエレーナ"
-      }
+        "winner_or_runner_up": "マリアエレーナ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:35.2",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ホウオウアマゾン"
-      }
+        "winner_or_runner_up": "ホウオウアマゾン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:05.1",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ウインアグライア"
-      }
+        "winner_or_runner_up": "ウインアグライア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:04.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ダノンザキッド"
-      }
+        "winner_or_runner_up": "ダノンザキッド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:01.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(クインズラベンダー)"
-      }
+        "winner_or_runner_up": "(クインズラベンダー)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:51.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(マンヌポルト)"
-      }
+        "winner_or_runner_up": "(マンヌポルト)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

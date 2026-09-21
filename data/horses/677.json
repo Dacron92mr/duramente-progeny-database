@@ -209,8 +209,10 @@
         "time": "2:03.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トライデントスピア"
-      }
+        "winner_or_runner_up": "トライデントスピア",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

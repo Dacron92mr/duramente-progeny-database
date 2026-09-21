@@ -209,8 +209,10 @@
         "time": "2:00.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サンバデジャネイロ"
-      }
+        "winner_or_runner_up": "サンバデジャネイロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:23.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "コスモアディラート"
-      }
+        "winner_or_runner_up": "コスモアディラート",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

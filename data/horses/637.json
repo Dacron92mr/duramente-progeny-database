@@ -209,8 +209,10 @@
         "time": "",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "マイネルオーサム"
-      }
+        "winner_or_runner_up": "マイネルオーサム",
+        "finish_note": "中"
+      },
+      "finish_note": "中"
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:17.4",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "トップスティール"
-      }
+        "winner_or_runner_up": "トップスティール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

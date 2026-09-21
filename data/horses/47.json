@@ -247,8 +247,10 @@
         "winner_or_runner_up": "ジョバンニ",
         "horse_id": 47,
         "horse_name": "マリアイリダータ",
-        "netkeiba_id": "2022105064"
-      }
+        "netkeiba_id": "2022105064",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:56.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(フィオレストラーダ)"
-      }
+        "winner_or_runner_up": "(フィオレストラーダ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "2:00.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ホウオウシンデレラ)"
-      }
+        "winner_or_runner_up": "(ホウオウシンデレラ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "2:02.0",
         "track_condition": "良",
         "weather": "雨",
-        "winner_or_runner_up": "(ベネスピラ)"
-      }
+        "winner_or_runner_up": "(ベネスピラ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:59.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "キャピタルリッチ"
-      }
+        "winner_or_runner_up": "キャピタルリッチ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:44.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ベストミーエヴァー"
-      }
+        "winner_or_runner_up": "ベストミーエヴァー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:48.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ミラーダカリエンテ"
-      }
+        "winner_or_runner_up": "ミラーダカリエンテ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:46.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ルージュソリテール"
-      }
+        "winner_or_runner_up": "ルージュソリテール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -751,8 +767,10 @@
         "time": "1:47.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(アーラグラシア)"
-      }
+        "winner_or_runner_up": "(アーラグラシア)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

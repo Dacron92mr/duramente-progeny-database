@@ -247,8 +247,10 @@
         "time": "1:56.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エアニゲラ"
-      }
+        "winner_or_runner_up": "エアニゲラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:56.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ハリウッドパーク"
-      }
+        "winner_or_runner_up": "ハリウッドパーク",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:55.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "サトノアイオライト"
-      }
+        "winner_or_runner_up": "サトノアイオライト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:56.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(タガノエクレール)"
-      }
+        "winner_or_runner_up": "(タガノエクレール)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:52.9",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "スマートプレシャス"
-      }
+        "winner_or_runner_up": "スマートプレシャス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:55.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "クラヴィコード"
-      }
+        "winner_or_runner_up": "クラヴィコード",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:56.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ペイシャコパ"
-      }
+        "winner_or_runner_up": "ペイシャコパ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:48.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サブマリーナ"
-      }
+        "winner_or_runner_up": "サブマリーナ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

@@ -209,8 +209,10 @@
         "time": "1:30.6",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "マニールリッヒ"
-      }
+        "winner_or_runner_up": "マニールリッヒ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:29.7",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "ナススイート"
-      }
+        "winner_or_runner_up": "ナススイート",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:28.4",
         "track_condition": "不",
         "weather": "晴",
-        "winner_or_runner_up": "ネオアビー"
-      }
+        "winner_or_runner_up": "ネオアビー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:15.5",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ヒューリット"
-      }
+        "winner_or_runner_up": "ヒューリット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:42.2",
         "track_condition": "稍",
         "weather": "小雨",
-        "winner_or_runner_up": "ソレンニータ"
-      }
+        "winner_or_runner_up": "ソレンニータ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:15.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ルミナスアロー"
-      }
+        "winner_or_runner_up": "ルミナスアロー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:16.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(シャイニーマジック)"
-      }
+        "winner_or_runner_up": "(シャイニーマジック)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:17.1",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "ネオリーズ"
-      }
+        "winner_or_runner_up": "ネオリーズ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

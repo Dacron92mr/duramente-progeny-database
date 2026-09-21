@@ -209,8 +209,10 @@
         "time": "1:34.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ジャスティンカフェ"
-      }
+        "winner_or_runner_up": "ジャスティンカフェ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:34.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(チアチアクラシカ)"
-      }
+        "winner_or_runner_up": "(チアチアクラシカ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:59.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ファインルージュ"
-      }
+        "winner_or_runner_up": "ファインルージュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:49.1",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "(アクセル)"
-      }
+        "winner_or_runner_up": "(アクセル)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:48.7",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "メイサウザンアワー"
-      }
+        "winner_or_runner_up": "メイサウザンアワー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:36.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ラインプリンス)"
-      }
+        "winner_or_runner_up": "(ラインプリンス)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:39.4",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ヴィクトゥーラ"
-      }
+        "winner_or_runner_up": "ヴィクトゥーラ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

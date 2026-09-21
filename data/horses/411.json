@@ -209,8 +209,10 @@
         "time": "2:02.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "メイショウケイガン"
-      }
+        "winner_or_runner_up": "メイショウケイガン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:48.7",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "タイセイフェイバー"
-      }
+        "winner_or_runner_up": "タイセイフェイバー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:48.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "クインズジョイフル"
-      }
+        "winner_or_runner_up": "クインズジョイフル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:47.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エコログロリアス"
-      }
+        "winner_or_runner_up": "エコログロリアス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:56.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ゼウスバイオ"
-      }
+        "winner_or_runner_up": "ゼウスバイオ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:49.6",
         "track_condition": "稍",
         "weather": "雨",
-        "winner_or_runner_up": "パーティーベル"
-      }
+        "winner_or_runner_up": "パーティーベル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:53.6",
         "track_condition": "重",
         "weather": "雨",
-        "winner_or_runner_up": "ツッチーフェイス"
-      }
+        "winner_or_runner_up": "ツッチーフェイス",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

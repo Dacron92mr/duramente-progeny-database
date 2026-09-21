@@ -209,8 +209,10 @@
         "time": "1:39.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "リュウノタブーク"
-      }
+        "winner_or_runner_up": "リュウノタブーク",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:56.3",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "スペイドアン"
-      }
+        "winner_or_runner_up": "スペイドアン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:48.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アンゴラブラック"
-      }
+        "winner_or_runner_up": "アンゴラブラック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:26.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "スティンガーグラス"
-      }
+        "winner_or_runner_up": "スティンガーグラス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:46.4",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "カニキュル"
-      }
+        "winner_or_runner_up": "カニキュル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:00.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "アドマイヤベル"
-      }
+        "winner_or_runner_up": "アドマイヤベル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "1:48.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ミアネーロ"
-      }
+        "winner_or_runner_up": "ミアネーロ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -650,8 +664,10 @@
         "time": "1:50.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(ルージュランブル)"
-      }
+        "winner_or_runner_up": "(ルージュランブル)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

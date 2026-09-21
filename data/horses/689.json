@@ -209,8 +209,10 @@
         "time": "1:51.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トクシージェネラル"
-      }
+        "winner_or_runner_up": "トクシージェネラル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:59.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ジュレブランシュ"
-      }
+        "winner_or_runner_up": "ジュレブランシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:51.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "バードウォッチャー"
-      }
+        "winner_or_runner_up": "バードウォッチャー",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

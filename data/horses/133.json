@@ -247,8 +247,10 @@
         "winner_or_runner_up": "プルメリアリノ",
         "horse_id": 133,
         "horse_name": "カフェノワール",
-        "netkeiba_id": "2020100683"
-      }
+        "netkeiba_id": "2020100683",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "1:25.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ラピダリア"
-      }
+        "winner_or_runner_up": "ラピダリア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:13.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ペレグリン"
-      }
+        "winner_or_runner_up": "ペレグリン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:12.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "バッハアルプゼー"
-      }
+        "winner_or_runner_up": "バッハアルプゼー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:11.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ヤマニンシュラ"
-      }
+        "winner_or_runner_up": "ヤマニンシュラ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -562,8 +572,10 @@
         "time": "1:13.1",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "フォルテローザ"
-      }
+        "winner_or_runner_up": "フォルテローザ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -625,8 +637,10 @@
         "time": "1:26.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "シュヴァルツリーベ"
-      }
+        "winner_or_runner_up": "シュヴァルツリーベ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -688,8 +702,10 @@
         "time": "1:25.2",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ジョニール"
-      }
+        "winner_or_runner_up": "ジョニール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -751,8 +767,10 @@
         "time": "1:47.6",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "タマモプルメリア"
-      }
+        "winner_or_runner_up": "タマモプルメリア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -814,8 +832,10 @@
         "time": "1:47.7",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エリカサファイア"
-      }
+        "winner_or_runner_up": "エリカサファイア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -877,8 +897,10 @@
         "time": "1:25.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ブリーズオンチーク"
-      }
+        "winner_or_runner_up": "ブリーズオンチーク",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -940,8 +962,10 @@
         "time": "1:25.5",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "セミマル"
-      }
+        "winner_or_runner_up": "セミマル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1003,8 +1027,10 @@
         "time": "1:26.1",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "サラサハウプリティ"
-      }
+        "winner_or_runner_up": "サラサハウプリティ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1066,8 +1092,10 @@
         "time": "1:55.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "メテオールライト"
-      }
+        "winner_or_runner_up": "メテオールライト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1129,8 +1157,10 @@
         "time": "2:00.2",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "パンデアスカル"
-      }
+        "winner_or_runner_up": "パンデアスカル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1192,8 +1222,10 @@
         "time": "1:47.0",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(グッドハビッツ)"
-      }
+        "winner_or_runner_up": "(グッドハビッツ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1255,8 +1287,10 @@
         "time": "1:48.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ロフティーイデアル"
-      }
+        "winner_or_runner_up": "ロフティーイデアル",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1318,8 +1352,10 @@
         "time": "1:55.1",
         "track_condition": "不",
         "weather": "雨",
-        "winner_or_runner_up": "パルメリータ"
-      }
+        "winner_or_runner_up": "パルメリータ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1381,8 +1417,10 @@
         "time": "1:47.7",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "アナベルヒマワリ"
-      }
+        "winner_or_runner_up": "アナベルヒマワリ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1444,8 +1482,10 @@
         "time": "1:53.0",
         "track_condition": "重",
         "weather": "小雨",
-        "winner_or_runner_up": "ノボリクレバー"
-      }
+        "winner_or_runner_up": "ノボリクレバー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1507,8 +1547,10 @@
         "time": "2:06.3",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "ミッキーゴージャス"
-      }
+        "winner_or_runner_up": "ミッキーゴージャス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1570,8 +1612,10 @@
         "time": "1:35.8",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ハッピーパンニャ"
-      }
+        "winner_or_runner_up": "ハッピーパンニャ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -1633,8 +1677,10 @@
         "time": "1:36.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "バースクライ"
-      }
+        "winner_or_runner_up": "バースクライ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

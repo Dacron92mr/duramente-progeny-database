@@ -209,8 +209,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アドマイヤアストラ"
-      }
+        "winner_or_runner_up": "アドマイヤアストラ",
+        "finish_note": "中"
+      },
+      "finish_note": "中"
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "サダメ"
-      }
+        "winner_or_runner_up": "サダメ",
+        "finish_note": "取"
+      },
+      "finish_note": "取"
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:33.9",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "ブラックサンライズ"
-      }
+        "winner_or_runner_up": "ブラックサンライズ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

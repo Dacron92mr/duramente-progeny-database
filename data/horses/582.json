@@ -209,8 +209,10 @@
         "time": "1:48.2",
         "track_condition": "不",
         "weather": "小雨",
-        "winner_or_runner_up": "ジェムフェザー"
-      }
+        "winner_or_runner_up": "ジェムフェザー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:49.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "インテンスフレイム"
-      }
+        "winner_or_runner_up": "インテンスフレイム",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:14.0",
         "track_condition": "良",
         "weather": "小雨",
-        "winner_or_runner_up": "サブロンカズマ"
-      }
+        "winner_or_runner_up": "サブロンカズマ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

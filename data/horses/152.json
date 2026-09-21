@@ -209,8 +209,10 @@
         "time": "2:26.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アームブランシュ"
-      }
+        "winner_or_runner_up": "アームブランシュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:58.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "エンパイアウエスト"
-      }
+        "winner_or_runner_up": "エンパイアウエスト",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "2:28.0",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(セイウンパシュート)"
-      }
+        "winner_or_runner_up": "(セイウンパシュート)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "2:26.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "アドマイヤサジー"
-      }
+        "winner_or_runner_up": "アドマイヤサジー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "2:26.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "(ロコルルハーツ)"
-      }
+        "winner_or_runner_up": "(ロコルルハーツ)",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "2:29.6",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "エコロマーベリック"
-      }
+        "winner_or_runner_up": "エコロマーベリック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:04.1",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ヴァイルマティ"
-      }
+        "winner_or_runner_up": "ヴァイルマティ",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

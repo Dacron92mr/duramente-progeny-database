@@ -247,8 +247,10 @@
         "winner_or_runner_up": "(ハーモニーソング)",
         "horse_id": 284,
         "horse_name": "ラミアメンテ",
-        "netkeiba_id": "2022105858"
-      }
+        "netkeiba_id": "2022105858",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -310,8 +312,10 @@
         "time": "0:59.6",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ベニシア"
-      }
+        "winner_or_runner_up": "ベニシア",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -373,8 +377,10 @@
         "time": "1:09.0",
         "track_condition": "稍",
         "weather": "晴",
-        "winner_or_runner_up": "ワインクーラー"
-      }
+        "winner_or_runner_up": "ワインクーラー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -436,8 +442,10 @@
         "time": "1:21.3",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ミクストベリーズ"
-      }
+        "winner_or_runner_up": "ミクストベリーズ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -499,8 +507,10 @@
         "time": "1:24.0",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "(フォルジュロン)"
-      }
+        "winner_or_runner_up": "(フォルジュロン)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

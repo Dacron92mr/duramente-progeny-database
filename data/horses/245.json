@@ -209,8 +209,10 @@
         "time": "2:00.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アオイゴールド"
-      }
+        "winner_or_runner_up": "アオイゴールド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "2:00.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "アンダープロット"
-      }
+        "winner_or_runner_up": "アンダープロット",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:49.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "スペシャルドラマ"
-      }
+        "winner_or_runner_up": "スペシャルドラマ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:48.3",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "ダノンザキッド"
-      }
+        "winner_or_runner_up": "ダノンザキッド",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:49.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "(レッドルーベンス)"
-      }
+        "winner_or_runner_up": "(レッドルーベンス)",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

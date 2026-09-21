@@ -209,8 +209,10 @@
         "time": "1:13.8",
         "track_condition": "稍",
         "weather": "曇",
-        "winner_or_runner_up": "ロードサージュ"
-      }
+        "winner_or_runner_up": "ロードサージュ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:58.1",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サノノヒーロー"
-      }
+        "winner_or_runner_up": "サノノヒーロー",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:57.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "コントゥール"
-      }
+        "winner_or_runner_up": "コントゥール",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:54.8",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "ルージュアリュール"
-      }
+        "winner_or_runner_up": "ルージュアリュール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": [

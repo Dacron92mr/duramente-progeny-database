@@ -209,8 +209,10 @@
         "time": "1:29.9",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "ルージュアマルフィ"
-      }
+        "winner_or_runner_up": "ルージュアマルフィ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -272,8 +274,10 @@
         "time": "1:09.8",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "サンポーニャ"
-      }
+        "winner_or_runner_up": "サンポーニャ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -335,8 +339,10 @@
         "time": "1:09.5",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "スクルプトーリス"
-      }
+        "winner_or_runner_up": "スクルプトーリス",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -398,8 +404,10 @@
         "time": "1:36.2",
         "track_condition": "重",
         "weather": "曇",
-        "winner_or_runner_up": "ファルシオン"
-      }
+        "winner_or_runner_up": "ファルシオン",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -461,8 +469,10 @@
         "time": "1:40.2",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "トーセンサマンサ"
-      }
+        "winner_or_runner_up": "トーセンサマンサ",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -524,8 +534,10 @@
         "time": "1:35.5",
         "track_condition": "良",
         "weather": "晴",
-        "winner_or_runner_up": "フィンガークリック"
-      }
+        "winner_or_runner_up": "フィンガークリック",
+        "finish_note": null
+      },
+      "finish_note": null
     },
     {
       "source": "netkeiba",
@@ -587,8 +599,10 @@
         "time": "2:04.9",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "エレガントルビー"
-      }
+        "winner_or_runner_up": "エレガントルビー",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []

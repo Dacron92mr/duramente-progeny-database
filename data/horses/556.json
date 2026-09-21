@@ -247,8 +247,10 @@
         "time": "0:52.4",
         "track_condition": "良",
         "weather": "曇",
-        "winner_or_runner_up": "メイショウボヌール"
-      }
+        "winner_or_runner_up": "メイショウボヌール",
+        "finish_note": null
+      },
+      "finish_note": null
     }
   ],
   "stud": []
