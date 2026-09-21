@@ -88,8 +88,8 @@ def parse_races(page, horse):
         if parsed > datetime.now(timezone.utc).date(): raise ValueError('future race result')
         race_id=next((re.search(r'/race/([0-9A-Za-z]+)/',u).group(1) for u in row['レース名']['links'] if re.search(r'/race/([0-9A-Za-z]+)/',u)),None)
         if not race_id: raise ValueError('race ID missing')
-        finish_text=get('着順');finish=int(finish_text) if finish_text.isdigit() else None
-        if finish is None and finish_text not in ('取消','除外','中止','失格','取','除','中','失'): raise ValueError('invalid finish')
+        finish_text=get('着順');finish_match=re.match(r'^(\d+)',finish_text)
+        finish=int(finish_match.group(1)) if finish_match else None
         distance=clean(get('距離'));match=re.fullmatch(r'([芝ダ障])([0-9]+)',distance)
         if not match: raise ValueError('invalid distance')
         numeric=lambda key: float(get(key).replace(',','')) if re.fullmatch(r'[\d,]+(?:\.\d+)?',get(key)) else None
@@ -99,11 +99,13 @@ def parse_races(page, horse):
             'body_weight':get('馬体重'),'last_3f':numeric('上り'),'corners':get('通過'),'pace':get('ペース'),
             'prize':numeric('賞金'),'time':get('タイム'),'margin':get('着差'),'track_condition':get('馬場'),
             'weather':get('天気'),'race_no':int(numeric('R') or 0),'odds':numeric('オッズ'),'popularity':numeric('人気'),
-            'bracket':numeric('枠番'),'horse_number':numeric('馬番'),'winner_or_runner_up':get('勝ち馬(2着馬)')}
+            'bracket':numeric('枠番'),'horse_number':numeric('馬番'),'winner_or_runner_up':get('勝ち馬(2着馬)'),
+            'finish_note':finish_text if finish is None and finish_text else None}
         if not 400<=result['distance_m']<=8000: raise ValueError('distance outside supported range')
         if result['field_size'] is not None and not 1<=result['field_size']<=100: raise ValueError('invalid field size')
         if finish is not None and (finish<1 or (result['field_size'] is not None and finish>result['field_size'])): raise ValueError('finish exceeds field size')
-        if result['last_3f'] is not None and not 20<=result['last_3f']<=65: raise ValueError('last 3f outside supported range')
+        last_3f_min=10 if result['surface']=='障' else 20
+        if result['last_3f'] is not None and not last_3f_min<=result['last_3f']<=65: raise ValueError('last 3f outside supported range')
         output.append(result)
     if len({r['race_id'] for r in output}) != len(output): raise ValueError('duplicate race IDs')
     return output

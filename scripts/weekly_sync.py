@@ -9,7 +9,7 @@ import re
 import shutil
 import tempfile
 import time
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timezone
 from http.client import HTTPException
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
@@ -21,6 +21,23 @@ from rebuild_synced_analytics import rebuild, read, write
 ROOT=Path(__file__).resolve().parents[1]
 AGENT='DuramenteDatabaseSync/1.0 (+https://github.com/Dacron92mr/duramente-progeny-database)'
 class SourceUnavailable(RuntimeError): pass
+
+def is_domestic_race(race):
+    """netkeiba uses 12-digit IDs for Japanese JRA/NAR races."""
+    return bool(re.fullmatch(r'\d{12}', str(race.get('race_id') or '')))
+
+def prize_coverage(root):
+    total=with_prize=0
+    for path in (root/'data/horses').glob('*.json'):
+        for race in read(path).get('races',[]):
+            if race.get('source')!='netkeiba' or not is_domestic_race(race): continue
+            total+=1
+            if race.get('prize') is not None: with_prize+=1
+    return {'domestic_races':total,'domestic_prize_rows':with_prize}
+
+def jbis_cycle(day):
+    return day.strftime('%Y-%m')
+
 class Client:
     def __init__(self): self.rules={};self.next_request={};self.blocked=set()
     def get(self,url):
@@ -65,7 +82,7 @@ def merge(horse,detail,patch,races=None):
         if key.startswith('earnings'):
             old=float(result.get(key) or 0)
             if value<0 or value>100_000_000: raise ValueError('earnings outside expected range')
-            if value < old-1: raise ValueError('lifetime earnings decreased; retain old record')
+            if value < old-1: continue
             # Profile pages round lifetime earnings; retain finer existing figures.
             if abs(value-old)<1: continue
         if value is not None and value!='': result[key]=value
@@ -76,6 +93,9 @@ def merge(horse,detail,patch,races=None):
         merged=[]
         for race in races:
             old=prior.get(str(race['race_id']),{})
+            # A temporarily blank source cell must never erase a known purse.
+            if race.get('prize') is None and old.get('prize') is not None:
+                race={**race,'prize':old['prize']}
             row={**old,**race}
             row['data']={**old.get('data',{}),**race,'horse_id':horse['id'],'horse_name':horse['name'],'netkeiba_id':horse.get('netkeiba_id')}
             row['data'].pop('raw',None)
@@ -107,11 +127,15 @@ def validate(stage,original):
         assert sum(r[key] for r in insights['distances'])==awd['summary'][key+'_wins'],'surface win mismatch'
     for name in ('sire_market','leading_sire_history','leading_sire_top10','sire_category_rankings','dosage','pedigree'):
         assert (stage/f'data/analytics/{name}.json').read_bytes()==(original/f'data/analytics/{name}.json').read_bytes(),'curated source changed'
+    before=prize_coverage(original);after=prize_coverage(stage)
+    assert after['domestic_races']>=before['domestic_races'],'domestic race history decreased'
+    assert after['domestic_prize_rows']>=before['domestic_prize_rows'],'domestic prize coverage decreased'
 
 def run(args):
     root=args.root.resolve();state_path=root/'.github/sync/state.json';state=read(state_path) if state_path.exists() else {'jbis_cursor':0}
     horses=read(root/'data/horses.json');original_count=len(horses)
-    report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False}
+    report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'netkeiba_retries':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False,
+            'prize_coverage_before':prize_coverage(root)}
     client=Client()
     with tempfile.TemporaryDirectory(prefix='duramente-sync-') as temp:
         stage=Path(temp);shutil.copytree(root/'data',stage/'data')
@@ -122,29 +146,41 @@ def run(args):
         for i,horse in enumerate(candidates):
             if 'db.netkeiba.com' in client.blocked: break
             print(f'netkeiba {i+1}/{len(candidates)} id={horse["id"]}',flush=True)
-            try:
-                base=f'https://db.netkeiba.com/horse/{horse["netkeiba_id"]}/'
-                patch=parse_profile(client.get(base),horse,'netkeiba')
-                races=[] if re.match(r'^0戦',patch.get('career_summary','')) else parse_races(client.get(f'https://db.netkeiba.com/horse/result/{horse["netkeiba_id"]}/'),horse)
-                path=stage/'data/horses'/f"{horse['id']}.json";detail=read(path)
-                updated,new_detail=merge(horse,detail,patch,races)
-                if updated!=horse or new_detail!=detail:
-                    horse.update(updated);write(path,new_detail);report['changed_horses'].append(horse['id'])
-                report['netkeiba_ok']+=1
-                consecutive_failures=0
-            except (ValueError,OSError,SourceUnavailable) as exc:
-                report['errors'].append({'source':'netkeiba','horse_id':horse['id'],'reason':str(exc)})
+            last_error=None
+            for attempt in range(3):
+                try:
+                    base=f'https://db.netkeiba.com/horse/{horse["netkeiba_id"]}/'
+                    patch=parse_profile(client.get(base),horse,'netkeiba')
+                    races=[] if re.match(r'^0戦',patch.get('career_summary','')) else parse_races(client.get(f'https://db.netkeiba.com/horse/result/{horse["netkeiba_id"]}/'),horse)
+                    path=stage/'data/horses'/f"{horse['id']}.json";detail=read(path)
+                    updated,new_detail=merge(horse,detail,patch,races)
+                    if updated!=horse or new_detail!=detail:
+                        horse.update(updated);write(path,new_detail);report['changed_horses'].append(horse['id'])
+                    report['netkeiba_ok']+=1
+                    last_error=None
+                    consecutive_failures=0
+                    break
+                except ValueError as exc:
+                    last_error=exc
+                    break
+                except (OSError,SourceUnavailable) as exc:
+                    last_error=exc
+                    if attempt==2 or 'db.netkeiba.com' in client.blocked: break
+                    report['netkeiba_retries']+=1
+                    time.sleep(8*(attempt+1))
+            if last_error is not None:
+                report['errors'].append({'source':'netkeiba','horse_id':horse['id'],'reason':str(last_error)})
                 # Multiple schema failures indicate a source change; don't hammer the site.
                 consecutive_failures+=1
                 if consecutive_failures>=5: break
         jbis=[h for h in horses if re.fullmatch(r'\d+',str(h.get('jbis_id') or ''))]
         today=datetime.now(timezone.utc).date()
-        cycle=(today-timedelta(days=today.weekday())).isoformat()
+        cycle=jbis_cycle(today)
         if state.get('jbis_cycle')!=cycle: state.update(jbis_cycle=cycle,jbis_cursor=0)
         cursor=min(state.get('jbis_cursor',0),len(jbis))
         count=0 if args.source=='netkeiba' else min(args.jbis_limit,len(jbis)-cursor)
         if not candidates and count==0:
-            report.update(batch_acceptable=True,skipped='weekly JBIS cycle complete')
+            report.update(batch_acceptable=True,skipped='monthly JBIS cycle complete')
             args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report);return
         for i in range(count):
             if 'www.jbis.or.jp' in client.blocked: break
@@ -161,7 +197,10 @@ def run(args):
         total=len(candidates)+count
         success=report['netkeiba_ok']+report['jbis_ok']
         # Never publish a mostly failed batch; all modifications exist only in staging.
-        acceptable=total>0 and success/total>=0.9
+        # A netkeiba batch publishes only when every requested horse succeeds.
+        # JBIS keeps the looser batch threshold because its mandatory 10-minute
+        # spacing makes a failed profile expensive to retry within one job.
+        acceptable=total>0 and (success==total if candidates else success/total>=0.9)
         report['changed_horses']=sorted(set(report['changed_horses']))
         if acceptable and report['changed_horses']:
             write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
@@ -178,6 +217,8 @@ def run(args):
         if acceptable and args.apply:
             state_path.parent.mkdir(parents=True,exist_ok=True);write(state_path,state)
         report['finished_at']=datetime.now(timezone.utc).isoformat();report['batch_acceptable']=acceptable
+        report['prize_coverage_after']=prize_coverage(root if report['applied'] else stage)
+        report['domestic_prize_rows_filled']=report['prize_coverage_after']['domestic_prize_rows']-report['prize_coverage_before']['domestic_prize_rows']
         args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report)
         print(json.dumps({k:v for k,v in report.items() if k!='errors'},ensure_ascii=False),flush=True)
         if not acceptable: raise SystemExit('Sync batch failed validation; existing dataset preserved.')

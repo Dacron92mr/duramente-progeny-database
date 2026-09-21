@@ -1,8 +1,8 @@
-name: JBIS weekly queue
+name: JBIS monthly queue
 on:
   schedule:
-    # Serial 30-profile batches, <= 5 hours each. Monday starts a new weekly cycle.
-    - cron: '17 3,9,15,21 * * *'
+    # Four serial 30-profile batches daily on days 1-6; one full cycle per month.
+    - cron: '17 3,9,15,21 1-6 * *'
   workflow_dispatch:
 permissions:
   contents: write
@@ -30,7 +30,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: jbis-sync-report
+          name: jbis-monthly-sync-report
           path: ${{ runner.temp }}/sync-report.json
           retention-days: 30
           if-no-files-found: warn
@@ -43,7 +43,7 @@ jobs:
           if ! git diff --cached --quiet -- data index.html; then site_changed=true; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Refresh validated JBIS weekly batch'
+          git commit -m 'Refresh validated JBIS monthly batch'
           python scripts/rebase_sync.py
           git push origin HEAD:main
           echo "changed=$site_changed" >> "$GITHUB_OUTPUT"

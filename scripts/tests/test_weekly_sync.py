@@ -4,7 +4,7 @@ import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from sync_sources import parse_races,parse_profile,money
-from weekly_sync import merge, Client, SourceUnavailable
+from weekly_sync import merge, Client, SourceUnavailable, is_domestic_race, jbis_cycle
 from unittest.mock import patch
 from urllib.error import HTTPError
 from http.client import IncompleteRead
@@ -39,6 +39,14 @@ class ParserTests(unittest.TestCase):
     def test_finish_above_known_field_size_rejected(self):
         values=VALUES.copy();values[4]='17'
         with self.assertRaises(ValueError):parse_races(page(values=values),HORSE)
+    def test_blank_finish_does_not_drop_other_race_fields(self):
+        values=VALUES.copy();values[4]='';values[-1]=''
+        row=parse_races(page(values=values),HORSE)[0]
+        self.assertIsNone(row['finish']);self.assertIsNone(row['prize'])
+    def test_jump_last_3f_uses_jump_scale(self):
+        values=VALUES.copy();values[5]='障3900';values[-2]='13.7'
+        row=parse_races(page(values=values),HORSE)[0]
+        self.assertEqual(row['last_3f'],13.7)
     def test_money_units(self):
         self.assertEqual(money('10億6,875万円'),106875)
         self.assertEqual(money('106875.1万円'),106875.1)
@@ -49,8 +57,9 @@ class ParserTests(unittest.TestCase):
     def test_rounding_keeps_precision(self):
         updated,_=merge(HORSE,{'horse':HORSE,'races':[]},{'earnings_netkeiba':100})
         self.assertEqual(updated['earnings_netkeiba'],100.1)
-    def test_earnings_drop_rejected(self):
-        with self.assertRaises(ValueError):merge(HORSE,{'horse':HORSE,'races':[]},{'earnings_netkeiba':10})
+    def test_earnings_drop_preserves_old_value(self):
+        updated,_=merge(HORSE,{'horse':HORSE,'races':[]},{'earnings_netkeiba':10})
+        self.assertEqual(updated['earnings_netkeiba'],100.1)
     def test_incomplete_history_rejected(self):
         detail={'horse':HORSE,'races':[{'source':'netkeiba','race_id':'older'}]}
         with self.assertRaises(ValueError):merge(HORSE,detail,{},parse_races(page(),HORSE))
@@ -58,6 +67,17 @@ class ParserTests(unittest.TestCase):
         other={'source':'jbis','race_id':'other'}
         updated,detail=merge(HORSE,{'horse':HORSE,'races':[other]}, {},parse_races(page(),HORSE))
         self.assertIn(other,detail['races']);self.assertEqual(updated['achievement_class'],'G1')
+    def test_blank_prize_never_erases_known_domestic_prize(self):
+        old=parse_races(page(),HORSE)[0]
+        fresh=copy.deepcopy(old);fresh['prize']=None
+        _horse,detail=merge(HORSE,{'horse':HORSE,'races':[old]}, {},[fresh])
+        self.assertEqual(detail['races'][0]['prize'],13048.6)
+        self.assertEqual(detail['races'][0]['data']['prize'],13048.6)
+    def test_domestic_race_id_and_monthly_cycle(self):
+        from datetime import date
+        self.assertTrue(is_domestic_race({'race_id':'202306050811'}))
+        self.assertFalse(is_domestic_race({'race_id':'2025J0010108'}))
+        self.assertEqual(jbis_cycle(date(2026,9,1)),jbis_cycle(date(2026,9,30)))
     def test_curated_extra_fields_retained(self):
         self.assertEqual(preserve_extra([{'label':'2018','manual':'keep','wins':1}],[{'label':'2018','wins':2}]),[{'label':'2018','manual':'keep','wins':2}])
     def test_inputs_not_mutated(self):
