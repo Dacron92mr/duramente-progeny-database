@@ -1,11 +1,11 @@
 {
   "summary": {
-    "overall_awd": 1589.8,
+    "overall_awd": 1589.7,
     "turf_awd": 1884.6,
-    "dirt_awd": 1459.4,
-    "overall_wins": 1249,
+    "dirt_awd": 1459.7,
+    "overall_wins": 1252,
     "turf_wins": 383,
-    "dirt_wins": 866
+    "dirt_wins": 869
   },
   "by_crop": [
     {
@@ -17,24 +17,24 @@
     },
     {
       "label": "2019",
-      "overall_awd": 1562.6,
+      "overall_awd": 1563.7,
       "turf_awd": 1876.5,
-      "dirt_awd": 1459.7,
-      "wins": 397
+      "dirt_awd": 1461.5,
+      "wins": 398
     },
     {
       "label": "2020",
-      "overall_awd": 1666.9,
+      "overall_awd": 1666.8,
       "turf_awd": 1908.9,
-      "dirt_awd": 1513.9,
-      "wins": 204
+      "dirt_awd": 1515.0,
+      "wins": 205
     },
     {
       "label": "2021",
-      "overall_awd": 1640.3,
+      "overall_awd": 1636.2,
       "turf_awd": 1950.0,
-      "dirt_awd": 1461.5,
-      "wins": 153
+      "dirt_awd": 1456.8,
+      "wins": 154
     },
     {
       "label": "2022",
@@ -88,20 +88,6 @@
       "stamina_gap": 0.92
     },
     {
-      "horse_id": 345,
-      "name": "アイコトバ",
-      "hkjc_name_zh": null,
-      "wins": 3,
-      "overall_awd": 1066.7,
-      "turf_awd": null,
-      "dirt_awd": 1066.7,
-      "di": 0.85,
-      "cd": -0.08,
-      "race_stamina_percentile": 0.008,
-      "pedigree_stamina_percentile": 0.923,
-      "stamina_gap": -0.92
-    },
-    {
       "horse_id": 97,
       "name": "ホウオウアートマン",
       "hkjc_name_zh": null,
@@ -114,6 +100,20 @@
       "race_stamina_percentile": 0.959,
       "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.92
+    },
+    {
+      "horse_id": 345,
+      "name": "アイコトバ",
+      "hkjc_name_zh": null,
+      "wins": 3,
+      "overall_awd": 1066.7,
+      "turf_awd": null,
+      "dirt_awd": 1066.7,
+      "di": 0.85,
+      "cd": -0.08,
+      "race_stamina_percentile": 0.009,
+      "pedigree_stamina_percentile": 0.923,
+      "stamina_gap": -0.91
     },
     {
       "horse_id": 120,
@@ -223,7 +223,7 @@
       "dirt_awd": null,
       "di": 2.16,
       "cd": 0.6,
-      "race_stamina_percentile": 0.873,
+      "race_stamina_percentile": 0.875,
       "pedigree_stamina_percentile": 0.041,
       "stamina_gap": 0.83
     },
@@ -237,7 +237,7 @@
       "dirt_awd": 2000.0,
       "di": 1.93,
       "cd": 0.64,
-      "race_stamina_percentile": 0.873,
+      "race_stamina_percentile": 0.875,
       "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.83
     },
@@ -279,7 +279,7 @@
       "dirt_awd": null,
       "di": 1.93,
       "cd": 0.59,
-      "race_stamina_percentile": 0.835,
+      "race_stamina_percentile": 0.839,
       "pedigree_stamina_percentile": 0.06,
       "stamina_gap": 0.78
     },
@@ -293,7 +293,7 @@
       "dirt_awd": null,
       "di": 1.91,
       "cd": 0.69,
-      "race_stamina_percentile": 0.813,
+      "race_stamina_percentile": 0.817,
       "pedigree_stamina_percentile": 0.032,
       "stamina_gap": 0.78
     },
@@ -363,7 +363,7 @@
       "dirt_awd": 1800.0,
       "di": 1.8,
       "cd": 0.64,
-      "race_stamina_percentile": 0.813,
+      "race_stamina_percentile": 0.817,
       "pedigree_stamina_percentile": 0.064,
       "stamina_gap": 0.75
     },
@@ -391,7 +391,7 @@
       "dirt_awd": null,
       "di": 1.89,
       "cd": 0.46,
-      "race_stamina_percentile": 0.873,
+      "race_stamina_percentile": 0.875,
       "pedigree_stamina_percentile": 0.137,
       "stamina_gap": 0.74
     },

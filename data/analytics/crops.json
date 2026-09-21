@@ -66,7 +66,7 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 154218.1,
+    "total_earnings": 154345.1,
     "representatives": [
       {
         "name": "ガイアメンテ",
@@ -110,8 +110,8 @@
     "graded_foal_rate": 0.0254,
     "graded_runner_rate": 0.0283,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 1306.9,
-    "avg_earnings_per_runner": 1454.9,
+    "avg_earnings_per_foal": 1308.0,
+    "avg_earnings_per_runner": 1456.1,
     "median_earnings_per_runner": 493.4,
     "earnings_q25": 13.6,
     "earnings_q75": 1547.2,
@@ -125,7 +125,7 @@
     "graded_winners": 8,
     "stakes_winners": 9,
     "g1_winners": 5,
-    "total_earnings": 412415.2,
+    "total_earnings": 412894.5,
     "representatives": [
       {
         "name": "リバティアイランド",
@@ -169,8 +169,8 @@
     "graded_foal_rate": 0.0656,
     "graded_runner_rate": 0.0702,
     "g1_foal_rate": 0.041,
-    "avg_earnings_per_foal": 3380.5,
-    "avg_earnings_per_runner": 3617.7,
+    "avg_earnings_per_foal": 3384.4,
+    "avg_earnings_per_runner": 3621.9,
     "median_earnings_per_runner": 643.3,
     "earnings_q25": 75.9,
     "earnings_q75": 3142.7,
@@ -184,7 +184,7 @@
     "graded_winners": 6,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 433246.1,
+    "total_earnings": 433581.1,
     "representatives": [
       {
         "name": "スターズオンアース",
@@ -228,8 +228,8 @@
     "graded_foal_rate": 0.0297,
     "graded_runner_rate": 0.0326,
     "g1_foal_rate": 0.0099,
-    "avg_earnings_per_foal": 2144.8,
-    "avg_earnings_per_runner": 2354.6,
+    "avg_earnings_per_foal": 2146.4,
+    "avg_earnings_per_runner": 2356.4,
     "median_earnings_per_runner": 603.5,
     "earnings_q25": 65.0,
     "earnings_q75": 1997.2,

@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total_wins": 1259,
+    "total_wins": 1262,
     "jra_wins": 583,
-    "nar_wins": 674,
+    "nar_wins": 677,
     "overseas_wins": 2,
     "other_wins": 0,
     "years": [
@@ -14,7 +14,7 @@
       2025,
       2026
     ],
-    "updated_at": "2026-09-19"
+    "updated_at": "2026-09-21"
   },
   "annual": [
     {
@@ -175,29 +175,29 @@
     },
     {
       "year": 2026,
-      "starts": 846,
-      "runners": 159,
-      "wins": 81,
-      "winners": 55,
+      "starts": 852,
+      "runners": 160,
+      "wins": 84,
+      "winners": 56,
       "jra_wins": 27,
-      "nar_wins": 54,
+      "nar_wins": 57,
       "overseas_wins": 0,
       "other_wins": 0,
-      "top3": 248,
-      "win_rate": 0.0957,
-      "top3_rate": 0.2931,
-      "winner_runner_rate": 0.3459,
+      "top3": 252,
+      "win_rate": 0.0986,
+      "top3_rate": 0.2958,
+      "winner_runner_rate": 0.35,
       "graded_wins": 2,
       "g1_wins": 0,
       "g2_wins": 2,
       "g3_wins": 0,
       "earnings": 103491.4,
-      "race_prize_earnings": 103320.7,
+      "race_prize_earnings": 104247.0,
       "earnings_status": "partial",
       "earnings_source": "JBISサーチ 種牡馬ランキング（进行中）",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2026&y2=2024&y3=2026&kind=1&division=1&racetype1=1&racetype2=1&y_f=2026&y_t=2026&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 9,
-      "prize_rows": 351
+      "prize_rows": 355
     }
   ],
   "win_events": [
@@ -21603,6 +21603,57 @@
       "grade_group": null,
       "prize": 820.0,
       "cumulative_wins": 1259
+    },
+    {
+      "race_date": "2026/09/16",
+      "year": 2026,
+      "horse_id": 300,
+      "horse": "サユリバナ",
+      "hkjc_name_zh": null,
+      "race_name": "サートゥルナーリア・(B3)",
+      "race_url": "https://db.netkeiba.com/race/202630091612/",
+      "meeting": "門別",
+      "raw_meeting": "門別",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 100.0,
+      "cumulative_wins": 1260
+    },
+    {
+      "race_date": "2026/09/17",
+      "year": 2026,
+      "horse_id": 90,
+      "horse": "タッチウッド",
+      "hkjc_name_zh": "吉利話",
+      "race_name": "ペルセウス賞競走(B1B2)",
+      "race_url": "https://db.netkeiba.com/race/202644091712/",
+      "meeting": "大井",
+      "raw_meeting": "大井",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 480.0,
+      "cumulative_wins": 1261
+    },
+    {
+      "race_date": "2026/09/18",
+      "year": 2026,
+      "horse_id": 102,
+      "horse": "ミアステラ",
+      "hkjc_name_zh": null,
+      "race_name": "名月大空特別(A)",
+      "race_url": "https://db.netkeiba.com/race/202648091811/",
+      "meeting": "名古屋",
+      "raw_meeting": "名古屋",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 320.0,
+      "cumulative_wins": 1262
     }
   ],
   "milestones": [
