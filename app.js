@@ -1202,7 +1202,7 @@ function renderChart(id, option) {
         ...item,
         smooth: false,
         lineStyle: { ...(item.lineStyle || {}), width: 2 },
-        label: { ...(item.label || {}), show: sparseLines, position: item.label?.position || "top", distance: (normalizedOption.series || []).some(series => series.type === "bar") ? 20 : 10, fontSize: 11, fontWeight: 600, backgroundColor: chartThemeColors().surface, padding: [2, 4], formatter: item.label?.formatter || (params => `${formatNumber(params.value, 1)}${/率|比例/.test(item.name || "") ? "%" : ""}`) },
+        label: { ...(item.label || {}), show: item.suppressAutoLabel ? false : sparseLines, position: item.label?.position || "top", distance: (normalizedOption.series || []).some(series => series.type === "bar") ? 20 : 10, fontSize: 11, fontWeight: 600, backgroundColor: chartThemeColors().surface, padding: [2, 4], formatter: item.label?.formatter || (params => `${formatNumber(params.value, 1)}${/率|比例/.test(item.name || "") ? "%" : ""}`) },
         endLabel: { show: false },
         labelLayout: { hideOverlap: true },
         emphasis,
@@ -2547,7 +2547,33 @@ function renderFirstSeasonSireChart(leadingTop10) {
   });
 }
 
-function renderSireCharts(profile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd) {
+function renderSireIndexCharts(indices) {
+  const annual = indices?.annual || [];
+  const crops = indices?.crops || [];
+  const indexValue = (value) => Number.isFinite(Number(value)) ? Number(value).toFixed(2) : "—";
+  renderChart("sireAnnualIndexChart", {
+    color: [COLORS.duramente, COLORS.gold],
+    tooltip: { trigger: "axis", formatter: (items) => `${items[0]?.axisValue}年<br>${items.map((item) => `${item.marker}${item.seriesName}：${indexValue(item.value)}`).join("<br>")}` },
+    legend: { top: 0, data: ["AEI", "重赏 AEI"] },
+    grid: { left: 48, right: 24, top: 52, bottom: 38, containLabel: true },
+    xAxis: { type: "category", data: annual.map((row) => row.year) },
+    yAxis: { type: "value", name: "指数", min: 0 },
+    series: [
+      { name: "AEI", type: "line", symbolSize: 8, suppressAutoLabel: true, data: annual.map((row) => row.aei), markLine: { silent: true, symbol: "none", lineStyle: { color: COLORS.muted, type: "dashed" }, label: { show: false }, data: [{ yAxis: 1 }] } },
+      { name: "重赏 AEI", type: "line", symbolSize: 8, suppressAutoLabel: true, data: annual.map((row) => row.graded_aei) },
+    ],
+  });
+  renderChart("sireCropIndexChart", {
+    color: [COLORS.duramente],
+    tooltip: { trigger: "axis", formatter: (items) => { const row=items[0]?.data?.raw; return `${row.birth_year}年出生（${row.covering_year}年配种）<br>AEI：${indexValue(row.aei)}<br>出赛马：${formatNumber(row.starters)}匹<br>收得奖金：${money(row.earnings_yen/10000)}`; } },
+    grid: { left: 46, right: 20, top: 34, bottom: 38, containLabel: true },
+    xAxis: { type: "category", data: crops.map((row) => row.birth_year) },
+    yAxis: { type: "value", name: "AEI", min: 0 },
+    series: [{ type: "bar", barMaxWidth: 34, data: crops.map((row) => ({ value: row.aei, raw: row, itemStyle: { color: cropColor(row.birth_year) } })), label: safeTopBarLabel((params) => indexValue(params.value)), markLine: { silent: true, symbol: "none", lineStyle: { color: COLORS.muted, type: "dashed" }, label: { show: false }, data: [{ yAxis: 1 }] } }],
+  });
+}
+
+function renderSireCharts(profile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd, sireIndices) {
   const crops = [...profile.crops].sort((a, b) => Number(a.label) - Number(b.label));
   const cropLabels = crops.map((row) => row.label);
   const marketRows = market.rows || [];
@@ -2564,6 +2590,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
     ].join("<br>");
   };
   renderAnnualPerformanceCharts(annualPerformance);
+  renderSireIndexCharts(sireIndices);
 
   renderChart("sireMaresCoveredChart", {
     color: [COLORS.duramente, COLORS.average],
@@ -2954,7 +2981,7 @@ function activateSireSection(section, { updateHistory = true } = {}) {
 
 async function renderSireAnalysis() {
   if (els.sireContent.dataset.loaded) return;
-  const [overview, sireProfile, annualPerformance, market, leadingHistory, leadingTop10, rawCategories, awd] = await Promise.all([
+  const [overview, sireProfile, annualPerformance, market, leadingHistory, leadingTop10, rawCategories, awd, sireIndices] = await Promise.all([
     getAnalytics("overview"),
     getAnalytics("sire_profile"),
     getAnalytics("annual_progeny_performance"),
@@ -2963,6 +2990,7 @@ async function renderSireAnalysis() {
     getAnalytics("leading_sire_top10"),
     getAnalytics("sire_category_rankings"),
     getAnalytics("awd"),
+    getAnalytics("sire_indices"),
     getAnalytics("chart_insights"),
   ]);
   const categories = normalizeLeadingCategories(rawCategories);
@@ -2980,6 +3008,18 @@ async function renderSireAnalysis() {
       <button type="button" role="tab" data-sire-section="market"><span>04</span><strong>配种市场</strong><small>配种费与配种数量</small></button>
     </div>
     <div class="analysis-subpanel" data-sire-panel="annual">
+    ${sectionBlock("AEI / CPI 指数", "用同期整体奖金基准衡量产驹表现，并用母群质量解释种牡马获得的配种机会。", `
+      <div class="awd-summary-band sire-index-summary-band" aria-label="AEI CPI 指数概览">
+        <div><span>AEI</span><strong>${Number(sireIndices.summary?.crop_aei).toFixed(2)}</strong><small>世代合计 · 1.00 为同期平均</small></div>
+        <div><span>CPI</span><strong>${Number(sireIndices.summary?.cpi).toFixed(2)}</strong><small>母群质量对照</small></div>
+        <div><span>AEI / CPI</span><strong>${Number(sireIndices.summary?.aei_cpi_ratio).toFixed(2)}</strong><small>本站按官方值计算</small></div>
+        <div><span>ANNUAL AEI</span><strong>${Number(sireIndices.summary?.annual_aei).toFixed(2)}</strong><small>年次数据生涯合计</small></div>
+      </div>
+      <div class="chart-grid single-chart">
+        ${chartBlock("年度 AEI 走势", "AEI 与重赏 AEI；虚线 1.00 表示同期平均。", "sireAnnualIndexChart")}
+      </div>
+      <p class="source-note">AEI 比较产驹与同期全部出赛马的平均收得奖金；CPI 比较配种母马与其他种牡马所生兄弟马的表现。平地赛口径，数据截至 ${escapeHtml(sireIndices.source?.updated_at || "—")}。<a class="inline-reference" href="${escapeHtml(sireIndices.source?.url || "https://www.jbis.or.jp/")}" target="_blank" rel="noopener noreferrer">来源：JBIS-Search ↗</a></p>
+    `, "EARNINGS INDEX")}
     ${sectionBlock("年度表现", "按比赛年份查看胜场、出赛马、重赏胜利和奖金变化。",
       `<div class="mini-chart-grid annual-mini-grid">
         ${chartBlock("胜场", "JRA／NAR／海外", "annualPerformance-wins")}
@@ -3045,6 +3085,7 @@ async function renderSireAnalysis() {
         ${chartBlock("奖金表现", "累计奖金；各世代观察年限不同。平均值以全部收录产驹为分母。", "sireCropEarningsChart")}
         ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
         ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
+        ${chartBlock("各世代 AEI", "按出生世代比较产驹平均收得奖金相对同期全部出赛马的水平；虚线 1.00 为平均。", "sireCropIndexChart")}
         ${controlledChartBlock("同龄累计胜场", "仅比较已经完整经历所选年龄年度的世代；每100匹以该世代全部产驹为分母。", "sireSameAgeChart", `<label><span>截至年龄</span><select id="sireSameAge"><option value="3">3岁末</option><option value="4">4岁末</option><option value="5">5岁末</option></select></label>`)}
         ${chartBlock("世代奖金集中度", "每个世代固定代表色；由深至浅依次为最高1匹、第2—3匹、其余产驹。点击查看金额。", "sireConcentrationChart")}
         ${chartBlock("获胜距离分布", "草地、泥地分别统计实际获胜距离；不含障碍赛及距离缺失的记录。", "sireDistanceDistributionChart")}
@@ -3121,7 +3162,7 @@ async function renderSireAnalysis() {
   `;
   wireAnalysisFilters(els.sireContent);
   wireExpandableTables(els.sireContent);
-  sireRuntime = [sireProfile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd];
+  sireRuntime = [sireProfile, market, leadingHistory, leadingTop10, categories, annualPerformance, awd, sireIndices];
   const rerender = () => renderSireCharts(...sireRuntime);
   for (const id of ["sireSameAge", "sireDevelopmentMetric", "sireLeadingAnnualCategory", "sireLeadingAnnualYear", "sireLeadingJuvenileCategory", "sireLeadingJuvenileYear"]) {
     els.sireContent.querySelector(`#${id}`)?.addEventListener("change", rerender);

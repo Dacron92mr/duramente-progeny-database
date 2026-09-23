@@ -1,0 +1,192 @@
+{
+  "source": {
+    "name": "JBIS-Search",
+    "url": "https://www.jbis.or.jp/horse/0001151936/sire/generation/thorough_c/",
+    "updated_at": "2026-09-22"
+  },
+  "summary": {
+    "crop_aei": 1.72,
+    "annual_aei": 1.88,
+    "cpi": 1.9,
+    "aei_cpi_ratio": 0.91,
+    "starters": 622,
+    "earnings_yen": 14920841000
+  },
+  "crops": [
+    {
+      "covering_year": 2017,
+      "birth_year": 2018,
+      "mares": 284,
+      "foals": 191,
+      "registrations": 189,
+      "starters": 160,
+      "winners": 63,
+      "placers": 20,
+      "two_year_old_winners": 32,
+      "graded_winners": 3,
+      "earnings_yen": 3455591000,
+      "aei": 1.45
+    },
+    {
+      "covering_year": 2018,
+      "birth_year": 2019,
+      "mares": 294,
+      "foals": 203,
+      "registrations": 201,
+      "starters": 171,
+      "winners": 75,
+      "placers": 35,
+      "two_year_old_winners": 29,
+      "graded_winners": 2,
+      "earnings_yen": 3721145000,
+      "aei": 1.33
+    },
+    {
+      "covering_year": 2019,
+      "birth_year": 2020,
+      "mares": 184,
+      "foals": 122,
+      "registrations": 122,
+      "starters": 111,
+      "winners": 49,
+      "placers": 17,
+      "two_year_old_winners": 20,
+      "graded_winners": 8,
+      "earnings_yen": 3931045000,
+      "aei": 2.49
+    },
+    {
+      "covering_year": 2020,
+      "birth_year": 2021,
+      "mares": 178,
+      "foals": 120,
+      "registrations": 118,
+      "starters": 102,
+      "winners": 43,
+      "placers": 17,
+      "two_year_old_winners": 10,
+      "graded_winners": 3,
+      "earnings_yen": 1451373000,
+      "aei": 1.05
+    },
+    {
+      "covering_year": 2021,
+      "birth_year": 2022,
+      "mares": 131,
+      "foals": 96,
+      "registrations": 95,
+      "starters": 78,
+      "winners": 34,
+      "placers": 14,
+      "two_year_old_winners": 13,
+      "graded_winners": 4,
+      "earnings_yen": 2361687000,
+      "aei": 2.8
+    }
+  ],
+  "annual": [
+    {
+      "year": 2020,
+      "starters": 102,
+      "starts": 234,
+      "winners": 32,
+      "wins": 37,
+      "graded_winners": 0,
+      "graded_wins": 0,
+      "first_prize_yen": 244457000,
+      "graded_prize_yen": 40450000,
+      "earnings_yen": 391347000,
+      "aei": 0.63,
+      "graded_aei": 0.26
+    },
+    {
+      "year": 2021,
+      "starters": 273,
+      "starts": 958,
+      "winners": 72,
+      "wins": 91,
+      "graded_winners": 1,
+      "graded_wins": 2,
+      "first_prize_yen": 853755000,
+      "graded_prize_yen": 346833000,
+      "earnings_yen": 1552390000,
+      "aei": 0.92,
+      "graded_aei": 0.99
+    },
+    {
+      "year": 2022,
+      "starters": 289,
+      "starts": 1164,
+      "winners": 100,
+      "wins": 126,
+      "graded_winners": 6,
+      "graded_wins": 9,
+      "first_prize_yen": 1953788000,
+      "graded_prize_yen": 1236317000,
+      "earnings_yen": 2946461000,
+      "aei": 1.59,
+      "graded_aei": 2.37
+    },
+    {
+      "year": 2023,
+      "starters": 292,
+      "starts": 1188,
+      "winners": 82,
+      "wins": 118,
+      "graded_winners": 9,
+      "graded_wins": 11,
+      "first_prize_yen": 2213562000,
+      "graded_prize_yen": 2208166000,
+      "earnings_yen": 4157759000,
+      "aei": 2.17,
+      "graded_aei": 4.0
+    },
+    {
+      "year": 2024,
+      "starters": 281,
+      "starts": 1061,
+      "winners": 80,
+      "wins": 105,
+      "graded_winners": 3,
+      "graded_wins": 4,
+      "first_prize_yen": 1280377000,
+      "graded_prize_yen": 645263000,
+      "earnings_yen": 2346719000,
+      "aei": 1.28,
+      "graded_aei": 1.06
+    },
+    {
+      "year": 2025,
+      "starters": 197,
+      "starts": 866,
+      "winners": 54,
+      "wins": 71,
+      "graded_winners": 5,
+      "graded_wins": 7,
+      "first_prize_yen": 1411103000,
+      "graded_prize_yen": 1422583000,
+      "earnings_yen": 2603337000,
+      "aei": 2.03,
+      "graded_aei": 2.17
+    },
+    {
+      "year": 2026,
+      "starters": 89,
+      "starts": 323,
+      "winners": 22,
+      "wins": 26,
+      "graded_winners": 1,
+      "graded_wins": 1,
+      "first_prize_yen": 422790000,
+      "graded_prize_yen": 197267000,
+      "earnings_yen": 922828000,
+      "aei": 1.8,
+      "graded_aei": 0.79
+    }
+  ],
+  "definitions": {
+    "aei": "产驹平均收得奖金与同期全部出赛马平均收得奖金之比；1.00为同期平均。",
+    "cpi": "配种母马与其他种牡马所生兄弟马的平均收得奖金与同期全部出赛马平均收得奖金之比。",
+    "ratio": "AEI÷CPI，由本站根据JBIS公布值计算，用于并列观察产驹表现与母群质量。"
+  }
+}

@@ -1,0 +1,52 @@
+name: JBIS weekly sire indices
+on:
+  schedule:
+    # One public summary page per week; individual JBIS horse profiles remain monthly.
+    - cron: '41 3 * * 3'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: weekly-data-sync
+  cancel-in-progress: false
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test parsers and safeguards
+        run: python -m unittest discover -s scripts/tests -v
+      - name: Fetch and validate JBIS AEI/CPI
+        run: python scripts/sync_sire_indices.py --apply --report "$RUNNER_TEMP/sire-index-report.json"
+      - name: Save diagnostic report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: jbis-sire-index-report
+          path: ${{ runner.temp }}/sire-index-report.json
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Commit validated indices
+        id: commit
+        run: |
+          git add data/analytics/sire_indices.json index.html
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Refresh weekly JBIS sire indices'
+          python scripts/rebase_sync.py
+          git push origin HEAD:main
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+      - name: Request existing GitHub Pages build
+        if: steps.commit.outputs.changed == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --silent

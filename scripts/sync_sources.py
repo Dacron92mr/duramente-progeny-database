@@ -31,6 +31,102 @@ class Tables(HTMLParser):
             self.stack[-1]['rows'].append(self.row); self.row=None
         elif tag == 'table' and self.stack: self.stack.pop()
 
+class JbisSireIndexGrids(HTMLParser):
+    """Read JBIS' div-based generation and racing-year grids by hierarchy."""
+    def __init__(self):
+        super().__init__(); self.depth=0; self.target=None; self.target_depth=None; self.inner_depth=None
+        self.row=None; self.row_depth=None; self.cell=None; self.cell_depth=None
+        self.rows={'crops':[],'annual':[]}
+    def handle_starttag(self, tag, attrs):
+        if tag!='div': return
+        self.depth+=1; classes=set(dict(attrs).get('class','').split())
+        if 'data-7-1' in classes or 'data-7-2' in classes:
+            self.target='crops' if 'data-7-1' in classes else 'annual';self.target_depth=self.depth
+        elif self.target and 'data-7__inner' in classes:
+            self.inner_depth=self.depth
+        elif self.inner_depth and self.depth==self.inner_depth+1:
+            self.row=[];self.row_depth=self.depth
+        elif self.row is not None and self.depth==self.row_depth+1:
+            self.cell=[];self.cell_depth=self.depth
+    def handle_data(self, data):
+        if self.cell is not None: self.cell.append(data)
+    def handle_endtag(self, tag):
+        if tag!='div': return
+        if self.cell_depth==self.depth:
+            self.row.append(clean(''.join(self.cell)));self.cell=None;self.cell_depth=None
+        if self.row_depth==self.depth:
+            self.rows[self.target].append(self.row);self.row=None;self.row_depth=None
+        if self.inner_depth==self.depth: self.inner_depth=None
+        if self.target_depth==self.depth: self.target=None;self.target_depth=None
+        self.depth-=1
+
+def _integer(value):
+    value=clean(value).replace(',','')
+    if not re.fullmatch(r'\d+',value): raise ValueError('invalid JBIS integer')
+    return int(value)
+
+def _decimal(value):
+    value=clean(value)
+    if not re.fullmatch(r'\d+(?:\.\d+)?',value): raise ValueError('invalid JBIS index')
+    return float(value)
+
+def _yen(value):
+    value=clean(value).replace(',','')
+    if not re.fullmatch(r'\d+円',value): raise ValueError('invalid JBIS yen amount')
+    return int(value[:-1])
+
+def parse_jbis_sire_indices(page, sire_name='ドゥラメンテ'):
+    """Parse official weekly AEI/CPI values without deriving missing denominators."""
+    identity(page,{'name':sire_name})
+    parser=JbisSireIndexGrids();parser.feed(page)
+    crop_rows=parser.rows['crops'];annual_rows=parser.rows['annual']
+    crop_header=['種付年度','種付頭数','生産頭数','血統登録頭数','出走頭数','勝馬頭数','入着頭数','2歳勝馬頭数','重賞勝馬頭数','収得賞金']
+    annual_header=['年度','出走頭数','出走回数','勝馬頭数','勝鞍回数','重賞勝馬','重賞勝鞍','1着賞金','重賞賞金','収得賞金']
+    if not crop_rows or crop_rows[0][:10]!=crop_header or not crop_rows[0][10].startswith('AEI'):
+        raise ValueError('JBIS crop index headers changed')
+    if not annual_rows or annual_rows[0][:10]!=annual_header or not annual_rows[0][10].startswith('AEI') or annual_rows[0][11]!='重賞AEI':
+        raise ValueError('JBIS annual index headers changed')
+    crops=[]
+    for row in crop_rows[1:]:
+        if not row or not re.fullmatch(r'\d{4}',row[0]): continue
+        if len(row)!=11: raise ValueError('JBIS crop index row changed')
+        crops.append({'covering_year':_integer(row[0]),'birth_year':_integer(row[0])+1,'mares':_integer(row[1]),
+            'foals':_integer(row[2]),'registrations':_integer(row[3]),'starters':_integer(row[4]),
+            'winners':_integer(row[5]),'placers':_integer(row[6]),'two_year_old_winners':_integer(row[7]),
+            'graded_winners':_integer(row[8]),'earnings_yen':_yen(row[9]),'aei':_decimal(row[10])})
+    crop_total=next((row for row in crop_rows if row and row[0]=='合計'),None)
+    if not crop_total or len(crop_total)!=9: raise ValueError('JBIS crop total row changed')
+    annual=[]
+    for row in annual_rows[1:]:
+        if not row or not re.fullmatch(r'\d{4}',row[0]): continue
+        if len(row)!=12: raise ValueError('JBIS annual index row changed')
+        annual.append({'year':_integer(row[0]),'starters':_integer(row[1]),'starts':_integer(row[2]),
+            'winners':_integer(row[3]),'wins':_integer(row[4]),'graded_winners':_integer(row[5]),
+            'graded_wins':_integer(row[6]),'first_prize_yen':_yen(row[7]),'graded_prize_yen':_yen(row[8]),
+            'earnings_yen':_yen(row[9]),'aei':_decimal(row[10]),'graded_aei':_decimal(row[11])})
+    annual_total=next((row for row in annual_rows if row and row[0]=='合計'),None)
+    if not annual_total or len(annual_total)!=12: raise ValueError('JBIS annual total row changed')
+    cpi_values=[_decimal(value) for value in re.findall(r'CPI.*?=\s*(\d+(?:\.\d+)?)',page,re.S)]
+    if not cpi_values or len(set(cpi_values))!=1: raise ValueError('JBIS CPI missing or inconsistent')
+    date_match=re.search(r'中央：\s*(\d{4})年(\d{1,2})月(\d{1,2})日現在',page)
+    if not date_match: raise ValueError('JBIS update date missing')
+    source_date=f'{int(date_match[1]):04d}-{int(date_match[2]):02d}-{int(date_match[3]):02d}'
+    crop_aei=_decimal(crop_total[-1]);annual_aei=_decimal(annual_total[-2]);cpi=cpi_values[0]
+    crop_earnings=_yen(crop_total[-2]);annual_earnings=_yen(annual_total[9])
+    if len(crops)<5 or len(annual)<2 or crop_earnings!=annual_earnings: raise ValueError('JBIS index totals failed validation')
+    if any(not 0<=row['aei']<=20 for row in crops+annual) or not 0<cpi<=20: raise ValueError('JBIS index outside expected range')
+    return {
+        'source':{'name':'JBIS-Search','url':'https://www.jbis.or.jp/horse/0001151936/sire/generation/thorough_c/','updated_at':source_date},
+        'summary':{'crop_aei':crop_aei,'annual_aei':annual_aei,'cpi':cpi,
+            'aei_cpi_ratio':round(crop_aei/cpi,2),'starters':_integer(crop_total[2]),'earnings_yen':crop_earnings},
+        'crops':crops,'annual':annual,
+        'definitions':{
+            'aei':'产驹平均收得奖金与同期全部出赛马平均收得奖金之比；1.00为同期平均。',
+            'cpi':'配种母马与其他种牡马所生兄弟马的平均收得奖金与同期全部出赛马平均收得奖金之比。',
+            'ratio':'AEI÷CPI，由本站根据JBIS公布值计算，用于并列观察产驹表现与母群质量。'
+        }
+    }
+
 def identity(page, horse):
     title=re.search(r'<title[^>]*>(.*?)</title>',page,re.S|re.I)
     if not title or clean(horse['name']) not in clean(text(title.group(1))):

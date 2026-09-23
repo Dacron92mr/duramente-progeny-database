@@ -3,7 +3,7 @@ from pathlib import Path
 import sys
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from sync_sources import parse_races,parse_profile,money
+from sync_sources import parse_races,parse_profile,parse_jbis_sire_indices,money
 from weekly_sync import merge, Client, SourceUnavailable, is_domestic_race, jbis_cycle
 from unittest.mock import patch
 from urllib.error import HTTPError
@@ -16,6 +16,13 @@ HEADERS=['日付','開催','レース名','隠し指数','着順','距離','頭�
 VALUES=['2023/12/24','5中山8','<a href="/race/202306050811/">有馬記念(GI)</a>','999','1','芝2500','16','騎手A','58','474(-2)','36.2','13,048.6']
 def page(headers=HEADERS,values=VALUES):
     return '<title>テストホース | 競走馬</title><table summary="テストホースの競走戦績"><tr>'+''.join('<th>'+h+'</th>' for h in headers)+'</tr><tr>'+''.join('<td>'+v+'</td>' for v in values)+'</tr></table>'
+def jbis_index_page(cpi='1.90'):
+    crop_header=['種付年度','種付頭数','生産頭数','血統登録頭数','出走頭数','勝馬頭数','入着頭数','2歳勝馬頭数','重賞勝馬頭数','収得賞金','AEI※1']
+    crops=[['2017','10','9','9','8','4','2','1','1','400円','1.20'],['2018','10','9','9','8','4','2','1','1','600円','1.80'],['2019','10','9','9','8','4','2','1','1','800円','2.10'],['2020','10','9','9','8','4','2','1','1','900円','1.10'],['2021','10','9','9','8','4','2','1','1','1,300円','2.80'],['合計','45','40','20','10','5','5','4,000円','1.72']]
+    annual_header=['年度','出走頭数','出走回数','勝馬頭数','勝鞍回数','重賞勝馬','重賞勝鞍','1着賞金','重賞賞金','収得賞金','AEI※1','重賞AEI']
+    annual=[['2025','20','50','10','12','2','2','700円','400円','1,500円','2.03','2.17'],['2026','20','50','10','12','2','2','900円','500円','2,500円','1.80','0.79'],['合計','40','100','20','24','4','4','1,600円','900円','4,000円','1.88','2.11']]
+    grid=lambda cls,rows:'<div class="'+cls+'"><div class="data-7__inner">'+''.join('<div>'+''.join('<div>'+v+'</div>' for v in row)+'</div>' for row in rows)+'</div></div>'
+    return '<title>世代・年次別｜ドゥラメンテ｜JBIS</title><p>中央：2026年9月22日現在</p>'+grid('data-7-1',[crop_header,*crops])+'<p>CPI='+cpi+'</p>'+grid('data-7-2',[annual_header,*annual])+'<p>CPI='+cpi+'</p>'
 class ParserTests(unittest.TestCase):
     def test_header_mapping_ignores_hidden_column(self):
         row=parse_races(page(),HORSE)[0]
@@ -54,6 +61,14 @@ class ParserTests(unittest.TestCase):
     def test_jbis_profile(self):
         result=parse_profile('<title>テストホース｜JBIS</title><dl><dt>総賞金</dt><dd>123.4万円</dd></dl>',HORSE,'jbis')
         self.assertEqual(result,{'earnings_jbis':123.4})
+    def test_jbis_sire_indices(self):
+        result=parse_jbis_sire_indices(jbis_index_page())
+        self.assertEqual(result['source']['updated_at'],'2026-09-22')
+        self.assertEqual(result['summary'],{'crop_aei':1.72,'annual_aei':1.88,'cpi':1.9,'aei_cpi_ratio':0.91,'starters':40,'earnings_yen':4000})
+        self.assertEqual((result['crops'][0]['birth_year'],result['annual'][-1]['graded_aei']),(2018,0.79))
+    def test_jbis_sire_indices_reject_inconsistent_cpi(self):
+        with self.assertRaisesRegex(ValueError,'CPI'):
+            parse_jbis_sire_indices(jbis_index_page().replace('CPI=1.90','CPI=1.80',1))
     def test_rounding_keeps_precision(self):
         updated,_=merge(HORSE,{'horse':HORSE,'races':[]},{'earnings_netkeiba':100})
         self.assertEqual(updated['earnings_netkeiba'],100.1)

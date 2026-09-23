@@ -1357,8 +1357,9 @@ def methodology(races: list[dict[str, Any]]) -> dict[str, Any]:
         "breeder": "牧场名称尽量保持原始登记写法，常见写法差异会合并到同一牧场名下。",
         "racecourse": "赛马场成绩以已取得正式名次的出赛为基础，统计胜率、连对率和前三率。",
         "awd": "平均胜距只统计已取得胜利且能够确认距离的比赛。",
+        "aei_cpi": "AEI与CPI采用JBIS-Search公布的中央平地赛口径；AEI以1.00表示同期全部出赛马平均，CPI衡量配种母马与其他种牡马所生兄弟马的相对表现，AEI/CPI由本站按公布值计算。",
         "race_prize_quality": prize_quality(races),
-        "missing_data": "CI、AEI和部分全体种马分类榜仍待补充；全日本榜单只采用可靠公开来源。",
+        "missing_data": "部分全体种马分类榜仍待补充；全日本榜单只采用可靠公开来源。",
         "last_updated": date.today().isoformat(),
     }
 

@@ -1934,6 +1934,10 @@ td {
   border-bottom: 1px solid var(--line);
 }
 
+.sire-index-summary-band {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .awd-summary-band > div {
   display: grid;
   gap: 4px;
