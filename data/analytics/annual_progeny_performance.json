@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total_wins": 1265,
-    "jra_wins": 583,
-    "nar_wins": 680,
+    "total_wins": 1267,
+    "jra_wins": 584,
+    "nar_wins": 681,
     "overseas_wins": 2,
     "other_wins": 0,
     "years": [
@@ -14,7 +14,7 @@
       2025,
       2026
     ],
-    "updated_at": "2026-09-21"
+    "updated_at": "2026-09-28"
   },
   "annual": [
     {
@@ -175,29 +175,29 @@
     },
     {
       "year": 2026,
-      "starts": 895,
+      "starts": 928,
       "runners": 161,
-      "wins": 87,
-      "winners": 58,
-      "jra_wins": 27,
-      "nar_wins": 60,
+      "wins": 89,
+      "winners": 60,
+      "jra_wins": 28,
+      "nar_wins": 61,
       "overseas_wins": 0,
       "other_wins": 0,
-      "top3": 261,
-      "win_rate": 0.0972,
-      "top3_rate": 0.2916,
-      "winner_runner_rate": 0.3602,
+      "top3": 268,
+      "win_rate": 0.0959,
+      "top3_rate": 0.2888,
+      "winner_runner_rate": 0.3727,
       "graded_wins": 2,
       "g1_wins": 0,
       "g2_wins": 2,
       "g3_wins": 0,
       "earnings": 103491.4,
-      "race_prize_earnings": 119208.3,
+      "race_prize_earnings": 121056.0,
       "earnings_status": "partial",
       "earnings_source": "JBISサーチ 種牡馬ランキング（进行中）",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2026&y2=2024&y3=2026&kind=1&division=1&racetype1=1&racetype2=1&y_f=2026&y_t=2026&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 9,
-      "prize_rows": 439
+      "prize_rows": 452
     }
   ],
   "win_events": [
@@ -21705,6 +21705,40 @@
       "grade_group": null,
       "prize": 320.0,
       "cumulative_wins": 1265
+    },
+    {
+      "race_date": "2026/09/21",
+      "year": 2026,
+      "horse_id": 217,
+      "horse": "ロードアルディート",
+      "hkjc_name_zh": "大勇王",
+      "race_name": "3歳以上1勝クラス",
+      "race_url": "https://db.netkeiba.com/race/202609040708/",
+      "meeting": "阪神",
+      "raw_meeting": "4阪神7",
+      "jurisdiction": "JRA",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 820.0,
+      "cumulative_wins": 1266
+    },
+    {
+      "race_date": "2026/09/27",
+      "year": 2026,
+      "horse_id": 143,
+      "horse": "エヴィダンシア",
+      "hkjc_name_zh": null,
+      "race_name": "C2七組",
+      "race_url": "https://db.netkeiba.com/race/202636092704/",
+      "meeting": "水沢",
+      "raw_meeting": "水沢",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 43.0,
+      "cumulative_wins": 1267
     }
   ],
   "milestones": [

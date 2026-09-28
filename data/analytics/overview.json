@@ -7,7 +7,7 @@
     "graded_winners": 29,
     "stakes_winners": 34,
     "g1_winners": 11,
-    "total_earnings": 1659575.3,
+    "total_earnings": 1660575.3,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -51,19 +51,19 @@
     "graded_foal_rate": 0.0399,
     "graded_runner_rate": 0.0443,
     "g1_foal_rate": 0.0152,
-    "avg_earnings_per_foal": 2285.9,
-    "avg_earnings_per_runner": 2533.7,
+    "avg_earnings_per_foal": 2287.3,
+    "avg_earnings_per_runner": 2535.2,
     "median_earnings_per_runner": 546.0,
     "earnings_q25": 23.2,
-    "earnings_q75": 1976.8,
+    "earnings_q75": 2001.2,
     "max_earnings": 106875.1,
-    "awd": 1600.6,
-    "winning_distance_count": 1265,
+    "awd": 1600.5,
+    "winning_distance_count": 1267,
     "generation_range": "2018-2022",
     "most_common_broodmare_sire": {
       "name": "ディープインパクト",
       "count": 29
     }
   },
-  "last_updated": "2026-09-21"
+  "last_updated": "2026-09-28"
 }
