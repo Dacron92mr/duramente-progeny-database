@@ -2,7 +2,7 @@
   "source": {
     "name": "JBIS-Search",
     "url": "https://www.jbis.or.jp/horse/0001151936/sire/generation/thorough_c/",
-    "updated_at": "2026-09-22"
+    "updated_at": "2026-09-27"
   },
   "summary": {
     "crop_aei": 1.72,
@@ -10,7 +10,7 @@
     "cpi": 1.9,
     "aei_cpi_ratio": 0.91,
     "starters": 622,
-    "earnings_yen": 14920841000
+    "earnings_yen": 14929321000
   },
   "crops": [
     {
@@ -52,7 +52,7 @@
       "placers": 17,
       "two_year_old_winners": 20,
       "graded_winners": 8,
-      "earnings_yen": 3931045000,
+      "earnings_yen": 3933145000,
       "aei": 2.49
     },
     {
@@ -80,7 +80,7 @@
       "placers": 14,
       "two_year_old_winners": 13,
       "graded_winners": 4,
-      "earnings_yen": 2361687000,
+      "earnings_yen": 2368067000,
       "aei": 2.8
     }
   ],
@@ -172,16 +172,16 @@
     {
       "year": 2026,
       "starters": 89,
-      "starts": 323,
+      "starts": 328,
       "winners": 22,
       "wins": 26,
       "graded_winners": 1,
       "graded_wins": 1,
       "first_prize_yen": 422790000,
       "graded_prize_yen": 197267000,
-      "earnings_yen": 922828000,
+      "earnings_yen": 931308000,
       "aei": 1.8,
-      "graded_aei": 0.79
+      "graded_aei": 0.77
     }
   ],
   "definitions": {
