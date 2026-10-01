@@ -1,51 +1,23 @@
+/* Neutral adaptive surfaces, with red reserved for emphasis and actions. */
 :root {
-  color-scheme: light;
-  --ink: #20201d;
-  --muted: #6d6a62;
-  --line: #ded6ce;
-  --paper: #fbf8f4;
-  --panel: #ffffff;
-  --panel-soft: #fffdf9;
-  --header-start: #fbf2ed;
-  --header-mid: #f7eef1;
-  --header-end: #fff7ea;
-  --filter-bg: #fbf2ed;
-  --input-bg: #ffffff;
-  --overlay-panel: rgba(255, 251, 247, 0.94);
-  --metric-bg: #f3e9ed;
-  --neutral-surface: #f5f0e8;
-  --neutral-track: #ece7dd;
-  --neutral-chip: #efe8dc;
-  --accent: #9b315d;
-  --accent-2: #d94b68;
-  --gold: #f0b45f;
-  --soft: #f6efe9;
-  --shadow: 0 18px 60px rgba(31, 30, 24, 0.14);
+  color-scheme:light;
+  --ink:#1d1d1f; --muted:#6e6e73; --line:#dedee3;
+  --paper:#ffffff; --panel:#ffffff; --panel-soft:#f5f5f7;
+  --header-start:#ffffff; --header-mid:#ffffff; --header-end:#ffffff;
+  --filter-bg:#f5f5f7; --input-bg:#ffffff; --overlay-panel:rgba(255,255,255,.97);
+  --metric-bg:#f5f5f7; --neutral-surface:#f5f5f7; --neutral-track:#e5e5ea; --neutral-chip:#ededf0;
+  --accent:#b42335; --accent-2:#cf3547; --gold:#b88736; --soft:#f5f5f7;
+  --shadow:0 12px 36px rgba(0,0,0,.07);
 }
-
 :root[data-theme="dark"] {
-  color-scheme: dark;
-  --ink: #f2e9ed;
-  --muted: #b9aab1;
-  --line: #4b3742;
-  --paper: #151015;
-  --panel: #211820;
-  --panel-soft: #291e26;
-  --header-start: #251821;
-  --header-mid: #21171e;
-  --header-end: #2b211c;
-  --filter-bg: #1c141a;
-  --input-bg: #291e26;
-  --overlay-panel: rgba(32, 23, 29, 0.96);
-  --metric-bg: #2b1c24;
-  --neutral-surface: #2b2228;
-  --neutral-track: #493842;
-  --neutral-chip: #382c33;
-  --accent: #e46b9a;
-  --accent-2: #f17891;
-  --gold: #d9a658;
-  --soft: #302229;
-  --shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+  color-scheme:dark;
+  --ink:#f5f5f7; --muted:#a1a1a6; --line:#38383a;
+  --paper:#000000; --panel:#1c1c1e; --panel-soft:#242426;
+  --header-start:#000000; --header-mid:#000000; --header-end:#000000;
+  --filter-bg:#1c1c1e; --input-bg:#2c2c2e; --overlay-panel:rgba(28,28,30,.97);
+  --metric-bg:#242426; --neutral-surface:#242426; --neutral-track:#38383a; --neutral-chip:#303033;
+  --accent:#ff6875; --accent-2:#ff8290; --gold:#d5ae65; --soft:#242426;
+  --shadow:0 12px 36px rgba(0,0,0,.25);
 }
 
 * {
@@ -4100,3 +4072,42 @@ html[data-theme="light"] .chart-card { background:#fff; }
   .horse-photo img { height: 230px; }
   .course-plot-table th,.course-plot-table td { padding: 12px; }
 }
+
+/* One layout contract for all analytical cards, including paired charts. */
+.topbar { background:var(--paper); }
+a { color:var(--accent); }
+.family-signal-card { background:var(--panel); }
+.pedigree-section-nav button.active { background:var(--panel); color:var(--accent); box-shadow:none; }
+.pedigree-section-nav button.active > span,.pedigree-section-nav button.active > small { color:var(--accent); }
+.chart-card,.research-chart { padding:22px; border:1px solid var(--line); border-radius:18px; background:var(--panel); min-width:0; }
+.chart-card-head,.research-chart .chart-card-head { padding-right:0; display:block; }
+.chart-card-head.with-controls { display:flex; flex-direction:column; gap:12px; }
+.chart-card-head h3 { padding-right:68px; font-size:18px; font-weight:650; line-height:1.4; }
+.chart-card p { font-weight:400; line-height:1.65; }
+.chart-card-head .chart-actions,.research-chart .chart-card-head .chart-actions { position:absolute; right:0; top:0; margin:0; }
+.chart-card-head .analysis-controls { width:100%; }
+.chart-card-head .analysis-controls select { max-width:100%; }
+.chart-grid > .chart-card > .chart-canvas,.mini-chart-grid > .chart-card > .chart-canvas,.club-analysis-grid > .chart-card > .chart-canvas { flex:0 0 auto; }
+.chart-reading-note { margin-top:auto!important; padding-top:16px; font-size:11px!important; color:var(--muted); border-top:1px solid var(--line); }
+.chart-grid,.mini-chart-grid,.club-analysis-grid { align-items:stretch; gap:20px; }
+.chart-grid > .analysis-block { min-width:0; }
+.chart-canvas { min-width:0; }
+.analysis-block,.analysis-title,.pedigree-panel-intro { box-shadow:none; }
+.chart-dialog { background:var(--panel); }
+.chart-dialog::backdrop { background:rgba(0,0,0,.65); }
+.chart-dialog-scroll { overflow:auto; }
+.chart-dialog header { position:sticky; top:-20px; background:var(--panel); z-index:4; padding-bottom:8px; }
+.table-wrap { max-width:100%; }
+@media(max-width:1100px) {
+ .chart-grid,.mini-chart-grid,.club-analysis-grid { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:600px) {
+ .chart-card,.research-chart,.mini-chart-grid .chart-card { padding:16px 12px; border-radius:14px; }
+ .chart-card-head h3 { font-size:17px; padding-right:64px; }
+ .chart-card-head .chart-actions,.research-chart .chart-card-head .chart-actions { position:absolute; }
+ .chart-grid,.mini-chart-grid,.club-analysis-grid { gap:16px; }
+ .chart-dialog header { top:-12px; }
+ .chart-card-head .analysis-controls label { min-width:0; width:100%; }
+}
+
+.course-comparison { margin-bottom:20px; }
