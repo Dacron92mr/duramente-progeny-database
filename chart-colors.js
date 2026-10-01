@@ -28,7 +28,8 @@
     const c=hex.slice(1).match(/../g).map(v=>{const n=parseInt(v,16)/255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;});
     return .2126*c[0]+.7152*c[1]+.0722*c[2]>.179?'#29242a':'#ffffff';
   }
-  const api={crops,tint,family,familyIdentity,ink};
+  const research=Object.freeze({diverging:['#587f7a','#f5f1ed','#9b4266'],grades:{G1:'#a34d70',G2:'#bca06b',G3:'#8497b0'}});
+  const api={crops,tint,family,familyIdentity,ink,research};
   root.DuramenteColors=api;
   if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

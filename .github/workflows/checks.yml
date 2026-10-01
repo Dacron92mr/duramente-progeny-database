@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: '22'
       - run: node --check app.js
+      - run: node --check chart-analysis.js
+      - run: node scripts/verify_research_charts.cjs
       - run: node scripts/verify_chart_colors.cjs
       - run: node scripts/verify_sankey.cjs
       - run: python scripts/verify_chart_insights.py
