@@ -665,7 +665,7 @@ function applyChartTheme(chart) {
       splitLine: { lineStyle: { color: line } },
       nameTextStyle: { color: muted },
     }));
-    chart.setOption({
+    const patch = {
       textStyle: { color: text },
       legend: (option.legend || []).map(() => ({
         inactiveColor: muted,
@@ -693,7 +693,20 @@ function applyChartTheme(chart) {
         } : undefined,
         markPoint: series.markPoint ? { label: { color: text } } : undefined,
       })),
-    });
+    };
+    if (chart.__designMedia) {
+      const merge = (base, update) => {
+        if (Array.isArray(update)) return update.map((value, i) => merge(base?.[i], value));
+        if (!update || typeof update !== "object") return update;
+        const result = { ...base };
+        for (const [key, value] of Object.entries(update)) if (value !== undefined) result[key] = merge(base?.[key], value);
+        return result;
+      };
+      chart.setOption({ baseOption: merge(chart.__designMedia.base, patch), media: [
+        { query: { maxWidth: 480 }, option: merge(chart.__designMedia.compact, patch) },
+        { option: merge(chart.__designMedia.base, patch) },
+      ] });
+    } else chart.setOption(patch);
 }
 
 function refreshChartTheme() {
@@ -1155,6 +1168,7 @@ function renderChart(id, option) {
   if (option.research) {
     const { research, __compact, ...designedOption } = option;
     const baseOption = { animationDuration: 220, textStyle: { fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }, aria: { enabled: true }, ...designedOption, tooltip: { confine: true, ...designedOption.tooltip } };
+    if (__compact) chart.__designMedia = { base: baseOption, compact: __compact };
     chart.setOption(__compact ? {baseOption,media:[{query:{maxWidth:480},option:__compact},{option:baseOption}]} : baseOption);
     chartRegistry.set(id, chart);
     addChartActions(el, id);
