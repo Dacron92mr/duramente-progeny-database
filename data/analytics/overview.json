@@ -7,7 +7,7 @@
     "graded_winners": 29,
     "stakes_winners": 34,
     "g1_winners": 11,
-    "total_earnings": 1660575.3,
+    "total_earnings": 1662549.6,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -51,11 +51,11 @@
     "graded_foal_rate": 0.0399,
     "graded_runner_rate": 0.0443,
     "g1_foal_rate": 0.0152,
-    "avg_earnings_per_foal": 2287.3,
-    "avg_earnings_per_runner": 2535.2,
+    "avg_earnings_per_foal": 2290.0,
+    "avg_earnings_per_runner": 2538.2,
     "median_earnings_per_runner": 546.0,
     "earnings_q25": 23.2,
-    "earnings_q75": 2001.2,
+    "earnings_q75": 2026.1,
     "max_earnings": 106875.1,
     "awd": 1600.5,
     "winning_distance_count": 1267,

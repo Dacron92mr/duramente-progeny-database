@@ -22,7 +22,7 @@
       "graded_winners": 9,
       "stakes_winners": 10,
       "g1_winners": 5,
-      "total_earnings": 380424.4,
+      "total_earnings": 380908.6,
       "representatives": [
         {
           "name": "スターズオンアース",
@@ -66,11 +66,11 @@
       "graded_foal_rate": 0.09,
       "graded_runner_rate": 0.0978,
       "g1_foal_rate": 0.05,
-      "avg_earnings_per_foal": 3804.2,
-      "avg_earnings_per_runner": 4135.0,
+      "avg_earnings_per_foal": 3809.1,
+      "avg_earnings_per_runner": 4140.3,
       "median_earnings_per_runner": 883.5,
       "earnings_q25": 88.8,
-      "earnings_q75": 3087.5,
+      "earnings_q75": 3097.0,
       "max_earnings": 84098.1
     },
     {
@@ -81,7 +81,7 @@
       "graded_winners": 9,
       "stakes_winners": 11,
       "g1_winners": 4,
-      "total_earnings": 661775.5,
+      "total_earnings": 662044.7,
       "representatives": [
         {
           "name": "タイトルホルダー",
@@ -125,8 +125,8 @@
       "graded_foal_rate": 0.0299,
       "graded_runner_rate": 0.0338,
       "g1_foal_rate": 0.0133,
-      "avg_earnings_per_foal": 2198.6,
-      "avg_earnings_per_runner": 2487.9,
+      "avg_earnings_per_foal": 2199.5,
+      "avg_earnings_per_runner": 2488.9,
       "median_earnings_per_runner": 605.2,
       "earnings_q25": 46.4,
       "earnings_q75": 1973.0,
@@ -140,7 +140,7 @@
       "graded_winners": 7,
       "stakes_winners": 8,
       "g1_winners": 1,
-      "total_earnings": 433013.9,
+      "total_earnings": 434234.8,
       "representatives": [
         {
           "name": "マスカレードボール",
@@ -184,8 +184,8 @@
       "graded_foal_rate": 0.0311,
       "graded_runner_rate": 0.034,
       "g1_foal_rate": 0.0044,
-      "avg_earnings_per_foal": 1924.5,
-      "avg_earnings_per_runner": 2102.0,
+      "avg_earnings_per_foal": 1929.9,
+      "avg_earnings_per_runner": 2107.9,
       "median_earnings_per_runner": 464.9,
       "earnings_q25": 6.5,
       "earnings_q75": 1810.4,
@@ -561,7 +561,7 @@
       "graded_winners": 0,
       "winner_rate": 0.4,
       "graded_rate": 0.0,
-      "total_earnings": 4133.0,
+      "total_earnings": 4612.1,
       "horses": [
         {
           "id": 141,
@@ -643,7 +643,7 @@
       "graded_winners": 0,
       "winner_rate": 0.7391,
       "graded_rate": 0.0,
-      "total_earnings": 14053.7,
+      "total_earnings": 14078.5,
       "horses": [
         {
           "id": 105,
@@ -816,7 +816,7 @@
       "graded_winners": 0,
       "winner_rate": 0.5417,
       "graded_rate": 0.0,
-      "total_earnings": 80423.0,
+      "total_earnings": 81113.0,
       "horses": [
         {
           "id": 25,
@@ -1108,7 +1108,7 @@
       "graded_winners": 3,
       "winner_rate": 0.5385,
       "graded_rate": 0.0769,
-      "total_earnings": 77005.9,
+      "total_earnings": 77032.9,
       "horses": [
         {
           "id": 14,
@@ -2909,7 +2909,7 @@
       "graded_winners": 3,
       "winner_rate": 0.6923,
       "graded_rate": 0.0577,
-      "total_earnings": 115643.5,
+      "total_earnings": 115843.5,
       "horses": [
         {
           "id": 9,
@@ -3201,7 +3201,7 @@
       "graded_winners": 5,
       "winner_rate": 0.6757,
       "graded_rate": 0.1351,
-      "total_earnings": 245197.8,
+      "total_earnings": 245467.0,
       "horses": [
         {
           "id": 2,
@@ -3472,7 +3472,7 @@
       "graded_winners": 1,
       "winner_rate": 0.6364,
       "graded_rate": 0.0909,
-      "total_earnings": 19583.1,
+      "total_earnings": 19598.1,
       "horses": [
         {
           "id": 18,
@@ -3727,7 +3727,7 @@
       "graded_winners": 4,
       "winner_rate": 0.6053,
       "graded_rate": 0.0526,
-      "total_earnings": 188545.4,
+      "total_earnings": 188548.4,
       "horses": [
         {
           "id": 6,
@@ -4019,7 +4019,7 @@
       "graded_winners": 3,
       "winner_rate": 0.6585,
       "graded_rate": 0.0366,
-      "total_earnings": 256678.2,
+      "total_earnings": 256898.2,
       "horses": [
         {
           "id": 1,
@@ -4311,7 +4311,7 @@
       "graded_winners": 0,
       "winner_rate": 0.6267,
       "graded_rate": 0.0,
-      "total_earnings": 90304.0,
+      "total_earnings": 90350.2,
       "horses": [
         {
           "id": 30,
@@ -5161,7 +5161,7 @@
           "graded_winners": 0,
           "winner_rate": 0.4,
           "graded_rate": 0.0,
-          "total_earnings": 4133.0,
+          "total_earnings": 4612.1,
           "horses": [
             {
               "id": 141,
@@ -5243,7 +5243,7 @@
           "graded_winners": 0,
           "winner_rate": 0.7391,
           "graded_rate": 0.0,
-          "total_earnings": 14053.7,
+          "total_earnings": 14078.5,
           "horses": [
             {
               "id": 105,
@@ -5416,7 +5416,7 @@
           "graded_winners": 0,
           "winner_rate": 0.5417,
           "graded_rate": 0.0,
-          "total_earnings": 80423.0,
+          "total_earnings": 81113.0,
           "horses": [
             {
               "id": 25,
@@ -5708,7 +5708,7 @@
           "graded_winners": 3,
           "winner_rate": 0.5385,
           "graded_rate": 0.0769,
-          "total_earnings": 77005.9,
+          "total_earnings": 77032.9,
           "horses": [
             {
               "id": 14,
@@ -7509,7 +7509,7 @@
           "graded_winners": 3,
           "winner_rate": 0.6923,
           "graded_rate": 0.0577,
-          "total_earnings": 115643.5,
+          "total_earnings": 115843.5,
           "horses": [
             {
               "id": 9,
@@ -7801,7 +7801,7 @@
           "graded_winners": 5,
           "winner_rate": 0.6757,
           "graded_rate": 0.1351,
-          "total_earnings": 245197.8,
+          "total_earnings": 245467.0,
           "horses": [
             {
               "id": 2,
@@ -8072,7 +8072,7 @@
           "graded_winners": 1,
           "winner_rate": 0.6364,
           "graded_rate": 0.0909,
-          "total_earnings": 19583.1,
+          "total_earnings": 19598.1,
           "horses": [
             {
               "id": 18,
@@ -8327,7 +8327,7 @@
           "graded_winners": 4,
           "winner_rate": 0.6053,
           "graded_rate": 0.0526,
-          "total_earnings": 188545.4,
+          "total_earnings": 188548.4,
           "horses": [
             {
               "id": 6,
@@ -8619,7 +8619,7 @@
           "graded_winners": 3,
           "winner_rate": 0.6585,
           "graded_rate": 0.0366,
-          "total_earnings": 256678.2,
+          "total_earnings": 256898.2,
           "horses": [
             {
               "id": 1,
@@ -8911,7 +8911,7 @@
           "graded_winners": 0,
           "winner_rate": 0.6267,
           "graded_rate": 0.0,
-          "total_earnings": 90304.0,
+          "total_earnings": 90350.2,
           "horses": [
             {
               "id": 30,
@@ -9754,7 +9754,7 @@
           "graded_winners": 0,
           "winner_rate": 0.4667,
           "graded_rate": 0.0,
-          "total_earnings": 6515.9,
+          "total_earnings": 7000.0,
           "horses": [
             {
               "id": 141,
@@ -9871,7 +9871,7 @@
           "graded_winners": 0,
           "winner_rate": 0.6667,
           "graded_rate": 0.0,
-          "total_earnings": 15909.4,
+          "total_earnings": 15929.2,
           "horses": [
             {
               "id": 105,
@@ -10072,7 +10072,7 @@
           "graded_winners": 0,
           "winner_rate": 0.5476,
           "graded_rate": 0.0,
-          "total_earnings": 76280.5,
+          "total_earnings": 76970.5,
           "horses": [
             {
               "id": 25,
@@ -10364,7 +10364,7 @@
           "graded_winners": 3,
           "winner_rate": 0.5,
           "graded_rate": 0.0682,
-          "total_earnings": 83645.4,
+          "total_earnings": 83672.4,
           "horses": [
             {
               "id": 14,
@@ -12123,7 +12123,7 @@
           "graded_winners": 3,
           "winner_rate": 0.6981,
           "graded_rate": 0.0566,
-          "total_earnings": 115795.0,
+          "total_earnings": 115995.0,
           "horses": [
             {
               "id": 9,
@@ -12415,7 +12415,7 @@
           "graded_winners": 5,
           "winner_rate": 0.6757,
           "graded_rate": 0.1351,
-          "total_earnings": 246473.7,
+          "total_earnings": 246742.9,
           "horses": [
             {
               "id": 2,
@@ -12686,7 +12686,7 @@
           "graded_winners": 1,
           "winner_rate": 0.6,
           "graded_rate": 0.1,
-          "total_earnings": 18155.7,
+          "total_earnings": 18170.7,
           "horses": [
             {
               "id": 18,
@@ -12955,7 +12955,7 @@
           "graded_winners": 5,
           "winner_rate": 0.6267,
           "graded_rate": 0.0667,
-          "total_earnings": 297125.5,
+          "total_earnings": 297128.5,
           "horses": [
             {
               "id": 1,
@@ -13247,7 +13247,7 @@
           "graded_winners": 2,
           "winner_rate": 0.6222,
           "graded_rate": 0.0222,
-          "total_earnings": 151274.3,
+          "total_earnings": 151494.3,
           "horses": [
             {
               "id": 8,
@@ -13539,7 +13539,7 @@
           "graded_winners": 1,
           "winner_rate": 0.6667,
           "graded_rate": 0.0145,
-          "total_earnings": 135316.1,
+          "total_earnings": 135362.3,
           "horses": [
             {
               "id": 5,
