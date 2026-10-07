@@ -2411,7 +2411,7 @@ td {
 }
 
 .grade-g2 {
-  background: #9b315d;
+  background: #c73545;
 }
 
 .grade-g3 {
@@ -4111,3 +4111,28 @@ a { color:var(--accent); }
 }
 
 .course-comparison { margin-bottom:20px; }
+
+/* Semantic badges retain their category identity in both themes. */
+.bms-family-card strong, .bms-family-card .mini-label { color:var(--ink); }
+.bms-family-card { border-color:var(--line); }
+.race-map-panel { background:var(--panel-soft); box-shadow:none; }
+.race-map-panel-section + .race-map-panel-section { border-color:var(--line); }
+#racecourseContent .tag.green, #racecourseContent .link-button { background:var(--neutral-chip); color:var(--accent); }
+.fact-siblings { grid-column:1 / -1; }
+.fact-siblings strong { display:flex; flex-wrap:wrap; gap:10px 18px; }
+.fact-siblings a { text-decoration:underline; text-underline-offset:3px; }
+
+.bms-family-card em { color:var(--ink); }
+.strategy-insight-list span { color:var(--ink); border-left:4px solid var(--lineage-color); padding-left:8px; }
+.rate-legend span { background:linear-gradient(90deg,#f5f5f7,#d78b94,#b42335); border-color:var(--line); }
+.size-legend i, .jra-dot, .nar-dot { background:var(--accent); border-color:var(--panel); box-shadow:0 0 0 1px var(--line); }
+.nar-dot { box-shadow:0 0 0 3px var(--muted); }
+
+.representative-horse-item.rep-grade-g1 { --grade-color:#2f6fa7; }
+.representative-horse-item.rep-grade-g2 { --grade-color:#c73545; }
+.representative-horse-item.rep-grade-g3 { --grade-color:#3f8f68; }
+.representative-horse-item:is(.rep-grade-g1,.rep-grade-g2,.rep-grade-g3) {
+  background:color-mix(in srgb,var(--grade-color) 14%,var(--panel));
+  border:1px solid color-mix(in srgb,var(--grade-color) 45%,var(--line));
+  color:var(--ink);
+}

@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const {gradedSiblings}=require('../horse-relatives');
+const focal={id:1,netkeiba_id:'2018100001',dam_netkeiba_id:'2000100001',dam_jbis_id:'123',name:'A'};
+const full={id:2,netkeiba_id:'2019100001',dam_netkeiba_id:'2000100001',name:'B',achievement_class:'G2'};
+const foreign={netkeiba_id:'2015100001',name:'C',major_win:'G1',birth_year:2015};
+const local=[focal,full,{...full,id:3,netkeiba_id:'2019100002',dam_netkeiba_id:'2000100002'}, {...full,id:4,netkeiba_id:'2019100003',achievement_class:'未勝利'}];
+const rows=gradedSiblings(focal,local,{dams:{'2000100001':[foreign,full,focal]}});
+assert.deepEqual(new Set(rows.map(r=>r.name)),new Set(['B','C']));
+assert.equal(gradedSiblings({...focal,dam_netkeiba_id:null},[{...full,dam_jbis_id:'123'}],{}).length,1);
+assert.equal(gradedSiblings({...focal,dam_netkeiba_id:null,dam_jbis_id:null},local,{}).length,0);
+const {bms,grades,research}=require('../chart-colors');
+assert.equal(bms['Sunday Silence'],'#bfeef4');assert.equal(bms['Northern Dancer'],'#d8aff7');
+assert.deepEqual(grades,{G1:'#2f6fa7',G2:'#c73545',G3:'#3f8f68'});assert.equal(research.grades,grades);
+console.log('Verified same-dam identity, winner eligibility, deduplication and semantic colours.');

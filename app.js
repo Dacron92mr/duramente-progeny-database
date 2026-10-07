@@ -878,8 +878,8 @@ function representativeItem(rep) {
   `;
   return `
     ${horse
-      ? `<a class="representative-horse-item" href="${escapeHtml(`${window.location.pathname}?horse=${horse.id}`)}" title="查看${escapeHtml(rep.name)}的产驹资料">${content}</a>`
-      : `<span class="representative-horse-item">${content}</span>`}
+      ? `<a class="representative-horse-item rep-${representativeGradeClass(grade)}" href="${escapeHtml(`${window.location.pathname}?horse=${horse.id}`)}" title="查看${escapeHtml(rep.name)}的产驹资料">${content}</a>`
+      : `<span class="representative-horse-item rep-${representativeGradeClass(grade)}">${content}</span>`}
   `;
 }
 
@@ -1148,6 +1148,10 @@ function renderChart(id, option) {
     oldChart.dispose();
   }
   const chart = window.echarts.init(el);
+  option = { ...option, series: (option.series || []).map(series => {
+    const grade = String(series.name || "").match(/^(G[123])(?:马|胜|$)/)?.[1];
+    return grade ? { ...series, itemStyle: { ...series.itemStyle, color: window.DuramenteColors.grades[grade] } } : series;
+  }) };
   const suppliedResearch = option.research;
   if (!suppliedResearch && window.DuramenteDesign) {
     const context = { width: el.clientWidth || 600, theme: chartThemeColors(), colors: Object.values(COLORS), sequential: window.DuramenteColors.research.sequential, wilson: window.DuramenteAnalysis.wilson, baseline: staticData.analytics.get("overview")?.summary };
@@ -1458,14 +1462,14 @@ function mapGeoComponent(name, layout) {
     zoom: layout.zoom,
     label: { show: false },
     itemStyle: {
-      areaColor: dark ? "#2c2329" : "#f4f0eb",
-      borderColor: dark ? "#55434d" : "#d8d0c8",
+      areaColor: dark ? "#242426" : "#f5f5f7",
+      borderColor: dark ? "#48484a" : "#d1d1d6",
       borderWidth: 0.55,
     },
     emphasis: {
       disabled: true,
       label: { show: false },
-      itemStyle: { areaColor: dark ? "#392b33" : "#eee7e0" },
+      itemStyle: { areaColor: dark ? "#38383a" : "#e5e5ea" },
     },
   };
 }
@@ -1624,7 +1628,7 @@ async function renderRacecourseMap(scope, rows, allRows) {
   const narPoints = (points) => points.filter((point) => point.system === "NAR").map((point) => ({
     ...point,
     symbolSize: (point.symbolSize || 0) + 5,
-    itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 },
+    itemStyle: { color: "rgba(0,0,0,0)", borderColor: chartThemeColors().muted, borderWidth: 1.4 },
     label: { show: false },
   }));
   const chart = renderChart("racecourseJapanMap", {
@@ -1642,7 +1646,7 @@ async function renderRacecourseMap(scope, rows, allRows) {
       text: ["高胜率", "低胜率"],
       textGap: 8,
       textStyle: { color: "#675c56", fontWeight: 700, fontSize: 11 },
-      inRange: { color: [COLORS.soft, COLORS.rose, COLORS.duramente, COLORS.plum] },
+      inRange: { color: ["#f5f5f7", "#d78b94", "#b42335"] },
       calculable: false,
     },
     geo: mapGeoComponent("日本", {
@@ -1650,7 +1654,7 @@ async function renderRacecourseMap(scope, rows, allRows) {
       layoutSize: "96%",
     }),
     series: [
-      racecourseScatterSeries("NAR外环", 0, narPoints(mainPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: "#5c2d4d", borderWidth: 1.4 }, label: { show: false } }),
+      racecourseScatterSeries("NAR外环", 0, narPoints(mainPoints), { maxWins, silent: true, zlevel: 1, itemStyle: { color: "rgba(0,0,0,0)", borderColor: chartThemeColors().muted, borderWidth: 1.4 }, label: { show: false } }),
       racecourseScatterSeries("赛马场", 0, mainPoints, { maxWins }),
       racecourseLeaderLineSeries("全国标签引导线", 0, mainPoints),
       racecourseScatterSeries("全国标签", 0, racecourseLeaderLabelPoints(mainPoints), { maxWins, silent: true, zlevel: 3, itemStyle: { color: "rgba(0,0,0,0)" } }),
@@ -2342,9 +2346,9 @@ function annualSeriesForMetric(metric, rows) {
       legend: ["G1", "G2", "G3"],
       yAxis: [{ type: "value", name: "胜场", minInterval: 1 }],
       series: [
-        { ...barBase, name: "G1", stack: "graded", itemStyle: { color: COLORS.raceLine }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g1_wins", COLORS.raceLine) },
-        { ...barBase, name: "G2", stack: "graded", itemStyle: { color: COLORS.duramente }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g2_wins", COLORS.duramente) },
-        { ...barBase, name: "G3", stack: "graded", itemStyle: { color: COLORS.green }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g3_wins", COLORS.green) },
+        { ...barBase, name: "G1", stack: "graded", itemStyle: { color: window.DuramenteColors.grades.G1 }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g1_wins", window.DuramenteColors.grades.G1) },
+        { ...barBase, name: "G2", stack: "graded", itemStyle: { color: window.DuramenteColors.grades.G2 }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g2_wins", window.DuramenteColors.grades.G2) },
+        { ...barBase, name: "G3", stack: "graded", itemStyle: { color: window.DuramenteColors.grades.G3 }, data: stackedAnnualData(["g1_wins", "g2_wins", "g3_wins"], "g3_wins", window.DuramenteColors.grades.G3) },
       ],
     };
   }
@@ -2366,7 +2370,7 @@ function renderAnnualPerformanceCharts(annualPerformance) {
     renderChart(`annualPerformance-${metric}`, {
       color: config.legend.map((name) => ({
         JRA: COLORS.duramente, NAR: COLORS.coral, 海外: COLORS.gold,
-        G1: COLORS.raceLine, G2: COLORS.duramente, G3: COLORS.green,
+        ...window.DuramenteColors.grades,
         年度奖金: COLORS.duramente, 出赛次数: COLORS.teal, 出赛马: COLORS.gold,
       }[name] || COLORS.duramente)),
       tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, confine: true, formatter: (items) => annualChartTooltip(metric, items[0]?.data?.raw || {}) },
@@ -3285,10 +3289,7 @@ function paddedAxisMax(value) {
 
 const PEDIGREE_SEXES = ["牡", "牝", "セン"];
 const BMS_PRIMARY_LINES = ["Northern Dancer", "Sunday Silence", "Native Dancer", "Nasrullah", "Turn-to", "Other"];
-const BMS_CATEGORY_COLORS = {
-  "Northern Dancer": COLORS.plum, "Sunday Silence": COLORS.duramente,
-  "Native Dancer": COLORS.gold, Nasrullah: COLORS.rose, "Turn-to": COLORS.teal, Other: COLORS.gray,
-};
+const BMS_CATEGORY_COLORS = window.DuramenteColors.bms;
 const BMS_CATEGORY_LIGHT_COLORS = Object.fromEntries(Object.keys(BMS_CATEGORY_COLORS).map(key => [key, COLORS.soft]));
 
 function horseStarts(horse) {
@@ -5209,7 +5210,7 @@ function regionBadge(region) {
 function lineageBadge(value) {
   if (!value || value === "未分類") return "";
   const key = String(value).toLowerCase().replace(/[^a-z]+/g, "-").replace(/^-|-$/g, "");
-  return `<span class="lineage lineage-${key}">${escapeHtml(value)}</span>`;
+  return `<span class="lineage lineage-${key}"${window.DuramenteColors.bms[value] ? ` style="background:${window.DuramenteColors.bms[value]}"` : ""}>${escapeHtml(value)}</span>`;
 }
 
 function crossItems(value) {
@@ -5708,6 +5709,8 @@ async function openAdjacentHorse(direction) {
   if (nextId) openHorse(nextId, { preserveFocus: true });
 }
 
+let gradedSiblingCatalog;
+
 async function openHorse(id, { trigger = null, updateHistory = true, preserveFocus = false } = {}) {
   if (!id) return;
   const requestedId = String(id);
@@ -5721,9 +5724,13 @@ async function openHorse(id, { trigger = null, updateHistory = true, preserveFoc
   document.body.classList.add("drawer-open");
   updateHorseNavigation();
   if (!preserveFocus && !wasOpen) els.drawerPanel.focus();
-  const data = await getJson(`/api/horse?id=${encodeURIComponent(id)}`);
+  gradedSiblingCatalog ||= fetchStaticData("graded_siblings.json").catch(() => { gradedSiblingCatalog = null; return { dams: {} }; });
+  const [data, relatives, allHorses] = await Promise.all([
+    getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(),
+  ]);
   if (state.horse !== requestedId) return;
   const horse = data.horse;
+  const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
   window.currentDetailHorse = horse;
   els.detail.innerHTML = `
     <div class="detail-head">
@@ -5751,7 +5758,6 @@ async function openHorse(id, { trigger = null, updateHistory = true, preserveFoc
       <div class="fact"><span>生产本胎时母龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
       ${horse.dam_biological_parity != null ? `<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>` : ""}
       ${horse.dam_registered_foal_order != null ? `<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>` : ""}
-      ${horse.parity_source_url ? `<div class="fact"><span>胎次来源</span><strong><a href="${escapeHtml(horse.parity_source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(horse.parity_source_name || "来源")}</a></strong></div>` : ""}
       <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
       <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
       <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分类")}</strong></div>
@@ -5759,7 +5765,6 @@ async function openHorse(id, { trigger = null, updateHistory = true, preserveFoc
       ${horse.dosage_profile ? `<div class="fact"><span>DP</span><strong>${escapeHtml(horse.dosage_profile)} (${escapeHtml(horse.dosage_points)})</strong></div>` : ""}
       ${horse.dosage_index != null ? `<div class="fact"><span>DI</span><strong>${escapeHtml(formatNumber(horse.dosage_index, 2))}</strong></div>` : ""}
       ${horse.center_of_distribution != null ? `<div class="fact"><span>CD</span><strong>${escapeHtml(formatNumber(horse.center_of_distribution, 2))}</strong></div>` : ""}
-      ${horse.dosage_profile ? `<div class="fact"><span>Dosage 数据状态</span><strong>${horse.dosage_source_url ? `<a href="${escapeHtml(horse.dosage_source_url)}" target="_blank" rel="noopener noreferrer">${dosageStatusLabel(horse.dosage_status)}</a>` : dosageStatusLabel(horse.dosage_status)}</strong></div>` : ""}
       <div class="fact"><span>马主</span><strong>${ownerCell(horse)}</strong></div>
       <div class="fact"><span>练马师</span><strong>${escapeHtml(horse.trainer)}</strong></div>
       <div class="fact"><span>生产牧场</span><strong>${escapeHtml(horse.breeder)}</strong></div>
@@ -5768,6 +5773,7 @@ async function openHorse(id, { trigger = null, updateHistory = true, preserveFoc
       <div class="fact"><span>最高成就</span><strong>${escapeHtml(uiValue(horse.achievement_class, "achievement"))}</strong></div>
       <div class="fact"><span>奖金</span><strong>${escapeHtml(prize(horse))}</strong></div>
       <div class="fact"><span>主要胜鞍</span><strong>${escapeHtml(horse.major_win)}</strong></div>
+      ${siblings.length ? `<div class="fact fact-siblings"><span>同母兄弟姐妹 · 重赏冠军</span><strong>${siblings.map(sibling => `<a href="https://db.netkeiba.com/horse/${escapeHtml(sibling.netkeiba_id)}/" target="_blank" rel="noopener noreferrer" title="${escapeHtml(sibling.major_win || sibling.achievement_class)}">${escapeHtml(sibling.name)}</a>`).join("")}</strong></div>` : ""}
     </div>
 
     <details class="race-section" open>

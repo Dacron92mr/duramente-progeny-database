@@ -28,9 +28,11 @@
     const c=hex.slice(1).match(/../g).map(v=>{const n=parseInt(v,16)/255;return n<=.04045?n/12.92:((n+.055)/1.055)**2.4;});
     return .2126*c[0]+.7152*c[1]+.0722*c[2]>.179?'#29242a':'#ffffff';
   }
-  const research=Object.freeze({sequential:['#f5f5f7','#d8a0a6','#a51d30'],diverging:['#587f7a','#f5f1ed','#9b4266'],grades:{G1:'#a34d70',G2:'#bca06b',G3:'#8497b0'}});
+  const bms=Object.freeze({'Northern Dancer':'#d8aff7','Sunday Silence':'#bfeef4','Native Dancer':'#ffd18c',Nasrullah:'#f49ad7','Turn-to':'#bdfaa3',Other:'#dddddd'});
+  const grades=Object.freeze({G1:'#2f6fa7',G2:'#c73545',G3:'#3f8f68'});
+  const research=Object.freeze({sequential:['#f5f5f7','#d8a0a6','#a51d30'],diverging:['#587f7a','#f5f1ed','#9b4266'],grades});
   const ui=Object.freeze({duramente:'#b42335',primary:'#b42335',secondary:'#d77c88',plum:'#796584',rose:'#cc7785',coral:'#cb8064',gold:'#b88736',jra:'#b42335',nar:'#43877a',overseas:'#b88736',raceLine:'#4e79a7',average:'#8b8b91',blue:'#4e79a7',teal:'#43877a',green:'#43877a',muted:'#98989f',soft:'#f5f5f7',gray:'#98989f',negative:'#796584'});
-  const api={ui,crops,tint,family,familyIdentity,ink,research};
+  const api={bms,grades,ui,crops,tint,family,familyIdentity,ink,research};
   root.DuramenteColors=api;
   if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -20,6 +20,7 @@ jobs:
       - run: node --check chart-analysis.js
       - run: node --check chart-design.js
       - run: node scripts/verify_chart_design.cjs
+      - run: node scripts/verify_horse_relatives.cjs
       - run: node scripts/verify_research_charts.cjs
       - run: node scripts/verify_chart_colors.cjs
       - run: node scripts/verify_sankey.cjs
