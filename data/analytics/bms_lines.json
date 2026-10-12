@@ -7,7 +7,7 @@
     "graded_winners": 6,
     "stakes_winners": 7,
     "g1_winners": 2,
-    "total_earnings": 233059.1,
+    "total_earnings": 233095.1,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -51,8 +51,8 @@
     "graded_foal_rate": 0.0522,
     "graded_runner_rate": 0.0566,
     "g1_foal_rate": 0.0174,
-    "avg_earnings_per_foal": 2026.6,
-    "avg_earnings_per_runner": 2198.7,
+    "avg_earnings_per_foal": 2026.9,
+    "avg_earnings_per_runner": 2199.0,
     "median_earnings_per_runner": 434.6,
     "earnings_q25": 29.0,
     "earnings_q75": 1007.6,
@@ -215,7 +215,7 @@
     "graded_winners": 4,
     "stakes_winners": 4,
     "g1_winners": 2,
-    "total_earnings": 293761.8,
+    "total_earnings": 293765.8,
     "representatives": [
       {
         "name": "スターズオンアース",
@@ -253,7 +253,7 @@
     "graded_runner_rate": 0.0426,
     "g1_foal_rate": 0.018,
     "avg_earnings_per_foal": 2646.5,
-    "avg_earnings_per_runner": 3125.1,
+    "avg_earnings_per_runner": 3125.2,
     "median_earnings_per_runner": 575.0,
     "earnings_q25": 0.0,
     "earnings_q75": 2031.5,
