@@ -127,3 +127,17 @@ https://dacron92mr.github.io/duramente-progeny-database/
 ---
 
 *Duramente Progeny Database is an independent fan-made research project and is not affiliated with the JRA, JBIS, netkeiba, Japan Stud Book or other data providers.*
+
+
+## 开发与维护
+
+本网站保持原生 HTML/CSS/JavaScript 和 GitHub Pages 静态部署，无需构建。
+
+- [本地运行、测试、扩展和故障排查](docs/DEVELOPMENT.md)
+- [架构与模块职责](docs/ARCHITECTURE.md)
+- [数据来源、生成边界和官方译名结构](docs/DATA_SCHEMA.md)
+- [界面设计系统](docs/UI_DESIGN_SYSTEM.md)
+- [本轮审计、验证及前后对照](docs/REFACTOR_REPORT.md)
+- [参与维护](CONTRIBUTING.md)
+
+列表默认紧凑显示，可切换详细模式。支持快捷筛选、组合高级筛选、每页 20/50/100 匹、Cmd/Ctrl+K 搜索，以及导出全部筛选结果的 CSV。显示偏好保存在本机，筛选、页码和马匹详情保存在网址。

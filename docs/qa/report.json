@@ -1,0 +1,6 @@
+{
+  "base": "http://127.0.0.1:8766/duramente-progeny-database/",
+  "passed": 26,
+  "failures": [],
+  "browserErrors": []
+}
