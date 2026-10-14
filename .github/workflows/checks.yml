@@ -17,6 +17,8 @@ jobs:
         with:
           node-version: '22'
       - run: node --check app.js
+      - run: for file in src/*.mjs; do node --check "$file"; done
+      - run: node --test tests/*.test.mjs
       - run: node --check chart-analysis.js
       - run: node --check chart-design.js
       - run: node scripts/verify_chart_design.cjs

@@ -1,6 +1,15 @@
 /* Purpose-specific views for the first six analytical chart redesigns. */
 (function (root) {
   'use strict';
+  // Rendering dependencies are supplied by the application, never ambient globals.
+  let escapeHtml, money, formatNumber, prize, formatRate, chartThemeColors, cropColor,
+    chartViewportWidth, renderChart, openHorse, navigateToProgeny, applyBroodmareSireFilter,
+    fetchStaticData, COLORS;
+  function configure(dependencies) {
+    ({ escapeHtml, money, formatNumber, prize, formatRate, chartThemeColors, cropColor,
+      chartViewportWidth, renderChart, openHorse, navigateToProgeny, applyBroodmareSireFilter,
+      fetchStaticData, COLORS } = dependencies);
+  }
   const quantile = (sorted, p) => {
     if (!sorted.length) return null;
     const at = (sorted.length - 1) * p, low = Math.floor(at);
@@ -170,12 +179,19 @@
       if(!container.isConnected)return;
       const photos=(catalog.horses[id]||[]).filter(p=>/^\d+$/.test(p));
       if(!photos.length){container.innerHTML=`<p class="photo-empty">暂无可展示照片 · <a href="${source}" target="_blank" rel="noreferrer">在 netkeiba 查看</a></p>`;return;}
-      container.innerHTML=`<a class="horse-photo-link" href="${source}" target="_blank" rel="noreferrer"><img alt="${escapeHtml(horse.name)}的照片" referrerpolicy="no-referrer" decoding="async"></a><figcaption><a href="${source}" target="_blank" rel="noreferrer">照片来源：netkeiba ↗</a><button type="button" ${photos.length<2?'hidden':''}>换一张</button></figcaption>`;
+      container.innerHTML=`<a class="horse-photo-link" href="${source}" target="_blank" rel="noreferrer"><span class="photo-loading" role="status">正在载入来源照片…</span><img alt="${escapeHtml(horse.name)}的照片" referrerpolicy="no-referrer" decoding="async"></a><figcaption><a href="${source}" target="_blank" rel="noreferrer">照片来源：netkeiba ↗</a><button type="button" ${photos.length<2?'hidden':''}>换一张</button></figcaption>`;
       const img=container.querySelector('img');let remaining=[...photos];
+      let photoTimeout;
+      const unavailable=()=>{
+        clearTimeout(photoTimeout);img.onerror=null;img.removeAttribute('src');
+        if(container.isConnected)container.innerHTML=`<p class="photo-empty">照片暂时无法加载 · <a href="${source}" target="_blank" rel="noreferrer">在 netkeiba 查看</a></p>`;
+      };
+      img.onload=()=>{clearTimeout(photoTimeout);photoTimeout=null;container.querySelector('.photo-loading')?.remove();};
       const show=()=>{
         const candidates=remaining.filter(p=>p!==previousPhoto.get(id));
         const pool=candidates.length?candidates:remaining;
-        if(!pool.length){container.innerHTML=`<p class="photo-empty">照片暂时无法加载 · <a href="${source}" target="_blank" rel="noreferrer">在 netkeiba 查看</a></p>`;return;}
+        if(!pool.length){unavailable();return;}
+        if(!photoTimeout)photoTimeout=setTimeout(unavailable,12000);
         const no=pool[Math.floor(Math.random()*pool.length)];previousPhoto.set(id,no);
         img.dataset.photo=no;img.src=`https://db.netkeiba.com/show_photo.php?horse_id=${id}&no=${no}&tn=no&tmp=no`;
       };
@@ -192,7 +208,7 @@
       if(/^https:\/\/db\.netkeiba\.com\/race\/\d+\/$/.test(url||''))window.open(url,'_blank','noopener,noreferrer');
     }
   }
-  const api={openDatum,quantile,distribution,wilson,earnings,achievement,milestones,efficiency,clubs,racecourses,horsePhoto};
+  const api={configure,openDatum,quantile,distribution,wilson,earnings,achievement,milestones,efficiency,clubs,racecourses,horsePhoto};
   root.DuramenteAnalysis=api;
   if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

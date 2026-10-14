@@ -1,86 +1,19 @@
-const state = {
-  view: "progeny",
-  pedigree: "bms",
-  sire: "annual",
-  production: "farm",
-  horse: "",
-  q: "",
-  sex: "",
-  year: "",
-  color: "",
-  region: "",
-  trainer: "",
-  owner: "",
-  breeder: "",
-  broodmare_sire: "",
-  female_family: "",
-  dam_age_bucket: "",
-  bms_line: "",
-  achievement: "",
-  breeding: "",
-  sort: "earnings_netkeiba",
-  dir: "desc",
-  limit: 50,
-  offset: 0,
-  total: 0,
-  allTotal: 0,
-};
+import { state, FILTER_META, FILTER_KEYS, VALID_VIEWS, VALID_PEDIGREE_SECTIONS, VALID_SIRE_SECTIONS, VALID_PRODUCTION_SECTIONS } from "./src/state.mjs";
+import { fmt, money, prize, escapeHtml, raceDateValue, uiValue, careerSummaryText, formatNumber, formatRate, horseDamAgeBucket } from "./src/format.mjs";
+import { createDataClient } from "./src/data.mjs";
+import { createRouter } from "./src/router.mjs";
+import { createThemeController } from "./src/theme.mjs";
+import { createHorseDrawer } from "./src/horse-drawer.mjs";
+import { createDetailContent } from "./src/detail-content.mjs";
+import { readPreference, savePreference } from "./src/preferences.mjs";
+import { filterAndSortHorses, QUICK_FILTER_LABELS } from "./src/filtering.mjs";
+import { renderProgenyRows, renderHorseCards } from "./src/progeny-renderer.mjs";
+import { exportHorsesCsv } from "./src/csv.mjs";
+import { loadChartLibrary } from "./src/chart-loader.mjs";
+import { setBackgroundInert, trapFocus } from "./src/dialog.mjs";
 
-const FILTER_META = {
-  q: { label: "搜索", element: "search" },
-  year: { label: "出生年", element: "year" },
-  sex: { label: "性别", element: "sex" },
-  color: { label: "毛色", element: "color" },
-  region: { label: "所属", element: "region" },
-  trainer: { label: "练马师", element: "trainer" },
-  owner: { label: "马主", element: "owner" },
-  breeder: { label: "生产牧场", element: "breeder" },
-  broodmare_sire: { label: "母父", element: "broodmareSire" },
-  female_family: { label: "牝系", element: "femaleFamily" },
-  dam_age_bucket: { label: "母龄", element: "damAgeBucket" },
-  bms_line: { label: "母父系", element: "bmsLine" },
-  achievement: { label: "最高成就", element: "achievement" },
-  breeding: { label: "退役后与繁殖", element: "breeding" },
-};
-
-const UI_VALUE_LABELS = {
-  sex: {
-    牡: "牡马",
-    牝: "牝马",
-    セン: "骟马",
-    セ: "骟马",
-    "♂": "牡马",
-    "♀": "牝马",
-  },
-  achievement: {
-    "3勝クラス": "3胜级",
-    "2勝クラス": "2胜级",
-    "1勝クラス": "1胜级",
-    "地方・その他": "地方／其他",
-    "未勝利・新馬": "未胜利／新马",
-    未勝利: "未胜利",
-  },
-  breeding: {
-    "Stud Record": "种牡马记录",
-    "Progeny Record": "繁殖记录",
-    なし: "无繁殖记录",
-  },
-};
-
-function uiValue(value, type) {
-  const text = String(value ?? "");
-  return UI_VALUE_LABELS[type]?.[text] || text;
-}
-
-function careerSummaryText(value) {
-  return String(value || "").replaceAll("戦", "战").replaceAll("勝", "胜");
-}
-const FILTER_KEYS = Object.keys(FILTER_META);
-const VALID_VIEWS = new Set(["progeny", "sire", "pedigree", "production", "racecourse"]);
-const VALID_PEDIGREE_SECTIONS = new Set(["bms", "family", "inbreeding", "dosage"]);
-const VALID_SIRE_SECTIONS = new Set(["annual", "crop", "graded", "market"]);
-const VALID_PRODUCTION_SECTIONS = new Set(["farm", "broodmare", "club"]);
-
+const { staticData, isStaticMode, fetchStaticData, getStaticHorses, getJson, getAnalytics } = createDataClient();
+const { writeUrlState, readUrlState } = createRouter(state);
 const els = {
   search: document.querySelector("#search"),
   mobileSearch: document.querySelector("#mobileSearch"),
@@ -127,42 +60,10 @@ const els = {
   productionContent: document.querySelector("#productionContent"),
   racecourseContent: document.querySelector("#racecourseContent"),
   themeMode: document.querySelector("#themeMode"),
-};
-
-function fmt(value) {
-  if (value === null || value === undefined || value === "") return "—";
-  return value;
-}
-
-function money(value) {
-  if (value === null || value === undefined || Number.isNaN(Number(value))) return "—";
-  return `${Number(value).toLocaleString("zh-CN", { maximumFractionDigits: 1 })} 万日元`;
-}
-
-function raceDateValue(value) {
-  const text = String(value || "").replaceAll("/", "-").replaceAll(".", "-");
-  const parsed = Date.parse(text);
-  return Number.isNaN(parsed) ? NaN : parsed;
-}
-
-function prize(horse) {
-  return money(horse.earnings_netkeiba ?? horse.earnings_jbis);
-}
-
-function escapeHtml(value) {
-  return String(fmt(value))
-    .replaceAll("&", "&amp;")
-    .replaceAll("<", "&lt;")
-    .replaceAll(">", "&gt;")
-    .replaceAll('"', "&quot;")
-    .replaceAll("'", "&#039;");
-}
-
-const staticData = {
-  summary: null,
-  horses: null,
-  analytics: new Map(),
-  details: new Map(),
+  pageSize: document.querySelector("#pageSize"),
+  clearSearch: document.querySelector("#clearSearch"),
+  exportCsv: document.querySelector("#exportCsv"),
+  actionStatus: document.querySelector("#actionStatus"),
 };
 
 let tableCounter = 0;
@@ -174,6 +75,17 @@ let productionRuntime = null;
 // One shared family: burgundy, dusty rose, slate, sage and restrained gold.
 const COLORS = window.DuramenteColors.ui;
 const CROP_COLORS = window.DuramenteColors.crops;
+
+const { applyTheme, refreshChartTheme, applyChartTheme } = createThemeController({
+  els, state, chartRegistry, chartThemeColors, renderRacecourseAnalysis, getDialogChart: () => chartDialogInstance,
+});
+const { horseDamCell, raceRows, studSection, detailSources } = createDetailContent({ finishBadge });
+
+const { openHorse, closeDrawer, openAdjacentHorse, updateHorseNavigation } = createHorseDrawer({
+  state, els, writeUrlState, getHorseIds: () => currentHorseIds, ensureHorseSequence,
+  fetchStaticData, getStaticHorses, getJson, horseDamCell, raceRows, studSection, detailSources,
+  regionBadge, lineageBadge, damAgeText, crossItems, ownerCell,
+});
 
 const RACECOURSE_COORDINATES = {
   東京: { lon: 139.485, lat: 35.6625, system: "JRA", prefecture: "東京都", aliases: ["東京競馬場"] },
@@ -448,192 +360,12 @@ function fixedHorizontalGrid(labelWidth = 150, top = 48, bottom = 34, right = 54
   };
 }
 
-function staticBase() {
-  return String(window.STATIC_DATA_BASE || "").replace(/\/$/, "");
-}
-
-function isStaticMode() {
-  return Boolean(staticBase());
-}
-
-async function fetchStaticData(path) {
-  const version = String(window.STATIC_DATA_VERSION || "");
-  let lastError;
-
-  for (let attempt = 0; attempt < 3; attempt += 1) {
-    const query = version ? `?v=${encodeURIComponent(version)}${attempt ? `-${attempt}` : ""}` : "";
-    try {
-      const response = await fetch(`${staticBase()}/${path}${query}`, {
-        cache: attempt === 0 ? "default" : "reload",
-      });
-      if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-      return await response.json();
-    } catch (error) {
-      lastError = error;
-      if (attempt < 2) await new Promise((resolve) => setTimeout(resolve, 350 * (attempt + 1)));
-    }
-  }
-
-  throw lastError;
-}
-
-async function getStaticSummary() {
-  if (!staticData.summary) staticData.summary = await fetchStaticData("summary.json");
-  return staticData.summary;
-}
-
-async function getStaticHorses() {
-  if (!staticData.horses) staticData.horses = await fetchStaticData("horses.json");
-  return staticData.horses;
-}
-
-function searchText(horse) {
-  return [
-    horse.name,
-    horse.name_en,
-    horse.hkjc_name_zh,
-    horse.search_aliases,
-    horse.dam,
-    horse.pedigree_crosses,
-    horse.broodmare_sire,
-    horse.owner,
-    horse.trainer,
-    horse.breeder,
-  ].filter(Boolean).join(" ").toLowerCase();
-}
-
-function staticSortValue(horse, sort) {
-  if (sort === "birth_year") return Number(horse.birth_year || -1);
-  if (sort === "sex") return horse.sex || "";
-  if (sort === "earnings_jbis") return Number(horse.earnings_jbis ?? -1);
-  if (sort === "earnings_netkeiba") return Number(horse.earnings_netkeiba ?? -1);
-  return horse.name || "";
-}
-
-function staticHorseList(horses, params) {
-  const search = (params.get("q") || "").trim().toLowerCase();
-  const sort = params.get("sort") || "earnings_netkeiba";
-  const direction = params.get("dir") === "asc" ? "asc" : "desc";
-  const limit = Math.max(1, Math.min(100, Number(params.get("limit") || 50)));
-  const offset = Math.max(0, Number(params.get("offset") || 0));
-
-  const checks = [
-    ["sex", "sex"],
-    ["year", "birth_year"],
-    ["color", "color"],
-    ["region", "trainer_region"],
-    ["trainer", "trainer"],
-    ["owner", "owner"],
-    ["breeder", "breeder"],
-    ["broodmare_sire", "broodmare_sire"],
-    ["female_family", "female_family"],
-    ["bms_line", "bms_line"],
-    ["achievement", "achievement_class"],
-    ["breeding", "breeding_role"],
-  ];
-
-  const filtered = horses.filter((horse) => {
-    if (search && !searchText(horse).includes(search)) return false;
-    const damAgeBucket = params.get("dam_age_bucket");
-    if (damAgeBucket && horseDamAgeBucket(horse) !== damAgeBucket) return false;
-    return checks.every(([param, field]) => {
-      const value = params.get(param);
-      return !value || String(horse[field] ?? "") === value;
-    });
-  });
-
-  filtered.sort((left, right) => {
-    const a = staticSortValue(left, sort);
-    const b = staticSortValue(right, sort);
-    let result = 0;
-    if (typeof a === "number" && typeof b === "number") {
-      result = a - b;
-    } else {
-      result = String(a).localeCompare(String(b), "ja");
-    }
-    if (result !== 0) return direction === "asc" ? result : -result;
-    return String(left.name || "").localeCompare(String(right.name || ""), "ja");
-  });
-
-  return {
-    total: filtered.length,
-    items: filtered.slice(offset, offset + limit),
-  };
-}
-
-async function getStaticJson(url) {
-  const parsed = new URL(url, window.location.href);
-  if (parsed.pathname === "/api/summary") return getStaticSummary();
-  if (parsed.pathname === "/api/horses") return staticHorseList(await getStaticHorses(), parsed.searchParams);
-  if (parsed.pathname === "/api/horse") {
-    const id = parsed.searchParams.get("id");
-    if (!staticData.details.has(id)) {
-      staticData.details.set(id, await fetchStaticData(`horses/${encodeURIComponent(id)}.json`));
-    }
-    return staticData.details.get(id);
-  }
-  if (parsed.pathname.startsWith("/data/analytics/")) {
-    return fetchStaticData(parsed.pathname.replace(/^\/data\//, ""));
-  }
-  throw new Error(`Static route not found: ${parsed.pathname}`);
-}
-
-async function getJson(url) {
-  if (isStaticMode()) return getStaticJson(url);
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Request failed: ${response.status}`);
-  return response.json();
-}
-
-async function getAnalytics(name) {
-  if (!staticData.analytics.has(name)) {
-    staticData.analytics.set(name, await getJson(`/data/analytics/${encodeURIComponent(name)}.json`));
-  }
-  return staticData.analytics.get(name);
-}
-
 function debounce(fn, wait = 220) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), wait);
   };
-}
-
-function urlForState() {
-  const params = new URLSearchParams();
-  if (state.view !== "progeny") params.set("view", state.view);
-  if (state.view === "pedigree" && state.pedigree !== "bms") params.set("pedigree", state.pedigree);
-  if (state.view === "sire" && state.sire !== "annual") params.set("sire", state.sire);
-  if (state.view === "production" && state.production !== "farm") params.set("production", state.production);
-  for (const key of FILTER_KEYS) {
-    if (state[key]) params.set(key === "horse" ? "horse" : key, state[key]);
-  }
-  if (state.sort !== "earnings_netkeiba") params.set("sort", state.sort);
-  if (state.dir !== (state.sort === "name" ? "asc" : "desc")) params.set("dir", state.dir);
-  if (state.offset) params.set("offset", String(state.offset));
-  if (state.horse) params.set("horse", String(state.horse));
-  const query = params.toString();
-  return `${window.location.pathname}${query ? `?${query}` : ""}${window.location.hash}`;
-}
-
-function writeUrlState(mode = "push") {
-  const url = urlForState();
-  if (`${window.location.pathname}${window.location.search}${window.location.hash}` === url) return;
-  window.history[mode === "replace" ? "replaceState" : "pushState"]({ duramente: true }, "", url);
-}
-
-function readUrlState() {
-  const params = new URLSearchParams(window.location.search);
-  state.view = VALID_VIEWS.has(params.get("view")) ? params.get("view") : "progeny";
-  state.pedigree = VALID_PEDIGREE_SECTIONS.has(params.get("pedigree")) ? params.get("pedigree") : "bms";
-  state.sire = VALID_SIRE_SECTIONS.has(params.get("sire")) ? params.get("sire") : "annual";
-  state.production = VALID_PRODUCTION_SECTIONS.has(params.get("production")) ? params.get("production") : "farm";
-  for (const key of FILTER_KEYS) state[key] = params.get(key) || "";
-  state.sort = ["earnings_netkeiba", "birth_year", "name"].includes(params.get("sort")) ? params.get("sort") : "earnings_netkeiba";
-  state.dir = ["asc", "desc"].includes(params.get("dir")) ? params.get("dir") : (state.sort === "name" ? "asc" : "desc");
-  state.offset = Math.max(0, Number(params.get("offset") || 0));
-  state.horse = params.get("horse") || "";
 }
 
 function syncControlsFromState() {
@@ -648,85 +380,8 @@ function syncControlsFromState() {
   setSelectValue(els.trainer, state.trainer);
   els.sort.value = state.sort;
   updateDirectionButton();
+  els.pageSize.value = String(state.limit);
   renderActiveFilters();
-}
-
-function resolvedTheme(preference) {
-  if (preference === "dark" || preference === "light") return preference;
-  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-}
-
-function applyChartTheme(chart) {
-  const { text, muted, line, surface } = chartThemeColors();
-    const option = chart.getOption();
-    const axisTheme = (axes = []) => axes.map(() => ({
-      axisLabel: { color: muted },
-      axisLine: { lineStyle: { color: line } },
-      splitLine: { lineStyle: { color: line } },
-      nameTextStyle: { color: muted },
-    }));
-    const patch = {
-      textStyle: { color: text },
-      legend: (option.legend || []).map(() => ({
-        inactiveColor: muted,
-        textStyle: { color: text },
-      })),
-      xAxis: axisTheme(option.xAxis),
-      yAxis: axisTheme(option.yAxis),
-      tooltip: (option.tooltip || []).map(() => ({
-        backgroundColor: surface,
-        borderColor: line,
-        textStyle: { color: text },
-      })),
-      title: (option.title || []).map(() => ({
-        textStyle: { color: text },
-        subtextStyle: { color: muted },
-      })),
-      visualMap: (option.visualMap || []).map(() => ({ textStyle: { color: muted } })),
-      dataZoom: (option.dataZoom || []).map(() => ({ textStyle: { color: muted } })),
-      series: (option.series || []).map((series) => ({
-        label: { color: text },
-        endLabel: { color: text },
-        ...(["line", "bar"].includes(series.type) && series.label?.backgroundColor ? { label: { color: text, backgroundColor: surface } } : {}),
-        markLine: series.markLine ? {
-          label: { color: text, backgroundColor: surface, borderColor: line, borderWidth: 1 },
-        } : undefined,
-        markPoint: series.markPoint ? { label: { color: text } } : undefined,
-      })),
-    };
-    if (chart.__designMedia) {
-      const merge = (base, update) => {
-        if (Array.isArray(update)) return update.map((value, i) => merge(base?.[i], value));
-        if (!update || typeof update !== "object") return update;
-        const result = { ...base };
-        for (const [key, value] of Object.entries(update)) if (value !== undefined) result[key] = merge(base?.[key], value);
-        return result;
-      };
-      chart.setOption({ baseOption: merge(chart.__designMedia.base, patch), media: [
-        { query: { maxWidth: 480 }, option: merge(chart.__designMedia.compact, patch) },
-        { option: merge(chart.__designMedia.base, patch) },
-      ] });
-    } else chart.setOption(patch);
-}
-
-function refreshChartTheme() {
-  for (const chart of chartRegistry.values()) {
-    chart.resize();
-    applyChartTheme(chart);
-  }
-}
-
-function applyTheme(preference, { persist = true } = {}) {
-  const next = ["system", "light", "dark"].includes(preference) ? preference : "system";
-  document.documentElement.dataset.themePreference = next;
-  document.documentElement.dataset.theme = resolvedTheme(next);
-  if (persist) localStorage.setItem("duramente-theme", next);
-  if (els.themeMode) els.themeMode.value = next;
-  requestAnimationFrame(refreshChartTheme);
-  if (state.view === "racecourse" && els.racecourseContent?.dataset.loaded) {
-    delete els.racecourseContent.dataset.loaded;
-    renderRacecourseAnalysis().catch(console.error);
-  }
 }
 
 function activeFilterCount() {
@@ -735,11 +390,13 @@ function activeFilterCount() {
 
 function renderActiveFilters() {
   const active = FILTER_KEYS.filter((key) => state[key]);
+  els.clearSearch.hidden = !state.q;
+  for (const button of document.querySelectorAll('[data-quick]')) button.setAttribute('aria-pressed', String(button.dataset.quick === state.quick));
   els.filterCountBadge.textContent = String(active.length);
   els.filterOpen?.classList.toggle("has-filters", active.length > 0);
   els.activeFilters.innerHTML = active.map((key) => `
     <button class="filter-chip" type="button" data-remove-filter="${key}" title="移除${escapeHtml(FILTER_META[key].label)}筛选">
-      ${escapeHtml(FILTER_META[key].label)}: ${escapeHtml(uiValue(state[key], key))}
+      ${escapeHtml(FILTER_META[key].label)}: ${escapeHtml(key === "quick" ? QUICK_FILTER_LABELS[state[key]] : uiValue(state[key], key))}
     </button>
   `).join("") + (active.length ? `<button class="clear-filter-chips" type="button" data-clear-filters>清除全部</button>` : "");
 }
@@ -783,6 +440,7 @@ function updateDirectionButton() {
     const active = button.dataset.tableSort === state.sort;
     button.classList.toggle("active", active);
     button.setAttribute("aria-pressed", String(active));
+    button.closest('th')?.setAttribute('aria-sort', active ? (state.dir === 'asc' ? 'ascending' : 'descending') : 'none');
     button.querySelector("span").textContent = active ? arrow : "";
   }
 }
@@ -790,6 +448,7 @@ function updateDirectionButton() {
 async function loadSummary() {
   const summary = await getJson("/api/summary");
   state.allTotal = Number(summary.horses || 0);
+  document.querySelector("#collectionCount").textContent = `${state.allTotal.toLocaleString("zh-CN")} 匹产驹`;
 
   for (const year of summary.facets.years) {
     const option = document.createElement("option");
@@ -827,27 +486,6 @@ function fillTrainerFacet() {
   } else {
     state.trainer = "";
   }
-}
-
-function formatNumber(value, digits = 0) {
-  if (value === null || value === undefined || value === "") return "—";
-  return Number(value).toLocaleString("zh-CN", { maximumFractionDigits: digits });
-}
-
-function formatRate(value) {
-  if (value === null || value === undefined) return "—";
-  return `${(Number(value) * 100).toFixed(1)}%`;
-}
-
-function horseDamAgeBucket(horse) {
-  const age = horse.dam_age_at_foaling;
-  if (age === null || age === undefined || age === "") return "未知";
-  const n = Number(age);
-  if (n <= 6) return "3-6";
-  if (n <= 10) return "7-10";
-  if (n <= 14) return "11-14";
-  if (n <= 18) return "15-18";
-  return "19+";
 }
 
 function representativeNames(row) {
@@ -1171,7 +809,7 @@ function renderChart(id, option) {
   }
   if (option.research) {
     const { research, __compact, ...designedOption } = option;
-    const baseOption = { animationDuration: 220, textStyle: { fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }, aria: { enabled: true }, ...designedOption, tooltip: { confine: true, ...designedOption.tooltip } };
+    const baseOption = { animationDuration: 220, textStyle: { fontFamily: "-apple-system, BlinkMacSystemFont, sans-serif" }, aria: { enabled: true }, ...designedOption, animation: !matchMedia("(prefers-reduced-motion: reduce)").matches && designedOption.animation !== false, tooltip: { confine: true, ...designedOption.tooltip } };
     if (__compact) chart.__designMedia = { base: baseOption, compact: __compact };
     chart.setOption(__compact ? {baseOption,media:[{query:{maxWidth:480},option:__compact},{option:baseOption}]} : baseOption);
     chartRegistry.set(id, chart);
@@ -1182,7 +820,7 @@ function renderChart(id, option) {
       const filters = CHART_DRILLDOWNS[id](params);
       if (filters && Object.values(filters).some(Boolean)) navigateToProgeny(filters);
     });
-    refreshChartTheme();
+    applyChartTheme(chart);
     el.classList.add("is-rendered");
     if (window.ResizeObserver) {
       chart.__resizeObserver = new ResizeObserver(() => { chart.resize(); applyChartTheme(chart); alignChartHeaders(); });
@@ -1190,9 +828,7 @@ function renderChart(id, option) {
     }
     if (!chartResizeBound) {
       window.addEventListener("resize", () => {
-        for (const item of chartRegistry.values()) item.resize();
         refreshChartTheme();
-        if (chartDialogInstance) { chartDialogInstance.resize(); applyChartTheme(chartDialogInstance); }
         alignChartHeaders();
       });
       chartResizeBound = true;
@@ -1293,7 +929,7 @@ function renderChart(id, option) {
   const baseOption = {
     animation: !window.matchMedia("(prefers-reduced-motion: reduce)").matches,
     animationDurationUpdate: 300,
-    textStyle: { fontFamily: "Inter, 'Noto Sans SC', 'Noto Sans JP', sans-serif" },
+    textStyle: { fontFamily: "-apple-system, BlinkMacSystemFont, system-ui, 'Noto Sans SC', 'Noto Sans JP', sans-serif" },
     aria: { enabled: true, decal: { show: false } },
     ...normalizedOption,
     ...axes,
@@ -1321,7 +957,7 @@ function renderChart(id, option) {
   chartRegistry.set(id, chart);
   addChartActions(el, id);
   alignChartHeaders();
-  refreshChartTheme();
+  applyChartTheme(chart);
   const drilldown = CHART_DRILLDOWNS[id];
   if (drilldown) {
     el.classList.add("is-drilldown");
@@ -1339,9 +975,7 @@ function renderChart(id, option) {
   }
   if (!chartResizeBound) {
     window.addEventListener("resize", () => {
-      for (const item of chartRegistry.values()) item.resize();
       refreshChartTheme();
-      if (chartDialogInstance) { chartDialogInstance.resize(); applyChartTheme(chartDialogInstance); }
       alignChartHeaders();
     });
     chartResizeBound = true;
@@ -1916,11 +1550,15 @@ function setSelectValue(select, value) {
   return false;
 }
 
-function closeFilters() {
-  els.filtersPanel?.classList.remove("open");
-  els.filterBackdrop?.classList.remove("open");
-  if (els.filterBackdrop) els.filterBackdrop.hidden = true;
-  els.filterOpen?.setAttribute("aria-expanded", "false");
+function closeFilters({ restoreFocus = true } = {}) {
+  const wasOpen = !els.filtersPanel.hidden;
+  els.filtersPanel.classList.remove('open');
+  els.filtersPanel.hidden = true;
+  els.filterBackdrop.hidden = true;
+  els.filterOpen.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('filters-open');
+  setBackgroundInert(els.filtersPanel, false);
+  if (wasOpen && restoreFocus) els.filterOpen.focus();
 }
 
 function navigateToProgeny(filters = {}) {
@@ -4292,15 +3930,6 @@ async function renderPedigreeAnalysis() {
   els.pedigreeContent.querySelector("#ancestorGroupSearch")?.addEventListener("input", debounce(rerender));
   for (const button of els.pedigreeContent.querySelectorAll("[data-pedigree-section]")) {
     button.addEventListener("click", () => activatePedigreeSection(button.dataset.pedigreeSection));
-    button.addEventListener("keydown", (event) => {
-      if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
-      event.preventDefault();
-      const buttons = [...els.pedigreeContent.querySelectorAll("[data-pedigree-section]")];
-      const current = buttons.indexOf(button);
-      const next = buttons[(current + (event.key === "ArrowRight" ? 1 : -1) + buttons.length) % buttons.length];
-      next.focus();
-      activatePedigreeSection(next.dataset.pedigreeSection);
-    });
   }
   for (const button of els.pedigreeContent.querySelectorAll("[data-ancestor-sort]")) {
     button.addEventListener("click", () => {
@@ -5147,6 +4776,10 @@ function renderMonthChart(id, rows, metric) {
 async function showView(name, { updateHistory = true } = {}) {
   if (!VALID_VIEWS.has(name)) name = "progeny";
   state.view = name;
+  closeFilters({ restoreFocus: false });
+  document.body.classList.remove('nav-open');
+  syncSidebarButton();
+  document.querySelector('.skip-link').href = `#${name}View`;
   if (name !== "progeny" && state.horse) closeDrawer({ updateHistory: false });
   for (const view of els.views) {
     const active = view.id === `${name}View`;
@@ -5160,7 +4793,10 @@ async function showView(name, { updateHistory = true } = {}) {
   if (updateHistory) writeUrlState("push");
   const content = document.getElementById(`${name}Content`);
   if (content && !content.dataset.loaded) content.innerHTML = '<p class="analysis-loading" role="status">正在加载图表与数据…</p>';
-  if (["sire", "pedigree", "production", "racecourse"].includes(name)) await getAnalytics("methodology");
+  if (name !== 'progeny') {
+    await Promise.all([loadChartLibrary(), getAnalytics('methodology')]);
+    if (state.view !== name) return;
+  }
   if (name === "sire") {
     await renderSireAnalysis();
     activateSireSection(state.sire, { updateHistory: false });
@@ -5174,7 +4810,7 @@ async function showView(name, { updateHistory = true } = {}) {
     activateProductionSection(state.production, { updateHistory: false });
   }
   if (name === "racecourse") await renderRacecourseAnalysis();
-  if (window.location.hash) requestAnimationFrame(() => document.querySelector(window.location.hash)?.scrollIntoView({ block: "start" }));
+  if (window.location.hash) requestAnimationFrame(() => document.getElementById(decodeURIComponent(window.location.hash.slice(1)))?.scrollIntoView({ block: "start" }));
 }
 
 function horseQuery() {
@@ -5193,6 +4829,7 @@ function horseQuery() {
     bms_line: state.bms_line,
     achievement: state.achievement,
     breeding: state.breeding,
+    quick: state.quick,
     sort: state.sort,
     dir: state.dir,
     limit: String(state.limit),
@@ -5240,7 +4877,7 @@ function ownerCell(horse) {
   const colorUrl = horse.owner_color_url && !isLocalHorse(horse) ? String(horse.owner_color_url) : "";
   return `
     <div class="owner-cell">
-      ${colorUrl ? `<img class="owner-silk" src="${escapeHtml(colorUrl)}" alt="${owner}">` : ""}
+      ${colorUrl ? `<img class="owner-silk" loading="lazy" src="${escapeHtml(colorUrl)}" alt="${owner}">` : ""}
       <span>${owner}</span>
     </div>
   `;
@@ -5254,7 +4891,6 @@ function finishBadge(finish) {
 
 let currentHorseIds = [];
 let horseSequenceCache = { key: "", ids: [] };
-let lastFocusedElement = null;
 
 function horseSequenceKey() {
   const params = new URL(horseQuery(), window.location.href).searchParams;
@@ -5265,21 +4901,10 @@ function horseSequenceKey() {
 
 async function ensureHorseSequence() {
   const key = horseSequenceKey();
-  if (horseSequenceCache.key === key && horseSequenceCache.ids.length) return horseSequenceCache.ids;
-  const ids = [];
-  let offset = 0;
-  let total = Infinity;
-  while (offset < total) {
-    const params = new URLSearchParams(key);
-    params.set("limit", "100");
-    params.set("offset", String(offset));
-    const data = await getJson(`/api/horses?${params.toString()}`);
-    const items = data.items || data.horses || [];
-    total = Number(data.total ?? items.length);
-    ids.push(...items.map((horse) => String(horse.id)));
-    if (!items.length) break;
-    offset += items.length;
-  }
+  if (horseSequenceCache.key === key) return horseSequenceCache.ids;
+  const horses = await getStaticHorses();
+  const ids = filterAndSortHorses(horses, new URLSearchParams(key)).map(horse => String(horse.id));
+  if (key !== horseSequenceKey()) return [];
   horseSequenceCache = { key, ids };
   currentHorseIds = ids;
   updateHorseNavigation();
@@ -5299,505 +4924,98 @@ function bindHorseOpeners(container) {
   }
 }
 
+let listRequest = 0;
 async function loadHorses() {
-  els.horseRows.innerHTML = `<tr><td colspan="12" class="muted">正在载入产驹资料...</td></tr>`;
-  els.horseCards.innerHTML = `<p class="muted">正在载入产驹资料...</p>`;
-  const data = await getJson(horseQuery());
-  const items = data.items || data.horses || [];
-  state.total = data.total;
-  if (state.offset >= state.total && state.total > 0) {
-    state.offset = Math.max(0, Math.floor((state.total - 1) / state.limit) * state.limit);
-    writeUrlState("replace");
-    return loadHorses();
+  const request = ++listRequest;
+  const table = document.querySelector('.progeny-table-wrap');
+  table.setAttribute('aria-busy', 'true');
+  els.horseCards.setAttribute('aria-busy', 'true');
+  try {
+    const data = await getJson(horseQuery());
+    if (request !== listRequest) return;
+    const items = data.items || data.horses || [];
+    state.total = data.total;
+    const lastOffset = state.total ? Math.floor((state.total - 1) / state.limit) * state.limit : 0;
+    if (state.offset > lastOffset) {
+      state.offset = lastOffset; writeUrlState('replace'); return loadHorses();
+    }
+    els.resultCount.textContent = `${Number(data.total).toLocaleString('zh-CN')} / ${Number(state.allTotal || data.total).toLocaleString('zh-CN')} 匹产驹`;
+    renderActiveFilters();
+    const empty = '<div class="empty-state"><strong>没有符合条件的产驹</strong><p>试试其他名称，或移除部分筛选条件。</p><button type="button" data-clear-filters>清除全部筛选</button></div>';
+    els.horseRows.innerHTML = renderProgenyRows(items, { regionBadge, lineageBadge, ownerCell }) || `<tr><td colspan="13">${empty}</td></tr>`;
+    els.horseCards.innerHTML = renderHorseCards(items) || empty;
+    currentHorseIds = items.map(horse => String(horse.id));
+    horseSequenceCache = { key: '', ids: [] };
+    bindHorseOpeners(els.horseRows); bindHorseOpeners(els.horseCards);
+    await ensureHorseSequence();
+    if (request !== listRequest) return;
+    updatePager();
+  } catch (error) {
+    if (request !== listRequest) return;
+    console.error('List load failed', error);
+    els.resultCount.textContent = '资料暂时无法载入';
+    const message = '<div class="load-error" role="alert">资料暂时无法载入。<button type="button" data-retry-list>重新载入</button></div>';
+    els.horseRows.innerHTML = `<tr><td colspan="13">${message}</td></tr>`;
+    els.horseCards.innerHTML = message;
+  } finally {
+    if (request === listRequest) { table.setAttribute('aria-busy', 'false'); els.horseCards.setAttribute('aria-busy', 'false'); }
   }
-  els.resultCount.textContent = `${Number(data.total).toLocaleString("zh-CN")} / ${Number(state.allTotal || data.total).toLocaleString("zh-CN")} 匹`;
-  renderActiveFilters();
-  els.horseRows.innerHTML = items.map((horse) => `
-    <tr data-id="${horse.id}" tabindex="0" role="button" aria-label="查看${escapeHtml(horse.name)}的详情">
-      <td class="horse-column">
-        <div class="horse-name">${escapeHtml(horse.name)}</div>
-        ${horse.hkjc_name_zh ? `<div class="hk-name">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
-      </td>
-      <td>${escapeHtml(horse.birth_year)}</td>
-      <td class="sex-cell">${escapeHtml(uiValue(horse.sex, "sex"))}</td>
-      <td class="color-name">${escapeHtml(uiValue(horse.color, "color"))}</td>
-      <td>${regionBadge(horse.trainer_region)}</td>
-      <td class="dam-name">
-        <div>${escapeHtml(horse.dam)}</div>
-      </td>
-      <td>${lineageBadge(horse.female_family)}</td>
-      <td class="bms-cell">
-        <div class="bms-name">${escapeHtml(horse.broodmare_sire)}</div>
-        <div class="tag-row compact">
-          ${lineageBadge(horse.bms_line)}
-        </div>
-      </td>
-      <td class="owner-name">${ownerCell(horse)}</td>
-      <td class="trainer-name">${escapeHtml(horse.trainer)}</td>
-      <td class="money">${escapeHtml(prize(horse))}</td>
-      <td class="record-cell">
-        <div>${escapeHtml(horse.major_win)}</div>
-        <div class="muted">${escapeHtml(careerSummaryText(horse.career_summary))}</div>
-      </td>
-    </tr>
-  `).join("") || `<tr><td colspan="12" class="muted">没有找到符合条件的产驹。</td></tr>`;
-  els.horseCards.innerHTML = items.map((horse) => `
-    <button class="horse-card" type="button" data-id="${horse.id}" aria-label="查看${escapeHtml(horse.name)}的详情">
-      <span class="horse-card-head">
-        <span><span class="horse-card-name">${escapeHtml(horse.name)}</span>${horse.hkjc_name_zh ? `<span class="horse-card-hk">${escapeHtml(horse.hkjc_name_zh)}</span>` : ""}</span>
-        ${regionBadge(horse.trainer_region)}
-      </span>
-      <span class="horse-card-meta"><span>${escapeHtml(horse.birth_year)}年</span><span>${escapeHtml(uiValue(horse.sex, "sex"))}</span><span>${escapeHtml(uiValue(horse.color, "color"))}</span></span>
-      <span class="horse-card-pedigree">
-        <span><small>母马</small><strong>${escapeHtml(horse.dam)}</strong></span>
-        <span><small>母父</small><strong>${escapeHtml(horse.broodmare_sire)}</strong></span>
-      </span>
-      <span class="horse-card-footer">
-        <span class="horse-card-summary"><small>主要胜鞍 / 生涯战绩</small><span>${escapeHtml(horse.major_win || careerSummaryText(horse.career_summary) || "—")}</span>${horse.major_win && horse.career_summary ? `<span class="muted">${escapeHtml(careerSummaryText(horse.career_summary))}</span>` : ""}</span>
-        <span class="horse-card-prize">${escapeHtml(prize(horse))}</span>
-      </span>
-    </button>
-  `).join("") || `<p class="muted">没有找到符合条件的产驹。</p>`;
-
-  currentHorseIds = items.map((horse) => String(horse.id));
-  horseSequenceCache = { key: "", ids: [] };
-  bindHorseOpeners(els.horseRows);
-  bindHorseOpeners(els.horseCards);
-  ensureHorseSequence().catch((error) => console.warn("Unable to prepare detail sequence", error));
-  updatePager();
 }
 
 function updatePager() {
   const start = state.total === 0 ? 0 : state.offset + 1;
   const end = Math.min(state.offset + state.limit, state.total);
-  els.pageLabel.textContent = `${start}-${end} / ${state.total}`;
+  const page = state.total ? Math.floor(state.offset / state.limit) + 1 : 0;
+  els.pageLabel.textContent = `${start}–${end} / ${state.total} · 第 ${page} / ${Math.ceil(state.total / state.limit)} 页`;
   els.prev.disabled = state.offset === 0;
   els.next.disabled = state.offset + state.limit >= state.total;
 }
 
-function sourceSummary(source) {
-  const data = source.data || {};
-  const pairs = Object.entries(data)
-    .filter(([key, value]) => !["raw", "source", "source_url"].includes(key) && value !== null && value !== "")
-    .slice(0, 22);
-  return pairs.map(([key, value]) => `
-    <dt>${escapeHtml(key)}</dt>
-    <dd>${escapeHtml(value)}</dd>
-  `).join("");
+function syncSidebarButton() {
+  const small = matchMedia('(max-width: 1000px)').matches;
+  const expanded = small ? document.body.classList.contains('nav-open') : !document.body.classList.contains('sidebar-collapsed');
+  const button = document.querySelector('#sidebarToggle');
+  button.setAttribute('aria-expanded', String(expanded));
+  button.setAttribute('aria-label', expanded ? '折叠导航侧栏' : '展开导航侧栏');
+  document.querySelector('#appSidebar').inert = small && !expanded;
 }
-
-function horseDamCell(horse) {
-  const dam = escapeHtml(horse.dam);
-  if (horse.dam_jbis_id) {
-    return `<a href="https://www.jbis.jp/horse/${escapeHtml(horse.dam_jbis_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
-  }
-  if (horse.dam_netkeiba_id) {
-    return `<a href="https://db.netkeiba.com/horse/${escapeHtml(horse.dam_netkeiba_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
-  }
-  return dam;
+function setDisplayMode(mode) {
+  state.display = mode === 'detailed' ? 'detailed' : 'compact';
+  document.querySelector('#progenyView').dataset.display = state.display;
+  for (const button of document.querySelectorAll('[data-display-mode]')) button.setAttribute('aria-pressed', String(button.dataset.displayMode === state.display));
+  savePreference('duramente-display', state.display);
 }
-
-function isOverseasRaceSet(races, horse) {
-  return horse?.trainer_region === "海外" || races.some((race) => race.source === "breednet");
-}
-
-function overseasPrize(race) {
-  if (race.prize === null || race.prize === undefined || race.prize === "") return "—";
-  const currency = race.data?.currency || (race.source === "breednet" ? "AUD" : "");
-  return `${currency === "AUD" ? "A$" : ""}${formatNumber(race.prize)}`;
-}
-
-function raceClassText(race) {
-  return race.data?.class || race.race_class || "—";
-}
-
-function raceSpText(race) {
-  return race.data?.sp || race.data?.odds_text || race.odds || "—";
-}
-
-function raceDistanceText(value) {
-  const text = String(value || "");
-  const match = text.match(/^(芝|ダ|障)(\d+)$/);
-  if (!match) return text;
-  const surface = { 芝: "芝地", ダ: "泥地", 障: "障碍" }[match[1]];
-  return `${surface} ${match[2]}m`;
-}
-
-function raceRows(races) {
-  if (!races.length) {
-    return `<p class="muted race-empty">暂无比赛记录</p>`;
-  }
-  const overseas = isOverseasRaceSet(races, window.currentDetailHorse);
-  if (overseas) {
-    return `
-      <div class="race-table-wrap">
-        <table class="race-table race-table-overseas">
-          <thead>
-            <tr>
-              <th>日期</th>
-              <th>赛马场</th>
-              <th>场次</th>
-              <th>名次</th>
-              <th>赛事</th>
-              <th>级别</th>
-              <th>参赛马</th>
-              <th>距离</th>
-              <th>骑师</th>
-              <th>负磅</th>
-              <th>马号</th>
-              <th>SP</th>
-              <th>用时</th>
-              <th>胜负距离</th>
-              <th>头马</th>
-              <th>奖金</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${races.map((race) => `
-              <tr>
-                <td>${escapeHtml(race.race_date)}</td>
-                <td>${escapeHtml(race.meeting)}</td>
-                <td>${escapeHtml(race.race_no)}</td>
-                <td>${finishBadge(race.finish)}</td>
-                <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(race.race_name)}</a>` : escapeHtml(race.race_name)}</td>
-                <td>${escapeHtml(raceClassText(race))}</td>
-                <td>${escapeHtml(race.field_size)}</td>
-                <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
-                <td>${escapeHtml(race.jockey)}</td>
-                <td>${escapeHtml(race.carried_weight)}</td>
-                <td>${escapeHtml(race.horse_number)}</td>
-                <td>${escapeHtml(raceSpText(race))}</td>
-                <td>${escapeHtml(race.time)}</td>
-                <td>${escapeHtml(race.margin)}</td>
-                <td>${escapeHtml(race.winner_or_runner_up)}</td>
-                <td>${escapeHtml(overseasPrize(race))}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    `;
-  }
-  return `
-    <div class="race-table-wrap">
-      <table class="race-table">
-        <thead>
-          <tr>
-            <th>日期</th>
-            <th>赛马场</th>
-            <th>场次</th>
-            <th>名次</th>
-            <th>赛事</th>
-            <th>距离</th>
-            <th>骑师</th>
-            <th>人气</th>
-            <th>用时</th>
-            <th>奖金</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${races.map((race) => `
-            <tr>
-              <td>${escapeHtml(race.race_date)}</td>
-              <td>${escapeHtml(race.meeting)}</td>
-              <td>${escapeHtml(race.race_no)}</td>
-              <td>${finishBadge(race.finish)}</td>
-              <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(race.race_name)}</a>` : escapeHtml(race.race_name)}</td>
-              <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
-              <td>${escapeHtml(race.jockey)}</td>
-              <td>${escapeHtml(race.popularity)}</td>
-              <td>${escapeHtml(race.time)}</td>
-              <td>${escapeHtml(money(race.prize))}</td>
-            </tr>
-          `).join("")}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-function detailSources(sources) {
-  return "";
-}
-
-function studTitle(studProfiles) {
-  if (studProfiles.some((profile) => profile.role === "stallion")) return "种牡马记录";
-  return "繁殖记录";
-}
-
-function studLinkName(profile, horse) {
-  return horse?.name || profile.name || "马";
-}
-
-function studbookHref(profile) {
-  return "https://www.studbook.jp/";
-}
-
-function profileExternalLinks(profile) {
-  const raw = profile?.external_links_json;
-  if (!raw) return [];
-  if (Array.isArray(raw)) return raw;
-  try {
-    const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : [];
-  } catch {
-    return [];
-  }
-}
-
-function normalizedStudName(value) {
-  return String(value || "").replace(/[\s　]/g, "").replace(/（/g, "(").replace(/）/g, ")");
-}
-
-function localizedRecordText(value) {
-  return String(value ?? "")
-    .replaceAll("供用種雄馬。", "现役供用种牡马。")
-    .replaceAll("父ドゥラメンテの繁殖登録馬。", "已登记为繁殖马，父系为ドゥラメンテ。")
-    .replaceAll("繁殖牝馬。2025年にエピファネイアを種付、2026年に牡馬を出産。", "繁殖母马。2025年与エピファネイア配种，2026年产下牡驹。")
-    .replaceAll("産駒は血統登録申込をされていません", "该产驹尚未申请血统登记")
-    .replaceAll("ASB mare produce: foal deceased after birth.", "ASB 繁殖记录：产驹出生后死亡。")
-    .replaceAll("ASB mare produce: missed.", "ASB 繁殖记录：未受孕。")
-    .replaceAll("ASB mare produce: parentage verified.", "ASB 繁殖记录：血统关系已核验。")
-    .replaceAll("Breednet public proof; ASB mare page is the profile link.", "Breednet 公开资料；详情链接指向 ASB 繁殖母马页面。")
-    .replaceAll("Breednet/Racing NSW public proof; ASB mare page is the profile link.", "Breednet／Racing NSW 公开资料；详情链接指向 ASB 繁殖母马页面。")
-    .replaceAll("報告なし", "暂无报告")
-    .replaceAll("生産予定", "预计生产")
-    .replaceAll("種付せず", "未配种")
-    .replaceAll("双子流産", "双胎流产")
-    .replaceAll("流産", "流产")
-    .replaceAll("死産", "死产")
-    .replaceAll("生後直死", "出生后死亡")
-    .replaceAll("不受胎", "未受孕")
-    .replaceAll("不明", "不明")
-    .replaceAll("万円", "万日元")
-    .replace(/^(\d+)年目$/, "第$1年");
-}
-
-function coveringResult(covering, foals) {
-  if (!covering.due_date) return "未受孕";
-  const sire = normalizedStudName(covering.stallion_name);
-  const expectedYear = Number(covering.cover_year) + 1;
-  const foal = (foals || []).find((row) => Number(row.result_year) === expectedYear && normalizedStudName(row.sire_name) === sire);
-  if (foal?.birth_date && String(foal.birth_date).includes("不受胎")) return "未受孕";
-  if (foal) return "出生";
-  return "预计生产";
-}
-
-function studSection(studProfiles, horse) {
-  if (!studProfiles || !studProfiles.length) return "";
-  return `
-    <section class="stud-section">
-      <h2>${escapeHtml(studTitle(studProfiles))}</h2>
-      ${studProfiles.map((profile) => `
-        <div class="stud-profile">
-          <div class="stud-head">
-            <div class="stud-links">
-              <a class="stud-chip" href="${escapeHtml(studbookHref(profile))}" target="_blank" rel="noreferrer">Studbook 血统书</a>
-              ${profileExternalLinks(profile).map((link) => `
-                <a class="stud-chip aus-chip" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label || "Australia")}</a>
-              `).join("")}
-              ${profile.own_netkeiba_url ? `<a class="stud-chip" href="${escapeHtml(profile.own_netkeiba_url)}" target="_blank" rel="noreferrer">Netkeiba Owners</a>` : ""}
-            </div>
-          </div>
-          ${profile.note ? `<p class="muted stud-note">${escapeHtml(localizedRecordText(profile.note))}</p>` : ""}
-          ${profile.fees.length ? `
-            <h3>配种费变化</h3>
-            <div class="stud-table-wrap">
-              <table class="stud-table">
-                <thead>
-                  <tr><th>年份</th><th>服役年</th><th>配种费</th><th>配种数</th><th>登记产驹</th><th>出赛马</th><th>胜马</th><th>代表产驹</th></tr>
-                </thead>
-                <tbody>
-                  ${profile.fees.map((row) => `
-                    <tr>
-                      <td>${escapeHtml(row.year)}</td>
-                      <td>${escapeHtml(localizedRecordText(row.service_year))}</td>
-                      <td>${escapeHtml(localizedRecordText(row.fee_text))}</td>
-                      <td>${escapeHtml(row.bred_count)}</td>
-                      <td>${escapeHtml(row.registered_count)}</td>
-                      <td>${escapeHtml(row.runners_count)}</td>
-                      <td>${escapeHtml(row.winners_count)}</td>
-                      <td>${escapeHtml(row.representative)}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          ` : ""}
-          ${profile.stallion_stats.length ? `
-            <h3>配种与生产</h3>
-            <div class="stud-table-wrap">
-              <table class="stud-table">
-                <thead>
-                  <tr><th>年份</th><th>配种总数</th><th>纯血马</th><th>出生</th><th>国内登记</th><th>无产驹等</th><th>改配</th></tr>
-                </thead>
-                <tbody>
-                  ${profile.stallion_stats.map((row) => `
-                    <tr>
-                      <td>${escapeHtml(row.year)}</td>
-                      <td>${escapeHtml(row.bred_total)}</td>
-                      <td>${escapeHtml(row.bred_thoroughbred)}</td>
-                      <td>${escapeHtml(row.births)}</td>
-                      <td>${escapeHtml(row.registered_total)}</td>
-                      <td>${escapeHtml(row.no_foal)}</td>
-                      <td>${escapeHtml(row.changed_mating)}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          ` : ""}
-          ${profile.coverings.length ? `
-            <h3>配种记录</h3>
-            <div class="stud-table-wrap">
-              <table class="stud-table">
-                <thead><tr><th>年份</th><th>配种日期</th><th>预产日期</th><th>种牡马</th><th>结果</th><th>饲养者</th></tr></thead>
-                <tbody>
-                  ${profile.coverings.map((row) => `
-                    <tr>
-                      <td>${escapeHtml(row.cover_year)}</td>
-                      <td>${escapeHtml(row.cover_date)}</td>
-                      <td>${escapeHtml(row.due_date)}</td>
-                      <td>${escapeHtml(row.stallion_name)}</td>
-                      <td>${escapeHtml(coveringResult(row, profile.foals))}</td>
-                      <td>${escapeHtml([row.keeper_location, row.keeper_name].filter(Boolean).join(" / "))}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          ` : ""}
-          ${profile.foals.length ? `
-            <h3>繁殖记录</h3>
-            <div class="stud-table-wrap">
-              <table class="stud-table">
-                <thead><tr><th>年份</th><th>出生日期</th><th>毛色</th><th>性别</th><th>马名</th><th>父系</th><th>备注</th></tr></thead>
-                <tbody>
-                  ${profile.foals.map((row) => `
-                    <tr>
-                      <td>${escapeHtml(row.result_year)}</td>
-                      <td>${escapeHtml(localizedRecordText(row.birth_date))}</td>
-                      <td>${escapeHtml(uiValue(row.color, "color"))}</td>
-                      <td>${escapeHtml(uiValue(row.sex, "sex"))}</td>
-                      <td>${escapeHtml(row.foal_name)}</td>
-                      <td>${escapeHtml(row.sire_name)}</td>
-                      <td>${escapeHtml(localizedRecordText(row.note))}</td>
-                    </tr>
-                  `).join("")}
-                </tbody>
-              </table>
-            </div>
-          ` : ""}
-        </div>
-      `).join("")}
-    </section>
-  `;
-}
-
-function updateHorseNavigation() {
-  const index = currentHorseIds.indexOf(String(state.horse));
-  els.previousHorse.disabled = index <= 0;
-  els.nextHorse.disabled = index < 0 || index >= currentHorseIds.length - 1;
-  els.previousHorse.title = index > 0 ? `${index} / ${currentHorseIds.length}` : "已经是第一匹产驹";
-  els.nextHorse.title = index >= 0 && index < currentHorseIds.length - 1 ? `${index + 2} / ${currentHorseIds.length}` : "已经是最后一匹产驹";
-}
-
-async function openAdjacentHorse(direction) {
-  const ids = await ensureHorseSequence();
-  const index = ids.indexOf(String(state.horse));
-  const nextId = ids[index + direction];
-  if (nextId) openHorse(nextId, { preserveFocus: true });
-}
-
-let gradedSiblingCatalog;
-
-async function openHorse(id, { trigger = null, updateHistory = true, preserveFocus = false } = {}) {
-  if (!id) return;
-  const requestedId = String(id);
-  const wasOpen = els.drawer.classList.contains("open");
-  if (!preserveFocus && !wasOpen) lastFocusedElement = trigger || document.activeElement;
-  state.horse = String(id);
-  if (updateHistory) writeUrlState("push");
-  els.detail.innerHTML = `<p class="muted">正在加载马匹详情...</p>`;
-  els.drawer.classList.add("open");
-  els.drawer.setAttribute("aria-hidden", "false");
-  document.body.classList.add("drawer-open");
-  updateHorseNavigation();
-  if (!preserveFocus && !wasOpen) els.drawerPanel.focus();
-  gradedSiblingCatalog ||= fetchStaticData("graded_siblings.json").catch(() => { gradedSiblingCatalog = null; return { dams: {} }; });
-  const [data, relatives, allHorses] = await Promise.all([
-    getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(),
-  ]);
-  if (state.horse !== requestedId) return;
-  const horse = data.horse;
-  const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
-  window.currentDetailHorse = horse;
-  els.detail.innerHTML = `
-    <div class="detail-head">
-      <p class="kicker">${escapeHtml(horse.sire || "Duramente")}</p>
-      <h2 id="drawerTitle">${escapeHtml(horse.name)}</h2>
-      ${horse.name_en ? `<div class="english-name">${escapeHtml(horse.name_en)}</div>` : ""}
-      ${horse.hkjc_name_zh ? `<div class="hk-name detail-hk">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
-      <div class="tag-row">
-        <span class="tag">${escapeHtml(horse.birth_year)}</span>
-        <span class="tag">${escapeHtml(uiValue(horse.sex, "sex"))}</span>
-        <span class="tag">${escapeHtml(uiValue(horse.color, "color"))}</span>
-        ${regionBadge(horse.trainer_region)}
-        ${lineageBadge(horse.female_family)}
-      </div>
-      <div class="external-links">
-        ${horse.netkeiba_id ? `<a href="https://db.netkeiba.com/horse/${escapeHtml(horse.netkeiba_id)}/" target="_blank" rel="noreferrer">netkeiba</a>` : ""}
-        ${horse.jbis_id ? `<a href="https://www.jbis.or.jp/horse/${escapeHtml(horse.jbis_id)}/" target="_blank" rel="noreferrer">JBIS</a>` : ""}
-      </div>
-    </div>
-
-    ${horse.netkeiba_id ? '<figure class="horse-photo" id="horsePhoto" aria-label="产驹照片"></figure>' : ''}
-    <div class="detail-grid">
-      <div class="fact"><span>母马</span><strong>${horseDamCell(horse)}</strong></div>
-      <div class="fact"><span>母马出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
-      <div class="fact"><span>生产本胎时母龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
-      ${horse.dam_biological_parity != null ? `<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>` : ""}
-      ${horse.dam_registered_foal_order != null ? `<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>` : ""}
-      <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
-      <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
-      <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分类")}</strong></div>
-      <div class="fact fact-cross"><span>Cross</span><strong>${crossItems(horse.pedigree_crosses)}</strong></div>
-      ${horse.dosage_profile ? `<div class="fact"><span>DP</span><strong>${escapeHtml(horse.dosage_profile)} (${escapeHtml(horse.dosage_points)})</strong></div>` : ""}
-      ${horse.dosage_index != null ? `<div class="fact"><span>DI</span><strong>${escapeHtml(formatNumber(horse.dosage_index, 2))}</strong></div>` : ""}
-      ${horse.center_of_distribution != null ? `<div class="fact"><span>CD</span><strong>${escapeHtml(formatNumber(horse.center_of_distribution, 2))}</strong></div>` : ""}
-      <div class="fact"><span>马主</span><strong>${ownerCell(horse)}</strong></div>
-      <div class="fact"><span>练马师</span><strong>${escapeHtml(horse.trainer)}</strong></div>
-      <div class="fact"><span>生产牧场</span><strong>${escapeHtml(horse.breeder)}</strong></div>
-      <div class="fact"><span>产地</span><strong>${escapeHtml(horse.birthplace)}</strong></div>
-      <div class="fact"><span>生涯战绩</span><strong>${escapeHtml(careerSummaryText(horse.career_summary))}</strong></div>
-      <div class="fact"><span>最高成就</span><strong>${escapeHtml(uiValue(horse.achievement_class, "achievement"))}</strong></div>
-      <div class="fact"><span>奖金</span><strong>${escapeHtml(prize(horse))}</strong></div>
-      <div class="fact"><span>主要胜鞍</span><strong>${escapeHtml(horse.major_win)}</strong></div>
-      ${siblings.length ? `<div class="fact fact-siblings"><span>同母兄弟姐妹 · 重赏冠军</span><strong>${siblings.map(sibling => `<a href="https://db.netkeiba.com/horse/${escapeHtml(sibling.netkeiba_id)}/" target="_blank" rel="noopener noreferrer" title="${escapeHtml(sibling.major_win || sibling.achievement_class)}">${escapeHtml(sibling.name)}</a>`).join("")}</strong></div>` : ""}
-    </div>
-
-    <details class="race-section" open>
-      <summary>比赛记录</summary>
-      ${raceRows(data.races)}
-    </details>
-    ${studSection(data.stud, horse)}
-    ${detailSources(data.sources)}
-  `;
-  window.DuramenteAnalysis.horsePhoto(horse, document.getElementById("horsePhoto"));
-  updateHorseNavigation();
-}
-
-function closeDrawer({ updateHistory = true, restoreFocus = true } = {}) {
-  if (!els.drawer.classList.contains("open") && !state.horse) return;
-  els.drawer.classList.remove("open");
-  els.drawer.setAttribute("aria-hidden", "true");
-  document.body.classList.remove("drawer-open");
-  state.horse = "";
-  if (updateHistory) writeUrlState("push");
-  if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus();
-}
-
 function bindControls() {
+  setDisplayMode(readPreference('duramente-display', 'compact'));
+  if (readPreference('duramente-sidebar', '') === 'collapsed') document.body.classList.add('sidebar-collapsed');
+  syncSidebarButton();
+  matchMedia('(max-width: 1000px)').addEventListener('change', syncSidebarButton);
+  document.querySelector('#sidebarToggle').addEventListener('click', () => {
+    if (matchMedia('(max-width: 1000px)').matches) document.body.classList.toggle('nav-open');
+    else { document.body.classList.toggle('sidebar-collapsed'); savePreference('duramente-sidebar', document.body.classList.contains('sidebar-collapsed') ? 'collapsed' : 'expanded'); }
+    syncSidebarButton(); requestAnimationFrame(refreshChartTheme);
+  });
+  for (const button of document.querySelectorAll('[data-display-mode]')) button.addEventListener('click', () => setDisplayMode(button.dataset.displayMode));
+  for (const button of document.querySelectorAll('[data-quick]')) button.addEventListener('click', () => {
+    state.quick = button.dataset.quick;
+    if (!state.quick) clearAllFilters();
+    refresh();
+  });
+  els.pageSize.addEventListener('change', () => { state.limit = Number(els.pageSize.value); refresh(); });
+  els.clearSearch.addEventListener('click', () => { state.q = ''; els.search.value = ''; els.mobileSearch.value = ''; refresh(); els.mobileSearch.focus(); });
+  els.exportCsv.addEventListener('click', async () => {
+    els.exportCsv.disabled = true;
+    const params = new URL(horseQuery(), window.location.href).searchParams;
+    try {
+      const rows = filterAndSortHorses(await getStaticHorses(), params);
+      exportHorsesCsv(rows); els.actionStatus.textContent = `已导出 ${rows.length} 匹产驹，使用完整固定字段。`;
+    } catch { els.actionStatus.textContent = '导出失败，请重试。'; }
+    finally { els.exportCsv.disabled = false; }
+  });
+  document.querySelector('#progenyView .content').addEventListener('click', event => {
+    if (event.target.closest('[data-retry-list]')) loadHorses();
+    if (event.target.closest('.empty-state [data-clear-filters]')) resetFilters();
+  });
   els.themeMode?.addEventListener("change", () => applyTheme(els.themeMode.value));
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
     if (document.documentElement.dataset.themePreference === "system") applyTheme("system", { persist: false });
@@ -5814,11 +5032,9 @@ function bindControls() {
     loadHorses();
   };
   els.resetFilters?.addEventListener("click", resetFilters);
-  const updateSearch = debounce((value, peer) => {
-    state.q = value.trim();
-    peer.value = value;
-    refresh();
-  });
+  const updateSearch = (value, peer) => {
+    state.q = value.trim(); peer.value = value; refresh();
+  };
   els.search.addEventListener("input", () => updateSearch(els.search.value, els.mobileSearch));
   els.mobileSearch.addEventListener("input", () => updateSearch(els.mobileSearch.value, els.search));
   els.year.addEventListener("change", () => {
@@ -5913,11 +5129,13 @@ function bindControls() {
     if (remove) removeFilter(remove.dataset.removeFilter);
     if (event.target.closest("[data-clear-filters]")) resetFilters();
   });
-  els.filterOpen.addEventListener("click", () => {
-    els.filtersPanel.classList.add("open");
+  els.filterOpen.addEventListener('click', () => {
+    els.filtersPanel.hidden = false;
+    els.filtersPanel.classList.add('open');
     els.filterBackdrop.hidden = false;
-    els.filterBackdrop.classList.add("open");
-    els.filterOpen.setAttribute("aria-expanded", "true");
+    els.filterOpen.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('filters-open');
+    setBackgroundInert(els.filtersPanel, true);
     els.filterClose.focus();
   });
   els.filterClose.addEventListener("click", closeFilters);
@@ -5936,6 +5154,22 @@ function bindControls() {
     });
   }
   document.addEventListener("keydown", (event) => {
+    const tab = event.target.closest('[role="tab"][data-sire-section], [role="tab"][data-pedigree-section], [role="tab"][data-production-section]');
+    if (tab && ['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+      const tabs = [...tab.closest('[role="tablist"]').querySelectorAll('[role="tab"]')];
+      const index = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1
+        : (tabs.indexOf(tab) + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      tabs[index].focus(); tabs[index].click(); return;
+    }
+    if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k' && !els.drawer.classList.contains('open') && els.filtersPanel.hidden) {
+      event.preventDefault();
+      if (state.view !== 'progeny') { showView('progeny'); loadHorses(); }
+      els.mobileSearch.focus(); els.mobileSearch.select(); return;
+    }
+    if (!els.filtersPanel.hidden) trapFocus(event, els.filtersPanel);
+    if (event.key === 'Escape' && document.body.classList.contains('nav-open')) { document.body.classList.remove('nav-open'); syncSidebarButton(); document.querySelector('#sidebarToggle').focus(); return; }
+
     if (event.key === "Escape") {
       if (els.filtersPanel.classList.contains("open")) closeFilters();
       else if (els.drawer.classList.contains("open")) closeDrawer();
@@ -5944,19 +5178,7 @@ function bindControls() {
     if (!els.drawer.classList.contains("open")) return;
     if (event.key === "ArrowLeft" && !event.target.matches("input, select, textarea")) openAdjacentHorse(-1);
     if (event.key === "ArrowRight" && !event.target.matches("input, select, textarea")) openAdjacentHorse(1);
-    if (event.key !== "Tab") return;
-    const focusable = [...els.drawerPanel.querySelectorAll('button:not([disabled]), a[href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
-      .filter((element) => !element.hidden && element.getClientRects().length);
-    if (!focusable.length) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (event.shiftKey && document.activeElement === first) {
-      event.preventDefault();
-      last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-      event.preventDefault();
-      first.focus();
-    }
+    trapFocus(event, els.drawerPanel);
   });
   window.addEventListener("popstate", restoreFromUrl);
 }
@@ -5971,7 +5193,13 @@ async function restoreFromUrl() {
 }
 
 async function init() {
-  applyTheme(localStorage.getItem("duramente-theme") || "system", { persist: false });
+  for (const [grade, color] of Object.entries(window.DuramenteColors.grades)) {
+    document.documentElement.style.setProperty(`--grade-${grade.toLowerCase()}`, color);
+  }
+  window.DuramenteAnalysis.configure({ escapeHtml, money, formatNumber, prize, formatRate,
+    chartThemeColors, cropColor, chartViewportWidth, renderChart, openHorse,
+    navigateToProgeny, applyBroodmareSireFilter, fetchStaticData, COLORS });
+  applyTheme(readPreference("duramente-theme", "system"), { persist: false });
   bindControls();
   await loadSummary();
   readUrlState();
@@ -5984,6 +5212,8 @@ async function init() {
 
 init().catch((error) => {
   console.error("Database load failed", error);
-  els.horseRows.innerHTML = `<tr><td colspan="11"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
-  els.horseCards.innerHTML = `<div class="load-error">资料暂时无法载入。</div>`;
+  const content = document.getElementById(`${state.view}Content`);
+  if (content) content.innerHTML = '<div class="load-error" role="alert">资料暂时无法载入。<button type="button" onclick="window.location.reload()">重新载入</button></div>';
+  els.horseRows.innerHTML = `<tr><td colspan="13"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
+  els.horseCards.innerHTML = `<div class="load-error">资料暂时无法载入。<button type="button" onclick="window.location.reload()">重新载入</button></div>`;
 });
