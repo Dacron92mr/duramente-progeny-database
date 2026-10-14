@@ -7,7 +7,7 @@
     "graded_winners": 5,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 242140.3,
+    "total_earnings": 242151.3,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -51,8 +51,8 @@
     "graded_foal_rate": 0.0526,
     "graded_runner_rate": 0.0595,
     "g1_foal_rate": 0.0211,
-    "avg_earnings_per_foal": 2548.8,
-    "avg_earnings_per_runner": 2882.6,
+    "avg_earnings_per_foal": 2549.0,
+    "avg_earnings_per_runner": 2882.8,
     "median_earnings_per_runner": 442.0,
     "earnings_q25": 0.0,
     "earnings_q75": 2360.0,
@@ -66,7 +66,7 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 154922.7,
+    "total_earnings": 154947.7,
     "representatives": [
       {
         "name": "ガイアメンテ",
@@ -110,8 +110,8 @@
     "graded_foal_rate": 0.0254,
     "graded_runner_rate": 0.0283,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 1312.9,
-    "avg_earnings_per_runner": 1461.5,
+    "avg_earnings_per_foal": 1313.1,
+    "avg_earnings_per_runner": 1461.8,
     "median_earnings_per_runner": 501.6,
     "earnings_q25": 13.6,
     "earnings_q75": 1547.2,
@@ -125,7 +125,7 @@
     "graded_winners": 8,
     "stakes_winners": 9,
     "g1_winners": 5,
-    "total_earnings": 414478.3,
+    "total_earnings": 414482.3,
     "representatives": [
       {
         "name": "リバティアイランド",
