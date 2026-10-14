@@ -2043,7 +2043,7 @@
         {
           "id": 108,
           "name": "メイショウラナキラ",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "名將百勝",
           "birth_year": 2019,
           "achievement_class": "1勝クラス"
         },
@@ -2646,7 +2646,7 @@
         {
           "id": 110,
           "name": "イルチルコ",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "馬戲姿采",
           "birth_year": 2019,
           "achievement_class": "1勝クラス"
         },
@@ -2935,7 +2935,7 @@
         {
           "id": 41,
           "name": "ジュンブルースカイ",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "碧天騰躍",
           "birth_year": 2018,
           "achievement_class": "1勝クラス"
         },
@@ -2956,7 +2956,7 @@
         {
           "id": 79,
           "name": "レヴェッツァ",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "輕妙巧",
           "birth_year": 2018,
           "achievement_class": "2勝クラス"
         },
@@ -4657,7 +4657,7 @@
         {
           "id": 179,
           "name": "ミッキーストライク",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "覓奇好球",
           "birth_year": 2021,
           "achievement_class": "未勝利・新馬"
         },
@@ -4830,7 +4830,7 @@
         {
           "id": 221,
           "name": "ヴィスパメンテ",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "輕快",
           "birth_year": 2019,
           "achievement_class": "未勝利・新馬"
         },
@@ -6643,7 +6643,7 @@
             {
               "id": 108,
               "name": "メイショウラナキラ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "名將百勝",
               "birth_year": 2019,
               "achievement_class": "1勝クラス"
             },
@@ -7246,7 +7246,7 @@
             {
               "id": 110,
               "name": "イルチルコ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "馬戲姿采",
               "birth_year": 2019,
               "achievement_class": "1勝クラス"
             },
@@ -7535,7 +7535,7 @@
             {
               "id": 41,
               "name": "ジュンブルースカイ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "碧天騰躍",
               "birth_year": 2018,
               "achievement_class": "1勝クラス"
             },
@@ -7556,7 +7556,7 @@
             {
               "id": 79,
               "name": "レヴェッツァ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "輕妙巧",
               "birth_year": 2018,
               "achievement_class": "2勝クラス"
             },
@@ -9257,7 +9257,7 @@
             {
               "id": 179,
               "name": "ミッキーストライク",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "覓奇好球",
               "birth_year": 2021,
               "achievement_class": "未勝利・新馬"
             },
@@ -9430,7 +9430,7 @@
             {
               "id": 221,
               "name": "ヴィスパメンテ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "輕快",
               "birth_year": 2019,
               "achievement_class": "未勝利・新馬"
             },
@@ -11250,7 +11250,7 @@
             {
               "id": 108,
               "name": "メイショウラナキラ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "名將百勝",
               "birth_year": 2019,
               "achievement_class": "1勝クラス"
             },
@@ -11874,7 +11874,7 @@
             {
               "id": 110,
               "name": "イルチルコ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "馬戲姿采",
               "birth_year": 2019,
               "achievement_class": "1勝クラス"
             },
@@ -12149,7 +12149,7 @@
             {
               "id": 41,
               "name": "ジュンブルースカイ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "碧天騰躍",
               "birth_year": 2018,
               "achievement_class": "1勝クラス"
             },
@@ -12170,7 +12170,7 @@
             {
               "id": 79,
               "name": "レヴェッツァ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "輕妙巧",
               "birth_year": 2018,
               "achievement_class": "2勝クラス"
             },
@@ -13878,7 +13878,7 @@
             {
               "id": 179,
               "name": "ミッキーストライク",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "覓奇好球",
               "birth_year": 2021,
               "achievement_class": "未勝利・新馬"
             },
@@ -14037,7 +14037,7 @@
             {
               "id": 221,
               "name": "ヴィスパメンテ",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "輕快",
               "birth_year": 2019,
               "achievement_class": "未勝利・新馬"
             },
