@@ -66,3 +66,5 @@ CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行�
 - **照片不显示**：外部 netkeiba 图片可能拒绝访问；页面保留原站链接，不伪造照片。
 - **数据更新后选项数量不匹配**：`summary.json` 不由周更自动刷新，检查其 facets 快照与列表。
 - **真数据冲突**：保留双方改动，逐项人工核对；禁止用 ours/theirs 整体覆盖研究数据。
+
+研究工作区回归：`npm run test:research` 验证实际地图平移、缩放、标记点击、同步列表、产驹追溯、A/B 图形点选、筛选下钻和同母导航。完整资料专项为 `npm run test:profile`。均支持 TEST_BASE_URL、TEST_OUTPUT_DIR、CHROME_PATH。赛果更新后执行 `python3 scripts/build_racecourse_population.py`，或通过现有同步重建流程生成索引。

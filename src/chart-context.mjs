@@ -1,5 +1,7 @@
 /** Reading guidance only: never changes the chart's source data or calculation. */
 const groups = [
+  [/sireInvestigation/, 'sire_profile.json', '原有同龄累计胜场 / 该世代全部产驹 × 100；不是独立胜马率。', '仅纳入完整经历所选年龄年度的世代；点击图形或选择 A/B，再打开对应产驹。'],
+  [/(pedigree|production)Investigation/, '../horses.json', '已确认胜马或重赏马 / 当前分组全部收录产驹；战绩未解析数另列。', '按所选世代、性别与最低样本量分组；点击选择 A，再与 B 对照，差异不是因果效应。'],
   [/IndexChart$/, 'sire_indices.json', 'AEI 以同期全部出赛马平均收得奖金为基准（1.00）；JBIS 中央平地赛口径。', '年度或出生世代；不与地方、海外口径直接合并。'],
   [/Leading|firstSeason/, 'leading_sire_history.json、leading_sire_top10.json、sire_category_rankings.json', '排名、奖金为原榜单值，不是比率；Top 10 只显示头部种牡马。', '所选年份与榜单分类；缺失榜单不代表零。'],
   [/MaresCovered|StudFee/, 'sire_market.json', '配种母马数或公开配种费（万日元），无比例分母。', '年度；公布费用不等于实际成交价格。'],

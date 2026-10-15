@@ -4,7 +4,8 @@
   "scripts": {
     "test": "node --test tests/*.test.mjs",
     "test:browser": "node scripts/smoke_ui.cjs",
-    "test:profile": "node scripts/smoke_profile.cjs"
+    "test:profile": "node scripts/smoke_profile.cjs",
+    "test:research": "node scripts/smoke_research.cjs"
   },
   "devDependencies": { "playwright": "1.62.1" }
 }

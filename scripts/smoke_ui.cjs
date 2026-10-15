@@ -108,6 +108,8 @@ async function check(name, run) {
     await page.setViewportSize({width,height:900});await page.goto(`${base}?view=${view}`);await page.locator(`#${view}Content[data-loaded]`).waitFor({timeout:30000});
     const missingContexts = await page.locator(`#${view}Content .chart-card`).evaluateAll(cards => cards.filter(card => card.querySelector('.is-rendered') && !card.querySelector('.chart-context')).map(card => card.querySelector('.is-rendered').id));
     assert.deepEqual(missingContexts, [], 'Every rendered chart card needs research context');
+    const evidence=page.locator(`#${view}Content .research-evidence`);
+    if(await evidence.count()) { await page.screenshot({path:path.join(output,`workspace-${view}-${width}.png`)}); await evidence.locator('summary').first().click(); }
     const attr={sire:'sire',pedigree:'pedigree',production:'production'}[view];
     const buttons=attr?await page.locator(`[data-${attr}-section]`).all():[];
     for(const button of buttons){await button.click();await page.locator(`#${view}Content canvas:visible`).first().waitFor({timeout:10000});}

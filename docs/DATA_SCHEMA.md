@@ -55,3 +55,11 @@
 ## 原有同步安全机制
 
 `weekly_sync.py` 在临时目录抓取、合并、重建、校验，只有指定 `--apply` 且校验成功才覆盖数据。保护马匹集合、已知奖金、完整历史及人工统计。`rebase_sync.py` 只专门处理 `STATIC_DATA_VERSION`，遇到真正数据冲突会中止。前端编辑必须保留 `index.html` 的版本赋值格式。
+
+## 探索派生数据与指标
+
+新增 `data/analytics/racecourse_population.json`：`horse_ids` 为各场有正式名次记录的独立产驹 ID；`starts/wins/top3` 按原有效出赛规则计数。由 `scripts/build_racecourse_population.py` 生成，接入 `rebuild_synced_analytics.py`；逐场与原 racecourses.json 对账，不替换原聚合。
+
+Profile：原始记录全部保留，比例分母仅为 finish 是正整数的记录，胜为 1、前三为 1–3。按日期年份、明确场地和已知米数分组；未知单列。距离为 ≤1200、1201–1600、1601–2000、2001–2400、>2400m。取消、未完成和名次缺失不补零，不从赛事名推断等级晋升；原表可恢复全部记录。
+
+工作区比例：原生涯文字中胜数大于零的已确认胜马，或原 G1/G2/G3 分类产驹，除以当前组全部产驹。战绩未解析数另报，不解释为未知记录已失败。分组使用原字段精确值，不重写历史牧场归一化统计。同龄图直接使用 crop_development 原指标，只纳入出生年加所选年龄小于快照年份的完整年龄年度。

@@ -1,61 +1,43 @@
-import { raceLabel, achievementBadge } from './racing-ui.mjs';
-/** Groups existing source-backed facts without duplicating or changing their values. */
-export function enhanceProfile(root, panel, state, writeUrlState) {
-  const grid = root.querySelector('.detail-grid');
-  const facts = new Map([...grid.children].map(node => [node.firstElementChild.textContent, node]));
-  const achievement = facts.get('最高成就')?.querySelector('strong');
-  if (achievement) achievement.innerHTML = achievementBadge(achievement.textContent);
-  const major = facts.get('主要胜鞍')?.querySelector('strong');
-  if (major) major.innerHTML = raceLabel(major.textContent);
-  const trainer = facts.get('练马师')?.querySelector('strong');
-  const region = root.querySelector('.tag-row .region');
-  if (trainer && region) trainer.prepend(region.cloneNode(true), document.createTextNode(' '));
-  const layout = document.createElement('div');
-  layout.className = 'profile-columns';
-  const section = (key, title) => {
-    const node = document.createElement('section');
-    node.className = 'profile-section'; node.id = `profile-${key}`; node.dataset.section = key;
-    const heading = document.createElement('h3'); heading.textContent = title; node.append(heading);
-    layout.append(node); return node;
-  };
-  const identity = section('identity', '身份与血统');
-  const racing = section('racing', '竞赛生涯');
-  const group = (target, title, labels, relationship) => {
-    const card = document.createElement('div'); card.className = 'profile-group';
-    const heading = document.createElement('h4'); heading.textContent = title;
-    if (relationship) heading.className = `relationship relationship-${relationship}`;
-    card.append(heading);
-    for (const label of labels) if (facts.has(label)) { card.append(facts.get(label)); facts.delete(label); }
-    target.append(card);
-  };
-  group(identity, '父 / Sire', ['父马'], 'sire');
-  group(identity, '母系与血统 · Dam', ['母马','母马出生年','生产本胎时母龄','真实生产胎次','登记产驹序次','同母兄弟姐妹 · 重赏冠军'], 'dam');
-  group(identity, '母父 / Broodmare Sire', ['母父','母父系'], 'bms');
-  group(identity, '牝系与血统结构', ['牝系','Cross','DP','DI','CD']);
-  group(identity, '马主、厩舍与生产', ['马主','练马师','生产牧场','产地']);
-  group(racing, '赛绩概览', ['生涯战绩','最高成就','主要胜鞍','奖金']);
-  const note = document.createElement('p'); note.className = 'muted';
-  note.textContent = '最高成就沿用数据库分类；比赛记录中的等级只说明赛事级别，请结合名次阅读。'; racing.append(note);
-  racing.append(root.querySelector('.race-section'));
-  const stud = root.querySelector('.stud-section');
-  if (stud) section('breeding', '繁殖生涯').append(stud);
-  panel.classList.toggle('has-breeding', Boolean(stud));
-  // Unknown future fields remain visible instead of being silently discarded.
-  if (facts.size) group(identity, '其他资料', [...facts.keys()]);
-  grid.replaceWith(layout);
-  const photo = root.querySelector('.horse-photo'); if (photo) identity.append(photo);
-  const controls = document.createElement('div'); controls.className = 'profile-controls';
-  controls.innerHTML = '<div class="profile-modes" role="group" aria-label="资料显示方式"><button type="button" data-profile="quick">快速查看</button><button type="button" data-profile="full">完整资料</button></div><nav class="profile-sections" aria-label="资料分段"></nav>';
-  root.querySelector('.detail-head').after(controls);
-  const setMode = mode => {
-    state.profile = mode; panel.dataset.profile = mode;
-    controls.querySelectorAll('[data-profile]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.profile === mode)));
-  };
-  setMode(state.profile || 'quick');
-  controls.querySelectorAll('[data-profile]').forEach(button => button.addEventListener('click', () => { setMode(button.dataset.profile); writeUrlState('replace'); }));
-  for (const section of layout.children) {
-    const link = document.createElement('a'); link.href = `#${section.id}`; link.textContent = section.firstElementChild.textContent;
-    link.addEventListener('click', event => { event.preventDefault(); section.scrollIntoView({ behavior: 'instant', block: 'start' }); section.tabIndex = -1; section.focus({ preventScroll: true }); });
-    controls.querySelector('nav').append(link);
-  }
+import { escapeHtml as html, uiValue, careerSummaryText, prize, formatNumber } from './format.mjs';
+import { raceLabel, achievementBadge, affiliationBadge } from './racing-ui.mjs';
+const fact = (label,value) => `<div class="profile-fact"><dt>${label}</dt><dd>${value ?? '—'}</dd></div>`;
+const plain = value => html(value == null || value === '' ? '—' : value);
+const group = (title,body,relationship='') => `<section class="profile-group"><h4${relationship?` class="relationship relationship-${relationship}"`:''}>${title}</h4><dl>${body}</dl></section>`;
+const explore = (key,value) => value ? `<button type="button" class="profile-explore" data-profile-filter="${key}" data-value="${html(value)}">${html(value)} <span aria-hidden="true">↗</span></button>` : '—';
+export function renderHorseIdentity(vm) {
+  const i=vm.identity;
+  return `<header class="detail-head"><div class="profile-title"><p class="kicker">DURAMENTE PROGENY</p><h2 id="drawerTitle">${plain(i.name)}</h2>${i.english?`<div class="english-name">${html(i.english)}</div>`:''}${i.chinese?`<div class="hk-name detail-hk">${html(i.chinese)}</div>`:''}</div><div class="profile-identity-meta"><div class="tag-row"><span class="tag">${plain(i.born)}</span><span class="tag">${plain(uiValue(i.sex,'sex'))}</span><span class="tag">${plain(uiValue(i.color,'color'))}</span>${affiliationBadge(i.region)}</div><div class="external-links">${i.netkeibaId?`<a href="https://db.netkeiba.com/horse/${html(i.netkeibaId)}/" target="_blank" rel="noreferrer">netkeiba</a>`:''}${i.jbisId?`<a href="https://www.jbis.or.jp/horse/${html(i.jbisId)}/" target="_blank" rel="noreferrer">JBIS</a>`:''}</div></div></header>`;
+}
+export function renderSiblings(siblings) {
+  if(!siblings.length) return '<p class="muted">暂无已核实的同母重赏冠军记录；不表示没有兄弟姐妹。</p>';
+  return `<ul class="profile-siblings">${siblings.map(s=>`<li>${s.localId!=null?`<button type="button" class="profile-explore" data-related-horse="${html(s.localId)}">${plain(s.name)} ↗</button>`:`<a href="https://db.netkeiba.com/horse/${html(s.netkeiba_id)}/" target="_blank" rel="noopener noreferrer">${plain(s.name)} ↗</a>`} <small>${plain(s.major_win || s.achievement_class)}</small></li>`).join('')}</ul>`;
+}
+export function renderMaternalPedigree(vm, helpers) {
+  const d=vm.pedigree.dam;
+  return group('母系 / Dam',fact('母马',helpers.horseDamCell(vm.sourceHorse))+fact('出生年',plain(d.birthYear))+fact('生产本胎时母龄',plain(helpers.damAgeText(vm.sourceHorse)))+fact('真实生产胎次',plain(d.parity))+fact('登记产驹序次',plain(d.registeredOrder)),'dam') + `<section class="profile-group"><h4>已核实同母重赏冠军</h4>${renderSiblings(vm.pedigree.siblings)}</section>`;
+}
+export function renderBroodmareSire(p) { return group('母父 / Broodmare Sire',fact('母父',explore('broodmare_sire',p.broodmareSire.name))+fact('母父系',explore('bms_line',p.broodmareSire.line)),'bms'); }
+export function renderFemaleFamily(p,helpers) { return group('牝系与血统结构',fact('牝系',explore('female_family',p.family))+fact('Cross',helpers.crossItems(p.crosses))+(p.dp?fact('DP',`${plain(p.dp)} (${plain(p.points)})`):'')+(p.di!=null?fact('DI',plain(formatNumber(p.di,2))):'')+(p.cd!=null?fact('CD',plain(formatNumber(p.cd,2))):'')); }
+export function renderRacingSummary(vm) { const r=vm.racing;return group('生涯概览',fact('原始生涯战绩',plain(careerSummaryText(r.summary)))+fact('最高成就',achievementBadge(r.achievement,uiValue(r.achievement,'achievement')))+fact('主要胜鞍',raceLabel(r.majorWin))+fact('奖金',plain(prize(vm.sourceHorse)))); }
+export function renderRacingHistory(vm,helpers) { return `<details class="race-section" open><summary>原始比赛记录 <span data-race-count>${vm.racing.records.length}</span></summary><button type="button" class="race-reset" hidden>显示全部记录</button><div data-race-records>${helpers.raceRows(vm.racing.records,vm.sourceHorse)}</div></details>`; }
+export function renderBreedingRecords(vm,helpers) { return helpers.studSection(vm.breeding.records,vm.sourceHorse); }
+export function renderPerformance(vm,dimension='year') {
+  const breakdown=vm.racing.breakdown;
+  return `<section class="performance-study"><h4>记录中的表现分布</h4><p class="muted">${breakdown.total} 条原始记录，${breakdown.valid} 条有正式名次；比例仅以有正式名次记录为分母。未完成、取消或名次缺失不补零，可能与原始生涯汇总不同。</p><label>分组 <select data-racing-dimension><option value="year"${dimension==='year'?' selected':''}>年份进程</option><option value="surface"${dimension==='surface'?' selected':''}>草地／泥地</option><option value="distance"${dimension==='distance'?' selected':''}>距离分布</option></select></label><div class="performance-rows">${breakdown[dimension].map((row,index)=>`<button type="button" data-race-group="${index}" data-dimension="${dimension}" aria-label="查看${html(row.key)}的${row.records.length}条原始记录"><strong>${html(row.key)}</strong><span>${row.wins} 胜 / ${row.n} 有名次</span><span class="rate-track"><i style="width:${row.winRate==null?0:row.winRate*100}%"></i></span><span>${row.winRate==null?'—':(row.winRate*100).toFixed(1)+'%'} 胜率 · 前三 ${row.top3}/${row.n}${row.excluded?` · ${row.excluded} 条未计入比例`:''}</span></button>`).join('')}</div><p class="muted">点选一组核对下方原始赛果。场地和距离未知的记录单列，不推断赛事级别。</p></section>`;
+}
+export function renderProfile(vm,helpers) {
+  const i=vm.identity,p=vm.pedigree;const breeding=renderBreedingRecords(vm,helpers);
+  return {hasBreeding:Boolean(breeding),html:`${renderHorseIdentity(vm)}<div class="profile-controls"><div class="profile-modes" role="group" aria-label="资料显示方式"><button type="button" data-profile="quick">快速查看</button><button type="button" data-profile="full">完整资料</button></div><nav class="profile-sections" aria-label="资料分段"><a href="#profile-identity">身份与血统</a><a href="#profile-racing">竞赛生涯</a>${breeding?'<a href="#profile-breeding">繁殖生涯</a>':''}</nav></div><div class="profile-quick">${renderRacingSummary(vm)}${group('探索相关产驹',fact('母父',explore('broodmare_sire',p.broodmareSire.name))+fact('牝系',explore('female_family',p.family))+fact('生产牧场',explore('breeder',i.breeder)))}<p class="muted">切换“完整资料”查看母系、同母兄弟姐妹、赛绩分布与繁殖记录。</p></div><div class="profile-columns"><section class="profile-section" id="profile-identity" data-section="identity"><h3>身份与血统</h3>${group('父 / Sire',fact('父马',plain(p.sire)),'sire')}${renderMaternalPedigree(vm,helpers)}${renderBroodmareSire(p)}${renderFemaleFamily(p,helpers)}${group('人物与生产',fact('马主',helpers.ownerCell(vm.sourceHorse))+fact('练马师',`${affiliationBadge(i.region)} ${plain(i.trainer)}`)+fact('生产牧场',explore('breeder',i.breeder))+fact('产地',plain(i.birthplace)))}</section><section class="profile-section" id="profile-racing" data-section="racing"><h3>竞赛生涯</h3>${renderRacingSummary(vm)}<p class="muted">最高成就来自数据库；赛果中的等级只代表赛事级别，不表示该场获胜。</p><div data-performance>${renderPerformance(vm)}</div>${renderRacingHistory(vm,helpers)}</section>${breeding?`<section class="profile-section" id="profile-breeding" data-section="breeding"><h3>繁殖生涯</h3>${breeding}</section>`:''}</div>${i.netkeibaId?'<figure class="horse-photo" id="horsePhoto" aria-label="产驹照片"></figure>':''}${helpers.detailSources(vm.sources)}`};
+}
+export function bindProfile(root,panel,state,writeUrlState,vm,helpers,actions) {
+  const setMode=mode=>{state.profile=mode;panel.dataset.profile=mode;root.querySelectorAll('[data-profile]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.profile===mode)));};setMode(state.profile||'quick');
+  root.querySelectorAll('[data-profile]').forEach(b=>b.addEventListener('click',()=>{setMode(b.dataset.profile);writeUrlState('replace');}));
+  root.querySelectorAll('.profile-sections a').forEach(a=>a.addEventListener('click',event=>{event.preventDefault();const section=root.querySelector(a.getAttribute('href'));section.scrollIntoView({block:'start'});section.tabIndex=-1;section.focus({preventScroll:true});}));
+  root.querySelectorAll('[data-profile-filter]').forEach(b=>b.addEventListener('click',()=>actions.explore({[b.dataset.profileFilter]:b.dataset.value})));
+  root.querySelectorAll('[data-related-horse]').forEach(b=>b.addEventListener('click',()=>actions.openHorse(b.dataset.relatedHorse)));
+  const showRecords=(records,label)=>{root.querySelector('[data-race-records]').innerHTML=helpers.raceRows(records,vm.sourceHorse);root.querySelector('[data-race-count]').textContent=`${records.length} · ${label}`;root.querySelector('.race-reset').hidden=records===vm.racing.records;};
+  const bindPerformance=()=>{
+    root.querySelector('[data-racing-dimension]').addEventListener('change',e=>{root.querySelector('[data-performance]').innerHTML=renderPerformance(vm,e.target.value);bindPerformance();showRecords(vm.racing.records,'全部');});
+    root.querySelectorAll('[data-race-group]').forEach(b=>b.addEventListener('click',()=>{const row=vm.racing.breakdown[b.dataset.dimension][Number(b.dataset.raceGroup)];showRecords(row.records,row.key);root.querySelector('.race-section').open=true;root.querySelector('.race-section').scrollIntoView({block:'start'});}));
+  };bindPerformance();root.querySelector('.race-reset').addEventListener('click',()=>showRecords(vm.racing.records,'全部'));
 }

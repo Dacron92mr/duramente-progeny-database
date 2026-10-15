@@ -14,6 +14,10 @@
 | `src/filtering.mjs` | 纯函数搜索、组合筛选、排序、分页；导出共用同一实现 |
 | `src/progeny-renderer.mjs` | 桌面表格、手机卡片、多语言马名 |
 | `src/horse-drawer.mjs` | 详情生命周期、连续查看、异步响应检查及焦点恢复 |
+| `src/profile-model.mjs` | Identity / Pedigree / Racing / Breeding 纯数据模型及有效名次统计 |
+| `src/horse-profile.mjs` | 专用资料组件；从模型渲染，不按显示标签搬动 DOM |
+| `src/racecourse-map.mjs` | 区域、缩放平移、屏幕空间聚合、同步列表与场地追溯 |
+| `src/research-workbench.mjs` | 研究分组、交集、A/B 图形比较与产驹下钻 |
 | `src/detail-content.mjs` | 比赛、繁殖、来源信息的内容渲染 |
 | `src/dialog.mjs` | 背景不可交互与 Tab 焦点约束 |
 | `src/theme.mjs`, `src/preferences.mjs` | 主题及本地偏好，存储禁用时安全降级 |
@@ -22,7 +26,7 @@
 | `chart-colors.js` | 世代、牝系、母父系、赛事等级语义色，唯一来源 |
 | `chart-design.js`, `chart-analysis.js`, `chart-animation.js` | 图表排版、研究视图和动画工具；保留现有计算 |
 | `horse-relatives.js` | 按稳定母马标识查找同母重赏兄弟姐妹 |
-| `styles/` | tokens、foundations、shell、progeny、detail、analysis 六个职责文件 |
+| `styles/` | 基础、领域语义、外壳、列表、Profile、分析及研究工作区样式 |
 | `data/` | 人工资料、列表、详情、派生统计，具体所有权见数据文档 |
 | `scripts/`, `scripts/tests/`, `tests/` | 数据管线、数据验证、纯函数测试和浏览器回归 |
 | `.github/workflows/` | PR 验证及原有定时数据更新 |
@@ -47,3 +51,13 @@ URL 包含 `view`、分析子页、现有各筛选字段、`quick`、`sort`、`d
 ## 渐进边界
 
 本次抽出了与探索体验直接相关的职责。领域分析仍在 `app.js`：其中图表定义、交叉引用及统计口径较复杂，未为缩短文件而强拆。后续可按种牡马／血统／繁殖／赛马场分别迁移，每次配套子页和图表下钻测试。不要在此过程中改变分母、排名、样本或 JRA/NAR/海外分类。
+
+## 研究探索数据流
+
+详情 JSON → `createProfileModel` → 身份／血统／竞赛／繁殖组件。Quick View 显示赛绩摘要与关系入口，Full Profile 显示完整研究资料；隐藏内容不参与键盘焦点。关系跳转复用现有筛选、URL 与 CSV；同母关系来自已核实目录或稳定母马标识，站内身份用 netkeiba ID 对齐。
+
+研究工作区选择分组、世代、性别和最少样本，图形选择 A、选择器选择 B，再下钻到对应产驹。旧分析放入可展开补充证据，展开时重新排版；这部分不称为图表重画。
+
+地图保留原 GeoJSON 与经纬度，在投影后按像素距离聚合。地图与列表共用选择，连接场地指标、距离证据和独立产驹。聚合点代表一组位置，不能解释为单个赛场地址。赛场产驹索引使用 `analytics_core` 的同一归一化与有效名次定义生成，并接入同步重建流程。
+
+Profile 完整模式通过 `profile=full` 分享。工作区 A/B、地图区域与场地选择是页面临时状态；产驹筛选 URL 可分享。

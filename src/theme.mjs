@@ -16,6 +16,7 @@ export function createThemeController({ els, state, chartRegistry, chartThemeCol
         nameTextStyle: { color: muted },
       }));
       const patch = {
+        geo: (option.geo || []).map(() => ({ itemStyle: { areaColor: surface, borderColor: line } })),
         textStyle: { color: text },
         legend: (option.legend || []).map(() => ({
           inactiveColor: muted,
@@ -74,10 +75,7 @@ export function createThemeController({ els, state, chartRegistry, chartThemeCol
     if (persist) savePreference("duramente-theme", next);
     if (els.themeMode) els.themeMode.value = next;
     requestAnimationFrame(() => requestAnimationFrame(refreshChartTheme));
-    if (state.view === "racecourse" && els.racecourseContent?.dataset.loaded) {
-      delete els.racecourseContent.dataset.loaded;
-      renderRacecourseAnalysis().catch(console.error);
-    }
+
   }
 
   return { applyTheme, refreshChartTheme, applyChartTheme };

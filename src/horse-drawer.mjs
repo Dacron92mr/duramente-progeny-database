@@ -1,11 +1,11 @@
-import { escapeHtml, uiValue, careerSummaryText, prize, formatNumber } from './format.mjs';
-import { enhanceProfile } from './horse-profile.mjs';
+import { createProfileModel } from './profile-model.mjs';
+import { renderProfile, bindProfile } from './horse-profile.mjs';
 import { setBackgroundInert } from './dialog.mjs';
 
 /** Owns drawer lifecycle, async identity checks and focus restoration. */
 export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensureHorseSequence,
   fetchStaticData, getStaticHorses, getJson, horseDamCell, raceRows, studSection, detailSources,
-  regionBadge, lineageBadge, damAgeText, crossItems, ownerCell }) {
+  damAgeText, crossItems, ownerCell, navigateToProgeny }) {
   let lastFocusedElement = null;
   function updateHorseNavigation() {
     const index = getHorseIds().indexOf(String(state.horse));
@@ -53,59 +53,15 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     const [data, relatives, allHorses] = result;
     const horse = data.horse;
     const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
-    els.detail.innerHTML = `
-      <div class="detail-head">
-        <p class="kicker">${escapeHtml(horse.sire || "Duramente")}</p>
-        <h2 id="drawerTitle">${escapeHtml(horse.name)}</h2>
-        ${horse.name_en ? `<div class="english-name">${escapeHtml(horse.name_en)}</div>` : ""}
-        ${horse.hkjc_name_zh ? `<div class="hk-name detail-hk">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
-        <div class="tag-row">
-          <span class="tag">${escapeHtml(horse.birth_date || horse.birth_year)}</span>
-          <span class="tag">${escapeHtml(uiValue(horse.sex, "sex"))}</span>
-          <span class="tag">${escapeHtml(uiValue(horse.color, "color"))}</span>
-          ${regionBadge(horse.trainer_region)}
-          ${lineageBadge(horse.female_family)}
-        </div>
-        <div class="external-links">
-          ${horse.netkeiba_id ? `<a href="https://db.netkeiba.com/horse/${escapeHtml(horse.netkeiba_id)}/" target="_blank" rel="noreferrer">netkeiba</a>` : ""}
-          ${horse.jbis_id ? `<a href="https://www.jbis.or.jp/horse/${escapeHtml(horse.jbis_id)}/" target="_blank" rel="noreferrer">JBIS</a>` : ""}
-        </div>
-      </div>
-
-      ${horse.netkeiba_id ? '<figure class="horse-photo" id="horsePhoto" aria-label="产驹照片"></figure>' : ''}
-      <div class="detail-grid">
-        <div class="fact"><span>父马</span><strong>${escapeHtml(horse.sire || "ドゥラメンテ")}</strong></div>
-        <div class="fact"><span>母马</span><strong>${horseDamCell(horse)}</strong></div>
-        <div class="fact"><span>母马出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
-        <div class="fact"><span>生产本胎时母龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
-        ${horse.dam_biological_parity != null ? `<div class="fact"><span>真实生产胎次</span><strong>母马第 ${escapeHtml(horse.dam_biological_parity)} 次生产</strong></div>` : ""}
-        ${horse.dam_registered_foal_order != null ? `<div class="fact"><span>登记产驹序次</span><strong>第 ${escapeHtml(horse.dam_registered_foal_order)} 匹登记产驹</strong></div>` : ""}
-        <div class="fact"><span>母父</span><strong>${escapeHtml(horse.broodmare_sire)}</strong></div>
-        <div class="fact"><span>母父系</span><strong>${escapeHtml(horse.bms_line || "Other")}</strong></div>
-        <div class="fact"><span>牝系</span><strong>${escapeHtml(horse.female_family || "未分类")}</strong></div>
-        <div class="fact fact-cross"><span>Cross</span><strong>${crossItems(horse.pedigree_crosses)}</strong></div>
-        ${horse.dosage_profile ? `<div class="fact"><span>DP</span><strong>${escapeHtml(horse.dosage_profile)} (${escapeHtml(horse.dosage_points)})</strong></div>` : ""}
-        ${horse.dosage_index != null ? `<div class="fact"><span>DI</span><strong>${escapeHtml(formatNumber(horse.dosage_index, 2))}</strong></div>` : ""}
-        ${horse.center_of_distribution != null ? `<div class="fact"><span>CD</span><strong>${escapeHtml(formatNumber(horse.center_of_distribution, 2))}</strong></div>` : ""}
-        <div class="fact"><span>马主</span><strong>${ownerCell(horse)}</strong></div>
-        <div class="fact"><span>练马师</span><strong>${escapeHtml(horse.trainer)}</strong></div>
-        <div class="fact"><span>生产牧场</span><strong>${escapeHtml(horse.breeder)}</strong></div>
-        <div class="fact"><span>产地</span><strong>${escapeHtml(horse.birthplace)}</strong></div>
-        <div class="fact"><span>生涯战绩</span><strong>${escapeHtml(careerSummaryText(horse.career_summary))}</strong></div>
-        <div class="fact"><span>最高成就</span><strong>${escapeHtml(uiValue(horse.achievement_class, "achievement"))}</strong></div>
-        <div class="fact"><span>奖金</span><strong>${escapeHtml(prize(horse))}</strong></div>
-        <div class="fact"><span>主要胜鞍</span><strong>${escapeHtml(horse.major_win)}</strong></div>
-        ${siblings.length ? `<div class="fact fact-siblings"><span>同母兄弟姐妹 · 重赏冠军</span><strong>${siblings.map(sibling => `<a href="https://db.netkeiba.com/horse/${escapeHtml(sibling.netkeiba_id)}/" target="_blank" rel="noopener noreferrer" title="${escapeHtml(sibling.major_win || sibling.achievement_class)}">${escapeHtml(sibling.name)}</a>`).join("")}</strong></div>` : ""}
-      </div>
-
-      <details class="race-section" open>
-        <summary>比赛记录</summary>
-        ${raceRows(data.races, horse)}
-      </details>
-      ${studSection(data.stud, horse)}
-      ${detailSources(data.sources)}
-    `;
-    enhanceProfile(els.detail, els.drawerPanel, state, writeUrlState);
+    const vm = createProfileModel(data, siblings, allHorses);
+    const helpers = { horseDamCell, raceRows, studSection, detailSources, damAgeText, crossItems, ownerCell };
+    const profile = renderProfile(vm, helpers);
+    els.detail.innerHTML = profile.html;
+    els.drawerPanel.classList.toggle('has-breeding', profile.hasBreeding);
+    bindProfile(els.detail, els.drawerPanel, state, writeUrlState, vm, helpers, {
+      openHorse,
+      explore(filters) { closeDrawer({ updateHistory: false, restoreFocus: false }); navigateToProgeny(filters); },
+    });
     window.DuramenteAnalysis.horsePhoto(horse, document.getElementById("horsePhoto"));
     updateHorseNavigation();
   }
