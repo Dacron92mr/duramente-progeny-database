@@ -1,7 +1,7 @@
 /** Reading guidance only: never changes the chart's source data or calculation. */
 const groups = [
   [/sireInvestigation/, 'sire_profile.json', '原有同龄累计胜场 / 该世代全部产驹 × 100；不是独立胜马率。', '仅纳入完整经历所选年龄年度的世代；点击图形或选择 A/B，再打开对应产驹。'],
-  [/(pedigree|production)Investigation/, '../horses.json', '已确认胜马或重赏马 / 当前分组全部收录产驹；战绩未解析数另列。', '按所选世代、性别与最低样本量分组；点击选择 A，再与 B 对照，差异不是因果效应。'],
+  [/(pedigree|production)Investigation/, '../horses.json', '已确认胜马或重赏马 / 当前分组全部收录产驹；尚未收录的战绩不推断为未胜。', '按所选世代、性别与最低样本量分组；点击选择 A，再与 B 对照，差异不是因果效应。'],
   [/IndexChart$/, 'sire_indices.json', 'AEI 以同期全部出赛马平均收得奖金为基准（1.00）；JBIS 中央平地赛口径。', '年度或出生世代；不与地方、海外口径直接合并。'],
   [/Leading|firstSeason/, 'leading_sire_history.json、leading_sire_top10.json、sire_category_rankings.json', '排名、奖金为原榜单值，不是比率；Top 10 只显示头部种牡马。', '所选年份与榜单分类；缺失榜单不代表零。'],
   [/MaresCovered|StudFee/, 'sire_market.json', '配种母马数或公开配种费（万日元），无比例分母。', '年度；公布费用不等于实际成交价格。'],
@@ -35,12 +35,12 @@ export function addChartContext(el, id, option) {
   const series = (option.series || []).map(item => item.name).filter(Boolean);
   const fields = [
     ['研究问题', `${heading}：${lead}`],
-    ['数据来源', `静态快照 data/analytics/${context[0]}；原始来源与更新时间见本页来源及方法说明。`],
+    ['资料来源', '各项统计所用资料及更新时间见本页资料说明；马匹资料中保留原网站链接。'],
     ['统计量与分母', `${[...new Set([...axes, ...series])].join(' · ')}。${context[1]}`],
     ['比较组与局限', context[2]],
   ];
   details.replaceChildren();
-  const summary = document.createElement('summary'); summary.textContent = '研究口径与局限'; details.append(summary);
+  const summary = document.createElement('summary'); summary.textContent = '统计说明'; details.append(summary);
   const list = document.createElement('dl');
   for (const [label, value] of fields) { const dt = document.createElement('dt'); dt.textContent = label; const dd = document.createElement('dd'); dd.textContent = value; list.append(dt, dd); }
   details.append(list);

@@ -94,7 +94,7 @@
         if(d.counts){const ci=ctx.wilson(...d.counts);text+=`<br>样本 ${d.counts[0]}/${d.counts[1]}${ci?` · 95% Wilson区间 ${ci.map(number).join('–')}%`:''}`;}
         return text;
       }};
-      note=rate?'点为实际比例；有分子分母时细线为95% Wilson区间。无样本留空，比例统一为0–100%。':type==='comparison'?'同一行比较同一对象；用点的位置读取差异，点选查看数值。':'按位置比较数值；点选查看原始数据与样本信息。';
+      note=rate?'点表示比例，细线表示估计范围（95%置信区间）。':type==='comparison'?'同一行比较同一对象；用点的位置读取差异，点选查看数值。':'按位置比较数值；点选查看更多。';
       if(id==='sireAwdDumbbellChart')note='每行一个世代，比较整体、草地与泥地的平均胜距；横轴为米。';
     } else if(type==='panels') {
       let groups=option.yAxis.map((axis,i)=>({axis,index:i,series:series.filter(s=>(s.yAxisIndex||0)===i)}));
@@ -141,10 +141,10 @@
       option.series=[{type:'heatmap',data,itemStyle:{borderColor:theme.surface,borderWidth:3},label:{show:true,fontSize:11,formatter:p=>p.value[2]==null?'—':`${number(p.value[2])}×`}}];
       option.tooltip={trigger:'item',confine:true,formatter:p=>`${esc(p.data.raw.label)} · ${p.data.raw.foals}匹<br>${p.data.metric[0]}：${number(p.data.raw[p.data.metric[1]]*(p.data.metric[2]==='%'?100:1))}${p.data.metric[2]}<br>相对全库 ${p.value[2]==null?'无基线':number(p.value[2])+'倍'}`};
       height=Math.max(420,rows.length*34+100);
-      note='按样本量选取并排序，分别比较三项原始指标相对全库的倍数；不再合成为主观加权分数。颜色上限3倍，点选查看真实值。';
+      note='比较各项指标相对全库的倍数；颜色越深，倍数越高。点选查看数值。';
     } else {
       if(horizontal&&ya){ya.axisLabel={...ya.axisLabel,width:small?96:Math.min(170,ctx.width*.3),overflow:'truncate',interval:0};height=Math.max(360,(ya.data?.length||0)*34+100);}
-      if(type==='trend')note='沿时间或年龄读取变化；缺失值保留断点，未结束年度以原始说明为准。';
+      if(type==='trend')note='沿时间或年龄观察变化；断点表示资料暂缺。';
       if(type==='stacked')note='柱高表示总量，分段表示来源；同一分类使用固定色彩，点选查看明细。';
       if(type==='distribution')note='按有序区间读取分布；柱从零开始，点选查看精确数量。';
       if(type==='scatter'){height=430;option.series=series.map(s=>({...s,itemStyle:{...s.itemStyle,opacity:.48,borderWidth:.5},data:(s.data||[]).map(d=>({...d,symbolSize:Math.max(5,Math.min(18,Math.sqrt(d.raw?.dosage_points||1)*2))}))}));option.grid={left:40,right:28,top:input.legend?60:24,bottom:58,containLabel:true};note='每点一匹；点选查看详情。坐标与点大小各自对应标题说明中的指标。';}

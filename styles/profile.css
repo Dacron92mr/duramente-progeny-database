@@ -38,3 +38,23 @@
 .performance-study {border-top:1px solid var(--line);padding-top:16px;margin:20px 0;}.performance-study h4 {margin:0;}.performance-study p {font-size:12px;}.performance-rows {display:grid;margin-top:10px;}.performance-rows button {display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:10px 0;background:transparent;font-size:12px;color:var(--ink);}.performance-rows button:hover {background:var(--selection);}.performance-rows button>span:last-child {grid-column:1/-1;color:var(--muted);}.rate-track {grid-column:1/-1;background:var(--neutral-track);height:5px;border-radius:4px;}.rate-track i {display:block;height:100%;background:var(--accent);border-radius:4px;}.race-section {scroll-margin-top:190px;}
 [data-profile="quick"] .profile-columns,[data-profile="quick"] .profile-sections {display:none;}[data-profile="full"] .profile-quick {display:none;}.profile-quick>.muted {font-size:12px;}.drawer-panel>.horse-photo,#horseDetail>.horse-photo {max-width:600px;}
 @media(min-width:1150px){[data-profile="full"] .detail-head {display:flex;align-items:center;justify-content:space-between;gap:24px;padding-right:0;margin-bottom:12px;}[data-profile="full"] .profile-identity-meta {text-align:right;}[data-profile="full"] .profile-identity-meta .tag-row,[data-profile="full"] .profile-identity-meta .external-links {justify-content:flex-end;}[data-profile="full"] .profile-controls {display:flex;align-items:center;gap:16px;}[data-profile="full"] .profile-sections {margin:0;}}
+
+/* A single photo node follows the selected view without reloading the image. */
+[data-photo-slot] .horse-photo { margin: 0 0 18px; max-width: none; }
+[data-photo-slot] .horse-photo img { height: 220px; width: 100%; object-fit: contain; }
+.profile-quick [data-photo-slot] .horse-photo img { height: 210px; }
+.horse-photo figcaption { flex-wrap: wrap; gap: 8px; }
+.profile-method { margin: 12px 0; color: var(--muted); font-size: 13px; }
+.profile-method summary { cursor: pointer; }
+.concept-intro { margin: 12px 0 20px; }
+.concept-intro p,.dosage-categories { line-height: 1.7; }
+.concept-intro h3 { font-size: 16px; }
+@media(max-width:600px) {
+ [data-photo-slot] .horse-photo img,.profile-quick [data-photo-slot] .horse-photo img { height: 165px; }
+ .horse-photo figcaption { font-size: 12px; }
+}
+
+.study-topics { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:20px; }
+.study-topics button { border:1px solid var(--line); border-radius:8px; padding:7px 10px; color:var(--text); background:var(--paper); cursor:pointer; }
+.pedigree-panel { scroll-margin-top: 170px; }
+@media(max-width:600px) { .pedigree-panel { scroll-margin-top: 230px; } }

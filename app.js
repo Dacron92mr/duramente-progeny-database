@@ -1,3 +1,4 @@
+import { conceptIntro, dosageCategories } from './src/ux-copy.mjs';
 import { mountResearchWorkbench } from './src/research-workbench.mjs';
 import { mountRacecourseMap } from './src/racecourse-map.mjs';
 import { addChartContext } from './src/chart-context.mjs';
@@ -1490,9 +1491,9 @@ function renderCropAwdDumbbellChart(awd) {
         const row = items[0]?.data.raw;
         return [
           `${row.label}年出生`,
-          `Overall AWD：${row.overall_awd ? `${formatNumber(row.overall_awd, 0)}m` : "—"}`,
-          `Turf AWD：${row.turf_awd ? `${formatNumber(row.turf_awd, 0)}m` : "—"}`,
-          `Dirt AWD：${row.dirt_awd ? `${formatNumber(row.dirt_awd, 0)}m` : "—"}`,
+          `整体平均胜距：${row.overall_awd ? `${formatNumber(row.overall_awd, 0)}m` : "—"}`,
+          `草地平均胜距：${row.turf_awd ? `${formatNumber(row.turf_awd, 0)}m` : "—"}`,
+          `泥地平均胜距：${row.dirt_awd ? `${formatNumber(row.dirt_awd, 0)}m` : "—"}`,
           `胜场：${formatNumber(row.wins)}`,
         ].join("<br>");
       },
@@ -2053,7 +2054,7 @@ function renderSireCharts(profile, market, leadingHistory, leadingTop10, categor
   const cropSet = [...new Set(profile.crop_development.map((row) => String(row.crop)))].sort();
   const developmentMetric = document.querySelector("#sireDevelopmentMetric")?.value || "cumulative_wins";
   const developmentLabels = {
-    cumulative_wins: "原始累计胜场",
+    cumulative_wins: "累计胜场",
     cumulative_wins_per_100_foals: "每100匹产驹累计胜场",
     cumulative_wins_per_100_runners: "每100匹出赛马累计胜场",
   };
@@ -2319,7 +2320,7 @@ async function renderSireAnalysis() {
       <button type="button" role="tab" data-sire-section="market"><span>04</span><strong>配种市场</strong><small>配种费与配种数量</small></button>
     </div>
     <div class="analysis-subpanel" data-sire-panel="annual">
-    ${sectionBlock("AEI / CPI 指数", "用同期整体奖金基准衡量产驹表现，并用母群质量解释种牡马获得的配种机会。", `
+    ${sectionBlock("AEI / CPI 指数", "", `${conceptIntro('indices',{heading:false})}
       <div class="awd-summary-band sire-index-summary-band" aria-label="AEI CPI 指数概览">
         <div><span>AEI</span><strong>${Number(sireIndices.summary?.crop_aei).toFixed(2)}</strong><small>世代合计 · 1.00 为同期平均</small></div>
         <div><span>CPI</span><strong>${Number(sireIndices.summary?.cpi).toFixed(2)}</strong><small>母群质量对照</small></div>
@@ -2329,7 +2330,7 @@ async function renderSireAnalysis() {
       <div class="chart-grid single-chart">
         ${chartBlock("年度 AEI 走势", "AEI 与重赏 AEI；虚线 1.00 表示同期平均。", "sireAnnualIndexChart")}
       </div>
-      <p class="source-note">AEI 比较产驹与同期全部出赛马的平均收得奖金；CPI 比较配种母马与其他种牡马所生兄弟马的表现。平地赛口径，数据截至 ${escapeHtml(sireIndices.source?.updated_at || "—")}。<a class="inline-reference" href="${escapeHtml(sireIndices.source?.url || "https://www.jbis.or.jp/")}" target="_blank" rel="noopener noreferrer">来源：JBIS-Search ↗</a></p>
+      <p class="source-note">中央平地赛统计，截至 ${escapeHtml(sireIndices.source?.updated_at || "—")}。<a class="inline-reference" href="${escapeHtml(sireIndices.source?.url || "https://www.jbis.or.jp/")}" target="_blank" rel="noopener noreferrer">来源：JBIS-Search ↗</a></p>
     `, "EARNINGS INDEX")}
     ${sectionBlock("年度表现", "按比赛年份查看胜场、出赛马、重赏胜利和奖金变化。",
       `<div class="mini-chart-grid annual-mini-grid">
@@ -2393,7 +2394,7 @@ async function renderSireAnalysis() {
     <div class="analysis-subpanel" data-sire-panel="crop">
     ${sectionBlock("出生世代表现", "比较不同出生世代的奖金、胜马和重赏表现。",
       `<div class="chart-color-key" aria-label="五世代固定代表色">${Object.entries(CROP_COLORS).map(([year,color]) => `<span><i style="background:${color}"></i>${year}年</span>`).join("")}<small>世代代表色 · 深浅表示组内比例</small></div><div class="chart-grid cohort-grid">
-        ${chartBlock("奖金分布 · 看见每一匹", "每点一匹；箱体为中间50%，线为中位数，须为1.5倍四分位距内的观测范围。含真实零奖金，缺失值不计；横轴为对数变换。各世代观察年限不同。", "sireCropEarningsChart")}
+        ${chartBlock("奖金分布 · 看见每一匹", "每个点代表一匹产驹，箱体显示中间一半的奖金范围。点击可查看马匹；横轴采用对数刻度。", "sireCropEarningsChart")}
         ${chartBlock("胜马表现", "比较各世代的胜马数量与比例。", "sireCropWinnersChart")}
         ${chartBlock("重赏表现", "观察重赏马在各世代中的分布。", "sireCropGradedChart")}
         ${chartBlock("各世代 AEI", "按出生世代比较产驹平均收得奖金相对同期全部出赛马的水平；虚线 1.00 为平均。", "sireCropIndexChart")}
@@ -2404,14 +2405,14 @@ async function renderSireAnalysis() {
         ${chartBlock("各出生世代的平均胜距", "平均获胜距离（AWD）：整体、草地与泥地；整体按有距离记录的草地及泥地胜场加权。", "sireAwdDumbbellChart")}
         ${controlledChartBlock("产驹成长曲线", "按年龄观察胜场积累；空心点为尚未结束的年龄年度，6+为开放区间；缺失阶段不连线。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
-            <option value="cumulative_wins">原始累计胜场</option>
+            <option value="cumulative_wins">累计胜场</option>
             <option value="cumulative_wins_per_100_foals">每100匹产驹</option>
             <option value="cumulative_wins_per_100_runners">每100匹出赛马</option>
           </select></label>
         `)}
       </div>`
     , "CROP PERFORMANCE")}
-    ${sectionBlock("平均胜距（AWD）", "AWD 来自实际获胜距离；DI 与 CD 描述血统中的速度与耐力结构。", `
+    ${sectionBlock("平均胜距（AWD）", "", `${conceptIntro('awd',{heading:false})}
       <div class="awd-summary-band" aria-label="平均胜距概览">
         <div><span>OVERALL</span><strong>${formatNumber(awd.summary?.overall_awd, 0)} m</strong><small>${formatNumber(awd.summary?.overall_wins)} 场胜利</small></div>
         <div><span>TURF</span><strong>${formatNumber(awd.summary?.turf_awd, 0)} m</strong><small>${formatNumber(awd.summary?.turf_wins)} 场胜利</small></div>
@@ -3441,7 +3442,7 @@ async function renderPedigreeAnalysis() {
       <div class="pedigree-panel-intro">
         <p class="kicker">BROODMARE SIRE</p>
         <h2>母父分析</h2>
-        <p>比较六大母父系的规模、胜马率和重赏马率，并按性别与出生世代观察表现差异。</p>
+        <p>比较六大母父系的产驹数量与成绩，也可按性别或出生世代细看。</p>
       </div>
       <div class="bms-family-grid">
         ${primaryBmsRows.map((row) => `
@@ -3487,7 +3488,7 @@ async function renderPedigreeAnalysis() {
       <div class="pedigree-panel-intro">
         <p class="kicker">FEMALE FAMILY</p>
         <h2>牝系分析</h2>
-        <p>按牝系编号观察整体表现，以及成绩是否集中在某一性别。</p>
+        ${conceptIntro('family',{heading:false})}
       </div>
       <div class="chart-grid">
         ${controlledChartBlock("牝系整体表现", "按产驹规模、奖金、胜马率或重赏马率比较主要牝系。", "femaleFamilyOverallChart", `
@@ -3527,10 +3528,10 @@ async function renderPedigreeAnalysis() {
       <div class="pedigree-panel-intro">
         <p class="kicker">INBREEDING</p>
         <h2>近交与 Cross</h2>
-        <p>近交观察五代血统表内反复出现的祖先，Cross 形式显示祖先在父母两侧出现的位置。</p>
+        ${conceptIntro('cross',{heading:false})}
         <a class="inline-reference" href="https://en.wikipedia.org/wiki/Thoroughbred_breeding_theories" target="_blank" rel="noopener noreferrer">参考：Wikipedia — Thoroughbred breeding theories ↗</a>
       </div>
-      ${sectionBlock("配合相性", "Nicking 观察种牡马与具体母父之间反复产生优秀产驹的配合倾向。", `
+      ${sectionBlock("配合相性", "", `${conceptIntro('nicking',{heading:false})}
         <p class="section-inline-note">分别观察胜马率、重赏马率和每匹奖金；按样本量排列，不将不同指标合成为一个分数。小样本仅作线索。</p>
         <div class="nicking-highlight-grid">
           ${nickingHighlights.map((row) => `<article class="nicking-entity-card"><span>${row.type}</span><button type="button" class="nicking-filter-link" data-progeny-filter-key="${row.filter}" data-progeny-filter-value="${escapeHtml(row.label)}">${escapeHtml(row.label)}</button><em>${formatNumber(row.foals)}匹</em><small>${formatNumber(row.foals)}匹 · 胜马 ${formatRate(row.winner_foal_rate)} · 重赏 ${formatRate(row.graded_foal_rate)}</small><div class="nicking-representatives">${renderRepresentativeHorses(row.representatives || [], { limit: 5 })}</div></article>`).join("")}
@@ -3601,12 +3602,11 @@ async function renderPedigreeAnalysis() {
       <div class="pedigree-panel-intro dosage-intro">
         <p class="kicker">DOSAGE THEORY</p>
         <h2>剂量理论血统参数｜DP・DI・CD</h2>
-        <p>DP（血统构成）把前四代父系祖先的影响分成五类。剂量指数（DI）用来观察速度与耐力两端的相对比重，重心值（CD）表示整组血统构成偏向哪一侧；两者只描述血统结构，不单独预测赛马能力。</p>
-        <a class="inline-reference" href="https://en.wikipedia.org/wiki/Dosage_Index" target="_blank" rel="noopener noreferrer">参考：Wikipedia — Dosage Index ↗</a>
+        ${conceptIntro('dosage',{heading:false})}${dosageCategories}
       </div>
       <div class="dosage-summary-band" aria-label="剂量指数与重心值解读">
-        <article><span>剂量指数（DI）</span><strong>${formatNumber(dosage.summary?.di_median, 2)}</strong><p>中位数略高于 1，现有产驹的血统构成整体较均衡，并轻微偏向速度端。</p></article>
-        <article><span>重心值（CD）</span><strong>${formatNumber(dosage.summary?.cd_median, 2)}</strong><p>中位数为正，平均重心落在经典型前侧，但仍保留耐力端的构成。</p></article>
+        <article><span>剂量指数（DI）</span><strong>${formatNumber(dosage.summary?.di_median, 2)}</strong><p>数值较高通常偏向速度；这里显示已收录产驹的中位数。</p></article>
+        <article><span>重心值（CD）</span><strong>${formatNumber(dosage.summary?.cd_median, 2)}</strong><p>正值偏向速度端，负值偏向耐力端；这里显示中位数。</p></article>
       </div>
       <div class="chart-grid dosage-chart-layout" id="dosage-charts">
         ${controlledChartBlock("DI 与 CD 分布", "每个点代表一匹产驹，点大小反映 DP 总点数；点击可打开详情。", "dosageScatterChart", `

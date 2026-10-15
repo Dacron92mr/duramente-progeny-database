@@ -179,7 +179,7 @@
       if(!container.isConnected)return;
       const photos=(catalog.horses[id]||[]).filter(p=>/^\d+$/.test(p));
       if(!photos.length){container.innerHTML=`<p class="photo-empty">暂无可展示照片 · <a href="${source}" target="_blank" rel="noreferrer">在 netkeiba 查看</a></p>`;return;}
-      container.innerHTML=`<a class="horse-photo-link" href="${source}" target="_blank" rel="noreferrer"><span class="photo-loading" role="status">正在载入来源照片…</span><img alt="${escapeHtml(horse.name)}的照片" referrerpolicy="no-referrer" decoding="async"></a><figcaption><a href="${source}" target="_blank" rel="noreferrer">照片来源：netkeiba ↗</a><button type="button" ${photos.length<2?'hidden':''}>换一张</button></figcaption>`;
+      container.innerHTML=`<a class="horse-photo-link" href="${source}" target="_blank" rel="noreferrer"><span class="photo-loading" role="status">正在加载照片…</span><img alt="${escapeHtml(horse.name)}的照片" referrerpolicy="no-referrer" decoding="async"></a><figcaption><a href="${source}" target="_blank" rel="noreferrer">在 netkeiba 查看全部照片 ↗</a><button type="button" ${photos.length<2?'hidden':''}>换一张 ↻</button></figcaption>`;
       const img=container.querySelector('img');let remaining=[...photos];
       let photoTimeout;
       const unavailable=()=>{

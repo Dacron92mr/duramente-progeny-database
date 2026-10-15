@@ -28,9 +28,9 @@ export async function mountRacecourseMap(root,{rows,coordinates,canonicalName,ge
   function select(point,focus=false){
     selected=point?.name||null;
     const panel=root.querySelector('.map-detail');
-    if(!point){panel.innerHTML='<h3>选择赛马场</h3><p>点选地图标记或下方列表，查看样本量、胜率与前三率。</p>';return;}
+    if(!point){panel.innerHTML='<h3>选择赛马场</h3><p>点选地图标记或下方列表，查看出赛次数、胜率与前三率。</p>';return;}
     const r=point.row;
-    panel.innerHTML=`<h3>${html(point.name)} <small>${html(r.jurisdiction)}</small></h3><dl><div><dt>出赛／样本量</dt><dd>${r.starts}</dd></div><div><dt>胜场</dt><dd>${r.wins_starts}</dd></div><div><dt>胜率</dt><dd>${ratio(r.wins_starts,r.starts)}</dd></div><div><dt>前三率</dt><dd>${ratio(r.top3,r.starts)} <small>(${r.top3}/${r.starts})</small></dd></div></dl><p>分母为有正式名次的出赛，非独立马匹数。${r.starts<30?'样本少于30场，比例波动较大。':''}</p><button type="button" data-course-population>查看对应产驹 ↗</button><div data-course-horses></div><button type="button" data-course-analysis>研究该场地与距离 ↓</button>`;
+    panel.innerHTML=`<h3>${html(point.name)} <small>${html(r.jurisdiction)}</small></h3><dl><div><dt>正式出赛</dt><dd>${r.starts}</dd></div><div><dt>胜场</dt><dd>${r.wins_starts}</dd></div><div><dt>胜率</dt><dd>${ratio(r.wins_starts,r.starts)}</dd></div><div><dt>前三率</dt><dd>${ratio(r.top3,r.starts)} <small>(${r.top3}/${r.starts})</small></dd></div></dl><p>按有正式名次的比赛统计。${r.starts<30?'样本少于30场，比例波动较大。':''}</p><button type="button" data-course-population>查看对应产驹 ↗</button><div data-course-horses></div><button type="button" data-course-analysis>查看场地与距离表现 ↓</button>`;
     panel.querySelector('[data-course-analysis]').onclick=()=>onSelect(r);
     panel.querySelector('[data-course-population]').onclick=async event=>{
       const button=event.currentTarget;button.disabled=true;button.textContent='正在载入产驹…';
@@ -39,7 +39,7 @@ export async function mountRacecourseMap(root,{rows,coordinates,canonicalName,ge
         if(selected!==point.name)return;
         button.textContent=`${population.length} 匹独立产驹`;
         const target=panel.querySelector('[data-course-horses]');
-        target.innerHTML=`<p>至少一场有正式名次记录；独立马匹数与出赛次数不同。</p><div class="course-horse-list">${population.map(h=>`<button type="button" data-map-horse="${html(h.id)}">${html(h.name)}</button>`).join('')}</div>`;
+        target.innerHTML=`<p>以下产驹曾在此取得正式名次。</p><div class="course-horse-list">${population.map(h=>`<button type="button" data-map-horse="${html(h.id)}">${html(h.name)}</button>`).join('')}</div>`;
         target.querySelectorAll('[data-map-horse]').forEach(b=>b.onclick=()=>openHorse(b.dataset.mapHorse));
       }catch(error){if(selected===point.name){button.disabled=false;button.textContent='载入失败，点此重试';}}
     };
