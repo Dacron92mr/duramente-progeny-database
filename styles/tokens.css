@@ -7,7 +7,7 @@
   --accent: #a62e42; --accent-2: #be3e52; --gold: #94671e; --soft: #f2f2f5;
   --selection: #f2e4e7; --sidebar: #ededf1; --shadow: 0 12px 36px rgba(25,25,35,.09);
   --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px; --space-6: 24px; --space-8: 32px;
-  --radius: 8px; --control-height: 36px; --sidebar-width: 208px; --header-height: 60px;
+  --radius: 12px; --radius-card: 16px; --radius-panel: 20px; --control-height: 36px; --sidebar-width: 208px; --header-height: 60px;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;

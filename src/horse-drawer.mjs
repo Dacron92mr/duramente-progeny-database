@@ -1,4 +1,5 @@
 import { escapeHtml, uiValue, careerSummaryText, prize, formatNumber } from './format.mjs';
+import { enhanceProfile } from './horse-profile.mjs';
 import { setBackgroundInert } from './dialog.mjs';
 
 /** Owns drawer lifecycle, async identity checks and focus restoration. */
@@ -59,7 +60,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
         ${horse.name_en ? `<div class="english-name">${escapeHtml(horse.name_en)}</div>` : ""}
         ${horse.hkjc_name_zh ? `<div class="hk-name detail-hk">${escapeHtml(horse.hkjc_name_zh)}</div>` : ""}
         <div class="tag-row">
-          <span class="tag">${escapeHtml(horse.birth_year)}</span>
+          <span class="tag">${escapeHtml(horse.birth_date || horse.birth_year)}</span>
           <span class="tag">${escapeHtml(uiValue(horse.sex, "sex"))}</span>
           <span class="tag">${escapeHtml(uiValue(horse.color, "color"))}</span>
           ${regionBadge(horse.trainer_region)}
@@ -73,6 +74,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
 
       ${horse.netkeiba_id ? '<figure class="horse-photo" id="horsePhoto" aria-label="产驹照片"></figure>' : ''}
       <div class="detail-grid">
+        <div class="fact"><span>父马</span><strong>${escapeHtml(horse.sire || "ドゥラメンテ")}</strong></div>
         <div class="fact"><span>母马</span><strong>${horseDamCell(horse)}</strong></div>
         <div class="fact"><span>母马出生年</span><strong>${escapeHtml(horse.dam_birth_year || "未知")}</strong></div>
         <div class="fact"><span>生产本胎时母龄</span><strong>${escapeHtml(damAgeText(horse))}</strong></div>
@@ -103,6 +105,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
       ${studSection(data.stud, horse)}
       ${detailSources(data.sources)}
     `;
+    enhanceProfile(els.detail, els.drawerPanel, state, writeUrlState);
     window.DuramenteAnalysis.horsePhoto(horse, document.getElementById("horsePhoto"));
     updateHorseNavigation();
   }
@@ -114,6 +117,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     document.body.classList.remove("drawer-open");
     setBackgroundInert(els.drawer, false);
     state.horse = "";
+    state.profile = "quick";
     if (updateHistory) writeUrlState("push");
     if (restoreFocus && lastFocusedElement?.isConnected) lastFocusedElement.focus();
   }

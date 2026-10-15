@@ -1,3 +1,5 @@
+import { addChartContext } from './src/chart-context.mjs';
+import { affiliationBadge, gradeClass } from './src/racing-ui.mjs';
 import { state, FILTER_META, FILTER_KEYS, VALID_VIEWS, VALID_PEDIGREE_SECTIONS, VALID_SIRE_SECTIONS, VALID_PRODUCTION_SECTIONS } from "./src/state.mjs";
 import { fmt, money, prize, escapeHtml, raceDateValue, uiValue, careerSummaryText, formatNumber, formatRate, horseDamAgeBucket } from "./src/format.mjs";
 import { createDataClient } from "./src/data.mjs";
@@ -494,14 +496,7 @@ function representativeNames(row) {
   return reps.map((rep) => [rep.name, rep.hkjc_name_zh ? `(${rep.hkjc_name_zh})` : "", rep.achievement_class].filter(Boolean).join(" ")).join(" / ");
 }
 
-function representativeGradeClass(value) {
-  const grade = String(value || "").toLowerCase();
-  if (grade.includes("g1") || grade === "gⅠ".toLowerCase()) return "grade-g1";
-  if (grade.includes("g2") || grade === "gⅡ".toLowerCase()) return "grade-g2";
-  if (grade.includes("g3") || grade === "gⅢ".toLowerCase()) return "grade-g3";
-  if (grade.includes("listed")) return "grade-listed";
-  return "grade-other";
-}
+function representativeGradeClass(value) { return gradeClass(value); }
 
 function representativeNameText(rep) {
   return [rep.name, rep.hkjc_name_zh ? `（${rep.hkjc_name_zh}）` : ""].filter(Boolean).join("");
@@ -775,6 +770,7 @@ function addChartActions(el, id) {
 function renderChart(id, option) {
   const el = document.getElementById(id);
   if (!el) return null;
+  addChartContext(el, id, option);
   el.classList.remove("is-rendered");
   if (!window.echarts) {
     el.innerHTML = `<div class="chart-fallback">图表暂时无法显示，可先查看下方表格。</div>`;
@@ -1797,12 +1793,7 @@ function renderCropAwdDumbbellChart(awd) {
   });
 }
 
-function gradedClass(grade) {
-  const value = String(grade || "").toUpperCase();
-  if (value.includes("G1")) return "grade-g1";
-  if (value.includes("G2")) return "grade-g2";
-  return "grade-g3";
-}
+function gradedClass(grade) { return gradeClass(grade); }
 
 function renderGradedWinsTimelineList(rows, mode = "year", targetId = "gradedWinsEventList") {
   const target = document.querySelector(`#${targetId}`);
@@ -1826,7 +1817,7 @@ function renderGradedWinsTimelineList(rows, mode = "year", targetId = "gradedWin
           <div class="graded-events">
             ${events.map((row) => `
               <article class="graded-event">
-                <span class="grade-pill ${gradedClass(row.grade_group || row.grade)}">${escapeHtml(row.grade_group || row.grade || "G")}</span>
+                <span class="grade-pill ${gradedClass(row.grade || row.grade_group)}">${escapeHtml(row.grade || row.grade_group || "G")}</span>
                 <span class="event-date">${escapeHtml(row.race_date)}</span>
                 <span class="event-race">${row.race_url ? `<a href="${escapeHtml(row.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(row.race_name)}</a>` : escapeHtml(row.race_name)}</span>
                 <button type="button" class="link-button event-horse" data-horse-name="${escapeHtml(row.horse)}">${escapeHtml(row.horse)}</button>
@@ -4838,11 +4829,7 @@ function horseQuery() {
   return `/api/horses?${params.toString()}`;
 }
 
-function regionBadge(region) {
-  if (!region) return "—";
-  const cls = region === "美浦" ? "miho" : region === "栗東" ? "ritto" : "local";
-  return `<span class="region ${cls}">${escapeHtml(region)}</span>`;
-}
+function regionBadge(region) { return affiliationBadge(region); }
 
 function lineageBadge(value) {
   if (!value || value === "未分類") return "";

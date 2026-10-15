@@ -156,31 +156,9 @@
   color: var(--accent-2);
 }
 
-.region {
-  display: inline-flex;
-  align-items: center;
-  min-height: 24px;
-  border-radius: 999px;
-  padding: 2px 9px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: nowrap;
-}
 
-.region.miho {
-  background: #f5d9d6;
-  color: #a12c20;
-}
 
-.region.ritto {
-  background: #d8e6f7;
-  color: #245a9d;
-}
 
-.region.local {
-  background: #dceee1;
-  color: #19733d;
-}
 
 .lineage {
   display: inline-flex;
@@ -1657,29 +1635,9 @@
   border-bottom: 0;
 }
 
-.grade-pill {
-  display: inline-flex;
-  justify-content: center;
-  border-radius: 999px;
-  padding: 3px 8px;
-  color: #fff;
-  font-size: 11px;
-  font-weight: 950;
-}
 
-.grade-g1 {
-  background: #2f6fa7;
-}
 
-.grade-g2 {
-  background: #c73545;
-}
 
-.grade-g3 {
-  background: #3F8F68;
-  border: 1px solid #337A58;
-  color: #fff;
-}
 
 .grade-listed {
   background: #f0b45f;

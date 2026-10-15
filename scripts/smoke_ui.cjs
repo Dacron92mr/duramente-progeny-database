@@ -106,6 +106,8 @@ async function check(name, run) {
   });
   for(const width of [1440,390])for(const view of ['sire','pedigree','production','racecourse'])await check(`analysis ${view} at ${width}`,async()=>{
     await page.setViewportSize({width,height:900});await page.goto(`${base}?view=${view}`);await page.locator(`#${view}Content[data-loaded]`).waitFor({timeout:30000});
+    const missingContexts = await page.locator(`#${view}Content .chart-card`).evaluateAll(cards => cards.filter(card => card.querySelector('.is-rendered') && !card.querySelector('.chart-context')).map(card => card.querySelector('.is-rendered').id));
+    assert.deepEqual(missingContexts, [], 'Every rendered chart card needs research context');
     const attr={sire:'sire',pedigree:'pedigree',production:'production'}[view];
     const buttons=attr?await page.locator(`[data-${attr}-section]`).all():[];
     for(const button of buttons){await button.click();await page.locator(`#${view}Content canvas:visible`).first().waitFor({timeout:10000});}

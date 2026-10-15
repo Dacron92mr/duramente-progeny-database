@@ -14,3 +14,34 @@
 - `prefers-reduced-motion` 禁用非必要动画与过渡。主题刷新同步主图和放大图。
 
 CSS 按职责修改原规则，避免在根样式末尾反复追加补丁；只有公共基础规则放 foundations。旧分析样式中仍有历史领域布局，后续修改相应部分时逐项收敛，不删除未经验证的规则。
+
+## 1. Racing Domain Semantics
+
+此次方向以真实 netkeiba 手机版资料页为参考，保留马名→基本信息→父母关系→人物→赛绩的阅读习惯。本站是独立研究项目；参考网站的 Logo、照片与页面代码不用于产品界面。观察证据、页面地址及前后截图见 [设计方向验证](qa/design-direction/README.md)。
+
+| 语义层 | 单一维护位置 | 约定 |
+| --- | --- | --- |
+| 通用 UI | `styles/tokens.css` | 酒红交互色、中性表面；不是赛事等级 |
+| 赛事等级 | `chart-colors.js: grades` → CSS `--grade-g*` | G1 #2F6FA7、G2 #C73545、G3 #3F8F68 |
+| 所属 | `styles/racing.css` | 美浦暖粉／红字，栗東浅蓝／蓝字；地方中性、海外中性虚线 |
+| 血统关系 | `styles/racing.css` | sire 浅蓝、dam 粉、BMS 浅粉；分别提供深色主题 token |
+| 母父分类 | `chart-colors.js: bms` | Northern Dancer、Sunday Silence、Native Dancer、Nasrullah、Turn-to、Other 原定义与映射不变 |
+| 出生世代 | `chart-colors.js: crops` | 2018–2022 深酒红→玫红→浅红→橙→黄 |
+
+`src/racing-ui.mjs` 提供 gradeClass、raceLabel、affiliationBadge、achievementBadge。等级标签统一圆角 10px；G3 使用深色文字保证对比度。标签不仅靠颜色，始终显示文字。最高成就读取既有字段；赛事等级仅从明确的等级注记显示，不能由比赛名称推断胜利。Jpn、障碍等级及未知值保留原文／中性标签，不降为 G3。时间线优先显示原始赛事等级，而非覆盖为归并等级。
+
+## 2. Application Interaction
+
+使用 macOS 工具式侧栏、搜索、检查器和分段控件。通用控件圆角 12px、资料分组 16px、大面板 20px、所属 pill 全圆角。按钮保持 hover、pressed、focus-visible 与原生 disabled 反馈；分段按钮用 aria-pressed 描述真实状态。减少动画偏好由公共样式处理。
+
+`src/horse-profile.mjs` 将原有详情事实分组为父系、母系、母父、牝系与血统结构、人物、赛绩，复用原字段节点；未来新增字段会显示在“其他资料”，不会被分组逻辑丢弃。母系含母龄、生物学胎次、登记序次和已核实同母重赏冠军。母父关系色与母父系分类色分开。
+
+快速查看为侧面检查器；完整资料在 ≥1150px 使用身份与血统／竞赛／繁殖三栏，没有繁殖资料则两栏。更窄视窗使用单栏，分段导航是可键盘访问的页内链接，跳转后将焦点移到目标段。所有资料仍可连续滚动阅读，不以隐藏页签造成内容缺失。`profile=full` 与马匹 ID 一同写入 URL；关闭详情移除这两项。前后匹导航保留当前查看方式。布局与皮肤位于 `styles/profile.css`。
+
+## 3. Research Visualization
+
+图表保留原研究问题、数值、变换及统计定义。`src/chart-context.mjs` 按图表领域提供可展开的“研究口径与局限”，呈现研究问题、静态来源、当前轴／系列指标、分母、比较组和限制。说明在图表重绘时更新，不能用通用主题色覆盖等级、世代或血统类别。
+
+必须区分独立产驹与重复出赛、全部产驹与有效记录、总量与比例、获胜距离与所有出赛距离。AEI 以同期平均为基准；Cross 组合可以重叠；俱乐部按当前马主归属；排名与 Top 10 不代表完整分布；各世代观察时间不同。详细公式、原来源及更新时间继续以页面方法说明及 `data/analytics/methodology.json` 为准。
+
+新增图表时同步添加 context 条目并运行浏览器覆盖检查。不得为填满图表而将缺失数据补零，或改变六大母父系映射。

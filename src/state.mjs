@@ -4,6 +4,7 @@ export const state = {
   sire: "annual",
   production: "farm",
   horse: "",
+  profile: "quick",
   q: "",
   sex: "",
   year: "",

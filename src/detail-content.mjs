@@ -1,3 +1,4 @@
+import { raceLabel } from './racing-ui.mjs';
 import { escapeHtml, formatNumber, money, uiValue } from "./format.mjs";
 
 export function createDetailContent({ finishBadge }) {
@@ -85,7 +86,7 @@ export function createDetailContent({ finishBadge }) {
                   <td>${escapeHtml(race.meeting)}</td>
                   <td>${escapeHtml(race.race_no)}</td>
                   <td>${finishBadge(race.finish)}</td>
-                  <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(race.race_name)}</a>` : escapeHtml(race.race_name)}</td>
+                  <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
                   <td>${escapeHtml(raceClassText(race))}</td>
                   <td>${escapeHtml(race.field_size)}</td>
                   <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
@@ -128,7 +129,7 @@ export function createDetailContent({ finishBadge }) {
                 <td>${escapeHtml(race.meeting)}</td>
                 <td>${escapeHtml(race.race_no)}</td>
                 <td>${finishBadge(race.finish)}</td>
-                <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${escapeHtml(race.race_name)}</a>` : escapeHtml(race.race_name)}</td>
+                <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
                 <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
                 <td>${escapeHtml(race.jockey)}</td>
                 <td>${escapeHtml(race.popularity)}</td>

@@ -15,6 +15,7 @@ export function createRouter(state, location = window.location, history = window
     if (state.limit !== 50) params.set("limit", String(state.limit));
     if (state.offset) params.set("offset", String(state.offset));
     if (state.horse) params.set("horse", String(state.horse));
+    if (state.horse && state.profile === "full") params.set("profile", "full");
     const query = params.toString();
     return `${location.pathname}${query ? `?${query}` : ""}${location.hash}`;
   }
@@ -39,6 +40,7 @@ export function createRouter(state, location = window.location, history = window
     state.offset = Number.isSafeInteger(offset) ? Math.max(0, Math.floor(offset / state.limit) * state.limit) : 0;
     if (!['g1', 'graded', 'hkjc', 'breeding'].includes(state.quick)) state.quick = '';
     state.horse = params.get("horse") || "";
+    state.profile = state.horse && params.get("profile") === "full" ? "full" : "quick";
   }
 
   return { urlForState, writeUrlState, readUrlState };

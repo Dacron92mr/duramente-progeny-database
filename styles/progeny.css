@@ -55,11 +55,6 @@
 .horse-name { display: block; color: var(--ink); font-weight: 600; font-size: 13px; overflow-wrap: anywhere; }
 .horse-name-secondary { display: block; color: var(--muted); font-size: 11px; line-height: 1.5; font-weight: 400; margin-top: 3px; overflow-wrap: anywhere; }
 .horse-open:hover .horse-name { color: var(--accent); }
-.achievement { display: inline-flex; align-items: center; gap: 5px; color: var(--ink); font-size: 11px; white-space: nowrap; }
-.achievement::before { content: ''; width: 5px; height: 5px; background: var(--muted); border-radius: 50%; flex-shrink: 0; }
-.achievement-g1::before { background: var(--grade-g1); }
-.achievement-g2::before { background: var(--grade-g2); }
-.achievement-g3::before { background: var(--grade-g3); }
 #progenyView[data-display="compact"] .detail-only { display: none; }
 #progenyView[data-display="detailed"] .progeny-table { min-width: 1700px; table-layout: auto; }
 #progenyView[data-display="detailed"] .progeny-table th { width: auto; }
