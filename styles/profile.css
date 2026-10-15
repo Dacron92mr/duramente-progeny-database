@@ -1,0 +1,60 @@
+.drawer-panel { border-radius: var(--radius-panel) 0 0 var(--radius-panel); }
+.drawer-panel[data-profile="full"] { width: min(1720px, calc(100vw - 32px)); }
+.profile-controls { position: sticky; top: 46px; z-index: 2; background: var(--panel); padding: 8px 0 12px; margin-bottom: 16px; }
+.profile-modes, .profile-sections { display: flex; gap: 4px; width: fit-content; padding: 4px; border-radius: 12px; background: var(--panel-soft); }
+.profile-modes button { border: 0; border-radius: 10px; padding: 7px 16px; background: transparent; color: var(--muted); }
+.profile-modes button[aria-pressed="true"] { background: var(--panel); color: var(--ink); box-shadow: 0 1px 5px #0002; }
+.profile-modes button:hover, .profile-sections a:hover { background: var(--selection); color: var(--ink); }
+.profile-modes button:active { transform: translateY(1px); }
+.profile-sections { margin-top: 8px; }
+.profile-sections a { font-size: 12px; color: var(--ink); padding: 6px 10px; border-radius: 8px; text-decoration: none; }
+.profile-columns { display: grid; gap: 20px; align-items: start; }
+.profile-section { min-width: 0; scroll-margin-top: 190px; }
+.profile-section > h3 { font-size: 18px; margin: 0 0 14px; }
+.profile-group { border: 1px solid var(--line); border-radius: var(--radius-card); padding: 14px; margin-bottom: 14px; background: var(--panel); }
+.profile-group h4 { margin: 0 0 8px; font-size: 13px; }
+.profile-group .fact { display: grid; grid-template-columns: minmax(95px, .7fr) minmax(0, 1.3fr); gap: 12px; padding: 9px 0; margin: 0; background: transparent; }
+.profile-group .fact:last-child { border-bottom: 0; }
+.profile-group .fact > span { font-size: 12px; margin: 0; }
+.profile-group .fact strong { font-size: 13px; overflow-wrap: anywhere; min-width: 0; }
+.profile-group .fact-siblings strong { display: grid; gap: 5px; }
+.profile-section .race-section, .profile-section .stud-section { margin-top: 16px; }
+.profile-section .horse-photo { margin-top: 18px; }
+@media (min-width: 1150px) {
+  [data-profile="full"] .profile-columns { grid-template-columns: minmax(300px, .8fr) minmax(0, 1.2fr); }
+  [data-profile="full"].has-breeding .profile-columns { grid-template-columns: minmax(300px, 1fr) minmax(0, 1.15fr) minmax(0, 1fr); }
+}
+@media (max-width: 600px) {
+  .drawer-panel, .drawer-panel[data-profile="full"] { width: 100%; border-radius: 0; padding: 18px; }
+  .profile-controls { top: 44px; }
+  .profile-group .fact { grid-template-columns: 100px minmax(0, 1fr); }
+}
+.chart-context { margin: 12px 16px 16px; border-top: 1px solid var(--line); padding-top: 10px; font-size: 12px; color: var(--muted); }
+.chart-context summary { cursor: pointer; color: var(--ink); }
+.chart-context dl { display: grid; grid-template-columns: 95px minmax(0, 1fr); gap: 8px 12px; }
+.chart-context dt { font-weight: 650; }.chart-context dd { margin: 0; overflow-wrap: anywhere; }
+.profile-group dl { margin:0; }.profile-fact { display:grid; grid-template-columns:minmax(90px,.7fr) minmax(0,1.3fr);gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px; }.profile-fact:last-child {border:0;}.profile-fact dt {font-size:12px;color:var(--muted);}.profile-fact dd {margin:0;min-width:0;overflow-wrap:anywhere;font-weight:600;}
+.profile-explore { border:0;background:transparent;color:var(--accent);padding:0;min-height:32px;text-align:left;font:inherit;text-decoration:underline;text-underline-offset:3px; }.profile-siblings {padding-left:18px;font-size:13px;}.profile-siblings small {display:block;color:var(--muted);}
+.performance-study {border-top:1px solid var(--line);padding-top:16px;margin:20px 0;}.performance-study h4 {margin:0;}.performance-study p {font-size:12px;}.performance-rows {display:grid;margin-top:10px;}.performance-rows button {display:grid;grid-template-columns:1fr 1fr;gap:6px;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;padding:10px 0;background:transparent;font-size:12px;color:var(--ink);}.performance-rows button:hover {background:var(--selection);}.performance-rows button>span:last-child {grid-column:1/-1;color:var(--muted);}.rate-track {grid-column:1/-1;background:var(--neutral-track);height:5px;border-radius:4px;}.rate-track i {display:block;height:100%;background:var(--accent);border-radius:4px;}.race-section {scroll-margin-top:190px;}
+[data-profile="quick"] .profile-columns,[data-profile="quick"] .profile-sections {display:none;}[data-profile="full"] .profile-quick {display:none;}.profile-quick>.muted {font-size:12px;}.drawer-panel>.horse-photo,#horseDetail>.horse-photo {max-width:600px;}
+@media(min-width:1150px){[data-profile="full"] .detail-head {display:flex;align-items:center;justify-content:space-between;gap:24px;padding-right:0;margin-bottom:12px;}[data-profile="full"] .profile-identity-meta {text-align:right;}[data-profile="full"] .profile-identity-meta .tag-row,[data-profile="full"] .profile-identity-meta .external-links {justify-content:flex-end;}[data-profile="full"] .profile-controls {display:flex;align-items:center;gap:16px;}[data-profile="full"] .profile-sections {margin:0;}}
+
+/* A single photo node follows the selected view without reloading the image. */
+[data-photo-slot] .horse-photo { margin: 0 0 18px; max-width: none; }
+[data-photo-slot] .horse-photo img { height: 220px; width: 100%; object-fit: contain; }
+.profile-quick [data-photo-slot] .horse-photo img { height: 210px; }
+.horse-photo figcaption { flex-wrap: wrap; gap: 8px; }
+.profile-method { margin: 12px 0; color: var(--muted); font-size: 13px; }
+.profile-method summary { cursor: pointer; }
+.concept-intro { margin: 12px 0 20px; }
+.concept-intro p,.dosage-categories { line-height: 1.7; }
+.concept-intro h3 { font-size: 16px; }
+@media(max-width:600px) {
+ [data-photo-slot] .horse-photo img,.profile-quick [data-photo-slot] .horse-photo img { height: 165px; }
+ .horse-photo figcaption { font-size: 12px; }
+}
+
+.study-topics { display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-top:20px; }
+.study-topics button { border:1px solid var(--line); border-radius:8px; padding:7px 10px; color:var(--text); background:var(--paper); cursor:pointer; }
+.pedigree-panel { scroll-margin-top: 170px; }
+@media(max-width:600px) { .pedigree-panel { scroll-margin-top: 230px; } }

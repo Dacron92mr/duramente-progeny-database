@@ -1,3 +1,5 @@
 __pycache__/
 *.pyc
 sync-report.json
+node_modules/
+test-results/

@@ -32,7 +32,8 @@
   const grades=Object.freeze({G1:'#2f6fa7',G2:'#c73545',G3:'#3f8f68'});
   const research=Object.freeze({sequential:['#f5f5f7','#d8a0a6','#a51d30'],diverging:['#587f7a','#f5f1ed','#9b4266'],grades});
   const ui=Object.freeze({duramente:'#b42335',primary:'#b42335',secondary:'#d77c88',plum:'#796584',rose:'#cc7785',coral:'#cb8064',gold:'#b88736',jra:'#b42335',nar:'#43877a',overseas:'#b88736',raceLine:'#4e79a7',average:'#8b8b91',blue:'#4e79a7',teal:'#43877a',green:'#43877a',muted:'#98989f',soft:'#f5f5f7',gray:'#98989f',negative:'#796584'});
-  const api={bms,grades,ui,crops,tint,family,familyIdentity,ink,research};
+  const comparison=Object.freeze({a:'#9d3154',b:'#426db3',neutral:'#a4a4ad'});
+  const api={bms,grades,ui,comparison,crops,tint,family,familyIdentity,ink,research};
   root.DuramenteColors=api;
   if(typeof module!=='undefined')module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);

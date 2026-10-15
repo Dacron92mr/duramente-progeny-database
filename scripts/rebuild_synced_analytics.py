@@ -5,6 +5,7 @@ from pathlib import Path
 import analytics_core as core
 import build_awd_analysis
 import build_chart_insights
+import build_racecourse_population
 
 def read(path): return json.loads(path.read_text())
 def write(path, data): path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -44,6 +45,7 @@ def rebuild(root):
     write(path,preserve_extra(old,annual))
     build_awd_analysis.ROOT=root;build_awd_analysis.main()
     build_chart_insights.ROOT=root;build_chart_insights.build()
+    build_racecourse_population.build(root)
     for horse in horses: horse.pop('race_count',None)
     return len(races)
 
