@@ -1,3 +1,5 @@
+> 历史阶段记录；最终发布检查与精简代表图见 [发布检查](../release/README.md)。
+
 # 文案与历史功能复核
 
 本轮在 `codex/macos-research-interface` 修改 PR #1；不合并 main，不改变人工数据与统计结果。
@@ -39,16 +41,10 @@
 
 ## 截图与测试
 
-截图使用实际 netkeiba 图片，未另存或批量复制照片。切换逻辑另以受控图片响应验证，截图不使用测试占位图。
-
-- [Quick View 桌面](photo-quick-1440-light.png) · [Full Profile 桌面](photo-full-1440-light.png)
-- [手机 Quick View](photo-quick-390-light.png) · [手机 Full Profile](photo-full-390-light.png)
-- [Full Profile 深色](photo-full-1440-dark.png) · [手机深色](photo-quick-390-dark.png)
-- [血统与 A/B](comparison-pedigree.png) · [Dosage 介绍与参考](dosage.png)
-- [图片加载失败](photo-error.png)
+此前验证使用真实外部图片。发布准备已移除含照片的截图，保留外链功能与测试；代表性界面见 [发布检查](../release/README.md)。
 
 21 项 Node、30 项 Python、6 项既有校验脚本通过；通用浏览器 26 组、完整资料 8 组、研究探索 13 条路径通过，无脚本运行错误。
 
-新增浏览器验证：1440/390px × 深浅色 × Quick/Full；连续四次换图避免相邻重复；换模式当前 URL 与图片请求数不变；来源链接实际打开新窗口并到达对应 netkeiba 照片列表；加载失败保留链接；空目录不留大框；标题随指标更新；血统专题跳转和 Wikipedia 链接；注入一匹未知战绩时显示缺漏提醒，切换重赏指标后隐藏。结果见 [测试记录](photo-test-result.json)。
+新增浏览器验证：1440/390px × 深浅色 × Quick/Full；连续四次换图避免相邻重复；换模式当前 URL 与图片请求数不变；来源链接实际打开新窗口并到达对应 netkeiba 照片列表；加载失败保留链接；空目录不留大框；标题随指标更新；血统专题跳转和 Wikipedia 链接；注入一匹未知战绩时显示缺漏提醒，切换重赏指标后隐藏。最终结果见发布检查。
 
 限制：外部图片及照片页仍依赖 netkeiba 的可用性与访问限制；此次真实图片成功加载。手机验证为 Chromium 窄视窗，未覆盖实体 Safari。PR 尚未合并，公开 Pages 不会因此自动切换到本轮界面。

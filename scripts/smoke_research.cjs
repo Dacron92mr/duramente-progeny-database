@@ -1,6 +1,6 @@
-const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
+const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path');
 (async()=>{
-const browser=await chromium.launch({executablePath:process.env.CHROME_PATH});const page=await browser.newPage();const out=process.env.TEST_OUTPUT_DIR||'test-results';fs.mkdirSync(out,{recursive:true});const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8765/';const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('**/show_photo.php?**',r=>r.abort());
+const browser=await (process.env.TEST_BROWSER==='webkit'?webkit:chromium).launch(process.env.TEST_BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH});const page=await browser.newPage();const out=process.env.TEST_OUTPUT_DIR||'test-results';fs.mkdirSync(out,{recursive:true});const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8765/';const errors=[];page.on('pageerror',e=>errors.push(e.message));await page.route('**/show_photo.php?**',r=>r.abort());
 for(const width of [390,430])for(const theme of ['light','dark']){
  await page.setViewportSize({width,height:844});await page.goto(base+'?view=racecourse');await page.locator('#racecourseContent[data-loaded]').waitFor({timeout:30000});await page.selectOption('#themeMode',theme);
  await page.waitForFunction(()=>window.echarts.getInstanceByDom(document.querySelector('#racecourseJapanMap')).getOption().series[0].data.length>0);

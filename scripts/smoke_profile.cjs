@@ -1,9 +1,9 @@
-const { chromium } = require('playwright');
+const { chromium, webkit } = require('playwright');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 (async () => {
-  const browser = await chromium.launch({ executablePath: process.env.CHROME_PATH });
+  const browser = await (process.env.TEST_BROWSER==='webkit'?webkit:chromium).launch(process.env.TEST_BROWSER==='webkit'?{}:{ executablePath: process.env.CHROME_PATH });
   const page = await browser.newPage();
   const output = process.env.TEST_OUTPUT_DIR || 'test-results'; fs.mkdirSync(output, {recursive:true});
   const errors = []; page.on('pageerror', e => errors.push(e.message));

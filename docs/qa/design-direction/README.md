@@ -1,13 +1,15 @@
+> 历史阶段记录；最终发布检查与精简代表图见 [发布检查](../release/README.md)。
+
 # netkeiba Familiarity × macOS Refinement
 
 ## 实际参考
 
 2026-10-14/15 通过 Codex 内置浏览器访问真实手机版网页，以 390×844 视窗检查；这是桌面浏览器的窄屏网页验证，不是实体手机或 iOS Safari 测试。截图仅用于设计研究与对照，不作为本站 UI 素材。
 
-- [数据库首页](https://db.sp.netkeiba.com/)：[截图](reference/database-home.jpg)。搜索、对象分类与排行榜优先，信息密度高。
-- [Titleholder](https://db.sp.netkeiba.com/horse/2018103559/)：[资料](reference/titleholder-profile.jpg)、[赛果](reference/titleholder-racing.jpg)。姓名／英文／性别毛色在前，所属标在练马师旁；GI/GII 紧邻赛事名，名次独立呈现。
-- [Stars On Earth](https://db.sp.netkeiba.com/horse/2019104740/)：[资料](reference/stars-profile.jpg)、[血统](reference/stars-pedigree.jpg)。父、母使用不同关系色；母父从属于母系资料。
-- [Liberty Island](https://db.sp.netkeiba.com/horse/2020103656/)：[资料](reference/liberty-profile.jpg)。补充核对栗東蓝色所属标签。
+- [数据库首页](https://db.sp.netkeiba.com/)：截图（历史验证记录）。搜索、对象分类与排行榜优先，信息密度高。
+- [Titleholder](https://db.sp.netkeiba.com/horse/2018103559/)：资料（历史验证记录）、赛果（历史验证记录）。姓名／英文／性别毛色在前，所属标在练马师旁；GI/GII 紧邻赛事名，名次独立呈现。
+- [Stars On Earth](https://db.sp.netkeiba.com/horse/2019104740/)：资料（历史验证记录）、血统（历史验证记录）。父、母使用不同关系色；母父从属于母系资料。
+- [Liberty Island](https://db.sp.netkeiba.com/horse/2020103656/)：资料（历史验证记录）。补充核对栗東蓝色所属标签。
 
 实际可见元素的样式：美浦 #CC1144、栗東 #155CC1；父关系 #639FDC、母关系 #D0788C；GI #3251BC、GII #C53131，所属与等级标签约 8–10px 圆角。本站保留自己的 G1/G2/G3 色值，并以浅底深字／深底浅字适配所属和关系标签。继承资料顺序和赛马语义；改进键盘、焦点、URL 恢复、宽屏分栏、紧凑分组与主题。未复制页面代码、Logo 或照片素材。
 
@@ -15,13 +17,13 @@
 
 | 内容 | PR #1 本轮前（355916d） | 本轮更新 |
 | --- | --- | --- |
-| 桌面列表 | [原列表](../after-1440-light.png) | [统一所属与成就标签](updated/after-1440-light.png) |
-| 详情 | [原平铺字段](../detail-1440-light.png) | [有繁殖记录三栏](updated/profile-1-1440-light.png) |
-| 无繁殖记录 | 原版统一窄详情 | [两栏完整资料](updated/profile-4-1440-light.png) |
-| 手机深色 | [原详情](../detail-390-dark.png) | [血统分组](updated/profile-4-390-dark.png)、[赛绩段](updated/racing-4-390-dark.png) |
-| 分析 | [原种牡马分析](../sire-1440-light.png) | [研究口径入口](updated/sire-1440-light.png) |
+| 桌面列表 | 原列表（历史验证记录） | 统一所属与成就标签（历史验证记录） |
+| 详情 | 原平铺字段（历史验证记录） | 有繁殖记录三栏（历史验证记录） |
+| 无繁殖记录 | 原版统一窄详情 | 两栏完整资料（历史验证记录） |
+| 手机深色 | 原详情（历史验证记录） | 血统分组（历史验证记录）、赛绩段（历史验证记录） |
+| 分析 | 原种牡马分析（历史验证记录） | 研究口径入口（历史验证记录） |
 
-本轮前截图保留在 `docs/qa/`，本轮输出在 `updated/`，参考站截图在 `reference/`。Titleholder 2023 有马记念为 G1 赛事、名次 3；界面明确区分赛事等级与该场获胜。最高成就来自已有数据库字段，未从赛名推断。
+发布清理已移除批量截图和第三方参考画面，以上外部链接保留用于设计来源追溯。Titleholder 2023 有马记念为 G1 赛事、名次 3；界面明确区分赛事等级与该场获胜。最高成就来自已有数据库字段，未从赛名推断。
 
 ## 验证
 

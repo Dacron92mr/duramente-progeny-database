@@ -1,9 +1,9 @@
-const { chromium }=require('playwright');
+const { chromium, webkit }=require('playwright');
 const assert=require('node:assert/strict');
 const fs=require('node:fs');
 (async()=>{
- const out=process.env.TEST_OUTPUT_DIR||'docs/qa/content-photo';fs.mkdirSync(out,{recursive:true});
- const browser=await chromium.launch({executablePath:process.env.CHROME_PATH});
+ const out=process.env.TEST_OUTPUT_DIR||'test-results';fs.mkdirSync(out,{recursive:true});
+ const browser=await (process.env.TEST_BROWSER==='webkit'?webkit:chromium).launch(process.env.TEST_BROWSER==='webkit'?{}:{executablePath:process.env.CHROME_PATH});
  const page=await browser.newPage();const errors=[];page.on('pageerror',e=>errors.push(e.message));
  const base=process.env.TEST_BASE_URL||'http://127.0.0.1:8765/';
  // Try real, existing photo URLs for screenshots. Do not save or copy source images.
@@ -50,7 +50,7 @@ const fs=require('node:fs');
  }
  await page.route('**/horses.json*',async route=>{const response=await route.fetch();const horses=await response.json();horses[0].career_summary=null;await route.fulfill({json:horses});});
  await page.goto(base+'?view=pedigree');await page.locator('[data-study-min]').selectOption('1');
- assert(await page.locator('[data-study-missing]').isVisible());assert.match(await page.locator('[data-study-missing]').innerText(),/1 匹/);
+ assert(await page.locator('[data-study-missing]').isVisible());assert.match(await page.locator('[data-study-title]').innerText(),/已确认胜马比例/);assert.match(await page.locator('[data-study-missing]').innerText(),/1 匹/);
  await page.locator('[data-study-metric]').selectOption('graded');assert(!await page.locator('[data-study-missing]').isVisible());
  assert.deepEqual(errors,[]);console.log('PASS photo position, themes, responsive layout, 4 switches, mode state, external link, error, empty catalogue, dynamic copy and dosage reference');
  fs.writeFileSync(`${out}/photo-test-result.json`,JSON.stringify({realLoaded,success:true,switches:4,modeReloads:0,errors},null,2));await browser.close();

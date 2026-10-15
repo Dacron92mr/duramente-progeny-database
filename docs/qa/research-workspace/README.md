@@ -1,3 +1,5 @@
+> 历史阶段记录；最终发布检查与精简代表图见 [发布检查](../release/README.md)。
+
 # 研究探索重构验收
 
 评审基线：`e22d74c9ab368d7113902d533e965b1ccf4b619a`。本轮保留同一 PR 分支，不合并 main。
@@ -19,15 +21,15 @@
 
 | 内容 | 基线 | 本轮 |
 | --- | --- | --- |
-| 手机首页 | [原快捷筛选](../design-direction/updated/after-390-light.png) | [紧凑 chip](after-390-light.png) |
-| 宽屏 Profile | [原分组 DOM](../design-direction/updated/profile-1-1440-light.png) | [结构化模型与赛绩分析](profile-1-1440-light.png) |
-| 无繁殖记录 | [原两栏](../design-direction/updated/profile-4-1440-light.png) | [新两栏](profile-4-1440-light.png) |
-| 手机 Profile | [原布局](../design-direction/updated/profile-4-390-dark.png) | [身份血统](profile-4-390-dark.png)、[赛绩分析](racing-4-390-dark.png) |
-| 手机地图 390 | [原地图](../design-direction/updated/racecourse-390-light.png) | [浅色地图](map-390-light.png)、[深色地图](map-390-dark.png)、[选中详情](map-detail-390-dark.png)、[列表](map-list-390-light.png) |
-| 手机地图 430 | 无同宽基线 | [浅色](map-430-light.png)、[深色](map-430-dark.png)、[详情](map-detail-430-dark.png)、[列表](map-list-430-dark.png) |
-| 同龄世代研究 | [原分析页](../design-direction/updated/sire-1440-light.png) | [同龄比较](study-sire-1440-light.png) |
-| 母父研究 | [原血统页](../design-direction/updated/pedigree-390-dark.png) | [规模 × 表现及 A/B](study-pedigree-390-dark.png) |
-| 生产研究 | [原生产页](../design-direction/updated/production-1440-light.png) | [样本与转化](study-production-1440-light.png) |
+| 手机首页 | 原快捷筛选（历史验证记录） | 紧凑 chip（历史验证记录） |
+| 宽屏 Profile | 原分组 DOM（历史验证记录） | 结构化模型与赛绩分析（历史验证记录） |
+| 无繁殖记录 | 原两栏（历史验证记录） | 新两栏（历史验证记录） |
+| 手机 Profile | 原布局（历史验证记录） | 身份血统（历史验证记录）、赛绩分析（历史验证记录） |
+| 手机地图 390 | 原地图（历史验证记录） | 浅色地图（历史验证记录）、深色地图（历史验证记录）、选中详情（历史验证记录）、列表（历史验证记录） |
+| 手机地图 430 | 无同宽基线 | 浅色（历史验证记录）、深色（历史验证记录）、详情（历史验证记录）、列表（历史验证记录） |
+| 同龄世代研究 | 原分析页（历史验证记录） | 同龄比较（历史验证记录） |
+| 母父研究 | 原血统页（历史验证记录） | 规模 × 表现及 A/B（历史验证记录） |
+| 生产研究 | 原生产页（历史验证记录） | 样本与转化（历史验证记录） |
 
 ## 可核对的用户路径
 

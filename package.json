@@ -6,7 +6,10 @@
     "test:browser": "node scripts/smoke_ui.cjs",
     "test:profile": "node scripts/smoke_profile.cjs",
     "test:research": "node scripts/smoke_research.cjs",
-    "test:content": "node scripts/smoke_content_photo.cjs"
+    "test:content": "node scripts/smoke_content_photo.cjs",
+    "test:mobile": "node scripts/smoke_mobile_webkit.cjs"
   },
-  "devDependencies": { "playwright": "1.62.1" }
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
 }

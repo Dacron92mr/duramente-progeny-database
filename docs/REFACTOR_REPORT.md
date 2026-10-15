@@ -1,3 +1,5 @@
+> 历史阶段记录；最终发布检查与精简代表图见 [发布检查](qa/release/README.md)。
+
 # 前端重构交付与审阅记录
 
 日期：2026-10-14。界面基线提交：`71ec0da`；提交前已接入主分支 `afd4e38` 的例行 JBIS 指数更新。本次范围是现有静态网站的界面、探索体验和维护结构；研究数据没有迁移。提交位于独立审阅分支，合并到主分支并完成 Pages 部署后才会影响正式站。
@@ -50,24 +52,11 @@ CSV 导出全部当前筛选结果并保持排序，使用固定 21 列 schema�
 | 视口与主题 | 390 / 768 / 1280 / 1440px，浅色与深色；页面无横向溢出 |
 | GitHub Pages 路径 | 在隔离服务的 `/duramente-progeny-database/` 路径完整运行回归，模块、样式和 JSON 加载正常 |
 
-浏览器回归覆盖名称搜索、组合筛选、排序、显示持久化、页数、URL/历史、详情与连续查看、焦点、CSV、空结果、详细表格固定列/滚动、照片失败回退、移动导航、全部分析子页、键盘标签与图表放大。运行报告见 [qa/report.json](qa/report.json)。
+浏览器回归覆盖名称搜索、组合筛选、排序、显示持久化、页数、URL/历史、详情与连续查看、焦点、CSV、空结果、详细表格固定列/滚动、照片失败回退、移动导航、全部分析子页、键盘标签与图表放大。运行报告见 qa/report.json（历史验证记录）。
 
-## 前后截图
+## 发布验证
 
-基线和完成态均由 Chromium 在本地真实站点渲染；截图高度为 900px。`qa/` 保存四种宽度、两种主题的列表前后对照，以及详情、筛选和分析状态。
-
-| 状态 | 改造前 | 改造后 |
-| --- | --- | --- |
-| 桌面 1440 浅色 | [查看](qa/before-1440-light.png) | [查看](qa/after-1440-light.png) |
-| 桌面 1440 深色 | [查看](qa/before-1440-dark.png) | [查看](qa/after-1440-dark.png) |
-| 笔记本 1280 浅色 | [查看](qa/before-1280-light.png) | [查看](qa/after-1280-light.png) |
-| 平板 768 浅色 | [查看](qa/before-768-light.png) | [查看](qa/after-768-light.png) |
-| 手机 390 浅色 | [查看](qa/before-390-light.png) | [查看](qa/after-390-light.png) |
-| 手机 390 深色 | [查看](qa/before-390-dark.png) | [查看](qa/after-390-dark.png) |
-
-![桌面完成态](qa/after-1440-light.png)
-
-补充：[详细表格](qa/detailed-1440-light.png) · [筛选面板](qa/filters-1440-light.png) · [桌面详情](qa/detail-1440-light.png) · [手机详情](qa/detail-390-dark.png) · [血统分析深色](qa/pedigree-1440-dark.png) · [繁殖分析手机](qa/production-390-dark.png)。
+历史批量截图已精简，最新结果与代表图见 [发布检查](qa/release/README.md)。
 
 ## 文件变更清单
 
