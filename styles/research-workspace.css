@@ -5,3 +5,10 @@
 .map-tools button {border-radius:10px;}.course-horse-list {max-height:240px;overflow:auto;display:grid;gap:3px;}.course-horse-list button {text-align:left;min-height:40px;margin:0;}.study-evidence .chart-card-head {padding-right:0;}.study-evidence .chart-card-head .chart-actions {position:static;display:flex;justify-content:flex-end;margin:6px 0 0;}.study-evidence .chart-card-head h3 {padding-right:0;}
 .map-workbench button {border-radius:10px;}.map-list-rows button {border-radius:12px;}.map-detail:focus {outline:2px solid var(--accent);outline-offset:3px;}
 .map-canvas-card,.map-detail {scroll-margin-top:72px;}
+
+.study-selection {display:flex;flex-wrap:wrap;gap:8px 18px;margin:0 20px 8px;font-size:12px;}
+.selection-key {overflow-wrap:anywhere;}
+.selection-key b,.compare-token {display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;border-radius:50%;background:var(--compare-a);color:#fff;font-size:12px;font-weight:700;}
+.selection-b b,.comparison-b .compare-token {background:var(--compare-b);border-radius:5px;}
+.comparison-values section {border-top:3px solid var(--compare-a);padding-top:4px;}
+.comparison-values .comparison-b {border-top-color:var(--compare-b);}

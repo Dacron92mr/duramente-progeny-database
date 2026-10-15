@@ -11,17 +11,24 @@ export function clusterPoints(points,project,radius=30) {
   const groups=[];
   for(const point of points){
     const pixel=project(point); if(!pixel || !pixel.every(Number.isFinite)) continue;
-    const matches=groups.filter(g=>g.some(p=>Math.hypot(p.pixel[0]-pixel[0],p.pixel[1]-pixel[1])<radius));
+    const matches=groups.filter(g=>g.some(p=>Math.hypot(p.pixel[0]-pixel[0],p.pixel[1]-pixel[1])<(typeof radius==='function'?radius(p.point,point):radius)));
     const merged=[{point,pixel},...matches.flat()];
     for(const match of matches)groups.splice(groups.indexOf(match),1);
     groups.push(merged);
   }
   return groups.map(g=>g.map(p=>p.point));
 }
+/** Circle area above a visible minimum is proportional to wins; fixed all-course scale. */
+export function courseBubbleSize(wins,maxWins,min=14,max=46) {
+  const share=maxWins>0?Math.max(0,Math.min(1,Number(wins)/maxWins)):0;
+  return Math.sqrt(min*min+(max*max-min*min)*share);
+}
 export async function mountRacecourseMap(root,{rows,coordinates,canonicalName,geoJson,renderChart,onSelect,getPopulation,openHorse}) {
   let scope='All',region=innerWidth<=600?'east':'all',mode='map',selected=null,chart,signature='',frame;
   const points=rows.filter(r=>['JRA','NAR'].includes(r.jurisdiction)).map(row=>({row,name:canonicalName(row.label),coord:coordinates[canonicalName(row.label)]})).filter(p=>p.coord);
-  root.innerHTML=`<div class="map-workbench"><div class="map-tools"><div role="group" aria-label="地图赛事体系">${['All','JRA','NAR'].map(s=>`<button type="button" data-map-scope="${s}" aria-pressed="${s==='All'}">${s==='All'?'全部':s}</button>`).join('')}</div><label>区域 <select id="mapRegion">${Object.entries(MAP_REGIONS).map(([key,r])=>`<option value="${key}"${key===region?' selected':''}>${r.label}</option>`).join('')}</select></label><div role="group" aria-label="地图或列表"><button type="button" data-map-mode="map" aria-pressed="true">地图</button><button type="button" data-map-mode="list" aria-pressed="false">列表</button></div></div><div class="map-stage"><article class="chart-card map-canvas-card"><div class="chart-card-head"><h3>从地理位置探索赛马场</h3><p>拖动平移，滚轮或双指缩放；数字圆点表示相邻赛马场数量，可点选展开。</p></div><div class="map-zoom" role="group" aria-label="地图导航"><button type="button" data-map-zoom="1.6" aria-label="放大地图">＋</button><button type="button" data-map-zoom="0.625" aria-label="缩小地图">−</button><button type="button" id="mapReset">重置视图</button></div><div id="racecourseJapanMap" class="chart"></div><p class="map-key"><span>● JRA</span><span>◆ NAR</span> · 标记大小不代表胜率</p></article><aside class="map-detail" aria-label="所选赛马场" aria-live="polite"></aside></div><div class="map-list" aria-label="同步赛马场列表"><div class="map-list-heading"><h3>当前区域赛马场</h3><span data-map-count></span></div><div class="map-list-rows"></div></div></div>`;
+  const maxWins=Math.max(0,...points.map(p=>p.row.wins_starts));
+  const diameter=p=>courseBubbleSize(p.row.wins_starts,maxWins);
+  root.innerHTML=`<div class="map-workbench"><div class="map-tools"><div role="group" aria-label="地图赛事体系">${['All','JRA','NAR'].map(s=>`<button type="button" data-map-scope="${s}" aria-pressed="${s==='All'}">${s==='All'?'全部':s}</button>`).join('')}</div><label>区域 <select id="mapRegion">${Object.entries(MAP_REGIONS).map(([key,r])=>`<option value="${key}"${key===region?' selected':''}>${r.label}</option>`).join('')}</select></label><div role="group" aria-label="地图或列表"><button type="button" data-map-mode="map" aria-pressed="true">地图</button><button type="button" data-map-mode="list" aria-pressed="false">列表</button></div></div><div class="map-stage"><article class="chart-card map-canvas-card"><div class="chart-card-head"><h3>产驹胜场分布</h3><p>圆圈大小代表胜场数量；点击赛马场查看详细成绩。</p></div><div class="map-zoom" role="group" aria-label="地图导航"><button type="button" data-map-zoom="1.6" aria-label="放大地图">＋</button><button type="button" data-map-zoom="0.625" aria-label="缩小地图">−</button><button type="button" id="mapReset">重置视图</button></div><div id="racecourseJapanMap" class="chart"></div><p class="map-key">数字表示附近赛马场数量 · 点击可展开</p></article><aside class="map-detail" aria-label="所选赛马场" aria-live="polite"></aside></div><div class="map-list" aria-label="同步赛马场列表"><div class="map-list-heading"><h3>当前区域赛马场</h3><span data-map-count></span></div><div class="map-list-rows"></div></div></div>`;
   window.echarts.registerMap('japan-research-map',geoJson);
   const visible=()=>points.filter(p=>(scope==='All'||p.row.jurisdiction===scope)&&MAP_REGIONS[region].test(p.coord));
   const ratio=(a,n)=>n?`${(100*a/n).toFixed(1)}%`:'—';
@@ -55,10 +62,20 @@ export async function mountRacecourseMap(root,{rows,coordinates,canonicalName,ge
   }
   function recluster(){
     if(!chart || chart.isDisposed() || mode==='list')return;
-    const groups=clusterPoints(visible(),p=>chart.convertToPixel({geoIndex:0},[p.coord.lon,p.coord.lat]));
+    const groups=clusterPoints(visible(),p=>chart.convertToPixel({geoIndex:0},[p.coord.lon,p.coord.lat]),(a,b)=>(diameter(a)+diameter(b))/2+6);
     const next=JSON.stringify(groups.map(g=>g.map(p=>p.name)))+selected+document.documentElement.dataset.theme;
     if(next===signature)return;signature=next;
-    chart.setOption({series:[{id:'courses',data:groups.map(group=>({name:group.length>1?`${group.length} 个相邻赛马场`:group[0].name,members:group.map(p=>p.name),value:[group.reduce((n,p)=>n+p.coord.lon,0)/group.length,group.reduce((n,p)=>n+p.coord.lat,0)/group.length],symbol:group.length>1?'circle':group[0].row.jurisdiction==='NAR'?'diamond':'circle',symbolSize:group.length>1?36:26,itemStyle:{color:group.length>1?'#796584':group[0].row.jurisdiction==='JRA'?'#b42335':'#43877a',borderWidth:group.some(p=>p.name===selected)?4:2,borderColor:group.some(p=>p.name===selected)?'#efc568':'#ffffff'},label:{show:true,position:group.length>1?'inside':'right',formatter:group.length>1?String(group.length):group[0].name,fontSize:12,color:group.length>1?'#fff':getComputedStyle(document.documentElement).getPropertyValue('--ink').trim(),textBorderColor:getComputedStyle(document.documentElement).getPropertyValue('--panel').trim(),textBorderWidth:group.length>1?0:3}}))}]});
+    const css=getComputedStyle(document.documentElement),dark=document.documentElement.dataset.theme==='dark';
+    const ink=css.getPropertyValue('--ink').trim(),panel=css.getPropertyValue('--panel').trim(),muted=css.getPropertyValue('--muted').trim();
+    chart.setOption({series:[{id:'courses',data:groups.map(group=>{
+      const clustered=group.length>1,active=group.some(p=>p.name===selected);
+      return {name:clustered?`${group.length} 个赛马场`:group[0].name,members:group.map(p=>p.name),
+        kind:clustered?'cluster':'course',courseCount:group.length,wins:clustered?null:group[0].row.wins_starts,
+        value:[group.reduce((n,p)=>n+p.coord.lon,0)/group.length,group.reduce((n,p)=>n+p.coord.lat,0)/group.length],
+        symbol:'circle',symbolSize:clustered?38:diameter(group[0]),
+        itemStyle:{color:clustered?panel:dark?'#c18095':'#a65b70',opacity:1,borderWidth:active?3:2,borderColor:active?ink:clustered?muted:panel,borderType:clustered?'dashed':'solid'},
+        label:{show:true,position:clustered?'inside':'right',formatter:clustered?String(group.length):group[0].name,fontWeight:clustered||active?700:400,fontSize:12,color:ink,textBorderColor:panel,textBorderWidth:clustered?0:3}};
+    })}]});
   }
   function focusRegion(){const r=MAP_REGIONS[region];chart.setOption({geo:{center:r.center,zoom:r.zoom}});signature='';recluster();renderList();if(selected&&!visible().some(p=>p.name===selected))select(null);}
   chart=renderChart('racecourseJapanMap',{research:true,animation:false,tooltip:{show:false},geo:{map:'japan-research-map',roam:true,scaleLimit:{min:1,max:60},center:MAP_REGIONS[region].center,zoom:MAP_REGIONS[region].zoom,left:10,right:10,top:10,bottom:10,label:{show:false},emphasis:{disabled:true},itemStyle:{areaColor:'#f0f0f3',borderColor:'#a7a7af',borderWidth:.7}},series:[{id:'courses',type:'scatter',coordinateSystem:'geo',data:[],labelLayout:{hideOverlap:true},emphasis:{scale:false}}]});

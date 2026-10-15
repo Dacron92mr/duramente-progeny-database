@@ -4628,7 +4628,7 @@ async function loadHorses() {
     els.resultCount.textContent = `${Number(data.total).toLocaleString('zh-CN')} / ${Number(state.allTotal || data.total).toLocaleString('zh-CN')} 匹产驹`;
     renderActiveFilters();
     const empty = '<div class="empty-state"><strong>没有符合条件的产驹</strong><p>试试其他名称，或移除部分筛选条件。</p><button type="button" data-clear-filters>清除全部筛选</button></div>';
-    els.horseRows.innerHTML = renderProgenyRows(items, { regionBadge, lineageBadge, ownerCell }) || `<tr><td colspan="13">${empty}</td></tr>`;
+    els.horseRows.innerHTML = renderProgenyRows(items, { regionBadge, lineageBadge, ownerCell }) || `<tr><td colspan="12">${empty}</td></tr>`;
     els.horseCards.innerHTML = renderHorseCards(items) || empty;
     currentHorseIds = items.map(horse => String(horse.id));
     horseSequenceCache = { key: '', ids: [] };
@@ -4641,7 +4641,7 @@ async function loadHorses() {
     console.error('List load failed', error);
     els.resultCount.textContent = '资料暂时无法载入';
     const message = '<div class="load-error" role="alert">资料暂时无法载入。<button type="button" data-retry-list>重新载入</button></div>';
-    els.horseRows.innerHTML = `<tr><td colspan="13">${message}</td></tr>`;
+    els.horseRows.innerHTML = `<tr><td colspan="12">${message}</td></tr>`;
     els.horseCards.innerHTML = message;
   } finally {
     if (request === listRequest) { table.setAttribute('aria-busy', 'false'); els.horseCards.setAttribute('aria-busy', 'false'); }
@@ -4900,6 +4900,6 @@ init().catch((error) => {
   console.error("Database load failed", error);
   const content = document.getElementById(`${state.view}Content`);
   if (content) content.innerHTML = '<div class="load-error" role="alert">资料暂时无法载入。<button type="button" onclick="window.location.reload()">重新载入</button></div>';
-  els.horseRows.innerHTML = `<tr><td colspan="13"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
+  els.horseRows.innerHTML = `<tr><td colspan="12"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
   els.horseCards.innerHTML = `<div class="load-error">资料暂时无法载入。<button type="button" onclick="window.location.reload()">重新载入</button></div>`;
 });

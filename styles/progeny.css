@@ -38,11 +38,10 @@
 .progeny-table th:first-child { width: 31%; }
 .progeny-table th:nth-child(2) { width: 8%; }
 .progeny-table th:nth-child(3) { width: 7%; }
-.progeny-table th:nth-child(4) { width: 12%; }
 .progeny-table .money-heading { width: 17%; text-align: right; }
 .progeny-table td.money { text-align: right; white-space: nowrap; font-size: 13px; font-weight: 500; color: var(--ink); }
 .progeny-table .record-cell { min-width: 0; white-space: normal; font-size: 11px; overflow-wrap: anywhere; }
-.progeny-table .record-cell span { display: block; }
+.progeny-table .record-cell > .major-win, .progeny-table .record-cell > .muted { display: block; }
 .progeny-table tbody tr { cursor: default; }
 .progeny-table tbody tr:hover { background: var(--soft); }
 .progeny-table tbody tr:focus-within { background: var(--selection); }

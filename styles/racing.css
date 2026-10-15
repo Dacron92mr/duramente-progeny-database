@@ -17,7 +17,7 @@
 .region.miho { background: var(--affiliation-miho-bg); color: var(--affiliation-miho-ink); }
 .region.ritto { background: var(--affiliation-ritto-bg); color: var(--affiliation-ritto-ink); }
 .region.overseas { border: 1px dashed var(--muted); }
-.grade-pill { display: inline-flex; align-items: center; padding: 3px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.grade-pill { display: inline-flex; flex: 0 0 auto; vertical-align: middle; align-items: center; padding: 3px 8px; border-radius: 10px; font-size: 11px; font-weight: 700; white-space: nowrap; }
 .grade-g1 { background: var(--grade-g1, #2f6fa7); color: white; }
 .grade-g2 { background: var(--grade-g2, #c73545); color: white; }
 .grade-g3 { background: var(--grade-g3, #3f8f68); color: #101113; }
