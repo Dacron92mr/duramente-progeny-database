@@ -10,8 +10,7 @@ assert.equal(out.xAxis[0].max,100);
 assert.deepEqual(out.series[0].data[0].value,[50,0]);
 assert.equal(out.series[0].data[0].raw,raw);
 assert.equal(out.series[0].data[1].value[0],null);
-assert.equal(out.series[1].data.length,1);
-assert.deepEqual(out.series[1].data[0],[...wilson(5,10),0]);
+assert.equal(out.series.length,1);assert.equal(out.series[0].type,'bar');assert.deepEqual(out.series[0].data[0].counts,[5,10]);
 const panels=prepare('sireCropWinnersChart',{xAxis:rate.xAxis,yAxis:[{type:'value',name:'匹'},{type:'value',name:'胜马率'}],series:[rate.series[0],{...rate.series[0],yAxisIndex:1}]},ctx).option;
 assert.equal(panels.grid.length,2);assert.equal(panels.yAxis[1].max,100);assert.equal(panels.series[1].xAxisIndex,1);
 const comp=prepare('breederCropChart',{xAxis:{type:'value'},yAxis:{type:'category',data:['farm']},series:[{type:'bar',stack:'c',data:[2]},{type:'bar',stack:'c',data:[3]}]},ctx).option;
@@ -21,7 +20,7 @@ const profile=prepare('nickingSireChart',{series:[{data:[{raw:{label:'A',foals:1
 assert.deepEqual(profile.series[0].data.map(d=>d.value[2]),[2,2,2]);
 assert(rate.series[0].type==='bar');
 const graded=prepare('bmsSexPerformanceChart',{...rate,yAxis:{type:'value',name:'重赏马率'},series:[{name:'牡马',type:'bar',data:[{value:10,raw}]}]},ctx).option;
-assert.deepEqual(graded.series[1].data[0],[...wilson(1,10),0]);
+assert.equal(graded.series[0].type,'bar');assert.deepEqual(graded.series[0].data[0].counts,[1,10]);
 assert.deepEqual(panels.series[1].data[0].value,['A',50]);
 const sankey=prepare('clubBreederSankeyChart',{series:[{type:'sankey',label:{show:true,position:'inside'},data:[{name:'Farm'}]}]},ctx).option;
 assert.equal(sankey.series[0].label.show,true);

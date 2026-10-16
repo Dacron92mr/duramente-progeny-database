@@ -6,6 +6,7 @@ import analytics_core as core
 import build_awd_analysis
 import build_chart_insights
 import build_racecourse_population
+import build_black_type_siblings
 
 def read(path): return json.loads(path.read_text())
 def write(path, data): path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -33,7 +34,13 @@ def rebuild(root):
       'breeders':lambda:core.breeder_analysis(horses,races),'racecourses':lambda:core.racecourse_analysis(races),
       'distance_surface':lambda:core.race_breakdowns(races),'dam_age':lambda:core.dam_age_analysis(horses)}
     for name,build in builders.items():
-        path=data/'analytics'/f'{name}.json';write(path,preserve_extra(read(path),build()))
+        path=data/'analytics'/f'{name}.json'
+        fresh=build(); merged=preserve_extra(read(path),fresh)
+        if name=='racecourses':
+            # Surface classifications are authoritative derived buckets, not curated extras.
+            merged['table']=fresh['table']
+            merged['overseas_history']=fresh['overseas_history']
+        write(path,merged)
     path=data/'analytics/annual_progeny_performance.json';old=read(path)
     annual=core.annual_progeny_performance(horses,races)
     # Ranking-based annual earnings are a separate authoritative series, not race prize sums.
@@ -46,6 +53,7 @@ def rebuild(root):
     build_awd_analysis.ROOT=root;build_awd_analysis.main()
     build_chart_insights.ROOT=root;build_chart_insights.build()
     build_racecourse_population.build(root)
+    build_black_type_siblings.build(root)
     for horse in horses: horse.pop('race_count',None)
     return len(races)
 

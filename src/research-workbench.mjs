@@ -33,20 +33,15 @@ const config={
 };
 export function mountResearchWorkbench(container,{kind,horses,profile,asOf,renderChart,navigate,onEvidence}) {
   const cfg=config[kind];const title=container.querySelector('.analysis-title');
-  const evidence=document.createElement('details');evidence.className='research-evidence';evidence.innerHTML=`<summary>${cfg.evidence}</summary>`;
-  for(const node of [...container.children])if(node!==title)evidence.append(node);
+  const tool=document.createElement('details');tool.className='comparison-tool';
+  tool.innerHTML='<summary>比较两组 <span>按世代、血统或生产背景进一步比较</span></summary>';
   const host=document.createElement('section');host.className='research-workbench';host.dataset.workbench=kind;
-  title.after(host);container.append(evidence);
-  evidence.addEventListener('toggle',()=>{if(evidence.open)requestAnimationFrame(onEvidence);});
+  tool.append(host);title.after(tool);
+  tool.addEventListener('toggle',()=>{if(tool.open)requestAnimationFrame(update);});
   const chartId=`${kind}InvestigationChart`;
   const palette=window.DuramenteColors.comparison;
   host.style.setProperty('--compare-a',palette.a);host.style.setProperty('--compare-b',palette.b);
   host.innerHTML=`<h2>${cfg.title}</h2><p class="study-scope">${kind==='sire'?'比较各世代在相同年龄末的累计胜场；每匹马可以贡献多场胜利。':'选择分组与指标，查看产驹表现，再比较感兴趣的两组。'}</p>${kind==='pedigree'?'<div data-study-concept></div>':''}<div class="study-controls"><label>分组<select data-study-field>${cfg.fields.map(([v,l])=>`<option value="${v}">${l}</option>`).join('')}</select></label>${kind==='sire'?'<label>截至年龄<select data-study-age><option value="3">3岁末</option><option value="4">4岁末</option><option value="5">5岁末</option></select></label>':`<label>出生世代<select data-study-year><option value="">全部世代</option>${[...new Set(horses.map(h=>h.birth_year))].sort().map(y=>`<option>${y}</option>`).join('')}</select></label><label>性别<select data-study-sex><option value="">全部</option><option value="牡">牡</option><option value="牝">牝</option><option value="セン">骟</option></select></label><label>指标<select data-study-metric><option value="winners">胜马率</option><option value="graded">重赏马比例</option></select></label><label>最少产驹<select data-study-min><option value="5">5</option><option value="1">1</option><option value="10">10</option><option value="20">20</option></select></label>`}</div><p data-study-coverage class="muted"></p><div class="study-evidence"><article class="chart-card"><div class="chart-card-head"><h3 data-study-title></h3><p data-study-reading>${kind==='sire'?'横轴每100匹累计胜场；点击世代选择比较。':'每个圆点代表一组产驹。点击圆点，查看或比较对应产驹。'}</p></div><div class="study-selection" data-selection-key aria-live="polite"></div><div id="${chartId}" class="chart study-chart"></div></article><section class="study-comparison" aria-label="研究分组比较"><h3>比较两组产驹</h3><div class="study-pair"><label>比较 A<select data-compare="a"></select></label><label>比较 B<select data-compare="b"></select></label></div><div data-study-result></div></section></div><p data-study-missing class="study-limit" hidden></p><details class="study-method"><summary>统计说明</summary><p>${kind==='sire'?`截至 ${html(asOf)}，只比较完整经历所选年龄年度的世代。累计胜场除以该世代全部产驹数，再换算为每100匹；一匹马可多次获胜。`:'胜马率：生涯至少一胜的马匹，占所选组全部收录产驹的比例。资料不完整时标为「已确认胜马比例」。尚未收录战绩的马匹保留在分母中，因此不能把它们视为未胜马。重赏马比例：最高成就为 G1、G2 或 G3 的独立马匹，占该组全部产驹的比例。'}</p><p>各组的年龄、参赛机会与配种背景可能不同；比较用于观察差异，不代表单一因素的影响。查看产驹会保留当前分组、世代与性别条件。</p></details>`;
-  if(kind==='pedigree'){
-    const shortcuts=document.createElement('nav');shortcuts.className='study-topics';shortcuts.setAttribute('aria-label','血统专题');
-    shortcuts.innerHTML='<span>继续探索</span>'+[['bms','母父系'],['family','牝系'],['inbreeding','近交与配合相性'],['dosage','DP · DI · CD']].map(([key,label])=>`<button type="button" data-topic="${key}">${label} ↓</button>`).join('');
-    host.append(shortcuts);shortcuts.querySelectorAll('button').forEach(button=>button.onclick=()=>{evidence.open=true;const tab=evidence.querySelector(`[data-pedigree-section="${button.dataset.topic}"]`);tab.click();requestAnimationFrame(()=>evidence.querySelector(`#pedigree-${button.dataset.topic}`).scrollIntoView({block:'start'}));});
-  }
   let rows=[],field=cfg.fields[0][0],year='',sex='',metric='winners',ageRows=[],incomplete=false,chart=null;
   const query=selector=>host.querySelector(selector);
   function filters(key){return {[field]:key,...(year?{year}:{}),...(sex?{sex}:{})};}

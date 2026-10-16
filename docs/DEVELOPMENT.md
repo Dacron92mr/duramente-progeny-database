@@ -72,3 +72,5 @@ CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行�
 文案、照片与历史功能回归：`npm run test:content`；界面用语见 [UX_COPY.md](UX_COPY.md)。
 
 发布检查：现有浏览器套件均支持 `TEST_BROWSER=webkit`（需先安装 Playwright WebKit）。`npm run test:mobile` 使用 WebKit iPhone 13 触控模拟。所有批量截图保持在被忽略的 `test-results/` 或临时目录；不要提交第三方参考画面或照片截图。
+
+本轮信息层级与资料回归：`npm run test:post-merge`。使用现有浏览器配置环境变量；`TEST_BROWSER=webkit` 可运行 Safari 对应引擎。截图输出到 `TEST_OUTPUT_DIR`，不要整批提交临时 QA 图片。

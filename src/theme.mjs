@@ -7,6 +7,7 @@ export function createThemeController({ els, state, chartRegistry, chartThemeCol
   }
 
   function applyChartTheme(chart) {
+    if (!chart || chart.isDisposed()) return;
     const { text, muted, line, surface } = chartThemeColors();
       const option = chart.getOption();
       const axisTheme = (axes = []) => axes.map(() => ({
@@ -62,7 +63,7 @@ export function createThemeController({ els, state, chartRegistry, chartThemeCol
 
   function refreshChartTheme() {
     for (const chart of [...chartRegistry.values(), getDialogChart()].filter(Boolean)) {
-      if (!chart.getDom().getClientRects().length) continue;
+      if (chart.isDisposed() || !chart.getDom().getClientRects().length) continue;
       chart.resize();
       applyChartTheme(chart);
     }

@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Build Average Winning Distance analytics from the stored race records."""
 
+from analytics_core import effective_surface
+
 import json
 from collections import defaultdict
 from pathlib import Path
@@ -35,16 +37,17 @@ def main():
         wins = [
             race for race in detail.get("races", [])
             if race.get("finish") == 1
-            and race.get("surface") in {"芝", "ダ"}
+            and effective_surface(race) in {"芝", "ダ", "合成"}
             and isinstance(race.get("distance_m"), (int, float))
             and race.get("distance_m") > 0
         ]
         distances = [race["distance_m"] for race in wins]
-        turf = [race["distance_m"] for race in wins if race["surface"] == "芝"]
-        dirt = [race["distance_m"] for race in wins if race["surface"] == "ダ"]
+        turf = [race["distance_m"] for race in wins if effective_surface(race) == "芝"]
+        dirt = [race["distance_m"] for race in wins if effective_surface(race) == "ダ"]
         all_distances.extend(distances)
         surface_distances["芝"].extend(turf)
         surface_distances["ダ"].extend(dirt)
+        surface_distances["合成"].extend(race["distance_m"] for race in wins if effective_surface(race) == "合成")
         crop = str(horse.get("birth_year") or "")
         crop_distances[crop]["overall"].extend(distances)
         crop_distances[crop]["turf"].extend(turf)
@@ -82,6 +85,8 @@ def main():
             "turf_awd": average(surface_distances["芝"]),
             "dirt_awd": average(surface_distances["ダ"]),
             "overall_wins": len(all_distances),
+            "synthetic_wins": len(surface_distances["合成"]),
+            "synthetic_awd": average(surface_distances["合成"]),
             "turf_wins": len(surface_distances["芝"]),
             "dirt_wins": len(surface_distances["ダ"]),
         },
