@@ -23,6 +23,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
   }
 
   let gradedSiblingCatalog;
+  let careerCatalog,blackTypeCatalog;
 
   async function openHorse(id, { trigger = null, updateHistory = true, preserveFocus = false } = {}) {
     if (!id) return;
@@ -40,9 +41,11 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     updateHorseNavigation();
     if (!preserveFocus && !wasOpen) els.drawerPanel.focus();
     gradedSiblingCatalog ||= fetchStaticData("graded_siblings.json").catch(() => { gradedSiblingCatalog = null; return { dams: {} }; });
+    careerCatalog ||= fetchStaticData('post_racing_careers.json').catch(()=>{careerCatalog=null;return {horses:{}};});
+    blackTypeCatalog ||= fetchStaticData('black_type_siblings.json').catch(()=>{blackTypeCatalog=null;return {dams:{}};});
     let result;
     try { result = await Promise.all([
-      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(),
+      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(), careerCatalog, blackTypeCatalog,
     ]); } catch (error) {
       if (state.horse !== requestedId) return;
       els.detail.innerHTML = '<h2 id="drawerTitle">马匹详情</h2><div class="load-error" role="alert">详情暂时无法载入。<button type="button" id="retryDetail">重试</button></div>';
@@ -50,13 +53,23 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
       return;
     }
     if (state.horse !== requestedId) return;
-    const [data, relatives, allHorses] = result;
+    const [data, relatives, allHorses, careers, blackTypes] = result;
     const horse = data.horse;
     const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
     const vm = createProfileModel(data, siblings, allHorses);
+    const career=careers.horses[String(id)];
+    vm.postRacing=career?.netkeiba_id===horse.netkeiba_id?career.events:[];
+    vm.blackType=(blackTypes.dams[horse.dam_netkeiba_id]||[]).filter(s=>s.netkeiba_id!==horse.netkeiba_id);
     const helpers = { horseDamCell, raceRows, studSection, detailSources, damAgeText, crossItems, ownerCell };
     const profile = renderProfile(vm, helpers);
     els.detail.innerHTML = profile.html;
+    const header=els.drawerPanel.querySelector('#drawerHeader');
+    header.querySelector('.profile-controls')?.remove();
+    header.append(els.detail.querySelector('.profile-controls'));
+    header.querySelector('#drawerCompactName').textContent=horse.name;
+    els.drawerPanel.onscroll=()=>header.classList.toggle('is-scrolled',els.drawerPanel.scrollTop>100);
+    header.classList.remove('is-scrolled');
+    if(!header._resize){header._resize=new ResizeObserver(()=>els.drawerPanel.style.setProperty('--profile-header-height',`${header.offsetHeight+24}px`));header._resize.observe(header);}
     els.drawerPanel.classList.toggle('has-breeding', profile.hasBreeding);
     bindProfile(els.detail, els.drawerPanel, state, writeUrlState, vm, helpers, {
       openHorse,

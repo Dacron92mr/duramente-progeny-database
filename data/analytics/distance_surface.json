@@ -9,10 +9,10 @@
     },
     {
       "label": "芝",
-      "starts": 3762,
-      "wins": 383,
-      "win_rate": 0.1018,
-      "awd": 1884.6
+      "starts": 3758,
+      "wins": 382,
+      "win_rate": 0.1016,
+      "awd": 1885.3
     },
     {
       "label": "障",
@@ -20,6 +20,13 @@
       "wins": 10,
       "win_rate": 0.1493,
       "awd": 3022.0
+    },
+    {
+      "label": "合成",
+      "starts": 4,
+      "wins": 1,
+      "win_rate": 0.25,
+      "awd": 1600.0
     }
   ],
   "by_sex": [

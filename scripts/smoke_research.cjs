@@ -27,7 +27,7 @@ for(const width of [390,430])for(const theme of ['light','dark']){
 }
 for(const kind of ['sire','pedigree','production'])for(const width of [390,1440]){
  await page.setViewportSize({width,height:900});await page.goto(base+'?view='+kind);await page.locator('#'+kind+'Content[data-loaded]').waitFor({timeout:30000});
- const work=page.locator('[data-workbench]');if(kind==='sire'){await work.locator('[data-study-age]').selectOption('5');assert(!(await work.locator('[data-compare="a"] option').evaluateAll(options=>options.map(o=>o.value))).includes('2022'));}else{await work.locator('[data-study-year]').selectOption('2019');await work.locator('[data-study-sex]').selectOption('牝');await work.locator('[data-study-min]').selectOption('1');}
+ await page.locator('.comparison-tool > summary').click(); const work=page.locator('[data-workbench]');if(kind==='sire'){await work.locator('[data-study-age]').selectOption('5');assert(!(await work.locator('[data-compare="a"] option').evaluateAll(options=>options.map(o=>o.value))).includes('2022'));}else{await work.locator('[data-study-year]').selectOption('2019');await work.locator('[data-study-sex]').selectOption('牝');await work.locator('[data-study-min]').selectOption('1');}
  const canvas=work.locator('.study-chart');await canvas.scrollIntoViewIfNeeded();
  const datum=await canvas.evaluate(el=>{const c=window.echarts.getInstanceByDom(el),o=c.getOption(),d=o.series[0].data.at(-1),index=o.series[0].data.length-1;return {key:d.key,pixel:c.convertToPixel({seriesIndex:0},o.series[0].type==='bar'?[d.value,index]:d.value)};});
  const cb=await canvas.boundingBox();await page.mouse.click(cb.x+datum.pixel[0]-(kind==='sire'?3:0),cb.y+datum.pixel[1]);assert.equal(await work.locator('[data-compare="a"]').inputValue(),datum.key);
@@ -41,6 +41,6 @@ for(const id of [1,4]){
  for(const key of ['broodmare_sire','female_family','breeder']){if(!await page.locator('#drawer.open').count()){await page.goto(base+`?horse=${id}&profile=full`);await page.locator('.profile-columns').waitFor();}const b=page.locator(`.profile-columns [data-profile-filter="${key}"]`).first();const v=await b.getAttribute('data-value');await b.click();await page.locator('#horseRows [data-id]').first().waitFor({state:'attached'});assert.equal(new URL(page.url()).searchParams.get(key),v);assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true');}
  console.log('PASS profile source and navigation',id);
 }
-await page.goto(base+'?horse=47&profile=full');await page.locator('.profile-columns').waitFor();await page.locator('[data-related-horse="9"]').click();await page.waitForFunction(()=>document.querySelector('#drawerTitle')?.textContent==='ドゥラエレーデ');console.log('PASS verified sibling profile navigation');
+await page.goto(base+'?horse=47&profile=full');await page.locator('.profile-columns').waitFor();await page.locator('summary').filter({hasText:'原有同母重赏资料'}).click();await page.locator('[data-related-horse="9"]').last().click();await page.waitForFunction(()=>document.querySelector('#drawerTitle')?.textContent==='ドゥラエレーデ');console.log('PASS verified sibling profile navigation');
 assert.deepEqual(errors,[]);console.log('PASS no runtime errors');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

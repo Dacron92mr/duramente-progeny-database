@@ -58,3 +58,16 @@
 .study-topics button { border:1px solid var(--line); border-radius:8px; padding:7px 10px; color:var(--text); background:var(--paper); cursor:pointer; }
 .pedigree-panel { scroll-margin-top: 170px; }
 @media(max-width:600px) { .pedigree-panel { scroll-margin-top: 230px; } }
+
+/* One header owns navigation; section anchors account for its measured height. */
+.drawer-header {position:sticky;top:-28px;z-index:8;background:var(--panel);margin:-28px -28px 20px;padding:16px 28px 0;border-bottom:1px solid var(--line);}
+.drawer-toolbar {display:flex;align-items:center;gap:16px;min-height:44px;}
+.drawer-header .drawer-nav {position:static;padding:0;flex-shrink:0;}
+.drawer-header .close {position:static;float:none;order:3;margin-left:auto;flex-shrink:0;}
+#drawerCompactName {font-size:15px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:1;min-width:0;}
+.drawer-header.is-scrolled #drawerCompactName {opacity:1;}
+.drawer-header .profile-controls {position:static;margin:0;padding:10px 0;}
+.profile-section,.race-section {scroll-margin-top:var(--profile-header-height,170px);}
+@media(max-width:600px){.drawer-header {top:-18px;margin:-18px -18px 18px;padding:10px 18px 0;}.drawer-toolbar {gap:8px;flex-wrap:wrap;}#drawerCompactName {order:4;flex-basis:100%;display:block;opacity:1;}.drawer-header.is-scrolled #drawerCompactName {display:block;}.profile-sections {max-width:100%;overflow:auto;}.profile-sections a {white-space:nowrap;}.drawer-header .profile-controls {display:block;}}
+
+.post-racing article+article {border-top:1px solid var(--line);margin-top:12px;padding-top:12px;}.post-racing small {display:block;color:var(--muted);font-size:12px;}.post-racing p {font-size:13px;margin:8px 0;}.post-racing a {font-size:12px;}.profile-siblings li {margin-bottom:12px;}.profile-siblings small a {color:var(--muted);}

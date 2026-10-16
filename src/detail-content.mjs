@@ -1,3 +1,4 @@
+import {effectiveSurface} from './race-surfaces.mjs';
 import { raceLabel } from './racing-ui.mjs';
 import { escapeHtml, formatNumber, money, uiValue } from "./format.mjs";
 
@@ -42,7 +43,8 @@ export function createDetailContent({ finishBadge }) {
     return race.data?.sp || race.data?.odds_text || race.odds || "—";
   }
 
-  function raceDistanceText(value) {
+  function raceDistanceText(value, race) {
+    if (effectiveSurface(race) === "合成") return `合成跑道 ${race.distance_m ? race.distance_m+"m" : ""}`;
     const text = String(value || "");
     const match = text.match(/^(芝|ダ|障)(\d+)$/);
     if (!match) return text;
@@ -89,7 +91,7 @@ export function createDetailContent({ finishBadge }) {
                   <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
                   <td>${escapeHtml(raceClassText(race))}</td>
                   <td>${escapeHtml(race.field_size)}</td>
-                  <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
+                  <td>${escapeHtml(raceDistanceText(race.distance, race))} ${escapeHtml(race.track_condition)}</td>
                   <td>${escapeHtml(race.jockey)}</td>
                   <td>${escapeHtml(race.carried_weight)}</td>
                   <td>${escapeHtml(race.horse_number)}</td>
@@ -130,7 +132,7 @@ export function createDetailContent({ finishBadge }) {
                 <td>${escapeHtml(race.race_no)}</td>
                 <td>${finishBadge(race.finish)}</td>
                 <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
-                <td>${escapeHtml(raceDistanceText(race.distance))} ${escapeHtml(race.track_condition)}</td>
+                <td>${escapeHtml(raceDistanceText(race.distance, race))} ${escapeHtml(race.track_condition)}</td>
                 <td>${escapeHtml(race.jockey)}</td>
                 <td>${escapeHtml(race.popularity)}</td>
                 <td>${escapeHtml(race.time)}</td>

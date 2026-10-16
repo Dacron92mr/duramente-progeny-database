@@ -1,0 +1,117 @@
+{
+  "scope": "Dated verified events, not a live location register. Organizations are those reported at the event; deregistration alone is not evidence of occupation.",
+  "horses": {
+    "14": {
+      "netkeiba_id": "2018104919",
+      "name": "フォーヴィスム",
+      "sire": "ドゥラメンテ",
+      "dam": "アートプリンセス",
+      "events": [
+        {
+          "role": "leading",
+          "status": "confirmed",
+          "date": "2025-08-26",
+          "summary": "在川崎赛马场首次担任诱导马。报道记载退役后前往秦野国际乘马俱乐部接受训练。",
+          "organization": "秦野国際乗馬クラブ",
+          "location": "川崎赛马场",
+          "competition_name": null,
+          "source_url": "https://www.keiba.go.jp/furlong/2025/20250919_01/",
+          "source_name": "NAR web Furlong · 高橋華代子（2025-09-19）",
+          "verified_at": "2026-10-16"
+        }
+      ]
+    },
+    "17": {
+      "netkeiba_id": "2018104960",
+      "name": "アリーヴォ",
+      "sire": "ドゥラメンテ",
+      "dam": "エスメラルディーナ",
+      "events": [
+        {
+          "role": "planned_riding",
+          "status": "announced",
+          "date": "2024-02-22",
+          "summary": "公布预定转为乘马；当时尚未确定安置地点。",
+          "organization": null,
+          "location": null,
+          "competition_name": null,
+          "source_url": "https://www.radionikkei.jp/keiba_article/news/post_31493.html",
+          "source_name": "ラジオNIKKEI · 转述 JRA 公布",
+          "verified_at": "2026-10-16"
+        },
+        {
+          "role": "equestrian",
+          "status": "confirmed",
+          "date": "2025-09-28",
+          "summary": "参加 RRC 北海道大会盛装舞步，获第19名，得分率64.242%。",
+          "organization": "モモセライディングファーム",
+          "location": "ノーザンホースパーク",
+          "competition_name": null,
+          "source_url": "https://jouba.nrca.or.jp/rrc/2025/assets/result/D7_r7_hokkaido_result.pdf",
+          "source_name": "NRCA · RRC2025 官方成绩",
+          "verified_at": "2026-10-16"
+        }
+      ]
+    },
+    "591": {
+      "netkeiba_id": "2018105029",
+      "name": "ケルボヌール",
+      "sire": "ドゥラメンテ",
+      "dam": "ケルシャンス",
+      "events": [
+        {
+          "role": "equestrian",
+          "status": "confirmed",
+          "date": "2023-09-30",
+          "summary": "以「ポケットロケット」参赛 RRC 北海道大会障碍马术，获第13名。",
+          "organization": "マオイホースパーク",
+          "location": "ノーザンホースパーク",
+          "competition_name": "ポケットロケット",
+          "source_url": "https://jouba.nrca.or.jp/rrc/2023/assets/result/J11_r5_hokkaido_result.pdf",
+          "source_name": "NRCA · RRC2023 官方成绩",
+          "verified_at": "2026-10-16"
+        }
+      ]
+    },
+    "677": {
+      "netkeiba_id": "2021102414",
+      "name": "レッドフェルマータ",
+      "sire": "ドゥラメンテ",
+      "dam": "ジョリージョコンド",
+      "events": [
+        {
+          "role": "equestrian",
+          "status": "confirmed",
+          "date": "2024-09-22",
+          "summary": "以「ソルテ」参赛 RRC 冈山大会盛装舞步，获第12名，得分率65.151%。",
+          "organization": "ミックルファーム",
+          "location": "蒜山ホースパーク",
+          "competition_name": "ソルテ",
+          "source_url": "https://jouba.nrca.or.jp/rrc/2024/assets/result/D6_r6_okayama_result.pdf",
+          "source_name": "NRCA · RRC2024 官方成绩",
+          "verified_at": "2026-10-16"
+        }
+      ]
+    },
+    "689": {
+      "netkeiba_id": "2021105314",
+      "name": "ルージュグレイシア",
+      "sire": "ドゥラメンテ",
+      "dam": "ドライヴンスノー",
+      "events": [
+        {
+          "role": "equestrian",
+          "status": "confirmed",
+          "date": "2025-04-20",
+          "summary": "参加 RRC 栃木大会障碍马术，获并列第26名。",
+          "organization": "中島トニアシュタール",
+          "location": "那須トレーニングファーム",
+          "competition_name": null,
+          "source_url": "https://jouba.nrca.or.jp/rrc/2025/assets/result/J3_r7_tochigi_result2.pdf",
+          "source_name": "NRCA · RRC2025 官方成绩",
+          "verified_at": "2026-10-16"
+        }
+      ]
+    }
+  }
+}

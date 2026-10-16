@@ -16,7 +16,7 @@
 | `broodmare_produce_records.json`, `broodmare_parity_*`, `analytics/parity.json` | 繁殖与胎次研究资料/审计快照；不属于普通赛果周更输出 |
 | `graded_siblings.json`, `horse_photos.json`, `analytics/covering_months.json` | 对应专用 `build_*` 脚本，运行前先查看脚本输入与 `--help` |
 
-`rebuild_synced_analytics.py` 不会重建整个 `data/`。不得删掉“未被 builder 输出”的文件。本次 UI 重构未修改任何研究数据。
+`rebuild_synced_analytics.py` 不会重建整个 `data/`。不得删掉“未被 builder 输出”的文件。原始赛果和人工核验资料保留不变；有来源的分类修正在派生层应用。
 
 ## 标识、空值与名称
 
@@ -63,3 +63,12 @@
 Profile：原始记录全部保留，比例分母仅为 finish 是正整数的记录，胜为 1、前三为 1–3。按日期年份、明确场地和已知米数分组；未知单列。距离为 ≤1200、1201–1600、1601–2000、2001–2400、>2400m。取消、未完成和名次缺失不补零，不从赛事名推断等级晋升；原表可恢复全部记录。
 
 工作区比例：原生涯文字中胜数大于零的已确认胜马，或原 G1/G2/G3 分类产驹，除以当前组全部产驹。战绩未解析数另报，不解释为未知记录已失败。分组使用原字段精确值，不重写历史牧场归一化统计。同龄图直接使用 crop_development 原指标，只纳入出生年加所选年龄小于快照年份的完整年龄年度。
+
+## 退役后记录、黑体资格与场地修正
+
+- `post_racing_careers.json`：人工核验。以本地 ID 与 netkeiba ID 双重匹配；事件保存日期、角色、`confirmed` / `announced`、摘要、当时所属及来源。不从注销推定职业，不要求存在繁殖记录。
+- `black_type_siblings.json`：由 `build_black_type_siblings.py` 从带赛果链接的 JRA 平地 G1/G2/G3/L 前三名记录生成，并加入逐例核验的外部马匹。按母马 ID 关联，排除自己。并非全球完整黑体名录；原 `graded_siblings.json` 继续保留在独立折叠栏。
+- `surface_classifications.json`：合成跑道证据目录。`race-surfaces.mjs` 与 `analytics_core.effective_surface` 采用同一精确场名规则；回归测试核对两种实现与目录一致。原始场地不改写，派生记录保留 `source_surface`。
+- `racecourses.overseas_history`：精简的逐场投影，保留马匹 ID、日期、赛事、结果与链接，补充经核验的国家/地区及赛马场名。包含无正式名次记录；汇总比例仍只采用正式名次。首尔、约克原“其他”归类已修正为海外。
+
+证据、影响与覆盖边界见[本轮审计](qa/post-merge/REVIEW.md)。

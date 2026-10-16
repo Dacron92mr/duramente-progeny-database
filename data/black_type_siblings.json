@@ -1,0 +1,432 @@
+{
+  "scope": "Verified JRA flat Group/Listed top-three from sourced local records since 2007, plus individually checked additions. Not a comprehensive black-type catalogue. Legacy graded_siblings.json is retained separately.",
+  "definition_source": "https://www.tjcis.com/pdf/icsc24/FrontMaterial2024.pdf",
+  "dams": {
+    "2009105916": [
+      {
+        "name": "マスカレードボール",
+        "netkeiba_id": "2022105519",
+        "localId": 3,
+        "evidence": [
+          {
+            "date": "2024/10/19",
+            "race": "アイビーS(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202405040509/"
+          }
+        ]
+      }
+    ],
+    "000a01447f": [
+      {
+        "name": "ルガル",
+        "netkeiba_id": "2020106851",
+        "localId": 6,
+        "evidence": [
+          {
+            "date": "2023/05/07",
+            "race": "橘S(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202308010610/"
+          },
+          {
+            "date": "2023/08/27",
+            "race": "朱鷺S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202304030610/"
+          }
+        ]
+      }
+    ],
+    "2011102321": [
+      {
+        "name": "アイコンテーラー",
+        "netkeiba_id": "2018104240",
+        "localId": 8,
+        "evidence": [
+          {
+            "date": "2023/08/26",
+            "race": "BSN賞(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202304030511/"
+          },
+          {
+            "date": "2022/03/06",
+            "race": "大阪城S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202209010811/"
+          },
+          {
+            "date": "2024/02/24",
+            "race": "仁川S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202409010111/"
+          }
+        ]
+      }
+    ],
+    "000a013cf1": [
+      {
+        "name": "シングザットソング",
+        "netkeiba_id": "2020102660",
+        "localId": 20,
+        "evidence": [
+          {
+            "date": "2023/10/08",
+            "race": "夕刊フジ杯オパールS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202308020211/"
+          },
+          {
+            "date": "2023/02/04",
+            "race": "エルフィンS(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202307011110/"
+          },
+          {
+            "date": "2024/05/26",
+            "race": "安土城S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202408031210/"
+          }
+        ]
+      }
+    ],
+    "2010104227": [
+      {
+        "name": "ファイアンクランツ",
+        "netkeiba_id": "2022104720",
+        "localId": 22,
+        "evidence": [
+          {
+            "date": "2025/03/01",
+            "race": "すみれS(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202509010109/"
+          }
+        ]
+      }
+    ],
+    "000a01446f": [
+      {
+        "name": "ブレイヴロッカー",
+        "netkeiba_id": "2020102870",
+        "localId": 23,
+        "evidence": [
+          {
+            "date": "2025/05/11",
+            "race": "メトロポリタンS(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202505020610/"
+          }
+        ]
+      }
+    ],
+    "2014102696": [
+      {
+        "name": "ニシノティアモ",
+        "netkeiba_id": "2021100244",
+        "localId": 24,
+        "evidence": [
+          {
+            "date": "2024/04/28",
+            "race": "スイートピーS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202405020411/"
+          }
+        ]
+      }
+    ],
+    "000a01205d": [
+      {
+        "name": "ガイアメンテ",
+        "netkeiba_id": "2021105808",
+        "localId": 25,
+        "evidence": [
+          {
+            "date": "2026/05/24",
+            "race": "都大路S(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202608031011/"
+          },
+          {
+            "date": "2026/04/12",
+            "race": "福島民報杯(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202603010211/"
+          }
+        ]
+      }
+    ],
+    "2009106431": [
+      {
+        "name": "ヴァリアメンテ",
+        "netkeiba_id": "2018105478",
+        "localId": 27,
+        "evidence": [
+          {
+            "date": "2021/01/23",
+            "race": "若駒S(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202107010710/"
+          }
+        ]
+      }
+    ],
+    "2008106602": [
+      {
+        "name": "ケリフレッドアスク",
+        "netkeiba_id": "2022102296",
+        "localId": 29,
+        "evidence": [
+          {
+            "date": "2025/05/03",
+            "race": "スイートピーS(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202505020310/"
+          }
+        ]
+      }
+    ],
+    "2012102313": [
+      {
+        "name": "ロードアヴニール",
+        "netkeiba_id": "2020100142",
+        "localId": 30,
+        "evidence": [
+          {
+            "date": "2024/12/08",
+            "race": "師走S(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202406050410/"
+          }
+        ]
+      }
+    ],
+    "2000101626": [
+      {
+        "name": "セントカメリア",
+        "netkeiba_id": "2019105040",
+        "localId": 35,
+        "evidence": [
+          {
+            "date": "2024/05/11",
+            "race": "都大路S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202408030711/"
+          }
+        ]
+      }
+    ],
+    "2013106145": [
+      {
+        "name": "ジュンブルースカイ",
+        "netkeiba_id": "2018105085",
+        "localId": 41,
+        "evidence": [
+          {
+            "date": "2020/10/31",
+            "race": "萩S(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202008040709/"
+          }
+        ]
+      }
+    ],
+    "2015105019": [
+      {
+        "name": "マリアイリダータ",
+        "netkeiba_id": "2022105064",
+        "localId": 47,
+        "evidence": [
+          {
+            "date": "2025/05/03",
+            "race": "スイートピーS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202505020310/"
+          }
+        ]
+      }
+    ],
+    "2011105685": [
+      {
+        "name": "ギャラクシーナイト",
+        "netkeiba_id": "2019103586",
+        "localId": 48,
+        "evidence": [
+          {
+            "date": "2024/10/13",
+            "race": "オクトーバーS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202405040311/"
+          }
+        ]
+      }
+    ],
+    "000a01379e": [
+      {
+        "name": "ミッキーツインクル",
+        "netkeiba_id": "2020103487",
+        "localId": 49,
+        "evidence": [
+          {
+            "date": "2023/04/09",
+            "race": "忘れな草賞(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202309020609/"
+          }
+        ]
+      }
+    ],
+    "000a015605": [
+      {
+        "name": "ジュタ",
+        "netkeiba_id": "2022104813",
+        "localId": 54,
+        "evidence": [
+          {
+            "date": "2025/01/25",
+            "race": "若駒S(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202507010809/"
+          }
+        ]
+      }
+    ],
+    "000a011aa0": [
+      {
+        "name": "ミスタージーティー",
+        "netkeiba_id": "2021105856",
+        "localId": 58,
+        "evidence": [
+          {
+            "date": "2024/03/16",
+            "race": "若葉S(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202409010711/"
+          }
+        ]
+      }
+    ],
+    "000a013e40": [
+      {
+        "name": "レヴァンジル",
+        "netkeiba_id": "2019105315",
+        "localId": 72,
+        "evidence": [
+          {
+            "date": "2022/02/26",
+            "race": "すみれS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202209010510/"
+          }
+        ]
+      }
+    ],
+    "2011104104": [
+      {
+        "name": "アスコルターレ",
+        "netkeiba_id": "2018104885",
+        "localId": 83,
+        "evidence": [
+          {
+            "date": "2021/02/27",
+            "race": "マーガレットS(L)",
+            "grade": "L",
+            "finish": 1,
+            "source_url": "https://db.netkeiba.com/race/202109010510/"
+          }
+        ]
+      }
+    ],
+    "2015104453": [
+      {
+        "name": "ジョイエッロ",
+        "netkeiba_id": "2022105438",
+        "localId": 89,
+        "evidence": [
+          {
+            "date": "2025/05/04",
+            "race": "プリンシパルS(L)",
+            "grade": "L",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202505020411/"
+          }
+        ]
+      }
+    ],
+    "2002104181": [
+      {
+        "name": "メイショウラナキラ",
+        "netkeiba_id": "2019102820",
+        "localId": 108,
+        "evidence": [
+          {
+            "date": "2022/01/22",
+            "race": "若駒S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202207010710/"
+          }
+        ]
+      }
+    ],
+    "000a012062": [
+      {
+        "name": "エレガントルビー",
+        "netkeiba_id": "2020106012",
+        "localId": 237,
+        "evidence": [
+          {
+            "date": "2022/10/29",
+            "race": "萩S(L)",
+            "grade": "L",
+            "finish": 3,
+            "source_url": "https://db.netkeiba.com/race/202209040809/"
+          }
+        ]
+      }
+    ],
+    "000a012f78": [
+      {
+        "name": "ルージュスティリア",
+        "jbis_id": "0001312182",
+        "identity_source": "https://www.jbis.or.jp/horse/0001312182/broodmare/info/",
+        "evidence": [
+          {
+            "date": "2023/07/23",
+            "race": "中京記念",
+            "grade": "G3",
+            "finish": 3,
+            "source_url": "https://jra.jp/datafile/seiseki/replay/2023/064.html"
+          }
+        ]
+      }
+    ]
+  }
+}

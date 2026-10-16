@@ -72,38 +72,20 @@
       tooltip:{trigger:'item',formatter:p=>p.seriesType==='scatter'
         ? `${escapeHtml(p.data.raw.name)}<br>${prize(p.data.raw)}<br>点选查看产驹`
         : `${rows[p.dataIndex].crop}年 · ${rows[p.dataIndex].horses.length}匹<br>中位数 ${money(rows[p.dataIndex].box[2])}<br>中间50% ${money(rows[p.dataIndex].box[1])} – ${money(rows[p.dataIndex].box[3])}`},
-      series:[{name:'每匹产驹',type:'scatter',symbolSize:4,data:dots,itemStyle:{opacity:.55},z:3},
+      series:[{name:'较高奖金产驹',type:'scatter',symbolSize:5,data:dots.filter(d=>Number(d.raw.earnings_netkeiba??d.raw.earnings_jbis)>rows[d.value[1]].box[4]),itemStyle:{opacity:.55},z:3},
         {name:'中间50%与中位数',type:'boxplot',layout:'horizontal',boxWidth:[16,26],z:1,
           data:rows.map(r=>({value:r.box?.map(transform),itemStyle:{color:root.DuramenteColors.tint(cropColor(r.crop),.88),borderColor:cropColor(r.crop),borderWidth:2}}))}]
     })?.on('click',p=>{if(p.data?.raw?.id)openHorse(p.data.raw.id);});
   }
   function achievement(crops) {
-    const stages=[['runners','出赛'],['winners','胜马'],['two_win_horses','2胜以上'],['three_win_horses','3胜以上'],['graded_winners','重赏马'],['g1_horses','G1马']];
-    const total=crops.reduce((s,c)=>s+c.foals,0);
-    const bases=stages.map(([key])=>crops.reduce((s,c)=>s+(c[key]||0),0)/total);
-    const data=crops.flatMap((c,x)=>stages.map(([key,label],y)=>{
-      const rate=(c[key]||0)/c.foals*100, delta=rate-bases[y]*100;
-      return {value:[x,y,delta],rate,count:c[key]||0,total:c.foals,crop:c.label,stage:label,base:bases[y]*100};
-    }));
-    const extent=Math.max(1,...data.map(d=>Math.abs(d.value[2])));
-    for (const d of data) {
-      const colors=root.DuramenteColors.research.diverging, t=d.value[2]/extent;
-      const a=colors[t<0?0:1], b=colors[t<0?1:2], f=t<0?t+1:t;
-      const rgb=c=>c.slice(1).match(/../g).map(v=>parseInt(v,16));
-      const aa=rgb(a),bb=rgb(b),hex='#'+aa.map((v,i)=>Math.round(v+(bb[i]-v)*f).toString(16).padStart(2,'0')).join('');
-      d.label={color:root.DuramenteColors.ink(hex)};
-    }
-    card('sireAchievementStepChart',410);
+    const grades=[['G1','g1_horses'],['G2','g2_horses'],['G3','g3_horses']];
+    card('sireAchievementStepChart',320);
     renderChart('sireAchievementStepChart',{research:true,
-      grid:{left:12,right:12,top:20,bottom:72,containLabel:true},
-      xAxis:{type:'category',data:crops.map(c=>c.label),axisLine:{show:false},axisTick:{show:false}},
-      yAxis:categories(stages.map(s=>s[1])),
-      visualMap:{min:-extent,max:extent,orient:'horizontal',left:'center',bottom:4,itemWidth:12,itemHeight:160,
-        text:['高于全库','低于全库'],calculable:false,inRange:{color:root.DuramenteColors.research.diverging}},
-      tooltip:{formatter:p=>`${p.data.crop}年 · ${p.data.stage}<br>${p.data.rate.toFixed(1)}%（${p.data.count}/${p.data.total}）<br>全库 ${p.data.base.toFixed(1)}%<br>差值 ${p.data.value[2]>=0?'+':''}${p.data.value[2].toFixed(1)} 个百分点`},
-      series:[{type:'heatmap',data,label:{show:true,fontSize:12,formatter:p=>`${p.data.rate.toFixed(1)}%`},
-        itemStyle:{borderWidth:3,borderColor:chartThemeColors().surface}}]
-    })?.on('click',p=>{if(p.data?.crop)navigateToProgeny({year:p.data.crop});});
+      legend:{top:0},grid:{left:16,right:24,top:45,bottom:35,containLabel:true},
+      xAxis:{type:'value',name:'匹',minInterval:1},yAxis:categories(crops.map(c=>c.label+'年')),
+      tooltip:{trigger:'axis',axisPointer:{type:'shadow'},formatter:items=>items.map(p=>`${p.marker}${p.seriesName}：${p.value} 匹`).join('<br>')},
+      series:grades.map(([grade,key])=>({name:grade,type:'bar',stack:'grade',barMaxWidth:26,itemStyle:{color:root.DuramenteColors.grades[grade]},data:crops.map(c=>c[key]||0),label:{show:true,formatter:p=>p.value||''}}))
+    })?.on('click',p=>navigateToProgeny({year:crops[p.dataIndex].label,achievement:p.seriesName}));
   }
   function milestones(events) {
     const rows=[...events].filter(r=>r.race_date).sort((a,b)=>a.race_date.localeCompare(b.race_date));
@@ -125,15 +107,14 @@
   }
   function efficiency(rows, baseline) {
     card('bmsSireEfficiencyChart',Math.max(380,rows.length*35+95));
-    const data=rows.map((r,i)=>({value:[r.winner_foal_rate*100,i],raw:r,name:r.label}));
+    const data=rows.map(r=>({value:r.winner_foal_rate*100,raw:r,name:r.label}));
     const intervals=rows.map((r,i)=>[...wilson(r.winners,r.foals),i]);
     const theme=chartThemeColors();
     renderChart('bmsSireEfficiencyChart',{research:true,
       grid:{left:12,right:94,top:30,bottom:42,containLabel:true},
       xAxis:{type:'value',min:0,max:100,name:'胜马率',axisLabel:{formatter:'{value}%'}},yAxis:categories(rows.map(r=>r.label)),
       tooltip:{trigger:'item',formatter:p=>{const r=p.data.raw;if(!r)return '';const ci=wilson(r.winners,r.foals);return `${escapeHtml(r.label)}<br>${formatRate(r.winner_foal_rate)}（${r.winners}/${r.foals}）<br>95% Wilson区间 ${ci[0].toFixed(1)}–${ci[1].toFixed(1)}%<br>区间用于探索性比较，不表示因果关系。`;}},
-      series:[{type:'custom',renderItem:segment(COLORS.muted,true),silent:true,data:intervals,encode:{x:[0,1],y:2}},
-        {type:'scatter',symbolSize:9,itemStyle:{color:COLORS.duramente},data,
+      series:[{type:'bar',barMaxWidth:16,itemStyle:{color:COLORS.duramente},data,
           label:{show:true,position:'right',distance:10,color:theme.text,backgroundColor:theme.surface,padding:[2,3],formatter:p=>`${p.data.raw.winners}/${p.data.raw.foals}`},
           markLine:{silent:true,symbol:'none',label:{show:false},lineStyle:{color:COLORS.muted,type:'dashed'},data:[{xAxis:baseline*100}]}}]
     })?.on('click',p=>{if(p.data?.raw)applyBroodmareSireFilter(p.data.raw.label);});
@@ -146,11 +127,7 @@
       legend:{top:0,data:[first.owner,second.owner]},grid:{left:10,right:68,top:66,bottom:38,containLabel:true},
       xAxis:{type:'value',min:0,max:100,axisLabel:{formatter:'{value}%'}},yAxis:categories(metrics.map(m=>m.label)),
       tooltip:{trigger:'item',formatter:p=>{const m=metrics[p.dataIndex];return `${m.label}<br>${escapeHtml(first.owner)}：${first[m.key]}/${first.foals}<br>${escapeHtml(second.owner)}：${second[m.key]}/${second.foals}<br>A − B：${(value(first,m.key)-value(second,m.key)).toFixed(1)} 个百分点`;}},
-      series:[{type:'custom',silent:true,renderItem:segment(COLORS.muted),data:pairs,encode:{x:[0,1],y:2}},
-        ...[first,second].map((s,j)=>({name:s.owner,type:'scatter',symbol:j?'diamond':'circle',symbolSize:11,
-          itemStyle:{color:j?COLORS.teal:COLORS.duramente},data:metrics.map((m,i)=>[value(s,m.key),i])})),
-        {type:'scatter',symbolSize:0,silent:true,data:metrics.map((m,i)=>({value:[100,i],delta:first.foals&&second.foals?value(first,m.key)-value(second,m.key):null})),
-          label:{show:true,position:'right',distance:12,formatter:p=>p.data.delta==null?'—':`${p.data.delta>=0?'+':''}${p.data.delta.toFixed(1)}pt`}}]
+      series:[first,second].map((s,j)=>({name:s.owner,type:'bar',barMaxWidth:18,itemStyle:{color:j?COLORS.teal:COLORS.duramente},data:metrics.map(m=>value(s,m.key))}))
     });
   }
   function racecourses(rows, minStarts, target) {
@@ -161,7 +138,7 @@
     const draw=key=>{
       node.querySelector('tbody').innerHTML=[...main].sort((a,b)=>b[key]-a[key]||b.starts-a.starts).map(r=>{
         const bar=(v,max)=>`<span class="table-bar"><i style="width:${v/max*100}%"></i><b>${formatNumber(v)}</b></span>`;
-        const dot=(hits,total)=>{const rate=total?hits/total*100:null;return `<span class="table-dot" title="${hits}/${total}"><i style="left:${rate??0}%"></i><b>${rate==null?'—':rate.toFixed(1)+'%'}</b></span>`;};
+        const dot=(hits,total)=>{const rate=total?hits/total*100:null;return `<span class="table-bar" title="${hits}/${total}"><i style="width:${rate??0}%"></i><b>${rate==null?'—':rate.toFixed(1)+'%'} <small>(${hits}/${total})</small></b></span>`;};
         return `<tr><th>${escapeHtml(r.label)}<small>${escapeHtml(r.jurisdiction)}</small></th><td>${bar(r.starts,maxStarts)}</td><td>${bar(r.wins_starts,maxWins)}</td><td>${dot(r.wins_starts,r.starts)}</td><td>${dot(r.top3,r.starts)}</td></tr>`;
       }).join('');
     };

@@ -350,19 +350,19 @@
           "win_rate": 0.1325,
           "top3_rate": 0.4458
         },
-        "1200以下": {
-          "starts": 49,
-          "wins": 5,
-          "top3": 14,
-          "win_rate": 0.102,
-          "top3_rate": 0.2857
-        },
         "1400-1600": {
           "starts": 475,
           "wins": 72,
           "top3": 179,
           "win_rate": 0.1516,
           "top3_rate": 0.3768
+        },
+        "1200以下": {
+          "starts": 49,
+          "wins": 5,
+          "top3": 14,
+          "win_rate": 0.102,
+          "top3_rate": 0.2857
         }
       }
     },
@@ -1230,19 +1230,19 @@
           "win_rate": 0.2333,
           "top3_rate": 0.4667
         },
-        "1400-1600": {
-          "starts": 30,
-          "wins": 2,
-          "top3": 5,
-          "win_rate": 0.0667,
-          "top3_rate": 0.1667
-        },
         "1200以下": {
           "starts": 48,
           "wins": 2,
           "top3": 11,
           "win_rate": 0.0417,
           "top3_rate": 0.2292
+        },
+        "1400-1600": {
+          "starts": 30,
+          "wins": 2,
+          "top3": 5,
+          "win_rate": 0.0667,
+          "top3_rate": 0.1667
         },
         "2200-2400": {
           "starts": 2,
@@ -1598,14 +1598,14 @@
         }
       },
       "distance": {
-        "1200以下": {
+        "2200-2400": {
           "starts": 1,
           "wins": 0,
           "top3": 0,
           "win_rate": 0.0,
           "top3_rate": 0.0
         },
-        "2200-2400": {
+        "1200以下": {
           "starts": 1,
           "wins": 0,
           "top3": 0,
@@ -1630,7 +1630,7 @@
       "quinella_rate": 0.0,
       "top3_rate": 0.5,
       "surface": {
-        "芝": {
+        "合成": {
           "starts": 2,
           "wins": 0,
           "top3": 1,
@@ -1705,7 +1705,7 @@
       "quinella_rate": 1.0,
       "top3_rate": 1.0,
       "surface": {
-        "芝": {
+        "合成": {
           "starts": 2,
           "wins": 1,
           "top3": 2,
@@ -1928,6 +1928,40 @@
       }
     },
     {
+      "label": "Seoul",
+      "jurisdiction": "Overseas",
+      "country": "Overseas",
+      "raw_meetings": [
+        "ソウル"
+      ],
+      "starts": 1,
+      "wins_starts": 0,
+      "seconds": 0,
+      "thirds": 0,
+      "top3": 0,
+      "win_start_rate": 0.0,
+      "quinella_rate": 0.0,
+      "top3_rate": 0.0,
+      "surface": {
+        "ダ": {
+          "starts": 1,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 1,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    },
+    {
       "label": "Seymour",
       "jurisdiction": "Overseas",
       "country": "Overseas",
@@ -1996,43 +2030,9 @@
       }
     },
     {
-      "label": "ソウル",
-      "jurisdiction": "Other",
-      "country": "Unknown",
-      "raw_meetings": [
-        "ソウル"
-      ],
-      "starts": 1,
-      "wins_starts": 0,
-      "seconds": 0,
-      "thirds": 0,
-      "top3": 0,
-      "win_start_rate": 0.0,
-      "quinella_rate": 0.0,
-      "top3_rate": 0.0,
-      "surface": {
-        "ダ": {
-          "starts": 1,
-          "wins": 0,
-          "top3": 0,
-          "win_rate": 0.0,
-          "top3_rate": 0.0
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 1,
-          "wins": 0,
-          "top3": 0,
-          "win_rate": 0.0,
-          "top3_rate": 0.0
-        }
-      }
-    },
-    {
-      "label": "ヨーク",
-      "jurisdiction": "Other",
-      "country": "Unknown",
+      "label": "York",
+      "jurisdiction": "Overseas",
+      "country": "Overseas",
       "raw_meetings": [
         "ヨーク"
       ],
@@ -2362,19 +2362,19 @@
           "win_rate": 0.2333,
           "top3_rate": 0.4667
         },
-        "1400-1600": {
-          "starts": 30,
-          "wins": 2,
-          "top3": 5,
-          "win_rate": 0.0667,
-          "top3_rate": 0.1667
-        },
         "1200以下": {
           "starts": 48,
           "wins": 2,
           "top3": 11,
           "win_rate": 0.0417,
           "top3_rate": 0.2292
+        },
+        "1400-1600": {
+          "starts": 30,
+          "wins": 2,
+          "top3": 5,
+          "win_rate": 0.0667,
+          "top3_rate": 0.1667
         },
         "2200-2400": {
           "starts": 2,
@@ -2465,19 +2465,19 @@
           "win_rate": 0.1325,
           "top3_rate": 0.4458
         },
-        "1200以下": {
-          "starts": 49,
-          "wins": 5,
-          "top3": 14,
-          "win_rate": 0.102,
-          "top3_rate": 0.2857
-        },
         "1400-1600": {
           "starts": 475,
           "wins": 72,
           "top3": 179,
           "win_rate": 0.1516,
           "top3_rate": 0.3768
+        },
+        "1200以下": {
+          "starts": 49,
+          "wins": 5,
+          "top3": 14,
+          "win_rate": 0.102,
+          "top3_rate": 0.2857
         }
       }
     },
@@ -3877,19 +3877,19 @@
           "win_rate": 0.1325,
           "top3_rate": 0.4458
         },
-        "1200以下": {
-          "starts": 49,
-          "wins": 5,
-          "top3": 14,
-          "win_rate": 0.102,
-          "top3_rate": 0.2857
-        },
         "1400-1600": {
           "starts": 475,
           "wins": 72,
           "top3": 179,
           "win_rate": 0.1516,
           "top3_rate": 0.3768
+        },
+        "1200以下": {
+          "starts": 49,
+          "wins": 5,
+          "top3": 14,
+          "win_rate": 0.102,
+          "top3_rate": 0.2857
         }
       }
     },
@@ -4757,19 +4757,19 @@
           "win_rate": 0.2333,
           "top3_rate": 0.4667
         },
-        "1400-1600": {
-          "starts": 30,
-          "wins": 2,
-          "top3": 5,
-          "win_rate": 0.0667,
-          "top3_rate": 0.1667
-        },
         "1200以下": {
           "starts": 48,
           "wins": 2,
           "top3": 11,
           "win_rate": 0.0417,
           "top3_rate": 0.2292
+        },
+        "1400-1600": {
+          "starts": 30,
+          "wins": 2,
+          "top3": 5,
+          "win_rate": 0.0667,
+          "top3_rate": 0.1667
         },
         "2200-2400": {
           "starts": 2,
@@ -5344,19 +5344,19 @@
           "win_rate": 0.1325,
           "top3_rate": 0.4458
         },
-        "1200以下": {
-          "starts": 49,
-          "wins": 5,
-          "top3": 14,
-          "win_rate": 0.102,
-          "top3_rate": 0.2857
-        },
         "1400-1600": {
           "starts": 475,
           "wins": 72,
           "top3": 179,
           "win_rate": 0.1516,
           "top3_rate": 0.3768
+        },
+        "1200以下": {
+          "starts": 49,
+          "wins": 5,
+          "top3": 14,
+          "win_rate": 0.102,
+          "top3_rate": 0.2857
         }
       }
     },
@@ -6224,19 +6224,19 @@
           "win_rate": 0.2333,
           "top3_rate": 0.4667
         },
-        "1400-1600": {
-          "starts": 30,
-          "wins": 2,
-          "top3": 5,
-          "win_rate": 0.0667,
-          "top3_rate": 0.1667
-        },
         "1200以下": {
           "starts": 48,
           "wins": 2,
           "top3": 11,
           "win_rate": 0.0417,
           "top3_rate": 0.2292
+        },
+        "1400-1600": {
+          "starts": 30,
+          "wins": 2,
+          "top3": 5,
+          "win_rate": 0.0667,
+          "top3_rate": 0.1667
         },
         "2200-2400": {
           "starts": 2,
@@ -6465,5 +6465,583 @@
       }
     }
   ],
-  "method": "取消、除外和中止等没有正式名次的记录不计入胜率、连对率和前三率。"
+  "method": "取消、除外和中止等没有正式名次的记录不计入胜率、连对率和前三率。",
+  "overseas_history": [
+    {
+      "horse_id": 1,
+      "name": "タイトルホルダー",
+      "hkjc_name_zh": "領銜",
+      "race_date": "2022/10/02",
+      "race_name": "凱旋門賞(GI)",
+      "race_url": "https://db.netkeiba.com/race/2022C8100204/",
+      "race_id": "2022C8100204",
+      "source": "netkeiba",
+      "meeting": "パリロンシャン",
+      "distance_m": 2400,
+      "finish": 11,
+      "finish_note": null,
+      "course": "ParisLongchamp",
+      "country": "France",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2,
+      "name": "スターズオンアース",
+      "hkjc_name_zh": "星映天下",
+      "race_date": "2024/03/30",
+      "race_name": "ドバイシーマC(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024J0033008/",
+      "race_id": "2024J0033008",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 2410,
+      "finish": 8,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 3,
+      "name": "マスカレードボール",
+      "hkjc_name_zh": "蒙面舞會",
+      "race_date": "2026/07/25",
+      "race_name": "キングジョージ(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026A0010105/",
+      "race_id": "2026A0010105",
+      "source": "netkeiba",
+      "meeting": "アスコット",
+      "distance_m": 2390,
+      "finish": 7,
+      "finish_note": null,
+      "course": "Ascot",
+      "country": "UK",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 3,
+      "name": "マスカレードボール",
+      "hkjc_name_zh": "蒙面舞會",
+      "race_date": "2026/04/26",
+      "race_name": "QE2世C(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026H1010109/",
+      "race_id": "2026H1010109",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 2000,
+      "finish": 2,
+      "finish_note": null,
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 4,
+      "name": "リバティアイランド",
+      "hkjc_name_zh": "自由島",
+      "race_date": "2025/04/27",
+      "race_name": "QE2世C(GI)",
+      "race_url": "https://db.netkeiba.com/race/2025H1010108/",
+      "race_id": "2025H1010108",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 2000,
+      "finish": null,
+      "finish_note": "中",
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 4,
+      "name": "リバティアイランド",
+      "hkjc_name_zh": "自由島",
+      "race_date": "2025/04/05",
+      "race_name": "ドバイターフ(GI)",
+      "race_url": "https://db.netkeiba.com/race/2025J0010107/",
+      "race_id": "2025J0010107",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 1800,
+      "finish": 8,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 4,
+      "name": "リバティアイランド",
+      "hkjc_name_zh": "自由島",
+      "race_date": "2024/12/08",
+      "race_name": "香港C(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024H1120808/",
+      "race_id": "2024H1120808",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 2000,
+      "finish": 2,
+      "finish_note": null,
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 4,
+      "name": "リバティアイランド",
+      "hkjc_name_zh": "自由島",
+      "race_date": "2024/03/30",
+      "race_name": "ドバイシーマC(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024J0033008/",
+      "race_id": "2024J0033008",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 2410,
+      "finish": 3,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 5,
+      "name": "ドゥレッツァ",
+      "hkjc_name_zh": "堅韌力",
+      "race_date": "2025/04/05",
+      "race_name": "ドバイシーマクラシッ(GI)",
+      "race_url": "https://db.netkeiba.com/race/2025J0010108/",
+      "race_id": "2025J0010108",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 2410,
+      "finish": 3,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 5,
+      "name": "ドゥレッツァ",
+      "hkjc_name_zh": "堅韌力",
+      "race_date": "2024/08/21",
+      "race_name": "英インターナショナル(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024AH082104/",
+      "race_id": "2024AH082104",
+      "source": "netkeiba",
+      "meeting": "ヨーク",
+      "distance_m": 2050,
+      "finish": 5,
+      "finish_note": null,
+      "course": "York",
+      "country": "UK",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 6,
+      "name": "ルガル",
+      "hkjc_name_zh": "賢德之君",
+      "race_date": "2026/06/20",
+      "race_name": "QE2世ジュビリーS(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026A0a00603/",
+      "race_id": "2026A0a00603",
+      "source": "netkeiba",
+      "meeting": "アスコット",
+      "distance_m": 1200,
+      "finish": 8,
+      "finish_note": null,
+      "course": "Ascot",
+      "country": "UK",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 6,
+      "name": "ルガル",
+      "hkjc_name_zh": "賢德之君",
+      "race_date": "2026/03/28",
+      "race_name": "アルクオーツスプリン(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026J0010105/",
+      "race_id": "2026J0010105",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 1200,
+      "finish": 2,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 6,
+      "name": "ルガル",
+      "hkjc_name_zh": "賢德之君",
+      "race_date": "2025/04/27",
+      "race_name": "チェアマンズSP(GI)",
+      "race_url": "https://db.netkeiba.com/race/2025H1010105/",
+      "race_id": "2025H1010105",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 1200,
+      "finish": 5,
+      "finish_note": null,
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 6,
+      "name": "ルガル",
+      "hkjc_name_zh": "賢德之君",
+      "race_date": "2024/12/08",
+      "race_name": "香港スプリント(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024H1120805/",
+      "race_id": "2024H1120805",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 1200,
+      "finish": 11,
+      "finish_note": null,
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 9,
+      "name": "ドゥラエレーデ",
+      "hkjc_name_zh": "盡得真傳",
+      "race_date": "2025/09/07",
+      "race_name": "コリアC(GIII)",
+      "race_url": "https://db.netkeiba.com/race/2025K0a00208/",
+      "race_id": "2025K0a00208",
+      "source": "netkeiba",
+      "meeting": "ソウル",
+      "distance_m": 1800,
+      "finish": 5,
+      "finish_note": null,
+      "course": "Seoul",
+      "country": "South Korea",
+      "source_surface": "ダ",
+      "surface": "ダ"
+    },
+    {
+      "horse_id": 9,
+      "name": "ドゥラエレーデ",
+      "hkjc_name_zh": "盡得真傳",
+      "race_date": "2024/03/30",
+      "race_name": "ドバイワールドC(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024J0033009/",
+      "race_id": "2024J0033009",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 2000,
+      "finish": 5,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "ダ",
+      "surface": "ダ"
+    },
+    {
+      "horse_id": 9,
+      "name": "ドゥラエレーデ",
+      "hkjc_name_zh": "盡得真傳",
+      "race_date": "2023/03/25",
+      "race_name": "UAEダービー(GII)",
+      "race_url": "https://db.netkeiba.com/race/2023J0032505/",
+      "race_id": "2023J0032505",
+      "source": "netkeiba",
+      "meeting": "メイダン",
+      "distance_m": 1900,
+      "finish": 2,
+      "finish_note": null,
+      "course": "Meydan",
+      "country": "UAE",
+      "source_surface": "ダ",
+      "surface": "ダ"
+    },
+    {
+      "horse_id": 13,
+      "name": "シャンパンカラー",
+      "hkjc_name_zh": "鑽彩",
+      "race_date": "2024/04/28",
+      "race_name": "チャンピオンズマイル(GI)",
+      "race_url": "https://db.netkeiba.com/race/2024H1042807/",
+      "race_id": "2024H1042807",
+      "source": "netkeiba",
+      "meeting": "シャティン",
+      "distance_m": 1600,
+      "finish": 11,
+      "finish_note": null,
+      "course": "Sha Tin",
+      "country": "Hong Kong",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 162,
+      "name": "アロヒアリイ",
+      "hkjc_name_zh": "耀目帝",
+      "race_date": "2026/02/15",
+      "race_name": "ネオムターフC(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026P0010107/",
+      "race_id": "2026P0010107",
+      "source": "netkeiba",
+      "meeting": "キングアブドゥル",
+      "distance_m": 2100,
+      "finish": 7,
+      "finish_note": null,
+      "course": "King Abdulaziz",
+      "country": "Saudi Arabia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 162,
+      "name": "アロヒアリイ",
+      "hkjc_name_zh": "耀目帝",
+      "race_date": "2025/10/05",
+      "race_name": "凱旋門賞(GI)",
+      "race_url": "https://db.netkeiba.com/race/2025C8020105/",
+      "race_id": "2025C8020105",
+      "source": "netkeiba",
+      "meeting": "パリロンシャン",
+      "distance_m": 2400,
+      "finish": 16,
+      "finish_note": null,
+      "course": "ParisLongchamp",
+      "country": "France",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 162,
+      "name": "アロヒアリイ",
+      "hkjc_name_zh": "耀目帝",
+      "race_date": "2025/08/16",
+      "race_name": "ギヨームドルナノ賞(GII)",
+      "race_url": "https://db.netkeiba.com/race/2025C4a00605/",
+      "race_id": "2025C4a00605",
+      "source": "netkeiba",
+      "meeting": "ドーヴィル",
+      "distance_m": 2000,
+      "finish": 1,
+      "finish_note": null,
+      "course": "Deauville",
+      "country": "France",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/08/15",
+      "race_name": "Bet365 (Bm64)",
+      "race_url": "https://www.breednet.com.au/race-results/Terang/2024-08-15",
+      "race_id": "breednet-daiya-20240815-1",
+      "source": "breednet",
+      "meeting": "Terang",
+      "distance_m": 2150,
+      "finish": 6,
+      "finish_note": null,
+      "course": "Terang",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/07/30",
+      "race_name": "Sportsbet Feed (Bm58)",
+      "race_url": "https://www.breednet.com.au/race-results/Ballarat-Synthetic/2024-07-30",
+      "race_id": "breednet-daiya-20240730-2",
+      "source": "breednet",
+      "meeting": "Ballarat Synthetic",
+      "distance_m": 2100,
+      "finish": 8,
+      "finish_note": null,
+      "course": "Ballarat Synthetic",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "合成"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/07/02",
+      "race_name": "Avenel Equine Hospital (Bm58)",
+      "race_url": "https://www.breednet.com.au/race-results/Seymour/2024-07-02",
+      "race_id": "breednet-daiya-20240702-3",
+      "source": "breednet",
+      "meeting": "Seymour",
+      "distance_m": 1600,
+      "finish": 9,
+      "finish_note": null,
+      "course": "Seymour",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/06/14",
+      "race_name": "Hygain Winners Choice (Bm58)",
+      "race_url": "https://www.breednet.com.au/race-results/Ballarat-Synthetic/2024-06-14",
+      "race_id": "breednet-daiya-20240614-4",
+      "source": "breednet",
+      "meeting": "Ballarat Synthetic",
+      "distance_m": 1400,
+      "finish": 3,
+      "finish_note": null,
+      "course": "Ballarat Synthetic",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "合成"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/01/19",
+      "race_name": "Ladbrokes Owners Incentive Scheme (Bm64)",
+      "race_url": "https://www.breednet.com.au/race-results/Cranbourne/2024-01-19",
+      "race_id": "breednet-daiya-20240119-5",
+      "source": "breednet",
+      "meeting": "Cranbourne",
+      "distance_m": 2025,
+      "finish": 4,
+      "finish_note": null,
+      "course": "Cranbourne",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2024/01/01",
+      "race_name": "New Year Plate (Bm70)",
+      "race_url": "https://www.breednet.com.au/race-results/Flemington/2024-01-01",
+      "race_id": "breednet-daiya-20240101-6",
+      "source": "breednet",
+      "meeting": "Flemington",
+      "distance_m": 1700,
+      "finish": 4,
+      "finish_note": null,
+      "course": "Flemington",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2023/12/06",
+      "race_name": "Ladbrokes Bet Ticker Hcp (C1)",
+      "race_url": "https://www.breednet.com.au/race-results/Sandown-Lakeside/2023-12-06",
+      "race_id": "breednet-daiya-20231206-7",
+      "source": "breednet",
+      "meeting": "Sandown-Lakeside",
+      "distance_m": 1400,
+      "finish": 6,
+      "finish_note": null,
+      "course": "Sandown-Lakeside",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2023/06/17",
+      "race_name": "Sir Henry Bolte Hcp",
+      "race_url": "https://www.breednet.com.au/race-results/Flemington/2023-06-17",
+      "race_id": "breednet-daiya-20230617-8",
+      "source": "breednet",
+      "meeting": "Flemington",
+      "distance_m": 2000,
+      "finish": 13,
+      "finish_note": null,
+      "course": "Flemington",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2023/05/29",
+      "race_name": "Bunyip Equipment Building Mdn",
+      "race_url": "https://www.breednet.com.au/race-results/Pakenham-Synthetic/2023-05-29",
+      "race_id": "breednet-daiya-20230529-9",
+      "source": "breednet",
+      "meeting": "Pakenham Synthetic",
+      "distance_m": 1600,
+      "finish": 1,
+      "finish_note": null,
+      "course": "Pakenham Synthetic",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "合成"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2023/05/07",
+      "race_name": "Patient Paws Dog Training Mdn",
+      "race_url": "https://www.breednet.com.au/race-results/Pakenham-Synthetic/2023-05-07",
+      "race_id": "breednet-daiya-20230507-10",
+      "source": "breednet",
+      "meeting": "Pakenham Synthetic",
+      "distance_m": 1400,
+      "finish": 2,
+      "finish_note": null,
+      "course": "Pakenham Synthetic",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "合成"
+    },
+    {
+      "horse_id": 2371,
+      "name": "Daiya",
+      "hkjc_name_zh": null,
+      "race_date": "2023/04/11",
+      "race_name": "Bendigo Mazda Mdn Plate",
+      "race_url": "https://www.breednet.com.au/race-results/Bendigo/2023-04-11",
+      "race_id": "breednet-daiya-20230411-11",
+      "source": "breednet",
+      "meeting": "Bendigo",
+      "distance_m": 1300,
+      "finish": 6,
+      "finish_note": null,
+      "course": "Bendigo",
+      "country": "Australia",
+      "source_surface": "芝",
+      "surface": "芝"
+    }
+  ]
 }

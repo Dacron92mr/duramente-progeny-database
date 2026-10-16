@@ -58,7 +58,7 @@
     "three_win_rate": 0.2948,
     "start_win_rate": 0.1163,
     "avg_starts_per_runner": 16.6,
-    "turf_awd": 1884.6,
+    "turf_awd": 1885.3,
     "dirt_awd": 1459.8,
     "median_earnings": 800.0,
     "earnings_q25": 23.2,
@@ -103,7 +103,7 @@
     },
     {
       "label": "芝平均胜距",
-      "value": 1884.6,
+      "value": 1885.3,
       "unit": "m",
       "note": "胜场平均"
     },
@@ -239,7 +239,7 @@
       "three_win_rate": 0.3465,
       "start_win_rate": 0.1091,
       "avg_starts_per_runner": 20.1,
-      "turf_awd": 1876.5,
+      "turf_awd": 1879.4,
       "dirt_awd": 1460.9,
       "median_earnings": 817.0,
       "earnings_q25": 65.0,
@@ -1058,11 +1058,11 @@
     {
       "surface": "芝",
       "distance": "2200-2400",
-      "starts": 418,
+      "starts": 417,
       "wins": 50,
       "top3": 138,
-      "win_rate": 0.1196,
-      "top3_rate": 0.3301,
+      "win_rate": 0.1199,
+      "top3_rate": 0.3309,
       "small_sample": false
     },
     {
@@ -1078,11 +1078,11 @@
     {
       "surface": "芝",
       "distance": "1400-1600",
-      "starts": 968,
-      "wins": 85,
-      "top3": 226,
-      "win_rate": 0.0878,
-      "top3_rate": 0.2335,
+      "starts": 965,
+      "wins": 84,
+      "top3": 223,
+      "win_rate": 0.087,
+      "top3_rate": 0.2311,
       "small_sample": false
     },
     {
@@ -1153,6 +1153,26 @@
       "top3": 1,
       "win_rate": 0.1667,
       "top3_rate": 0.1667,
+      "small_sample": true
+    },
+    {
+      "surface": "合成",
+      "distance": "2200-2400",
+      "starts": 1,
+      "wins": 0,
+      "top3": 0,
+      "win_rate": 0.0,
+      "top3_rate": 0.0,
+      "small_sample": true
+    },
+    {
+      "surface": "合成",
+      "distance": "1400-1600",
+      "starts": 3,
+      "wins": 1,
+      "top3": 3,
+      "win_rate": 0.3333,
+      "top3_rate": 1.0,
       "small_sample": true
     }
   ],

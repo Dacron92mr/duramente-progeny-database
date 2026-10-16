@@ -1,0 +1,39 @@
+import {escapeHtml as html} from './format.mjs';
+import {raceLabel} from './racing-ui.mjs';
+export const scopeRows=(rows,scope)=>rows.filter(r=>scope==='All'||r.jurisdiction===scope);
+export const surfaceSample=(row,surface,min)=>{const s=row.surface?.[surface];return s?.starts>=min?{...s,rate:100*s.wins/s.starts}:null;};
+const rate=(wins,starts)=>starts?`${(100*wins/starts).toFixed(1)}%`:'—';
+const names={JRA:'JRA 中央',NAR:'NAR 地方',Overseas:'海外'};
+const surfaceNames={芝:'草地',ダ:'泥地',障:'障碍',合成:'合成跑道'};
+const countryNames={'South Korea':'韩国',Japan:'日本',Australia:'澳大利亚',France:'法国',UK:'英国',UAE:'阿联酋','Hong Kong':'中国香港','Saudi Arabia':'沙特阿拉伯'};
+export function mountCourseAnalysis(root,{data,renderChart,openHorse,onScope}) {
+ let scope='All',minimum=30,charts=[];
+ const dispose=()=>{for(const chart of charts)if(chart&&!chart.isDisposed()){chart.__resizeObserver?.disconnect();chart.dispose();}charts=[];};
+ const table=rows=>`<div class="table-wrap"><table class="analysis-table"><thead><tr><th>赛马场</th><th>出赛</th><th>胜场</th><th>胜率</th><th>前三率</th></tr></thead><tbody>${rows.map(r=>`<tr><th>${html(r.label)}</th><td>${r.starts}</td><td>${r.wins_starts}</td><td>${rate(r.wins_starts,r.starts)}</td><td>${rate(r.top3,r.starts)}</td></tr>`).join('')}</tbody></table></div>`;
+ function render(next=scope){
+  scope=next;dispose();root.dataset.scope=scope;onScope?.(scope);
+  const rows=scopeRows(data.table,scope).sort((a,b)=>b.starts-a.starts);
+  if(scope==='All'){
+   root.innerHTML=`<section class="jurisdiction-overview"><h2>按赛事体系探索</h2><p>各体系分别统计。选择中央、地方或海外，查看适合该类资料的分析。</p><div class="jurisdiction-cards">${Object.entries(names).map(([key,name])=>{const list=scopeRows(rows,key),starts=list.reduce((n,r)=>n+r.starts,0),wins=list.reduce((n,r)=>n+r.wins_starts,0);return `<article><h3>${name}</h3><strong>${wins} 胜</strong><p>${starts} 场正式出赛 · ${list.length} 个赛马场</p><p>胜率 ${rate(wins,starts)}</p><button data-jurisdiction="${key}">查看${name} ${key==='Overseas'?'出赛历程':'表现'} ↗</button></article>`;}).join('')}</div></section>`;
+   root.querySelectorAll('[data-jurisdiction]').forEach(b=>b.onclick=()=>render(b.dataset.jurisdiction));return;
+  }
+  if(scope==='Overseas'){
+   const groups=new Map();for(const r of [...(data.overseas_history||[])].sort((a,b)=>String(b.race_date).localeCompare(String(a.race_date)))){if(!groups.has(r.horse_id))groups.set(r.horse_id,[]);groups.get(r.horse_id).push(r);}
+   root.innerHTML=`<section class="overseas-history"><h2>海外出赛历程</h2><p>按马匹整理已收录的海外赛事，不以少量出赛排列赛马场胜率。</p>${[...groups].map(([id,races])=>`<article class="overseas-horse"><h3><button class="profile-explore" data-overseas-horse="${id}">${html(races[0].name)}${races[0].hkjc_name_zh?` · ${html(races[0].hkjc_name_zh)}`:''} ↗</button></h3><ol>${races.map(r=>`<li><time>${html(r.race_date||'日期未详')}</time><div><strong>${raceLabel(r.race_name)}</strong><small>${html(countryNames[r.country]||r.country||'地区未详')} · ${html(r.course)} · ${html(surfaceNames[r.surface]||'场地未详')}${r.distance_m?` ${r.distance_m}m`:''}</small></div><span class="race-result">${Number.isInteger(r.finish)&&r.finish>0?`第 ${r.finish} 名`:'无正式名次'}</span>${r.race_url?`<a href="${html(r.race_url)}" target="_blank" rel="noopener noreferrer">赛果 ↗</a>`:''}</li>`).join('')}</ol></article>`).join('')||'<p>暂无海外出赛记录。</p>'}<details class="study-method"><summary>场地与记录说明</summary><p>合成跑道独立于草地和泥地。Pakenham Synthetic、Ballarat Synthetic 依据 Racing Australia 场地目录修正分类，原始来源记录保留。</p><a href="https://racingaustralia.horse/FAQ/Track-Information.aspx" target="_blank" rel="noreferrer">Racing Australia 场地目录 ↗</a></details></section>`;
+   root.querySelectorAll('[data-overseas-horse]').forEach(b=>b.onclick=()=>openHorse(b.dataset.overseasHorse));return;
+  }
+  const surfaces=scope==='JRA'?['芝','ダ']:['ダ'];
+  const plotRows=rows.filter(r=>surfaces.some(s=>surfaceSample(r,s,minimum)));
+  const morioka=rows.find(r=>r.label==='盛岡')?.surface?.芝;
+  root.innerHTML=`<div class="course-analysis-heading"><h2>${names[scope]} · ${scope==='JRA'?'草地与泥地':'泥地表现'}</h2><label>排行最低出赛 <select id="courseMinStarts">${[1,10,30,100].map(n=>`<option value="${n}"${minimum===n?' selected':''}>${n} 场</option>`).join('')}</select></label></div><article class="chart-card course-comparison"><div class="chart-card-head"><h3>赛马场 · 规模与效率</h3><p>出赛与胜场分别比较，比例同时显示样本量。</p></div><div id="racecourseComparison"></div></article><article class="chart-card"><div class="chart-card-head"><h3>${scope==='JRA'?'草地 / 泥地胜率':'地方泥地胜率'}</h3><p>每个场地类型分别要求至少 ${minimum} 场；未达到门槛的比例不画成零。</p></div>${plotRows.length?'<div id="racecourseSurfaceChart" class="chart"></div>':'<p class="empty-note">当前门槛下暂无足够样本。</p>'}</article>${scope==='NAR'?`<section class="morioka-turf"><h3>盛冈草地 · 单独观察</h3><p>${morioka?`${morioka.starts} 场 · ${morioka.wins} 胜 · 胜率 ${rate(morioka.wins,morioka.starts)} · 前三 ${morioka.top3}/${morioka.starts}`:'暂无已收录草地赛果。'}</p><small>盛冈草地与地方泥地分开阅读。</small></section>`:''}<article class="chart-card"><div class="chart-card-head"><h3>距离表现</h3><label>赛马场 <select id="racecourseDistanceCourse">${rows.map(r=>`<option value="${html(r.label)}">${html(r.label)}</option>`).join('')}</select></label></div><div id="racecourseDistanceChart" class="chart"></div></article><section class="course-all-records"><h3>全部赛马场明细</h3><p>包含未达到排行门槛的小样本；百分比保留真实数值。</p>${table(rows)}</section>`;
+  window.DuramenteAnalysis.racecourses(rows,minimum,'racecourseComparison');
+  root.querySelector('#courseMinStarts').onchange=e=>{minimum=Number(e.target.value);render();};
+  if(plotRows.length){document.getElementById('racecourseSurfaceChart').style.height=`${Math.max(300,plotRows.length*(scope==='JRA'?48:30)+95)}px`;
+   charts.push(renderChart('racecourseSurfaceChart',{research:true,legend:{top:0},grid:{left:12,right:70,top:45,bottom:35,containLabel:true},xAxis:{type:'value',min:0,max:100,name:'胜率 %'},yAxis:{type:'category',inverse:true,data:plotRows.map(r=>r.label)},tooltip:{trigger:'item',formatter:p=>`${html(p.name)} · ${p.seriesName}<br>${p.value.toFixed(1)}%（${p.data.wins}/${p.data.starts}）`},series:surfaces.map((s,i)=>({name:surfaceNames[s],type:'bar',barMaxWidth:14,itemStyle:{color:i?window.DuramenteColors.ui.blue:window.DuramenteColors.ui.primary},data:plotRows.map(r=>{const v=surfaceSample(r,s,minimum);return v?{value:v.rate,wins:v.wins,starts:v.starts}:null;}),label:{show:true,position:'right',formatter:p=>p.value==null?'':`${p.data.wins}/${p.data.starts}`}}))}));
+  }
+  let distanceChart;
+  const distance=()=>{if(distanceChart&&!distanceChart.isDisposed()){distanceChart.__resizeObserver?.disconnect();distanceChart.dispose();}const course=rows.find(r=>r.label===root.querySelector('#racecourseDistanceCourse').value),buckets=Object.entries(course?.distance||{});distanceChart=renderChart('racecourseDistanceChart',{research:true,legend:{top:0},grid:{left:12,right:28,top:45,bottom:50,containLabel:true},xAxis:{type:'category',data:buckets.map(([k])=>k),axisLabel:{rotate:25}},yAxis:{type:'value',name:'场',minInterval:1},tooltip:{trigger:'axis',formatter:items=>{const r=buckets[items[0].dataIndex][1];return `${html(items[0].axisValue)}<br>${r.starts} 场 · ${r.wins} 胜<br>胜率 ${rate(r.wins,r.starts)} · 前三率 ${rate(r.top3,r.starts)}`;}},series:[{name:'出赛',type:'bar',data:buckets.map(([,r])=>r.starts),itemStyle:{color:window.DuramenteColors.ui.muted}},{name:'胜场',type:'bar',data:buckets.map(([,r])=>r.wins),itemStyle:{color:window.DuramenteColors.ui.primary}}]});charts.push(distanceChart);};
+  root.querySelector('#racecourseDistanceCourse').onchange=distance;distance();
+ }
+ return {render};
+}

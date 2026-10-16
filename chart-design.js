@@ -68,24 +68,20 @@
       option.xAxis=[{...valAxis,type:'value',min:rate?0:valAxis?.min,max:rate?100:valAxis?.max,...(rate?{interval:small?25:20}:{}),nameLocation:'middle',nameGap:30,axisLabel:{...valAxis?.axisLabel,formatter:rate?'{value}%':v=>number(v),fontSize:11,color:theme.muted},splitNumber:small?3:5}];
       option.yAxis=[{type:'category',data:categories,inverse:true,axisLine:{show:false},axisTick:{show:false},axisLabel:{color:theme.muted,fontSize:11,interval:0,width:small?94:Math.min(175,ctx.width*.29),overflow:'truncate',margin:12}}];
       option.grid={left:8,right:rate?22:58,top:56,bottom:48,containLabel:true};
-      height=Math.max(360,categories.length*42+112);
-      const extra=[];
+      height=Math.max(360,categories.length*Math.max(42,series.length*12+12)+112);
       option.series=series.map((s,j)=>{
-        const offset=type==='comparison'?(j-(series.length-1)/2)*8:0;
         const color=s.itemStyle?.color && typeof s.itemStyle.color==='string'?s.itemStyle.color:colors[j%colors.length];
-        const intervals=[];
         const data=(s.data||[]).map((datum,i)=>{
-          const d=record(datum),value=scalar(datum),counts=rate?sample(d,(s.name||'')+' '+(valAxis?.name||''),id):null;
+          const d=record(datum),rawValue=scalar(datum),value=Array.isArray(rawValue)?rawValue[horizontal?0:1]:rawValue,counts=rate?sample(d,(s.name||'')+' '+(valAxis?.name||''),id):null;
           const valid=counts ? counts[1]>0 : value!=null;
-          if(valid&&counts&&counts[0]!=null){const ci=ctx.wilson(...counts);if(ci)intervals.push([...ci,i]);}
           const style={...d.itemStyle};
           if(style.color && typeof style.color==='object')style.color=style.color.colorStops?.at(-1)?.color||color;
           return {...d,name:String(categories[i]),category:categories[i],originalValue:valid?value:null,counts,value:[valid?value:null,i],itemStyle:style};
         });
-        if(intervals.length)extra.push({type:'custom',silent:true,renderItem:segment(type==='dot'?theme.muted:color,offset),encode:{x:[0,1],y:2},data:intervals});
-        return {...s,type:'scatter',symbol:['circle','diamond','rect','triangle'][j%4],symbolSize:9,symbolOffset:[0,offset],itemStyle:{...s.itemStyle,color:typeof s.itemStyle?.color==='object'?color:s.itemStyle?.color||color,opacity:.95},encode:{x:0,y:1},data,
+
+        return {...s,type:'bar',barMaxWidth:16,barGap:'20%',itemStyle:{...s.itemStyle,color:typeof s.itemStyle?.color==='object'?color:s.itemStyle?.color||color,opacity:.95},encode:{x:0,y:1},data,
           markPoint:undefined,label:{show:type==='dot'&&!rate,position:'right',distance:8,color:theme.text,fontSize:11,formatter:p=>number(p.data.originalValue)},markLine:s.markLine?{...s.markLine,data:s.markLine.data?.map(m=>!horizontal&&m.yAxis!=null?{...m,xAxis:m.yAxis,yAxis:undefined}:m)}:undefined};
-      }).concat(extra);
+      });
       option.tooltip={trigger:'item',confine:true,formatter:p=>{
         if(!p.data||p.seriesType==='custom')return '';
         const d=p.data,pp=original(p);
@@ -94,7 +90,7 @@
         if(d.counts){const ci=ctx.wilson(...d.counts);text+=`<br>样本 ${d.counts[0]}/${d.counts[1]}${ci?` · 95% Wilson区间 ${ci.map(number).join('–')}%`:''}`;}
         return text;
       }};
-      note=rate?'点表示比例，细线表示估计范围（95%置信区间）。':type==='comparison'?'同一行比较同一对象；用点的位置读取差异，点选查看数值。':'按位置比较数值；点选查看更多。';
+      note=rate?'横条表示比例；点选查看实际匹数与样本量。':type==='comparison'?'同一行比较同一对象，各组使用相同标尺。':'条长表示数值；点选查看更多。';
       if(id==='sireAwdDumbbellChart')note='每行一个世代，比较整体、草地与泥地的平均胜距；横轴为米。';
     } else if(type==='panels') {
       let groups=option.yAxis.map((axis,i)=>({axis,index:i,series:series.filter(s=>(s.yAxisIndex||0)===i)}));
@@ -108,7 +104,7 @@
         option.xAxis.push({...xa,gridIndex:i,axisLabel:{...xa?.axisLabel,rotate:0,fontSize:10,hideOverlap:true,...(id==='racecourseDistanceChart'?{interval:0,formatter:v=>String(v).replace('-', '\n–').replace('以下','\n以下').replace('以上','\n以上')}:{} )},axisLine:{show:false},axisTick:{show:false},name:'',boundaryGap:true});
         const rate=/%|率/.test(g.axis.name||'')||g.series.some(s=>/率/.test(s.name||''));
         option.yAxis.push({...g.axis,gridIndex:i,position:'left',min:0,...(rate?{max:100,interval:25}:{}),name:g.axis.name||g.series.map(s=>s.name).join(' / '),nameGap:13,splitNumber:3,nameTextStyle:{color:theme.muted,fontSize:11},axisLabel:{color:theme.muted,fontSize:10,formatter:rate?'{value}%':v=>number(v)},splitLine:{lineStyle:{color:theme.line,type:'dashed',opacity:.55}}});
-        g.series.forEach(s=>option.series.push({...s,xAxisIndex:i,yAxisIndex:i,type:rate?'scatter':s.type,symbolSize:8,encode:rate?{x:0,y:1}:undefined,
+        g.series.forEach(s=>option.series.push({...s,xAxisIndex:i,yAxisIndex:i,type:rate?'bar':s.type,symbolSize:8,encode:rate?{x:0,y:1}:undefined,
           data:rate?(s.data||[]).map((datum,k)=>{const d=record(datum),v=id==='racecourseDistanceChart'&&s.name==='前三率'&&!scalar(input.series[0].data[k])?null:scalar(datum);return {...d,name:String(xa.data[k]),category:xa.data[k],originalValue:v,value:[String(xa.data[k]),v]};}):s.data,label:{show:false}}));
       });
       option.legend=groups.some(g=>g.series.length>1)?{top:0,left:0,type:'scroll',textStyle:{color:theme.text,fontSize:11}}:undefined;
