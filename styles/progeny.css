@@ -105,3 +105,12 @@
   .page-size { flex-basis: 100%; justify-content: center; }
   .page-size select, .pager button { min-height: 44px; }
 }
+
+/* Compact rows remain readable while exposing more horses per screen. */
+.quick-filters {gap:6px;}
+.quick-filters button {font-size:12px;}
+.quick-filters button span {min-height:32px;display:inline-flex;align-items:center;padding:4px 12px;}
+#progenyView[data-display="compact"] .progeny-table td {padding:7px 12px;height:70px;}
+#progenyView[data-display="compact"] .horse-column {position:sticky;padding-right:65px;}
+#progenyView[data-display="compact"] .compact-affiliation {position:absolute;right:12px;top:24px;}
+#progenyView[data-display="compact"] .progeny-table-wrap {max-height:calc(100dvh - 350px);}

@@ -39,17 +39,17 @@ const fs=require('node:fs');
  await page.goto(base+'?horse=1');await page.locator('#horsePhoto .photo-empty').waitFor();assert.match(await page.locator('#horsePhoto').innerText(),/暂时无法加载/);assert(await page.locator('#horsePhoto a').isVisible());await page.screenshot({path:`${out}/photo-error.png`});
  await page.route('**/horse_photos.json*',r=>r.fulfill({json:{horses:{}}}));await page.goto(base+'?horse=1');await page.locator('#horsePhoto .photo-empty').waitFor();assert.match(await page.locator('#horsePhoto').innerText(),/暂无/);assert((await page.locator('#horsePhoto').boundingBox()).height<100);
  for(const view of ['sire','pedigree','production']){
-  await page.setViewportSize({width:1440,height:1000});await page.goto(base+`?view=${view}`);await page.locator('[data-study-result]').waitFor();
+  await page.setViewportSize({width:1440,height:1000});await page.goto(base+`?view=${view}`);await page.locator('.comparison-tool > summary').click();await page.locator('[data-study-result]').waitFor();
   assert(!/\.json|战绩未解析|A − B/.test(await page.locator('.research-workbench').innerText()));
   if(view!=='sire'){await page.locator('[data-study-metric]').selectOption('graded');assert.match(await page.locator('[data-study-title]').innerText(),/重赏马比例/);await page.locator('[data-study-metric]').selectOption('winners');}
   await page.screenshot({path:`${out}/comparison-${view}.png`});
   if(view==='pedigree'){
-   await page.locator('[data-topic="dosage"]').click();await page.locator('#pedigree-dosage').evaluate(el=>el.scrollIntoView({block:'start'}));
+   await page.locator('[data-pedigree-section="dosage"]').click();await page.locator('#pedigree-dosage').evaluate(el=>el.scrollIntoView({block:'start'}));
    assert(await page.locator('#pedigree-dosage a[href="https://en.wikipedia.org/wiki/Dosage_Index"]').isVisible());assert.match(await page.locator('#pedigree-dosage').innerText(),/Brilliant.*Professional/s);await page.screenshot({path:`${out}/dosage.png`});
   }
  }
  await page.route('**/horses.json*',async route=>{const response=await route.fetch();const horses=await response.json();horses[0].career_summary=null;await route.fulfill({json:horses});});
- await page.goto(base+'?view=pedigree');await page.locator('[data-study-min]').selectOption('1');
+ await page.goto(base+'?view=pedigree');await page.locator('.comparison-tool > summary').click();await page.locator('[data-study-min]').selectOption('1');
  assert(await page.locator('[data-study-missing]').isVisible());assert.match(await page.locator('[data-study-title]').innerText(),/已确认胜马比例/);assert.match(await page.locator('[data-study-missing]').innerText(),/1 匹/);
  await page.locator('[data-study-metric]').selectOption('graded');assert(!await page.locator('[data-study-missing]').isVisible());
  assert.deepEqual(errors,[]);console.log('PASS photo position, themes, responsive layout, 4 switches, mode state, external link, error, empty catalogue, dynamic copy and dosage reference');

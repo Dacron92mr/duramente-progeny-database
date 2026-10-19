@@ -19,7 +19,7 @@
       document.documentElement.dataset.themePreference = preference;
     })();
   </script>
-  <link rel="stylesheet" href="style.css?v=20261014-interface">
+  <link rel="stylesheet" href="style.css?v=20261016-analysis">
 </head>
 <body>
   <a class="skip-link" href="#progenyView">跳至内容</a>
@@ -170,11 +170,14 @@
     </aside>
 
     <section class="content">
-      <div class="toolbar">
-        <div>
-          <h2>产驹列表</h2>
-          <p id="resultCount" role="status" aria-live="polite">正在载入产驹资料…</p>
+      <div id="discoveryOverview"></div>
+      <div class="explorer-controls">
+        <div class="search-field">
+          <span class="search-symbol" aria-hidden="true">⌕</span>
+          <label class="mobile-search"><span class="sr-only">搜索产驹</span><input id="mobileSearch" type="search" placeholder="日文、英文、香港译名或相关资料" aria-keyshortcuts="Meta+K Control+K"></label>
+          <button id="clearSearch" type="button" aria-label="清除搜索" hidden>×</button><kbd aria-hidden="true">⌘ K</kbd>
         </div>
+        <button id="filterOpen" class="filter-open" type="button" aria-controls="filtersPanel" aria-expanded="false">筛选 <span id="filterCountBadge">0</span></button>
         <div class="toolbar-actions">
           <select id="sort" aria-label="排序依据">
             <option value="earnings_netkeiba">奖金</option>
@@ -184,27 +187,24 @@
           <button id="direction" type="button" aria-label="排序方向">↓</button>
         </div>
       </div>
-
-      <div class="explorer-controls">
-        <div class="search-field">
-          <span class="search-symbol" aria-hidden="true">⌕</span>
-          <label class="mobile-search"><span class="sr-only">搜索产驹</span><input id="mobileSearch" type="search" placeholder="日文、英文、香港译名或相关资料" aria-keyshortcuts="Meta+K Control+K"></label>
-          <button id="clearSearch" type="button" aria-label="清除搜索" hidden>×</button><kbd aria-hidden="true">⌘ K</kbd>
-        </div>
-        <button id="filterOpen" class="filter-open" type="button" aria-controls="filtersPanel" aria-expanded="false">筛选 <span id="filterCountBadge">0</span></button>
-        <div class="display-modes" role="group" aria-label="列表显示模式"><button type="button" data-display-mode="compact" aria-pressed="true">紧凑</button><button type="button" data-display-mode="detailed" aria-pressed="false">详细</button></div>
-        <button id="exportCsv" class="export-button" type="button" title="导出全部筛选结果，包含固定完整字段">导出 CSV</button>
-      </div>
       <div class="quick-filters" role="group" aria-label="快捷筛选">
         <button type="button" data-quick="" aria-pressed="true"><span>全部产驹</span></button>
         <button type="button" data-quick="g1" aria-pressed="false"><span>G1 冠军</span></button>
-        <button type="button" data-quick="graded" aria-pressed="false"><span>G1–G3 冠军</span></button>
+        <button type="button" data-quick="graded" aria-pressed="false"><span>重赏冠军（含 G1）</span></button>
         <button type="button" data-quick="hkjc" aria-pressed="false"><span>有香港译名</span></button>
         <button type="button" data-quick="breeding" aria-pressed="false"><span>有繁殖记录</span></button>
       </div>
-      <p class="classification-note">成就沿用数据库原分类；中央、地方交流及海外赛事的具体级别见马匹详情。</p>
+      <details class="classification-note"><summary>等级分类说明</summary><p>快捷筛选沿用数据库的 G1、G2、G3 成就分类；中央、地方交流及海外赛事的具体级别见马匹详情。</p></details>
       <div class="active-filters" id="activeFilters" aria-live="polite"></div>
 
+      <div class="toolbar">
+        <div>
+          <h2>产驹列表</h2>
+          <p id="resultCount" role="status" aria-live="polite">正在载入产驹资料…</p>
+        </div>
+        <div class="table-tools">        <div class="display-modes" role="group" aria-label="列表显示模式"><button type="button" data-display-mode="compact" aria-pressed="true">紧凑</button><button type="button" data-display-mode="detailed" aria-pressed="false">详细</button></div>
+        <button id="exportCsv" class="export-button" type="button" title="导出全部筛选结果，包含固定完整字段">导出 CSV</button></div>
+      </div>
       <div class="table-wrap progeny-table-wrap" tabindex="0" role="region" aria-label="产驹数据表，可滚动">
         <table class="progeny-table">
           <caption class="sr-only">产驹资料；奖金单位为万日元，空缺以破折号显示。</caption>
@@ -258,11 +258,13 @@
   <div class="drawer" id="drawer" aria-hidden="true">
     <button class="drawer-backdrop" id="closeBackdrop" type="button" aria-label="关闭详情"></button>
     <aside class="drawer-panel" id="drawerPanel" role="dialog" aria-modal="true" aria-labelledby="drawerTitle" tabindex="-1">
+      <header id="drawerHeader" class="drawer-header"><div class="drawer-toolbar">
       <button class="icon-button close" id="closeDrawer" type="button" aria-label="关闭详情">×</button>
       <div class="drawer-nav" aria-label="产驹连续浏览">
         <button id="previousHorse" type="button">← 前一匹</button>
         <button id="nextHorse" type="button">后一匹 →</button>
       </div>
+      <strong id="drawerCompactName"></strong></div></header>
       <div id="detail"></div>
     </aside>
   </div>
@@ -270,10 +272,10 @@
   <script src="chart-animation.js?v=20260907b"></script>
   <script>window.STATIC_DATA_BASE = "data"; window.STATIC_DATA_VERSION = "20261019T062859";</script>
   <script src="chart-colors.js?v=20261007-semantic"></script>
-  <script src="chart-analysis.js?v=20261014-interface"></script>
-  <script src="chart-design.js?v=20261007-semantic"></script>
+  <script src="chart-analysis.js?v=20261016-analysis"></script>
+  <script src="chart-design.js?v=20261016-analysis"></script>
   <script src="horse-relatives.js?v=20261007-semantic"></script>
-  <script type="module" src="app.js?v=20261014-interface"></script>
+  <script type="module" src="app.js?v=20261019-discovery"></script>
   <div id="actionStatus" class="sr-only" role="status" aria-live="polite"></div>
 </body>
 </html>

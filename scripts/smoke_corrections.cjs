@@ -22,7 +22,7 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
     await page.screenshot({path:`${out}/list-${mode}.png`});
    }
   }
-  await page.goto(base+'?view=pedigree');await page.locator('[data-study-result]').waitFor();await page.selectOption('#themeMode',theme);
+  await page.goto(base+'?view=pedigree');await page.locator('.comparison-tool > summary').click();await page.locator('[data-study-result]').waitFor();await page.selectOption('#themeMode',theme);
   const chartState=()=>page.evaluate(()=>window.echarts.getInstanceByDom(document.querySelector('#pedigreeInvestigationChart')).getOption());
   const state=await chartState(),groups=state.series.find(s=>s.id==='groups').data;
   const coincident=groups.find(d=>groups.some(other=>other.key!==d.key&&String(other.value)===String(d.value)));

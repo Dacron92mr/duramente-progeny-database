@@ -1,0 +1,7 @@
+{
+  "verified_at": "2026-10-16",
+  "source_url": "https://racingaustralia.horse/FAQ/Track-Information.aspx",
+  "source_name": "Racing Australia — Track Information",
+  "courses": {"Pakenham Synthetic": "合成", "Ballarat Synthetic": "合成"},
+  "note": "Named synthetic tracks are classified separately from turf/dirt. Original race JSON and source fields remain unchanged."
+}

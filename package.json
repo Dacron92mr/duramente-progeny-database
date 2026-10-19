@@ -8,7 +8,9 @@
     "test:research": "node scripts/smoke_research.cjs",
     "test:content": "node scripts/smoke_content_photo.cjs",
     "test:mobile": "node scripts/smoke_mobile_webkit.cjs",
-    "test:corrections": "node scripts/smoke_corrections.cjs"
+    "test:corrections": "node scripts/smoke_corrections.cjs",
+    "test:post-merge": "node scripts/smoke_post_merge.cjs",
+    "test:discovery": "node scripts/smoke_discovery.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

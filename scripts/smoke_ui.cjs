@@ -112,7 +112,7 @@ async function check(name, run) {
     if(await evidence.count()) { await page.screenshot({path:path.join(output,`workspace-${view}-${width}.png`)}); await evidence.locator('summary').first().click(); }
     const attr={sire:'sire',pedigree:'pedigree',production:'production'}[view];
     const buttons=attr?await page.locator(`[data-${attr}-section]`).all():[];
-    for(const button of buttons){await button.click();await page.locator(`#${view}Content canvas:visible`).first().waitFor({timeout:10000});}
+    for(const button of buttons){await button.click();await page.locator(`#${view}Content canvas:visible, #${view}Content .graded-timeline-list:visible`).first().waitFor({timeout:10000});}
     if(buttons.length){
       await buttons[0].focus();await page.keyboard.press('ArrowRight');assert.equal(await buttons[1].getAttribute('aria-selected'),'true');
       await page.keyboard.press('End');assert.equal(await buttons.at(-1).getAttribute('aria-selected'),'true');
@@ -120,7 +120,7 @@ async function check(name, run) {
       await buttons.at(-1).click();
     }
     for(const theme of ['light','dark']){
-      await setTheme(theme);await page.locator(`#${view}Content[data-loaded]`).waitFor();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert((await page.locator(`#${view}Content canvas:visible`).count())>0);
+      await setTheme(theme);await page.locator(`#${view}Content[data-loaded]`).waitFor();assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth));assert((await page.locator(`#${view}Content canvas:visible, #${view}Content .graded-timeline-list:visible`).count())>0);
       await page.screenshot({path:path.join(output,`${view}-${width}-${theme}.png`)});
       const zoom=page.locator(`#${view}Content .chart-actions button:visible`).first();
       if(await zoom.count()){

@@ -95,6 +95,14 @@
       "wins": 0,
       "top3": 0
     },
+    "Seoul": {
+      "horse_ids": [
+        "9"
+      ],
+      "starts": 1,
+      "wins": 0,
+      "top3": 0
+    },
     "Seymour": {
       "horse_ids": [
         "2371"
@@ -122,15 +130,7 @@
       "wins": 0,
       "top3": 0
     },
-    "ソウル": {
-      "horse_ids": [
-        "9"
-      ],
-      "starts": 1,
-      "wins": 0,
-      "top3": 0
-    },
-    "ヨーク": {
+    "York": {
       "horse_ids": [
         "5"
       ],

@@ -18690,11 +18690,18 @@
       "top3_rate": 0.2727,
       "surface": {
         "芝": {
-          "starts": 11,
+          "starts": 7,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "合成": {
+          "starts": 4,
           "wins": 1,
           "top3": 3,
-          "win_rate": 0.0909,
-          "top3_rate": 0.2727
+          "win_rate": 0.25,
+          "top3_rate": 0.75
         }
       },
       "distance": {
@@ -31659,11 +31666,18 @@
       "top3_rate": 0.2727,
       "surface": {
         "芝": {
-          "starts": 11,
+          "starts": 7,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        },
+        "合成": {
+          "starts": 4,
           "wins": 1,
           "top3": 3,
-          "win_rate": 0.0909,
-          "top3_rate": 0.2727
+          "win_rate": 0.25,
+          "top3_rate": 0.75
         }
       },
       "distance": {

@@ -31,6 +31,7 @@ NAR_COURSES = [
     "園田", "姫路", "高知", "佐賀",
 ]
 OVERSEAS_COURSE_MAP = {
+    "ソウル": "Seoul", "Seoul": "Seoul", "ヨーク": "York", "York": "York",
     "ロンシャン": "ParisLongchamp",
     "ParisLongchamp": "ParisLongchamp",
     "アスコット": "Ascot",
@@ -629,7 +630,7 @@ def sire_profile(horses: list[dict[str, Any]], races: list[dict[str, Any]]) -> d
         crop = int(horse.get("birth_year") or 0)
         finish = int(race["finish"])
         distance = int(race.get("distance_m") or 0)
-        surface = clean_group(race.get("surface"), "Unknown")
+        surface = clean_group(effective_surface(race), "Unknown")
         bucket = distance_bucket(distance)
         target_rows = [total]
         if crop in crops:
@@ -760,7 +761,7 @@ def race_breakdowns(races: list[dict[str, Any]]) -> dict[str, Any]:
     for race in races:
         if not is_valid_start(race):
             continue
-        surface = clean_group(race.get("surface"), "Unknown")
+        surface = clean_group(effective_surface(race), "Unknown")
         sex = clean_group(race.get("sex"), "Unknown")
         distance = int(race.get("distance_m") or 0)
         distance_label = (
@@ -832,7 +833,7 @@ def add_start(stats: dict[str, Any], race: dict[str, Any]) -> None:
         stats["thirds"] += 1
     if finish <= 3:
         stats["top3"] += 1
-    surface = clean_group(race.get("surface"), "Unknown")
+    surface = clean_group(effective_surface(race), "Unknown")
     distance = distance_bucket(race.get("distance_m"))
     for bucket in (stats["surface"][surface], stats["distance"][distance]):
         bucket["starts"] += 1
@@ -917,6 +918,18 @@ def breeder_analysis(horses: list[dict[str, Any]], races: list[dict[str, Any]]) 
     }
 
 
+OVERSEAS_COUNTRIES = {
+    **dict.fromkeys(['Ballarat Synthetic','Pakenham Synthetic','Flemington','Bendigo','Cranbourne','Sandown-Lakeside','Seymour','Terang'], 'Australia'),
+    'Seoul':'South Korea','York':'UK', 'Meydan':'UAE', 'Sha Tin':'Hong Kong', 'Ascot':'UK',
+    'ParisLongchamp':'France', 'Deauville':'France', 'King Abdulaziz':'Saudi Arabia',
+}
+
+
+def effective_surface(race):
+    # Verified named synthetic courses; never overwrite raw race records.
+    return '合成' if race.get('meeting') in {'Pakenham Synthetic', 'Ballarat Synthetic'} else race.get('surface')
+
+
 def racecourse_analysis(races: list[dict[str, Any]]) -> dict[str, Any]:
     groups: dict[str, dict[str, Any]] = {}
     for race in races:
@@ -951,6 +964,7 @@ def racecourse_analysis(races: list[dict[str, Any]]) -> dict[str, Any]:
         },
         "table": rows,
         "main_chart": sorted(main_rows, key=lambda row: (-(row["win_start_rate"] or 0), -row["starts"], row["label"])),
+        "overseas_history": [{**{k:r.get(k) for k in ["horse_id","name","hkjc_name_zh","race_date","race_name","race_url","race_id","source","meeting","distance_m","finish","finish_note"]}, 'course': canonical_racecourse(r.get('meeting'))[0], 'country': OVERSEAS_COUNTRIES.get(canonical_racecourse(r.get('meeting'))[0]), 'source_surface': r.get('surface'), 'surface': effective_surface(r)} for r in races if canonical_racecourse(r.get('meeting'))[1] == 'Overseas'],
         "surface_heatmap": main_rows,
         "distance_heatmap": main_rows,
         "method": "取消、除外和中止等没有正式名次的记录不计入胜率、连对率和前三率。",
