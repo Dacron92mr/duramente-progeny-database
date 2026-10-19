@@ -14,6 +14,7 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
   await page.evaluate(()=>scrollTo(0,0));await snap('hierarchy-'+view);
  }
  await page.goto(base);await page.locator('#horseRows tr').first().waitFor();
+ await page.locator('.discovery-overview > summary').click();
  const density=await page.locator('#horseRows tr').evaluateAll(rows=>rows.map(r=>r.getBoundingClientRect()).filter(r=>r.top>=0&&r.bottom<=Math.min(innerHeight,document.querySelector('.progeny-table-wrap').getBoundingClientRect().bottom)).map(r=>r.height));
  assert(density.length>=7);assert(density.every(h=>h>=64&&h<=76));console.log('Compact 1440×900:',density.length,'fully visible rows;',density[0],'px');await snap('compact');
  for(const width of [390,430,768,1440])for(const theme of ['light','dark']){

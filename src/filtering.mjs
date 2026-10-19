@@ -24,7 +24,7 @@ export function staticSortValue(horse, sort) {
 }
 
 export const QUICK_FILTER_LABELS = {
-  g1: 'G1 冠军', graded: 'G1–G3 冠军', hkjc: '有香港官方译名', breeding: '有繁殖记录',
+  g1: 'G1 冠军', graded: '重赏冠军（含 G1）', hkjc: '有香港官方译名', breeding: '有繁殖记录',
 };
 export function matchesQuickFilter(horse, quick) {
   if (quick === 'g1') return horse.achievement_class === 'G1';

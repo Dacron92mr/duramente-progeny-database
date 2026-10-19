@@ -1,3 +1,4 @@
+import { mountDiscovery, organizeAnalysis } from './src/discovery.mjs';
 import {mountCourseAnalysis} from './src/racecourse-analysis.mjs';
 import { conceptIntro, dosageCategories } from './src/ux-copy.mjs';
 import { mountResearchWorkbench } from './src/research-workbench.mjs';
@@ -2397,6 +2398,7 @@ async function renderSireAnalysis() {
   for (const button of els.sireContent.querySelectorAll("[data-open-horse]")) button.addEventListener("click", () => openHorse(button.dataset.openHorse));
   activateSireSection(state.sire, { updateHistory: false });
   mountResearchWorkbench(els.sireContent, { kind: 'sire', horses: await getStaticHorses(), profile: sireProfile, asOf: (await getAnalytics('methodology')).last_updated, renderChart, navigate: navigateToProgeny, onEvidence: () => renderSireCharts(...sireRuntime) });
+  organizeAnalysis(els.sireContent, rerender);
   els.sireContent.dataset.loaded = "true";
 }
 
@@ -3565,6 +3567,7 @@ async function renderPedigreeAnalysis() {
     button.addEventListener("click", () => openHorse(button.dataset.openHorse));
   }
   mountResearchWorkbench(els.pedigreeContent, { kind: 'pedigree', horses: await getStaticHorses(), asOf: (await getAnalytics('methodology')).last_updated, renderChart, navigate: navigateToProgeny, onEvidence: () => renderPedigreeCharts(pedigreeRuntime.pedigree, pedigreeRuntime.bmsLines, pedigreeRuntime.broodmareSires, pedigreeRuntime.dosage, pedigreeRuntime.horses, pedigreeRuntime.overview) });
+  organizeAnalysis(els.pedigreeContent, rerender);
   els.pedigreeContent.dataset.loaded = "true";
 }
 
@@ -3926,6 +3929,7 @@ async function renderProductionAnalysis() {
   }
   activateProductionSection(state.production, { updateHistory: false });
   mountResearchWorkbench(els.productionContent, { kind: 'production', horses: await getStaticHorses(), asOf: (await getAnalytics('methodology')).last_updated, renderChart, navigate: navigateToProgeny, onEvidence: renderProductionCharts });
+  organizeAnalysis(els.productionContent, renderProductionCharts);
   els.productionContent.dataset.loaded = "true";
 }
 
@@ -4430,6 +4434,7 @@ async function loadHorses() {
     horseSequenceCache = { key: '', ids: [] };
     bindHorseOpeners(els.horseRows); bindHorseOpeners(els.horseCards);
     await ensureHorseSequence();
+    mountDiscovery(document.querySelector("#discoveryOverview"), await getStaticHorses());
     if (request !== listRequest) return;
     updatePager();
   } catch (error) {
