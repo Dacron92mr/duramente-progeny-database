@@ -1,8 +1,8 @@
 {
   "summary": {
-    "total_wins": 1267,
+    "total_wins": 1270,
     "jra_wins": 584,
-    "nar_wins": 681,
+    "nar_wins": 684,
     "overseas_wins": 2,
     "other_wins": 0,
     "years": [
@@ -14,7 +14,7 @@
       2025,
       2026
     ],
-    "updated_at": "2026-10-12"
+    "updated_at": "2026-10-19"
   },
   "annual": [
     {
@@ -175,29 +175,29 @@
     },
     {
       "year": 2026,
-      "starts": 965,
+      "starts": 997,
       "runners": 162,
-      "wins": 89,
-      "winners": 60,
+      "wins": 92,
+      "winners": 61,
       "jra_wins": 28,
-      "nar_wins": 61,
+      "nar_wins": 64,
       "overseas_wins": 0,
       "other_wins": 0,
-      "top3": 278,
-      "win_rate": 0.0922,
-      "top3_rate": 0.2881,
-      "winner_runner_rate": 0.3704,
+      "top3": 284,
+      "win_rate": 0.0923,
+      "top3_rate": 0.2849,
+      "winner_runner_rate": 0.3765,
       "graded_wins": 2,
       "g1_wins": 0,
       "g2_wins": 2,
       "g3_wins": 0,
       "earnings": 103491.4,
-      "race_prize_earnings": 122226.5,
+      "race_prize_earnings": 123554.6,
       "earnings_status": "partial",
       "earnings_source": "JBISサーチ 種牡馬ランキング（进行中）",
       "earnings_source_url": "https://www.jbis.or.jp/ranking/result/?ranking=1&y1=2026&y2=2024&y3=2026&kind=1&division=1&racetype1=1&racetype2=1&y_f=2026&y_t=2026&hold=0&condition=1&match=prefix&sort=ranking&items=20&page=1&order=A",
       "earnings_rank": 9,
-      "prize_rows": 470
+      "prize_rows": 484
     }
   ],
   "win_events": [
@@ -21739,6 +21739,57 @@
       "grade_group": null,
       "prize": 43.0,
       "cumulative_wins": 1267
+    },
+    {
+      "race_date": "2026/10/13",
+      "year": 2026,
+      "horse_id": 389,
+      "horse": "ブルースバローズ",
+      "hkjc_name_zh": null,
+      "race_name": "みなみのうお座特別(B)",
+      "race_url": "https://db.netkeiba.com/race/202648101311/",
+      "meeting": "名古屋",
+      "raw_meeting": "名古屋",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 100.0,
+      "cumulative_wins": 1268
+    },
+    {
+      "race_date": "2026/10/17",
+      "year": 2026,
+      "horse_id": 178,
+      "horse": "ダノンマカルー",
+      "hkjc_name_zh": null,
+      "race_name": "C1ー4",
+      "race_url": "https://db.netkeiba.com/race/202654101706/",
+      "meeting": "高知",
+      "raw_meeting": "高知",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 100.0,
+      "cumulative_wins": 1269
+    },
+    {
+      "race_date": "2026/10/17",
+      "year": 2026,
+      "horse_id": 378,
+      "horse": "アルディオール",
+      "hkjc_name_zh": null,
+      "race_name": "秋晴特選(C2)",
+      "race_url": "https://db.netkeiba.com/race/202655101710/",
+      "meeting": "佐賀",
+      "raw_meeting": "佐賀",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "grade": null,
+      "grade_group": null,
+      "prize": 50.0,
+      "cumulative_wins": 1270
     }
   ],
   "milestones": [

@@ -18,9 +18,9 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
    await button.click();await page.waitForTimeout(300);
    const sections=page.locator('.further-exploration:visible');
    for(const d of await sections.all()){
-    assert.equal(await d.getAttribute('open'),null);await d.locator('summary').click();await page.waitForTimeout(300);
+    assert.equal(await d.getAttribute('open'),null);await d.locator(':scope > summary').click();await page.waitForTimeout(300);
     const sizes=await d.locator('.chart-canvas').evaluateAll(es=>es.map(e=>({id:e.id,width:e.clientWidth,canvas:!!e.querySelector('canvas')})));
-    assert(sizes.every(s=>s.width>100&&s.canvas),JSON.stringify(sizes));await d.locator('summary').click();
+    assert(sizes.every(s=>s.width>100&&s.canvas),JSON.stringify(sizes));await d.locator(':scope > summary').click();
    }
   }
  }
