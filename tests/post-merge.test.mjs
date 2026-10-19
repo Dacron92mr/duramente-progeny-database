@@ -14,7 +14,7 @@ test('four synthetic starts and one win are corrected without changing source re
  assert(rows.every(r=>r.source_surface==='芝'));
  assert.equal(JSON.stringify(detail),before);
  const display=createDetailContent({finishBadge:()=>''}).raceRows(rows,detail.horse);assert.match(display,/合成跑道 1600m/);assert.doesNotMatch(display,/芝地/);
- const awd=read('analytics/awd.json').summary;assert.equal(awd.overall_wins,awd.turf_wins+awd.dirt_wins+awd.synthetic_wins);assert.equal(awd.overall_wins,1257);
+ const awd=read('analytics/awd.json').summary;assert.equal(awd.overall_wins,awd.turf_wins+awd.dirt_wins+awd.synthetic_wins);const wins=read('horses.json').flatMap(h=>read(`horses/${h.id}.json`).races||[]).filter(r=>r.finish===1&&['芝','ダ','合成'].includes(classifiedRace(r).surface)&&Number(r.distance_m)>0);assert.equal(awd.overall_wins,wins.length);
  for(const [meeting,surface] of Object.entries(read('surface_classifications.json').courses))assert.equal(classifiedRace({meeting,surface:'芝'}).surface,surface);
  const turf={meeting:'東京',surface:'芝'};assert.equal(classifiedRace(turf),turf);
 });

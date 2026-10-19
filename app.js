@@ -2317,7 +2317,7 @@ async function renderSireAnalysis() {
         ${chartBlock("世代奖金集中度", "每个世代固定代表色；由深至浅依次为最高1匹、第2—3匹、其余产驹。点击查看金额。", "sireConcentrationChart")}
         ${chartBlock("获胜距离分布", "草地、泥地分别统计实际获胜距离；不含障碍赛及距离缺失的记录。", "sireDistanceDistributionChart")}
         ${chartBlock("世代成就 · 等级分布", "按原库最高成就分类，G1、G2、G3 分段互斥；点击查看该世代。具体赛事等级见单马赛绩。", "sireAchievementStepChart")}
-        ${chartBlock("各出生世代的平均胜距", "平均获胜距离（AWD）：整体、草地与泥地；整体按有距离记录的草地及泥地胜场加权。", "sireAwdDumbbellChart")}
+        ${chartBlock("各出生世代的平均胜距", "平均获胜距离（AWD）：整体、草地与泥地；整体包含有距离记录的草地、泥地及合成跑道胜场。", "sireAwdDumbbellChart")}
         ${controlledChartBlock("产驹成长曲线", "按年龄观察胜场积累；空心点为尚未结束的年龄年度，6+为开放区间；缺失阶段不连线。", "sireDevelopmentChart", `
           <label><span>标准化</span><select id="sireDevelopmentMetric">
             <option value="cumulative_wins">累计胜场</option>

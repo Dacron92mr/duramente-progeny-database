@@ -67,3 +67,6 @@
  .discovery-paths span { display:none; }
  .discovery-stats { margin-top:14px; }
 }
+@media(max-width:700px) {
+ .chart-card-head:has(.chart-actions) h3 { min-height:44px; }
+}
