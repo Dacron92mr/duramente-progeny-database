@@ -1,11 +1,11 @@
 {
   "summary": {
-    "overall_awd": 1589.2,
+    "overall_awd": 1589.3,
     "turf_awd": 1884.6,
-    "dirt_awd": 1459.8,
-    "overall_wins": 1257,
+    "dirt_awd": 1460.3,
+    "overall_wins": 1260,
     "turf_wins": 383,
-    "dirt_wins": 874
+    "dirt_wins": 877
   },
   "by_crop": [
     {
@@ -31,17 +31,17 @@
     },
     {
       "label": "2021",
-      "overall_awd": 1633.8,
+      "overall_awd": 1634.3,
       "turf_awd": 1950.0,
-      "dirt_awd": 1456.7,
-      "wins": 156
+      "dirt_awd": 1461.0,
+      "wins": 158
     },
     {
       "label": "2022",
-      "overall_awd": 1749.1,
+      "overall_awd": 1746.8,
       "turf_awd": 1928.6,
-      "dirt_awd": 1555.8,
-      "wins": 108
+      "dirt_awd": 1554.7,
+      "wins": 109
     }
   ],
   "discrepancies": [
@@ -461,7 +461,7 @@
       "dirt_awd": 1400.0,
       "di": 0.65,
       "cd": -0.07,
-      "race_stamina_percentile": 0.251,
+      "race_stamina_percentile": 0.248,
       "pedigree_stamina_percentile": 0.959,
       "stamina_gap": -0.71
     }
