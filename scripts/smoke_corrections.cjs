@@ -69,7 +69,7 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
   await page.setViewportSize({width,height:1000});
   const horse=JSON.parse(fs.readFileSync(require('node:path').join(__dirname,`../data/horses/${id}.json`))).horse;
   await page.goto(base+`?q=${encodeURIComponent(horse.name)}`);await page.locator(`#horseRows [data-id="${id}"]`).waitFor({state:'attached'});
-  const expected={1:'G1',20:'G2',17:'G3',15:'JpnIII',11:'J.G2',10:null,202:null}[id];
+  const expected={1:'G1',20:'G2',17:'G3',15:'JpnIII',11:'J.G2',10:'OP',202:null}[id];
   for(const display of ['compact','detailed']){
     await page.locator(`button[data-display-mode="${display}"]`).click();await badges('#horseRows .grade-pill, #horseCards .grade-pill');
     const badge=page.locator(`#horseRows tr[data-horse-row="${id}"] .record-cell .grade-pill`);

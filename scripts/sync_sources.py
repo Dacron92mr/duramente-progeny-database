@@ -166,7 +166,7 @@ def parse_profile(page, horse, source):
     result['earnings_netkeiba']=round(sum(amounts),4)
     return result
 
-def parse_races(page, horse):
+def parse_races(page, horse, *, check_sectionals=True):
     identity(page,horse)
     parser=Tables();parser.feed(page)
     table=next((t for t in parser.tables if '競走戦績' in t['attrs'].get('summary','')),None)
@@ -201,7 +201,65 @@ def parse_races(page, horse):
         if result['field_size'] is not None and not 1<=result['field_size']<=100: raise ValueError('invalid field size')
         if finish is not None and (finish<1 or (result['field_size'] is not None and finish>result['field_size'])): raise ValueError('finish exceeds field size')
         last_3f_min=10 if result['surface']=='障' else 20
-        if result['last_3f'] is not None and not last_3f_min<=result['last_3f']<=65: raise ValueError('last 3f outside supported range')
+        if check_sectionals and result['last_3f'] is not None and not last_3f_min<=result['last_3f']<=65: raise ValueError('last 3f outside supported range')
         output.append(result)
     if len({r['race_id'] for r in output}) != len(output): raise ValueError('duplicate race IDs')
     return output
+
+def parse_dynamic_races(payload, horse):
+    """Parse the same public JSON fragment used by netkeiba's own horse page."""
+    import json
+    data=json.loads(payload)
+    if data.get('status')!='OK' or not isinstance(data.get('data'),str):raise ValueError('dynamic race source unavailable')
+    fragment=data['data']
+    parser=Tables();parser.feed(fragment)
+    table=next((t for t in parser.tables if clean(horse['name'])+'の競走戦績'==clean(t['attrs'].get('summary'))),None)
+    if not table:raise ValueError('dynamic horse identity missing or mismatched')
+    return parse_races('<title>'+html.escape(horse['name'])+'</title>'+fragment,horse)
+
+def reconcile_race_sources(static, dynamic, career):
+    """Only combine matching histories. Reject stale/conflicting snapshots before publication."""
+    left={r['race_id']:r for r in static};right={r['race_id']:r for r in dynamic}
+    for key in left.keys() & right.keys():
+        if any(left[key].get(f)!=right[key].get(f) for f in ['race_date','finish','distance_m']):
+            raise ValueError('race snapshots disagree; retry after source refresh')
+    merged={**left,**right}
+    for key in left.keys() & right.keys():
+        merged[key]={**left[key],**{k:v for k,v in right[key].items() if v is not None}}
+    expected=re.match(r'^(\d+)戦',clean(career))
+    # Career counts exclude withdrawals/cancellations; compare actual starters.
+    starts=sum(r.get('finish') is not None or r.get('finish_note') in ['中止','失格'] for r in merged.values())
+    if expected and starts!=int(expected[1]):raise ValueError('career/race count mismatch; source may be stale or truncated')
+    return sorted(merged.values(),key=lambda r:r['race_date'],reverse=True)
+
+def parse_jra_winners(page, year):
+    """Official annual graded-results index, header-mapped and fail closed."""
+    from datetime import date
+    parser=Tables();parser.feed(page)
+    table=next((t for t in parser.tables if t['rows'] and '優勝馬' in [clean(c['text']) for c in t['rows'][0]]),None)
+    if not table:raise ValueError('JRA graded winners table unavailable')
+    headers=[clean(c['text']) for c in table['rows'][0]]
+    required=['月日','レース名','競馬場','優勝馬','結果']
+    if any(headers.count(k)!=1 for k in required):raise ValueError('JRA graded headers changed')
+    output=[]
+    for cells in table['rows'][1:]:
+        if len(cells)!=len(headers):raise ValueError('JRA graded row shape changed')
+        row=dict(zip(headers,cells));winner=clean(row['優勝馬']['text'])
+        if not winner or winner in ['—','-']:continue
+        md=re.search(r'(\d+)月(\d+)日',row['月日']['text'])
+        links=[u for u in row['結果']['links'] if '/datafile/seiseki/' in u]
+        if not md or not links:raise ValueError('JRA winner without dated result source')
+        output.append({'name':winner,'date':date(year,int(md[1]),int(md[2])).strftime('%Y/%m/%d'),'race':clean(row['レース名']['text']),'course':clean(row['競馬場']['text']),'source_url':urljoin('https://www.jra.go.jp',links[0])})
+    return output
+
+def verify_known_winners(winners, horses, detail_for):
+    """Do not claim a successful refresh while an official known win is absent."""
+    names={clean(h['name']):h for h in horses};checked=[]
+    for winner in winners:
+        horse=names.get(clean(winner['name']))
+        if not horse:continue
+        rows=detail_for(horse['id']).get('races',[])
+        if not any(r.get('race_date')==winner['date'] and r.get('finish')==1 and winner['course'] in str(r.get('meeting','')) for r in rows):
+            raise ValueError(f"official graded win missing: {horse['name']} {winner['date']} {winner['source_url']}")
+        checked.append({'horse_id':horse['id'],**winner})
+    return checked

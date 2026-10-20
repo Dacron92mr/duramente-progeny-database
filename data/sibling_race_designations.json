@@ -1,0 +1,155 @@
+{
+  "description": "Event-year international catalogue designation, independent of domestic grade labels. Only exact dated reviewed races qualify.",
+  "races": [
+    {
+      "date": "2019/02/27",
+      "race_prefix": "エンプレス杯",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2019/racing2019.html"
+    },
+    {
+      "date": "2019/12/29",
+      "race_prefix": "東京大賞典",
+      "designation": "G1",
+      "source_url": "https://www.goracing.jp/english/upload/2019/racing2019.html"
+    },
+    {
+      "date": "2020/06/04",
+      "race_prefix": "北海道スプリント",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2020/racing2020.html"
+    },
+    {
+      "date": "2020/10/12",
+      "race_prefix": "マイルチャンピオン",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2020/racing2020.html"
+    },
+    {
+      "date": "2022/01/26",
+      "race_prefix": "TCK女王盃",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2022/03/23",
+      "race_prefix": "ダイオライト記念",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2022/07/13",
+      "race_prefix": "ジャパンダート",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2022/07/18",
+      "race_prefix": "マーキュリー",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2022/11/03",
+      "race_prefix": "JBCレディス",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2022/11/30",
+      "race_prefix": "クイーン賞",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2022/racing2022.html"
+    },
+    {
+      "date": "2023/02/09",
+      "race_prefix": "佐賀記念",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2023/racing2023.html"
+    },
+    {
+      "date": "2023/03/01",
+      "race_prefix": "エンプレス杯",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2023/racing2023.html"
+    },
+    {
+      "date": "2023/08/17",
+      "race_prefix": "ブリーダーズゴールド",
+      "designation": "LR",
+      "source_url": "https://www.goracing.jp/english/upload/2023/racing2023.html"
+    },
+    {
+      "date": "2013/07/10",
+      "race_prefix": "ジャパンダート",
+      "designation": "L",
+      "source_url": "https://www.keiba.go.jp/pdf/about/english/2013-18.pdf"
+    },
+    {
+      "date": "2024/04/04",
+      "race_prefix": "兵庫女王盃",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc24/2024_EntireBook.pdf"
+    },
+    {
+      "date": "2024/07/15",
+      "race_prefix": "マーキュリー",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc24/2024_EntireBook.pdf"
+    },
+    {
+      "date": "2024/08/27",
+      "race_prefix": "ブリーダーズゴールド",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc24/2024_EntireBook.pdf"
+    },
+    {
+      "date": "2024/09/01",
+      "race_prefix": "サマーチャンピオン",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc24/2024_EntireBook.pdf"
+    },
+    {
+      "date": "2024/12/25",
+      "race_prefix": "兵庫ゴールドトロフィ",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc24/2024_EntireBook.pdf"
+    },
+    {
+      "date": "2014/12/17",
+      "race_prefix": "全日本2歳優駿",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc14/2014_EntireBook.pdf"
+    },
+    {
+      "date": "2015/05/01",
+      "race_prefix": "ケンタッキーオークス",
+      "designation": "G1",
+      "source_url": "https://www.tjcis.com/pdf/icsc15/2015_EntireBook.pdf"
+    },
+    {
+      "date": "2026/06/24",
+      "race_prefix": "さきたま杯",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc26/2026_EntireBook.pdf"
+    },
+    {
+      "date": "2026/03/11",
+      "race_prefix": "ダイオライト記念",
+      "designation": "LR",
+      "source_url": "https://www.tjcis.com/pdf/icsc26/2026_EntireBook.pdf"
+    },
+    {
+      "date": "2018/09/01",
+      "race_prefix": "ウッドワードS",
+      "designation": "G1",
+      "source_url": "https://www.nyra.com/saratoga/news/yoshida-proves-dirt-prowess-in-g1-woodward-win/"
+    },
+    {
+      "date": "2015/03/28",
+      "race_prefix": "UAEダービー",
+      "designation": "G2",
+      "source_url": "https://www.tjcis.com/pdf/icsc15/2015_EntireBook.pdf"
+    }
+  ]
+}

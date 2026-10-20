@@ -1,0 +1,15 @@
+{
+  "verified_at": "2026-10-20",
+  "horses": {
+    "717": {
+      "note": "已核对母马与本马身份；公开检索返回单马页面，完整同母目录尚待取得。",
+      "status": "list-unavailable",
+      "source_url": "https://db.netkeiba.com/horse/ped/2005190003/"
+    },
+    "2371": {
+      "note": "Racing NSW 已确认母马为 Bulbinella；澳洲完整同母目录尚待核实。",
+      "status": "list-unavailable",
+      "source_url": "https://mdata.racingnsw.com.au/InteractiveForm/HorseFullForm.aspx?horsecode=MTYxNzE3NDUwNA%3D%3D&src=horseform"
+    }
+  }
+}

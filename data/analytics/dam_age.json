@@ -11,7 +11,7 @@
     "registered_foal_order_confirmed": 726,
     "biological_parity_rate": 1.0,
     "registered_foal_order_rate": 1.0,
-    "updated_at": "2026-10-19"
+    "updated_at": "2026-10-20"
   },
   "buckets": [
     {
@@ -199,7 +199,7 @@
       "graded_winners": 4,
       "stakes_winners": 5,
       "g1_winners": 1,
-      "total_earnings": 167776.3,
+      "total_earnings": 173774.1,
       "representatives": [
         {
           "name": "エネルジコ",
@@ -226,8 +226,8 @@
           "name": "シュガークン",
           "hkjc_name_zh": "甜蜜時刻",
           "achievement_class": "G2",
-          "major_win": "24'青葉賞(G2)",
-          "earnings": 7414.2
+          "major_win": "26'富士S(G2)",
+          "earnings": 13412.0
         },
         {
           "name": "ミスタージーティー",
@@ -243,8 +243,8 @@
       "graded_foal_rate": 0.044,
       "graded_runner_rate": 0.0488,
       "g1_foal_rate": 0.011,
-      "avg_earnings_per_foal": 1843.7,
-      "avg_earnings_per_runner": 2046.1,
+      "avg_earnings_per_foal": 1909.6,
+      "avg_earnings_per_runner": 2119.2,
       "median_earnings_per_runner": 447.6,
       "earnings_q25": 0.0,
       "earnings_q75": 1565.2,
@@ -2620,7 +2620,7 @@
       "graded_winners": 2,
       "winner_rate": 0.6818,
       "graded_rate": 0.0909,
-      "total_earnings": 45557.4,
+      "total_earnings": 51555.2,
       "horses": [
         {
           "id": 15,
@@ -7220,7 +7220,7 @@
           "graded_winners": 2,
           "winner_rate": 0.6818,
           "graded_rate": 0.0909,
-          "total_earnings": 45557.4,
+          "total_earnings": 51555.2,
           "horses": [
             {
               "id": 15,
@@ -11855,7 +11855,7 @@
           "graded_winners": 2,
           "winner_rate": 0.6316,
           "graded_rate": 0.1053,
-          "total_earnings": 45444.2,
+          "total_earnings": 51442.0,
           "horses": [
             {
               "id": 11,

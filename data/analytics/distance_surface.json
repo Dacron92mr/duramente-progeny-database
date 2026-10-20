@@ -9,10 +9,10 @@
     },
     {
       "label": "芝",
-      "starts": 3765,
-      "wins": 382,
-      "win_rate": 0.1015,
-      "awd": 1885.3
+      "starts": 3766,
+      "wins": 383,
+      "win_rate": 0.1017,
+      "awd": 1884.6
     },
     {
       "label": "障",
@@ -39,10 +39,10 @@
     },
     {
       "label": "牡",
-      "starts": 4830,
-      "wins": 630,
-      "win_rate": 0.1304,
-      "awd": 1658.7
+      "starts": 4831,
+      "wins": 631,
+      "win_rate": 0.1306,
+      "awd": 1658.6
     },
     {
       "label": "セン",
@@ -61,9 +61,9 @@
     },
     {
       "label": "マイル",
-      "starts": 3616,
-      "wins": 424,
-      "win_rate": 0.1173
+      "starts": 3617,
+      "wins": 425,
+      "win_rate": 0.1175
     },
     {
       "label": "中距離",

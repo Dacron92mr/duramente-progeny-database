@@ -18,7 +18,7 @@ export function renderProgenyRows(items, { regionBadge, lineageBadge, ownerCell 
     <td class="detail-only owner-name">${ownerCell(horse)}</td>
     <td class="detail-only trainer-name">${regionBadge(horse.trainer_region)} ${html(horse.trainer)}</td>
     <td class="money">${formatNumber(horse.earnings_netkeiba ?? horse.earnings_jbis, 1)}</td>
-    <td class="record-cell"><span class="major-win">${majorWinLabel(horse.major_win)}</span><span class="muted detail-only">${html(careerSummaryText(horse.career_summary))}</span></td>
+    <td class="record-cell"><span class="major-win">${majorWinLabel(horse.major_win, horse)}</span><span class="muted detail-only">${html(careerSummaryText(horse.career_summary))}</span></td>
   </tr>`).join('');
 }
 export function renderHorseCards(items) {
@@ -26,6 +26,6 @@ export function renderHorseCards(items) {
     <span class="horse-card-head"><span>${horseName(horse)}</span></span>
     <span class="horse-card-meta">${html(horse.birth_year)} · ${html(uiValue(horse.sex, 'sex'))} · ${affiliationBadge(horse.trainer_region)}</span>
     <span class="horse-card-pedigree detail-only"><span><small>母马</small>${html(horse.dam)}</span><span><small>母父</small>${html(horse.broodmare_sire)}</span></span>
-    <span class="horse-card-footer"><span class="horse-card-summary">${majorWinLabel(horse.major_win || careerSummaryText(horse.career_summary) || '—')}</span><span class="horse-card-prize">${html(prize(horse))}</span></span>
+    <span class="horse-card-footer"><span class="horse-card-summary">${majorWinLabel(horse.major_win || careerSummaryText(horse.career_summary) || '—', horse)}</span><span class="horse-card-prize">${html(prize(horse))}</span></span>
   </button>`).join('');
 }

@@ -7,6 +7,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
   fetchStaticData, getStaticHorses, getJson, horseDamCell, raceRows, studSection, detailSources,
   damAgeText, crossItems, ownerCell, navigateToProgeny }) {
   let lastFocusedElement = null;
+  let notableCatalog;
   function updateHorseNavigation() {
     const index = getHorseIds().indexOf(String(state.horse));
     els.previousHorse.disabled = index <= 0;
@@ -43,9 +44,10 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     gradedSiblingCatalog ||= fetchStaticData("graded_siblings.json").catch(() => { gradedSiblingCatalog = null; return { dams: {} }; });
     careerCatalog ||= fetchStaticData('post_racing_careers.json').catch(()=>{careerCatalog=null;return {horses:{}};});
     blackTypeCatalog ||= fetchStaticData('black_type_siblings.json').catch(()=>{blackTypeCatalog=null;return {dams:{}};});
+    notableCatalog ||= fetchStaticData('notable_siblings.json').catch(()=>{notableCatalog=null;return {dams:{}};});
     let result;
     try { result = await Promise.all([
-      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(), careerCatalog, blackTypeCatalog,
+      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(), careerCatalog, blackTypeCatalog, notableCatalog,
     ]); } catch (error) {
       if (state.horse !== requestedId) return;
       els.detail.innerHTML = '<h2 id="drawerTitle">马匹详情</h2><div class="load-error" role="alert">详情暂时无法载入。<button type="button" id="retryDetail">重试</button></div>';
@@ -53,13 +55,15 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
       return;
     }
     if (state.horse !== requestedId) return;
-    const [data, relatives, allHorses, careers, blackTypes] = result;
+    const [data, relatives, allHorses, careers, blackTypes, notables] = result;
     const horse = data.horse;
     const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
     const vm = createProfileModel(data, siblings, allHorses);
     const career=careers.horses[String(id)];
     vm.postRacing=career?.netkeiba_id===horse.netkeiba_id?career.events:[];
+    vm.siblingAudit=blackTypes.coverage?.[String(horse.id)];
     vm.blackType=(blackTypes.dams[horse.dam_netkeiba_id]||[]).filter(s=>s.netkeiba_id!==horse.netkeiba_id);
+    vm.notableSiblings=(notables.dams[horse.dam_netkeiba_id]||[]).filter(s=>s.netkeiba_id!==horse.netkeiba_id);
     const helpers = { horseDamCell, raceRows, studSection, detailSources, damAgeText, crossItems, ownerCell };
     const profile = renderProfile(vm, helpers);
     els.detail.innerHTML = profile.html;

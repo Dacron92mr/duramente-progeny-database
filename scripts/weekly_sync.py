@@ -15,7 +15,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from urllib.robotparser import RobotFileParser
 from urllib.parse import urlsplit
-from sync_sources import parse_profile, parse_races
+from sync_sources import parse_profile, parse_races, parse_dynamic_races, reconcile_race_sources, parse_jra_winners, verify_known_winners
 from rebuild_synced_analytics import rebuild, read, write
 
 ROOT=Path(__file__).resolve().parents[1]
@@ -39,7 +39,7 @@ def jbis_cycle(day):
     return day.strftime('%Y-%m')
 
 class Client:
-    def __init__(self): self.rules={};self.next_request={};self.blocked=set()
+    def __init__(self, min_interval=4): self.rules={};self.next_request={};self.blocked=set();self.min_interval=max(1,min_interval)
     def get(self,url):
         host=urlsplit(url).netloc
         if host in self.blocked: raise SourceUnavailable('source stopped after access restriction')
@@ -58,16 +58,17 @@ class Client:
         rules=self.rules[host]
         if not rules.can_fetch(AGENT,url):
             self.blocked.add(host);raise SourceUnavailable('robots disallow this endpoint')
-        delay=max(rules.crawl_delay(AGENT) or 0,600 if host=='www.jbis.or.jp' else 4)
+        delay=max(rules.crawl_delay(AGENT) or 0,600 if host=='www.jbis.or.jp' else self.min_interval)
         wait=self.next_request.get(host,0)-time.monotonic()
         if wait>0: time.sleep(wait)
         self.next_request[host]=time.monotonic()+delay
         try:
-            response=urlopen(Request(url,headers={'User-Agent':AGENT,'Accept':'text/html'}),timeout=35)
+            response=urlopen(Request(url,headers={'User-Agent':AGENT,'Accept':'text/html,application/json','Cache-Control':'no-cache'}),timeout=35)
             if urlsplit(response.url).netloc != host: raise SourceUnavailable('unexpected redirect')
             body=response.read(3_000_001)
             if len(body)>3_000_000: raise SourceUnavailable('response too large')
-            encoding=response.headers.get_content_charset() or ('euc-jp' if host=='db.netkeiba.com' else 'utf-8')
+            declared=re.search(br'charset\s*=\s*[\"\']?([a-zA-Z0-9_-]+)',body[:4096],re.I)
+            encoding=response.headers.get_content_charset() or (declared[1].decode('ascii') if declared else ('euc-jp' if host=='db.netkeiba.com' else 'utf-8'))
             return body.decode(encoding,errors='strict')
         except HTTPError as exc:
             if exc.code in (401,403,429): self.blocked.add(host)
@@ -135,7 +136,7 @@ def run(args):
     root=args.root.resolve();state_path=root/'.github/sync/state.json';state=read(state_path) if state_path.exists() else {'jbis_cursor':0}
     horses=read(root/'data/horses.json');original_count=len(horses)
     report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'netkeiba_retries':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False,
-            'prize_coverage_before':prize_coverage(root)}
+            'prize_coverage_before':prize_coverage(root),'horse_checks':[]}
     client=Client()
     with tempfile.TemporaryDirectory(prefix='duramente-sync-') as temp:
         stage=Path(temp);shutil.copytree(root/'data',stage/'data')
@@ -152,6 +153,10 @@ def run(args):
                     base=f'https://db.netkeiba.com/horse/{horse["netkeiba_id"]}/'
                     patch=parse_profile(client.get(base),horse,'netkeiba')
                     races=[] if re.match(r'^0戦',patch.get('career_summary','')) else parse_races(client.get(f'https://db.netkeiba.com/horse/result/{horse["netkeiba_id"]}/'),horse)
+                    if races:
+                        dynamic=parse_dynamic_races(client.get(f'https://db.netkeiba.com/horse/ajax_horse_results.html?input=UTF-8&output=json&id={horse["netkeiba_id"]}'),horse)
+                        races=reconcile_race_sources(races,dynamic,patch.get('career_summary',''))
+                    report['horse_checks'].append({'horse_id':horse['id'],'checked_at':datetime.now(timezone.utc).isoformat(),'latest_race':max((r['race_date'] for r in races),default=None),'race_rows':len(races),'career_summary':patch.get('career_summary')})
                     path=stage/'data/horses'/f"{horse['id']}.json";detail=read(path)
                     updated,new_detail=merge(horse,detail,patch,races)
                     if updated!=horse or new_detail!=detail:
@@ -162,6 +167,9 @@ def run(args):
                     break
                 except ValueError as exc:
                     last_error=exc
+                    if 'challenge or access limit' in str(exc):client.blocked.add('db.netkeiba.com')
+                    if ('snapshots disagree' in str(exc) or 'count mismatch' in str(exc)) and attempt<2:
+                        report['netkeiba_retries']+=1;time.sleep(8*(attempt+1));continue
                     break
                 except (OSError,SourceUnavailable) as exc:
                     last_error=exc
@@ -202,6 +210,13 @@ def run(args):
         # spacing makes a failed profile expensive to retry within one job.
         acceptable=total>0 and (success==total if candidates else success/total>=0.9)
         report['changed_horses']=sorted(set(report['changed_horses']))
+        if acceptable and candidates and not args.limit:
+            try:
+                year=datetime.now(timezone.utc).year
+                official=parse_jra_winners(client.get(f'https://www.jra.go.jp/datafile/seiseki/replay/{year}/jyusyo.html'),year)
+                report['official_wins_checked']=verify_known_winners(official,horses,lambda id:read(stage/'data/horses'/f'{id}.json'))
+            except (ValueError,OSError,SourceUnavailable) as exc:
+                acceptable=False;report['errors'].append({'source':'JRA freshness check','reason':str(exc)})
         if acceptable and report['changed_horses']:
             write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
             if candidates and report['netkeiba_ok']==len(candidates) and not args.limit:
@@ -220,7 +235,7 @@ def run(args):
         report['prize_coverage_after']=prize_coverage(root if report['applied'] else stage)
         report['domestic_prize_rows_filled']=report['prize_coverage_after']['domestic_prize_rows']-report['prize_coverage_before']['domestic_prize_rows']
         args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report)
-        print(json.dumps({k:v for k,v in report.items() if k!='errors'},ensure_ascii=False),flush=True)
+        print(json.dumps({k:v for k,v in report.items() if k not in ('errors','horse_checks')},ensure_ascii=False),flush=True)
         if not acceptable: raise SystemExit('Sync batch failed validation; existing dataset preserved.')
 
 if __name__=='__main__':

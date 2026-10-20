@@ -3,6 +3,8 @@ on:
   schedule:
     # Monday 08:23 Hong Kong / 00:23 UTC; weekly batch, not live streaming.
     - cron: '23 0 * * 1'
+    # Tuesday reconciliation catches source pages updated after Monday's batch.
+    - cron: '23 0 * * 2'
   workflow_dispatch:
     inputs:
       limit:

@@ -10,7 +10,7 @@ const {chromium,webkit}=require('playwright'),assert=require('node:assert/strict
   assert.equal(await page.locator('.research-evidence').count(),0);assert.equal(await page.locator('.comparison-tool').getAttribute('open'),null);
   const buttons=page.locator(`[data-${view}-section]`);assert.equal(await buttons.count(),view==='production'?3:4);
   for(const b of await buttons.all()){assert(await b.isVisible());await b.click();await page.locator('#'+view+'Content canvas:visible, #'+view+'Content .graded-timeline-list:visible').first().waitFor();}
-  await buttons.first().click();if(view==='sire')assert.match(await page.locator('.career-honour').innerText(),/2022.*两岁马种牡马冠军/);
+  await buttons.first().click();if(view==='sire')assert.match(await page.locator('.career-honours').innerText(),/2022.*两岁马种牡马冠军/);
   await page.evaluate(()=>scrollTo(0,0));await snap('hierarchy-'+view);
  }
  await page.goto(base);await page.locator('#horseRows tr').first().waitFor();

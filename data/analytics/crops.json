@@ -66,8 +66,15 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 155851.7,
+    "total_earnings": 161849.5,
     "representatives": [
+      {
+        "name": "シュガークン",
+        "hkjc_name_zh": "甜蜜時刻",
+        "achievement_class": "G2",
+        "major_win": "26'富士S(G2)",
+        "earnings": 13412.0
+      },
       {
         "name": "ガイアメンテ",
         "hkjc_name_zh": "心快意快",
@@ -90,13 +97,6 @@
         "earnings": 9319.0
       },
       {
-        "name": "シュガークン",
-        "hkjc_name_zh": "甜蜜時刻",
-        "achievement_class": "G2",
-        "major_win": "24'青葉賞(G2)",
-        "earnings": 7414.2
-      },
-      {
         "name": "ミスタージーティー",
         "hkjc_name_zh": "跑車男兒",
         "achievement_class": "Listed",
@@ -110,12 +110,12 @@
     "graded_foal_rate": 0.0254,
     "graded_runner_rate": 0.0283,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 1320.8,
-    "avg_earnings_per_runner": 1470.3,
+    "avg_earnings_per_foal": 1371.6,
+    "avg_earnings_per_runner": 1526.9,
     "median_earnings_per_runner": 501.6,
     "earnings_q25": 13.6,
     "earnings_q75": 1547.2,
-    "max_earnings": 11900.0
+    "max_earnings": 13412.0
   },
   {
     "label": "2020",

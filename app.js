@@ -1589,32 +1589,9 @@ function renderMilestoneTimeline(targetId, inputPoints) {
     target.innerHTML = `<p class="empty-note">暂无累计胜场里程碑。</p>`;
     return;
   }
-  const dates = points.map((row) => raceDateValue(row.race_date)).filter((value) => Number.isFinite(value));
-  const minDate = Math.min(...dates);
-  const maxDate = Math.max(...dates);
-  const span = Math.max(maxDate - minDate, 1);
-  const compact = target.closest(".milestone-compact-card");
-  const width = Math.max(compact ? 520 : 860, points.length * (compact ? 118 : 138));
-  const nodes = points.map((row, index) => {
-    const left = 54 + ((raceDateValue(row.race_date) - minDate) / span) * (width - 108);
-    const side = index % 2 === 0 ? "above" : "below";
-    return `
-      <button class="milestone-node ${side}" type="button" style="left:${left}px;" data-milestone-index="${index}" aria-label="第${formatNumber(row.cumulative_wins)}胜 ${escapeHtml(row.race_date || "")}">
-        <span class="milestone-dot"></span>
-        <span class="milestone-label">第${formatNumber(row.cumulative_wins)}胜<br><small>${escapeHtml(row.race_date || "")}</small></span>
-      </button>
-    `;
-  }).join("");
-  target.innerHTML = `
-    <div class="milestone-scroll" role="group" aria-label="累计胜场里程碑时间轴">
-      <div class="milestone-track" style="width:${width}px">
-        <div class="milestone-axis"></div>
-        ${nodes}
-      </div>
-    </div>
-    <div class="milestone-detail" id="milestoneDetail" aria-live="polite"></div>
-  `;
-  const detail = target.querySelector("#milestoneDetail");
+  const selectedIndex = Math.min(Number(target.dataset.selectedIndex ?? points.length - 1), points.length - 1);
+  target.innerHTML = `<div class="milestone-steps" role="group" aria-label="累计胜场节点，按时间排列">${points.map((row,index)=>`<button class="milestone-step" type="button" data-milestone-index="${index}" aria-pressed="${index===selectedIndex}"><strong>${formatNumber(row.cumulative_wins)}<small> 胜</small></strong><span>${escapeHtml(row.race_date||'')}</span></button>`).join('')}</div><div class="milestone-detail" id="${targetId}Detail" aria-live="polite"></div>`;
+  const detail = target.querySelector(".milestone-detail");
   const renderDetail = (row) => {
     if (!detail || !row) return;
     const horse = `${escapeHtml(row.horse || "")}${row.hkjc_name_zh ? `（${escapeHtml(row.hkjc_name_zh)}）` : ""}`;
@@ -1626,15 +1603,22 @@ function renderMilestoneTimeline(targetId, inputPoints) {
       ${row.race_url ? `<a href="${escapeHtml(row.race_url)}" target="_blank" rel="noreferrer">赛事链接</a>` : ""}
     `;
   };
-  renderDetail(points[0]);
+  renderDetail(points[selectedIndex]);
   for (const button of target.querySelectorAll("[data-milestone-index]")) {
     button.addEventListener("click", () => {
-      target.querySelector(".milestone-node.is-active")?.classList.remove("is-active");
+      target.querySelector(".milestone-step.is-active")?.classList.remove("is-active");
       button.classList.add("is-active");
+      target.dataset.selectedIndex = button.dataset.milestoneIndex;
+      target.querySelectorAll("[data-milestone-index]").forEach(b=>b.setAttribute("aria-pressed",String(b===button)));
       renderDetail(points[Number(button.dataset.milestoneIndex)]);
     });
   }
-  target.querySelector("[data-milestone-index]")?.classList.add("is-active");
+  const selected=target.querySelector(`[data-milestone-index="${selectedIndex}"]`);
+  selected?.classList.add("is-active");
+  requestAnimationFrame(()=>{
+    const strip=target.querySelector('.milestone-steps');
+    if (selected && strip.clientWidth) strip.scrollLeft += selected.getBoundingClientRect().left-strip.getBoundingClientRect().left-(strip.clientWidth-selected.clientWidth)/2;
+  });
 }
 
 function renderAnnualMilestoneTimeline(annualPerformance) {
@@ -1762,7 +1746,8 @@ function renderLeadingRankingGroup({
   const rankYears = [...availableYears].sort((a, b) => a - b);
   const historyByYear = new Map(history.map((row) => [Number(row.year), row]));
   const yearSelect = document.querySelector(`#${yearSelectId}`);
-  const preferredYear = activeCategory === "jra_overall" && availableYears.includes(2023) ? 2023 : availableYears[0];
+  const championYear = [...history].reverse().find(row => row.rank === 1)?.year;
+  const preferredYear = availableYears.includes(championYear) ? championYear : availableYears[0];
   const previousYear = Number(yearSelect?.value || preferredYear);
   const selectedYear = availableYears.includes(previousYear) ? previousYear : preferredYear;
   const selectedRank = historyByYear.get(selectedYear)?.rank;
@@ -2219,7 +2204,7 @@ async function renderSireAnalysis() {
   ]);
   const categories = normalizeLeadingCategories(rawCategories);
   const profile = sireProfile.summary;
-  const juvenileChampion=leadingHistory.history.find(r=>r.year===2022&&r.category==='two_year_all'&&r.rank===1);
+
   const firstChampion=leadingTop10.rows.find(r=>r.category==='first_crop_all'&&r.rank===1);
   els.sireContent.innerHTML = `
     <div class="analysis-title">
@@ -2234,7 +2219,14 @@ async function renderSireAnalysis() {
       <button type="button" role="tab" data-sire-section="market"><span>04</span><strong>配种市场</strong><small>配种费与配种数量</small></button>
     </div>
     <div class="analysis-subpanel" data-sire-panel="annual">
-    ${juvenileChampion?`<article class="career-honour"><p>2022 · 两岁马种牡马冠军</p><strong>第 1 名</strong><span>JRA + NAR · ${juvenileChampion.winners} 匹胜马 / ${juvenileChampion.runners} 匹出赛马 · ${juvenileChampion.wins} 胜</span><small>奖金 ${formatNumber(juvenileChampion.earnings,1)} 万日元 · <a href="${escapeHtml(juvenileChampion.source_url)}" target="_blank" rel="noreferrer">JBIS 排名来源 ↗</a></small></article>`:''}
+    <div class="career-honours" aria-label="种牡马冠军记录">${[
+      ['初年度种牡马冠军','first_crop_all',2020],
+      ['两岁马种牡马冠军','two_year_all',2022],
+      ['年度种牡马冠军','jra_nar_overall',2023],
+    ].map(([label,category,year])=>{
+      const row=leadingHistory.history.find(r=>r.category===category&&r.year===year&&r.rank===1);
+      return row?`<article class="career-honour"><p>${year} · ${label}</p><strong>第 1 名</strong><span>JRA + NAR · ${row.winners} 匹胜马 · ${row.wins} 胜</span><small>奖金 ${formatNumber(row.earnings,1)} 万日元</small><a href="${escapeHtml(row.source_url)}" target="_blank" rel="noreferrer">JBIS 排名来源 ↗</a></article>`:'';
+    }).join('')}</div>
     ${sectionBlock("AEI / CPI 指数", "", `${conceptIntro('indices',{heading:false})}
       <div class="awd-summary-band sire-index-summary-band" aria-label="AEI CPI 指数概览">
         <div><span>AEI</span><strong>${Number(sireIndices.summary?.crop_aei).toFixed(2)}</strong><small>世代合计 · 1.00 为同期平均</small></div>
@@ -3900,7 +3892,7 @@ async function renderProductionAnalysis() {
           <div class="chart-card-head with-controls">
             <div><h3>俱乐部 A vs 俱乐部 B</h3><p>每行用并列横条比较同一指标；点选查看匹数与百分点差。比例以各自收录产驹数为分母，按当前马主归属。</p></div>
             <div class="analysis-controls inline-controls club-compare-controls">
-              <label><span>俱乐部 A</span><select id="clubCompareA">${clubOptions(defaultClubA)}</select></label>
+              <label><span>俱乐部 A</span><select id="clubCompareA">${clubOptions("all")}</select></label>
               <label><span>俱乐部 B</span><select id="clubCompareB">${clubOptions(defaultClubB)}</select></label>
             </div>
           </div>
@@ -3911,7 +3903,7 @@ async function renderProductionAnalysis() {
       ${sectionBlock("俱乐部与生产牧场", "桑基图展示俱乐部马由哪些生产牧场出产；连线宽度代表产驹数量。", `
         <div class="club-sankey-scroll">
           ${controlledChartBlock("生产牧场 → 俱乐部", "按登记生产牧场与马主展示产驹来源关系；连线宽度表示匹数，不代表直接交易记录。窄屏可左右滑动，或查看下方完整明细。", "clubBreederSankeyChart", `
-            <label><span>俱乐部</span><select id="clubSankeyOwner"><option value="all">全部俱乐部（${formatNumber(clubHorses.length)}匹）</option>${clubOptions(defaultClubA)}</select></label>
+            <label><span>俱乐部</span><select id="clubSankeyOwner"><option value="all">全部俱乐部（${formatNumber(clubHorses.length)}匹）</option>${clubOptions("all")}</select></label>
           `)}
           <div class="club-sankey-legend" id="clubSankeyLegend" aria-label="桑基图颜色说明"></div>
         </div>
