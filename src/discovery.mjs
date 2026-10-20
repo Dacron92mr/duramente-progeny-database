@@ -1,3 +1,4 @@
+import {mountRecentUpdates} from './updates.mjs';
 import { matchesQuickFilter } from './filtering.mjs';
 
 export function discoveryStats(horses) {
@@ -5,7 +6,7 @@ export function discoveryStats(horses) {
   return { total: horses.length, years, graded: horses.filter(h => matchesQuickFilter(h, 'graded')).length };
 }
 
-export function mountDiscovery(host, horses) {
+export function mountDiscovery(host, horses, fetchData) {
   if (!host || host.childElementCount) return;
   const { total, years, graded } = discoveryStats(horses);
   host.innerHTML = `<details class="discovery-overview" open>
@@ -14,8 +15,9 @@ export function mountDiscovery(host, horses) {
       <div class="discovery-intro"><div><p class="discovery-name" lang="ja">ドゥラメンテ</p><h1>从一匹马，探索五个世代。</h1><p>血统、竞赛成绩与繁殖生涯，沿着你感兴趣的线索继续阅读。</p></div>
       <dl class="discovery-stats"><div><dt>收录产驹</dt><dd>${total}<small> 匹</small></dd></div><div><dt>出生世代</dt><dd>${years.length}<small> 代</small></dd><span>${years[0] ?? '—'}–${years.at(-1) ?? '—'}</span></div><div><dt>重赏冠军</dt><dd><a href="?quick=graded">${graded}<small> 匹 ↗</small></a></dd></div></dl></div>
       <nav class="discovery-paths" aria-label="探索数据库"><a href="?quick=g1"><strong>认识代表产驹 →</strong><span>从 G1 冠军开始</span></a><a href="?view=sire&sire=crop"><strong>比较五个世代 →</strong><span>同龄胜场与重赏表现</span></a><a href="?view=pedigree"><strong>探索血统与配合 →</strong><span>母父、牝系与近交</span></a></nav>
-    </div>
+    <section class="recent-updates" aria-label="最近动态"></section></div>
   </details>`;
+  if(fetchData)mountRecentUpdates(host.querySelector(".recent-updates"),fetchData);
 }
 
 // Move existing cards with their controls and listeners; never replace their data.

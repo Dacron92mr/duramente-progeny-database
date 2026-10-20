@@ -24,7 +24,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
   }
 
   let gradedSiblingCatalog;
-  let careerCatalog,blackTypeCatalog;
+  let careerCatalog,blackTypeCatalog,historyCatalog;
 
   async function openHorse(id, { trigger = null, updateHistory = true, preserveFocus = false } = {}) {
     if (!id) return;
@@ -45,9 +45,10 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     careerCatalog ||= fetchStaticData('post_racing_careers.json').catch(()=>{careerCatalog=null;return {horses:{}};});
     blackTypeCatalog ||= fetchStaticData('black_type_siblings.json').catch(()=>{blackTypeCatalog=null;return {dams:{}};});
     notableCatalog ||= fetchStaticData('notable_siblings.json').catch(()=>{notableCatalog=null;return {dams:{}};});
+    historyCatalog ||= fetchStaticData('career_history.json').catch(()=>{historyCatalog=null;return {horses:{}};});
     let result;
     try { result = await Promise.all([
-      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(), careerCatalog, blackTypeCatalog, notableCatalog,
+      getJson(`/api/horse?id=${encodeURIComponent(id)}`), gradedSiblingCatalog, getStaticHorses(), careerCatalog, blackTypeCatalog, notableCatalog, historyCatalog,
     ]); } catch (error) {
       if (state.horse !== requestedId) return;
       els.detail.innerHTML = '<h2 id="drawerTitle">马匹详情</h2><div class="load-error" role="alert">详情暂时无法载入。<button type="button" id="retryDetail">重试</button></div>';
@@ -55,11 +56,15 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
       return;
     }
     if (state.horse !== requestedId) return;
-    const [data, relatives, allHorses, careers, blackTypes, notables] = result;
+    const [data, relatives, allHorses, careers, blackTypes, notables, histories] = result;
     const horse = data.horse;
     const siblings = window.DuramenteRelatives.gradedSiblings(horse, allHorses, relatives);
     const vm = createProfileModel(data, siblings, allHorses);
     const career=careers.horses[String(id)];
+    const history=histories.horses[String(id)];
+    vm.affiliations=history?.netkeiba_id===horse.netkeiba_id?history.affiliations:[];
+    vm.raceAttributions=history?.netkeiba_id===horse.netkeiba_id?history.race_attributions:[];
+    vm.registration=history?.netkeiba_id===horse.netkeiba_id?history.registration:[];
     vm.postRacing=career?.netkeiba_id===horse.netkeiba_id?career.events:[];
     vm.siblingAudit=blackTypes.coverage?.[String(horse.id)];
     vm.blackType=(blackTypes.dams[horse.dam_netkeiba_id]||[]).filter(s=>s.netkeiba_id!==horse.netkeiba_id);

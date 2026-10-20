@@ -1,0 +1,44 @@
+.breeding-years {display:grid;gap:0;margin:16px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.breeding-years>details {padding:18px;border-bottom:1px solid var(--line)}
+.breeding-years>details:last-child {border-bottom:0}
+.breeding-years summary {display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none}
+.breeding-years summary:after {content:'⌄';color:var(--muted)}
+.breeding-years summary span {font-size:12px;color:var(--muted);margin-left:auto;text-align:right}
+.breeding-years dl {background:var(--panel-soft,var(--paper));padding:14px;border-radius:12px;margin:14px 0 0}
+.breeding-years dl>div {display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
+.breeding-years dl>div:last-child {border:0}
+.breeding-years dt {color:var(--muted);font-size:12px;flex-shrink:0}
+.breeding-years dd {text-align:right;margin:0;font-weight:500;overflow-wrap:anywhere}
+.breeding-original {margin-top:18px}.breeding-original>summary{cursor:pointer;color:var(--muted);font-size:12px;padding:12px 0}
+.life-timeline {list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--line)}
+.life-timeline li {display:grid;gap:5px;padding:4px 0 18px;position:relative;font-size:12px}
+.life-timeline li:before{content:'';position:absolute;left:-19px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--muted)}
+.life-timeline time,.life-timeline span{color:var(--muted)}.life-timeline p{margin:0}.life-timeline a{width:fit-content}
+.race-mobile{display:none}.race-detail-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:250px;white-space:normal}
+.race-detail-fields>div{display:grid;gap:3px}.race-detail-fields dt{font-size:11px;color:var(--muted)}.race-detail-fields dd{margin:0;overflow-wrap:anywhere}
+@media(max-width:600px){
+ .race-desktop{display:none}.race-mobile{display:block}
+ .race-mobile-row{border-bottom:1px solid var(--line);padding:14px 0}
+ .race-mobile-row>summary{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;list-style:none;cursor:pointer}
+ .race-mobile-meta{grid-column:1/-1;font-size:11px;color:var(--muted);line-height:1.6}
+ .race-mobile-meta small{display:inline-block;padding:1px 5px;border:1px solid var(--line);border-radius:5px}
+ .race-mobile-name{font-size:13px;line-height:1.8;overflow-wrap:anywhere}
+ .race-mobile-finish{grid-column:2;grid-row:2/4;align-self:center}
+ .race-mobile-finish .finish{font-size:20px}
+ .race-mobile-sub,.race-mobile-expand{font-size:11px;color:var(--muted)}
+ .race-mobile-expand{grid-column:1/-1;text-align:right}
+ .race-mobile-row[open]>summary{padding-bottom:12px;border-bottom:1px solid var(--line)}
+ .race-mobile-row>.race-detail-fields{margin:14px 0}
+ .breeding-years>details{padding:14px}.breeding-years summary{gap:8px}.breeding-years summary strong{font-size:13px}.breeding-years dl>div{gap:8px}
+}
+.recent-updates{margin:18px 0;padding:20px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.recent-updates>header{display:flex;align-items:center;justify-content:space-between;gap:12px}.recent-updates h2{font-size:18px;margin:0}.recent-updates header a{font-size:12px}
+.update-row{display:grid;grid-template-columns:64px minmax(0,1fr);gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}.update-row:last-child{border:0;padding-bottom:0}
+.update-date{align-self:start;background:var(--panel-soft,var(--paper));border-radius:12px;text-align:center;padding:10px 5px;display:grid;gap:5px}.update-date small{font-size:10px;color:var(--muted)}.update-date strong{font-size:25px}.update-date span{font-size:12px;color:var(--muted)}
+.update-horse{font-weight:650}.update-row p{margin:8px 0;line-height:1.6;font-size:13px}.update-row small{color:var(--muted);font-size:11px}.update-source{display:inline-block;margin-left:10px;font-size:11px}
+.updates-page{display:block;overflow:auto}.updates-page>main{max-width:880px;margin:40px auto;padding:20px}.updates-filters{display:flex;flex-wrap:wrap;gap:14px}.updates-filters label{display:grid;gap:6px;font-size:12px}.updates-filters input,.updates-filters select{max-width:100%;min-height:40px}
+@media(max-width:600px){.recent-updates{padding:16px}.update-row{grid-template-columns:54px minmax(0,1fr);gap:12px}.updates-page>main{margin:16px auto}.updates-filters label{width:100%}}
+
+#profile-breeding .stud-section>h2{display:none}
+#profile-breeding .stud-profile{border:0;padding:0;background:transparent}
+.update-date small{line-height:1.5;white-space:normal}

@@ -1,3 +1,4 @@
+import {historyNames} from './life-records.mjs';
 import { horseDamAgeBucket } from "./format.mjs";
 
 export function searchText(horse) {
@@ -9,8 +10,8 @@ export function searchText(horse) {
     horse.dam,
     horse.pedigree_crosses,
     horse.broodmare_sire,
-    horse.owner,
-    horse.trainer,
+    ...historyNames(horse,"owner"),
+    ...historyNames(horse,"trainer"),
     horse.breeder,
   ].filter(Boolean).join(" ").toLowerCase();
 }
@@ -60,7 +61,7 @@ export function filterAndSortHorses(horses, params) {
     if (damAgeBucket && horseDamAgeBucket(horse) !== damAgeBucket) return false;
     return checks.every(([param, field]) => {
       const value = params.get(param);
-      return !value || String(horse[field] ?? "") === value;
+      return !value || (["trainer","owner"].includes(field) ? historyNames(horse,field).includes(value) : String(horse[field] ?? "") === value);
     });
   });
 

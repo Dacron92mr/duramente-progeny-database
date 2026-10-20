@@ -148,7 +148,7 @@ body.drawer-open {
   margin-top: 22px;
 }
 
-.race-section summary {
+.race-section > summary {
   cursor: pointer;
   font-size: 19px;
   font-weight: 600;
@@ -156,18 +156,18 @@ body.drawer-open {
   list-style: none;
 }
 
-.race-section summary::-webkit-details-marker {
+.race-section > summary::-webkit-details-marker {
   display: none;
 }
 
-.race-section summary::after {
+.race-section > summary::after {
   content: "−";
   float: right;
   color: var(--muted);
   font-size: 22px;
 }
 
-.race-section:not([open]) summary::after {
+.race-section:not([open]) > summary::after {
   content: "+";
 }
 

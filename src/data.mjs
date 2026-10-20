@@ -9,6 +9,7 @@ export function createDataClient() {
   };
 
   const pending = new Map();
+  let horsesRequest;
   function fetchStaticData(path) {
     if (!pending.has(path)) {
       const request = fetchUncached(path).catch(error => { pending.delete(path); throw error; });
@@ -51,8 +52,12 @@ export function createDataClient() {
   }
 
   async function getStaticHorses() {
-    if (!staticData.horses) staticData.horses = await fetchStaticData("horses.json");
-    return staticData.horses;
+    if (staticData.horses) return staticData.horses;
+    horsesRequest ||= Promise.all([fetchStaticData("horses.json"),fetchStaticData('career_history.json')]).then(([horses,history])=>{
+      staticData.horses=horses.map(h=>({...h,affiliation_history:history.horses?.[String(h.id)]?.affiliations||[]}));
+      return staticData.horses;
+    }).catch(error=>{horsesRequest=null;throw error;});
+    return horsesRequest;
   }
 
   async function getStaticJson(url) {

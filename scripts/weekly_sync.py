@@ -110,6 +110,11 @@ def merge(horse,detail,patch,races=None):
         for race in races:
             grade=graded_race_group(race.get('race_name'))[0] if race.get('finish')==1 else None
             if ranks.get(grade,0)>ranks.get(result.get('achievement_class'),0): result['achievement_class']=grade
+    affiliation={key:patch[key] for key in ('trainer','owner','affiliation') if patch.get(key)}
+    if affiliation and horse.get('netkeiba_id'):
+        sources=updated.setdefault('sources',[])
+        if not any(all((s.get('data') or {}).get(k)==v for k,v in affiliation.items()) for s in sources):
+            sources.append({'source':'netkeiba','source_horse_id':horse['netkeiba_id'],'url':f"https://db.netkeiba.com/horse/{horse['netkeiba_id']}/",'fetched_at':datetime.now(timezone.utc).isoformat(),'data':affiliation})
     updated['horse']={**updated.get('horse',{}),**result}
     return result,updated
 
