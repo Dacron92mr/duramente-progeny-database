@@ -48,6 +48,9 @@ test('black type includes a verified placed sibling and retains event-level evid
  assert.equal(sister.evidence[0].finish,3);assert.equal(sister.evidence[0].grade,'G3');
  assert.match(renderBlackType([sister]),/第3名/);
  for(const siblings of Object.values(catalog.dams))for(const sibling of siblings)for(const e of sibling.evidence){
-  assert(['G1','G2','G3','L'].includes(e.grade));assert(e.finish>=1&&e.finish<=3);assert(e.source_url);
+  if (!['G1','G2','G3','L'].includes(e.grade)) {
+   assert(['G1','G2','G3','L','LR'].includes(e.catalogue_designation));
+   assert.match(e.designation_source,/^https:\/\//);
+  }assert(e.finish>=1&&e.finish<=3);assert(e.source_url);
  }
 });

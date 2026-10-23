@@ -175,14 +175,14 @@
     "graded_winners": 1,
     "stakes_winners": 1,
     "g1_winners": 0,
-    "total_earnings": 12707.6,
+    "total_earnings": 18705.4,
     "representatives": [
       {
         "name": "シュガークン",
         "hkjc_name_zh": "甜蜜時刻",
         "achievement_class": "G2",
-        "major_win": "24'青葉賞(G2)",
-        "earnings": 7414.2
+        "major_win": "26'富士S(G2)",
+        "earnings": 13412.0
       }
     ],
     "runner_rate": 0.8462,
@@ -191,12 +191,12 @@
     "graded_foal_rate": 0.0769,
     "graded_runner_rate": 0.0909,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 977.5,
-    "avg_earnings_per_runner": 1155.2,
+    "avg_earnings_per_foal": 1438.9,
+    "avg_earnings_per_runner": 1700.5,
     "median_earnings_per_runner": 140.9,
     "earnings_q25": 0.0,
     "earnings_q75": 338.2,
-    "max_earnings": 7414.2
+    "max_earnings": 13412.0
   },
   {
     "label": "Galileo",

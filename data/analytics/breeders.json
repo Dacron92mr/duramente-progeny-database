@@ -6911,14 +6911,14 @@
       "graded_winners": 1,
       "stakes_winners": 1,
       "g1_winners": 0,
-      "total_earnings": 7602.2,
+      "total_earnings": 13600.0,
       "representatives": [
         {
           "name": "シュガークン",
           "hkjc_name_zh": "甜蜜時刻",
           "achievement_class": "G2",
-          "major_win": "24'青葉賞(G2)",
-          "earnings": 7414.2
+          "major_win": "26'富士S(G2)",
+          "earnings": 13412.0
         }
       ],
       "runner_rate": 0.6667,
@@ -6927,27 +6927,27 @@
       "graded_foal_rate": 0.3333,
       "graded_runner_rate": 0.5,
       "g1_foal_rate": 0.0,
-      "avg_earnings_per_foal": 2534.1,
-      "avg_earnings_per_runner": 3801.1,
-      "median_earnings_per_runner": 3801.1,
+      "avg_earnings_per_foal": 4533.3,
+      "avg_earnings_per_runner": 6800.0,
+      "median_earnings_per_runner": 6800.0,
       "earnings_q25": 94.0,
-      "earnings_q75": 3801.1,
-      "max_earnings": 7414.2,
-      "starts": 41,
-      "wins_starts": 3,
+      "earnings_q75": 6800.0,
+      "max_earnings": 13412.0,
+      "starts": 42,
+      "wins_starts": 4,
       "seconds": 1,
       "thirds": 0,
-      "top3": 4,
-      "win_start_rate": 0.0732,
-      "quinella_rate": 0.0976,
-      "top3_rate": 0.0976,
+      "top3": 5,
+      "win_start_rate": 0.0952,
+      "quinella_rate": 0.119,
+      "top3_rate": 0.119,
       "surface": {
         "芝": {
-          "starts": 11,
-          "wins": 3,
-          "top3": 4,
-          "win_rate": 0.2727,
-          "top3_rate": 0.3636
+          "starts": 12,
+          "wins": 4,
+          "top3": 5,
+          "win_rate": 0.3333,
+          "top3_rate": 0.4167
         },
         "ダ": {
           "starts": 30,
@@ -6973,11 +6973,11 @@
           "top3_rate": 0.1429
         },
         "1400-1600": {
-          "starts": 12,
-          "wins": 0,
-          "top3": 1,
-          "win_rate": 0.0,
-          "top3_rate": 0.0833
+          "starts": 13,
+          "wins": 1,
+          "top3": 2,
+          "win_rate": 0.0769,
+          "top3_rate": 0.1538
         },
         "1200以下": {
           "starts": 18,
@@ -15363,14 +15363,14 @@
       "graded_winners": 1,
       "stakes_winners": 1,
       "g1_winners": 0,
-      "total_earnings": 7602.2,
+      "total_earnings": 13600.0,
       "representatives": [
         {
           "name": "シュガークン",
           "hkjc_name_zh": "甜蜜時刻",
           "achievement_class": "G2",
-          "major_win": "24'青葉賞(G2)",
-          "earnings": 7414.2
+          "major_win": "26'富士S(G2)",
+          "earnings": 13412.0
         }
       ],
       "runner_rate": 0.6667,
@@ -15379,27 +15379,27 @@
       "graded_foal_rate": 0.3333,
       "graded_runner_rate": 0.5,
       "g1_foal_rate": 0.0,
-      "avg_earnings_per_foal": 2534.1,
-      "avg_earnings_per_runner": 3801.1,
-      "median_earnings_per_runner": 3801.1,
+      "avg_earnings_per_foal": 4533.3,
+      "avg_earnings_per_runner": 6800.0,
+      "median_earnings_per_runner": 6800.0,
       "earnings_q25": 94.0,
-      "earnings_q75": 3801.1,
-      "max_earnings": 7414.2,
-      "starts": 41,
-      "wins_starts": 3,
+      "earnings_q75": 6800.0,
+      "max_earnings": 13412.0,
+      "starts": 42,
+      "wins_starts": 4,
       "seconds": 1,
       "thirds": 0,
-      "top3": 4,
-      "win_start_rate": 0.0732,
-      "quinella_rate": 0.0976,
-      "top3_rate": 0.0976,
+      "top3": 5,
+      "win_start_rate": 0.0952,
+      "quinella_rate": 0.119,
+      "top3_rate": 0.119,
       "surface": {
         "芝": {
-          "starts": 11,
-          "wins": 3,
-          "top3": 4,
-          "win_rate": 0.2727,
-          "top3_rate": 0.3636
+          "starts": 12,
+          "wins": 4,
+          "top3": 5,
+          "win_rate": 0.3333,
+          "top3_rate": 0.4167
         },
         "ダ": {
           "starts": 30,
@@ -15425,11 +15425,11 @@
           "top3_rate": 0.1429
         },
         "1400-1600": {
-          "starts": 12,
-          "wins": 0,
-          "top3": 1,
-          "win_rate": 0.0,
-          "top3_rate": 0.0833
+          "starts": 13,
+          "wins": 1,
+          "top3": 2,
+          "win_rate": 0.0769,
+          "top3_rate": 0.1538
         },
         "1200以下": {
           "starts": 18,
@@ -28339,14 +28339,14 @@
       "graded_winners": 1,
       "stakes_winners": 1,
       "g1_winners": 0,
-      "total_earnings": 7602.2,
+      "total_earnings": 13600.0,
       "representatives": [
         {
           "name": "シュガークン",
           "hkjc_name_zh": "甜蜜時刻",
           "achievement_class": "G2",
-          "major_win": "24'青葉賞(G2)",
-          "earnings": 7414.2
+          "major_win": "26'富士S(G2)",
+          "earnings": 13412.0
         }
       ],
       "runner_rate": 0.6667,
@@ -28355,27 +28355,27 @@
       "graded_foal_rate": 0.3333,
       "graded_runner_rate": 0.5,
       "g1_foal_rate": 0.0,
-      "avg_earnings_per_foal": 2534.1,
-      "avg_earnings_per_runner": 3801.1,
-      "median_earnings_per_runner": 3801.1,
+      "avg_earnings_per_foal": 4533.3,
+      "avg_earnings_per_runner": 6800.0,
+      "median_earnings_per_runner": 6800.0,
       "earnings_q25": 94.0,
-      "earnings_q75": 3801.1,
-      "max_earnings": 7414.2,
-      "starts": 41,
-      "wins_starts": 3,
+      "earnings_q75": 6800.0,
+      "max_earnings": 13412.0,
+      "starts": 42,
+      "wins_starts": 4,
       "seconds": 1,
       "thirds": 0,
-      "top3": 4,
-      "win_start_rate": 0.0732,
-      "quinella_rate": 0.0976,
-      "top3_rate": 0.0976,
+      "top3": 5,
+      "win_start_rate": 0.0952,
+      "quinella_rate": 0.119,
+      "top3_rate": 0.119,
       "surface": {
         "芝": {
-          "starts": 11,
-          "wins": 3,
-          "top3": 4,
-          "win_rate": 0.2727,
-          "top3_rate": 0.3636
+          "starts": 12,
+          "wins": 4,
+          "top3": 5,
+          "win_rate": 0.3333,
+          "top3_rate": 0.4167
         },
         "ダ": {
           "starts": 30,
@@ -28401,11 +28401,11 @@
           "top3_rate": 0.1429
         },
         "1400-1600": {
-          "starts": 12,
-          "wins": 0,
-          "top3": 1,
-          "win_rate": 0.0,
-          "top3_rate": 0.0833
+          "starts": 13,
+          "wins": 1,
+          "top3": 2,
+          "win_rate": 0.0769,
+          "top3_rate": 0.1538
         },
         "1200以下": {
           "starts": 18,

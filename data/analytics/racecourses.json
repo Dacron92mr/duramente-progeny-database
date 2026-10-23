@@ -1,6 +1,6 @@
 {
   "summary": {
-    "valid_starts": 10927,
+    "valid_starts": 10928,
     "courses": 40,
     "main_chart_min_starts": 30
   },
@@ -16,21 +16,21 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1067,
-      "wins_starts": 119,
+      "starts": 1068,
+      "wins_starts": 120,
       "seconds": 109,
       "thirds": 86,
-      "top3": 314,
-      "win_start_rate": 0.1115,
-      "quinella_rate": 0.2137,
-      "top3_rate": 0.2943,
+      "top3": 315,
+      "win_start_rate": 0.1124,
+      "quinella_rate": 0.2144,
+      "top3_rate": 0.2949,
       "surface": {
         "芝": {
-          "starts": 685,
-          "wins": 80,
-          "top3": 215,
-          "win_rate": 0.1168,
-          "top3_rate": 0.3139
+          "starts": 686,
+          "wins": 81,
+          "top3": 216,
+          "win_rate": 0.1181,
+          "top3_rate": 0.3149
         },
         "ダ": {
           "starts": 377,
@@ -63,11 +63,11 @@
           "top3_rate": 0.2988
         },
         "1400-1600": {
-          "starts": 560,
-          "wins": 57,
-          "top3": 146,
-          "win_rate": 0.1018,
-          "top3_rate": 0.2607
+          "starts": 561,
+          "wins": 58,
+          "top3": 147,
+          "win_rate": 0.1034,
+          "top3_rate": 0.262
         },
         "2500以上": {
           "starts": 12,
@@ -2657,21 +2657,21 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1067,
-      "wins_starts": 119,
+      "starts": 1068,
+      "wins_starts": 120,
       "seconds": 109,
       "thirds": 86,
-      "top3": 314,
-      "win_start_rate": 0.1115,
-      "quinella_rate": 0.2137,
-      "top3_rate": 0.2943,
+      "top3": 315,
+      "win_start_rate": 0.1124,
+      "quinella_rate": 0.2144,
+      "top3_rate": 0.2949,
       "surface": {
         "芝": {
-          "starts": 685,
-          "wins": 80,
-          "top3": 215,
-          "win_rate": 0.1168,
-          "top3_rate": 0.3139
+          "starts": 686,
+          "wins": 81,
+          "top3": 216,
+          "win_rate": 0.1181,
+          "top3_rate": 0.3149
         },
         "ダ": {
           "starts": 377,
@@ -2704,11 +2704,11 @@
           "top3_rate": 0.2988
         },
         "1400-1600": {
-          "starts": 560,
-          "wins": 57,
-          "top3": 146,
-          "win_rate": 0.1018,
-          "top3_rate": 0.2607
+          "starts": 561,
+          "wins": 58,
+          "top3": 147,
+          "win_rate": 0.1034,
+          "top3_rate": 0.262
         },
         "2500以上": {
           "starts": 12,
@@ -3543,21 +3543,21 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1067,
-      "wins_starts": 119,
+      "starts": 1068,
+      "wins_starts": 120,
       "seconds": 109,
       "thirds": 86,
-      "top3": 314,
-      "win_start_rate": 0.1115,
-      "quinella_rate": 0.2137,
-      "top3_rate": 0.2943,
+      "top3": 315,
+      "win_start_rate": 0.1124,
+      "quinella_rate": 0.2144,
+      "top3_rate": 0.2949,
       "surface": {
         "芝": {
-          "starts": 685,
-          "wins": 80,
-          "top3": 215,
-          "win_rate": 0.1168,
-          "top3_rate": 0.3139
+          "starts": 686,
+          "wins": 81,
+          "top3": 216,
+          "win_rate": 0.1181,
+          "top3_rate": 0.3149
         },
         "ダ": {
           "starts": 377,
@@ -3590,11 +3590,11 @@
           "top3_rate": 0.2988
         },
         "1400-1600": {
-          "starts": 560,
-          "wins": 57,
-          "top3": 146,
-          "win_rate": 0.1018,
-          "top3_rate": 0.2607
+          "starts": 561,
+          "wins": 58,
+          "top3": 147,
+          "win_rate": 0.1034,
+          "top3_rate": 0.262
         },
         "2500以上": {
           "starts": 12,
@@ -5010,21 +5010,21 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1067,
-      "wins_starts": 119,
+      "starts": 1068,
+      "wins_starts": 120,
       "seconds": 109,
       "thirds": 86,
-      "top3": 314,
-      "win_start_rate": 0.1115,
-      "quinella_rate": 0.2137,
-      "top3_rate": 0.2943,
+      "top3": 315,
+      "win_start_rate": 0.1124,
+      "quinella_rate": 0.2144,
+      "top3_rate": 0.2949,
       "surface": {
         "芝": {
-          "starts": 685,
-          "wins": 80,
-          "top3": 215,
-          "win_rate": 0.1168,
-          "top3_rate": 0.3139
+          "starts": 686,
+          "wins": 81,
+          "top3": 216,
+          "win_rate": 0.1181,
+          "top3_rate": 0.3149
         },
         "ダ": {
           "starts": 377,
@@ -5057,11 +5057,11 @@
           "top3_rate": 0.2988
         },
         "1400-1600": {
-          "starts": 560,
-          "wins": 57,
-          "top3": 146,
-          "win_rate": 0.1018,
-          "top3_rate": 0.2607
+          "starts": 561,
+          "wins": 58,
+          "top3": 147,
+          "win_rate": 0.1034,
+          "top3_rate": 0.262
         },
         "2500以上": {
           "starts": 12,

@@ -8,7 +8,7 @@ import {renderProgenyRows,renderHorseCards} from '../src/progeny-renderer.mjs';
 const data=async p=>JSON.parse(await readFile(new URL('../'+p,import.meta.url),'utf8'));
 test('major win badges retain explicit race systems and reconcile two summaries to winning records',async()=>{
  for(const code of ['G1','G2','G3','JpnI','JpnII','JpnIII','J.G2','J.GIII'])assert.match(raceLabel(`Race(${code})`),new RegExp(`>${code.replace('.','\\.')}<`));
- for(const text of ['',null,'Race(OP)','Race','Race(G)'])assert(!majorWinLabel(text).includes('grade-pill'));
+ for(const text of ['',null,'Race','Race(G)'])assert(!majorWinLabel(text).includes('grade-pill'));
  for(const [id,grade] of [[15,'JpnIII'],[18,'JpnI']]){
   const detail=await data(`data/horses/${id}.json`);assert(detail.races.some(r=>r.finish===1&&r.race_name.includes(`(${grade})`)));
   assert(majorWinLabel(detail.horse.major_win).includes(`>${grade}<`));

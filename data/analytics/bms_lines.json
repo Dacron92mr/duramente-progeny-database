@@ -163,7 +163,7 @@
     "graded_winners": 4,
     "stakes_winners": 4,
     "g1_winners": 2,
-    "total_earnings": 150477.6,
+    "total_earnings": 156475.4,
     "representatives": [
       {
         "name": "エネルジコ",
@@ -180,18 +180,18 @@
         "earnings": 14174.4
       },
       {
+        "name": "シュガークン",
+        "hkjc_name_zh": "甜蜜時刻",
+        "achievement_class": "G2",
+        "major_win": "26'富士S(G2)",
+        "earnings": 13412.0
+      },
+      {
         "name": "ミアネーロ",
         "hkjc_name_zh": "心傾慕",
         "achievement_class": "G3",
         "major_win": "24'フラワーC(G3)",
         "earnings": 9319.0
-      },
-      {
-        "name": "シュガークン",
-        "hkjc_name_zh": "甜蜜時刻",
-        "achievement_class": "G2",
-        "major_win": "24'青葉賞(G2)",
-        "earnings": 7414.2
       }
     ],
     "runner_rate": 0.8718,
@@ -200,8 +200,8 @@
     "graded_foal_rate": 0.0513,
     "graded_runner_rate": 0.0588,
     "g1_foal_rate": 0.0256,
-    "avg_earnings_per_foal": 1929.2,
-    "avg_earnings_per_runner": 2212.9,
+    "avg_earnings_per_foal": 2006.1,
+    "avg_earnings_per_runner": 2301.1,
     "median_earnings_per_runner": 483.0,
     "earnings_q25": 0.0,
     "earnings_q75": 2505.5,

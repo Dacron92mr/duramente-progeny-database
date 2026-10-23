@@ -10,9 +10,9 @@
     "g1_horses": 11,
     "g2_horses": 7,
     "g3_horses": 11,
-    "total_earnings": 1663915.9,
-    "starts": 10927,
-    "wins_starts": 1270,
+    "total_earnings": 1669913.7,
+    "starts": 10928,
+    "wins_starts": 1271,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -50,15 +50,15 @@
         "earnings": 47277.8
       }
     ],
-    "earnings_per_foal": 2291.9,
+    "earnings_per_foal": 2300.2,
     "debut_rate": 0.9022,
     "winner_foal_rate": 0.6185,
     "graded_foal_rate": 0.0399,
     "two_win_rate": 0.4408,
     "three_win_rate": 0.2948,
-    "start_win_rate": 0.1162,
+    "start_win_rate": 0.1163,
     "avg_starts_per_runner": 16.7,
-    "turf_awd": 1885.3,
+    "turf_awd": 1884.6,
     "dirt_awd": 1460.3,
     "median_earnings": 800.0,
     "earnings_q25": 23.2,
@@ -67,7 +67,7 @@
   "evaluation_cards": [
     {
       "label": "总奖金",
-      "value": 1663915.9,
+      "value": 1669913.7,
       "unit": "万円",
       "note": "产驹累计奖金"
     },
@@ -103,7 +103,7 @@
     },
     {
       "label": "芝平均胜距",
-      "value": 1885.3,
+      "value": 1884.6,
       "unit": "m",
       "note": "胜场平均"
     },
@@ -321,10 +321,17 @@
       "g1_horses": 0,
       "g2_horses": 1,
       "g3_horses": 2,
-      "total_earnings": 155851.7,
-      "starts": 1482,
-      "wins_starts": 158,
+      "total_earnings": 161849.5,
+      "starts": 1483,
+      "wins_starts": 159,
       "representatives": [
+        {
+          "name": "シュガークン",
+          "hkjc_name_zh": "甜蜜時刻",
+          "achievement_class": "G2",
+          "major_win": "26'富士S(G2)",
+          "earnings": 13412.0
+        },
         {
           "name": "ガイアメンテ",
           "hkjc_name_zh": "心快意快",
@@ -347,13 +354,6 @@
           "earnings": 9319.0
         },
         {
-          "name": "シュガークン",
-          "hkjc_name_zh": "甜蜜時刻",
-          "achievement_class": "G2",
-          "major_win": "24'青葉賞(G2)",
-          "earnings": 7414.2
-        },
-        {
           "name": "ミスタージーティー",
           "hkjc_name_zh": "跑車男兒",
           "achievement_class": "Listed",
@@ -361,15 +361,15 @@
           "earnings": 5876.1
         }
       ],
-      "earnings_per_foal": 1320.8,
+      "earnings_per_foal": 1371.6,
       "debut_rate": 0.8983,
       "winner_foal_rate": 0.6186,
       "graded_foal_rate": 0.0254,
       "two_win_rate": 0.3559,
       "three_win_rate": 0.2203,
-      "start_win_rate": 0.1066,
+      "start_win_rate": 0.1072,
       "avg_starts_per_runner": 14.0,
-      "turf_awd": 1950.0,
+      "turf_awd": 1943.9,
       "dirt_awd": 1461.0,
       "median_earnings": 634.5,
       "earnings_q25": 13.6,
@@ -643,13 +643,13 @@
     {
       "crop": 2021,
       "age": 5,
-      "starts": 279,
-      "wins": 22,
-      "cumulative_starts": 1482,
-      "cumulative_wins": 158,
-      "cumulative_wins_per_100_foals": 133.9,
-      "cumulative_wins_per_100_runners": 149.1,
-      "cumulative_win_rate": 0.1066
+      "starts": 280,
+      "wins": 23,
+      "cumulative_starts": 1483,
+      "cumulative_wins": 159,
+      "cumulative_wins_per_100_foals": 134.7,
+      "cumulative_wins_per_100_runners": 150.0,
+      "cumulative_win_rate": 0.1072
     },
     {
       "crop": 2021,
@@ -1042,6 +1042,15 @@
       "meeting": "2東京12",
       "grade": "GII",
       "grade_group": "G2"
+    },
+    {
+      "race_date": "2026/10/17",
+      "horse": "シュガークン",
+      "race_name": "富士S(GII)",
+      "race_url": "https://db.netkeiba.com/race/202605040611/",
+      "meeting": "4東京6",
+      "grade": "GII",
+      "grade_group": "G2"
     }
   ],
   "surface_distance": [
@@ -1078,11 +1087,11 @@
     {
       "surface": "芝",
       "distance": "1400-1600",
-      "starts": 966,
-      "wins": 84,
-      "top3": 223,
-      "win_rate": 0.087,
-      "top3_rate": 0.2308,
+      "starts": 967,
+      "wins": 85,
+      "top3": 224,
+      "win_rate": 0.0879,
+      "top3_rate": 0.2316,
       "small_sample": false
     },
     {
@@ -1192,11 +1201,11 @@
     },
     {
       "label": "牡",
-      "starts": 4830,
-      "wins": 630,
-      "top3": 1574,
-      "win_rate": 0.1304,
-      "top3_rate": 0.3259
+      "starts": 4831,
+      "wins": 631,
+      "top3": 1575,
+      "win_rate": 0.1306,
+      "top3_rate": 0.326
     },
     {
       "label": "セン",

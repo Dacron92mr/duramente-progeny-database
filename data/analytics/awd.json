@@ -1,12 +1,12 @@
 {
   "summary": {
     "overall_awd": 1589.3,
-    "turf_awd": 1885.3,
+    "turf_awd": 1884.6,
     "dirt_awd": 1460.3,
-    "overall_wins": 1260,
+    "overall_wins": 1261,
     "synthetic_wins": 1,
     "synthetic_awd": 1600.0,
-    "turf_wins": 382,
+    "turf_wins": 383,
     "dirt_wins": 877
   },
   "by_crop": [
@@ -33,10 +33,10 @@
     },
     {
       "label": "2021",
-      "overall_awd": 1634.3,
-      "turf_awd": 1950.0,
+      "overall_awd": 1634.1,
+      "turf_awd": 1943.9,
       "dirt_awd": 1461.0,
-      "wins": 158
+      "wins": 159
     },
     {
       "label": "2022",
@@ -99,7 +99,7 @@
       "dirt_awd": null,
       "di": 1.93,
       "cd": 0.64,
-      "race_stamina_percentile": 0.959,
+      "race_stamina_percentile": 0.961,
       "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.92
     },
@@ -127,7 +127,7 @@
       "dirt_awd": null,
       "di": 1.91,
       "cd": 0.63,
-      "race_stamina_percentile": 0.959,
+      "race_stamina_percentile": 0.961,
       "pedigree_stamina_percentile": 0.053,
       "stamina_gap": 0.91
     },
@@ -141,9 +141,9 @@
       "dirt_awd": 1800.0,
       "di": 1.8,
       "cd": 0.64,
-      "race_stamina_percentile": 0.959,
+      "race_stamina_percentile": 0.961,
       "pedigree_stamina_percentile": 0.064,
-      "stamina_gap": 0.89
+      "stamina_gap": 0.9
     },
     {
       "horse_id": 175,
