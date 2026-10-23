@@ -112,6 +112,44 @@
           "verified_at": "2026-10-16"
         }
       ]
+    },
+    "9": {
+      "netkeiba_id": "2020103626",
+      "name": "ドゥラエレーデ",
+      "dam": "マルケッサ",
+      "sire": "ドゥラメンテ",
+      "events": [
+        {
+          "role": "stallion_transition",
+          "status": "confirmed",
+          "date": "2026-10-01",
+          "summary": "退役后已确定种牡马安置去向；10月1日近况称身在浦河町，牧场名称暂未公布。",
+          "location": "浦河町（10月1日公布）",
+          "source_url": "https://x.com/dolcemore___/status/2105466292128166156",
+          "source_name": "ドルチェモア X · ドゥラエレーデ近况",
+          "verified_at": "2026-10-23"
+        }
+      ]
+    },
+    "57": {
+      "netkeiba_id": "2020103132",
+      "name": "オクタヴィアヌス",
+      "dam": "クイーンズアドヴァイス",
+      "sire": "ドゥラメンテ",
+      "events": [
+        {
+          "role": "leading",
+          "status": "announced",
+          "date": "2026-10-24",
+          "announced_at": "2026-10-23",
+          "summary": "JRA 公布预定于10月24日在新潟赛马场首次担任诱导马；安排可能随马匹状态调整。",
+          "organization": "JRA",
+          "location": "新潟赛马场",
+          "source_url": "https://x.com/JRA_Special/status/2113527397241008200",
+          "source_name": "JRA 公式 X",
+          "verified_at": "2026-10-23"
+        }
+      ]
     }
   }
 }

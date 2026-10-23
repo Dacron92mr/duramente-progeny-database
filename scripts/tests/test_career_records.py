@@ -20,3 +20,15 @@ class CareerTests(unittest.TestCase):
    first=updates(root,'2026-10-20');second=updates(root,'2026-10-21');self.assertEqual(first['events'],second['events']);self.assertTrue(first['events'][0]['historical']);self.assertEqual(first['events'][0]['recorded_at'],'2026-10-20')
    build(root);self.assertEqual(json.loads((data/'career_history.json').read_text())['horses']['1']['affiliations'],[])
 if __name__=='__main__':unittest.main()
+
+class NewsTests(unittest.TestCase):
+ def test_announced_events_and_identity_checked_news_survive_rebuild(self):
+  with tempfile.TemporaryDirectory() as tmp:
+   root=Path(tmp);data=root/'data';(data/'horses').mkdir(parents=True)
+   def write(name,value):(data/name).write_text(json.dumps(value))
+   write('horses.json',[{'id':1,'name':'A','netkeiba_id':'123'}])
+   write('post_racing_careers.json',{'horses':{'1':{'events':[{'date':'2026-10-24','status':'announced','summary':'预定诱导马出道','source_url':'https://example.org/plan'}]}}})
+   write('horse_news.json',{'events':[{'id':'verified','horse_id':1,'netkeiba_id':'123','date':'2026-10-22','title':'预报名','source_url':'https://example.org/news'},{'id':'wrong-horse','horse_id':1,'netkeiba_id':'999','date':'2026-10-22','title':'不应收录','source_url':'https://example.org/wrong'}]})
+   first=updates(root,'2026-10-23');second=updates(root,'2026-10-25')
+   self.assertEqual(first['events'],second['events']);self.assertEqual(len(second['events']),2)
+   self.assertEqual(next(e for e in second['events'] if e['type']=='career')['status'],'announced')

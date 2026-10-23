@@ -1,3 +1,4 @@
+import {mountRecentUpdates} from './src/updates.mjs';
 import {historyNames} from './src/life-records.mjs';
 import { mountDiscovery, organizeAnalysis } from './src/discovery.mjs';
 import {mountCourseAnalysis} from './src/racecourse-analysis.mjs';
@@ -435,6 +436,7 @@ function updateDirectionButton() {
 }
 
 async function loadSummary() {
+  mountRecentUpdates(document.querySelector('#sidebarUpdates'), fetchStaticData);
   const summary = await getJson("/api/summary");
   state.allTotal = Number(summary.horses || 0);
   document.querySelector("#collectionCount").textContent = `${state.allTotal.toLocaleString("zh-CN")} 匹产驹`;

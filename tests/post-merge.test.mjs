@@ -31,14 +31,14 @@ test('jurisdiction counts reconcile and each surface has its own minimum sample'
 });
 test('dated careers match horse identity, distinguish plans and need no breeding record',()=>{
  const careers=read('post_racing_careers.json').horses;
- assert.deepEqual(Object.keys(careers),['14','17','591','677','689']);
+ assert.deepEqual(Object.keys(careers),['9','14','17','57','591','677','689']);
  for(const [id,row] of Object.entries(careers)){
   const horse=read('horses/'+id+'.json').horse;
   assert.equal(row.netkeiba_id,horse.netkeiba_id);assert.equal(row.name,horse.name);
   assert(row.events.every(e=>/^https:\/\//.test(e.source_url)&&/^\d{4}-\d{2}-\d{2}$/.test(e.date)));
   assert.match(renderPostRacing(row.events),/退役后去向/);
  }
- assert.match(renderPostRacing(careers[17].events),/当时公布的计划/);
+ assert.match(renderPostRacing(careers[17].events),/已公布计划/);
  assert.match(renderPostRacing(careers[17].events),/已确认记录/);
  assert.equal(renderPostRacing([]),'');
 });

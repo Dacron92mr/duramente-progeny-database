@@ -1,6 +1,58 @@
 {
   "events": [
     {
+      "id": "57:career:fb4c86909d1a",
+      "horse_id": 57,
+      "horse_name": "オクタヴィアヌス",
+      "type": "career",
+      "event_date": "2026-10-24",
+      "recorded_at": "2026-10-23",
+      "title": "JRA 公布预定于10月24日在新潟赛马场首次担任诱导马；安排可能随马匹状态调整。",
+      "source_url": "https://x.com/JRA_Special/status/2113527397241008200",
+      "historical": false,
+      "featured": true,
+      "status": "announced"
+    },
+    {
+      "id": "6:news:lugal-bc-preentry-2026",
+      "horse_id": 6,
+      "horse_name": "ルガル",
+      "type": "news",
+      "event_date": "2026-10-22",
+      "recorded_at": "2026-10-23",
+      "title": "育马者杯草地短途赛、草地一哩赛预报名",
+      "source_url": "https://jra.jp/news/202610/102203.html",
+      "historical": false,
+      "featured": true,
+      "status": null
+    },
+    {
+      "id": "9:career:c41e727cd142",
+      "horse_id": 9,
+      "horse_name": "ドゥラエレーデ",
+      "type": "career",
+      "event_date": "2026-10-01",
+      "recorded_at": "2026-10-23",
+      "title": "退役后已确定种牡马安置去向；10月1日近况称身在浦河町，牧场名称暂未公布。",
+      "source_url": "https://x.com/dolcemore___/status/2105466292128166156",
+      "historical": false,
+      "featured": true,
+      "status": "confirmed"
+    },
+    {
+      "id": "9:registration:325a42e97e1b",
+      "horse_id": 9,
+      "horse_name": "ドゥラエレーデ",
+      "type": "registration",
+      "event_date": "2026-10-01",
+      "recorded_at": "2026-10-23",
+      "title": "退役后种牡马去向公布 · 已结束竞赛生涯，公布种牡马安置去向；此日期为近况公布日，非确切退役日。",
+      "source_url": "https://x.com/dolcemore___/status/2105466292128166156",
+      "historical": false,
+      "featured": true,
+      "status": null
+    },
+    {
       "id": "40:race:202605040611:da9c927e",
       "horse_id": 40,
       "horse_name": "シュガークン",

@@ -10,13 +10,16 @@ def build(root,today=None):
  state_path=data/'updates_state.json';old=read(state_path,{})
  feed=read(data/'updates.json',{'events':[]});known={e['id'] for e in feed['events']};new={}
  careers=read(data/'post_racing_careers.json',{'horses':{}})['horses'];history=read(data/'career_history_verified.json',{'horses':{}})['horses'];affiliations=read(data/'career_history.json',{'horses':{}})['horses']
- def add(h,kind,key,date,title,source,featured=False):
+ def add(h,kind,key,date,title,source,featured=False,status=None):
   eid=f"{h['id']}:{kind}:{key}"
   if eid in known or not source or not source.startswith('https://'):return
   date=(date or '').replace('/','-')
   historical=not date or date[:4]!=today[:4] or (len(date)==10 and (datetime.fromisoformat(today)-datetime.fromisoformat(date)).days>30)
-  feed['events'].append(dict(id=eid,horse_id=h['id'],horse_name=h['name'],type=kind,event_date=date or None,recorded_at=today,title=title,source_url=source,historical=historical,featured=featured));known.add(eid)
+  feed['events'].append(dict(id=eid,horse_id=h['id'],horse_name=h['name'],type=kind,event_date=date or None,recorded_at=today,title=title,source_url=source,historical=historical,featured=featured,status=status));known.add(eid)
+ news=read(data/'horse_news.json',{'events':[]})['events']
  for h in read(data/'horses.json',[]):
+  for e in news:
+   if e['horse_id']==h['id'] and e['netkeiba_id']==h['netkeiba_id']:add(h,'news',e['id'],e['date'],e['title'],e['source_url'],True)
   hid=str(h['id']);detail=read(data/'horses'/f'{hid}.json',{});before=old.get(hid,{})
   races={str(r.get('race_id') or digest([r.get('race_date'),r.get('race_name')])):digest(r) for r in detail.get('races',[])}
   for r in detail.get('races',[]):
@@ -27,8 +30,8 @@ def build(root,today=None):
   stud=detail.get('stud',[]);stud_hash=digest(stud)
   if before and before.get('stud')!=stud_hash and stud:
    add(h,'breeding',stud_hash,None,'繁殖资料补充',next((p.get('studbook_url') for p in stud if p.get('studbook_url')),None),True)
-  for e in careers.get(hid,{}).get('events',[]):add(h,'career',digest(e)[:12],e.get('date'),e['summary'],e['source_url'],True)
-  for e in history.get(hid,{}).get('registration',[]):add(h,'registration',digest(e)[:12],e.get('date'),e['title']+' · '+e['summary'],e['source_url'],True)
+  for e in careers.get(hid,{}).get('events',[]):add(h,'career',digest(e)[:12],e.get('date'),e['summary'],e['source_url'],True,e.get('status'))
+  for e in history.get(hid,{}).get('registration',[]):add(h,'registration',digest(e)[:12],e.get('date'),e['title']+' · '+e['summary'],e['source_url'],True,e.get('status'))
   # A single explicitly verified recent result seeds the initial editorial feed.
   if not old and hid=='40':
    for r in detail.get('races',[]):

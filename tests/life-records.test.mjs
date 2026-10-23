@@ -27,7 +27,15 @@ test('updates filter collection date independently of historical event date',()=
  assert.equal(filterUpdates(events,{date:'2026-10-20',horse:9,type:'registration'}).length,1);assert.equal(filterUpdates(events,{date:'2025-12-11'}).length,0);assert.match(updateRows(events),/新增历史资料/);assert.match(updateRows(events),/2025/);
 });
 test('Dura Erede history separates deregistration, later racing and trainer attribution',()=>{
- const history=JSON.parse(fs.readFileSync(new URL('../data/career_history.json',import.meta.url))).horses['9'];assert(history.affiliations.some(e=>e.trainer==='池添学'));assert(history.affiliations.some(e=>e.trainer==='藤田輝信'));assert.equal(history.registration.length,2);assert.equal(history.race_attributions.find(e=>e.date==='2023-12-29').trainer,'池添学');
+ const history=JSON.parse(fs.readFileSync(new URL('../data/career_history.json',import.meta.url))).horses['9'];assert(history.affiliations.some(e=>e.trainer==='池添学'));assert(history.affiliations.some(e=>e.trainer==='藤田輝信'));assert.equal(history.registration.length,3);assert.equal(history.race_attributions.find(e=>e.date==='2023-12-29').trainer,'池添学');
 });
 
 test('stallion yearly cards preserve genuine zero counts',()=>{const html=renderBreedingYears({role:'stallion',fees:[{year:2026,fee_text:'100万円',bred_count:0}],stallion_stats:[{year:2026,births:0,registered_total:0}]});assert.match(html,/<dt>出生<\/dt><dd>0<\/dd>/);});
+
+test('new career notices preserve confirmed versus announced status',()=>{
+ const data=JSON.parse(fs.readFileSync(new URL('../data/post_racing_careers.json',import.meta.url))).horses;
+ assert.equal(data['9'].events[0].status,'confirmed');
+ assert.equal(data['57'].events[0].status,'announced');
+ assert.equal(data['57'].events[0].date,'2026-10-24');
+ assert.match(updateRows([{...data['57'].events[0],horse_id:57,title:'预定诱导马出道',recorded_at:'2026-10-23'}]),/已公布计划/);
+});
