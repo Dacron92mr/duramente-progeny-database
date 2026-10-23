@@ -2,15 +2,15 @@
   "source": {
     "name": "JBIS-Search",
     "url": "https://www.jbis.or.jp/horse/0001151936/sire/generation/thorough_c/",
-    "updated_at": "2026-10-12"
+    "updated_at": "2026-10-18"
   },
   "summary": {
     "crop_aei": 1.72,
-    "annual_aei": 1.89,
+    "annual_aei": 1.9,
     "cpi": 1.89,
     "aei_cpi_ratio": 0.91,
     "starters": 622,
-    "earnings_yen": 14944181000
+    "earnings_yen": 15010161000
   },
   "crops": [
     {
@@ -53,7 +53,7 @@
       "two_year_old_winners": 20,
       "graded_winners": 8,
       "earnings_yen": 3938765000,
-      "aei": 2.49
+      "aei": 2.48
     },
     {
       "covering_year": 2020,
@@ -66,8 +66,8 @@
       "placers": 17,
       "two_year_old_winners": 10,
       "graded_winners": 3,
-      "earnings_yen": 1458743000,
-      "aei": 1.05
+      "earnings_yen": 1518723000,
+      "aei": 1.09
     },
     {
       "covering_year": 2021,
@@ -80,7 +80,7 @@
       "placers": 14,
       "two_year_old_winners": 13,
       "graded_winners": 4,
-      "earnings_yen": 2369937000,
+      "earnings_yen": 2375937000,
       "aei": 2.76
     }
   ],
@@ -172,16 +172,16 @@
     {
       "year": 2026,
       "starters": 90,
-      "starts": 344,
-      "winners": 22,
-      "wins": 26,
-      "graded_winners": 1,
-      "graded_wins": 1,
-      "first_prize_yen": 422790000,
-      "graded_prize_yen": 202767000,
-      "earnings_yen": 946168000,
-      "aei": 1.79,
-      "graded_aei": 0.78
+      "starts": 352,
+      "winners": 23,
+      "wins": 27,
+      "graded_winners": 2,
+      "graded_wins": 2,
+      "first_prize_yen": 482770000,
+      "graded_prize_yen": 262747000,
+      "earnings_yen": 1012148000,
+      "aei": 1.89,
+      "graded_aei": 0.99
     }
   ],
   "definitions": {
