@@ -1,0 +1,100 @@
+{
+  "horses": {
+    "9": {
+      "netkeiba_id": "2020103626",
+      "affiliations": [
+        {
+          "date": "2025-12-11",
+          "trainer": "池添学",
+          "owner": "スリーエイチレーシング",
+          "affiliation": "JRA 栗東",
+          "source_url": "https://jra.jp/news/202512/121112.html",
+          "source_name": "JRA",
+          "summary": "中央登记注销时确认的所属；并非转厩起始日期。"
+        },
+        {
+          "date": "2026-04-08",
+          "trainer": "藤田輝信",
+          "owner": null,
+          "affiliation": "NAR 大井",
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576",
+          "source_name": "NAR 逐场赛绩",
+          "summary": "川崎纪念的赛绩明确记载由藤田辉信训练。"
+        }
+      ],
+      "registration": [
+        {
+          "date": "2025-12-11",
+          "title": "JRA 竞赛登记注销",
+          "summary": "当时公布拟转为种牡马，安置地点未定。此为当时计划，不代表已经供用。",
+          "source_url": "https://jra.jp/news/202512/121112.html",
+          "source_name": "JRA"
+        },
+        {
+          "date": "2026-04-08",
+          "title": "地方赛事继续出赛",
+          "summary": "以藤田辉信厩舍所属参加川崎纪念，获第二名；确认继续竞技，不将此前注销视为永久退役。",
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576",
+          "source_name": "NAR"
+        },
+        {
+          "date": "2026-10-01",
+          "title": "退役后种牡马去向公布",
+          "summary": "已结束竞赛生涯，公布种牡马安置去向；此日期为近况公布日，非确切退役日。",
+          "source_url": "https://x.com/dolcemore___/status/2105466292128166156",
+          "source_name": "ドルチェモア X · ドゥラエレーデ近况"
+        }
+      ],
+      "race_attributions": [
+        {
+          "date": "2026-08-26",
+          "trainer": "藤田輝信",
+          "finish": 4,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2026-07-20",
+          "trainer": "藤田輝信",
+          "finish": 5,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2026-05-20",
+          "trainer": "藤田輝信",
+          "finish": 13,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2026-04-08",
+          "trainer": "藤田輝信",
+          "finish": 2,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2025-12-06",
+          "trainer": "池添学",
+          "finish": 14,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2023-12-29",
+          "trainer": "池添学",
+          "finish": 3,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2022-12-28",
+          "trainer": "池添学",
+          "finish": 1,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        },
+        {
+          "date": "2022-08-20",
+          "trainer": "池添学",
+          "finish": 1,
+          "source_url": "https://www.keiba.go.jp/KeibaWeb/DataRoom/HorseMarkInfo?k_lineageLoginCode=30005401576"
+        }
+      ]
+    }
+  }
+}

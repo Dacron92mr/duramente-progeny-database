@@ -163,6 +163,14 @@ def parse_profile(page, horse, source):
         if fields.get(label): result[key]=fields[label]
     amounts=[money(v) for k,v in fields.items() if k.startswith('獲得賞金')]
     if not amounts or any(v is None for v in amounts): raise ValueError('earnings fields incomplete')
+    # Source-labelled affiliation only; never infer a stable from a race venue.
+    trainer=re.fullmatch(r'(.+?)\s*[(（]([^()（）]+)[)）]',fields.get('調教師',''))
+    if trainer:
+        result['trainer']=clean(trainer.group(1))
+        result['affiliation']=clean(trainer.group(2))
+        region=result['affiliation']
+        result['trainer_region']=region if region in ('美浦','栗東') else '地方' if region in ('大井','川崎','船橋','浦和','北海道','岩手','金沢','笠松','愛知','兵庫','高知','佐賀') else horse.get('trainer_region')
+    if fields.get('馬主'): result['owner']=fields['馬主']
     result['earnings_netkeiba']=round(sum(amounts),4)
     return result
 

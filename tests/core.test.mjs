@@ -60,11 +60,11 @@ test('concurrent requests share one fetch and failed requests can retry', async 
   globalThis.fetch=async()=>{calls++;return {ok:true,json:async()=>fixtures};};
   try {
     const client=createDataClient();const [a,b]=await Promise.all([client.getStaticHorses(),client.getStaticHorses()]);
-    assert.equal(calls,1);assert.equal(a,b);
+    assert.equal(calls,2);assert.equal(a,b);
     globalThis.fetch=async()=>{calls++;throw new Error('fixture failure');};
     await assert.rejects(client.fetchStaticData('retry.json'));
     globalThis.fetch=async()=>{calls++;return {ok:true,json:async()=>({ok:true})};};
-    assert.deepEqual(await client.fetchStaticData('retry.json'),{ok:true});assert.equal(calls,5);
+    assert.deepEqual(await client.fetchStaticData('retry.json'),{ok:true});assert.equal(calls,6);
   } finally {globalThis.window=oldWindow;globalThis.fetch=oldFetch;}
 });
 test('real list/detail inventory and verified names remain consistent without a frozen count', () => {

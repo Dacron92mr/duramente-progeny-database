@@ -1,3 +1,5 @@
+import { renderBreedingYears, breedingOutcome } from './life-records.mjs';
+import { renderRaceHistory } from './race-history.mjs';
 import {effectiveSurface} from './race-surfaces.mjs';
 import { raceLabel } from './racing-ui.mjs';
 import { escapeHtml, formatNumber, money, uiValue } from "./format.mjs";
@@ -25,22 +27,10 @@ export function createDetailContent({ finishBadge }) {
     return dam;
   }
 
-  function isOverseasRaceSet(races, horse) {
-    return horse?.trainer_region === "海外" || races.some((race) => race.source === "breednet");
-  }
-
   function overseasPrize(race) {
     if (race.prize === null || race.prize === undefined || race.prize === "") return "—";
     const currency = race.data?.currency || (race.source === "breednet" ? "AUD" : "");
     return `${currency === "AUD" ? "A$" : ""}${formatNumber(race.prize)}`;
-  }
-
-  function raceClassText(race) {
-    return race.data?.class || race.race_class || "—";
-  }
-
-  function raceSpText(race) {
-    return race.data?.sp || race.data?.odds_text || race.odds || "—";
   }
 
   function raceDistanceText(value, race) {
@@ -53,96 +43,7 @@ export function createDetailContent({ finishBadge }) {
   }
 
   function raceRows(races, horse) {
-    if (!races.length) {
-      return `<p class="muted race-empty">暂无比赛记录</p>`;
-    }
-    const overseas = isOverseasRaceSet(races, horse);
-    if (overseas) {
-      return `
-        <div class="race-table-wrap">
-          <table class="race-table race-table-overseas">
-            <thead>
-              <tr>
-                <th>日期</th>
-                <th>赛马场</th>
-                <th>场次</th>
-                <th>名次</th>
-                <th>赛事</th>
-                <th>级别</th>
-                <th>参赛马</th>
-                <th>距离</th>
-                <th>骑师</th>
-                <th>负磅</th>
-                <th>马号</th>
-                <th>SP</th>
-                <th>用时</th>
-                <th>胜负距离</th>
-                <th>头马</th>
-                <th>奖金</th>
-              </tr>
-            </thead>
-            <tbody>
-              ${races.map((race) => `
-                <tr>
-                  <td>${escapeHtml(race.race_date)}</td>
-                  <td>${escapeHtml(race.meeting)}</td>
-                  <td>${escapeHtml(race.race_no)}</td>
-                  <td>${finishBadge(race.finish)}</td>
-                  <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
-                  <td>${escapeHtml(raceClassText(race))}</td>
-                  <td>${escapeHtml(race.field_size)}</td>
-                  <td>${escapeHtml(raceDistanceText(race.distance, race))} ${escapeHtml(race.track_condition)}</td>
-                  <td>${escapeHtml(race.jockey)}</td>
-                  <td>${escapeHtml(race.carried_weight)}</td>
-                  <td>${escapeHtml(race.horse_number)}</td>
-                  <td>${escapeHtml(raceSpText(race))}</td>
-                  <td>${escapeHtml(race.time)}</td>
-                  <td>${escapeHtml(race.margin)}</td>
-                  <td>${escapeHtml(race.winner_or_runner_up)}</td>
-                  <td>${escapeHtml(overseasPrize(race))}</td>
-                </tr>
-              `).join("")}
-            </tbody>
-          </table>
-        </div>
-      `;
-    }
-    return `
-      <div class="race-table-wrap">
-        <table class="race-table">
-          <thead>
-            <tr>
-              <th>日期</th>
-              <th>赛马场</th>
-              <th>场次</th>
-              <th>名次</th>
-              <th>赛事</th>
-              <th>距离</th>
-              <th>骑师</th>
-              <th>人气</th>
-              <th>用时</th>
-              <th>奖金</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${races.map((race) => `
-              <tr>
-                <td>${escapeHtml(race.race_date)}</td>
-                <td>${escapeHtml(race.meeting)}</td>
-                <td>${escapeHtml(race.race_no)}</td>
-                <td>${finishBadge(race.finish)}</td>
-                <td>${race.race_url ? `<a href="${escapeHtml(race.race_url)}" target="_blank" rel="noreferrer">${raceLabel(race.race_name)}</a>` : raceLabel(race.race_name)}</td>
-                <td>${escapeHtml(raceDistanceText(race.distance, race))} ${escapeHtml(race.track_condition)}</td>
-                <td>${escapeHtml(race.jockey)}</td>
-                <td>${escapeHtml(race.popularity)}</td>
-                <td>${escapeHtml(race.time)}</td>
-                <td>${escapeHtml(money(race.prize))}</td>
-              </tr>
-            `).join("")}
-          </tbody>
-        </table>
-      </div>
-    `;
+    return renderRaceHistory(races, {finishBadge, raceDistanceText, overseasPrize});
   }
 
   function detailSources(sources = []) {
@@ -161,7 +62,7 @@ export function createDetailContent({ finishBadge }) {
   }
 
   function studbookHref(profile) {
-    return "https://www.studbook.jp/";
+    return /^https:\/\//.test(profile.studbook_url || "") ? profile.studbook_url : "https://www.studbook.jp/";
   }
 
   function profileExternalLinks(profile) {
@@ -205,13 +106,7 @@ export function createDetailContent({ finishBadge }) {
   }
 
   function coveringResult(covering, foals) {
-    if (!covering.due_date) return "未受孕";
-    const sire = normalizedStudName(covering.stallion_name);
-    const expectedYear = Number(covering.cover_year) + 1;
-    const foal = (foals || []).find((row) => Number(row.result_year) === expectedYear && normalizedStudName(row.sire_name) === sire);
-    if (foal?.birth_date && String(foal.birth_date).includes("不受胎")) return "未受孕";
-    if (foal) return "出生";
-    return "预计生产";
+    return breedingOutcome(covering, foals).label;
   }
 
   function studSection(studProfiles, horse) {
@@ -231,7 +126,7 @@ export function createDetailContent({ finishBadge }) {
               </div>
             </div>
             ${profile.note ? `<p class="muted stud-note">${escapeHtml(localizedRecordText(profile.note))}</p>` : ""}
-            ${profile.fees.length ? `
+            ${renderBreedingYears(profile)}<details class="breeding-original"><summary>原始繁殖资料与完整明细</summary>${profile.fees.length ? `
               <h3>配种费变化</h3>
               <div class="stud-table-wrap">
                 <table class="stud-table">
@@ -319,7 +214,7 @@ export function createDetailContent({ finishBadge }) {
                 </table>
               </div>
             ` : ""}
-          </div>
+          </details></div>
         `).join("")}
       </section>
     `;

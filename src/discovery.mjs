@@ -5,7 +5,7 @@ export function discoveryStats(horses) {
   return { total: horses.length, years, graded: horses.filter(h => matchesQuickFilter(h, 'graded')).length };
 }
 
-export function mountDiscovery(host, horses) {
+export function mountDiscovery(host, horses, fetchData) {
   if (!host || host.childElementCount) return;
   const { total, years, graded } = discoveryStats(horses);
   host.innerHTML = `<details class="discovery-overview" open>

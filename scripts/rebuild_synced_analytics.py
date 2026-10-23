@@ -7,6 +7,8 @@ import build_awd_analysis
 import build_chart_insights
 import build_racecourse_population
 import build_black_type_siblings
+import build_career_history
+import build_updates
 
 def read(path): return json.loads(path.read_text())
 def write(path, data): path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
@@ -54,6 +56,8 @@ def rebuild(root):
     build_chart_insights.ROOT=root;build_chart_insights.build()
     build_racecourse_population.build(root)
     build_black_type_siblings.build(root)
+    build_career_history.build(root)
+    build_updates.build(root)
     for horse in horses: horse.pop('race_count',None)
     return len(races)
 

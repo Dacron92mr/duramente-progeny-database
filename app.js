@@ -1,3 +1,5 @@
+import {mountRecentUpdates} from './src/updates.mjs';
+import {historyNames} from './src/life-records.mjs';
 import { mountDiscovery, organizeAnalysis } from './src/discovery.mjs';
 import {mountCourseAnalysis} from './src/racecourse-analysis.mjs';
 import { conceptIntro, dosageCategories } from './src/ux-copy.mjs';
@@ -434,6 +436,7 @@ function updateDirectionButton() {
 }
 
 async function loadSummary() {
+  mountRecentUpdates(document.querySelector('#sidebarUpdates'), fetchStaticData);
   const summary = await getJson("/api/summary");
   state.allTotal = Number(summary.horses || 0);
   document.querySelector("#collectionCount").textContent = `${state.allTotal.toLocaleString("zh-CN")} 匹产驹`;
@@ -447,9 +450,11 @@ async function loadSummary() {
   fillFacet(els.sex, summary.facets.sexes);
   fillFacet(els.color, summary.facets.colors);
   fillFacet(els.region, summary.facets.regions);
-  window.trainerFacets = summary.facets.trainers;
+  const historyHorses=await getStaticHorses();
+  const historicalFacet=field=>{const counts=new Map();for(const horse of historyHorses)for(const name of historyNames(horse,field))counts.set(name,(counts.get(name)||0)+1);return [...counts].map(([value,count])=>({value,count})).sort((a,b)=>a.value.localeCompare(b.value,'ja'));};
+  window.trainerFacets = historicalFacet('trainer');
   fillTrainerFacet();
-  fillFacet(els.owner, summary.facets.owners || []);
+  fillFacet(els.owner, historicalFacet('owner'));
   fillFacet(els.breeder, summary.facets.breeders || []);
   fillFacet(els.broodmareSire, summary.facets.broodmareSires || []);
   fillFacet(els.femaleFamily, summary.facets.femaleFamilies);
@@ -462,7 +467,7 @@ async function loadSummary() {
 function fillTrainerFacet() {
   const selected = state.trainer;
   els.trainer.innerHTML = `<option value="">全部</option>`;
-  const rows = (window.trainerFacets || []).filter((row) => !state.region || row.region === state.region);
+  const rows = window.trainerFacets || [];
   for (const row of rows) {
     const option = document.createElement("option");
     option.value = row.value;
@@ -3890,7 +3895,7 @@ async function renderProductionAnalysis() {
       ${sectionBlock("俱乐部任意对比", "选择任意两个俱乐部，对比出赛率、胜马率、2胜／3胜以上率、重赏马率和G1马率。", `
         <article class="chart-card club-comparison-card">
           <div class="chart-card-head with-controls">
-            <div><h3>俱乐部 A vs 俱乐部 B</h3><p>每行用并列横条比较同一指标；点选查看匹数与百分点差。比例以各自收录产驹数为分母，按当前马主归属。</p></div>
+            <div><h3>俱乐部 A vs 俱乐部 B</h3><p>每行用并列横条比较同一指标；点选查看匹数与百分点差。比例以各自收录产驹数为分母，按最后确认马主分组；比较生涯成绩，不代表持有期间成绩。</p></div>
             <div class="analysis-controls inline-controls club-compare-controls">
               <label><span>俱乐部 A</span><select id="clubCompareA">${clubOptions("all")}</select></label>
               <label><span>俱乐部 B</span><select id="clubCompareB">${clubOptions(defaultClubB)}</select></label>
@@ -4426,7 +4431,7 @@ async function loadHorses() {
     horseSequenceCache = { key: '', ids: [] };
     bindHorseOpeners(els.horseRows); bindHorseOpeners(els.horseCards);
     await ensureHorseSequence();
-    mountDiscovery(document.querySelector("#discoveryOverview"), await getStaticHorses());
+    mountDiscovery(document.querySelector("#discoveryOverview"), await getStaticHorses(), fetchStaticData);
     if (request !== listRequest) return;
     updatePager();
   } catch (error) {
