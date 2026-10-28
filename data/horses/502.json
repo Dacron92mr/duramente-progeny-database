@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104848",
     "jbis_id": "0001359589",
     "trainer": "鮫島克也",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "野口幸八",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=26",
         "trainer": "鮫島克也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104848",
+      "url": "https://db.netkeiba.com/horse/2022104848/",
+      "fetched_at": "2026-10-28T03:09:29.855186+00:00",
+      "data": {
+        "trainer": "鮫島克也",
+        "owner": "野口幸八",
+        "affiliation": "佐賀"
       }
     }
   ],

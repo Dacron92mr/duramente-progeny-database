@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100056",
     "jbis_id": "0001262760",
     "trainer": "瀬戸口悟",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "福岡隆史",
     "breeder": "新井昭二",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "瀬戸口悟"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100056",
+      "url": "https://db.netkeiba.com/horse/2018100056/",
+      "fetched_at": "2026-10-28T02:55:41.849089+00:00",
+      "data": {
+        "trainer": "瀬戸口悟",
+        "owner": "福岡隆史",
+        "affiliation": "愛知"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101421",
     "jbis_id": "0001307406",
     "trainer": "真島正徳",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "ＹＧＧホースクラブ",
     "breeder": "オリオンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "真島正徳"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101421",
+      "url": "https://db.netkeiba.com/horse/2019101421/",
+      "fetched_at": "2026-10-28T02:47:29.805781+00:00",
+      "data": {
+        "trainer": "真島正徳",
+        "owner": "ＹＧＧホースクラブ",
+        "affiliation": "佐賀"
       }
     }
   ],

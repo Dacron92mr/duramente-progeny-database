@@ -17,7 +17,7 @@
     "netkeiba_id": "2020100292",
     "jbis_id": "0001327729",
     "trainer": "後藤佑耶",
-    "affiliation": "(佐 賀)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "ノルマンディーサラブレッドレーシング",
     "breeder": "土田ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "後藤佑耶"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020100292",
+      "url": "https://db.netkeiba.com/horse/2020100292/",
+      "fetched_at": "2026-10-28T03:18:53.809638+00:00",
+      "data": {
+        "trainer": "後藤佑耶",
+        "owner": "ノルマンディーサラブレッドレーシング",
+        "affiliation": "笠松"
       }
     }
   ],

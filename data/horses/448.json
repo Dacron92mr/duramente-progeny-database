@@ -17,7 +17,7 @@
     "netkeiba_id": "2022100100",
     "jbis_id": "0001360317",
     "trainer": "小栗実",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "増田和啓",
     "breeder": "笠松牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "小栗実"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022100100",
+      "url": "https://db.netkeiba.com/horse/2022100100/",
+      "fetched_at": "2026-10-28T02:58:41.809114+00:00",
+      "data": {
+        "trainer": "小栗実",
+        "owner": "増田和啓",
+        "affiliation": "栗東"
       }
     }
   ],

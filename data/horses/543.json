@@ -17,7 +17,7 @@
     "netkeiba_id": "2022107119",
     "jbis_id": "0001359596",
     "trainer": "小野望",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "長谷川千代子",
     "breeder": "森永聡",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "小野望"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022107119",
+      "url": "https://db.netkeiba.com/horse/2022107119/",
+      "fetched_at": "2026-10-28T03:17:41.855199+00:00",
+      "data": {
+        "trainer": "小野望",
+        "owner": "長谷川千代子",
+        "affiliation": "北海道"
       }
     }
   ],

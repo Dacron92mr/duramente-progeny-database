@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105319",
     "jbis_id": "0001359933",
     "trainer": "澤佳宏",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "豊島愛子",
     "breeder": "社台ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "澤佳宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105319",
+      "url": "https://db.netkeiba.com/horse/2022105319/",
+      "fetched_at": "2026-10-28T02:39:29.871970+00:00",
+      "data": {
+        "trainer": "澤佳宏",
+        "owner": "豊島愛子",
+        "affiliation": "大井"
       }
     }
   ],

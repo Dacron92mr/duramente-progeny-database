@@ -17,7 +17,7 @@
     "netkeiba_id": "2022102980",
     "jbis_id": "0001361707",
     "trainer": "目迫大輔",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "永井商事（株）",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "目迫大輔"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022102980",
+      "url": "https://db.netkeiba.com/horse/2022102980/",
+      "fetched_at": "2026-10-28T03:06:30.102223+00:00",
+      "data": {
+        "trainer": "目迫大輔",
+        "owner": "永井商事（株）",
+        "affiliation": "高知"
       }
     }
   ],

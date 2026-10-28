@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103559",
     "jbis_id": "0001267543",
     "trainer": "栗田徹",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "山田弘",
     "breeder": "岡田スタッド",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all",
         "trainer": "栗田徹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103559",
+      "url": "https://db.netkeiba.com/horse/2018103559/",
+      "fetched_at": "2026-10-28T01:29:17.713030+00:00",
+      "data": {
+        "trainer": "栗田徹",
+        "owner": "山田弘",
+        "affiliation": "美浦"
       }
     }
   ],

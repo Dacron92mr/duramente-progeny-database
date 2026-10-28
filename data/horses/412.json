@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105879",
     "jbis_id": "0001318872",
     "trainer": "笹野博司",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "桑野隆司",
     "breeder": "松浦牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "笹野博司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105879",
+      "url": "https://db.netkeiba.com/horse/2020105879/",
+      "fetched_at": "2026-10-28T02:51:29.842639+00:00",
+      "data": {
+        "trainer": "笹野博司",
+        "owner": "桑野隆司",
+        "affiliation": "笠松"
       }
     }
   ],

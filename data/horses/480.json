@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102225",
     "jbis_id": "0001310354",
     "trainer": "吉見真幸",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "赤阪治恒",
     "breeder": "前野牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "吉見真幸"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102225",
+      "url": "https://db.netkeiba.com/horse/2019102225/",
+      "fetched_at": "2026-10-28T03:05:05.847960+00:00",
+      "data": {
+        "trainer": "吉見真幸",
+        "owner": "赤阪治恒",
+        "affiliation": "兵庫"
       }
     }
   ],

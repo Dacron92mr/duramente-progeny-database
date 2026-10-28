@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103860",
     "jbis_id": "0001270479",
     "trainer": "川島正一",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "東京Ｍｉｄｇａｒ",
     "breeder": "静内フジカワ牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=10",
         "trainer": "川島正一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103860",
+      "url": "https://db.netkeiba.com/horse/2018103860/",
+      "fetched_at": "2026-10-28T02:07:05.753291+00:00",
+      "data": {
+        "trainer": "川島正一",
+        "owner": "東京Ｍｉｄｇａｒ",
+        "affiliation": "船橋"
       }
     }
   ],

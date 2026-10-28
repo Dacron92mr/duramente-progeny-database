@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102353",
     "jbis_id": "0001266031",
     "trainer": "後藤正義",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "村田繁實",
     "breeder": "村田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "後藤正義"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102353",
+      "url": "https://db.netkeiba.com/horse/2018102353/",
+      "fetched_at": "2026-10-28T02:50:29.906359+00:00",
+      "data": {
+        "trainer": "後藤正義",
+        "owner": "村田繁實",
+        "affiliation": "笠松"
       }
     }
   ],

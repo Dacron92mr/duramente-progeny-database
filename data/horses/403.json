@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106331",
     "jbis_id": "0001268203",
     "trainer": "大島静夫",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "成富直行",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "大島静夫"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106331",
+      "url": "https://db.netkeiba.com/horse/2018106331/",
+      "fetched_at": "2026-10-28T02:49:41.939946+00:00",
+      "data": {
+        "trainer": "大島静夫",
+        "owner": "成富直行",
+        "affiliation": "佐賀"
       }
     }
   ],

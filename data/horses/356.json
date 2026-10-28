@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106393",
     "jbis_id": "0001307424",
     "trainer": "渡辺和雄",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "加藤裕司",
     "breeder": "千代田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "渡辺和雄"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106393",
+      "url": "https://db.netkeiba.com/horse/2019106393/",
+      "fetched_at": "2026-10-28T02:40:17.749541+00:00",
+      "data": {
+        "trainer": "渡辺和雄",
+        "owner": "加藤裕司",
+        "affiliation": "大井"
       }
     }
   ],

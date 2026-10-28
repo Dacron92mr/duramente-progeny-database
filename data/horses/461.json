@@ -17,7 +17,7 @@
     "netkeiba_id": "2022101919",
     "jbis_id": "0001358801",
     "trainer": "小野望",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "長谷川祐司",
     "breeder": "日高大洋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "小野望"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022101919",
+      "url": "https://db.netkeiba.com/horse/2022101919/",
+      "fetched_at": "2026-10-28T03:00:41.781844+00:00",
+      "data": {
+        "trainer": "小野望",
+        "owner": "長谷川祐司",
+        "affiliation": "北海道"
       }
     }
   ],

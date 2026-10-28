@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103762",
     "jbis_id": "0001269012",
     "trainer": "吉見真幸",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "森田和豊",
     "breeder": "今牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "吉見真幸"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103762",
+      "url": "https://db.netkeiba.com/horse/2018103762/",
+      "fetched_at": "2026-10-28T02:11:53.902436+00:00",
+      "data": {
+        "trainer": "吉見真幸",
+        "owner": "森田和豊",
+        "affiliation": "兵庫"
       }
     }
   ],

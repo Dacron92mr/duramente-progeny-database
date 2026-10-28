@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102987",
     "jbis_id": "0001262139",
     "trainer": "中舘英二",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "鈴木照雄",
     "breeder": "市川ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "中舘英二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102987",
+      "url": "https://db.netkeiba.com/horse/2018102987/",
+      "fetched_at": "2026-10-28T02:17:05.724097+00:00",
+      "data": {
+        "trainer": "中舘英二",
+        "owner": "鈴木照雄",
+        "affiliation": "美浦"
       }
     }
   ],

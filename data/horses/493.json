@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101481",
     "jbis_id": "0001308384",
     "trainer": "凾館一昭",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "横田一男",
     "breeder": "木村牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "凾館一昭"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101481",
+      "url": "https://db.netkeiba.com/horse/2019101481/",
+      "fetched_at": "2026-10-28T03:07:41.847134+00:00",
+      "data": {
+        "trainer": "凾館一昭",
+        "owner": "横田一男",
+        "affiliation": "船橋"
       }
     }
   ],

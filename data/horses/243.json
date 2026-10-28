@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105538",
     "jbis_id": "0001305142",
     "trainer": "西山裕貴",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "織田隆寛",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "西山裕貴"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105538",
+      "url": "https://db.netkeiba.com/horse/2019105538/",
+      "fetched_at": "2026-10-28T02:17:41.948051+00:00",
+      "data": {
+        "trainer": "西山裕貴",
+        "owner": "織田隆寛",
+        "affiliation": "高知"
       }
     }
   ],

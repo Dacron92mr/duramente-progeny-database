@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102546",
     "jbis_id": "0001308817",
     "trainer": "佐藤雅彦",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "田中成奉",
     "breeder": "高昭牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "佐藤雅彦"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102546",
+      "url": "https://db.netkeiba.com/horse/2019102546/",
+      "fetched_at": "2026-10-28T02:43:05.849474+00:00",
+      "data": {
+        "trainer": "佐藤雅彦",
+        "owner": "田中成奉",
+        "affiliation": "岩手"
       }
     }
   ],

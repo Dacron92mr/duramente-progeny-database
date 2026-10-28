@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104443",
     "jbis_id": "0001360398",
     "trainer": "吉見真幸",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "ヒダカ・ブリーダーズ・ユニオン",
     "breeder": "ＰＲＩＤＥＲＯＣＫ",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "吉見真幸"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104443",
+      "url": "https://db.netkeiba.com/horse/2022104443/",
+      "fetched_at": "2026-10-28T03:20:17.854589+00:00",
+      "data": {
+        "trainer": "吉見真幸",
+        "owner": "ヒダカ・ブリーダーズ・ユニオン",
+        "affiliation": "兵庫"
       }
     }
   ],

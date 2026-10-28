@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103228",
     "jbis_id": "0001340076",
     "trainer": "田中一巧",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "鈴木剛史",
     "breeder": "三嶋牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "田中一巧"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103228",
+      "url": "https://db.netkeiba.com/horse/2021103228/",
+      "fetched_at": "2026-10-28T02:34:53.849177+00:00",
+      "data": {
+        "trainer": "田中一巧",
+        "owner": "鈴木剛史",
+        "affiliation": "兵庫"
       }
     }
   ],

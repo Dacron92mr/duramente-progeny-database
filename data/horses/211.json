@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100480",
     "jbis_id": "0001336279",
     "trainer": "櫻井今朝",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "ＪＰＮ技研",
     "breeder": "明治牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "櫻井今朝"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100480",
+      "url": "https://db.netkeiba.com/horse/2021100480/",
+      "fetched_at": "2026-10-28T02:11:17.724267+00:00",
+      "data": {
+        "trainer": "櫻井今朝",
+        "owner": "ＪＰＮ技研",
+        "affiliation": "愛知"
       }
     }
   ],

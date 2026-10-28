@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104774",
     "jbis_id": "0001263990",
     "trainer": "須貝尚介",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "金子真人ホールディングス",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "須貝尚介"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104774",
+      "url": "https://db.netkeiba.com/horse/2018104774/",
+      "fetched_at": "2026-10-28T02:31:05.755847+00:00",
+      "data": {
+        "trainer": "須貝尚介",
+        "owner": "金子真人ホールディングス",
+        "affiliation": "栗東"
       }
     }
   ],

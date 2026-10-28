@@ -17,8 +17,8 @@
     "netkeiba_id": "2018103781",
     "jbis_id": "0001262251",
     "trainer": "菊沢隆徳",
-    "affiliation": "(大 井)",
-    "trainer_region": "地方",
+    "affiliation": "美浦",
+    "trainer_region": "美浦",
     "owner": "宮崎俊也",
     "breeder": "酒井秀紀",
     "birthplace": "新ひだか町",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "菊沢隆徳"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103781",
+      "url": "https://db.netkeiba.com/horse/2018103781/",
+      "fetched_at": "2026-10-28T03:28:46.015895+00:00",
+      "data": {
+        "trainer": "菊沢隆徳",
+        "owner": "宮崎俊也",
+        "affiliation": "美浦"
       }
     }
   ],

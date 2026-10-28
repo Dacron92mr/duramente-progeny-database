@@ -16,10 +16,10 @@
     "pedigree_crosses": "Mr. Prospector(USA) ：S4×M4×M5",
     "netkeiba_id": "2019104056",
     "jbis_id": "0001310645",
-    "trainer": "田中淳司",
-    "affiliation": "(水 沢)",
+    "trainer": "千葉幸喜",
+    "affiliation": "岩手",
     "trainer_region": "地方",
-    "owner": "（株）ティケム",
+    "owner": "前田敏文",
     "breeder": "三嶋牧場",
     "birthplace": "浦河町",
     "career_summary": "17戦3勝 [3-3-1-10]",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "田中淳司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104056",
+      "url": "https://db.netkeiba.com/horse/2019104056/",
+      "fetched_at": "2026-10-28T01:45:05.655463+00:00",
+      "data": {
+        "trainer": "千葉幸喜",
+        "owner": "前田敏文",
+        "affiliation": "岩手"
       }
     }
   ],

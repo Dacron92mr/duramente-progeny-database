@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105369",
     "jbis_id": "0001308118",
     "trainer": "古賀慎明",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=7",
         "trainer": "古賀慎明"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105369",
+      "url": "https://db.netkeiba.com/horse/2019105369/",
+      "fetched_at": "2026-10-28T01:56:29.689488+00:00",
+      "data": {
+        "trainer": "古賀慎明",
+        "owner": "キャロットファーム",
+        "affiliation": "美浦"
       }
     }
   ],

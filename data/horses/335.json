@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105430",
     "jbis_id": "0001323967",
     "trainer": "田中正二",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "水上行雄",
     "breeder": "富本茂喜",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "田中正二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105430",
+      "url": "https://db.netkeiba.com/horse/2020105430/",
+      "fetched_at": "2026-10-28T02:36:06.015119+00:00",
+      "data": {
+        "trainer": "田中正二",
+        "owner": "水上行雄",
+        "affiliation": "北海道"
       }
     }
   ],

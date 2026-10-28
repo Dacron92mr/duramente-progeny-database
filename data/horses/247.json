@@ -17,7 +17,7 @@
     "netkeiba_id": "2022103222",
     "jbis_id": "0001360416",
     "trainer": "平岩大典",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "鈴木剛史",
     "breeder": "三嶋牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "平岩大典"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022103222",
+      "url": "https://db.netkeiba.com/horse/2022103222/",
+      "fetched_at": "2026-10-28T02:18:29.783142+00:00",
+      "data": {
+        "trainer": "平岩大典",
+        "owner": "鈴木剛史",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019100837",
     "jbis_id": "0001305249",
     "trainer": "畠山信一",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "吉田勝利",
     "breeder": "北星村田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=15",
         "trainer": "畠山信一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019100837",
+      "url": "https://db.netkeiba.com/horse/2019100837/",
+      "fetched_at": "2026-10-28T02:27:17.891966+00:00",
+      "data": {
+        "trainer": "畠山信一",
+        "owner": "吉田勝利",
+        "affiliation": "岩手"
       }
     }
   ],

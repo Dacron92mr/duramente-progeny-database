@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102810",
     "jbis_id": "0001270425",
     "trainer": "千葉幸喜",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "楊明翰",
     "breeder": "本桐牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=15",
         "trainer": "千葉幸喜"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102810",
+      "url": "https://db.netkeiba.com/horse/2018102810/",
+      "fetched_at": "2026-10-28T02:25:18.079178+00:00",
+      "data": {
+        "trainer": "千葉幸喜",
+        "owner": "楊明翰",
+        "affiliation": "岩手"
       }
     }
   ],

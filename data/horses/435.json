@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103073",
     "jbis_id": "0001313168",
     "trainer": "塚田隆男",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "ＡＨＣ（株）",
     "breeder": "下屋敷牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "塚田隆男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103073",
+      "url": "https://db.netkeiba.com/horse/2019103073/",
+      "fetched_at": "2026-10-28T02:56:05.917631+00:00",
+      "data": {
+        "trainer": "塚田隆男",
+        "owner": "ＡＨＣ（株）",
+        "affiliation": "愛知"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106143",
     "jbis_id": "0001309477",
     "trainer": "武市康男",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "国本哲秀",
     "breeder": "静内フジカワ牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "武市康男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106143",
+      "url": "https://db.netkeiba.com/horse/2019106143/",
+      "fetched_at": "2026-10-28T02:19:05.721776+00:00",
+      "data": {
+        "trainer": "武市康男",
+        "owner": "国本哲秀",
+        "affiliation": "美浦"
       }
     }
   ],

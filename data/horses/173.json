@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106561",
     "jbis_id": "0001263026",
     "trainer": "須貝尚介",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "安原浩司",
     "breeder": "三嶋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=9",
         "trainer": "須貝尚介"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106561",
+      "url": "https://db.netkeiba.com/horse/2018106561/",
+      "fetched_at": "2026-10-28T02:03:41.724213+00:00",
+      "data": {
+        "trainer": "須貝尚介",
+        "owner": "安原浩司",
+        "affiliation": "栗東"
       }
     }
   ],

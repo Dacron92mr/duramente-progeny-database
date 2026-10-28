@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102084",
     "jbis_id": "0001267487",
     "trainer": "小笠倫弘",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "グリーンファーム",
     "breeder": "ハシモトファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "小笠倫弘"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102084",
+      "url": "https://db.netkeiba.com/horse/2018102084/",
+      "fetched_at": "2026-10-28T03:07:53.829486+00:00",
+      "data": {
+        "trainer": "小笠倫弘",
+        "owner": "グリーンファーム",
+        "affiliation": "美浦"
       }
     }
   ],

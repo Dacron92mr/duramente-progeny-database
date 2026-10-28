@@ -17,7 +17,7 @@
     "netkeiba_id": "2020104467",
     "jbis_id": "0001325778",
     "trainer": "今津勝之",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "水野修",
     "breeder": "千代田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "今津勝之"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020104467",
+      "url": "https://db.netkeiba.com/horse/2020104467/",
+      "fetched_at": "2026-10-28T03:02:41.897637+00:00",
+      "data": {
+        "trainer": "今津勝之",
+        "owner": "水野修",
+        "affiliation": "愛知"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106351",
     "jbis_id": "0001264952",
     "trainer": "斎藤雄一",
-    "affiliation": "(盛 岡)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "辻牧場",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "斎藤雄一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106351",
+      "url": "https://db.netkeiba.com/horse/2018106351/",
+      "fetched_at": "2026-10-28T02:46:41.881796+00:00",
+      "data": {
+        "trainer": "斎藤雄一",
+        "owner": "辻牧場",
+        "affiliation": "岩手"
       }
     }
   ],

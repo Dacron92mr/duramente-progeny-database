@@ -17,7 +17,7 @@
     "netkeiba_id": "2020104343",
     "jbis_id": "0001325315",
     "trainer": "佐藤雅彦",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "相馬哲夫",
     "breeder": "タイヘイ牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=34",
         "trainer": "佐藤雅彦"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020104343",
+      "url": "https://db.netkeiba.com/horse/2020104343/",
+      "fetched_at": "2026-10-28T03:32:21.940782+00:00",
+      "data": {
+        "trainer": "佐藤雅彦",
+        "owner": "相馬哲夫",
+        "affiliation": "岩手"
       }
     }
   ],

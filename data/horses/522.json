@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103603",
     "jbis_id": "0001308145",
     "trainer": "田中正二",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "（株）ＴＳホールディ",
     "breeder": "杵臼牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "田中正二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103603",
+      "url": "https://db.netkeiba.com/horse/2019103603/",
+      "fetched_at": "2026-10-28T03:13:29.830038+00:00",
+      "data": {
+        "trainer": "田中正二",
+        "owner": "（株）ＴＳホールディ",
+        "affiliation": "北海道"
       }
     }
   ],

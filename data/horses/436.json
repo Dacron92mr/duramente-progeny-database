@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105287",
     "jbis_id": "0001356214",
     "trainer": "林幻",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "浅沼廣幸",
     "breeder": "社台ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "林幻"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105287",
+      "url": "https://db.netkeiba.com/horse/2022105287/",
+      "fetched_at": "2026-10-28T02:56:17.815634+00:00",
+      "data": {
+        "trainer": "林幻",
+        "owner": "浅沼廣幸",
+        "affiliation": "船橋"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105644",
     "jbis_id": "0001304217",
     "trainer": "原口次夫",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "加藤守",
     "breeder": "レイクヴィラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=33",
         "trainer": "原口次夫"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105644",
+      "url": "https://db.netkeiba.com/horse/2019105644/",
+      "fetched_at": "2026-10-28T03:25:57.871802+00:00",
+      "data": {
+        "trainer": "原口次夫",
+        "owner": "加藤守",
+        "affiliation": "愛知"
       }
     }
   ],

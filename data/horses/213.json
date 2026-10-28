@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105567",
     "jbis_id": "0001318630",
     "trainer": "小椋研介",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ホシノレーシング",
     "breeder": "新冠橋本牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "小椋研介"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105567",
+      "url": "https://db.netkeiba.com/horse/2020105567/",
+      "fetched_at": "2026-10-28T02:11:41.690225+00:00",
+      "data": {
+        "trainer": "小椋研介",
+        "owner": "ホシノレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

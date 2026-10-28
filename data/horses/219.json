@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103021",
     "jbis_id": "0001310365",
     "trainer": "和田勇介",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ロードホースクラブ",
     "breeder": "ケイアイファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "和田勇介"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103021",
+      "url": "https://db.netkeiba.com/horse/2019103021/",
+      "fetched_at": "2026-10-28T02:12:53.752905+00:00",
+      "data": {
+        "trainer": "和田勇介",
+        "owner": "ロードホースクラブ",
+        "affiliation": "美浦"
       }
     }
   ],

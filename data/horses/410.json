@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106089",
     "jbis_id": "0001305110",
     "trainer": "山本学",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "トーケンサービス（株",
     "breeder": "佐竹学",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "山本学"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106089",
+      "url": "https://db.netkeiba.com/horse/2019106089/",
+      "fetched_at": "2026-10-28T02:51:06.000635+00:00",
+      "data": {
+        "trainer": "山本学",
+        "owner": "トーケンサービス（株",
+        "affiliation": "船橋"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102768",
     "jbis_id": "0001266341",
     "trainer": "小久保智",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "上田江吏子",
     "breeder": "平野牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "小久保智"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102768",
+      "url": "https://db.netkeiba.com/horse/2018102768/",
+      "fetched_at": "2026-10-28T02:21:05.744766+00:00",
+      "data": {
+        "trainer": "小久保智",
+        "owner": "上田江吏子",
+        "affiliation": "浦和"
       }
     }
   ],

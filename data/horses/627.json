@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103899",
     "jbis_id": "0001312279",
     "trainer": "寺島良",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "三木正浩",
     "breeder": "富田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=32",
         "trainer": "寺島良"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103899",
+      "url": "https://db.netkeiba.com/horse/2019103899/",
+      "fetched_at": "2026-10-28T03:29:41.914944+00:00",
+      "data": {
+        "trainer": "寺島良",
+        "owner": "三木正浩",
+        "affiliation": "栗東"
       }
     }
   ],

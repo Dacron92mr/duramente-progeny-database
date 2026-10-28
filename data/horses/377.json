@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103230",
     "jbis_id": "0001304161",
     "trainer": "平山宏秀",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "宮本孝一",
     "breeder": "本桐牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "平山宏秀"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103230",
+      "url": "https://db.netkeiba.com/horse/2019103230/",
+      "fetched_at": "2026-10-28T02:44:29.862183+00:00",
+      "data": {
+        "trainer": "平山宏秀",
+        "owner": "宮本孝一",
+        "affiliation": "佐賀"
       }
     }
   ],

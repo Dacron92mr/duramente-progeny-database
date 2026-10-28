@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104934",
     "jbis_id": "0001361109",
     "trainer": "武幸四郎",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ＴＮレーシング",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "武幸四郎"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104934",
+      "url": "https://db.netkeiba.com/horse/2022104934/",
+      "fetched_at": "2026-10-28T03:37:45.847701+00:00",
+      "data": {
+        "trainer": "武幸四郎",
+        "owner": "ＴＮレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

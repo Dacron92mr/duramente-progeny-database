@@ -17,7 +17,7 @@
     "netkeiba_id": "2020106860",
     "jbis_id": "0001326151",
     "trainer": "木村哲也",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "三木正浩",
     "breeder": "三嶋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "木村哲也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020106860",
+      "url": "https://db.netkeiba.com/horse/2020106860/",
+      "fetched_at": "2026-10-28T02:20:41.714509+00:00",
+      "data": {
+        "trainer": "木村哲也",
+        "owner": "三木正浩",
+        "affiliation": "美浦"
       }
     }
   ],

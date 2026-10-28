@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105622",
     "jbis_id": "0001339840",
     "trainer": "手塚貴久",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "サンデーレーシング",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "手塚貴久"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105622",
+      "url": "https://db.netkeiba.com/horse/2021105622/",
+      "fetched_at": "2026-10-28T02:33:05.707328+00:00",
+      "data": {
+        "trainer": "手塚貴久",
+        "owner": "サンデーレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2020106685",
     "jbis_id": "0001326106",
     "trainer": "川添明弘",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "本口博康",
     "breeder": "辻牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "川添明弘"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020106685",
+      "url": "https://db.netkeiba.com/horse/2020106685/",
+      "fetched_at": "2026-10-28T02:31:41.784665+00:00",
+      "data": {
+        "trainer": "川添明弘",
+        "owner": "本口博康",
+        "affiliation": "金沢"
       }
     }
   ],

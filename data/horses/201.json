@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103495",
     "jbis_id": "0001308080",
     "trainer": "佐藤祐司",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "伊藤由次",
     "breeder": "栄進牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "佐藤祐司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103495",
+      "url": "https://db.netkeiba.com/horse/2019103495/",
+      "fetched_at": "2026-10-28T02:09:17.835833+00:00",
+      "data": {
+        "trainer": "佐藤祐司",
+        "owner": "伊藤由次",
+        "affiliation": "岩手"
       }
     }
   ],

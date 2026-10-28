@@ -16,10 +16,10 @@
     "pedigree_crosses": "Kingmambo(USA) ：S3×M4 Sadler's Wells(USA) ：M4×M5",
     "netkeiba_id": "2019105918",
     "jbis_id": "0001309401",
-    "trainer": "工藤伸輔",
-    "affiliation": "(浦 和)",
+    "trainer": "三野宮通",
+    "affiliation": "岩手",
     "trainer_region": "地方",
-    "owner": "（株）アプエンテ",
+    "owner": "山根義信",
     "breeder": "カタオカファーム",
     "birthplace": "新ひだか町",
     "career_summary": "68戦5勝 [5-7-4-52]",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "工藤伸輔"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105918",
+      "url": "https://db.netkeiba.com/horse/2019105918/",
+      "fetched_at": "2026-10-28T02:22:30.044983+00:00",
+      "data": {
+        "trainer": "三野宮通",
+        "owner": "山根義信",
+        "affiliation": "岩手"
       }
     }
   ],

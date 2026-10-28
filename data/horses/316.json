@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105109",
     "jbis_id": "0001311218",
     "trainer": "森下淳平",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "吉田和美",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "森下淳平"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105109",
+      "url": "https://db.netkeiba.com/horse/2019105109/",
+      "fetched_at": "2026-10-28T02:32:17.722954+00:00",
+      "data": {
+        "trainer": "森下淳平",
+        "owner": "吉田和美",
+        "affiliation": "大井"
       }
     }
   ],

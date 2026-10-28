@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105676",
     "jbis_id": "0001326148",
     "trainer": "林徹",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ライオンレースホース",
     "breeder": "ハクレイファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "林徹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105676",
+      "url": "https://db.netkeiba.com/horse/2020105676/",
+      "fetched_at": "2026-10-28T03:08:17.779637+00:00",
+      "data": {
+        "trainer": "林徹",
+        "owner": "ライオンレースホース",
+        "affiliation": "美浦"
       }
     }
   ],

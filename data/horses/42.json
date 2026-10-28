@@ -17,7 +17,7 @@
     "netkeiba_id": "2019100824",
     "jbis_id": "0001310996",
     "trainer": "大久保龍",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "居城寿与",
     "breeder": "北勝ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=3",
         "trainer": "大久保龍"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019100824",
+      "url": "https://db.netkeiba.com/horse/2019100824/",
+      "fetched_at": "2026-10-28T01:37:29.726585+00:00",
+      "data": {
+        "trainer": "大久保龍",
+        "owner": "居城寿与",
+        "affiliation": "栗東"
       }
     }
   ],

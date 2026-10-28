@@ -1,6 +1,6 @@
 {
   "summary": {
-    "valid_starts": 10928,
+    "valid_starts": 10965,
     "courses": 40,
     "main_chart_min_starts": 30
   },
@@ -16,28 +16,28 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1068,
+      "starts": 1074,
       "wins_starts": 120,
-      "seconds": 109,
+      "seconds": 110,
       "thirds": 86,
-      "top3": 315,
-      "win_start_rate": 0.1124,
-      "quinella_rate": 0.2144,
-      "top3_rate": 0.2949,
+      "top3": 316,
+      "win_start_rate": 0.1117,
+      "quinella_rate": 0.2142,
+      "top3_rate": 0.2942,
       "surface": {
         "芝": {
-          "starts": 686,
+          "starts": 689,
           "wins": 81,
-          "top3": 216,
-          "win_rate": 0.1181,
+          "top3": 217,
+          "win_rate": 0.1176,
           "top3_rate": 0.3149
         },
         "ダ": {
-          "starts": 377,
+          "starts": 380,
           "wins": 39,
           "top3": 97,
-          "win_rate": 0.1034,
-          "top3_rate": 0.2573
+          "win_rate": 0.1026,
+          "top3_rate": 0.2553
         },
         "障": {
           "starts": 5,
@@ -49,25 +49,25 @@
       },
       "distance": {
         "2200-2400": {
-          "starts": 167,
+          "starts": 168,
           "wins": 23,
           "top3": 64,
-          "win_rate": 0.1377,
-          "top3_rate": 0.3832
+          "win_rate": 0.1369,
+          "top3_rate": 0.381
         },
         "1800-2000": {
-          "starts": 328,
+          "starts": 331,
           "wins": 38,
-          "top3": 98,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2988
+          "top3": 99,
+          "win_rate": 0.1148,
+          "top3_rate": 0.2991
         },
         "1400-1600": {
-          "starts": 561,
+          "starts": 563,
           "wins": 58,
           "top3": 147,
-          "win_rate": 0.1034,
-          "top3_rate": 0.262
+          "win_rate": 0.103,
+          "top3_rate": 0.2611
         },
         "2500以上": {
           "starts": 12,
@@ -325,21 +325,21 @@
       "raw_meetings": [
         "名古屋"
       ],
-      "starts": 611,
-      "wins_starts": 89,
+      "starts": 613,
+      "wins_starts": 90,
       "seconds": 74,
       "thirds": 68,
-      "top3": 231,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2668,
-      "top3_rate": 0.3781,
+      "top3": 232,
+      "win_start_rate": 0.1468,
+      "quinella_rate": 0.2675,
+      "top3_rate": 0.3785,
       "surface": {
         "ダ": {
-          "starts": 611,
-          "wins": 89,
-          "top3": 231,
-          "win_rate": 0.1457,
-          "top3_rate": 0.3781
+          "starts": 613,
+          "wins": 90,
+          "top3": 232,
+          "win_rate": 0.1468,
+          "top3_rate": 0.3785
         }
       },
       "distance": {
@@ -351,11 +351,11 @@
           "top3_rate": 0.4458
         },
         "1400-1600": {
-          "starts": 479,
+          "starts": 480,
           "wins": 73,
           "top3": 180,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3758
+          "win_rate": 0.1521,
+          "top3_rate": 0.375
         },
         "1200以下": {
           "starts": 49,
@@ -363,6 +363,13 @@
           "top3": 14,
           "win_rate": 0.102,
           "top3_rate": 0.2857
+        },
+        "2200-2400": {
+          "starts": 1,
+          "wins": 1,
+          "top3": 1,
+          "win_rate": 1.0,
+          "top3_rate": 1.0
         }
       }
     },
@@ -377,21 +384,21 @@
         "2京都1",
         "2京都6"
       ],
-      "starts": 541,
+      "starts": 543,
       "wins_starts": 49,
       "seconds": 51,
       "thirds": 45,
       "top3": 145,
-      "win_start_rate": 0.0906,
-      "quinella_rate": 0.1848,
-      "top3_rate": 0.268,
+      "win_start_rate": 0.0902,
+      "quinella_rate": 0.1842,
+      "top3_rate": 0.267,
       "surface": {
         "芝": {
-          "starts": 335,
+          "starts": 337,
           "wins": 29,
           "top3": 89,
-          "win_rate": 0.0866,
-          "top3_rate": 0.2657
+          "win_rate": 0.0861,
+          "top3_rate": 0.2641
         },
         "ダ": {
           "starts": 200,
@@ -410,11 +417,11 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 285,
+          "starts": 286,
           "wins": 28,
           "top3": 88,
-          "win_rate": 0.0982,
-          "top3_rate": 0.3088
+          "win_rate": 0.0979,
+          "top3_rate": 0.3077
         },
         "2200-2400": {
           "starts": 64,
@@ -431,11 +438,11 @@
           "top3_rate": 0.5385
         },
         "1200以下": {
-          "starts": 38,
+          "starts": 39,
           "wins": 2,
           "top3": 11,
-          "win_rate": 0.0526,
-          "top3_rate": 0.2895
+          "win_rate": 0.0513,
+          "top3_rate": 0.2821
         },
         "1400-1600": {
           "starts": 141,
@@ -453,32 +460,32 @@
       "raw_meetings": [
         "1新潟1",
         "4新潟2",
-        "2新潟1",
         "4新潟4",
+        "2新潟1",
         "1新潟4"
       ],
-      "starts": 526,
+      "starts": 534,
       "wins_starts": 57,
-      "seconds": 51,
+      "seconds": 52,
       "thirds": 40,
-      "top3": 148,
-      "win_start_rate": 0.1084,
-      "quinella_rate": 0.2053,
-      "top3_rate": 0.2814,
+      "top3": 149,
+      "win_start_rate": 0.1067,
+      "quinella_rate": 0.2041,
+      "top3_rate": 0.279,
       "surface": {
         "芝": {
-          "starts": 337,
+          "starts": 344,
           "wins": 35,
-          "top3": 98,
-          "win_rate": 0.1039,
-          "top3_rate": 0.2908
+          "top3": 99,
+          "win_rate": 0.1017,
+          "top3_rate": 0.2878
         },
         "ダ": {
-          "starts": 164,
+          "starts": 165,
           "wins": 19,
           "top3": 43,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2622
+          "win_rate": 0.1152,
+          "top3_rate": 0.2606
         },
         "障": {
           "starts": 25,
@@ -490,32 +497,32 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 263,
+          "starts": 267,
           "wins": 29,
-          "top3": 87,
-          "win_rate": 0.1103,
-          "top3_rate": 0.3308
+          "top3": 88,
+          "win_rate": 0.1086,
+          "top3_rate": 0.3296
         },
         "1400-1600": {
-          "starts": 115,
+          "starts": 116,
           "wins": 11,
           "top3": 29,
-          "win_rate": 0.0957,
-          "top3_rate": 0.2522
+          "win_rate": 0.0948,
+          "top3_rate": 0.25
         },
         "2200-2400": {
-          "starts": 48,
+          "starts": 50,
           "wins": 7,
           "top3": 13,
-          "win_rate": 0.1458,
-          "top3_rate": 0.2708
+          "win_rate": 0.14,
+          "top3_rate": 0.26
         },
         "1200以下": {
-          "starts": 73,
+          "starts": 74,
           "wins": 6,
           "top3": 11,
-          "win_rate": 0.0822,
-          "top3_rate": 0.1507
+          "win_rate": 0.0811,
+          "top3_rate": 0.1486
         },
         "2500以上": {
           "starts": 27,
@@ -523,6 +530,54 @@
           "top3": 8,
           "win_rate": 0.1481,
           "top3_rate": 0.2963
+        }
+      }
+    },
+    {
+      "label": "門別",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "門別"
+      ],
+      "starts": 511,
+      "wins_starts": 76,
+      "seconds": 60,
+      "thirds": 56,
+      "top3": 192,
+      "win_start_rate": 0.1487,
+      "quinella_rate": 0.2661,
+      "top3_rate": 0.3757,
+      "surface": {
+        "ダ": {
+          "starts": 511,
+          "wins": 76,
+          "top3": 192,
+          "win_rate": 0.1487,
+          "top3_rate": 0.3757
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 87,
+          "wins": 11,
+          "top3": 24,
+          "win_rate": 0.1264,
+          "top3_rate": 0.2759
+        },
+        "1200以下": {
+          "starts": 400,
+          "wins": 59,
+          "top3": 158,
+          "win_rate": 0.1475,
+          "top3_rate": 0.395
+        },
+        "1400-1600": {
+          "starts": 24,
+          "wins": 6,
+          "top3": 10,
+          "win_rate": 0.25,
+          "top3_rate": 0.4167
         }
       }
     },
@@ -600,84 +655,36 @@
       }
     },
     {
-      "label": "門別",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "門別"
-      ],
-      "starts": 508,
-      "wins_starts": 74,
-      "seconds": 60,
-      "thirds": 56,
-      "top3": 190,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2638,
-      "top3_rate": 0.374,
-      "surface": {
-        "ダ": {
-          "starts": 508,
-          "wins": 74,
-          "top3": 190,
-          "win_rate": 0.1457,
-          "top3_rate": 0.374
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 87,
-          "wins": 11,
-          "top3": 24,
-          "win_rate": 0.1264,
-          "top3_rate": 0.2759
-        },
-        "1200以下": {
-          "starts": 397,
-          "wins": 57,
-          "top3": 156,
-          "win_rate": 0.1436,
-          "top3_rate": 0.3929
-        },
-        "1400-1600": {
-          "starts": 24,
-          "wins": 6,
-          "top3": 10,
-          "win_rate": 0.25,
-          "top3_rate": 0.4167
-        }
-      }
-    },
-    {
       "label": "園田",
       "jurisdiction": "NAR",
       "country": "Japan",
       "raw_meetings": [
         "園田"
       ],
-      "starts": 490,
+      "starts": 491,
       "wins_starts": 45,
       "seconds": 48,
       "thirds": 38,
       "top3": 131,
-      "win_start_rate": 0.0918,
-      "quinella_rate": 0.1898,
-      "top3_rate": 0.2673,
+      "win_start_rate": 0.0916,
+      "quinella_rate": 0.1894,
+      "top3_rate": 0.2668,
       "surface": {
         "ダ": {
-          "starts": 490,
+          "starts": 491,
           "wins": 45,
           "top3": 131,
-          "win_rate": 0.0918,
-          "top3_rate": 0.2673
+          "win_rate": 0.0916,
+          "top3_rate": 0.2668
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 424,
+          "starts": 425,
           "wins": 41,
           "top3": 121,
-          "win_rate": 0.0967,
-          "top3_rate": 0.2854
+          "win_rate": 0.0965,
+          "top3_rate": 0.2847
         },
         "1800-2000": {
           "starts": 31,
@@ -702,30 +709,30 @@
       "raw_meetings": [
         "高知"
       ],
-      "starts": 477,
+      "starts": 480,
       "wins_starts": 72,
       "seconds": 65,
       "thirds": 36,
       "top3": 173,
-      "win_start_rate": 0.1509,
-      "quinella_rate": 0.2872,
-      "top3_rate": 0.3627,
+      "win_start_rate": 0.15,
+      "quinella_rate": 0.2854,
+      "top3_rate": 0.3604,
       "surface": {
         "ダ": {
-          "starts": 477,
+          "starts": 480,
           "wins": 72,
           "top3": 173,
-          "win_rate": 0.1509,
-          "top3_rate": 0.3627
+          "win_rate": 0.15,
+          "top3_rate": 0.3604
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 466,
+          "starts": 469,
           "wins": 71,
           "top3": 172,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3691
+          "win_rate": 0.1514,
+          "top3_rate": 0.3667
         },
         "1800-2000": {
           "starts": 3,
@@ -750,21 +757,21 @@
       "raw_meetings": [
         "盛岡"
       ],
-      "starts": 376,
+      "starts": 382,
       "wins_starts": 43,
-      "seconds": 34,
-      "thirds": 46,
-      "top3": 123,
-      "win_start_rate": 0.1144,
-      "quinella_rate": 0.2048,
-      "top3_rate": 0.3271,
+      "seconds": 35,
+      "thirds": 48,
+      "top3": 126,
+      "win_start_rate": 0.1126,
+      "quinella_rate": 0.2042,
+      "top3_rate": 0.3298,
       "surface": {
         "ダ": {
-          "starts": 343,
+          "starts": 349,
           "wins": 36,
-          "top3": 113,
-          "win_rate": 0.105,
-          "top3_rate": 0.3294
+          "top3": 116,
+          "win_rate": 0.1032,
+          "top3_rate": 0.3324
         },
         "芝": {
           "starts": 33,
@@ -783,18 +790,18 @@
           "top3_rate": 0.2941
         },
         "1200以下": {
-          "starts": 149,
+          "starts": 152,
           "wins": 15,
-          "top3": 42,
-          "win_rate": 0.1007,
-          "top3_rate": 0.2819
+          "top3": 44,
+          "win_rate": 0.0987,
+          "top3_rate": 0.2895
         },
         "1400-1600": {
-          "starts": 208,
+          "starts": 211,
           "wins": 23,
-          "top3": 74,
-          "win_rate": 0.1106,
-          "top3_rate": 0.3558
+          "top3": 75,
+          "win_rate": 0.109,
+          "top3_rate": 0.3555
         },
         "2200-2400": {
           "starts": 2,
@@ -867,21 +874,21 @@
       "raw_meetings": [
         "佐賀"
       ],
-      "starts": 340,
+      "starts": 341,
       "wins_starts": 54,
-      "seconds": 42,
+      "seconds": 43,
       "thirds": 29,
-      "top3": 125,
-      "win_start_rate": 0.1588,
-      "quinella_rate": 0.2824,
-      "top3_rate": 0.3676,
+      "top3": 126,
+      "win_start_rate": 0.1584,
+      "quinella_rate": 0.2845,
+      "top3_rate": 0.3695,
       "surface": {
         "ダ": {
-          "starts": 340,
+          "starts": 341,
           "wins": 54,
-          "top3": 125,
-          "win_rate": 0.1588,
-          "top3_rate": 0.3676
+          "top3": 126,
+          "win_rate": 0.1584,
+          "top3_rate": 0.3695
         }
       },
       "distance": {
@@ -893,11 +900,11 @@
           "top3_rate": 0.44
         },
         "1400-1600": {
-          "starts": 310,
+          "starts": 311,
           "wins": 46,
-          "top3": 111,
-          "win_rate": 0.1484,
-          "top3_rate": 0.3581
+          "top3": 112,
+          "win_rate": 0.1479,
+          "top3_rate": 0.3601
         },
         "1200以下": {
           "starts": 5,
@@ -963,33 +970,33 @@
       "raw_meetings": [
         "金沢"
       ],
-      "starts": 327,
+      "starts": 329,
       "wins_starts": 61,
       "seconds": 44,
       "thirds": 32,
       "top3": 137,
-      "win_start_rate": 0.1865,
-      "quinella_rate": 0.3211,
-      "top3_rate": 0.419,
+      "win_start_rate": 0.1854,
+      "quinella_rate": 0.3191,
+      "top3_rate": 0.4164,
       "surface": {
         "ダ": {
-          "starts": 327,
+          "starts": 329,
           "wins": 61,
           "top3": 137,
-          "win_rate": 0.1865,
-          "top3_rate": 0.419
+          "win_rate": 0.1854,
+          "top3_rate": 0.4164
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 319,
+          "starts": 320,
           "wins": 61,
           "top3": 136,
-          "win_rate": 0.1912,
-          "top3_rate": 0.4263
+          "win_rate": 0.1906,
+          "top3_rate": 0.425
         },
         "1200以下": {
-          "starts": 3,
+          "starts": 4,
           "wins": 0,
           "top3": 0,
           "win_rate": 0.0,
@@ -1315,30 +1322,30 @@
       "raw_meetings": [
         "浦和"
       ],
-      "starts": 251,
-      "wins_starts": 24,
+      "starts": 254,
+      "wins_starts": 25,
       "seconds": 22,
-      "thirds": 26,
-      "top3": 72,
-      "win_start_rate": 0.0956,
-      "quinella_rate": 0.1833,
-      "top3_rate": 0.2869,
+      "thirds": 27,
+      "top3": 74,
+      "win_start_rate": 0.0984,
+      "quinella_rate": 0.185,
+      "top3_rate": 0.2913,
       "surface": {
         "ダ": {
-          "starts": 251,
-          "wins": 24,
-          "top3": 72,
-          "win_rate": 0.0956,
-          "top3_rate": 0.2869
+          "starts": 254,
+          "wins": 25,
+          "top3": 74,
+          "win_rate": 0.0984,
+          "top3_rate": 0.2913
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 203,
-          "wins": 19,
-          "top3": 64,
-          "win_rate": 0.0936,
-          "top3_rate": 0.3153
+          "starts": 206,
+          "wins": 20,
+          "top3": 66,
+          "win_rate": 0.0971,
+          "top3_rate": 0.3204
         },
         "1800-2000": {
           "starts": 19,
@@ -2072,33 +2079,33 @@
       "raw_meetings": [
         "金沢"
       ],
-      "starts": 327,
+      "starts": 329,
       "wins_starts": 61,
       "seconds": 44,
       "thirds": 32,
       "top3": 137,
-      "win_start_rate": 0.1865,
-      "quinella_rate": 0.3211,
-      "top3_rate": 0.419,
+      "win_start_rate": 0.1854,
+      "quinella_rate": 0.3191,
+      "top3_rate": 0.4164,
       "surface": {
         "ダ": {
-          "starts": 327,
+          "starts": 329,
           "wins": 61,
           "top3": 137,
-          "win_rate": 0.1865,
-          "top3_rate": 0.419
+          "win_rate": 0.1854,
+          "top3_rate": 0.4164
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 319,
+          "starts": 320,
           "wins": 61,
           "top3": 136,
-          "win_rate": 0.1912,
-          "top3_rate": 0.4263
+          "win_rate": 0.1906,
+          "top3_rate": 0.425
         },
         "1200以下": {
-          "starts": 3,
+          "starts": 4,
           "wins": 0,
           "top3": 0,
           "win_rate": 0.0,
@@ -2168,21 +2175,21 @@
       "raw_meetings": [
         "佐賀"
       ],
-      "starts": 340,
+      "starts": 341,
       "wins_starts": 54,
-      "seconds": 42,
+      "seconds": 43,
       "thirds": 29,
-      "top3": 125,
-      "win_start_rate": 0.1588,
-      "quinella_rate": 0.2824,
-      "top3_rate": 0.3676,
+      "top3": 126,
+      "win_start_rate": 0.1584,
+      "quinella_rate": 0.2845,
+      "top3_rate": 0.3695,
       "surface": {
         "ダ": {
-          "starts": 340,
+          "starts": 341,
           "wins": 54,
-          "top3": 125,
-          "win_rate": 0.1588,
-          "top3_rate": 0.3676
+          "top3": 126,
+          "win_rate": 0.1584,
+          "top3_rate": 0.3695
         }
       },
       "distance": {
@@ -2194,11 +2201,11 @@
           "top3_rate": 0.44
         },
         "1400-1600": {
-          "starts": 310,
+          "starts": 311,
           "wins": 46,
-          "top3": 111,
-          "win_rate": 0.1484,
-          "top3_rate": 0.3581
+          "top3": 112,
+          "win_rate": 0.1479,
+          "top3_rate": 0.3601
         },
         "1200以下": {
           "starts": 5,
@@ -2271,30 +2278,30 @@
       "raw_meetings": [
         "高知"
       ],
-      "starts": 477,
+      "starts": 480,
       "wins_starts": 72,
       "seconds": 65,
       "thirds": 36,
       "top3": 173,
-      "win_start_rate": 0.1509,
-      "quinella_rate": 0.2872,
-      "top3_rate": 0.3627,
+      "win_start_rate": 0.15,
+      "quinella_rate": 0.2854,
+      "top3_rate": 0.3604,
       "surface": {
         "ダ": {
-          "starts": 477,
+          "starts": 480,
           "wins": 72,
           "top3": 173,
-          "win_rate": 0.1509,
-          "top3_rate": 0.3627
+          "win_rate": 0.15,
+          "top3_rate": 0.3604
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 466,
+          "starts": 469,
           "wins": 71,
           "top3": 172,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3691
+          "win_rate": 0.1514,
+          "top3_rate": 0.3667
         },
         "1800-2000": {
           "starts": 3,
@@ -2309,6 +2316,109 @@
           "top3": 1,
           "win_rate": 0.125,
           "top3_rate": 0.125
+        }
+      }
+    },
+    {
+      "label": "門別",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "門別"
+      ],
+      "starts": 511,
+      "wins_starts": 76,
+      "seconds": 60,
+      "thirds": 56,
+      "top3": 192,
+      "win_start_rate": 0.1487,
+      "quinella_rate": 0.2661,
+      "top3_rate": 0.3757,
+      "surface": {
+        "ダ": {
+          "starts": 511,
+          "wins": 76,
+          "top3": 192,
+          "win_rate": 0.1487,
+          "top3_rate": 0.3757
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 87,
+          "wins": 11,
+          "top3": 24,
+          "win_rate": 0.1264,
+          "top3_rate": 0.2759
+        },
+        "1200以下": {
+          "starts": 400,
+          "wins": 59,
+          "top3": 158,
+          "win_rate": 0.1475,
+          "top3_rate": 0.395
+        },
+        "1400-1600": {
+          "starts": 24,
+          "wins": 6,
+          "top3": 10,
+          "win_rate": 0.25,
+          "top3_rate": 0.4167
+        }
+      }
+    },
+    {
+      "label": "名古屋",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "名古屋"
+      ],
+      "starts": 613,
+      "wins_starts": 90,
+      "seconds": 74,
+      "thirds": 68,
+      "top3": 232,
+      "win_start_rate": 0.1468,
+      "quinella_rate": 0.2675,
+      "top3_rate": 0.3785,
+      "surface": {
+        "ダ": {
+          "starts": 613,
+          "wins": 90,
+          "top3": 232,
+          "win_rate": 0.1468,
+          "top3_rate": 0.3785
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 83,
+          "wins": 11,
+          "top3": 37,
+          "win_rate": 0.1325,
+          "top3_rate": 0.4458
+        },
+        "1200以下": {
+          "starts": 49,
+          "wins": 5,
+          "top3": 14,
+          "win_rate": 0.102,
+          "top3_rate": 0.2857
+        },
+        "1400-1600": {
+          "starts": 480,
+          "wins": 73,
+          "top3": 180,
+          "win_rate": 0.1521,
+          "top3_rate": 0.375
+        },
+        "2200-2400": {
+          "starts": 1,
+          "wins": 1,
+          "top3": 1,
+          "win_rate": 1.0,
+          "top3_rate": 1.0
         }
       }
     },
@@ -2382,102 +2492,6 @@
           "top3": 2,
           "win_rate": 0.5,
           "top3_rate": 1.0
-        }
-      }
-    },
-    {
-      "label": "名古屋",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "名古屋"
-      ],
-      "starts": 611,
-      "wins_starts": 89,
-      "seconds": 74,
-      "thirds": 68,
-      "top3": 231,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2668,
-      "top3_rate": 0.3781,
-      "surface": {
-        "ダ": {
-          "starts": 611,
-          "wins": 89,
-          "top3": 231,
-          "win_rate": 0.1457,
-          "top3_rate": 0.3781
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 83,
-          "wins": 11,
-          "top3": 37,
-          "win_rate": 0.1325,
-          "top3_rate": 0.4458
-        },
-        "1200以下": {
-          "starts": 49,
-          "wins": 5,
-          "top3": 14,
-          "win_rate": 0.102,
-          "top3_rate": 0.2857
-        },
-        "1400-1600": {
-          "starts": 479,
-          "wins": 73,
-          "top3": 180,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3758
-        }
-      }
-    },
-    {
-      "label": "門別",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "門別"
-      ],
-      "starts": 508,
-      "wins_starts": 74,
-      "seconds": 60,
-      "thirds": 56,
-      "top3": 190,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2638,
-      "top3_rate": 0.374,
-      "surface": {
-        "ダ": {
-          "starts": 508,
-          "wins": 74,
-          "top3": 190,
-          "win_rate": 0.1457,
-          "top3_rate": 0.374
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 87,
-          "wins": 11,
-          "top3": 24,
-          "win_rate": 0.1264,
-          "top3_rate": 0.2759
-        },
-        "1200以下": {
-          "starts": 397,
-          "wins": 57,
-          "top3": 156,
-          "win_rate": 0.1436,
-          "top3_rate": 0.3929
-        },
-        "1400-1600": {
-          "starts": 24,
-          "wins": 6,
-          "top3": 10,
-          "win_rate": 0.25,
-          "top3_rate": 0.4167
         }
       }
     },
@@ -2591,21 +2605,21 @@
       "raw_meetings": [
         "盛岡"
       ],
-      "starts": 376,
+      "starts": 382,
       "wins_starts": 43,
-      "seconds": 34,
-      "thirds": 46,
-      "top3": 123,
-      "win_start_rate": 0.1144,
-      "quinella_rate": 0.2048,
-      "top3_rate": 0.3271,
+      "seconds": 35,
+      "thirds": 48,
+      "top3": 126,
+      "win_start_rate": 0.1126,
+      "quinella_rate": 0.2042,
+      "top3_rate": 0.3298,
       "surface": {
         "ダ": {
-          "starts": 343,
+          "starts": 349,
           "wins": 36,
-          "top3": 113,
-          "win_rate": 0.105,
-          "top3_rate": 0.3294
+          "top3": 116,
+          "win_rate": 0.1032,
+          "top3_rate": 0.3324
         },
         "芝": {
           "starts": 33,
@@ -2624,18 +2638,18 @@
           "top3_rate": 0.2941
         },
         "1200以下": {
-          "starts": 149,
+          "starts": 152,
           "wins": 15,
-          "top3": 42,
-          "win_rate": 0.1007,
-          "top3_rate": 0.2819
+          "top3": 44,
+          "win_rate": 0.0987,
+          "top3_rate": 0.2895
         },
         "1400-1600": {
-          "starts": 208,
+          "starts": 211,
           "wins": 23,
-          "top3": 74,
-          "win_rate": 0.1106,
-          "top3_rate": 0.3558
+          "top3": 75,
+          "win_rate": 0.109,
+          "top3_rate": 0.3555
         },
         "2200-2400": {
           "starts": 2,
@@ -2657,28 +2671,28 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1068,
+      "starts": 1074,
       "wins_starts": 120,
-      "seconds": 109,
+      "seconds": 110,
       "thirds": 86,
-      "top3": 315,
-      "win_start_rate": 0.1124,
-      "quinella_rate": 0.2144,
-      "top3_rate": 0.2949,
+      "top3": 316,
+      "win_start_rate": 0.1117,
+      "quinella_rate": 0.2142,
+      "top3_rate": 0.2942,
       "surface": {
         "芝": {
-          "starts": 686,
+          "starts": 689,
           "wins": 81,
-          "top3": 216,
-          "win_rate": 0.1181,
+          "top3": 217,
+          "win_rate": 0.1176,
           "top3_rate": 0.3149
         },
         "ダ": {
-          "starts": 377,
+          "starts": 380,
           "wins": 39,
           "top3": 97,
-          "win_rate": 0.1034,
-          "top3_rate": 0.2573
+          "win_rate": 0.1026,
+          "top3_rate": 0.2553
         },
         "障": {
           "starts": 5,
@@ -2690,25 +2704,25 @@
       },
       "distance": {
         "2200-2400": {
-          "starts": 167,
+          "starts": 168,
           "wins": 23,
           "top3": 64,
-          "win_rate": 0.1377,
-          "top3_rate": 0.3832
+          "win_rate": 0.1369,
+          "top3_rate": 0.381
         },
         "1800-2000": {
-          "starts": 328,
+          "starts": 331,
           "wins": 38,
-          "top3": 98,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2988
+          "top3": 99,
+          "win_rate": 0.1148,
+          "top3_rate": 0.2991
         },
         "1400-1600": {
-          "starts": 561,
+          "starts": 563,
           "wins": 58,
           "top3": 147,
-          "win_rate": 0.1034,
-          "top3_rate": 0.262
+          "win_rate": 0.103,
+          "top3_rate": 0.2611
         },
         "2500以上": {
           "starts": 12,
@@ -2726,32 +2740,32 @@
       "raw_meetings": [
         "1新潟1",
         "4新潟2",
-        "2新潟1",
         "4新潟4",
+        "2新潟1",
         "1新潟4"
       ],
-      "starts": 526,
+      "starts": 534,
       "wins_starts": 57,
-      "seconds": 51,
+      "seconds": 52,
       "thirds": 40,
-      "top3": 148,
-      "win_start_rate": 0.1084,
-      "quinella_rate": 0.2053,
-      "top3_rate": 0.2814,
+      "top3": 149,
+      "win_start_rate": 0.1067,
+      "quinella_rate": 0.2041,
+      "top3_rate": 0.279,
       "surface": {
         "芝": {
-          "starts": 337,
+          "starts": 344,
           "wins": 35,
-          "top3": 98,
-          "win_rate": 0.1039,
-          "top3_rate": 0.2908
+          "top3": 99,
+          "win_rate": 0.1017,
+          "top3_rate": 0.2878
         },
         "ダ": {
-          "starts": 164,
+          "starts": 165,
           "wins": 19,
           "top3": 43,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2622
+          "win_rate": 0.1152,
+          "top3_rate": 0.2606
         },
         "障": {
           "starts": 25,
@@ -2763,32 +2777,32 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 263,
+          "starts": 267,
           "wins": 29,
-          "top3": 87,
-          "win_rate": 0.1103,
-          "top3_rate": 0.3308
+          "top3": 88,
+          "win_rate": 0.1086,
+          "top3_rate": 0.3296
         },
         "1400-1600": {
-          "starts": 115,
+          "starts": 116,
           "wins": 11,
           "top3": 29,
-          "win_rate": 0.0957,
-          "top3_rate": 0.2522
+          "win_rate": 0.0948,
+          "top3_rate": 0.25
         },
         "2200-2400": {
-          "starts": 48,
+          "starts": 50,
           "wins": 7,
           "top3": 13,
-          "win_rate": 0.1458,
-          "top3_rate": 0.2708
+          "win_rate": 0.14,
+          "top3_rate": 0.26
         },
         "1200以下": {
-          "starts": 73,
+          "starts": 74,
           "wins": 6,
           "top3": 11,
-          "win_rate": 0.0822,
-          "top3_rate": 0.1507
+          "win_rate": 0.0811,
+          "top3_rate": 0.1486
         },
         "2500以上": {
           "starts": 27,
@@ -2953,6 +2967,54 @@
       }
     },
     {
+      "label": "浦和",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "浦和"
+      ],
+      "starts": 254,
+      "wins_starts": 25,
+      "seconds": 22,
+      "thirds": 27,
+      "top3": 74,
+      "win_start_rate": 0.0984,
+      "quinella_rate": 0.185,
+      "top3_rate": 0.2913,
+      "surface": {
+        "ダ": {
+          "starts": 254,
+          "wins": 25,
+          "top3": 74,
+          "win_rate": 0.0984,
+          "top3_rate": 0.2913
+        }
+      },
+      "distance": {
+        "1400-1600": {
+          "starts": 206,
+          "wins": 20,
+          "top3": 66,
+          "win_rate": 0.0971,
+          "top3_rate": 0.3204
+        },
+        "1800-2000": {
+          "starts": 19,
+          "wins": 3,
+          "top3": 4,
+          "win_rate": 0.1579,
+          "top3_rate": 0.2105
+        },
+        "1200以下": {
+          "starts": 29,
+          "wins": 2,
+          "top3": 4,
+          "win_rate": 0.069,
+          "top3_rate": 0.1379
+        }
+      }
+    },
+    {
       "label": "阪神",
       "jurisdiction": "JRA",
       "country": "Japan",
@@ -3029,54 +3091,6 @@
           "top3": 14,
           "win_rate": 0.0494,
           "top3_rate": 0.1728
-        }
-      }
-    },
-    {
-      "label": "浦和",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "浦和"
-      ],
-      "starts": 251,
-      "wins_starts": 24,
-      "seconds": 22,
-      "thirds": 26,
-      "top3": 72,
-      "win_start_rate": 0.0956,
-      "quinella_rate": 0.1833,
-      "top3_rate": 0.2869,
-      "surface": {
-        "ダ": {
-          "starts": 251,
-          "wins": 24,
-          "top3": 72,
-          "win_rate": 0.0956,
-          "top3_rate": 0.2869
-        }
-      },
-      "distance": {
-        "1400-1600": {
-          "starts": 203,
-          "wins": 19,
-          "top3": 64,
-          "win_rate": 0.0936,
-          "top3_rate": 0.3153
-        },
-        "1800-2000": {
-          "starts": 19,
-          "wins": 3,
-          "top3": 4,
-          "win_rate": 0.1579,
-          "top3_rate": 0.2105
-        },
-        "1200以下": {
-          "starts": 29,
-          "wins": 2,
-          "top3": 4,
-          "win_rate": 0.069,
-          "top3_rate": 0.1379
         }
       }
     },
@@ -3208,30 +3222,30 @@
       "raw_meetings": [
         "園田"
       ],
-      "starts": 490,
+      "starts": 491,
       "wins_starts": 45,
       "seconds": 48,
       "thirds": 38,
       "top3": 131,
-      "win_start_rate": 0.0918,
-      "quinella_rate": 0.1898,
-      "top3_rate": 0.2673,
+      "win_start_rate": 0.0916,
+      "quinella_rate": 0.1894,
+      "top3_rate": 0.2668,
       "surface": {
         "ダ": {
-          "starts": 490,
+          "starts": 491,
           "wins": 45,
           "top3": 131,
-          "win_rate": 0.0918,
-          "top3_rate": 0.2673
+          "win_rate": 0.0916,
+          "top3_rate": 0.2668
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 424,
+          "starts": 425,
           "wins": 41,
           "top3": 121,
-          "win_rate": 0.0967,
-          "top3_rate": 0.2854
+          "win_rate": 0.0965,
+          "top3_rate": 0.2847
         },
         "1800-2000": {
           "starts": 31,
@@ -3260,21 +3274,21 @@
         "2京都1",
         "2京都6"
       ],
-      "starts": 541,
+      "starts": 543,
       "wins_starts": 49,
       "seconds": 51,
       "thirds": 45,
       "top3": 145,
-      "win_start_rate": 0.0906,
-      "quinella_rate": 0.1848,
-      "top3_rate": 0.268,
+      "win_start_rate": 0.0902,
+      "quinella_rate": 0.1842,
+      "top3_rate": 0.267,
       "surface": {
         "芝": {
-          "starts": 335,
+          "starts": 337,
           "wins": 29,
           "top3": 89,
-          "win_rate": 0.0866,
-          "top3_rate": 0.2657
+          "win_rate": 0.0861,
+          "top3_rate": 0.2641
         },
         "ダ": {
           "starts": 200,
@@ -3293,11 +3307,11 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 285,
+          "starts": 286,
           "wins": 28,
           "top3": 88,
-          "win_rate": 0.0982,
-          "top3_rate": 0.3088
+          "win_rate": 0.0979,
+          "top3_rate": 0.3077
         },
         "2200-2400": {
           "starts": 64,
@@ -3314,11 +3328,11 @@
           "top3_rate": 0.5385
         },
         "1200以下": {
-          "starts": 38,
+          "starts": 39,
           "wins": 2,
           "top3": 11,
-          "win_rate": 0.0526,
-          "top3_rate": 0.2895
+          "win_rate": 0.0513,
+          "top3_rate": 0.2821
         },
         "1400-1600": {
           "starts": 141,
@@ -3543,28 +3557,28 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1068,
+      "starts": 1074,
       "wins_starts": 120,
-      "seconds": 109,
+      "seconds": 110,
       "thirds": 86,
-      "top3": 315,
-      "win_start_rate": 0.1124,
-      "quinella_rate": 0.2144,
-      "top3_rate": 0.2949,
+      "top3": 316,
+      "win_start_rate": 0.1117,
+      "quinella_rate": 0.2142,
+      "top3_rate": 0.2942,
       "surface": {
         "芝": {
-          "starts": 686,
+          "starts": 689,
           "wins": 81,
-          "top3": 216,
-          "win_rate": 0.1181,
+          "top3": 217,
+          "win_rate": 0.1176,
           "top3_rate": 0.3149
         },
         "ダ": {
-          "starts": 377,
+          "starts": 380,
           "wins": 39,
           "top3": 97,
-          "win_rate": 0.1034,
-          "top3_rate": 0.2573
+          "win_rate": 0.1026,
+          "top3_rate": 0.2553
         },
         "障": {
           "starts": 5,
@@ -3576,25 +3590,25 @@
       },
       "distance": {
         "2200-2400": {
-          "starts": 167,
+          "starts": 168,
           "wins": 23,
           "top3": 64,
-          "win_rate": 0.1377,
-          "top3_rate": 0.3832
+          "win_rate": 0.1369,
+          "top3_rate": 0.381
         },
         "1800-2000": {
-          "starts": 328,
+          "starts": 331,
           "wins": 38,
-          "top3": 98,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2988
+          "top3": 99,
+          "win_rate": 0.1148,
+          "top3_rate": 0.2991
         },
         "1400-1600": {
-          "starts": 561,
+          "starts": 563,
           "wins": 58,
           "top3": 147,
-          "win_rate": 0.1034,
-          "top3_rate": 0.262
+          "win_rate": 0.103,
+          "top3_rate": 0.2611
         },
         "2500以上": {
           "starts": 12,
@@ -3852,21 +3866,21 @@
       "raw_meetings": [
         "名古屋"
       ],
-      "starts": 611,
-      "wins_starts": 89,
+      "starts": 613,
+      "wins_starts": 90,
       "seconds": 74,
       "thirds": 68,
-      "top3": 231,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2668,
-      "top3_rate": 0.3781,
+      "top3": 232,
+      "win_start_rate": 0.1468,
+      "quinella_rate": 0.2675,
+      "top3_rate": 0.3785,
       "surface": {
         "ダ": {
-          "starts": 611,
-          "wins": 89,
-          "top3": 231,
-          "win_rate": 0.1457,
-          "top3_rate": 0.3781
+          "starts": 613,
+          "wins": 90,
+          "top3": 232,
+          "win_rate": 0.1468,
+          "top3_rate": 0.3785
         }
       },
       "distance": {
@@ -3885,11 +3899,18 @@
           "top3_rate": 0.2857
         },
         "1400-1600": {
-          "starts": 479,
+          "starts": 480,
           "wins": 73,
           "top3": 180,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3758
+          "win_rate": 0.1521,
+          "top3_rate": 0.375
+        },
+        "2200-2400": {
+          "starts": 1,
+          "wins": 1,
+          "top3": 1,
+          "win_rate": 1.0,
+          "top3_rate": 1.0
         }
       }
     },
@@ -3904,21 +3925,21 @@
         "2京都1",
         "2京都6"
       ],
-      "starts": 541,
+      "starts": 543,
       "wins_starts": 49,
       "seconds": 51,
       "thirds": 45,
       "top3": 145,
-      "win_start_rate": 0.0906,
-      "quinella_rate": 0.1848,
-      "top3_rate": 0.268,
+      "win_start_rate": 0.0902,
+      "quinella_rate": 0.1842,
+      "top3_rate": 0.267,
       "surface": {
         "芝": {
-          "starts": 335,
+          "starts": 337,
           "wins": 29,
           "top3": 89,
-          "win_rate": 0.0866,
-          "top3_rate": 0.2657
+          "win_rate": 0.0861,
+          "top3_rate": 0.2641
         },
         "ダ": {
           "starts": 200,
@@ -3937,11 +3958,11 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 285,
+          "starts": 286,
           "wins": 28,
           "top3": 88,
-          "win_rate": 0.0982,
-          "top3_rate": 0.3088
+          "win_rate": 0.0979,
+          "top3_rate": 0.3077
         },
         "2200-2400": {
           "starts": 64,
@@ -3958,11 +3979,11 @@
           "top3_rate": 0.5385
         },
         "1200以下": {
-          "starts": 38,
+          "starts": 39,
           "wins": 2,
           "top3": 11,
-          "win_rate": 0.0526,
-          "top3_rate": 0.2895
+          "win_rate": 0.0513,
+          "top3_rate": 0.2821
         },
         "1400-1600": {
           "starts": 141,
@@ -3980,32 +4001,32 @@
       "raw_meetings": [
         "1新潟1",
         "4新潟2",
-        "2新潟1",
         "4新潟4",
+        "2新潟1",
         "1新潟4"
       ],
-      "starts": 526,
+      "starts": 534,
       "wins_starts": 57,
-      "seconds": 51,
+      "seconds": 52,
       "thirds": 40,
-      "top3": 148,
-      "win_start_rate": 0.1084,
-      "quinella_rate": 0.2053,
-      "top3_rate": 0.2814,
+      "top3": 149,
+      "win_start_rate": 0.1067,
+      "quinella_rate": 0.2041,
+      "top3_rate": 0.279,
       "surface": {
         "芝": {
-          "starts": 337,
+          "starts": 344,
           "wins": 35,
-          "top3": 98,
-          "win_rate": 0.1039,
-          "top3_rate": 0.2908
+          "top3": 99,
+          "win_rate": 0.1017,
+          "top3_rate": 0.2878
         },
         "ダ": {
-          "starts": 164,
+          "starts": 165,
           "wins": 19,
           "top3": 43,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2622
+          "win_rate": 0.1152,
+          "top3_rate": 0.2606
         },
         "障": {
           "starts": 25,
@@ -4017,32 +4038,32 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 263,
+          "starts": 267,
           "wins": 29,
-          "top3": 87,
-          "win_rate": 0.1103,
-          "top3_rate": 0.3308
+          "top3": 88,
+          "win_rate": 0.1086,
+          "top3_rate": 0.3296
         },
         "1400-1600": {
-          "starts": 115,
+          "starts": 116,
           "wins": 11,
           "top3": 29,
-          "win_rate": 0.0957,
-          "top3_rate": 0.2522
+          "win_rate": 0.0948,
+          "top3_rate": 0.25
         },
         "2200-2400": {
-          "starts": 48,
+          "starts": 50,
           "wins": 7,
           "top3": 13,
-          "win_rate": 0.1458,
-          "top3_rate": 0.2708
+          "win_rate": 0.14,
+          "top3_rate": 0.26
         },
         "1200以下": {
-          "starts": 73,
+          "starts": 74,
           "wins": 6,
           "top3": 11,
-          "win_rate": 0.0822,
-          "top3_rate": 0.1507
+          "win_rate": 0.0811,
+          "top3_rate": 0.1486
         },
         "2500以上": {
           "starts": 27,
@@ -4050,6 +4071,54 @@
           "top3": 8,
           "win_rate": 0.1481,
           "top3_rate": 0.2963
+        }
+      }
+    },
+    {
+      "label": "門別",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "門別"
+      ],
+      "starts": 511,
+      "wins_starts": 76,
+      "seconds": 60,
+      "thirds": 56,
+      "top3": 192,
+      "win_start_rate": 0.1487,
+      "quinella_rate": 0.2661,
+      "top3_rate": 0.3757,
+      "surface": {
+        "ダ": {
+          "starts": 511,
+          "wins": 76,
+          "top3": 192,
+          "win_rate": 0.1487,
+          "top3_rate": 0.3757
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 87,
+          "wins": 11,
+          "top3": 24,
+          "win_rate": 0.1264,
+          "top3_rate": 0.2759
+        },
+        "1200以下": {
+          "starts": 400,
+          "wins": 59,
+          "top3": 158,
+          "win_rate": 0.1475,
+          "top3_rate": 0.395
+        },
+        "1400-1600": {
+          "starts": 24,
+          "wins": 6,
+          "top3": 10,
+          "win_rate": 0.25,
+          "top3_rate": 0.4167
         }
       }
     },
@@ -4127,84 +4196,36 @@
       }
     },
     {
-      "label": "門別",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "門別"
-      ],
-      "starts": 508,
-      "wins_starts": 74,
-      "seconds": 60,
-      "thirds": 56,
-      "top3": 190,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2638,
-      "top3_rate": 0.374,
-      "surface": {
-        "ダ": {
-          "starts": 508,
-          "wins": 74,
-          "top3": 190,
-          "win_rate": 0.1457,
-          "top3_rate": 0.374
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 87,
-          "wins": 11,
-          "top3": 24,
-          "win_rate": 0.1264,
-          "top3_rate": 0.2759
-        },
-        "1200以下": {
-          "starts": 397,
-          "wins": 57,
-          "top3": 156,
-          "win_rate": 0.1436,
-          "top3_rate": 0.3929
-        },
-        "1400-1600": {
-          "starts": 24,
-          "wins": 6,
-          "top3": 10,
-          "win_rate": 0.25,
-          "top3_rate": 0.4167
-        }
-      }
-    },
-    {
       "label": "園田",
       "jurisdiction": "NAR",
       "country": "Japan",
       "raw_meetings": [
         "園田"
       ],
-      "starts": 490,
+      "starts": 491,
       "wins_starts": 45,
       "seconds": 48,
       "thirds": 38,
       "top3": 131,
-      "win_start_rate": 0.0918,
-      "quinella_rate": 0.1898,
-      "top3_rate": 0.2673,
+      "win_start_rate": 0.0916,
+      "quinella_rate": 0.1894,
+      "top3_rate": 0.2668,
       "surface": {
         "ダ": {
-          "starts": 490,
+          "starts": 491,
           "wins": 45,
           "top3": 131,
-          "win_rate": 0.0918,
-          "top3_rate": 0.2673
+          "win_rate": 0.0916,
+          "top3_rate": 0.2668
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 424,
+          "starts": 425,
           "wins": 41,
           "top3": 121,
-          "win_rate": 0.0967,
-          "top3_rate": 0.2854
+          "win_rate": 0.0965,
+          "top3_rate": 0.2847
         },
         "1800-2000": {
           "starts": 31,
@@ -4229,30 +4250,30 @@
       "raw_meetings": [
         "高知"
       ],
-      "starts": 477,
+      "starts": 480,
       "wins_starts": 72,
       "seconds": 65,
       "thirds": 36,
       "top3": 173,
-      "win_start_rate": 0.1509,
-      "quinella_rate": 0.2872,
-      "top3_rate": 0.3627,
+      "win_start_rate": 0.15,
+      "quinella_rate": 0.2854,
+      "top3_rate": 0.3604,
       "surface": {
         "ダ": {
-          "starts": 477,
+          "starts": 480,
           "wins": 72,
           "top3": 173,
-          "win_rate": 0.1509,
-          "top3_rate": 0.3627
+          "win_rate": 0.15,
+          "top3_rate": 0.3604
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 466,
+          "starts": 469,
           "wins": 71,
           "top3": 172,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3691
+          "win_rate": 0.1514,
+          "top3_rate": 0.3667
         },
         "1800-2000": {
           "starts": 3,
@@ -4277,21 +4298,21 @@
       "raw_meetings": [
         "盛岡"
       ],
-      "starts": 376,
+      "starts": 382,
       "wins_starts": 43,
-      "seconds": 34,
-      "thirds": 46,
-      "top3": 123,
-      "win_start_rate": 0.1144,
-      "quinella_rate": 0.2048,
-      "top3_rate": 0.3271,
+      "seconds": 35,
+      "thirds": 48,
+      "top3": 126,
+      "win_start_rate": 0.1126,
+      "quinella_rate": 0.2042,
+      "top3_rate": 0.3298,
       "surface": {
         "ダ": {
-          "starts": 343,
+          "starts": 349,
           "wins": 36,
-          "top3": 113,
-          "win_rate": 0.105,
-          "top3_rate": 0.3294
+          "top3": 116,
+          "win_rate": 0.1032,
+          "top3_rate": 0.3324
         },
         "芝": {
           "starts": 33,
@@ -4310,18 +4331,18 @@
           "top3_rate": 0.2941
         },
         "1200以下": {
-          "starts": 149,
+          "starts": 152,
           "wins": 15,
-          "top3": 42,
-          "win_rate": 0.1007,
-          "top3_rate": 0.2819
+          "top3": 44,
+          "win_rate": 0.0987,
+          "top3_rate": 0.2895
         },
         "1400-1600": {
-          "starts": 208,
+          "starts": 211,
           "wins": 23,
-          "top3": 74,
-          "win_rate": 0.1106,
-          "top3_rate": 0.3558
+          "top3": 75,
+          "win_rate": 0.109,
+          "top3_rate": 0.3555
         },
         "2200-2400": {
           "starts": 2,
@@ -4394,21 +4415,21 @@
       "raw_meetings": [
         "佐賀"
       ],
-      "starts": 340,
+      "starts": 341,
       "wins_starts": 54,
-      "seconds": 42,
+      "seconds": 43,
       "thirds": 29,
-      "top3": 125,
-      "win_start_rate": 0.1588,
-      "quinella_rate": 0.2824,
-      "top3_rate": 0.3676,
+      "top3": 126,
+      "win_start_rate": 0.1584,
+      "quinella_rate": 0.2845,
+      "top3_rate": 0.3695,
       "surface": {
         "ダ": {
-          "starts": 340,
+          "starts": 341,
           "wins": 54,
-          "top3": 125,
-          "win_rate": 0.1588,
-          "top3_rate": 0.3676
+          "top3": 126,
+          "win_rate": 0.1584,
+          "top3_rate": 0.3695
         }
       },
       "distance": {
@@ -4420,11 +4441,11 @@
           "top3_rate": 0.44
         },
         "1400-1600": {
-          "starts": 310,
+          "starts": 311,
           "wins": 46,
-          "top3": 111,
-          "win_rate": 0.1484,
-          "top3_rate": 0.3581
+          "top3": 112,
+          "win_rate": 0.1479,
+          "top3_rate": 0.3601
         },
         "1200以下": {
           "starts": 5,
@@ -4490,33 +4511,33 @@
       "raw_meetings": [
         "金沢"
       ],
-      "starts": 327,
+      "starts": 329,
       "wins_starts": 61,
       "seconds": 44,
       "thirds": 32,
       "top3": 137,
-      "win_start_rate": 0.1865,
-      "quinella_rate": 0.3211,
-      "top3_rate": 0.419,
+      "win_start_rate": 0.1854,
+      "quinella_rate": 0.3191,
+      "top3_rate": 0.4164,
       "surface": {
         "ダ": {
-          "starts": 327,
+          "starts": 329,
           "wins": 61,
           "top3": 137,
-          "win_rate": 0.1865,
-          "top3_rate": 0.419
+          "win_rate": 0.1854,
+          "top3_rate": 0.4164
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 319,
+          "starts": 320,
           "wins": 61,
           "top3": 136,
-          "win_rate": 0.1912,
-          "top3_rate": 0.4263
+          "win_rate": 0.1906,
+          "top3_rate": 0.425
         },
         "1200以下": {
-          "starts": 3,
+          "starts": 4,
           "wins": 0,
           "top3": 0,
           "win_rate": 0.0,
@@ -4842,30 +4863,30 @@
       "raw_meetings": [
         "浦和"
       ],
-      "starts": 251,
-      "wins_starts": 24,
+      "starts": 254,
+      "wins_starts": 25,
       "seconds": 22,
-      "thirds": 26,
-      "top3": 72,
-      "win_start_rate": 0.0956,
-      "quinella_rate": 0.1833,
-      "top3_rate": 0.2869,
+      "thirds": 27,
+      "top3": 74,
+      "win_start_rate": 0.0984,
+      "quinella_rate": 0.185,
+      "top3_rate": 0.2913,
       "surface": {
         "ダ": {
-          "starts": 251,
-          "wins": 24,
-          "top3": 72,
-          "win_rate": 0.0956,
-          "top3_rate": 0.2869
+          "starts": 254,
+          "wins": 25,
+          "top3": 74,
+          "win_rate": 0.0984,
+          "top3_rate": 0.2913
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 203,
-          "wins": 19,
-          "top3": 64,
-          "win_rate": 0.0936,
-          "top3_rate": 0.3153
+          "starts": 206,
+          "wins": 20,
+          "top3": 66,
+          "win_rate": 0.0971,
+          "top3_rate": 0.3204
         },
         "1800-2000": {
           "starts": 19,
@@ -5010,28 +5031,28 @@
         "2東京10",
         "1東京4"
       ],
-      "starts": 1068,
+      "starts": 1074,
       "wins_starts": 120,
-      "seconds": 109,
+      "seconds": 110,
       "thirds": 86,
-      "top3": 315,
-      "win_start_rate": 0.1124,
-      "quinella_rate": 0.2144,
-      "top3_rate": 0.2949,
+      "top3": 316,
+      "win_start_rate": 0.1117,
+      "quinella_rate": 0.2142,
+      "top3_rate": 0.2942,
       "surface": {
         "芝": {
-          "starts": 686,
+          "starts": 689,
           "wins": 81,
-          "top3": 216,
-          "win_rate": 0.1181,
+          "top3": 217,
+          "win_rate": 0.1176,
           "top3_rate": 0.3149
         },
         "ダ": {
-          "starts": 377,
+          "starts": 380,
           "wins": 39,
           "top3": 97,
-          "win_rate": 0.1034,
-          "top3_rate": 0.2573
+          "win_rate": 0.1026,
+          "top3_rate": 0.2553
         },
         "障": {
           "starts": 5,
@@ -5043,25 +5064,25 @@
       },
       "distance": {
         "2200-2400": {
-          "starts": 167,
+          "starts": 168,
           "wins": 23,
           "top3": 64,
-          "win_rate": 0.1377,
-          "top3_rate": 0.3832
+          "win_rate": 0.1369,
+          "top3_rate": 0.381
         },
         "1800-2000": {
-          "starts": 328,
+          "starts": 331,
           "wins": 38,
-          "top3": 98,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2988
+          "top3": 99,
+          "win_rate": 0.1148,
+          "top3_rate": 0.2991
         },
         "1400-1600": {
-          "starts": 561,
+          "starts": 563,
           "wins": 58,
           "top3": 147,
-          "win_rate": 0.1034,
-          "top3_rate": 0.262
+          "win_rate": 0.103,
+          "top3_rate": 0.2611
         },
         "2500以上": {
           "starts": 12,
@@ -5319,21 +5340,21 @@
       "raw_meetings": [
         "名古屋"
       ],
-      "starts": 611,
-      "wins_starts": 89,
+      "starts": 613,
+      "wins_starts": 90,
       "seconds": 74,
       "thirds": 68,
-      "top3": 231,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2668,
-      "top3_rate": 0.3781,
+      "top3": 232,
+      "win_start_rate": 0.1468,
+      "quinella_rate": 0.2675,
+      "top3_rate": 0.3785,
       "surface": {
         "ダ": {
-          "starts": 611,
-          "wins": 89,
-          "top3": 231,
-          "win_rate": 0.1457,
-          "top3_rate": 0.3781
+          "starts": 613,
+          "wins": 90,
+          "top3": 232,
+          "win_rate": 0.1468,
+          "top3_rate": 0.3785
         }
       },
       "distance": {
@@ -5352,11 +5373,18 @@
           "top3_rate": 0.2857
         },
         "1400-1600": {
-          "starts": 479,
+          "starts": 480,
           "wins": 73,
           "top3": 180,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3758
+          "win_rate": 0.1521,
+          "top3_rate": 0.375
+        },
+        "2200-2400": {
+          "starts": 1,
+          "wins": 1,
+          "top3": 1,
+          "win_rate": 1.0,
+          "top3_rate": 1.0
         }
       }
     },
@@ -5371,21 +5399,21 @@
         "2京都1",
         "2京都6"
       ],
-      "starts": 541,
+      "starts": 543,
       "wins_starts": 49,
       "seconds": 51,
       "thirds": 45,
       "top3": 145,
-      "win_start_rate": 0.0906,
-      "quinella_rate": 0.1848,
-      "top3_rate": 0.268,
+      "win_start_rate": 0.0902,
+      "quinella_rate": 0.1842,
+      "top3_rate": 0.267,
       "surface": {
         "芝": {
-          "starts": 335,
+          "starts": 337,
           "wins": 29,
           "top3": 89,
-          "win_rate": 0.0866,
-          "top3_rate": 0.2657
+          "win_rate": 0.0861,
+          "top3_rate": 0.2641
         },
         "ダ": {
           "starts": 200,
@@ -5404,11 +5432,11 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 285,
+          "starts": 286,
           "wins": 28,
           "top3": 88,
-          "win_rate": 0.0982,
-          "top3_rate": 0.3088
+          "win_rate": 0.0979,
+          "top3_rate": 0.3077
         },
         "2200-2400": {
           "starts": 64,
@@ -5425,11 +5453,11 @@
           "top3_rate": 0.5385
         },
         "1200以下": {
-          "starts": 38,
+          "starts": 39,
           "wins": 2,
           "top3": 11,
-          "win_rate": 0.0526,
-          "top3_rate": 0.2895
+          "win_rate": 0.0513,
+          "top3_rate": 0.2821
         },
         "1400-1600": {
           "starts": 141,
@@ -5447,32 +5475,32 @@
       "raw_meetings": [
         "1新潟1",
         "4新潟2",
-        "2新潟1",
         "4新潟4",
+        "2新潟1",
         "1新潟4"
       ],
-      "starts": 526,
+      "starts": 534,
       "wins_starts": 57,
-      "seconds": 51,
+      "seconds": 52,
       "thirds": 40,
-      "top3": 148,
-      "win_start_rate": 0.1084,
-      "quinella_rate": 0.2053,
-      "top3_rate": 0.2814,
+      "top3": 149,
+      "win_start_rate": 0.1067,
+      "quinella_rate": 0.2041,
+      "top3_rate": 0.279,
       "surface": {
         "芝": {
-          "starts": 337,
+          "starts": 344,
           "wins": 35,
-          "top3": 98,
-          "win_rate": 0.1039,
-          "top3_rate": 0.2908
+          "top3": 99,
+          "win_rate": 0.1017,
+          "top3_rate": 0.2878
         },
         "ダ": {
-          "starts": 164,
+          "starts": 165,
           "wins": 19,
           "top3": 43,
-          "win_rate": 0.1159,
-          "top3_rate": 0.2622
+          "win_rate": 0.1152,
+          "top3_rate": 0.2606
         },
         "障": {
           "starts": 25,
@@ -5484,32 +5512,32 @@
       },
       "distance": {
         "1800-2000": {
-          "starts": 263,
+          "starts": 267,
           "wins": 29,
-          "top3": 87,
-          "win_rate": 0.1103,
-          "top3_rate": 0.3308
+          "top3": 88,
+          "win_rate": 0.1086,
+          "top3_rate": 0.3296
         },
         "1400-1600": {
-          "starts": 115,
+          "starts": 116,
           "wins": 11,
           "top3": 29,
-          "win_rate": 0.0957,
-          "top3_rate": 0.2522
+          "win_rate": 0.0948,
+          "top3_rate": 0.25
         },
         "2200-2400": {
-          "starts": 48,
+          "starts": 50,
           "wins": 7,
           "top3": 13,
-          "win_rate": 0.1458,
-          "top3_rate": 0.2708
+          "win_rate": 0.14,
+          "top3_rate": 0.26
         },
         "1200以下": {
-          "starts": 73,
+          "starts": 74,
           "wins": 6,
           "top3": 11,
-          "win_rate": 0.0822,
-          "top3_rate": 0.1507
+          "win_rate": 0.0811,
+          "top3_rate": 0.1486
         },
         "2500以上": {
           "starts": 27,
@@ -5517,6 +5545,54 @@
           "top3": 8,
           "win_rate": 0.1481,
           "top3_rate": 0.2963
+        }
+      }
+    },
+    {
+      "label": "門別",
+      "jurisdiction": "NAR",
+      "country": "Japan",
+      "raw_meetings": [
+        "門別"
+      ],
+      "starts": 511,
+      "wins_starts": 76,
+      "seconds": 60,
+      "thirds": 56,
+      "top3": 192,
+      "win_start_rate": 0.1487,
+      "quinella_rate": 0.2661,
+      "top3_rate": 0.3757,
+      "surface": {
+        "ダ": {
+          "starts": 511,
+          "wins": 76,
+          "top3": 192,
+          "win_rate": 0.1487,
+          "top3_rate": 0.3757
+        }
+      },
+      "distance": {
+        "1800-2000": {
+          "starts": 87,
+          "wins": 11,
+          "top3": 24,
+          "win_rate": 0.1264,
+          "top3_rate": 0.2759
+        },
+        "1200以下": {
+          "starts": 400,
+          "wins": 59,
+          "top3": 158,
+          "win_rate": 0.1475,
+          "top3_rate": 0.395
+        },
+        "1400-1600": {
+          "starts": 24,
+          "wins": 6,
+          "top3": 10,
+          "win_rate": 0.25,
+          "top3_rate": 0.4167
         }
       }
     },
@@ -5594,84 +5670,36 @@
       }
     },
     {
-      "label": "門別",
-      "jurisdiction": "NAR",
-      "country": "Japan",
-      "raw_meetings": [
-        "門別"
-      ],
-      "starts": 508,
-      "wins_starts": 74,
-      "seconds": 60,
-      "thirds": 56,
-      "top3": 190,
-      "win_start_rate": 0.1457,
-      "quinella_rate": 0.2638,
-      "top3_rate": 0.374,
-      "surface": {
-        "ダ": {
-          "starts": 508,
-          "wins": 74,
-          "top3": 190,
-          "win_rate": 0.1457,
-          "top3_rate": 0.374
-        }
-      },
-      "distance": {
-        "1800-2000": {
-          "starts": 87,
-          "wins": 11,
-          "top3": 24,
-          "win_rate": 0.1264,
-          "top3_rate": 0.2759
-        },
-        "1200以下": {
-          "starts": 397,
-          "wins": 57,
-          "top3": 156,
-          "win_rate": 0.1436,
-          "top3_rate": 0.3929
-        },
-        "1400-1600": {
-          "starts": 24,
-          "wins": 6,
-          "top3": 10,
-          "win_rate": 0.25,
-          "top3_rate": 0.4167
-        }
-      }
-    },
-    {
       "label": "園田",
       "jurisdiction": "NAR",
       "country": "Japan",
       "raw_meetings": [
         "園田"
       ],
-      "starts": 490,
+      "starts": 491,
       "wins_starts": 45,
       "seconds": 48,
       "thirds": 38,
       "top3": 131,
-      "win_start_rate": 0.0918,
-      "quinella_rate": 0.1898,
-      "top3_rate": 0.2673,
+      "win_start_rate": 0.0916,
+      "quinella_rate": 0.1894,
+      "top3_rate": 0.2668,
       "surface": {
         "ダ": {
-          "starts": 490,
+          "starts": 491,
           "wins": 45,
           "top3": 131,
-          "win_rate": 0.0918,
-          "top3_rate": 0.2673
+          "win_rate": 0.0916,
+          "top3_rate": 0.2668
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 424,
+          "starts": 425,
           "wins": 41,
           "top3": 121,
-          "win_rate": 0.0967,
-          "top3_rate": 0.2854
+          "win_rate": 0.0965,
+          "top3_rate": 0.2847
         },
         "1800-2000": {
           "starts": 31,
@@ -5696,30 +5724,30 @@
       "raw_meetings": [
         "高知"
       ],
-      "starts": 477,
+      "starts": 480,
       "wins_starts": 72,
       "seconds": 65,
       "thirds": 36,
       "top3": 173,
-      "win_start_rate": 0.1509,
-      "quinella_rate": 0.2872,
-      "top3_rate": 0.3627,
+      "win_start_rate": 0.15,
+      "quinella_rate": 0.2854,
+      "top3_rate": 0.3604,
       "surface": {
         "ダ": {
-          "starts": 477,
+          "starts": 480,
           "wins": 72,
           "top3": 173,
-          "win_rate": 0.1509,
-          "top3_rate": 0.3627
+          "win_rate": 0.15,
+          "top3_rate": 0.3604
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 466,
+          "starts": 469,
           "wins": 71,
           "top3": 172,
-          "win_rate": 0.1524,
-          "top3_rate": 0.3691
+          "win_rate": 0.1514,
+          "top3_rate": 0.3667
         },
         "1800-2000": {
           "starts": 3,
@@ -5744,21 +5772,21 @@
       "raw_meetings": [
         "盛岡"
       ],
-      "starts": 376,
+      "starts": 382,
       "wins_starts": 43,
-      "seconds": 34,
-      "thirds": 46,
-      "top3": 123,
-      "win_start_rate": 0.1144,
-      "quinella_rate": 0.2048,
-      "top3_rate": 0.3271,
+      "seconds": 35,
+      "thirds": 48,
+      "top3": 126,
+      "win_start_rate": 0.1126,
+      "quinella_rate": 0.2042,
+      "top3_rate": 0.3298,
       "surface": {
         "ダ": {
-          "starts": 343,
+          "starts": 349,
           "wins": 36,
-          "top3": 113,
-          "win_rate": 0.105,
-          "top3_rate": 0.3294
+          "top3": 116,
+          "win_rate": 0.1032,
+          "top3_rate": 0.3324
         },
         "芝": {
           "starts": 33,
@@ -5777,18 +5805,18 @@
           "top3_rate": 0.2941
         },
         "1200以下": {
-          "starts": 149,
+          "starts": 152,
           "wins": 15,
-          "top3": 42,
-          "win_rate": 0.1007,
-          "top3_rate": 0.2819
+          "top3": 44,
+          "win_rate": 0.0987,
+          "top3_rate": 0.2895
         },
         "1400-1600": {
-          "starts": 208,
+          "starts": 211,
           "wins": 23,
-          "top3": 74,
-          "win_rate": 0.1106,
-          "top3_rate": 0.3558
+          "top3": 75,
+          "win_rate": 0.109,
+          "top3_rate": 0.3555
         },
         "2200-2400": {
           "starts": 2,
@@ -5861,21 +5889,21 @@
       "raw_meetings": [
         "佐賀"
       ],
-      "starts": 340,
+      "starts": 341,
       "wins_starts": 54,
-      "seconds": 42,
+      "seconds": 43,
       "thirds": 29,
-      "top3": 125,
-      "win_start_rate": 0.1588,
-      "quinella_rate": 0.2824,
-      "top3_rate": 0.3676,
+      "top3": 126,
+      "win_start_rate": 0.1584,
+      "quinella_rate": 0.2845,
+      "top3_rate": 0.3695,
       "surface": {
         "ダ": {
-          "starts": 340,
+          "starts": 341,
           "wins": 54,
-          "top3": 125,
-          "win_rate": 0.1588,
-          "top3_rate": 0.3676
+          "top3": 126,
+          "win_rate": 0.1584,
+          "top3_rate": 0.3695
         }
       },
       "distance": {
@@ -5887,11 +5915,11 @@
           "top3_rate": 0.44
         },
         "1400-1600": {
-          "starts": 310,
+          "starts": 311,
           "wins": 46,
-          "top3": 111,
-          "win_rate": 0.1484,
-          "top3_rate": 0.3581
+          "top3": 112,
+          "win_rate": 0.1479,
+          "top3_rate": 0.3601
         },
         "1200以下": {
           "starts": 5,
@@ -5957,33 +5985,33 @@
       "raw_meetings": [
         "金沢"
       ],
-      "starts": 327,
+      "starts": 329,
       "wins_starts": 61,
       "seconds": 44,
       "thirds": 32,
       "top3": 137,
-      "win_start_rate": 0.1865,
-      "quinella_rate": 0.3211,
-      "top3_rate": 0.419,
+      "win_start_rate": 0.1854,
+      "quinella_rate": 0.3191,
+      "top3_rate": 0.4164,
       "surface": {
         "ダ": {
-          "starts": 327,
+          "starts": 329,
           "wins": 61,
           "top3": 137,
-          "win_rate": 0.1865,
-          "top3_rate": 0.419
+          "win_rate": 0.1854,
+          "top3_rate": 0.4164
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 319,
+          "starts": 320,
           "wins": 61,
           "top3": 136,
-          "win_rate": 0.1912,
-          "top3_rate": 0.4263
+          "win_rate": 0.1906,
+          "top3_rate": 0.425
         },
         "1200以下": {
-          "starts": 3,
+          "starts": 4,
           "wins": 0,
           "top3": 0,
           "win_rate": 0.0,
@@ -6309,30 +6337,30 @@
       "raw_meetings": [
         "浦和"
       ],
-      "starts": 251,
-      "wins_starts": 24,
+      "starts": 254,
+      "wins_starts": 25,
       "seconds": 22,
-      "thirds": 26,
-      "top3": 72,
-      "win_start_rate": 0.0956,
-      "quinella_rate": 0.1833,
-      "top3_rate": 0.2869,
+      "thirds": 27,
+      "top3": 74,
+      "win_start_rate": 0.0984,
+      "quinella_rate": 0.185,
+      "top3_rate": 0.2913,
       "surface": {
         "ダ": {
-          "starts": 251,
-          "wins": 24,
-          "top3": 72,
-          "win_rate": 0.0956,
-          "top3_rate": 0.2869
+          "starts": 254,
+          "wins": 25,
+          "top3": 74,
+          "win_rate": 0.0984,
+          "top3_rate": 0.2913
         }
       },
       "distance": {
         "1400-1600": {
-          "starts": 203,
-          "wins": 19,
-          "top3": 64,
-          "win_rate": 0.0936,
-          "top3_rate": 0.3153
+          "starts": 206,
+          "wins": 20,
+          "top3": 66,
+          "win_rate": 0.0971,
+          "top3_rate": 0.3204
         },
         "1800-2000": {
           "starts": 19,

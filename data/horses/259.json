@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105330",
     "jbis_id": "0001266384",
     "trainer": "伊藤和忍",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "ＤＭＭドリームクラブ",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "伊藤和忍"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105330",
+      "url": "https://db.netkeiba.com/horse/2018105330/",
+      "fetched_at": "2026-10-28T02:20:53.799351+00:00",
+      "data": {
+        "trainer": "伊藤和忍",
+        "owner": "ＤＭＭドリームクラブ",
+        "affiliation": "岩手"
       }
     }
   ],

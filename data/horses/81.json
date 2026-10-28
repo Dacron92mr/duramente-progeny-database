@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105514",
     "jbis_id": "0001305953",
     "trainer": "清水久詞",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=5",
         "trainer": "清水久詞"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105514",
+      "url": "https://db.netkeiba.com/horse/2019105514/",
+      "fetched_at": "2026-10-28T01:45:17.731491+00:00",
+      "data": {
+        "trainer": "清水久詞",
+        "owner": "キャロットファーム",
+        "affiliation": "栗東"
       }
     }
   ],

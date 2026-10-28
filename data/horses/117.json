@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106716",
     "jbis_id": "0001308573",
     "trainer": "伊藤大士",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "高橋貴士",
     "breeder": "松田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=6",
         "trainer": "伊藤大士"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106716",
+      "url": "https://db.netkeiba.com/horse/2019106716/",
+      "fetched_at": "2026-10-28T01:52:29.725648+00:00",
+      "data": {
+        "trainer": "伊藤大士",
+        "owner": "高橋貴士",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101420",
     "jbis_id": "0001311965",
     "trainer": "大塚信次",
-    "affiliation": "(水 沢)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "大黒富美子",
     "breeder": "オリオンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "大塚信次"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101420",
+      "url": "https://db.netkeiba.com/horse/2019101420/",
+      "fetched_at": "2026-10-28T03:16:29.885360+00:00",
+      "data": {
+        "trainer": "大塚信次",
+        "owner": "大黒富美子",
+        "affiliation": "兵庫"
       }
     }
   ],

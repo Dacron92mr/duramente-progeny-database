@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101462",
     "jbis_id": "0001311982",
     "trainer": "堀内岳志",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "木部厳生",
     "breeder": "木部ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "堀内岳志"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101462",
+      "url": "https://db.netkeiba.com/horse/2019101462/",
+      "fetched_at": "2026-10-28T02:18:17.804705+00:00",
+      "data": {
+        "trainer": "堀内岳志",
+        "owner": "木部厳生",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103289",
     "jbis_id": "0001304785",
     "trainer": "松浦聡志",
-    "affiliation": "(西 脇)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "加藤誠",
     "breeder": "三石川上牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "松浦聡志"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103289",
+      "url": "https://db.netkeiba.com/horse/2019103289/",
+      "fetched_at": "2026-10-28T02:22:41.780929+00:00",
+      "data": {
+        "trainer": "松浦聡志",
+        "owner": "加藤誠",
+        "affiliation": "兵庫"
       }
     }
   ],

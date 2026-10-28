@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104659",
     "jbis_id": "0001360334",
     "trainer": "池添学",
-    "affiliation": "",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "サンデーレーシング",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "池添学"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104659",
+      "url": "https://db.netkeiba.com/horse/2022104659/",
+      "fetched_at": "2026-10-28T03:23:57.953859+00:00",
+      "data": {
+        "trainer": "池添学",
+        "owner": "サンデーレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

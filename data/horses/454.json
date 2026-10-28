@@ -17,7 +17,7 @@
     "netkeiba_id": "2021106977",
     "jbis_id": "0001339163",
     "trainer": "森澤友貴",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "（同）ＮＯＫＫＮ",
     "breeder": "村上欽哉",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "森澤友貴"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021106977",
+      "url": "https://db.netkeiba.com/horse/2021106977/",
+      "fetched_at": "2026-10-28T02:59:53.851623+00:00",
+      "data": {
+        "trainer": "森澤友貴",
+        "owner": "（同）ＮＯＫＫＮ",
+        "affiliation": "兵庫"
       }
     }
   ],

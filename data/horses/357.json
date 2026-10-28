@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106913",
     "jbis_id": "0001326282",
     "trainer": "斉藤正弘",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "（株）アスラン",
     "breeder": "アスラン",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "斉藤正弘"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106913",
+      "url": "https://db.netkeiba.com/horse/2019106913/",
+      "fetched_at": "2026-10-28T02:40:29.793466+00:00",
+      "data": {
+        "trainer": "斉藤正弘",
+        "owner": "（株）アスラン",
+        "affiliation": "北海道"
       }
     }
   ],

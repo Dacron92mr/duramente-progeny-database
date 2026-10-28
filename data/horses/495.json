@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103678",
     "jbis_id": "0001325940",
     "trainer": "川添明弘",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "栗嶋豊明",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "川添明弘"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103678",
+      "url": "https://db.netkeiba.com/horse/2020103678/",
+      "fetched_at": "2026-10-28T03:08:05.877803+00:00",
+      "data": {
+        "trainer": "川添明弘",
+        "owner": "栗嶋豊明",
+        "affiliation": "金沢"
       }
     }
   ],

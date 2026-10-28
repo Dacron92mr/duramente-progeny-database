@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105150",
     "jbis_id": "0001322287",
     "trainer": "田中一巧",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "山下新一",
     "breeder": "川島牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "田中一巧"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105150",
+      "url": "https://db.netkeiba.com/horse/2020105150/",
+      "fetched_at": "2026-10-28T03:13:53.826773+00:00",
+      "data": {
+        "trainer": "田中一巧",
+        "owner": "山下新一",
+        "affiliation": "兵庫"
       }
     }
   ],

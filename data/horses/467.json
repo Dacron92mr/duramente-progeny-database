@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103294",
     "jbis_id": "0001333648",
     "trainer": "村田順一",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "山邉浩",
     "breeder": "宮内牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "村田順一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103294",
+      "url": "https://db.netkeiba.com/horse/2021103294/",
+      "fetched_at": "2026-10-28T03:02:30.005987+00:00",
+      "data": {
+        "trainer": "村田順一",
+        "owner": "山邉浩",
+        "affiliation": "川崎"
       }
     }
   ],

@@ -2,16 +2,16 @@
   "by_surface": [
     {
       "label": "ダ",
-      "starts": 7091,
-      "wins": 877,
-      "win_rate": 0.1237,
-      "awd": 1460.3
+      "starts": 7116,
+      "wins": 881,
+      "win_rate": 0.1238,
+      "awd": 1460.2
     },
     {
       "label": "芝",
-      "starts": 3766,
+      "starts": 3778,
       "wins": 383,
-      "win_rate": 0.1017,
+      "win_rate": 0.1014,
       "awd": 1884.6
     },
     {
@@ -32,44 +32,44 @@
   "by_sex": [
     {
       "label": "牝",
-      "starts": 4925,
-      "wins": 503,
-      "win_rate": 0.1021,
-      "awd": 1525.4
+      "starts": 4939,
+      "wins": 505,
+      "win_rate": 0.1022,
+      "awd": 1523.7
     },
     {
       "label": "牡",
-      "starts": 4831,
-      "wins": 631,
-      "win_rate": 0.1306,
-      "awd": 1658.6
+      "starts": 4848,
+      "wins": 632,
+      "win_rate": 0.1304,
+      "awd": 1658.2
     },
     {
       "label": "セン",
-      "starts": 1172,
-      "wins": 137,
-      "win_rate": 0.1169,
-      "awd": 1609.2
+      "starts": 1178,
+      "wins": 138,
+      "win_rate": 0.1171,
+      "awd": 1612.8
     }
   ],
   "by_distance": [
     {
       "label": "短距離",
-      "starts": 5345,
-      "wins": 643,
+      "starts": 5368,
+      "wins": 646,
       "win_rate": 0.1203
     },
     {
       "label": "マイル",
-      "starts": 3617,
+      "starts": 3623,
       "wins": 425,
-      "win_rate": 0.1175
+      "win_rate": 0.1173
     },
     {
       "label": "中距離",
-      "starts": 1489,
-      "wins": 140,
-      "win_rate": 0.094
+      "starts": 1497,
+      "wins": 141,
+      "win_rate": 0.0942
     },
     {
       "label": "長距離",

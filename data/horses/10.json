@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105556",
     "jbis_id": "0001311116",
     "trainer": "宮田敬介",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "吉田勝己",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all",
         "trainer": "宮田敬介"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105556",
+      "url": "https://db.netkeiba.com/horse/2019105556/",
+      "fetched_at": "2026-10-28T01:31:05.679602+00:00",
+      "data": {
+        "trainer": "宮田敬介",
+        "owner": "吉田勝己",
+        "affiliation": "美浦"
       }
     }
   ],

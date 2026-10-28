@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105064",
     "jbis_id": "0001359413",
     "trainer": "田中博康",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "サンデーレーシング",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=3",
         "trainer": "田中博康"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105064",
+      "url": "https://db.netkeiba.com/horse/2022105064/",
+      "fetched_at": "2026-10-28T01:38:29.639561+00:00",
+      "data": {
+        "trainer": "田中博康",
+        "owner": "サンデーレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

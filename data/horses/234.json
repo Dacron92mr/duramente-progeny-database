@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103132",
     "jbis_id": "0001309768",
     "trainer": "岩戸孝樹",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "山田弘",
     "breeder": "土田農場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "岩戸孝樹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103132",
+      "url": "https://db.netkeiba.com/horse/2019103132/",
+      "fetched_at": "2026-10-28T02:15:53.698859+00:00",
+      "data": {
+        "trainer": "岩戸孝樹",
+        "owner": "山田弘",
+        "affiliation": "美浦"
       }
     }
   ],

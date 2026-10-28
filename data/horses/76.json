@@ -16,8 +16,8 @@
     "pedigree_crosses": "Mr. Prospector(USA) ：S4×M4",
     "netkeiba_id": "2019105400",
     "jbis_id": "0001307433",
-    "trainer": "藤原英昭",
-    "affiliation": "(高 知)",
+    "trainer": "中西達也",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "廣崎利洋ＨＤ",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "藤原英昭"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105400",
+      "url": "https://db.netkeiba.com/horse/2019105400/",
+      "fetched_at": "2026-10-28T01:44:17.681961+00:00",
+      "data": {
+        "trainer": "中西達也",
+        "owner": "廣崎利洋ＨＤ",
+        "affiliation": "高知"
       }
     }
   ],

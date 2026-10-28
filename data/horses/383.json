@@ -17,7 +17,7 @@
     "netkeiba_id": "2021106705",
     "jbis_id": "0001333753",
     "trainer": "小牧毅",
-    "affiliation": "(西 脇)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "前田晋二",
     "breeder": "ハシモトファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "小牧毅"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021106705",
+      "url": "https://db.netkeiba.com/horse/2021106705/",
+      "fetched_at": "2026-10-28T02:45:42.008114+00:00",
+      "data": {
+        "trainer": "小牧毅",
+        "owner": "前田晋二",
+        "affiliation": "兵庫"
       }
     }
   ],

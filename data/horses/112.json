@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101630",
     "jbis_id": "0001264319",
     "trainer": "畠山吉宏",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ウイン",
     "breeder": "コスモヴューファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=6",
         "trainer": "畠山吉宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101630",
+      "url": "https://db.netkeiba.com/horse/2018101630/",
+      "fetched_at": "2026-10-28T01:51:29.724270+00:00",
+      "data": {
+        "trainer": "畠山吉宏",
+        "owner": "ウイン",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106503",
     "jbis_id": "0001270531",
     "trainer": "打越勇児",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "カナヤマホールディングス",
     "breeder": "三嶋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "打越勇児"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106503",
+      "url": "https://db.netkeiba.com/horse/2018106503/",
+      "fetched_at": "2026-10-28T02:18:41.768544+00:00",
+      "data": {
+        "trainer": "打越勇児",
+        "owner": "カナヤマホールディングス",
+        "affiliation": "高知"
       }
     }
   ],

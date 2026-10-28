@@ -17,7 +17,7 @@
     "netkeiba_id": "2020101007",
     "jbis_id": "0001322227",
     "trainer": "寺島良",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "寺田千代乃",
     "breeder": "吉田ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=33",
         "trainer": "寺島良"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020101007",
+      "url": "https://db.netkeiba.com/horse/2020101007/",
+      "fetched_at": "2026-10-28T03:38:13.904126+00:00",
+      "data": {
+        "trainer": "寺島良",
+        "owner": "寺田千代乃",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101116",
     "jbis_id": "0001309224",
     "trainer": "栗本陽一",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "福永實",
     "breeder": "清水牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "栗本陽一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101116",
+      "url": "https://db.netkeiba.com/horse/2019101116/",
+      "fetched_at": "2026-10-28T03:03:53.877425+00:00",
+      "data": {
+        "trainer": "栗本陽一",
+        "owner": "福永實",
+        "affiliation": "笠松"
       }
     }
   ],

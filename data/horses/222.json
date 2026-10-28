@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104477",
     "jbis_id": "0001311280",
     "trainer": "工藤伸輔",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "（株）アプエンテ",
     "breeder": "追分ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "工藤伸輔"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104477",
+      "url": "https://db.netkeiba.com/horse/2019104477/",
+      "fetched_at": "2026-10-28T02:13:29.958184+00:00",
+      "data": {
+        "trainer": "工藤伸輔",
+        "owner": "（株）アプエンテ",
+        "affiliation": "浦和"
       }
     }
   ],

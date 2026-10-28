@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106484",
     "jbis_id": "0001310309",
     "trainer": "酒井一則",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "小林裕典",
     "breeder": "野坂牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "酒井一則"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106484",
+      "url": "https://db.netkeiba.com/horse/2019106484/",
+      "fetched_at": "2026-10-28T02:14:17.801147+00:00",
+      "data": {
+        "trainer": "酒井一則",
+        "owner": "小林裕典",
+        "affiliation": "浦和"
       }
     }
   ],

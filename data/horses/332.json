@@ -17,7 +17,7 @@
     "netkeiba_id": "2022103827",
     "jbis_id": "0001356336",
     "trainer": "櫻井今朝",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "ＪＰＮ技研",
     "breeder": "坂本智広",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "櫻井今朝"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022103827",
+      "url": "https://db.netkeiba.com/horse/2022103827/",
+      "fetched_at": "2026-10-28T02:35:29.799231+00:00",
+      "data": {
+        "trainer": "櫻井今朝",
+        "owner": "ＪＰＮ技研",
+        "affiliation": "愛知"
       }
     }
   ],

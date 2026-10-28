@@ -17,7 +17,7 @@
     "netkeiba_id": "2019100863",
     "jbis_id": "0001309673",
     "trainer": "関本浩司",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "伊藤弘泰",
     "breeder": "松浦牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "関本浩司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019100863",
+      "url": "https://db.netkeiba.com/horse/2019100863/",
+      "fetched_at": "2026-10-28T02:35:18.034474+00:00",
+      "data": {
+        "trainer": "関本浩司",
+        "owner": "伊藤弘泰",
+        "affiliation": "岩手"
       }
     }
   ],

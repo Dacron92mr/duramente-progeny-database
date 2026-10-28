@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100757",
     "jbis_id": "0001266219",
     "trainer": "川西毅",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "森達郎",
     "breeder": "ディアレストクラブ",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "川西毅"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100757",
+      "url": "https://db.netkeiba.com/horse/2018100757/",
+      "fetched_at": "2026-10-28T03:06:17.842793+00:00",
+      "data": {
+        "trainer": "川西毅",
+        "owner": "森達郎",
+        "affiliation": "愛知"
       }
     }
   ],

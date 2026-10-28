@@ -17,7 +17,7 @@
     "netkeiba_id": "2021104795",
     "jbis_id": "0001334130",
     "trainer": "伊藤強一",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "（同）ＪＰＮ技研",
     "breeder": "追分ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=35",
         "trainer": "伊藤強一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021104795",
+      "url": "https://db.netkeiba.com/horse/2021104795/",
+      "fetched_at": "2026-10-28T03:44:25.912815+00:00",
+      "data": {
+        "trainer": "伊藤強一",
+        "owner": "（同）ＪＰＮ技研",
+        "affiliation": "笠松"
       }
     }
   ],

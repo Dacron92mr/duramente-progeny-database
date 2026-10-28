@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105709",
     "jbis_id": "0001340160",
     "trainer": "高橋義忠",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "シルクレーシング",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "高橋義忠"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105709",
+      "url": "https://db.netkeiba.com/horse/2021105709/",
+      "fetched_at": "2026-10-28T02:20:05.718833+00:00",
+      "data": {
+        "trainer": "高橋義忠",
+        "owner": "シルクレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

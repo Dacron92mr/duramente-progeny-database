@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105196",
     "jbis_id": "0001323375",
     "trainer": "水野善太",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "小橋亮太",
     "breeder": "コスモヴューファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "水野善太"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105196",
+      "url": "https://db.netkeiba.com/horse/2020105196/",
+      "fetched_at": "2026-10-28T02:29:29.800586+00:00",
+      "data": {
+        "trainer": "水野善太",
+        "owner": "小橋亮太",
+        "affiliation": "笠松"
       }
     }
   ],

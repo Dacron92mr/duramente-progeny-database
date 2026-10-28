@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103132",
     "jbis_id": "0001326100",
     "trainer": "木村哲也",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "山本英俊",
     "breeder": "社台牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=3",
         "trainer": "木村哲也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103132",
+      "url": "https://db.netkeiba.com/horse/2020103132/",
+      "fetched_at": "2026-10-28T01:40:29.668833+00:00",
+      "data": {
+        "trainer": "木村哲也",
+        "owner": "山本英俊",
+        "affiliation": "美浦"
       }
     }
   ],

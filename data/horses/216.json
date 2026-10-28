@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105515",
     "jbis_id": "0001266887",
     "trainer": "金成貴史",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "野田努",
     "breeder": "社台コーポレーション白老ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "金成貴史"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105515",
+      "url": "https://db.netkeiba.com/horse/2018105515/",
+      "fetched_at": "2026-10-28T02:12:17.782546+00:00",
+      "data": {
+        "trainer": "金成貴史",
+        "owner": "野田努",
+        "affiliation": "美浦"
       }
     }
   ],

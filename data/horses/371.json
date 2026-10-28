@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105692",
     "jbis_id": "0001318783",
     "trainer": "的場直之",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "平本敏夫",
     "breeder": "ハシモトファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "的場直之"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105692",
+      "url": "https://db.netkeiba.com/horse/2020105692/",
+      "fetched_at": "2026-10-28T02:43:17.758091+00:00",
+      "data": {
+        "trainer": "的場直之",
+        "owner": "平本敏夫",
+        "affiliation": "大井"
       }
     }
   ],

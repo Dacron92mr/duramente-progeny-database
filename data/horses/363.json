@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104739",
     "jbis_id": "0001264998",
     "trainer": "加藤和宏",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "石山紘",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "加藤和宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104739",
+      "url": "https://db.netkeiba.com/horse/2018104739/",
+      "fetched_at": "2026-10-28T02:41:42.020646+00:00",
+      "data": {
+        "trainer": "加藤和宏",
+        "owner": "石山紘",
+        "affiliation": "金沢"
       }
     }
   ],

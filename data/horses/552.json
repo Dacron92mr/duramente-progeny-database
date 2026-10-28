@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101123",
     "jbis_id": "0001268377",
     "trainer": "藤ヶ崎一",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "神谷恵",
     "breeder": "モリナガファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "藤ヶ崎一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101123",
+      "url": "https://db.netkeiba.com/horse/2018101123/",
+      "fetched_at": "2026-10-28T03:19:30.027059+00:00",
+      "data": {
+        "trainer": "藤ヶ崎一",
+        "owner": "神谷恵",
+        "affiliation": "愛知"
       }
     }
   ],

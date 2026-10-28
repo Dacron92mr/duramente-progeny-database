@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105195",
     "jbis_id": "0001269867",
     "trainer": "小林真也",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "亀井哲也",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=15",
         "trainer": "小林真也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105195",
+      "url": "https://db.netkeiba.com/horse/2018105195/",
+      "fetched_at": "2026-10-28T02:26:05.799819+00:00",
+      "data": {
+        "trainer": "小林真也",
+        "owner": "亀井哲也",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103095",
     "jbis_id": "0001311176",
     "trainer": "藪口一麻",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "吉田勝利",
     "breeder": "田上徹",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=26",
         "trainer": "藪口一麻"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103095",
+      "url": "https://db.netkeiba.com/horse/2019103095/",
+      "fetched_at": "2026-10-28T03:13:06.180092+00:00",
+      "data": {
+        "trainer": "藪口一麻",
+        "owner": "吉田勝利",
+        "affiliation": "浦和"
       }
     }
   ],

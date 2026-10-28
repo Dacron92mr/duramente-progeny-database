@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103844",
     "jbis_id": "0001309246",
     "trainer": "萱野浩二",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "馬目卓",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=32",
         "trainer": "萱野浩二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103844",
+      "url": "https://db.netkeiba.com/horse/2019103844/",
+      "fetched_at": "2026-10-28T03:33:29.878632+00:00",
+      "data": {
+        "trainer": "萱野浩二",
+        "owner": "馬目卓",
+        "affiliation": "美浦"
       }
     }
   ],

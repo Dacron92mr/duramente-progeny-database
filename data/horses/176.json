@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106882",
     "jbis_id": "0001304405",
     "trainer": "澤佳宏",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "佐々木勉",
     "breeder": "チャンピオンズファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=9",
         "trainer": "澤佳宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106882",
+      "url": "https://db.netkeiba.com/horse/2019106882/",
+      "fetched_at": "2026-10-28T02:04:17.791336+00:00",
+      "data": {
+        "trainer": "澤佳宏",
+        "owner": "佐々木勉",
+        "affiliation": "大井"
       }
     }
   ],

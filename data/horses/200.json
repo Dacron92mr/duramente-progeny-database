@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103832",
     "jbis_id": "0001261785",
     "trainer": "山本学",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "手嶋康雄",
     "breeder": "佐竹学",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=10",
         "trainer": "山本学"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103832",
+      "url": "https://db.netkeiba.com/horse/2018103832/",
+      "fetched_at": "2026-10-28T02:09:06.064305+00:00",
+      "data": {
+        "trainer": "山本学",
+        "owner": "手嶋康雄",
+        "affiliation": "船橋"
       }
     }
   ],

@@ -16,8 +16,8 @@
     "pedigree_crosses": null,
     "netkeiba_id": "2018104241",
     "jbis_id": "0001268960",
-    "trainer": "保利良次",
-    "affiliation": "(園 田)",
+    "trainer": "保利幸作",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "星野裕光",
     "breeder": "畠山牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "保利良次"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104241",
+      "url": "https://db.netkeiba.com/horse/2018104241/",
+      "fetched_at": "2026-10-28T02:14:54.020362+00:00",
+      "data": {
+        "trainer": "保利幸作",
+        "owner": "星野裕光",
+        "affiliation": "兵庫"
       }
     }
   ],

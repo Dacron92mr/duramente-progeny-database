@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105381",
     "jbis_id": "0001312148",
     "trainer": "手塚貴久",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "馬場幸夫",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=7",
         "trainer": "手塚貴久"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105381",
+      "url": "https://db.netkeiba.com/horse/2019105381/",
+      "fetched_at": "2026-10-28T01:55:17.646474+00:00",
+      "data": {
+        "trainer": "手塚貴久",
+        "owner": "馬場幸夫",
+        "affiliation": "美浦"
       }
     }
   ],

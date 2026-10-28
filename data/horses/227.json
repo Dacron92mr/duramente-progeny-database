@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105982",
     "jbis_id": "0001354086",
     "trainer": "尾関知人",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "シルクレーシング",
     "breeder": "レイクヴィラファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "尾関知人"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105982",
+      "url": "https://db.netkeiba.com/horse/2022105982/",
+      "fetched_at": "2026-10-28T02:14:29.681301+00:00",
+      "data": {
+        "trainer": "尾関知人",
+        "owner": "シルクレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

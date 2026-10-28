@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102627",
     "jbis_id": "0001307138",
     "trainer": "藤ヶ崎一",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "須藤英之",
     "breeder": "鮫川啓一",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "藤ヶ崎一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102627",
+      "url": "https://db.netkeiba.com/horse/2019102627/",
+      "fetched_at": "2026-10-28T02:37:53.809215+00:00",
+      "data": {
+        "trainer": "藤ヶ崎一",
+        "owner": "須藤英之",
+        "affiliation": "愛知"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100676",
     "jbis_id": "0001340062",
     "trainer": "柳井宏之",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "北原大史",
     "breeder": "桑田牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "柳井宏之"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100676",
+      "url": "https://db.netkeiba.com/horse/2021100676/",
+      "fetched_at": "2026-10-28T02:48:29.898149+00:00",
+      "data": {
+        "trainer": "柳井宏之",
+        "owner": "北原大史",
+        "affiliation": "佐賀"
       }
     }
   ],

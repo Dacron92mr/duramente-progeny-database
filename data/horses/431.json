@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102658",
     "jbis_id": "0001270506",
     "trainer": "工藤裕孝",
-    "affiliation": "(盛 岡)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "坂本直子",
     "breeder": "田上徹",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "工藤裕孝"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102658",
+      "url": "https://db.netkeiba.com/horse/2018102658/",
+      "fetched_at": "2026-10-28T02:55:17.836953+00:00",
+      "data": {
+        "trainer": "工藤裕孝",
+        "owner": "坂本直子",
+        "affiliation": "岩手"
       }
     }
   ],

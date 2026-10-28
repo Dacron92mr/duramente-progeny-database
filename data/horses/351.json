@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106001",
     "jbis_id": "0001306450",
     "trainer": "斉藤崇史",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ＯＵＭＡ",
     "breeder": "グランド牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "斉藤崇史"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106001",
+      "url": "https://db.netkeiba.com/horse/2019106001/",
+      "fetched_at": "2026-10-28T02:39:05.779467+00:00",
+      "data": {
+        "trainer": "斉藤崇史",
+        "owner": "ＯＵＭＡ",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102494",
     "jbis_id": "0001305418",
     "trainer": "佐々木仁",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "水上ふじ子",
     "breeder": "笠松牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "佐々木仁"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102494",
+      "url": "https://db.netkeiba.com/horse/2019102494/",
+      "fetched_at": "2026-10-28T02:31:29.776711+00:00",
+      "data": {
+        "trainer": "佐々木仁",
+        "owner": "水上ふじ子",
+        "affiliation": "川崎"
       }
     }
   ],

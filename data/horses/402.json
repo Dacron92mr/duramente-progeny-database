@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105049",
     "jbis_id": "0001360401",
     "trainer": "打越勇児",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "江馬由将",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "打越勇児"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105049",
+      "url": "https://db.netkeiba.com/horse/2022105049/",
+      "fetched_at": "2026-10-28T02:49:29.796801+00:00",
+      "data": {
+        "trainer": "打越勇児",
+        "owner": "江馬由将",
+        "affiliation": "高知"
       }
     }
   ],

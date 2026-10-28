@@ -17,7 +17,7 @@
     "netkeiba_id": "2021101729",
     "jbis_id": "0001332336",
     "trainer": "尾形和幸",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "チャンピオンズファーム",
     "breeder": "チャンピオンズファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=34",
         "trainer": "尾形和幸"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021101729",
+      "url": "https://db.netkeiba.com/horse/2021101729/",
+      "fetched_at": "2026-10-28T03:34:53.868422+00:00",
+      "data": {
+        "trainer": "尾形和幸",
+        "owner": "チャンピオンズファーム",
+        "affiliation": "美浦"
       }
     }
   ],

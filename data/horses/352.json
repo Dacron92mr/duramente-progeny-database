@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102659",
     "jbis_id": "0001268882",
     "trainer": "宮下靖旨",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "平井頼行",
     "breeder": "田上徹",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "宮下靖旨"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102659",
+      "url": "https://db.netkeiba.com/horse/2018102659/",
+      "fetched_at": "2026-10-28T02:39:53.927604+00:00",
+      "data": {
+        "trainer": "宮下靖旨",
+        "owner": "平井頼行",
+        "affiliation": "船橋"
       }
     }
   ],

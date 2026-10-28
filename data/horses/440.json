@@ -17,7 +17,7 @@
     "netkeiba_id": "2022103197",
     "jbis_id": "0001359581",
     "trainer": "山田質",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "伊藤恵介",
     "breeder": "三嶋牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "山田質"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022103197",
+      "url": "https://db.netkeiba.com/horse/2022103197/",
+      "fetched_at": "2026-10-28T02:57:05.831358+00:00",
+      "data": {
+        "trainer": "山田質",
+        "owner": "伊藤恵介",
+        "affiliation": "川崎"
       }
     }
   ],

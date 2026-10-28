@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106338",
     "jbis_id": "0001265154",
     "trainer": "森下淳平",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "嶋田賢",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "森下淳平"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106338",
+      "url": "https://db.netkeiba.com/horse/2018106338/",
+      "fetched_at": "2026-10-28T02:47:41.820037+00:00",
+      "data": {
+        "trainer": "森下淳平",
+        "owner": "嶋田賢",
+        "affiliation": "大井"
       }
     }
   ],

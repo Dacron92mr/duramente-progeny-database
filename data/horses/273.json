@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104923",
     "jbis_id": "0001269854",
     "trainer": "堀宣行",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "サンデーレーシング",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "堀宣行"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104923",
+      "url": "https://db.netkeiba.com/horse/2018104923/",
+      "fetched_at": "2026-10-28T02:23:41.717702+00:00",
+      "data": {
+        "trainer": "堀宣行",
+        "owner": "サンデーレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

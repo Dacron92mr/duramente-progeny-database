@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106014",
     "jbis_id": "0001305075",
     "trainer": "松平幸秀",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "橘勝年",
     "breeder": "今牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "松平幸秀"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106014",
+      "url": "https://db.netkeiba.com/horse/2019106014/",
+      "fetched_at": "2026-10-28T02:10:41.864048+00:00",
+      "data": {
+        "trainer": "松平幸秀",
+        "owner": "橘勝年",
+        "affiliation": "兵庫"
       }
     }
   ],

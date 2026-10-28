@@ -17,7 +17,7 @@
     "netkeiba_id": "2020105841",
     "jbis_id": "0001326060",
     "trainer": "坂口智康",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "フジイ興産",
     "breeder": "北星村田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "坂口智康"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020105841",
+      "url": "https://db.netkeiba.com/horse/2020105841/",
+      "fetched_at": "2026-10-28T02:56:29.837394+00:00",
+      "data": {
+        "trainer": "坂口智康",
+        "owner": "フジイ興産",
+        "affiliation": "栗東"
       }
     }
   ],
