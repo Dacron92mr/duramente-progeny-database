@@ -342,23 +342,50 @@ def cross_intensity(positions: list[str]) -> str:
 
 def parse_crosses(text: str | None) -> list[dict[str, Any]]:
     raw = text or ""
-    entry_re = re.compile(r"([^：:]+?)\s*[：:]\s*((?:[SM]\d+(?:[×x][SM]\d+)+))")
     entries = []
-    for match in entry_re.finditer(raw):
-        ancestor = clean_ancestor(match.group(1))
-        positions = split_positions(match.group(2))
-        if not ancestor or len(positions) < 2:
+    position_pattern = re.compile(r"[SM]\d+(?:[×x][SM]\d+)+")
+    pattern_separator = re.compile(r"\s*[,，;；、]\s*")
+    cursor = 0
+
+    while cursor < len(raw):
+        colon = re.search(r"[：:]", raw[cursor:])
+        if not colon:
+            break
+        colon_index = cursor + colon.start()
+        next_cursor = cursor + colon.end()
+        ancestor = clean_ancestor(raw[cursor:colon_index])
+
+        pattern_start = next_cursor
+        while pattern_start < len(raw) and raw[pattern_start].isspace():
+            pattern_start += 1
+        first_pattern = position_pattern.match(raw, pattern_start)
+        if not first_pattern:
+            cursor = next_cursor
             continue
+
+        patterns = [first_pattern.group(0)]
+        cursor = first_pattern.end()
+        while separator := pattern_separator.match(raw, cursor):
+            following = position_pattern.match(raw, separator.end())
+            if not following:
+                break
+            patterns.append(following.group(0))
+            cursor = following.end()
+
         country_match = re.search(r"\(([A-Z]{2,3})\)$", ancestor)
-        entries.append({
-            "ancestor": ancestor,
-            "ancestor_country": country_match.group(1) if country_match else "",
-            "positions": canonical_positions(positions),
-            "canonical_pattern": canonical_pattern(positions),
-            "pair_patterns": pair_patterns(positions),
-            "branch_count": len(positions),
-            "intensity": cross_intensity(positions),
-        })
+        for pattern in patterns:
+            positions = split_positions(pattern)
+            if not ancestor or len(positions) < 2:
+                continue
+            entries.append({
+                "ancestor": ancestor,
+                "ancestor_country": country_match.group(1) if country_match else "",
+                "positions": canonical_positions(positions),
+                "canonical_pattern": canonical_pattern(positions),
+                "pair_patterns": pair_patterns(positions),
+                "branch_count": len(positions),
+                "intensity": cross_intensity(positions),
+            })
     return entries
 
 

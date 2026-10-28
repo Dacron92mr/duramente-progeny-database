@@ -46,6 +46,7 @@ CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行�
 - **加图**：数据处理先说明来源、样本和分母；保持对应分析页定义；使用 `renderChart()` 和 `chart-colors.js`。纯计算用稳定样本测试，浏览器核对手机、主题、放大和下钻。
 - **改主题**：颜色优先修改 `styles/tokens.css`。图表依赖 `chartThemeColors()` 与主题控制器，主图和放大图都需验证。所有语义色仍由 `chart-colors.js` 管理。
 - **改马匹资料/译名**：遵循 [DATA_SCHEMA.md](DATA_SCHEMA.md)，先查证，再核对清单、详情、来源和统计，不直接覆盖全部 JSON。
+- **改搜索交互**：输入阶段使用 180ms debounce，并只创建一个搜索 session；后续字符以 `replaceState` 更新，避免 Back 键逐字符回退。浏览器回归需覆盖快速输入、清空和前进/后退恢复。
 
 ## CSV
 
