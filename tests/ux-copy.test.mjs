@@ -18,7 +18,7 @@ test('comparison summaries handle higher, lower, tie, same, missing, empty and s
 test('titles follow both field and metric; concept references never claim to be data sources',()=>{
  assert.equal(studyTitle('bms_line','graded'),'不同母父系的重赏马比例');
  assert.match(studyTitle('female_family','winners'),/牝系.*胜马率/);
- assert.match(conceptIntro('dosage'),/Wikipedia/);assert(!conceptIntro('dosage').includes('数据来源'));
+ assert.match(conceptIntro('dosage'),/BRISnet/);assert(!conceptIntro('dosage').includes('数据来源'));
 });
 test('unknown careers remain unknown and stay in the denominator without becoming winners',()=>{
  const horses=['12戦2勝','0戦0勝','6戦0勝','',null,'尚未收录'].map((career_summary,id)=>({id,career_summary,broodmare_sire:'A'}));

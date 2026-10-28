@@ -1,0 +1,323 @@
+/* Research notes stay in the reading flow rather than becoming card stacks. */
+.research-context {
+  max-width: 86ch;
+  margin: 16px 0 22px;
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.research-context > p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.research-disclosure {
+  font-size: 13px;
+}
+
+.research-disclosure > summary {
+  width: fit-content;
+  max-width: 100%;
+  padding: 7px 0;
+  color: var(--muted);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.research-disclosure > summary span {
+  white-space: nowrap;
+}
+
+.research-disclosure[open] > summary {
+  color: var(--ink);
+}
+
+.research-method {
+  margin: 8px 0 16px;
+  line-height: 1.8;
+}
+
+.research-method strong {
+  font-weight: 600;
+}
+
+.reference-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.reference-list > li {
+  min-width: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+
+.reference-list p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.reference-byline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  margin-bottom: 5px;
+  font-size: 13px;
+}
+
+.reference-byline > span,
+.reference-publication {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.reference-publication {
+  margin-top: 4px;
+  overflow-wrap: anywhere;
+}
+
+.reference-list .reference-limit {
+  color: var(--muted);
+}
+
+.research-citation {
+  color: var(--ink);
+  font-size: 14px;
+  line-height: 1.7;
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+}
+
+.research-citation:hover {
+  color: var(--accent);
+  text-decoration-color: currentColor;
+}
+
+/* The opposite responsive citation row is removed from navigation flow. */
+.reference-mobile-link,
+.research-details {
+  display: none;
+}
+
+[data-link-purpose="source"] {
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+[data-link-purpose="source"]:hover {
+  color: var(--ink);
+  text-decoration-style: solid;
+}
+
+[data-link-purpose="drill"] {
+  color: var(--accent);
+  text-underline-offset: 3px;
+}
+
+button[data-link-purpose="drill"] {
+  border-radius: 7px;
+}
+
+[data-link-purpose="drill"]:hover {
+  background: var(--selection);
+}
+
+.representative-horse-item .representative-arrow {
+  flex: none;
+  color: var(--muted);
+}
+
+.research-citation:focus-visible,
+[data-link-purpose="source"]:focus-visible,
+[data-link-purpose="drill"]:focus-visible,
+.research-disclosure > summary:focus-visible,
+.research-details > summary:focus-visible {
+  border-radius: 3px;
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 600px) {
+  .research-context {
+    margin: 12px 0 18px;
+  }
+
+  .research-disclosure > summary {
+    box-sizing: border-box;
+    display: list-item;
+    min-height: 40px;
+  }
+}
+
+@media (max-width: 599px) {
+  .research-disclosure[open] {
+    margin-top: 2px;
+  }
+
+  .research-method {
+    margin: 0 0 10px;
+    padding: 10px 0 10px 12px;
+    border-left: 2px solid var(--line);
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .research-method strong {
+    display: block;
+    margin-bottom: 2px;
+    color: var(--ink);
+    font-size: 12px;
+  }
+
+  .reference-list {
+    border-top: 0;
+  }
+
+  .reference-list > li {
+    padding: 0;
+  }
+
+  .reference-desktop {
+    display: none;
+  }
+
+  .reference-mobile-link {
+    box-sizing: border-box;
+    display: block;
+    min-height: 54px;
+    padding: 8px 0;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .reference-mobile-link:hover,
+  .reference-mobile-link:focus-visible {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .reference-mobile-copy {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 24px;
+    align-items: center;
+    column-gap: 12px;
+    min-width: 0;
+  }
+
+  .reference-mobile-byline {
+    grid-column: 1;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .reference-mobile-topic {
+    grid-column: 1;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+  }
+
+  .reference-mobile-icon {
+    grid-row: 1 / span 2;
+    grid-column: 2;
+    align-self: center;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .research-details {
+    display: block;
+    margin: 10px 0 2px;
+    border-top: 1px solid var(--line);
+  }
+
+  .research-details > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 44px;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .research-details > summary span {
+    white-space: nowrap;
+  }
+
+  .research-details[open] > summary {
+    color: var(--ink);
+  }
+
+  .research-details-intro {
+    margin: 0 0 6px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.65;
+  }
+
+  .reference-detail-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .reference-detail-item {
+    min-width: 0;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+  }
+
+  .reference-detail-heading {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.55;
+  }
+
+  .reference-detail-title {
+    margin-top: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.55;
+  }
+
+  .reference-detail-item .reference-publication {
+    margin-top: 3px;
+  }
+
+  .reference-detail-item p {
+    margin: 8px 0 0;
+    font-size: 12.5px;
+    line-height: 1.7;
+  }
+
+  .reference-detail-item p strong {
+    display: block;
+    margin-bottom: 1px;
+    color: var(--ink);
+    font-size: 12px;
+  }
+}
