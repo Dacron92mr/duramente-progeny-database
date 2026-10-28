@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104685",
     "jbis_id": "0001360021",
     "trainer": "高柳瑞樹",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "シルクレーシング",
     "breeder": "ノーザンファーム",
@@ -221,6 +221,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all",
         "trainer": "高柳瑞樹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104685",
+      "url": "https://db.netkeiba.com/horse/2022104685/",
+      "fetched_at": "2026-10-28T01:30:29.604355+00:00",
+      "data": {
+        "trainer": "高柳瑞樹",
+        "owner": "シルクレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

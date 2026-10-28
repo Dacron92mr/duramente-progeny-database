@@ -17,7 +17,7 @@
     "netkeiba_id": "2018109095",
     "jbis_id": "0001265390",
     "trainer": "堀内岳志",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ノルマンディーサラブレッドレーシング",
     "breeder": "恵比寿興業株式会社那須野牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "堀内岳志"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018109095",
+      "url": "https://db.netkeiba.com/horse/2018109095/",
+      "fetched_at": "2026-10-28T02:47:05.790562+00:00",
+      "data": {
+        "trainer": "堀内岳志",
+        "owner": "ノルマンディーサラブレッドレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102754",
     "jbis_id": "0001306243",
     "trainer": "清水英克",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "長谷川光司",
     "breeder": "ヒダカファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "清水英克"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102754",
+      "url": "https://db.netkeiba.com/horse/2019102754/",
+      "fetched_at": "2026-10-28T02:39:41.785123+00:00",
+      "data": {
+        "trainer": "清水英克",
+        "owner": "長谷川光司",
+        "affiliation": "美浦"
       }
     }
   ],

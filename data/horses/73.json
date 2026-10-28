@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104877",
     "jbis_id": "0001267296",
     "trainer": "堀宣行",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ＮＩＣＫＳ",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "堀宣行"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104877",
+      "url": "https://db.netkeiba.com/horse/2018104877/",
+      "fetched_at": "2026-10-28T01:43:41.662955+00:00",
+      "data": {
+        "trainer": "堀宣行",
+        "owner": "ＮＩＣＫＳ",
+        "affiliation": "美浦"
       }
     }
   ],

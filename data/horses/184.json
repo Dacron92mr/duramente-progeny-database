@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105838",
     "jbis_id": "0001336125",
     "trainer": "手塚貴徳",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "シルクレーシング",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=10",
         "trainer": "手塚貴徳"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105838",
+      "url": "https://db.netkeiba.com/horse/2021105838/",
+      "fetched_at": "2026-10-28T02:05:53.784876+00:00",
+      "data": {
+        "trainer": "手塚貴徳",
+        "owner": "シルクレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

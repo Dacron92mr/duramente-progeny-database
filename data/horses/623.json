@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103532",
     "jbis_id": "0001308396",
     "trainer": "菊川正達",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ＸＩＡＯジャパン",
     "breeder": "カナイシスタッド",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=32",
         "trainer": "菊川正達"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103532",
+      "url": "https://db.netkeiba.com/horse/2019103532/",
+      "fetched_at": "2026-10-28T03:25:25.840067+00:00",
+      "data": {
+        "trainer": "菊川正達",
+        "owner": "ＸＩＡＯジャパン",
+        "affiliation": "美浦"
       }
     }
   ],

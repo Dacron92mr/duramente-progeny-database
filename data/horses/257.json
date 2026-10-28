@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105385",
     "jbis_id": "0001312000",
     "trainer": "杉山晴紀",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "三木正浩",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "杉山晴紀"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105385",
+      "url": "https://db.netkeiba.com/horse/2019105385/",
+      "fetched_at": "2026-10-28T02:20:29.742569+00:00",
+      "data": {
+        "trainer": "杉山晴紀",
+        "owner": "三木正浩",
+        "affiliation": "栗東"
       }
     }
   ],

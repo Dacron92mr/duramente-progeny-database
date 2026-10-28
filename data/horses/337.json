@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104075",
     "jbis_id": "0001305391",
     "trainer": "加藤和宏",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "（株）ファーストビジ",
     "breeder": "三嶋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "加藤和宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104075",
+      "url": "https://db.netkeiba.com/horse/2019104075/",
+      "fetched_at": "2026-10-28T02:36:29.975253+00:00",
+      "data": {
+        "trainer": "加藤和宏",
+        "owner": "（株）ファーストビジ",
+        "affiliation": "金沢"
       }
     }
   ],

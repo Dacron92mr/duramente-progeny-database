@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100188",
     "jbis_id": "0001269787",
     "trainer": "戸田博文",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "大谷正嗣",
     "breeder": "オリオンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "戸田博文"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100188",
+      "url": "https://db.netkeiba.com/horse/2018100188/",
+      "fetched_at": "2026-10-28T02:19:53.748671+00:00",
+      "data": {
+        "trainer": "戸田博文",
+        "owner": "大谷正嗣",
+        "affiliation": "美浦"
       }
     }
   ],

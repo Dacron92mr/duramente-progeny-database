@@ -17,7 +17,7 @@
     "netkeiba_id": "2022100161",
     "jbis_id": "0001356321",
     "trainer": "藤原英昭",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "廣崎利洋ＨＤ",
     "breeder": "高昭牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=3",
         "trainer": "藤原英昭"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022100161",
+      "url": "https://db.netkeiba.com/horse/2022100161/",
+      "fetched_at": "2026-10-28T01:39:17.713260+00:00",
+      "data": {
+        "trainer": "藤原英昭",
+        "owner": "廣崎利洋ＨＤ",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105114",
     "jbis_id": "0001265959",
     "trainer": "工藤真司",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "永谷友一郎",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "工藤真司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105114",
+      "url": "https://db.netkeiba.com/horse/2018105114/",
+      "fetched_at": "2026-10-28T02:58:53.822980+00:00",
+      "data": {
+        "trainer": "工藤真司",
+        "owner": "永谷友一郎",
+        "affiliation": "高知"
       }
     }
   ],

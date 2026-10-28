@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103828",
     "jbis_id": "0001308804",
     "trainer": "瀬戸幸一",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "後藤順男",
     "breeder": "辻牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "瀬戸幸一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103828",
+      "url": "https://db.netkeiba.com/horse/2019103828/",
+      "fetched_at": "2026-10-28T02:31:17.800519+00:00",
+      "data": {
+        "trainer": "瀬戸幸一",
+        "owner": "後藤順男",
+        "affiliation": "岩手"
       }
     }
   ],

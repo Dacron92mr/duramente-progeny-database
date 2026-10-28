@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101579",
     "jbis_id": "0001262980",
     "trainer": "笹田和秀",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "林進",
     "breeder": "協和牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "笹田和秀"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101579",
+      "url": "https://db.netkeiba.com/horse/2018101579/",
+      "fetched_at": "2026-10-28T01:41:29.703438+00:00",
+      "data": {
+        "trainer": "笹田和秀",
+        "owner": "林進",
+        "affiliation": "栗東"
       }
     }
   ],

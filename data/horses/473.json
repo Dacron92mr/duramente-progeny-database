@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100704",
     "jbis_id": "0001266756",
     "trainer": "栗本陽一",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "小林伸幸",
     "breeder": "千葉飯田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "栗本陽一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100704",
+      "url": "https://db.netkeiba.com/horse/2018100704/",
+      "fetched_at": "2026-10-28T03:03:41.884143+00:00",
+      "data": {
+        "trainer": "栗本陽一",
+        "owner": "小林伸幸",
+        "affiliation": "笠松"
       }
     }
   ],

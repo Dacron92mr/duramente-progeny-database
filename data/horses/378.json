@@ -17,7 +17,7 @@
     "netkeiba_id": "2021101721",
     "jbis_id": "0001333041",
     "trainer": "九日俊光",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "ＪＰＮ技研",
     "breeder": "チャンピオンズファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "九日俊光"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021101721",
+      "url": "https://db.netkeiba.com/horse/2021101721/",
+      "fetched_at": "2026-10-28T02:44:41.886277+00:00",
+      "data": {
+        "trainer": "九日俊光",
+        "owner": "ＪＰＮ技研",
+        "affiliation": "佐賀"
       }
     }
   ],

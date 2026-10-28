@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105325",
     "jbis_id": "0001268304",
     "trainer": "池江泰寿",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ダノックス",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=10",
         "trainer": "池江泰寿"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105325",
+      "url": "https://db.netkeiba.com/horse/2018105325/",
+      "fetched_at": "2026-10-28T02:06:29.739863+00:00",
+      "data": {
+        "trainer": "池江泰寿",
+        "owner": "ダノックス",
+        "affiliation": "栗東"
       }
     }
   ],

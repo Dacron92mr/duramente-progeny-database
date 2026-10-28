@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103886",
     "jbis_id": "0001338848",
     "trainer": "久保秀男",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "シグラップ・マネジメ",
     "breeder": "静内白井牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "久保秀男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103886",
+      "url": "https://db.netkeiba.com/horse/2021103886/",
+      "fetched_at": "2026-10-28T02:35:53.842602+00:00",
+      "data": {
+        "trainer": "久保秀男",
+        "owner": "シグラップ・マネジメ",
+        "affiliation": "川崎"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104209",
     "jbis_id": "0001264657",
     "trainer": "長南和宏",
-    "affiliation": "(西 脇)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "山岡正人",
     "breeder": "野坂牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "長南和宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104209",
+      "url": "https://db.netkeiba.com/horse/2018104209/",
+      "fetched_at": "2026-10-28T02:42:29.934977+00:00",
+      "data": {
+        "trainer": "長南和宏",
+        "owner": "山岡正人",
+        "affiliation": "兵庫"
       }
     }
   ],

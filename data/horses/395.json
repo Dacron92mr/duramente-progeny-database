@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105736",
     "jbis_id": "0001360190",
     "trainer": "錦見勇夫",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "森田裕樹",
     "breeder": "追分ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "錦見勇夫"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105736",
+      "url": "https://db.netkeiba.com/horse/2022105736/",
+      "fetched_at": "2026-10-28T02:48:06.001150+00:00",
+      "data": {
+        "trainer": "錦見勇夫",
+        "owner": "森田裕樹",
+        "affiliation": "愛知"
       }
     }
   ],
@@ -1103,7 +1114,7 @@
       "meeting": "名古屋",
       "weather": "晴",
       "race_no": 7,
-      "race_name": "〜高松宮記念〜熱い感(C)",
+      "race_name": "～高松宮記念～熱い感(C)",
       "race_id": "202648032707",
       "race_url": "https://db.netkeiba.com/race/202648032707/",
       "field_size": 10,
@@ -1149,7 +1160,7 @@
         "prize": 29.8,
         "race_date": "2026/03/27",
         "race_id": "202648032707",
-        "race_name": "〜高松宮記念〜熱い感(C)",
+        "race_name": "～高松宮記念～熱い感(C)",
         "race_no": 7,
         "race_url": "https://db.netkeiba.com/race/202648032707/",
         "source": "netkeiba",

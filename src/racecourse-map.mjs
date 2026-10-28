@@ -37,7 +37,7 @@ export async function mountRacecourseMap(root,{rows,coordinates,canonicalName,ge
     const panel=root.querySelector('.map-detail');
     if(!point){panel.innerHTML='<h3>选择赛马场</h3><p>点选地图标记或下方列表，查看出赛次数、胜率与前三率。</p>';return;}
     const r=point.row;
-    panel.innerHTML=`<h3>${html(point.name)} <small>${html(r.jurisdiction)}</small></h3><dl><div><dt>正式出赛</dt><dd>${r.starts}</dd></div><div><dt>胜场</dt><dd>${r.wins_starts}</dd></div><div><dt>胜率</dt><dd>${ratio(r.wins_starts,r.starts)}</dd></div><div><dt>前三率</dt><dd>${ratio(r.top3,r.starts)} <small>(${r.top3}/${r.starts})</small></dd></div></dl><p>按有正式名次的比赛统计。${r.starts<30?'样本少于30场，比例波动较大。':''}</p><button type="button" data-course-population>查看对应产驹 →</button><div data-course-horses></div><button type="button" data-course-analysis>查看场地与距离表现 ↓</button>`;
+    panel.innerHTML=`<h3>${html(point.name)} <small>${html(r.jurisdiction)}</small></h3><dl><div><dt>正式出赛</dt><dd>${r.starts}</dd></div><div><dt>胜场</dt><dd>${r.wins_starts}</dd></div><div><dt>胜率</dt><dd>${ratio(r.wins_starts,r.starts)}</dd></div><div><dt>前三率</dt><dd>${ratio(r.top3,r.starts)} <small>(${r.top3}/${r.starts})</small></dd></div></dl><p>按有正式名次的比赛统计。${r.starts<30?'样本少于30场，比例波动较大。':''}</p><button type="button" data-link-purpose="drill" data-course-population>查看对应产驹 →</button><div data-course-horses></div><button type="button" data-course-analysis>查看场地与距离表现 ↓</button>`;
     panel.querySelector('[data-course-analysis]').onclick=()=>onSelect(r);
     panel.querySelector('[data-course-population]').onclick=async event=>{
       const button=event.currentTarget;button.disabled=true;button.textContent='正在载入产驹…';

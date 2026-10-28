@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102852",
     "jbis_id": "0001308833",
     "trainer": "西村守幸",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "（株）ファーストビジ",
     "breeder": "吉田ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "西村守幸"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102852",
+      "url": "https://db.netkeiba.com/horse/2019102852/",
+      "fetched_at": "2026-10-28T02:56:41.933981+00:00",
+      "data": {
+        "trainer": "西村守幸",
+        "owner": "（株）ファーストビジ",
+        "affiliation": "兵庫"
       }
     }
   ],

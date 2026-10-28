@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103069",
     "jbis_id": "0001337778",
     "trainer": "川西毅",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "芳賀美知子",
     "breeder": "富田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "川西毅"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103069",
+      "url": "https://db.netkeiba.com/horse/2021103069/",
+      "fetched_at": "2026-10-28T02:33:53.766939+00:00",
+      "data": {
+        "trainer": "川西毅",
+        "owner": "芳賀美知子",
+        "affiliation": "愛知"
       }
     }
   ],

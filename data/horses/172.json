@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106588",
     "jbis_id": "0001264660",
     "trainer": "田中譲二",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "（同）ＪＰＮ技研",
     "breeder": "ミリオンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=9",
         "trainer": "田中譲二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106588",
+      "url": "https://db.netkeiba.com/horse/2018106588/",
+      "fetched_at": "2026-10-28T02:03:29.723544+00:00",
+      "data": {
+        "trainer": "田中譲二",
+        "owner": "（同）ＪＰＮ技研",
+        "affiliation": "高知"
       }
     }
   ],

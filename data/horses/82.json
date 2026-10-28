@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102146",
     "jbis_id": "0001312122",
     "trainer": "小久保智",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "了徳寺健二ホールディングス",
     "breeder": "藤本ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=5",
         "trainer": "小久保智"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102146",
+      "url": "https://db.netkeiba.com/horse/2019102146/",
+      "fetched_at": "2026-10-28T01:45:29.757655+00:00",
+      "data": {
+        "trainer": "小久保智",
+        "owner": "了徳寺健二ホールディングス",
+        "affiliation": "浦和"
       }
     }
   ],

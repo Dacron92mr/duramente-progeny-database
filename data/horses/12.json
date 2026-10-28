@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102657",
     "jbis_id": "0001262898",
     "trainer": "渡辺和雄",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "吉田和美",
     "breeder": "田上徹",
@@ -221,6 +221,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all",
         "trainer": "渡辺和雄"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102657",
+      "url": "https://db.netkeiba.com/horse/2018102657/",
+      "fetched_at": "2026-10-28T01:31:29.692316+00:00",
+      "data": {
+        "trainer": "渡辺和雄",
+        "owner": "吉田和美",
+        "affiliation": "大井"
       }
     }
   ],

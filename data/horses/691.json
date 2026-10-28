@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105393",
     "jbis_id": "0001337804",
     "trainer": "板垣吉則",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=35",
         "trainer": "板垣吉則"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105393",
+      "url": "https://db.netkeiba.com/horse/2021105393/",
+      "fetched_at": "2026-10-28T03:23:01.897752+00:00",
+      "data": {
+        "trainer": "板垣吉則",
+        "owner": "キャロットファーム",
+        "affiliation": "岩手"
       }
     }
   ],

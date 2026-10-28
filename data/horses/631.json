@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104338",
     "jbis_id": "0001313112",
     "trainer": "庄野靖志",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "長谷川芳信",
     "breeder": "新井牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=32",
         "trainer": "庄野靖志"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104338",
+      "url": "https://db.netkeiba.com/horse/2019104338/",
+      "fetched_at": "2026-10-28T03:27:29.878753+00:00",
+      "data": {
+        "trainer": "庄野靖志",
+        "owner": "長谷川芳信",
+        "affiliation": "栗東"
       }
     }
   ],

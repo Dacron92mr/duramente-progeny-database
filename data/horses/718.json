@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105432",
     "jbis_id": "0001358900",
     "trainer": "金成貴史",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "吉田照哉",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "金成貴史"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105432",
+      "url": "https://db.netkeiba.com/horse/2022105432/",
+      "fetched_at": "2026-10-28T03:32:45.863761+00:00",
+      "data": {
+        "trainer": "金成貴史",
+        "owner": "吉田照哉",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,8 +17,8 @@
     "netkeiba_id": "2018105446",
     "jbis_id": null,
     "trainer": "石坂正",
-    "affiliation": "西",
-    "trainer_region": "地方",
+    "affiliation": "栗東",
+    "trainer_region": "栗東",
     "owner": "Ｇ１レーシング",
     "breeder": "追分ファーム",
     "birthplace": "安平町",
@@ -107,6 +107,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=30",
         "trainer": "石坂正"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105446",
+      "url": "https://db.netkeiba.com/horse/2018105446/",
+      "fetched_at": "2026-10-28T03:39:41.994391+00:00",
+      "data": {
+        "trainer": "石坂正",
+        "owner": "Ｇ１レーシング",
+        "affiliation": "栗東"
       }
     }
   ],

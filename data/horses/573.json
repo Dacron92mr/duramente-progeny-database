@@ -17,8 +17,8 @@
     "netkeiba_id": "2018102447",
     "jbis_id": "0001264340",
     "trainer": "佐々木晶",
-    "affiliation": "(名古屋)",
-    "trainer_region": "地方",
+    "affiliation": "栗東",
+    "trainer_region": "栗東",
     "owner": "キャピタルクラブ",
     "breeder": "上村清志",
     "birthplace": "新ひだか町",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "佐々木晶"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102447",
+      "url": "https://db.netkeiba.com/horse/2018102447/",
+      "fetched_at": "2026-10-28T03:36:45.854730+00:00",
+      "data": {
+        "trainer": "佐々木晶",
+        "owner": "キャピタルクラブ",
+        "affiliation": "栗東"
       }
     }
   ],

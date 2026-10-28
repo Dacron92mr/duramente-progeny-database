@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105620",
     "jbis_id": "0001269442",
     "trainer": "那俄性哲",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "岩田雅之",
     "breeder": "上水牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=26",
         "trainer": "那俄性哲"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105620",
+      "url": "https://db.netkeiba.com/horse/2018105620/",
+      "fetched_at": "2026-10-28T03:09:41.870032+00:00",
+      "data": {
+        "trainer": "那俄性哲",
+        "owner": "岩田雅之",
+        "affiliation": "高知"
       }
     }
   ],

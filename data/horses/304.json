@@ -17,7 +17,7 @@
     "netkeiba_id": "2020100191",
     "jbis_id": "0001324715",
     "trainer": "小沢宏次",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "西山茂行",
     "breeder": "佐藤鉄也",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "小沢宏次"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020100191",
+      "url": "https://db.netkeiba.com/horse/2020100191/",
+      "fetched_at": "2026-10-28T02:29:53.789140+00:00",
+      "data": {
+        "trainer": "小沢宏次",
+        "owner": "西山茂行",
+        "affiliation": "浦和"
       }
     }
   ],

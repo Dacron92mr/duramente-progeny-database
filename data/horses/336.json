@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104760",
     "jbis_id": "0001306697",
     "trainer": "川村守男",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "豊島愛子",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "川村守男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104760",
+      "url": "https://db.netkeiba.com/horse/2019104760/",
+      "fetched_at": "2026-10-28T02:36:17.915336+00:00",
+      "data": {
+        "trainer": "川村守男",
+        "owner": "豊島愛子",
+        "affiliation": "浦和"
       }
     }
   ],

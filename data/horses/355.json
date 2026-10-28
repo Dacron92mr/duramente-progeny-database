@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104480",
     "jbis_id": "0001304159",
     "trainer": "小国博行",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "前田良平",
     "breeder": "追分ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "小国博行"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104480",
+      "url": "https://db.netkeiba.com/horse/2019104480/",
+      "fetched_at": "2026-10-28T02:40:05.826182+00:00",
+      "data": {
+        "trainer": "小国博行",
+        "owner": "前田良平",
+        "affiliation": "北海道"
       }
     }
   ],

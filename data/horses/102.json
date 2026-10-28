@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104126",
     "jbis_id": "0001312244",
     "trainer": "角田輝也",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "福盛訓之",
     "breeder": "宮内牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=6",
         "trainer": "角田輝也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104126",
+      "url": "https://db.netkeiba.com/horse/2019104126/",
+      "fetched_at": "2026-10-28T01:49:29.814260+00:00",
+      "data": {
+        "trainer": "角田輝也",
+        "owner": "福盛訓之",
+        "affiliation": "愛知"
       }
     }
   ],

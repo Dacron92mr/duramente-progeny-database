@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105831",
     "jbis_id": "0001262729",
     "trainer": "和田正一",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "江馬由将",
     "breeder": "レイクヴィラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=7",
         "trainer": "和田正一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105831",
+      "url": "https://db.netkeiba.com/horse/2018105831/",
+      "fetched_at": "2026-10-28T01:54:53.720826+00:00",
+      "data": {
+        "trainer": "和田正一",
+        "owner": "江馬由将",
+        "affiliation": "美浦"
       }
     }
   ],

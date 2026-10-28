@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104494",
     "jbis_id": "0001307762",
     "trainer": "堀宣行",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "Ｇ１レーシング",
     "breeder": "追分ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "堀宣行"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104494",
+      "url": "https://db.netkeiba.com/horse/2019104494/",
+      "fetched_at": "2026-10-28T02:54:29.760040+00:00",
+      "data": {
+        "trainer": "堀宣行",
+        "owner": "Ｇ１レーシング",
+        "affiliation": "美浦"
       }
     }
   ],

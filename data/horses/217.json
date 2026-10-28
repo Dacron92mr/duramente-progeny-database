@@ -17,7 +17,7 @@
     "netkeiba_id": "2022100637",
     "jbis_id": "0001356052",
     "trainer": "武幸四郎",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ロードホースクラブ",
     "breeder": "ケイアイファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "武幸四郎"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022100637",
+      "url": "https://db.netkeiba.com/horse/2022100637/",
+      "fetched_at": "2026-10-28T02:12:29.793107+00:00",
+      "data": {
+        "trainer": "武幸四郎",
+        "owner": "ロードホースクラブ",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104357",
     "jbis_id": "0001264220",
     "trainer": "瀬戸口悟",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "吉岡泰治",
     "breeder": "藤原牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "瀬戸口悟"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104357",
+      "url": "https://db.netkeiba.com/horse/2018104357/",
+      "fetched_at": "2026-10-28T02:51:41.840765+00:00",
+      "data": {
+        "trainer": "瀬戸口悟",
+        "owner": "吉岡泰治",
+        "affiliation": "愛知"
       }
     }
   ],

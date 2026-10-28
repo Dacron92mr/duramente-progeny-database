@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103404",
     "jbis_id": "0001325329",
     "trainer": "中野博",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "小濱正智",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "中野博"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103404",
+      "url": "https://db.netkeiba.com/horse/2020103404/",
+      "fetched_at": "2026-10-28T02:46:30.399669+00:00",
+      "data": {
+        "trainer": "中野博",
+        "owner": "小濱正智",
+        "affiliation": "佐賀"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105635",
     "jbis_id": "0001305854",
     "trainer": "松浦聡志",
-    "affiliation": "(西 脇)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "吉田ひとみ",
     "breeder": "レイクヴィラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "松浦聡志"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105635",
+      "url": "https://db.netkeiba.com/horse/2019105635/",
+      "fetched_at": "2026-10-28T02:58:29.827602+00:00",
+      "data": {
+        "trainer": "松浦聡志",
+        "owner": "吉田ひとみ",
+        "affiliation": "兵庫"
       }
     }
   ],

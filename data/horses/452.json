@@ -17,7 +17,7 @@
     "netkeiba_id": "2020102337",
     "jbis_id": "0001326216",
     "trainer": "吉田正美",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "冨田藤男",
     "breeder": "ヤナガワ牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "吉田正美"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020102337",
+      "url": "https://db.netkeiba.com/horse/2020102337/",
+      "fetched_at": "2026-10-28T02:59:17.957151+00:00",
+      "data": {
+        "trainer": "吉田正美",
+        "owner": "冨田藤男",
+        "affiliation": "浦和"
       }
     }
   ],

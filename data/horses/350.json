@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100269",
     "jbis_id": "0001269835",
     "trainer": "石井勝男",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "矢野悦三",
     "breeder": "クラウン日高牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "石井勝男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100269",
+      "url": "https://db.netkeiba.com/horse/2018100269/",
+      "fetched_at": "2026-10-28T02:39:17.768918+00:00",
+      "data": {
+        "trainer": "石井勝男",
+        "owner": "矢野悦三",
+        "affiliation": "船橋"
       }
     }
   ],

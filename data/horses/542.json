@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102143",
     "jbis_id": "0001265646",
     "trainer": "石川浩文",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "（同）ＪＰＮ技研",
     "breeder": "ビッグレッドファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "石川浩文"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102143",
+      "url": "https://db.netkeiba.com/horse/2018102143/",
+      "fetched_at": "2026-10-28T03:17:29.875403+00:00",
+      "data": {
+        "trainer": "石川浩文",
+        "owner": "（同）ＪＰＮ技研",
+        "affiliation": "佐賀"
       }
     }
   ],

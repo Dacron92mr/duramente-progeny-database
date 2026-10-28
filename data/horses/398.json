@@ -17,7 +17,7 @@
     "netkeiba_id": "2021102801",
     "jbis_id": "0001332910",
     "trainer": "柴田卓",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ヒダカ・ブリーダーズ・ユニオン",
     "breeder": "笹島政信",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "柴田卓"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021102801",
+      "url": "https://db.netkeiba.com/horse/2021102801/",
+      "fetched_at": "2026-10-28T02:48:41.788269+00:00",
+      "data": {
+        "trainer": "柴田卓",
+        "owner": "ヒダカ・ブリーダーズ・ユニオン",
+        "affiliation": "栗東"
       }
     }
   ],

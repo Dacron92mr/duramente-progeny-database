@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102225",
     "jbis_id": "0001265096",
     "trainer": "昆貢",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ヒルノ",
     "breeder": "松浦牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=26",
         "trainer": "昆貢"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102225",
+      "url": "https://db.netkeiba.com/horse/2018102225/",
+      "fetched_at": "2026-10-28T03:11:41.823774+00:00",
+      "data": {
+        "trainer": "昆貢",
+        "owner": "ヒルノ",
+        "affiliation": "栗東"
       }
     }
   ],

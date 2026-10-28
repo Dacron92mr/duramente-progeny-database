@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104746",
     "jbis_id": "0001358826",
     "trainer": "田中博康",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "里見治",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "田中博康"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104746",
+      "url": "https://db.netkeiba.com/horse/2022104746/",
+      "fetched_at": "2026-10-28T02:34:17.739505+00:00",
+      "data": {
+        "trainer": "田中博康",
+        "owner": "里見治",
+        "affiliation": "美浦"
       }
     }
   ],

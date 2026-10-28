@@ -17,7 +17,7 @@
     "netkeiba_id": "2020106139",
     "jbis_id": "0001327145",
     "trainer": "的場均",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "渡辺牧場",
     "breeder": "様似渡辺牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=34",
         "trainer": "的場均"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020106139",
+      "url": "https://db.netkeiba.com/horse/2020106139/",
+      "fetched_at": "2026-10-28T03:28:25.869152+00:00",
+      "data": {
+        "trainer": "的場均",
+        "owner": "渡辺牧場",
+        "affiliation": "美浦"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104628",
     "jbis_id": "0001267509",
     "trainer": "尾原強",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "山下壽",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=8",
         "trainer": "尾原強"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104628",
+      "url": "https://db.netkeiba.com/horse/2018104628/",
+      "fetched_at": "2026-10-28T01:58:42.051943+00:00",
+      "data": {
+        "trainer": "尾原強",
+        "owner": "山下壽",
+        "affiliation": "兵庫"
       }
     }
   ],

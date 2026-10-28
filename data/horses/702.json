@@ -17,7 +17,7 @@
     "netkeiba_id": "2022102401",
     "jbis_id": "0001361143",
     "trainer": "上村洋行",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "近藤英子",
     "breeder": "坂東牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "上村洋行"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022102401",
+      "url": "https://db.netkeiba.com/horse/2022102401/",
+      "fetched_at": "2026-10-28T03:38:50.107308+00:00",
+      "data": {
+        "trainer": "上村洋行",
+        "owner": "近藤英子",
+        "affiliation": "栗東"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104910",
     "jbis_id": "0001270458",
     "trainer": "木村哲也",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "シルクレーシング",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=2",
         "trainer": "木村哲也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104910",
+      "url": "https://db.netkeiba.com/horse/2018104910/",
+      "fetched_at": "2026-10-28T01:33:17.707369+00:00",
+      "data": {
+        "trainer": "木村哲也",
+        "owner": "シルクレーシング",
+        "affiliation": "美浦"
       }
     }
   ],

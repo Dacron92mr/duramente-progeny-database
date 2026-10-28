@@ -17,7 +17,7 @@
     "netkeiba_id": "2020101767",
     "jbis_id": "0001322637",
     "trainer": "加用正",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ＨｉｍＲｏｃｋＲａｃｉｎｇホールディングス",
     "breeder": "タバタファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=33",
         "trainer": "加用正"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020101767",
+      "url": "https://db.netkeiba.com/horse/2020101767/",
+      "fetched_at": "2026-10-28T03:24:41.860910+00:00",
+      "data": {
+        "trainer": "加用正",
+        "owner": "ＨｉｍＲｏｃｋＲａｃｉｎｇホールディングス",
+        "affiliation": "栗東"
       }
     }
   ],

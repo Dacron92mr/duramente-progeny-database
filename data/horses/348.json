@@ -17,7 +17,7 @@
     "netkeiba_id": "2021101042",
     "jbis_id": "0001335287",
     "trainer": "田中道夫",
-    "affiliation": "(西 脇)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "（同）ＪＰＮ技研",
     "breeder": "天羽牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "田中道夫"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021101042",
+      "url": "https://db.netkeiba.com/horse/2021101042/",
+      "fetched_at": "2026-10-28T02:38:42.047061+00:00",
+      "data": {
+        "trainer": "田中道夫",
+        "owner": "（同）ＪＰＮ技研",
+        "affiliation": "兵庫"
       }
     }
   ],

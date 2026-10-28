@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105217",
     "jbis_id": "0001304817",
     "trainer": "木村哲也",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "木村哲也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105217",
+      "url": "https://db.netkeiba.com/horse/2019105217/",
+      "fetched_at": "2026-10-28T02:52:05.780985+00:00",
+      "data": {
+        "trainer": "木村哲也",
+        "owner": "キャロットファーム",
+        "affiliation": "美浦"
       }
     }
   ],

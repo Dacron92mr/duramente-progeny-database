@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103003",
     "jbis_id": "0001313087",
     "trainer": "木村哲也",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "ロードホースクラブ",
     "breeder": "ケイアイファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=31",
         "trainer": "木村哲也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103003",
+      "url": "https://db.netkeiba.com/horse/2019103003/",
+      "fetched_at": "2026-10-28T03:30:33.826176+00:00",
+      "data": {
+        "trainer": "木村哲也",
+        "owner": "ロードホースクラブ",
+        "affiliation": "美浦"
       }
     }
   ],

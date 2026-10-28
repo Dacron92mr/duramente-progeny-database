@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105748",
     "jbis_id": "0001340205",
     "trainer": "黒岩陽一",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "吉田和美",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=35",
         "trainer": "黒岩陽一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105748",
+      "url": "https://db.netkeiba.com/horse/2021105748/",
+      "fetched_at": "2026-10-28T03:37:58.007152+00:00",
+      "data": {
+        "trainer": "黒岩陽一",
+        "owner": "吉田和美",
+        "affiliation": "美浦"
       }
     }
   ],

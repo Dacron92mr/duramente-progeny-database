@@ -17,7 +17,7 @@
     "netkeiba_id": "2021102675",
     "jbis_id": "0001333970",
     "trainer": "牧光二",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "辻子依旦",
     "breeder": "川越ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=34",
         "trainer": "牧光二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021102675",
+      "url": "https://db.netkeiba.com/horse/2021102675/",
+      "fetched_at": "2026-10-28T03:39:25.895034+00:00",
+      "data": {
+        "trainer": "牧光二",
+        "owner": "辻子依旦",
+        "affiliation": "美浦"
       }
     }
   ],

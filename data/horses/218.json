@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101296",
     "jbis_id": "0001263264",
     "trainer": "野口寛仁",
-    "affiliation": "(浦 和)",
+    "affiliation": "浦和",
     "trainer_region": "地方",
     "owner": "菅藤孝雄",
     "breeder": "清水牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "野口寛仁"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101296",
+      "url": "https://db.netkeiba.com/horse/2018101296/",
+      "fetched_at": "2026-10-28T02:12:42.212699+00:00",
+      "data": {
+        "trainer": "野口寛仁",
+        "owner": "菅藤孝雄",
+        "affiliation": "浦和"
       }
     }
   ],

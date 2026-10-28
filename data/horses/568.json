@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101199",
     "jbis_id": "0001268884",
     "trainer": "小野寺晋",
-    "affiliation": "(小 林)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "（有）ジェムインター",
     "breeder": "門別山際牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "小野寺晋"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101199",
+      "url": "https://db.netkeiba.com/horse/2018101199/",
+      "fetched_at": "2026-10-28T03:43:21.917669+00:00",
+      "data": {
+        "trainer": "小野寺晋",
+        "owner": "（有）ジェムインター",
+        "affiliation": "大井"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103437",
     "jbis_id": "0001326028",
     "trainer": "久保田貴",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "久保田貴"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103437",
+      "url": "https://db.netkeiba.com/horse/2020103437/",
+      "fetched_at": "2026-10-28T02:45:17.773912+00:00",
+      "data": {
+        "trainer": "久保田貴",
+        "owner": "キャロットファーム",
+        "affiliation": "美浦"
       }
     }
   ],

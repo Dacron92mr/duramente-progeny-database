@@ -16,10 +16,10 @@
     "pedigree_crosses": "サンデーサイレンス(USA) ：S3×M4 Halo(USA) ：S4×M4×M5",
     "netkeiba_id": "2021102759",
     "jbis_id": "0001337426",
-    "trainer": "",
-    "affiliation": "(佐 賀)",
+    "trainer": "伊藤強一",
+    "affiliation": "笠松",
     "trainer_region": "地方",
-    "owner": "",
+    "owner": "中込哲太郎",
     "breeder": "",
     "birthplace": "",
     "career_summary": "13戦1勝 [1-1-3-8]",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "伊藤強一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021102759",
+      "url": "https://db.netkeiba.com/horse/2021102759/",
+      "fetched_at": "2026-10-28T03:08:53.916690+00:00",
+      "data": {
+        "trainer": "伊藤強一",
+        "owner": "中込哲太郎",
+        "affiliation": "笠松"
       }
     }
   ],

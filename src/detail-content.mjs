@@ -19,10 +19,10 @@ export function createDetailContent({ finishBadge }) {
   function horseDamCell(horse) {
     const dam = escapeHtml(horse.dam);
     if (horse.dam_jbis_id) {
-      return `<a href="https://www.jbis.jp/horse/${escapeHtml(horse.dam_jbis_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
+      return `<a data-link-purpose="source" href="https://www.jbis.jp/horse/${escapeHtml(horse.dam_jbis_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
     }
     if (horse.dam_netkeiba_id) {
-      return `<a href="https://db.netkeiba.com/horse/${escapeHtml(horse.dam_netkeiba_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
+      return `<a data-link-purpose="source" href="https://db.netkeiba.com/horse/${escapeHtml(horse.dam_netkeiba_id)}/" target="_blank" rel="noreferrer">${dam}</a>`;
     }
     return dam;
   }
@@ -49,7 +49,7 @@ export function createDetailContent({ finishBadge }) {
   function detailSources(sources = []) {
     const available = sources.filter(source => /^https?:\/\//.test(source.url || ''));
     if (!available.length) return '';
-    return `<details class="source-section"><summary>资料来源与采集时间</summary><ul>${available.map(source => `<li><a href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.source || '原始资料')}</a>${source.fetched_at ? `<span> · ${escapeHtml(String(source.fetched_at).slice(0, 10))}</span>` : ''}</li>`).join('')}</ul></details>`;
+    return `<details class="source-section"><summary>资料来源与采集时间</summary><ul>${available.map(source => `<li><a data-link-purpose="source" href="${escapeHtml(source.url)}" target="_blank" rel="noreferrer">${escapeHtml(source.source || '原始资料')} ↗</a>${source.fetched_at ? `<span> · ${escapeHtml(String(source.fetched_at).slice(0, 10))}</span>` : ''}</li>`).join('')}</ul></details>`;
   }
 
   function studTitle(studProfiles) {
@@ -118,11 +118,11 @@ export function createDetailContent({ finishBadge }) {
           <div class="stud-profile">
             <div class="stud-head">
               <div class="stud-links">
-                <a class="stud-chip" href="${escapeHtml(studbookHref(profile))}" target="_blank" rel="noreferrer">Studbook 血统书</a>
+                <a class="stud-chip" data-link-purpose="source" href="${escapeHtml(studbookHref(profile))}" target="_blank" rel="noreferrer">Studbook 血统书 ↗</a>
                 ${profileExternalLinks(profile).map((link) => `
-                  <a class="stud-chip aus-chip" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label || "Australia")}</a>
+                  <a class="stud-chip aus-chip" data-link-purpose="source" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label || "Australia")} ↗</a>
                 `).join("")}
-                ${profile.own_netkeiba_url ? `<a class="stud-chip" href="${escapeHtml(profile.own_netkeiba_url)}" target="_blank" rel="noreferrer">Netkeiba Owners</a>` : ""}
+                ${profile.own_netkeiba_url ? `<a class="stud-chip" data-link-purpose="source" href="${escapeHtml(profile.own_netkeiba_url)}" target="_blank" rel="noreferrer">Netkeiba Owners ↗</a>` : ""}
               </div>
             </div>
             ${profile.note ? `<p class="muted stud-note">${escapeHtml(localizedRecordText(profile.note))}</p>` : ""}

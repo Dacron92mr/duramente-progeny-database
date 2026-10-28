@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100303",
     "jbis_id": "0001335004",
     "trainer": "千田輝彦",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "前原敏行",
     "breeder": "中田英樹",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=13",
         "trainer": "千田輝彦"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100303",
+      "url": "https://db.netkeiba.com/horse/2021100303/",
+      "fetched_at": "2026-10-28T02:20:17.736751+00:00",
+      "data": {
+        "trainer": "千田輝彦",
+        "owner": "前原敏行",
+        "affiliation": "栗東"
       }
     }
   ],

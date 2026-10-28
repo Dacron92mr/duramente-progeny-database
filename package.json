@@ -12,7 +12,8 @@
     "test:pr3": "node scripts/smoke_pr3.cjs",
     "test:post-merge": "node scripts/smoke_post_merge.cjs",
     "test:discovery": "node scripts/smoke_discovery.cjs",
-    "test:careers": "node scripts/smoke_careers.cjs"
+    "test:careers": "node scripts/smoke_careers.cjs",
+    "test:references": "node scripts/smoke_references.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

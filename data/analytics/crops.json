@@ -7,7 +7,7 @@
     "graded_winners": 5,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 242437.6,
+    "total_earnings": 243871.4,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -35,7 +35,7 @@
         "hkjc_name_zh": "機靈發問",
         "achievement_class": "G2",
         "major_win": "25'紫苑S(G2)",
-        "earnings": 9522.0
+        "earnings": 9792.0
       },
       {
         "name": "ジュタ",
@@ -51,11 +51,11 @@
     "graded_foal_rate": 0.0526,
     "graded_runner_rate": 0.0595,
     "g1_foal_rate": 0.0211,
-    "avg_earnings_per_foal": 2552.0,
-    "avg_earnings_per_runner": 2886.2,
+    "avg_earnings_per_foal": 2567.1,
+    "avg_earnings_per_runner": 2903.2,
     "median_earnings_per_runner": 459.9,
     "earnings_q25": 0.0,
-    "earnings_q75": 2360.0,
+    "earnings_q75": 2386.5,
     "max_earnings": 75799.0
   },
   {
@@ -66,7 +66,7 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 161849.5,
+    "total_earnings": 162117.1,
     "representatives": [
       {
         "name": "シュガークン",
@@ -110,8 +110,8 @@
     "graded_foal_rate": 0.0254,
     "graded_runner_rate": 0.0283,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 1371.6,
-    "avg_earnings_per_runner": 1526.9,
+    "avg_earnings_per_foal": 1373.9,
+    "avg_earnings_per_runner": 1529.4,
     "median_earnings_per_runner": 501.6,
     "earnings_q25": 13.6,
     "earnings_q75": 1547.2,
@@ -125,7 +125,7 @@
     "graded_winners": 8,
     "stakes_winners": 9,
     "g1_winners": 5,
-    "total_earnings": 414594.3,
+    "total_earnings": 414730.3,
     "representatives": [
       {
         "name": "リバティアイランド",
@@ -169,8 +169,8 @@
     "graded_foal_rate": 0.0656,
     "graded_runner_rate": 0.0702,
     "g1_foal_rate": 0.041,
-    "avg_earnings_per_foal": 3398.3,
-    "avg_earnings_per_runner": 3636.8,
+    "avg_earnings_per_foal": 3399.4,
+    "avg_earnings_per_runner": 3638.0,
     "median_earnings_per_runner": 643.3,
     "earnings_q25": 75.9,
     "earnings_q75": 3146.0,
@@ -184,7 +184,7 @@
     "graded_winners": 6,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 433897.3,
+    "total_earnings": 433933.3,
     "representatives": [
       {
         "name": "スターズオンアース",
@@ -228,8 +228,8 @@
     "graded_foal_rate": 0.0297,
     "graded_runner_rate": 0.0326,
     "g1_foal_rate": 0.0099,
-    "avg_earnings_per_foal": 2148.0,
-    "avg_earnings_per_runner": 2358.1,
+    "avg_earnings_per_foal": 2148.2,
+    "avg_earnings_per_runner": 2358.3,
     "median_earnings_per_runner": 609.5,
     "earnings_q25": 65.0,
     "earnings_q75": 2026.1,
@@ -243,7 +243,7 @@
     "graded_winners": 7,
     "stakes_winners": 8,
     "g1_winners": 2,
-    "total_earnings": 417135.0,
+    "total_earnings": 417150.0,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -288,7 +288,7 @@
     "graded_runner_rate": 0.0419,
     "g1_foal_rate": 0.0106,
     "avg_earnings_per_foal": 2207.1,
-    "avg_earnings_per_runner": 2497.8,
+    "avg_earnings_per_runner": 2497.9,
     "median_earnings_per_runner": 450.0,
     "earnings_q25": 1.6,
     "earnings_q75": 1635.0,

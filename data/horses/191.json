@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100400",
     "jbis_id": "0001269912",
     "trainer": "矢作芳人",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "里見治",
     "breeder": "下河辺牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=10",
         "trainer": "矢作芳人"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100400",
+      "url": "https://db.netkeiba.com/horse/2018100400/",
+      "fetched_at": "2026-10-28T02:07:17.732324+00:00",
+      "data": {
+        "trainer": "矢作芳人",
+        "owner": "里見治",
+        "affiliation": "栗東"
       }
     }
   ],

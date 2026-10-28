@@ -17,8 +17,8 @@
     "netkeiba_id": "2021103745",
     "jbis_id": "0001339969",
     "trainer": "伊藤圭三",
-    "affiliation": "(西 脇)",
-    "trainer_region": "地方",
+    "affiliation": "美浦",
+    "trainer_region": "美浦",
     "owner": "山本益臣",
     "breeder": "グランド牧場",
     "birthplace": "新ひだか町",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=35",
         "trainer": "伊藤圭三"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103745",
+      "url": "https://db.netkeiba.com/horse/2021103745/",
+      "fetched_at": "2026-10-28T03:38:46.013285+00:00",
+      "data": {
+        "trainer": "伊藤圭三",
+        "owner": "山本益臣",
+        "affiliation": "美浦"
       }
     }
   ],

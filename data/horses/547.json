@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100154",
     "jbis_id": "0001339935",
     "trainer": "打越勇児",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "中村智幸",
     "breeder": "ケイアイファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "打越勇児"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100154",
+      "url": "https://db.netkeiba.com/horse/2021100154/",
+      "fetched_at": "2026-10-28T03:18:29.874846+00:00",
+      "data": {
+        "trainer": "打越勇児",
+        "owner": "中村智幸",
+        "affiliation": "高知"
       }
     }
   ],

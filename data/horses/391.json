@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103635",
     "jbis_id": "0001310954",
     "trainer": "鈴木義久",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "サイプレスホールディングス",
     "breeder": "グランデファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "鈴木義久"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103635",
+      "url": "https://db.netkeiba.com/horse/2019103635/",
+      "fetched_at": "2026-10-28T02:47:17.794436+00:00",
+      "data": {
+        "trainer": "鈴木義久",
+        "owner": "サイプレスホールディングス",
+        "affiliation": "川崎"
       }
     }
   ],

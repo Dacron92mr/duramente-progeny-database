@@ -17,7 +17,7 @@
     "netkeiba_id": "2019104832",
     "jbis_id": "0001313018",
     "trainer": "高橋俊之",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "上小澤美香",
     "breeder": "社台ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "高橋俊之"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019104832",
+      "url": "https://db.netkeiba.com/horse/2019104832/",
+      "fetched_at": "2026-10-28T02:29:17.826681+00:00",
+      "data": {
+        "trainer": "高橋俊之",
+        "owner": "上小澤美香",
+        "affiliation": "金沢"
       }
     }
   ],

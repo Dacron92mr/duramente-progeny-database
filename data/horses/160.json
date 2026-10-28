@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106586",
     "jbis_id": "0001304993",
     "trainer": "渡邊貴光",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "吉岡實",
     "breeder": "フジワラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=8",
         "trainer": "渡邊貴光"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106586",
+      "url": "https://db.netkeiba.com/horse/2019106586/",
+      "fetched_at": "2026-10-28T02:01:05.753104+00:00",
+      "data": {
+        "trainer": "渡邊貴光",
+        "owner": "吉岡實",
+        "affiliation": "船橋"
       }
     }
   ],

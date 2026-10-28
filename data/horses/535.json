@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103198",
     "jbis_id": "0001307807",
     "trainer": "田中淳司",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "上田江吏子",
     "breeder": "平野牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "田中淳司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103198",
+      "url": "https://db.netkeiba.com/horse/2019103198/",
+      "fetched_at": "2026-10-28T03:16:05.847850+00:00",
+      "data": {
+        "trainer": "田中淳司",
+        "owner": "上田江吏子",
+        "affiliation": "北海道"
       }
     }
   ],

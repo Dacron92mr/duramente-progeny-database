@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103611",
     "jbis_id": "0001327750",
     "trainer": "音無秀孝",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "野田みづき",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "音無秀孝"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103611",
+      "url": "https://db.netkeiba.com/horse/2020103611/",
+      "fetched_at": "2026-10-28T03:01:05.890177+00:00",
+      "data": {
+        "trainer": "音無秀孝",
+        "owner": "野田みづき",
+        "affiliation": "栗東"
       }
     }
   ],

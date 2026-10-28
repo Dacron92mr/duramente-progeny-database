@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105820",
     "jbis_id": "0001268409",
     "trainer": "武英智",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "近藤英子",
     "breeder": "レイクヴィラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "武英智"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105820",
+      "url": "https://db.netkeiba.com/horse/2018105820/",
+      "fetched_at": "2026-10-28T02:13:53.785233+00:00",
+      "data": {
+        "trainer": "武英智",
+        "owner": "近藤英子",
+        "affiliation": "栗東"
       }
     }
   ],

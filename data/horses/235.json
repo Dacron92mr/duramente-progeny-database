@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103769",
     "jbis_id": "0001313427",
     "trainer": "新井清重",
-    "affiliation": "(船 橋)",
+    "affiliation": "船橋",
     "trainer_region": "地方",
     "owner": "ＹＧＧホースクラブ",
     "breeder": "谷川牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "新井清重"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103769",
+      "url": "https://db.netkeiba.com/horse/2019103769/",
+      "fetched_at": "2026-10-28T02:16:05.789675+00:00",
+      "data": {
+        "trainer": "新井清重",
+        "owner": "ＹＧＧホースクラブ",
+        "affiliation": "船橋"
       }
     }
   ],

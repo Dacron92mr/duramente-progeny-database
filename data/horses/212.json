@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102147",
     "jbis_id": "0001305907",
     "trainer": "四位洋文",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "林正道",
     "breeder": "藤本ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=11",
         "trainer": "四位洋文"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102147",
+      "url": "https://db.netkeiba.com/horse/2019102147/",
+      "fetched_at": "2026-10-28T02:11:29.714548+00:00",
+      "data": {
+        "trainer": "四位洋文",
+        "owner": "林正道",
+        "affiliation": "栗東"
       }
     }
   ],

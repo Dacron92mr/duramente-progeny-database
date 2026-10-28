@@ -17,7 +17,7 @@
     "netkeiba_id": "2022107063",
     "jbis_id": "0001354980",
     "trainer": "昆貢",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ローレルレーシング",
     "breeder": "村田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=20",
         "trainer": "昆貢"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022107063",
+      "url": "https://db.netkeiba.com/horse/2022107063/",
+      "fetched_at": "2026-10-28T02:47:53.774775+00:00",
+      "data": {
+        "trainer": "昆貢",
+        "owner": "ローレルレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

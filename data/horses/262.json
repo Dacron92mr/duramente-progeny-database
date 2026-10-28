@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102607",
     "jbis_id": "0001264977",
     "trainer": "佐野謙二",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "シグラップ・マネジメ",
     "breeder": "ケイアイファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "佐野謙二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102607",
+      "url": "https://db.netkeiba.com/horse/2018102607/",
+      "fetched_at": "2026-10-28T02:21:29.749331+00:00",
+      "data": {
+        "trainer": "佐野謙二",
+        "owner": "シグラップ・マネジメ",
+        "affiliation": "大井"
       }
     }
   ],

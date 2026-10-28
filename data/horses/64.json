@@ -17,7 +17,7 @@
     "netkeiba_id": "2020103947",
     "jbis_id": "0001318938",
     "trainer": "蛯名正義",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "小笹芳央",
     "breeder": "岡田スタッド",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "蛯名正義"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020103947",
+      "url": "https://db.netkeiba.com/horse/2020103947/",
+      "fetched_at": "2026-10-28T01:41:53.875692+00:00",
+      "data": {
+        "trainer": "蛯名正義",
+        "owner": "小笹芳央",
+        "affiliation": "美浦"
       }
     }
   ],

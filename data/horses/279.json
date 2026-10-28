@@ -17,7 +17,7 @@
     "netkeiba_id": "2020106380",
     "jbis_id": "0001323268",
     "trainer": "河嶋宏樹",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "ローレルレーシング",
     "breeder": "杵臼牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "河嶋宏樹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020106380",
+      "url": "https://db.netkeiba.com/horse/2020106380/",
+      "fetched_at": "2026-10-28T02:24:53.896879+00:00",
+      "data": {
+        "trainer": "河嶋宏樹",
+        "owner": "ローレルレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

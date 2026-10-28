@@ -45,13 +45,14 @@ const fs=require('node:fs');
   await page.screenshot({path:`${out}/comparison-${view}.png`});
   if(view==='pedigree'){
    await page.locator('[data-pedigree-section="dosage"]').click();await page.locator('#pedigree-dosage').evaluate(el=>el.scrollIntoView({block:'start'}));
-   assert(await page.locator('#pedigree-dosage a[href="https://en.wikipedia.org/wiki/Dosage_Index"]').isVisible());assert.match(await page.locator('#pedigree-dosage').innerText(),/Brilliant.*Professional/s);await page.screenshot({path:`${out}/dosage.png`});
+   await page.locator('#pedigree-dosage [data-research-topic="dosage"] .research-disclosure > summary').click();
+   assert(await page.locator('#pedigree-dosage .reference-desktop a[href="https://www.brisnet.com/cgi-bin/static.cgi?page=expdosage"]').isVisible());assert.match(await page.locator('#pedigree-dosage').innerText(),/Brilliant.*Professional/s);await page.screenshot({path:`${out}/dosage.png`});
   }
  }
  await page.route('**/horses.json*',async route=>{const response=await route.fetch();const horses=await response.json();horses[0].career_summary=null;await route.fulfill({json:horses});});
  await page.goto(base+'?view=pedigree');await page.locator('.comparison-tool > summary').click();await page.locator('[data-study-min]').selectOption('1');
  assert(await page.locator('[data-study-missing]').isVisible());assert.match(await page.locator('[data-study-title]').innerText(),/已确认胜马比例/);assert.match(await page.locator('[data-study-missing]').innerText(),/1 匹/);
  await page.locator('[data-study-metric]').selectOption('graded');assert(!await page.locator('[data-study-missing]').isVisible());
- assert.deepEqual(errors,[]);console.log('PASS photo position, themes, responsive layout, 4 switches, mode state, external link, error, empty catalogue, dynamic copy and dosage reference');
+ assert.deepEqual(errors,[]);console.log('PASS photo position, themes, responsive layout, 4 switches, mode state, external link, error, empty catalogue, dynamic copy and verified dosage reference');
  fs.writeFileSync(`${out}/photo-test-result.json`,JSON.stringify({realLoaded,success:true,switches:4,modeReloads:0,errors},null,2));await browser.close();
 })().catch(e=>{console.error(e);process.exit(1);});

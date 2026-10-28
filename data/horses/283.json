@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105967",
     "jbis_id": "0001340053",
     "trainer": "小栗実",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "岩崎伸道",
     "breeder": "レイクヴィラファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=15",
         "trainer": "小栗実"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105967",
+      "url": "https://db.netkeiba.com/horse/2021105967/",
+      "fetched_at": "2026-10-28T02:25:41.701066+00:00",
+      "data": {
+        "trainer": "小栗実",
+        "owner": "岩崎伸道",
+        "affiliation": "栗東"
       }
     }
   ],

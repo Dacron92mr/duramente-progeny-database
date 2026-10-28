@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103803",
     "jbis_id": "0001269731",
     "trainer": "田中剛",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "島井新一郎",
     "breeder": "桜井牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "田中剛"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103803",
+      "url": "https://db.netkeiba.com/horse/2018103803/",
+      "fetched_at": "2026-10-28T03:29:01.817987+00:00",
+      "data": {
+        "trainer": "田中剛",
+        "owner": "島井新一郎",
+        "affiliation": "美浦"
       }
     }
   ],

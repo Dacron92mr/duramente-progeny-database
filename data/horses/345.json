@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104302",
     "jbis_id": "0001263569",
     "trainer": "福田真広",
-    "affiliation": "(小 林)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "藤沢澄雄",
     "breeder": "藤沢牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=18",
         "trainer": "福田真広"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104302",
+      "url": "https://db.netkeiba.com/horse/2018104302/",
+      "fetched_at": "2026-10-28T02:38:05.812737+00:00",
+      "data": {
+        "trainer": "福田真広",
+        "owner": "藤沢澄雄",
+        "affiliation": "大井"
       }
     }
   ],

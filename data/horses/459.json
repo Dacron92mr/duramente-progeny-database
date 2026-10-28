@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105136",
     "jbis_id": "0001333196",
     "trainer": "千田輝彦",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "吉田照哉",
     "breeder": "社台ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "千田輝彦"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105136",
+      "url": "https://db.netkeiba.com/horse/2021105136/",
+      "fetched_at": "2026-10-28T03:01:17.817275+00:00",
+      "data": {
+        "trainer": "千田輝彦",
+        "owner": "吉田照哉",
+        "affiliation": "栗東"
       }
     }
   ],

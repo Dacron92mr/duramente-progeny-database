@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103440",
     "jbis_id": "0001332476",
     "trainer": "古賀慎明",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "里見治",
     "breeder": "ウエスタンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "古賀慎明"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103440",
+      "url": "https://db.netkeiba.com/horse/2021103440/",
+      "fetched_at": "2026-10-28T02:59:05.826482+00:00",
+      "data": {
+        "trainer": "古賀慎明",
+        "owner": "里見治",
+        "affiliation": "美浦"
       }
     }
   ],

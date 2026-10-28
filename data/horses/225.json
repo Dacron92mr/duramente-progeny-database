@@ -17,7 +17,7 @@
     "netkeiba_id": "2018101604",
     "jbis_id": "0001268095",
     "trainer": "武市康男",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "谷川正純",
     "breeder": "小泉学",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "武市康男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018101604",
+      "url": "https://db.netkeiba.com/horse/2018101604/",
+      "fetched_at": "2026-10-28T02:14:05.705207+00:00",
+      "data": {
+        "trainer": "武市康男",
+        "owner": "谷川正純",
+        "affiliation": "美浦"
       }
     }
   ],

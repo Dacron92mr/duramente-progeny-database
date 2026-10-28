@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105088",
     "jbis_id": "0001358811",
     "trainer": "萩原清",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "キャロットファーム",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "萩原清"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105088",
+      "url": "https://db.netkeiba.com/horse/2022105088/",
+      "fetched_at": "2026-10-28T03:28:01.825366+00:00",
+      "data": {
+        "trainer": "萩原清",
+        "owner": "キャロットファーム",
+        "affiliation": "美浦"
       }
     }
   ],

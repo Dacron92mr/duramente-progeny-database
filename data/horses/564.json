@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100272",
     "jbis_id": "0001266643",
     "trainer": "天間昭一",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "クラウン",
     "breeder": "クラウン日高牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "天間昭一"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100272",
+      "url": "https://db.netkeiba.com/horse/2018100272/",
+      "fetched_at": "2026-10-28T03:26:29.927731+00:00",
+      "data": {
+        "trainer": "天間昭一",
+        "owner": "クラウン",
+        "affiliation": "美浦"
       }
     }
   ],

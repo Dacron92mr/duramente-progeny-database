@@ -17,7 +17,7 @@
     "netkeiba_id": "2022105575",
     "jbis_id": "0001361129",
     "trainer": "松浦裕之",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "前田良平",
     "breeder": "社台ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "松浦裕之"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022105575",
+      "url": "https://db.netkeiba.com/horse/2022105575/",
+      "fetched_at": "2026-10-28T03:07:17.830834+00:00",
+      "data": {
+        "trainer": "松浦裕之",
+        "owner": "前田良平",
+        "affiliation": "大井"
       }
     }
   ],

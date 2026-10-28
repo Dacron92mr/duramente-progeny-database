@@ -17,7 +17,7 @@
     "netkeiba_id": "2019106023",
     "jbis_id": "0001313178",
     "trainer": "池田孝",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "川上和彦",
     "breeder": "ゴールドアップカンパニー",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=24",
         "trainer": "池田孝"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019106023",
+      "url": "https://db.netkeiba.com/horse/2019106023/",
+      "fetched_at": "2026-10-28T03:03:05.829297+00:00",
+      "data": {
+        "trainer": "池田孝",
+        "owner": "川上和彦",
+        "affiliation": "川崎"
       }
     }
   ],

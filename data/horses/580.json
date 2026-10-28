@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103830",
     "jbis_id": "0001263391",
     "trainer": "佐藤英明",
-    "affiliation": "(北海道)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "三岡有香",
     "breeder": "佐竹学",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "佐藤英明"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103830",
+      "url": "https://db.netkeiba.com/horse/2018103830/",
+      "fetched_at": "2026-10-28T03:31:53.931797+00:00",
+      "data": {
+        "trainer": "佐藤英明",
+        "owner": "三岡有香",
+        "affiliation": "北海道"
       }
     }
   ],

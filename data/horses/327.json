@@ -17,7 +17,7 @@
     "netkeiba_id": "2019105871",
     "jbis_id": "0001305154",
     "trainer": "佐々木由",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "大黒富美子",
     "breeder": "岡田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=17",
         "trainer": "佐々木由"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019105871",
+      "url": "https://db.netkeiba.com/horse/2019105871/",
+      "fetched_at": "2026-10-28T02:34:29.921099+00:00",
+      "data": {
+        "trainer": "佐々木由",
+        "owner": "大黒富美子",
+        "affiliation": "岩手"
       }
     }
   ],

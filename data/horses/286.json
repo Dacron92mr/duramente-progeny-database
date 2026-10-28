@@ -17,7 +17,7 @@
     "netkeiba_id": "2020102914",
     "jbis_id": "0001318943",
     "trainer": "八木正喜",
-    "affiliation": "(川 崎)",
+    "affiliation": "川崎",
     "trainer_region": "地方",
     "owner": "橋詰弘一",
     "breeder": "社台ファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=15",
         "trainer": "八木正喜"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020102914",
+      "url": "https://db.netkeiba.com/horse/2020102914/",
+      "fetched_at": "2026-10-28T02:26:17.885037+00:00",
+      "data": {
+        "trainer": "八木正喜",
+        "owner": "橋詰弘一",
+        "affiliation": "川崎"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018102931",
     "jbis_id": "0001263362",
     "trainer": "尾林幸二",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "奥村啓二",
     "breeder": "山際牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=29",
         "trainer": "尾林幸二"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018102931",
+      "url": "https://db.netkeiba.com/horse/2018102931/",
+      "fetched_at": "2026-10-28T03:39:37.925826+00:00",
+      "data": {
+        "trainer": "尾林幸二",
+        "owner": "奥村啓二",
+        "affiliation": "兵庫"
       }
     }
   ],

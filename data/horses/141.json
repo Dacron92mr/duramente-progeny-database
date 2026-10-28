@@ -16,8 +16,8 @@
     "pedigree_crosses": "Ahonoora(GB) ：M4×M5",
     "netkeiba_id": "2022103232",
     "jbis_id": "0001355440",
-    "trainer": "大竹正博",
-    "affiliation": "(美 浦)",
+    "trainer": "古賀大生",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "嶋田一成",
     "breeder": "三嶋牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=8",
         "trainer": "大竹正博"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022103232",
+      "url": "https://db.netkeiba.com/horse/2022103232/",
+      "fetched_at": "2026-10-28T01:57:17.698685+00:00",
+      "data": {
+        "trainer": "古賀大生",
+        "owner": "嶋田一成",
+        "affiliation": "美浦"
       }
     }
   ],

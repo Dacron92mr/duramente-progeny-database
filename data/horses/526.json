@@ -17,7 +17,7 @@
     "netkeiba_id": "2018100737",
     "jbis_id": "0001266140",
     "trainer": "田中淳司",
-    "affiliation": "(川 崎)",
+    "affiliation": "北海道",
     "trainer_region": "地方",
     "owner": "（株）チャンピオンズ",
     "breeder": "チャンピオンズファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "田中淳司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018100737",
+      "url": "https://db.netkeiba.com/horse/2018100737/",
+      "fetched_at": "2026-10-28T03:14:17.806783+00:00",
+      "data": {
+        "trainer": "田中淳司",
+        "owner": "（株）チャンピオンズ",
+        "affiliation": "北海道"
       }
     }
   ],

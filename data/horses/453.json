@@ -17,7 +17,7 @@
     "netkeiba_id": "2021101177",
     "jbis_id": "0001334216",
     "trainer": "胡本友晴",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "岡田龍太郎",
     "breeder": "加藤牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "胡本友晴"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021101177",
+      "url": "https://db.netkeiba.com/horse/2021101177/",
+      "fetched_at": "2026-10-28T02:59:41.805973+00:00",
+      "data": {
+        "trainer": "胡本友晴",
+        "owner": "岡田龍太郎",
+        "affiliation": "高知"
       }
     }
   ],

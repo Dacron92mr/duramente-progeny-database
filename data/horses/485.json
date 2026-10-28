@@ -17,7 +17,7 @@
     "netkeiba_id": "2020104268",
     "jbis_id": "0001325523",
     "trainer": "角田輝也",
-    "affiliation": "(名古屋)",
+    "affiliation": "愛知",
     "trainer_region": "地方",
     "owner": "（株）ヒダカ・ブリー",
     "breeder": "静内ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "角田輝也"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020104268",
+      "url": "https://db.netkeiba.com/horse/2020104268/",
+      "fetched_at": "2026-10-28T03:06:05.798382+00:00",
+      "data": {
+        "trainer": "角田輝也",
+        "owner": "（株）ヒダカ・ブリー",
+        "affiliation": "愛知"
       }
     }
   ],

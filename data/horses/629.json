@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103982",
     "jbis_id": "0001310803",
     "trainer": "国枝栄",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "三協ファーム",
     "breeder": "林孝輝",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=32",
         "trainer": "国枝栄"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103982",
+      "url": "https://db.netkeiba.com/horse/2019103982/",
+      "fetched_at": "2026-10-28T03:36:33.832054+00:00",
+      "data": {
+        "trainer": "国枝栄",
+        "owner": "三協ファーム",
+        "affiliation": "美浦"
       }
     }
   ],

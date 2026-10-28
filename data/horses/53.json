@@ -17,7 +17,7 @@
     "netkeiba_id": "2018103615",
     "jbis_id": "0001263621",
     "trainer": "茶木太樹",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "山田和夫",
     "breeder": "岡田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=3",
         "trainer": "茶木太樹"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018103615",
+      "url": "https://db.netkeiba.com/horse/2018103615/",
+      "fetched_at": "2026-10-28T01:39:41.737988+00:00",
+      "data": {
+        "trainer": "茶木太樹",
+        "owner": "山田和夫",
+        "affiliation": "栗東"
       }
     }
   ],

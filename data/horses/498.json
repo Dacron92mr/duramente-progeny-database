@@ -17,7 +17,7 @@
     "netkeiba_id": "2020106584",
     "jbis_id": "0001324527",
     "trainer": "橘友和",
-    "affiliation": "(盛 岡)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "石川秀守",
     "breeder": "谷口牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=25",
         "trainer": "橘友和"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020106584",
+      "url": "https://db.netkeiba.com/horse/2020106584/",
+      "fetched_at": "2026-10-28T03:08:41.895035+00:00",
+      "data": {
+        "trainer": "橘友和",
+        "owner": "石川秀守",
+        "affiliation": "岩手"
       }
     }
   ],

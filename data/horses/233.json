@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101611",
     "jbis_id": "0001309738",
     "trainer": "杉山晴紀",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "猪熊広次",
     "breeder": "下河辺牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=12",
         "trainer": "杉山晴紀"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101611",
+      "url": "https://db.netkeiba.com/horse/2019101611/",
+      "fetched_at": "2026-10-28T02:15:41.668315+00:00",
+      "data": {
+        "trainer": "杉山晴紀",
+        "owner": "猪熊広次",
+        "affiliation": "栗東"
       }
     }
   ],

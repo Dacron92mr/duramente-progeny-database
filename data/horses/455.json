@@ -17,7 +17,7 @@
     "netkeiba_id": "2019101798",
     "jbis_id": "0001307694",
     "trainer": "九日俊光",
-    "affiliation": "(佐 賀)",
+    "affiliation": "佐賀",
     "trainer_region": "地方",
     "owner": "森中蕃",
     "breeder": "スマイルファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=23",
         "trainer": "九日俊光"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019101798",
+      "url": "https://db.netkeiba.com/horse/2019101798/",
+      "fetched_at": "2026-10-28T03:00:05.852776+00:00",
+      "data": {
+        "trainer": "九日俊光",
+        "owner": "森中蕃",
+        "affiliation": "佐賀"
       }
     }
   ],

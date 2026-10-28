@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100069",
     "jbis_id": "0001339341",
     "trainer": "田島俊明",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "谷掛龍夫",
     "breeder": "片山牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=34",
         "trainer": "田島俊明"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100069",
+      "url": "https://db.netkeiba.com/horse/2021100069/",
+      "fetched_at": "2026-10-28T03:28:41.881384+00:00",
+      "data": {
+        "trainer": "田島俊明",
+        "owner": "谷掛龍夫",
+        "affiliation": "美浦"
       }
     }
   ],

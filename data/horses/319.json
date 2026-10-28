@@ -17,9 +17,9 @@
     "netkeiba_id": "2021100023",
     "jbis_id": "0001338728",
     "trainer": "雑賀正光",
-    "affiliation": "(高 知)",
+    "affiliation": "高知",
     "trainer_region": "地方",
-    "owner": "梶正典",
+    "owner": "ウッドテール",
     "breeder": "上村清志",
     "birthplace": "新ひだか町",
     "career_summary": "63戦3勝 [3-11-3-46]",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=16",
         "trainer": "雑賀正光"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100023",
+      "url": "https://db.netkeiba.com/horse/2021100023/",
+      "fetched_at": "2026-10-28T02:32:53.919697+00:00",
+      "data": {
+        "trainer": "雑賀正光",
+        "owner": "ウッドテール",
+        "affiliation": "高知"
       }
     }
   ],

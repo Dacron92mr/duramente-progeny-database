@@ -17,7 +17,7 @@
     "netkeiba_id": "2021103215",
     "jbis_id": "0001339825",
     "trainer": "渡辺和雄",
-    "affiliation": "(大 井)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "江馬由将",
     "breeder": "三嶋牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "渡辺和雄"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021103215",
+      "url": "https://db.netkeiba.com/horse/2021103215/",
+      "fetched_at": "2026-10-28T02:53:18.427091+00:00",
+      "data": {
+        "trainer": "渡辺和雄",
+        "owner": "江馬由将",
+        "affiliation": "大井"
       }
     }
   ],

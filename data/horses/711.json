@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104837",
     "jbis_id": "0001357481",
     "trainer": "友道康夫",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "河合純二",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=36",
         "trainer": "友道康夫"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104837",
+      "url": "https://db.netkeiba.com/horse/2022104837/",
+      "fetched_at": "2026-10-28T03:30:05.877864+00:00",
+      "data": {
+        "trainer": "友道康夫",
+        "owner": "河合純二",
+        "affiliation": "栗東"
       }
     }
   ],

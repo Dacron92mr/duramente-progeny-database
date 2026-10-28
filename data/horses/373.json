@@ -17,7 +17,7 @@
     "netkeiba_id": "2018104057",
     "jbis_id": "0001269814",
     "trainer": "武市康男",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "飯田良枝",
     "breeder": "千代田牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=19",
         "trainer": "武市康男"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018104057",
+      "url": "https://db.netkeiba.com/horse/2018104057/",
+      "fetched_at": "2026-10-28T02:43:41.813218+00:00",
+      "data": {
+        "trainer": "武市康男",
+        "owner": "飯田良枝",
+        "affiliation": "美浦"
       }
     }
   ],

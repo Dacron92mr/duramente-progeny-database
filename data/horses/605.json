@@ -17,7 +17,7 @@
     "netkeiba_id": "2018106419",
     "jbis_id": "0001266120",
     "trainer": "杉浦宏昭",
-    "affiliation": "(美 浦)",
+    "affiliation": "美浦",
     "trainer_region": "美浦",
     "owner": "山岸桂市",
     "breeder": "日進牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=31",
         "trainer": "杉浦宏昭"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018106419",
+      "url": "https://db.netkeiba.com/horse/2018106419/",
+      "fetched_at": "2026-10-28T03:36:57.866537+00:00",
+      "data": {
+        "trainer": "杉浦宏昭",
+        "owner": "山岸桂市",
+        "affiliation": "美浦"
       }
     }
   ],

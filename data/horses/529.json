@@ -17,7 +17,7 @@
     "netkeiba_id": "2021100481",
     "jbis_id": "0001332819",
     "trainer": "田口輝彦",
-    "affiliation": "(笠 松)",
+    "affiliation": "笠松",
     "trainer_region": "地方",
     "owner": "（株）ＴＳホールディ",
     "breeder": "明治牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=27",
         "trainer": "田口輝彦"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021100481",
+      "url": "https://db.netkeiba.com/horse/2021100481/",
+      "fetched_at": "2026-10-28T03:14:53.904336+00:00",
+      "data": {
+        "trainer": "田口輝彦",
+        "owner": "（株）ＴＳホールディ",
+        "affiliation": "笠松"
       }
     }
   ],

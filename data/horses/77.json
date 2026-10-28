@@ -17,7 +17,7 @@
     "netkeiba_id": "2021105680",
     "jbis_id": "0001336948",
     "trainer": "藤原英昭",
-    "affiliation": "(栗 東)",
+    "affiliation": "栗東",
     "trainer_region": "栗東",
     "owner": "サンデーレーシング",
     "breeder": "ノーザンファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=4",
         "trainer": "藤原英昭"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105680",
+      "url": "https://db.netkeiba.com/horse/2021105680/",
+      "fetched_at": "2026-10-28T01:44:29.652919+00:00",
+      "data": {
+        "trainer": "藤原英昭",
+        "owner": "サンデーレーシング",
+        "affiliation": "栗東"
       }
     }
   ],

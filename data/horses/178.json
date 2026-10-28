@@ -16,8 +16,8 @@
     "pedigree_crosses": "Mr. Prospector(USA) ：S4×M5×M5",
     "netkeiba_id": "2021105965",
     "jbis_id": "0001339979",
-    "trainer": "別府真司",
-    "affiliation": "(高 知)",
+    "trainer": "細川忠義",
+    "affiliation": "高知",
     "trainer_region": "地方",
     "owner": "谷口信喜",
     "breeder": "レイクヴィラファーム",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=9",
         "trainer": "別府真司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2021105965",
+      "url": "https://db.netkeiba.com/horse/2021105965/",
+      "fetched_at": "2026-10-28T02:04:41.770888+00:00",
+      "data": {
+        "trainer": "細川忠義",
+        "owner": "谷口信喜",
+        "affiliation": "高知"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2019102638",
     "jbis_id": "0001308197",
     "trainer": "加藤和義",
-    "affiliation": "(金 沢)",
+    "affiliation": "金沢",
     "trainer_region": "地方",
     "owner": "山村太三",
     "breeder": "鮫川啓一",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=22",
         "trainer": "加藤和義"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019102638",
+      "url": "https://db.netkeiba.com/horse/2019102638/",
+      "fetched_at": "2026-10-28T02:53:53.870397+00:00",
+      "data": {
+        "trainer": "加藤和義",
+        "owner": "山村太三",
+        "affiliation": "金沢"
       }
     }
   ],

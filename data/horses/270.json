@@ -17,7 +17,7 @@
     "netkeiba_id": "2020104961",
     "jbis_id": "0001325337",
     "trainer": "永田幸宏",
-    "affiliation": "(盛 岡)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "鈴木康弘",
     "breeder": "奥山牧場",
@@ -183,6 +183,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=14",
         "trainer": "永田幸宏"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2020104961",
+      "url": "https://db.netkeiba.com/horse/2020104961/",
+      "fetched_at": "2026-10-28T02:23:05.752825+00:00",
+      "data": {
+        "trainer": "永田幸宏",
+        "owner": "鈴木康弘",
+        "affiliation": "岩手"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2022104350",
     "jbis_id": "0001361152",
     "trainer": "菅原勲",
-    "affiliation": "(水 沢)",
+    "affiliation": "岩手",
     "trainer_region": "地方",
     "owner": "蓑島竜一",
     "breeder": "藤川ファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=28",
         "trainer": "菅原勲"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2022104350",
+      "url": "https://db.netkeiba.com/horse/2022104350/",
+      "fetched_at": "2026-10-28T03:20:41.848967+00:00",
+      "data": {
+        "trainer": "菅原勲",
+        "owner": "蓑島竜一",
+        "affiliation": "岩手"
       }
     }
   ],

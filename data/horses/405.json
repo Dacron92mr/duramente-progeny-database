@@ -17,7 +17,7 @@
     "netkeiba_id": "2019103992",
     "jbis_id": "0001305262",
     "trainer": "新子雅司",
-    "affiliation": "(園 田)",
+    "affiliation": "兵庫",
     "trainer_region": "地方",
     "owner": "キャピタル・システム",
     "breeder": "日の出牧場",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "新子雅司"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2019103992",
+      "url": "https://db.netkeiba.com/horse/2019103992/",
+      "fetched_at": "2026-10-28T02:50:18.278406+00:00",
+      "data": {
+        "trainer": "新子雅司",
+        "owner": "キャピタル・システム",
+        "affiliation": "兵庫"
       }
     }
   ],

@@ -17,7 +17,7 @@
     "netkeiba_id": "2018105234",
     "jbis_id": "0001266190",
     "trainer": "橋本和馬",
-    "affiliation": "(小 林)",
+    "affiliation": "大井",
     "trainer_region": "地方",
     "owner": "（株）ジャパン・ヘル",
     "breeder": "ノーザンファーム",
@@ -145,6 +145,17 @@
         "source": "netkeiba",
         "source_url": "https://db.netkeiba.com/horse/list.html?sire_id=2012104511&range=all&page=21",
         "trainer": "橋本和馬"
+      }
+    },
+    {
+      "source": "netkeiba",
+      "source_horse_id": "2018105234",
+      "url": "https://db.netkeiba.com/horse/2018105234/",
+      "fetched_at": "2026-10-28T02:52:29.761105+00:00",
+      "data": {
+        "trainer": "橋本和馬",
+        "owner": "（株）ジャパン・ヘル",
+        "affiliation": "大井"
       }
     }
   ],
