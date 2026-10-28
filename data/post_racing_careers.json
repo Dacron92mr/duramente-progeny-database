@@ -150,6 +150,27 @@
           "verified_at": "2026-10-23"
         }
       ]
+    },
+    "67": {
+      "netkeiba_id": "2019106739",
+      "name": "ダークエクリプス",
+      "dam": "スターズインハーアイズ",
+      "sire": "ドゥラメンテ",
+      "events": [
+        {
+          "role": "planned_teaser",
+          "status": "announced",
+          "date": "2026-10-26",
+          "date_basis": "公告收录日期；确切退役及上岗日期未详",
+          "summary": "矢野牧场公布已退役，计划留在场内担任试情马（当て馬），协助判断母马是否发情。",
+          "organization": "矢野牧場",
+          "location": null,
+          "source_url": "https://x.com/yanofarm1/status/2114552849350918493",
+          "source_name": "矢野牧場 X",
+          "verified_at": "2026-10-26",
+          "verification_basis": "User-supplied original post screenshot, verified 2026-10-26"
+        }
+      ]
     }
   }
 }

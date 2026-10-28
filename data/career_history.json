@@ -1761,7 +1761,18 @@
           "kind": "observation"
         }
       ],
-      "registration": [],
+      "registration": [
+        {
+          "date": "2026-10-26",
+          "title": "牧场公布退役",
+          "summary": "矢野牧场确认结束竞赛生涯；公告称31战3胜、顺利退役。此处为公告收录日期，确切退役日期未详。",
+          "status": "confirmed",
+          "source_url": "https://x.com/yanofarm1/status/2114552849350918493",
+          "source_name": "矢野牧場 X",
+          "verification_basis": "User-supplied original post screenshot, verified 2026-10-26",
+          "source_reported_record": "31 starts, 3 wins"
+        }
+      ],
       "race_attributions": []
     },
     "68": {

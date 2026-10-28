@@ -41,6 +41,6 @@ for(const id of [1,4]){
  for(const key of ['broodmare_sire','female_family','breeder']){if(!await page.locator('#drawer.open').count()){await page.goto(base+`?horse=${id}&profile=full`);await page.locator('.profile-columns').waitFor();}const b=page.locator(`.profile-columns [data-profile-filter="${key}"]`).first();const v=await b.getAttribute('data-value');await b.click();await page.locator('#horseRows [data-id]').first().waitFor({state:'attached'});assert.equal(new URL(page.url()).searchParams.get(key),v);assert.equal(await page.locator('#drawer').getAttribute('aria-hidden'),'true');}
  console.log('PASS profile source and navigation',id);
 }
-await page.goto(base+'?horse=47&profile=full');await page.locator('.profile-columns').waitFor();await page.locator('summary').filter({hasText:'原有同母重赏资料'}).click();await page.locator('[data-related-horse="9"]').last().click();await page.waitForFunction(()=>document.querySelector('#drawerTitle')?.textContent==='ドゥラエレーデ');console.log('PASS verified sibling profile navigation');
+await page.goto(base+'?horse=47&profile=full');await page.locator('.profile-columns').waitFor();assert.equal(await page.locator('summary').filter({hasText:'原有同母重赏资料'}).count(),0);await page.locator('[data-related-horse="9"]').last().click();await page.waitForFunction(()=>document.querySelector('#drawerTitle')?.textContent==='ドゥラエレーデ');console.log('PASS verified sibling profile navigation');
 assert.deepEqual(errors,[]);console.log('PASS no runtime errors');await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});

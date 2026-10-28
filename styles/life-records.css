@@ -1,5 +1,5 @@
-.breeding-years {display:grid;gap:0;margin:16px 0;border:1px solid var(--line);border-radius:16px;overflow:hidden}
-.breeding-years>details {padding:18px;border-bottom:1px solid var(--line)}
+.breeding-years {display:grid;gap:0;margin:16px 0;border:0;border-radius:12px;overflow:hidden}
+.breeding-years>details {padding:18px 0;border-bottom:1px solid var(--line)}
 .breeding-years>details:last-child {border-bottom:0}
 .breeding-years summary {display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none}
 .breeding-years summary:after {content:'⌄';color:var(--muted)}
@@ -7,11 +7,11 @@
 .breeding-years dl {background:var(--panel-soft,var(--paper));padding:14px;border-radius:12px;margin:14px 0 0}
 .breeding-years dl>div {display:flex;justify-content:space-between;gap:16px;padding:10px 0;border-bottom:1px solid var(--line)}
 .breeding-years dl>div:last-child {border:0}
-.breeding-years dt {color:var(--muted);font-size:12px;flex-shrink:0}
+.breeding-years dt {color:var(--muted);font-size:13px;flex-shrink:0}
 .breeding-years dd {text-align:right;margin:0;font-weight:500;overflow-wrap:anywhere}
 .breeding-original {margin-top:18px}.breeding-original>summary{cursor:pointer;color:var(--muted);font-size:12px;padding:12px 0}
 .life-timeline {list-style:none;margin:0;padding:0 0 0 14px;border-left:2px solid var(--line)}
-.life-timeline li {display:grid;gap:5px;padding:4px 0 18px;position:relative;font-size:12px}
+.life-timeline li {display:grid;gap:8px;padding:4px 0 18px;position:relative;font-size:14px}
 .life-timeline li:before{content:'';position:absolute;left:-19px;top:9px;width:8px;height:8px;border-radius:50%;background:var(--muted)}
 .life-timeline time,.life-timeline span{color:var(--muted)}.life-timeline p{margin:0}.life-timeline a{width:fit-content}
 .race-mobile{display:none}.race-detail-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:250px;white-space:normal}
@@ -42,3 +42,8 @@
 #profile-breeding .stud-section>h2{display:none}
 #profile-breeding .stud-profile{border:0;padding:0;background:transparent}
 .update-date small{line-height:1.5;white-space:normal}
+
+.affiliation-changes { list-style: none; margin: 0; padding: 0; }
+.affiliation-changes li { display: grid; gap: 3px; padding: 10px 0; }
+.affiliation-changes li + li { border-top: 1px solid var(--line); }
+.affiliation-changes span { color: var(--muted); font-size: 12px; }

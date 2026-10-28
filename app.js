@@ -752,7 +752,7 @@ function addChartActions(el, id) {
   actions.className = "chart-actions";
   const button = document.createElement("button");
   button.type = "button";
-  button.textContent = "放大 ↗";
+  button.textContent = "放大 ⤢";
   button.setAttribute("aria-label", `放大${head.querySelector("h3")?.textContent || "图表"}`);
   button.addEventListener("click", () => showChartDialog(id, button));
   actions.append(button);
@@ -1061,7 +1061,7 @@ function metricCard(label, value, sub = "", href = "") {
       <span>${escapeHtml(label)}</span>
       <strong>${escapeHtml(value)}</strong>
       ${sub ? `<small>${escapeHtml(sub)}</small>` : ""}
-      ${href ? `<i aria-hidden="true">↗</i>` : ""}
+      ${href ? `<i aria-hidden="true">${/^https?:/.test(href) ? "↗" : "→"}</i>` : ""}
     </${tag}>
   `;
 }
