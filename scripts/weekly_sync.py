@@ -137,50 +137,73 @@ def validate(stage,original):
     assert after['domestic_races']>=before['domestic_races'],'domestic race history decreased'
     assert after['domestic_prize_rows']>=before['domestic_prize_rows'],'domestic prize coverage decreased'
 
+def select_netkeiba_candidates(horses, source, limit=0, horse_id=None):
+    candidates=[h for h in horses if re.fullmatch(r'\d+',str(h.get('netkeiba_id') or ''))]
+    if horse_id is not None:
+        if source!='netkeiba' or limit:
+            raise ValueError('--horse-id requires --source netkeiba and no --limit')
+        candidates=[h for h in candidates if str(h['id'])==str(horse_id)]
+        if not candidates: raise ValueError('unknown horse ID or missing netkeiba identity')
+    elif source=='jbis': candidates=[]
+    return candidates[:limit] if limit else candidates
+
+def snapshot_summary(rows):
+    return {'rows':len(rows),'latest_race':max((r.get('race_date') or '' for r in rows),default=None),
+            'race_ids':[r.get('race_id') for r in rows],
+            'non_numeric_results':[{'race_id':r.get('race_id'),'finish_note':r.get('finish_note')} for r in rows if r.get('finish') is None]}
+
 def run(args):
     root=args.root.resolve();state_path=root/'.github/sync/state.json';state=read(state_path) if state_path.exists() else {'jbis_cursor':0}
     horses=read(root/'data/horses.json');original_count=len(horses)
     report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'netkeiba_retries':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False,
             'prize_coverage_before':prize_coverage(root),'horse_checks':[]}
+    horse_id=getattr(args,'horse_id',None)
+    selected=select_netkeiba_candidates(horses,args.source,args.limit,horse_id)
     client=Client()
     with tempfile.TemporaryDirectory(prefix='duramente-sync-') as temp:
         stage=Path(temp);shutil.copytree(root/'data',stage/'data')
-        candidates=[h for h in horses if re.fullmatch(r'\d+',str(h.get('netkeiba_id') or ''))]
-        if args.source=='jbis': candidates=[]
-        if args.limit: candidates=candidates[:args.limit]
+        candidates=selected
         consecutive_failures=0
         for i,horse in enumerate(candidates):
             if 'db.netkeiba.com' in client.blocked: break
             print(f'netkeiba {i+1}/{len(candidates)} id={horse["id"]}',flush=True)
             last_error=None
             for attempt in range(3):
+                check={'horse_id':horse['id'],'attempt':attempt+1,'checked_at':datetime.now(timezone.utc).isoformat()}
                 try:
                     base=f'https://db.netkeiba.com/horse/{horse["netkeiba_id"]}/'
                     patch=parse_profile(client.get(base),horse,'netkeiba')
+                    check['career_summary']=patch.get('career_summary')
                     races=[] if re.match(r'^0戦',patch.get('career_summary','')) else parse_races(client.get(f'https://db.netkeiba.com/horse/result/{horse["netkeiba_id"]}/'),horse)
+                    check['static']=snapshot_summary(races)
                     if races:
                         dynamic=parse_dynamic_races(client.get(f'https://db.netkeiba.com/horse/ajax_horse_results.html?input=UTF-8&output=json&id={horse["netkeiba_id"]}'),horse)
+                        check['dynamic']=snapshot_summary(dynamic)
                         races=reconcile_race_sources(races,dynamic,patch.get('career_summary',''))
-                    report['horse_checks'].append({'horse_id':horse['id'],'checked_at':datetime.now(timezone.utc).isoformat(),'latest_race':max((r['race_date'] for r in races),default=None),'race_rows':len(races),'career_summary':patch.get('career_summary')})
                     path=stage/'data/horses'/f"{horse['id']}.json";detail=read(path)
                     updated,new_detail=merge(horse,detail,patch,races)
                     if updated!=horse or new_detail!=detail:
                         horse.update(updated);write(path,new_detail);report['changed_horses'].append(horse['id'])
+                    check['validated']=True
                     report['netkeiba_ok']+=1
                     last_error=None
                     consecutive_failures=0
                     break
                 except ValueError as exc:
+                    check['error']=str(exc)
                     last_error=exc
                     if 'challenge or access limit' in str(exc):client.blocked.add('db.netkeiba.com')
                     if ('snapshots disagree' in str(exc) or 'count mismatch' in str(exc)) and attempt<2:
                         report['netkeiba_retries']+=1;time.sleep(8*(attempt+1));continue
                     break
                 except (OSError,SourceUnavailable) as exc:
+                    check['error']=str(exc)
                     last_error=exc
                     if attempt==2 or 'db.netkeiba.com' in client.blocked: break
                     report['netkeiba_retries']+=1
                     time.sleep(8*(attempt+1))
+                finally:
+                    report['horse_checks'].append(check)
             if last_error is not None:
                 report['errors'].append({'source':'netkeiba','horse_id':horse['id'],'reason':str(last_error)})
                 # Multiple schema failures indicate a source change; don't hammer the site.
@@ -215,7 +238,7 @@ def run(args):
         # spacing makes a failed profile expensive to retry within one job.
         acceptable=total>0 and (success==total if candidates else success/total>=0.9)
         report['changed_horses']=sorted(set(report['changed_horses']))
-        if acceptable and candidates and not args.limit:
+        if acceptable and candidates and not args.limit and horse_id is None:
             try:
                 year=datetime.now(timezone.utc).year
                 official=parse_jra_winners(client.get(f'https://www.jra.go.jp/datafile/seiseki/replay/{year}/jyusyo.html'),year)
@@ -224,7 +247,7 @@ def run(args):
                 acceptable=False;report['errors'].append({'source':'JRA freshness check','reason':str(exc)})
         if acceptable and report['changed_horses']:
             write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
-            if candidates and report['netkeiba_ok']==len(candidates) and not args.limit:
+            if candidates and report['netkeiba_ok']==len(candidates) and not args.limit and horse_id is None:
                 path=stage/'data/analytics/methodology.json';method=read(path);method['last_updated']=datetime.now(timezone.utc).date().isoformat();write(path,method)
             if args.apply:
                 for path in (stage/'data').rglob('*.json'):
@@ -241,9 +264,11 @@ def run(args):
         report['domestic_prize_rows_filled']=report['prize_coverage_after']['domestic_prize_rows']-report['prize_coverage_before']['domestic_prize_rows']
         args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report)
         print(json.dumps({k:v for k,v in report.items() if k not in ('errors','horse_checks')},ensure_ascii=False),flush=True)
+        for error in report['errors']:
+            print(f"Sync error [{error.get('source')}] horse={error.get('horse_id','batch')}: {error['reason']}",flush=True)
         if not acceptable: raise SystemExit('Sync batch failed validation; existing dataset preserved.')
 
 if __name__=='__main__':
-    parser=argparse.ArgumentParser();parser.add_argument('--root',type=Path,default=ROOT);parser.add_argument('--limit',type=int,default=0);parser.add_argument('--jbis-limit',type=int,default=12);parser.add_argument('--source',choices=['both','netkeiba','jbis'],default='both');parser.add_argument('--apply',action='store_true');parser.add_argument('--report',type=Path,default=Path('sync-report.json'));args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--root',type=Path,default=ROOT);parser.add_argument('--horse-id',type=int,help='Retry one local horse ID (requires --source netkeiba)');parser.add_argument('--limit',type=int,default=0);parser.add_argument('--jbis-limit',type=int,default=12);parser.add_argument('--source',choices=['both','netkeiba','jbis'],default='both');parser.add_argument('--apply',action='store_true');parser.add_argument('--report',type=Path,default=Path('sync-report.json'));args=parser.parse_args()
     if args.limit<0 or not 0<=args.jbis_limit<=32: parser.error('invalid batch limits')
     run(args)
