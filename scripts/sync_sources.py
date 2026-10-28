@@ -236,8 +236,8 @@ def reconcile_race_sources(static, dynamic, career):
         merged[key]={**left[key],**{k:v for k,v in right[key].items() if v is not None}}
     expected=re.match(r'^(\d+)戦',clean(career))
     # Career counts exclude withdrawals/cancellations; compare actual starters.
-    starts=sum(r.get('finish') is not None or r.get('finish_note') in ['中止','失格'] for r in merged.values())
-    if expected and starts!=int(expected[1]):raise ValueError('career/race count mismatch; source may be stale or truncated')
+    starts=sum(r.get('finish') is not None or clean(r.get('finish_note')) in ['中','中止','失','失格'] for r in merged.values())
+    if expected and starts!=int(expected[1]):raise ValueError(f'career/race count mismatch: profile={int(expected[1])}, parsed_starts={starts}, rows={len(merged)}; source may be stale or truncated')
     return sorted(merged.values(),key=lambda r:r['race_date'],reverse=True)
 
 def parse_jra_winners(page, year):

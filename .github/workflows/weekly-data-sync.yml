@@ -11,6 +11,10 @@ on:
         description: 'netkeiba horse limit; 0 refreshes all registered IDs'
         default: '0'
         type: string
+      horse_id:
+        description: 'Optional local horse ID to retry; leave empty for normal batch'
+        default: ''
+        type: string
       apply:
         description: 'Apply validated updates and publish'
         default: false
@@ -38,10 +42,12 @@ jobs:
       - name: Fetch, stage and validate
         env:
           SYNC_LIMIT: ${{ inputs.limit || '0' }}
+          SYNC_HORSE_ID: ${{ inputs.horse_id }}
           APPLY_UPDATES: ${{ github.event_name == 'schedule' || inputs.apply }}
         shell: bash
         run: |
           args=(--limit "$SYNC_LIMIT" --source netkeiba --jbis-limit 0 --report "$RUNNER_TEMP/sync-report.json")
+          if [ -n "$SYNC_HORSE_ID" ]; then args+=(--horse-id "$SYNC_HORSE_ID"); fi
           if [ "$APPLY_UPDATES" = "true" ]; then args+=(--apply); fi
           python scripts/weekly_sync.py "${args[@]}"
       - name: Save diagnostic report
