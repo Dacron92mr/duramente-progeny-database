@@ -52,7 +52,7 @@
 
 原有专业栏目和核心图表直接可见；出生世代优先展示同龄累计胜场与重赏表现，奖金、胜距、成长等次级图表置于「进一步探索」，完整数据表仍可展开查看。需要 A/B 比较时，再展开「比较两组」。可用下拉菜单选择 **A / B**，也可点击图中对象选择 A。血统散点图以不同颜色、外圈和字母标识两组，并同步更新比较卡片；即使坐标重合，也保留真实位置和两个标识。点击「查看产驹」可回到对应筛选结果。
 
-DP / DI / CD、AEI / CPI、AWD 等术语在相关分析附近提供简短解释和参考链接。详细口径放在可展开的「统计说明」中；概念参考与真实数据来源分开标注。
+DP / DI / CD、AEI / CPI、AWD、母父、牝系、母龄、胎次与出生月份等术语，在相关分析附近提供简短解释和参考资料。研究依据、完整文献与局限默认折叠；概念参考、原始数据来源和站内下钻使用不同链接样式。
 
 ![恢复后的分析层级](docs/qa/post-merge/sire-after.png)
 
@@ -118,6 +118,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 - [架构与模块职责](docs/ARCHITECTURE.md)
 - [数据所有权、来源与官方译名维护](docs/DATA_SCHEMA.md)
 - [界面设计系统](docs/UI_DESIGN_SYSTEM.md) · [统一用语](docs/UX_COPY.md)
+- [研究引用与链接语义](docs/RESEARCH_REFERENCES.md)
 - [本轮验收、资料审计与修改前后截图](docs/qa/post-merge/REVIEW.md)
 - [上一轮发布验收](docs/qa/release/UI-CORRECTIONS.md)
 - [参与维护](CONTRIBUTING.md) · [报告数据错误或问题](https://github.com/Dacron92mr/duramente-progeny-database/issues)

@@ -32,9 +32,10 @@ git diff --check
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 pnpm test:browser
+pnpm test:references
 ```
 
-先保持上面的静态服务运行。已有 Chrome 可用 `CHROME_PATH` 指定路径；`TEST_BASE_URL` 可验证项目子目录；`TEST_OUTPUT_DIR` 可指定截图目录。默认生成 `test-results/`，已忽略。测试检查日英中搜索、组合筛选、排序、分页、详情/历史/焦点、CSV、主题、四个屏宽与分析子页。测试不更新 JSON。
+先保持上面的静态服务运行。已有 Chrome 可用 `CHROME_PATH` 指定路径；`TEST_BASE_URL` 可验证项目子目录；`TEST_OUTPUT_DIR` 可指定截图目录。默认生成 `test-results/`，已忽略。`test:references` 额外检查 14 个研究主题、引用展开、三种链接语义与动态资料抽屉。测试不更新 JSON。
 
 CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行，避免把外部图表 CDN 的网络状况变成数据自动更新的阻塞条件。
 

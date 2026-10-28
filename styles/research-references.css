@@ -1,0 +1,25 @@
+/* References belong to the reading flow, not another stack of cards. */
+.research-context {margin:16px 0 22px;max-width:86ch;color:var(--ink);font-size:14px;line-height:1.75;}
+.research-context>p {margin:0 0 6px;font-size:14px;line-height:1.75;}
+.research-disclosure {font-size:13px;}
+.research-disclosure>summary {width:fit-content;max-width:100%;padding:7px 0;cursor:pointer;color:var(--muted);font-weight:500;}
+.research-disclosure>summary span {white-space:nowrap;}
+.research-disclosure[open]>summary {color:var(--ink);}
+.research-method {margin:8px 0 16px;line-height:1.8;}
+.research-method strong {font-weight:600;}
+.reference-list {list-style:none;margin:0;padding:0;border-top:1px solid var(--line);}
+.reference-list>li {padding:16px 0;border-bottom:1px solid var(--line);min-width:0;overflow-wrap:anywhere;}
+.reference-list p {font-size:13px;line-height:1.8;margin:7px 0 0;}
+.reference-byline {display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;margin-bottom:5px;}
+.reference-byline>span,.reference-publication {color:var(--muted);font-size:12px;line-height:1.7;}
+.reference-publication {margin-top:4px;overflow-wrap:anywhere;}
+.reference-list .reference-limit {color:var(--muted);}
+.research-citation {color:var(--ink);font-size:14px;text-decoration:underline;text-decoration-color:var(--muted);text-decoration-thickness:1px;text-underline-offset:4px;line-height:1.7;}
+.research-citation:hover {color:var(--accent);text-decoration-color:currentColor;}
+.data-source-link {font-size:13px;line-height:1.7;color:var(--muted);text-decoration:underline;text-decoration-style:dotted;text-underline-offset:3px;}
+.data-source-link:hover {color:var(--ink);text-decoration-style:solid;}
+.data-drill-link {color:var(--accent);text-underline-offset:3px;}
+button.data-drill-link {border-radius:7px;}
+.data-drill-link:hover {background:var(--selection);}
+.research-citation:focus-visible,.data-source-link:focus-visible,.data-drill-link:focus-visible,.research-disclosure>summary:focus-visible {outline:2px solid var(--accent);outline-offset:4px;border-radius:3px;}
+@media(max-width:600px){.research-context{margin:12px 0 18px;}.reference-list>li{padding:14px 0;}.research-disclosure>summary{min-height:40px;display:list-item;box-sizing:border-box;}}

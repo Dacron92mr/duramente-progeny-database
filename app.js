@@ -1,3 +1,5 @@
+import {renderResearch} from './src/research-references.mjs';
+import {installLinkSemantics} from './src/link-semantics.mjs';
 import {mountRecentUpdates} from './src/updates.mjs';
 import {historyNames} from './src/life-records.mjs';
 import { mountDiscovery, organizeAnalysis } from './src/discovery.mjs';
@@ -502,7 +504,7 @@ function representativeItem(rep) {
   `;
   return `
     ${horse
-      ? `<a class="representative-horse-item rep-${representativeGradeClass(grade)}" href="${escapeHtml(`${window.location.pathname}?horse=${horse.id}`)}" title="查看${escapeHtml(rep.name)}的产驹资料">${content}</a>`
+      ? `<a class="representative-horse-item rep-${representativeGradeClass(grade)}" data-link-purpose="drill" href="${escapeHtml(`${window.location.pathname}?horse=${horse.id}`)}" title="查看${escapeHtml(rep.name)}的产驹资料">${content}</a>`
       : `<span class="representative-horse-item rep-${representativeGradeClass(grade)}">${content}</span>`}
   `;
 }
@@ -752,7 +754,8 @@ function addChartActions(el, id) {
   actions.className = "chart-actions";
   const button = document.createElement("button");
   button.type = "button";
-  button.textContent = "放大 ↗";
+  button.dataset.linkPurpose = "drill";
+  button.textContent = "放大 →";
   button.setAttribute("aria-label", `放大${head.querySelector("h3")?.textContent || "图表"}`);
   button.addEventListener("click", () => showChartDialog(id, button));
   actions.append(button);
@@ -2242,7 +2245,7 @@ async function renderSireAnalysis() {
       <div class="chart-grid single-chart">
         ${chartBlock("年度 AEI 走势", "AEI 与重赏 AEI；虚线 1.00 表示同期平均。", "sireAnnualIndexChart")}
       </div>
-      <p class="source-note">中央平地赛统计，截至 ${escapeHtml(sireIndices.source?.updated_at || "—")}。<a class="inline-reference" href="${escapeHtml(sireIndices.source?.url || "https://www.jbis.or.jp/")}" target="_blank" rel="noopener noreferrer">来源：JBIS-Search ↗</a></p>
+      <p class="source-note">中央平地赛统计，截至 ${escapeHtml(sireIndices.source?.updated_at || "—")}。<a class="data-source-link" data-link-purpose="source" href="${escapeHtml(sireIndices.source?.url || "https://www.jbis.or.jp/")}" target="_blank" rel="noopener noreferrer">来源：JBIS-Search ↗</a></p>
     `, "EARNINGS INDEX")}
     ${sectionBlock("年度表现", "按比赛年份查看胜场、出赛马、重赏胜利和奖金变化。",
       `<div class="mini-chart-grid annual-mini-grid">
@@ -2303,7 +2306,7 @@ async function renderSireAnalysis() {
       </article>`
     , "LEADING SIRE")}
     </div>
-    <div class="analysis-subpanel" data-sire-panel="crop">
+    <div class="analysis-subpanel" data-sire-panel="crop">${renderResearch('cohort')}
     ${sectionBlock("出生世代表现", "比较不同出生世代的奖金、胜马和重赏表现。",
       `<div class="chart-color-key" aria-label="五世代固定代表色">${Object.entries(CROP_COLORS).map(([year,color]) => `<span><i style="background:${color}"></i>${year}年</span>`).join("")}<small>世代代表色 · 深浅表示组内比例</small></div><div class="chart-grid cohort-grid">
         ${chartBlock("各世代奖金分布", "箱体显示中间一半的奖金范围与中位数；仅标出超出上须的高奖金产驹，可点选查看。横轴采用对数刻度。", "sireCropEarningsChart")}
@@ -3356,6 +3359,7 @@ async function renderPedigreeAnalysis() {
         <p class="kicker">BROODMARE SIRE</p>
         <h2>母父分析</h2>
         <p>比较六大母父系的产驹数量与成绩，也可按性别或出生世代细看。</p>
+        ${conceptIntro('bms',{heading:false})}
       </div>
       <div class="bms-family-grid">
         ${primaryBmsRows.map((row) => `
@@ -3442,7 +3446,6 @@ async function renderPedigreeAnalysis() {
         <p class="kicker">INBREEDING</p>
         <h2>近交与 Cross</h2>
         ${conceptIntro('cross',{heading:false})}
-        <a class="inline-reference" href="https://en.wikipedia.org/wiki/Thoroughbred_breeding_theories" target="_blank" rel="noopener noreferrer">参考：Wikipedia — Thoroughbred breeding theories ↗</a>
       </div>
       ${sectionBlock("配合相性", "", `${conceptIntro('nicking',{heading:false})}
         <p class="section-inline-note">分别观察胜马率、重赏马率和每匹奖金；按样本量排列，不将不同指标合成为一个分数。小样本仅作线索。</p>
@@ -3802,7 +3805,7 @@ async function renderProductionAnalysis() {
       <div class="section-heading">
         <p class="kicker">BREEDING FARM</p>
         <h2>生产牧场</h2>
-        <p>比较主要生产牧场的产驹规模、胜马率、重赏马来源和出生世代构成。</p>
+        <p>比较主要生产牧场的产驹规模、胜马率、重赏马来源和出生世代构成。</p>${renderResearch('farm')}
       </div>
       <div class="chart-grid">
         ${controlledChartBlock("主要生产牧场", "按产驹规模排列；切换指标比较同一批牧场。", "breederMainChart", `<label><span>指标</span><select id="breederMainMetric"><option value="foals">产驹数</option><option value="rate">胜马率</option></select></label>`)}
@@ -3831,14 +3834,14 @@ async function renderProductionAnalysis() {
         <p>比较繁殖母马生产本胎时的年龄、胎次和具体繁殖母马的产驹表现。</p>
       </div>
       ${sectionBlock("配种与生产月份", "比较实际配种月份与登记出生月份的成绩分布。",
-        `<div class="analysis-controls"><label><span>指标</span><select id="monthMetric"><option value="winner">胜马率</option><option value="graded">重赏马率</option></select></label></div>
+        `${renderResearch('birthMonth')}<div class="analysis-controls"><label><span>指标</span><select id="monthMetric"><option value="winner">胜马率</option><option value="graded">重赏马率</option></select></label></div>
         <div class="chart-grid">${chartBlock("实际配种月份", `Japan Stud Book 匹配 ${formatNumber(coveringMonths.coverage?.matched || 0)} / ${formatNumber(coveringMonths.coverage?.horses || 0)} 匹。`, "coverMonthChart")}${chartBlock("生产月份", "按登记出生日期统计。", "foalMonthChart")}</div>`
       , "BREEDING CALENDAR")}
-      <div class="chart-grid">
+      ${renderResearch('maternalAge')}<div class="chart-grid">
         ${chartBlock("母马生产本胎时的年龄", "观察产驹集中出生在哪些母龄段。", "damAgeHistogramChart")}
         ${chartBlock("不同母龄组的产驹胜马率", "比较不同母龄组的胜马表现。", "damAgeWinRateChart")}
       </div>
-      <div class="chart-grid">
+      ${renderResearch('parity')}<div class="chart-grid">
         ${chartBlock("不同母龄组的重赏马率", "观察重赏马在母龄组中的分布。", "damAgeGradedRateChart")}
         ${controlledChartBlock("胎次与表现", "比较母马生产履历与产驹表现。", "damFoalOrderChart", `
           <div class="segmented-sort" aria-label="胎次口径">
@@ -3859,7 +3862,7 @@ async function renderProductionAnalysis() {
           { label: "代表马", className: "name-column", value: representativeCell, html: true },
         ], damAgeBucketRows)
       , "DAM AGE TABLE")}
-      ${sectionBlock("繁殖母马明细", "优先显示G1与重赏母马，其次按3胜／2胜以上产驹、总奖金和胜马率排序；可展开查看全部繁殖母马。",
+      ${renderResearch('reproduction')}${sectionBlock("繁殖母马明细", "优先显示G1与重赏母马，其次按3胜／2胜以上产驹、总奖金和胜马率排序；可展开查看全部繁殖母马。",
         analysisTable([
           { label: "繁殖母马", className: "name-column", value: (row) => row.label },
           { label: "母父", className: "name-column", value: (row) => broodmareSireFilterButton(row.broodmare_sire), html: true },
@@ -3892,7 +3895,7 @@ async function renderProductionAnalysis() {
         ${chartBlock("牝马", "比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-牝")}
         ${chartBlock("骟马", "比较俱乐部马与全部产驹的胜马率。", "clubWinCompare-セン")}
       </div>
-      ${sectionBlock("俱乐部任意对比", "选择任意两个俱乐部，对比出赛率、胜马率、2胜／3胜以上率、重赏马率和G1马率。", `
+      ${renderResearch('farm')}${sectionBlock("俱乐部任意对比", "选择任意两个俱乐部，对比出赛率、胜马率、2胜／3胜以上率、重赏马率和G1马率。", `
         <article class="chart-card club-comparison-card">
           <div class="chart-card-head with-controls">
             <div><h3>俱乐部 A vs 俱乐部 B</h3><p>每行用并列横条比较同一指标；点选查看匹数与百分点差。比例以各自收录产驹数为分母，按最后确认马主分组；比较生涯成绩，不代表持有期间成绩。</p></div>
@@ -4701,3 +4704,5 @@ init().catch((error) => {
   els.horseRows.innerHTML = `<tr><td colspan="12"><div class="load-error">资料暂时无法载入。<button class="reset-filters" type="button" onclick="window.location.reload()">重新载入</button></div></td></tr>`;
   els.horseCards.innerHTML = `<div class="load-error">资料暂时无法载入。<button type="button" onclick="window.location.reload()">重新载入</button></div>`;
 });
+
+installLinkSemantics();
