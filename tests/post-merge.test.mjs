@@ -5,7 +5,7 @@ import {createDetailContent} from '../src/detail-content.mjs';
 import {classifiedRace} from '../src/race-surfaces.mjs';
 import {createProfileModel} from '../src/profile-model.mjs';
 import {scopeRows,surfaceSample} from '../src/racecourse-analysis.mjs';
-import {renderPostRacing,renderBlackType} from '../src/horse-profile.mjs';
+import {renderPostRacing,renderBlackType,renderMaternalPedigree} from '../src/horse-profile.mjs';
 const read=p=>JSON.parse(fs.readFileSync(new URL('../data/'+p,import.meta.url)));
 test('four synthetic starts and one win are corrected without changing source records',()=>{
  const detail=read('horses/2371.json'),before=JSON.stringify(detail),vm=createProfileModel(detail);
@@ -31,7 +31,7 @@ test('jurisdiction counts reconcile and each surface has its own minimum sample'
 });
 test('dated careers match horse identity, distinguish plans and need no breeding record',()=>{
  const careers=read('post_racing_careers.json').horses;
- assert.deepEqual(Object.keys(careers),['9','14','17','57','591','677','689']);
+ assert.deepEqual(Object.keys(careers),['9','14','17','57','67','591','677','689']);
  for(const [id,row] of Object.entries(careers)){
   const horse=read('horses/'+id+'.json').horse;
   assert.equal(row.netkeiba_id,horse.netkeiba_id);assert.equal(row.name,horse.name);
@@ -39,7 +39,7 @@ test('dated careers match horse identity, distinguish plans and need no breeding
   assert.match(renderPostRacing(row.events),/退役后去向/);
  }
  assert.match(renderPostRacing(careers[17].events),/已公布计划/);
- assert.match(renderPostRacing(careers[17].events),/已确认记录/);
+ assert.match(renderPostRacing(careers[17].events),/已确认/);
  assert.equal(renderPostRacing([]),'');
 });
 test('black type includes a verified placed sibling and retains event-level evidence',()=>{
@@ -53,4 +53,21 @@ test('black type includes a verified placed sibling and retains event-level evid
    assert.match(e.designation_source,/^https:\/\//);
   }assert(e.finish>=1&&e.finish<=3);assert(e.source_url);
  }
+});
+
+test('profile omits the redundant legacy sibling block',()=>{
+ const html=renderMaternalPedigree({pedigree:{dam:{}},sourceHorse:{},blackType:[],notableSiblings:[]},{horseDamCell:()=>'',damAgeText:()=>''});
+ assert.match(html,/同母黑体马/);assert.doesNotMatch(html,/原有同母重赏资料|暂无同母重赏冠军资料/);
+});
+test('new HKJC name matches list and detail and is searchable',()=>{
+ const horse=read('horses.json').find(h=>h.id===45),detail=read('horses/45.json').horse;
+ assert.equal(horse.hkjc_name_zh,'星象古盤');assert.equal(detail.hkjc_name_zh,horse.hkjc_name_zh);assert.match(horse.search_aliases,/星象古盘/);
+});
+
+test('Dark Eclipse retirement and planned teaser role remain separate facts',()=>{
+ const career=read('post_racing_careers.json').horses['67'];
+ assert.equal(career.netkeiba_id,read('horses/67.json').horse.netkeiba_id);
+ assert.equal(career.events[0].status,'announced');assert.equal(career.events[0].role,'planned_teaser');
+ assert.match(renderPostRacing(career.events),/试情马/);
+ assert.equal(read('career_history_verified.json').horses['67'].registration[0].status,'confirmed');
 });

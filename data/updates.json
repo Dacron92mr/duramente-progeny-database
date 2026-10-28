@@ -768,6 +768,32 @@
       "status": null
     },
     {
+      "id": "67:career:92ce517775ea",
+      "horse_id": 67,
+      "horse_name": "ダークエクリプス",
+      "type": "career",
+      "event_date": "2026-10-26",
+      "recorded_at": "2026-10-26",
+      "title": "矢野牧场公布已退役，计划留在场内担任试情马（当て馬），协助判断母马是否发情。",
+      "source_url": "https://x.com/yanofarm1/status/2114552849350918493",
+      "historical": false,
+      "featured": true,
+      "status": "announced"
+    },
+    {
+      "id": "67:registration:e9b250a53dcc",
+      "horse_id": 67,
+      "horse_name": "ダークエクリプス",
+      "type": "registration",
+      "event_date": "2026-10-26",
+      "recorded_at": "2026-10-26",
+      "title": "牧场公布退役 · 矢野牧场确认结束竞赛生涯；公告称31战3胜、顺利退役。此处为公告收录日期，确切退役日期未详。",
+      "source_url": "https://x.com/yanofarm1/status/2114552849350918493",
+      "historical": false,
+      "featured": true,
+      "status": "confirmed"
+    },
+    {
       "id": "57:career:fb4c86909d1a",
       "horse_id": 57,
       "horse_name": "オクタヴィアヌス",

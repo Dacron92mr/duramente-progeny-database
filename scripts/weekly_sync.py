@@ -28,6 +28,7 @@ from jbis_queue import (
     record_jbis_results,
     write_github_summary,
 )
+from build_summary import summary_mismatches
 
 ROOT=Path(__file__).resolve().parents[1]
 AGENT='DuramenteDatabaseSync/1.0 (+https://github.com/Dacron92mr/duramente-progeny-database)'
@@ -132,6 +133,8 @@ def merge(horse,detail,patch,races=None):
 def validate(stage,original):
     horses=read(stage/'data/horses.json');old=read(original/'data/horses.json')
     assert {h['id'] for h in horses}=={h['id'] for h in old},'horse inventory changed'
+    summary=read(stage/'data/summary.json')
+    assert not summary_mismatches(summary,horses),'summary facets do not match horse catalogue'
     for h in horses:
         detail=read(stage/'data/horses'/f"{h['id']}.json")
         assert detail['horse']['name']==h['name'],'list/detail mismatch'
