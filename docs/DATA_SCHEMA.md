@@ -58,6 +58,12 @@
 
 `weekly_sync.py` 在临时目录抓取、合并、重建、校验，只有指定 `--apply` 且校验成功才覆盖数据。保护马匹集合、已知奖金、完整历史及人工统计。`rebase_sync.py` 只专门处理 `STATIC_DATA_VERSION`，遇到真正数据冲突会中止。前端编辑必须保留 `index.html` 的版本赋值格式。
 
+### JBIS queue state
+
+`.github/sync/state.json` 使用 `schema_version: 2` 的 JBIS 队列状态。`completed_ids` 只记录本周期成功的档案，`pending_ids` 记录尚未尝试的档案，`failed` 记录需要优先重试的马匹及失败次数、错误和时间。批次通过校验并完成数据发布后才原子写入新状态。
+
+旧版只含 `jbis_cycle` / `jbis_cursor` 的状态不能证明 cursor 前的档案是否成功，因此会保守地迁移为“全部档案重新排队一次”，并保留旧 cycle/cursor 作为迁移说明。周期未完成时跨月继续原周期；只有完整周期结束后才在下一月创建新周期。
+
 ## 探索派生数据与指标
 
 新增 `data/analytics/racecourse_population.json`：`horse_ids` 为各场有正式名次记录的独立产驹 ID；`starts/wins/top3` 按原有效出赛规则计数。由 `scripts/build_racecourse_population.py` 生成，接入 `rebuild_synced_analytics.py`；逐场与原 racecourses.json 对账，不替换原聚合。
