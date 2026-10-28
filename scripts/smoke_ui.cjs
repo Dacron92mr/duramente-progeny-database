@@ -47,6 +47,28 @@ async function check(name, run) {
     }
     await page.click('#clearSearch');await page.waitForFunction(()=>document.querySelectorAll('#horseRows [data-id]').length===50);
   });
+  await check('rapid search creates one history entry and restores through Back/Forward',async()=>{
+    await list();
+    const baseline=await page.evaluate(()=>history.length);
+    const search=page.locator('#mobileSearch');
+    await search.focus();
+    await search.pressSequentially('タイトルホルダー',{delay:10});
+    await waitIds([String(horses.find(h=>h.name_en==='Titleholder').id)]);
+    await page.waitForFunction(()=>new URL(location.href).searchParams.get('q')==='タイトルホルダー');
+    assert.equal((await page.evaluate(()=>history.length))-baseline,1);
+    await page.goBack();
+    await page.waitForFunction(()=>!new URL(location.href).searchParams.has('q'));
+    await page.waitForFunction(()=>document.querySelectorAll('#horseRows [data-id]').length===50);
+    assert.equal(await page.locator('#mobileSearch').inputValue(),'');
+    await page.goForward();
+    await waitIds([String(horses.find(h=>h.name_en==='Titleholder').id)]);
+    assert.equal(await page.locator('#mobileSearch').inputValue(),'タイトルホルダー');
+    const beforeClear=await page.evaluate(()=>history.length);
+    await page.click('#clearSearch');
+    await page.waitForFunction(()=>!new URL(location.href).searchParams.has('q'));
+    await page.waitForFunction(()=>document.querySelectorAll('#horseRows [data-id]').length===50);
+    assert.equal((await page.evaluate(()=>history.length))-beforeClear,1);
+  });
   await check('combined filters, chips and quick filters',async()=>{
     await page.click('[data-quick="graded"]');await page.click('#filterOpen');await page.selectOption('#sex','牝');await page.selectOption('#year','2019');await page.keyboard.press('Escape');
     const expected=horses.filter(h=>['G1','G2','G3'].includes(h.achievement_class)&&h.sex==='牝'&&h.birth_year===2019).sort((a,b)=>b.earnings_netkeiba-a.earnings_netkeiba).map(h=>String(h.id));await waitIds(expected);
