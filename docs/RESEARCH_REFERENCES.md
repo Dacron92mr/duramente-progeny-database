@@ -4,13 +4,22 @@ Verified October 28, 2026. This branch only changes explanatory and presentation
 
 ## Reading design
 
-Each topic has a short context paragraph and a closed native disclosure. Full source metadata, original Chinese summaries, limits, and the distinction from site calculations appear on demand. References are ordinary editorial rows, not cards. Metadata is 12–14 px.
+Each topic has a short visible context paragraph and a closed native disclosure. Desktop keeps the richer reference row with full metadata, DOI, Chinese summary, and limitations. Below 600 px, the opened list becomes compact two-line citations; the complete research explanation and limitations live in a second optional disclosure. References remain editorial rows rather than cards, with metadata at 12–14 px.
 
 - Accent/right arrow: internal horse profiles, filters, population drill-downs.
 - Neutral/underlined/external arrow: research and methodology.
 - Muted/dotted underline/external arrow: original data and provenance; original URLs and dates retained.
 
-Purpose is assigned from explicit action attributes and provenance containers, never merely anchor versus button or hostname. Unmarked external destinations default to provenance. A small child-list observer covers dynamically replaced charts and drawers, so late-inserted links keep the same semantics; it does not intercept navigation or alter event handlers.
+Purpose is assigned with explicit `data-link-purpose` attributes at the render site and styled directly from CSS. This avoids global DOM scans, text rewriting, duplicated arrows, and changes to accessible names. Dynamically rendered charts, update history, and the Full Profile drawer carry the same attributes in their own templates, so no global `MutationObserver` is required.
+
+## Module boundaries
+
+- `src/research-references.mjs` owns source records, evidence types, full metadata, compact mobile metadata, and topic mapping.
+- `src/research-rendering.mjs` owns citation markup, accessible labels, responsive reading levels, and metadata escaping.
+- `styles/research-references.css` owns the desktop/mobile reading density and the three link-purpose styles.
+- `src/ux-copy.mjs` only composes concept titles with the reusable research renderer.
+
+Adding a study requires one source record and its topic reference ID. Adding a topic requires the context, caveat, and referenced source IDs; no `app.js` citation list is needed.
 
 ## Verified registry
 
@@ -79,9 +88,10 @@ Purpose is assigned from explicit action attributes and provenance containers, n
 Verified against the local static site on October 28, 2026:
 
 - `node --check app.js`, every `src/*.mjs`, and `git diff --check` pass.
-- 45 Node tests and 55 Python tests pass, along with the existing chart colour, Sankey, chart-design, horse-relative, research-chart and chart-insight checks.
-- `npm run test:references` covers all 14 topics at 390, 430, 768 and 1440 px in light and dark themes. Every disclosure starts closed, opens and closes, contains the expected research links, has no horizontal overflow and reports no page errors.
-- The same browser test expands the A/B tool, follows a real population drill-down, verifies representative-horse and update-history links as internal actions, checks source links and the dynamic Full Profile drawer, and confirms the same destination can remain research or provenance according to context.
+- 46 Node tests and 55 Python tests pass, along with the existing chart colour, Sankey, chart-design, horse-relative, research-chart and chart-insight checks.
+- `npm run test:references` covers all 14 topics at 390, 430, 768 and 1440 px in light and dark themes. Mobile rows are capped at two visual lines and 48–64 px; desktop rows retain summaries and limits. Every disclosure starts closed, opens and closes, has no horizontal overflow and reports no page errors.
+- The same browser test opens the secondary mobile research detail, expands the A/B tool, follows a real population drill-down, verifies representative-horse and update-history links as internal actions, checks source styling and the dynamic Full Profile drawer, and detects duplicate external-arrow indicators.
+- In a fixed Production → Broodmare → Farm → Full Profile scenario, removing the global link observer reduced measured observer work from 12 callbacks, 2,353 changed nodes and about 5.6 ms to zero callbacks. This measures only the removed observer callback, not total page load time.
 - Existing UI, Profile, research, content/photo, post-merge, discovery, career and mobile smoke suites remain the final cross-feature regression layer before PR review.
 
 Remaining limitation: external publications can block some networks or change redirects. The registry preserves canonical verified identifiers, but availability cannot be guaranteed from every reader's network. No data file or statistical formula is changed by this branch.

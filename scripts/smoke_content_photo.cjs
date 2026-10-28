@@ -45,8 +45,8 @@ const fs=require('node:fs');
   await page.screenshot({path:`${out}/comparison-${view}.png`});
   if(view==='pedigree'){
    await page.locator('[data-pedigree-section="dosage"]').click();await page.locator('#pedigree-dosage').evaluate(el=>el.scrollIntoView({block:'start'}));
-   await page.locator('#pedigree-dosage [data-research-topic="dosage"] summary').click();
-   assert(await page.locator('#pedigree-dosage a[href="https://www.brisnet.com/cgi-bin/static.cgi?page=expdosage"]').isVisible());assert.match(await page.locator('#pedigree-dosage').innerText(),/Brilliant.*Professional/s);await page.screenshot({path:`${out}/dosage.png`});
+   await page.locator('#pedigree-dosage [data-research-topic="dosage"] .research-disclosure > summary').click();
+   assert(await page.locator('#pedigree-dosage .reference-desktop a[href="https://www.brisnet.com/cgi-bin/static.cgi?page=expdosage"]').isVisible());assert.match(await page.locator('#pedigree-dosage').innerText(),/Brilliant.*Professional/s);await page.screenshot({path:`${out}/dosage.png`});
   }
  }
  await page.route('**/horses.json*',async route=>{const response=await route.fetch();const horses=await response.json();horses[0].career_summary=null;await route.fulfill({json:horses});});
