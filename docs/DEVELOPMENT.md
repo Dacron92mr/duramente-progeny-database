@@ -37,7 +37,7 @@ pnpm test:references
 
 先保持上面的静态服务运行。已有 Chrome 可用 `CHROME_PATH` 指定路径；`TEST_BASE_URL` 可验证项目子目录；`TEST_OUTPUT_DIR` 可指定截图目录。默认生成 `test-results/`，已忽略。`test:references` 额外检查 14 个研究主题、桌面与两行移动引用、二级研究解读、显式链接用途、无重复箭头及动态资料抽屉。测试不更新 JSON。
 
-CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行，避免把外部图表 CDN 的网络状况变成数据自动更新的阻塞条件。
+CI 分两个 job：`checks` 执行数据、脚本和纯函数检查；`browser-regression` 在本地 HTTP 服务上运行主界面、Profile、研究和引用四处 Playwright smoke。浏览器 job 使用锁定的 Playwright 版本与 Chromium，不访问外部论文站点；失败时上传 `browser-regression-diagnostics` 截图。
 
 ## 常见改动
 
@@ -60,14 +60,17 @@ CI 执行原有检查和新增纯函数测试；浏览器测试需本地运行�
 
 原有周更（netkeiba）、按月分批（JBIS 单马）、每周种牡马指数 workflow 保持原样，不为了部署 UI 触发数据抓取。
 
+JBIS 月度队列在每月 1–10 日运行，并为失败档案保留后续批次重试；手动运行 `JBIS monthly queue` 可设置 1–32 个档案。workflow summary 会列出总数、已完成、未处理及待重试数量。不要手工删除 `failed` 条目；一次成功重试会自动将其移入 `completed_ids`。
+
 ## 故障排查
 
 - **列表/详情加载失败**：检查 Network 中 JSON 的路径与 HTTP 状态；使用页面重试。缓存失败会释放，下次可重新请求。
 - **旧样式/模块 404**：确保 `src/`、`styles/` 已部署，刷新后检查版本资源；不要只上传根目录三文件。
 - **分析加载失败**：检查 ECharts CDN、`data/analytics/`；页面提供重载。列表不依赖 ECharts。
 - **照片不显示**：外部 netkeiba 图片可能拒绝访问；页面保留原站链接，不伪造照片。
-- **数据更新后选项数量不匹配**：`summary.json` 不由周更自动刷新，检查其 facets 快照与列表。
+- **数据更新后选项数量不匹配**：运行 `python3 scripts/build_summary.py`，并执行 `scripts/tests/test_summary.py`；不要覆盖保留的 `trainers` / `owners` 历史 facets。
 - **真数据冲突**：保留双方改动，逐项人工核对；禁止用 ours/theirs 整体覆盖研究数据。
+- **JBIS 队列状态异常**：不要根据旧 cursor 猜测已完成档案。保留原报告，按迁移规则重新排队；失败档案会保留错误信息和尝试次数，不会覆盖已验证奖金。
 
 研究工作区回归：`npm run test:research` 验证实际地图平移、缩放、标记点击、同步列表、产驹追溯、A/B 图形点选、筛选下钻和同母导航。完整资料专项为 `npm run test:profile`。均支持 TEST_BASE_URL、TEST_OUTPUT_DIR、CHROME_PATH。赛果更新后执行 `python3 scripts/build_racecourse_population.py`，或通过现有同步重建流程生成索引。
 

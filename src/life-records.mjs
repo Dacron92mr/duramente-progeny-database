@@ -25,17 +25,38 @@ export function renderBreedingYears(profile) {
  for(const f of [...(profile.foals||[])].sort((a,b)=>b.result_year-a.result_year))if(!linked.has(f))cards.push(`<details><summary><strong>${h(f.result_year)} 生产记录</strong><span>查看记录</span></summary><dl>${row('父马',f.sire_name)}${row('出生／结果',recordText(f.birth_date))}${row('性别／毛色',[uiValue(f.sex,'sex'),uiValue(f.color,'color')].filter(Boolean).join(' · '))}${foalIdentity(f)}${row('备注',recordText(f.note))}</dl></details>`);
  return cards.length?`<div class="breeding-years">${cards.join('')}</div>`:'';
 }
-function foalIdentity(f){const url=f.source_url||f.foal_url||f.jbis_url;return `<div><dt>产驹登记</dt><dd>${f.horse_id?`<a data-link-purpose="drill" href="?horse=${encodeURIComponent(f.horse_id)}&profile=full">${h(f.foal_name||'查看产驹')} →</a>`:/^https:\/\//.test(url||'')?`<a data-link-purpose="source" href="${h(url)}" target="_blank" rel="noreferrer">${h(f.foal_name||'查看登记')} ↗</a>`:h(f.foal_name||'尚无已核实马名')}</dd></div>`;}
+function foalIdentity(f){const url=f.source_url||f.foal_url||f.jbis_url;return `<div><dt>产驹登记</dt><dd>${f.horse_id?`<a data-link-purpose="drill" href="?horse=${encodeURIComponent(f.horse_id)}&profile=full">${h(f.foal_name||'查看产驹')} →</a>`:/^https:\/\//.test(url||'')?`<a data-link-purpose="source" href="${h(url)}" target="_blank" rel="noreferrer">${h(f.foal_name||'查看登记')} ↗</a>`:h(f.foal_name||'暂无登记马名')}</dd></div>`;}
 export function historyNames(horse,field){return [...new Set([horse[field],...(horse.affiliation_history||[]).map(e=>e[field])].filter(Boolean))];}
 export function attributionCounts(records=[]) {
  const groups=new Map();for(const r of records){if(!r.trainer||!r.source_url)continue;const g=groups.get(r.trainer)||new Map();g.set(r.race_id||r.date,r);groups.set(r.trainer,g);}
  return [...groups].map(([trainer,rows])=>({trainer,races:rows.size,wins:[...rows.values()].filter(r=>r.finish===1).length}));
 }
+const affiliationName=value=>{
+ const name=norm(value).replace(/[()]/g,'');
+ return ({'西':'栗東','東':'美浦'})[name]||name;
+};
+// Collapse compatible observations, never a confirmed change or a different owner.
+export function affiliationChanges(events=[]) {
+ const groups=[];
+ for(const original of [...events].sort((a,b)=>(a.date||a.observed_at||'').localeCompare(b.date||b.observed_at||''))) {
+  const e={...original,trainer:norm(original.trainer),owner:norm(original.owner),affiliation:affiliationName(original.affiliation)};
+  const previous=groups.at(-1);
+  const compatible=previous && ['trainer','owner','affiliation'].every(k=>!previous[k]||!e[k]||previous[k]===e[k]);
+  if(compatible && !(e.kind==='transfer'||e.kind==='ownership_change')) {
+   for(const k of ['trainer','owner','affiliation'])if(e[k])previous[k]=e[k];
+   previous.sources.push(original);
+  } else groups.push({...e,sources:[original]});
+ }
+ return groups.reverse();
+}
 export function renderAffiliations(events=[],records=[]) {
- if(!events.length)return '<p class="muted">尚无已核实的历史所属记录。</p>';
- return `<section class="profile-group affiliation-history"><h4>所属履历</h4>${records.length?`<p class="muted">已核实的任职赛果（部分记录）：${attributionCounts(records).map(r=>`${h(r.trainer)} ${r.wins}胜 / ${r.races}场`).join("；")}。</p>`:""}<ol class="life-timeline">${[...events].sort((a,b)=>(b.date||b.observed_at||'').localeCompare(a.date||a.observed_at||'')).map(e=>`<li><time>${h(e.date||e.observed_at||'日期未详')}${e.date?'':' · 资料确认'}</time><strong>${h([e.trainer,e.affiliation].filter(Boolean).join(' · '))}</strong>${e.owner?`<span>马主：${h(e.owner)}</span>`:''}${e.summary?`<p>${h(e.summary)}</p>`:''}<a data-link-purpose="source" href="${h(e.source_url)}" target="_blank" rel="noreferrer">${h(e.source_name||'来源')} ↗</a></li>`).join('')}</ol><details class="profile-method"><summary>所属与成绩说明</summary><p>筛选包含已核实的历任练马师与马主。资料确认日不是转厩日期；赛事举办地不代表所属变更。任职期间胜场仅按逐场明确记载或有完整起止依据的记录归属，不把全部生涯成绩归于最后一任。</p></details></section>`;
+ const changes=affiliationChanges(events);
+ // A single unchanged affiliation already appears under People and Breeder.
+ if(changes.length<2)return '';
+ return `<section class="profile-group affiliation-history"><h4>所属变动</h4><ul class="affiliation-changes">${changes.map(e=>`<li><strong>${h([e.trainer,e.affiliation].filter(Boolean).join(' · '))}</strong>${e.owner?`<span>马主：${h(e.owner)}</span>`:''}</li>`).join('')}</ul><details class="profile-method"><summary>来源与成绩归属</summary>${records.length?`<p>已核实的任职赛果（部分记录）：${attributionCounts(records).map(r=>`${h(r.trainer)} ${r.wins}胜 / ${r.races}场`).join('；')}。</p>`:''}<p>筛选包含已核实的历任练马师与马主。资料确认日不代表转厩日；未确认任职期间的赛果不归于最后一任。</p>${changes.map(e=>`<p>${h(e.trainer||e.owner)}：${[...new Map(e.sources.filter(s=>s.source_url).map(s=>[s.source_url,s])).values()].map(s=>`<a data-link-purpose="source" href="${h(s.source_url)}" target="_blank" rel="noreferrer">${h(s.source_name||'来源')} ↗</a>`).join(' · ')}</p>`).join('')}</details></section>`;
 }
 export function renderRegistration(vm) {
- const events=[...(vm.registration||[])].sort((a,b)=>b.date.localeCompare(a.date)),last=[...vm.racing.records].sort((a,b)=>String(b.race_date).localeCompare(String(a.race_date)))[0];
- return `<section class="profile-group registration-history"><h4>竞赛与登记履历</h4>${last?`<p>最后一次已收录出赛：${h(last.race_date)} · ${h(last.race_name)} · ${h(last.finish?`${last.finish}着`:last.finish_note||'名次未详')}</p>`:''}${events.length?`<ol class="life-timeline">${events.map(e=>`<li><time>${h(e.date)}</time><strong>${h(e.title)}</strong><p>${h(e.summary)}</p><a data-link-purpose="source" href="${h(e.source_url)}" target="_blank" rel="noreferrer">${h(e.source_name)} ↗</a></li>`).join('')}</ol>`:'<p class="muted">暂无单独核实的登记变更记录。</p>'}${events.length&&!vm.postRacing?.length?'<p class="muted">后续去向暂无已核实资料。</p>':''}</section>`;
+ const events=(vm.registration||[]).filter(e=>!((e.status==='confirmed' && /退役/.test(e.title) && !/注销|抹消|转籍/.test(e.title)) && (vm.postRacing||[]).some(c=>c.source_url && c.source_url===e.source_url && c.date===e.date && /已退役|确认退役|公布退役/.test(c.summary)))).sort((a,b)=>b.date.localeCompare(a.date)),last=[...vm.racing.records].sort((a,b)=>String(b.race_date).localeCompare(String(a.race_date)))[0];
+ if(!events.length)return '';
+ return `<section class="profile-group registration-history"><h4>竞赛与登记履历</h4>${last?`<p>最近出赛：${h(last.race_date)} · ${h(last.race_name)} · ${h(last.finish?`${last.finish}着`:last.finish_note||'名次未详')}</p>`:''}${events.length?`<ol class="life-timeline">${events.map(e=>`<li><time>${h(e.date)}</time><strong>${h(e.title)}</strong><details class="profile-method"><summary>查看记录与来源</summary><p>${h(e.summary)}</p><a data-link-purpose="source" href="${h(e.source_url)}" target="_blank" rel="noreferrer">${h(e.source_name)} ↗</a></details></li>`).join('')}</ol>`:'<p class="muted">暂无单独核实的登记变更记录。</p>'}</section>`;
 }

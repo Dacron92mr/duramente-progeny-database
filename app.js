@@ -1085,7 +1085,7 @@ function metricCard(label, value, sub = "", href = "") {
       <span>${escapeHtml(label)}</span>
       <strong>${escapeHtml(value)}</strong>
       ${sub ? `<small>${escapeHtml(sub)}</small>` : ""}
-      ${href ? `<i aria-hidden="true">↗</i>` : ""}
+      ${href ? `<i aria-hidden="true">${/^https?:/.test(href) ? "↗" : "→"}</i>` : ""}
     </${tag}>
   `;
 }

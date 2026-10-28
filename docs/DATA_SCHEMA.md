@@ -6,7 +6,7 @@
 | --- | --- |
 | `data/horses.json` | 稳定收录清单 + 人工核验字段 + 允许同步的生涯资料；不是可任意重建的缓存 |
 | `data/horses/<id>.json` | 同一匹马的 `horse`、`races`、`stud`、`sources`；含来源及人工补充记录 |
-| `data/summary.json` | 列表数量与筛选 facets 的已发布快照；当前周更脚本不会重建它，增减记录或类别时须单独核对 |
+| `data/summary.json` | 列表数量、当前资料 facets 与保留的 curated 历史 facets；`build_summary.py` 只重建 catalogue-owned 字段 |
 | `data/analytics/overview,sire_profile,crops,bms_lines,broodmare_sires,breeders,racecourses,distance_surface,dam_age.json` | `rebuild_synced_analytics.py` 从清单和比赛记录派生，保留既有扩展元数据 |
 | `annual_progeny_performance.json` | 混合：比赛派生统计 + 独立权威年度奖金系列；重建明确保留旧 `earnings*` 字段 |
 | `awd.json`, `chart_insights.json` | 专用 builder 重建；与生涯、比赛及场地统计核对 |
@@ -17,6 +17,8 @@
 | `graded_siblings.json`, `horse_photos.json`, `analytics/covering_months.json` | 对应专用 `build_*` 脚本，运行前先查看脚本输入与 `--help` |
 
 `rebuild_synced_analytics.py` 不会重建整个 `data/`。不得删掉“未被 builder 输出”的文件。原始赛果和人工核验资料保留不变；有来源的分类修正在派生层应用。
+
+`build_summary.py` 更新总马数、JBIS/netkeiba 身份数、年份、性别、当前所属、颜色、牧场、母父、牝系、母龄、母父系、成就和繁殖状态 facets。`trainers`、`owners` 及未知扩展字段保留原值；历史练马师/马主筛选由 `career_history.json` 在现场生成，不拿当前清单静默覆盖历史口径。
 
 ## 标识、空值与名称
 
@@ -55,6 +57,12 @@
 ## 原有同步安全机制
 
 `weekly_sync.py` 在临时目录抓取、合并、重建、校验，只有指定 `--apply` 且校验成功才覆盖数据。保护马匹集合、已知奖金、完整历史及人工统计。`rebase_sync.py` 只专门处理 `STATIC_DATA_VERSION`，遇到真正数据冲突会中止。前端编辑必须保留 `index.html` 的版本赋值格式。
+
+### JBIS queue state
+
+`.github/sync/state.json` 使用 `schema_version: 2` 的 JBIS 队列状态。`completed_ids` 只记录本周期成功的档案，`pending_ids` 记录尚未尝试的档案，`failed` 记录需要优先重试的马匹及失败次数、错误和时间。批次通过校验并完成数据发布后才原子写入新状态。
+
+旧版只含 `jbis_cycle` / `jbis_cursor` 的状态不能证明 cursor 前的档案是否成功，因此会保守地迁移为“全部档案重新排队一次”，并保留旧 cycle/cursor 作为迁移说明。周期未完成时跨月继续原周期；只有完整周期结束后才在下一月创建新周期。
 
 ## 探索派生数据与指标
 

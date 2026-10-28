@@ -119,6 +119,7 @@ python3 -m http.server 8765 --bind 127.0.0.1
 - [数据所有权、来源与官方译名维护](docs/DATA_SCHEMA.md)
 - [界面设计系统](docs/UI_DESIGN_SYSTEM.md) · [统一用语](docs/UX_COPY.md)
 - [研究引用与链接语义](docs/RESEARCH_REFERENCES.md)
+- [全仓技术审计（2026-10-28）](docs/REPOSITORY_AUDIT_2026-10-28.md)
 - [本轮验收、资料审计与修改前后截图](docs/qa/post-merge/REVIEW.md)
 - [上一轮发布验收](docs/qa/release/UI-CORRECTIONS.md)
 - [参与维护](CONTRIBUTING.md) · [报告数据错误或问题](https://github.com/Dacron92mr/duramente-progeny-database/issues)

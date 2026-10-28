@@ -1,5 +1,5 @@
 import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';
-import {breedingOutcome,renderBreedingYears,historyNames} from '../src/life-records.mjs';
+import {breedingOutcome,renderBreedingYears,historyNames,affiliationChanges,renderAffiliations,renderRegistration} from '../src/life-records.mjs';
 import {filterAndSortHorses} from '../src/filtering.mjs';
 import {raceJurisdiction,renderRaceHistory} from '../src/race-history.mjs';
 import {filterUpdates,updateRows} from '../src/updates.mjs';
@@ -38,4 +38,31 @@ test('new career notices preserve confirmed versus announced status',()=>{
  assert.equal(data['57'].events[0].status,'announced');
  assert.equal(data['57'].events[0].date,'2026-10-24');
  assert.match(updateRows([{...data['57'].events[0],horse_id:57,title:'预定诱导马出道',recorded_at:'2026-10-23'}]),/已公布计划/);
+});
+
+test('unchanged affiliation observations collapse without dates or duplicated history',()=>{
+ const observations=[{trainer:'辻野 泰之',affiliation:'(栗 東)',observed_at:'2026-07-06',source_url:'https://www.jbis.or.jp/'},{trainer:'辻野泰之',affiliation:'西',owner:'ノルマンディー',observed_at:'2026-07-06',source_url:'https://db.netkeiba.com/'}];
+ const before=JSON.stringify(observations),groups=affiliationChanges(observations);
+ assert.equal(groups.length,1);assert.equal(groups[0].sources.length,2);assert.equal(groups[0].owner,'ノルマンディー');
+ assert.equal(renderAffiliations(observations),'');assert.equal(JSON.stringify(observations),before);
+});
+test('genuine owner changes and returns to an earlier trainer remain distinct',()=>{
+ const events=[{trainer:'A',owner:'X',observed_at:'2024-01-01'},{trainer:'A',owner:'Y',observed_at:'2025-01-01'},{trainer:'B',owner:'Y',date:'2025-06-01'},{trainer:'A',owner:'Y',date:'2026-01-01'}];
+ assert.equal(affiliationChanges(events).length,4);
+ const html=renderAffiliations(events);assert.match(html,/所属变动/);assert.doesNotMatch(html,/<time>|life-timeline|2024-01-01/);
+});
+test('internal horse links and external evidence use different arrows',()=>{
+ const rows=updateRows([{horse_id:45,horse_name:'星象古盤',title:'资料补充',recorded_at:'2026-10-26',source_url:'https://www.hkjc.com/'}]);
+ assert.match(rows,/星象古盤 →/);assert.match(rows,/来源 ↗/);
+});
+
+test('one retirement announcement is displayed once while registration changes remain',()=>{
+ const careers=JSON.parse(fs.readFileSync(new URL('../data/post_racing_careers.json',import.meta.url))).horses['67'].events;
+ const registration=JSON.parse(fs.readFileSync(new URL('../data/career_history.json',import.meta.url))).horses['67'].registration;
+ const vm={registration,postRacing:careers,racing:{records:[]}};
+ assert.equal(renderRegistration(vm),'');
+ assert.match(renderRegistration({...vm,postRacing:[]}),/牧场公布退役/);
+ assert.match(renderRegistration({...vm,registration:[{...registration[0],title:'中央登记注销'}]}),/中央登记注销/);
+ assert.match(renderRegistration({...vm,postRacing:[{...careers[0],source_url:'https://example.org/another'}]}),/牧场公布退役/);
+ assert.equal(registration.length,1);
 });

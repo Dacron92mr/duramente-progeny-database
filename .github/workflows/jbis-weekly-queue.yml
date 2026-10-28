@@ -1,9 +1,15 @@
 name: JBIS monthly queue
 on:
   schedule:
-    # Four serial 30-profile batches daily on days 1-6; one full cycle per month.
-    - cron: '17 3,9,15,21 1-6 * *'
+    # Four serial 30-profile batches daily through day 10, leaving retry/catch-up
+    # capacity after the normal 23-batch cycle has time to finish.
+    - cron: '17 3,9,15,21 1-10 * *'
   workflow_dispatch:
+    inputs:
+      batch_size:
+        description: 'Profiles to process (1-32)'
+        default: '30'
+        type: string
 permissions:
   contents: write
   pages: write
@@ -25,7 +31,9 @@ jobs:
       - name: Test safeguards
         run: python -m unittest discover -s scripts/tests -v
       - name: Process next JBIS batch
-        run: python scripts/weekly_sync.py --source jbis --jbis-limit 30 --apply --report "$RUNNER_TEMP/sync-report.json"
+        env:
+          JBIS_BATCH_SIZE: ${{ inputs.batch_size || '30' }}
+        run: python scripts/weekly_sync.py --source jbis --jbis-limit "$JBIS_BATCH_SIZE" --apply --report "$RUNNER_TEMP/sync-report.json"
       - name: Save diagnostic report
         if: always()
         uses: actions/upload-artifact@v4
