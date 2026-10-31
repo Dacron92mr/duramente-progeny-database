@@ -82,6 +82,9 @@ let chartResizeBound = false;
 let pedigreeRuntime = null;
 let sireRuntime = null;
 let productionRuntime = null;
+let searchRenderTimer = null;
+let searchSessionActive = false;
+let pendingSearchValue = null;
 // One shared family: burgundy, dusty rose, slate, sage and restrained gold.
 const COLORS = window.DuramenteColors.ui;
 const CROP_COLORS = window.DuramenteColors.crops;
@@ -357,6 +360,25 @@ function debounce(fn, wait = 220) {
     clearTimeout(timer);
     timer = setTimeout(() => fn(...args), wait);
   };
+}
+
+function cancelPendingSearchTimer() {
+  if (searchRenderTimer) clearTimeout(searchRenderTimer);
+  searchRenderTimer = null;
+  pendingSearchValue = null;
+}
+
+function commitPendingSearch({ load = false, replace = false } = {}) {
+  if (pendingSearchValue === null) return false;
+  const nextQuery = pendingSearchValue;
+  cancelPendingSearchTimer();
+  state.q = nextQuery;
+  state.offset = 0;
+  renderActiveFilters();
+  writeUrlState(searchSessionActive || replace ? "replace" : "push");
+  searchSessionActive = true;
+  if (load) loadHorses();
+  return true;
 }
 
 function syncControlsFromState() {
@@ -4263,6 +4285,7 @@ function renderMonthChart(id, rows, metric) {
 }
 
 async function showView(name, { updateHistory = true } = {}) {
+  commitPendingSearch({ load: false, replace: true });
   if (!VALID_VIEWS.has(name)) name = "progeny";
   state.view = name;
   closeFilters({ restoreFocus: false });
@@ -4488,7 +4511,15 @@ function bindControls() {
     refresh();
   });
   els.pageSize.addEventListener('change', () => { state.limit = Number(els.pageSize.value); refresh(); });
-  els.clearSearch.addEventListener('click', () => { state.q = ''; els.search.value = ''; els.mobileSearch.value = ''; refresh(); els.mobileSearch.focus(); });
+  els.clearSearch.addEventListener('click', () => {
+    cancelPendingSearchTimer();
+    searchSessionActive = false;
+    state.q = '';
+    els.search.value = '';
+    els.mobileSearch.value = '';
+    refresh();
+    els.mobileSearch.focus();
+  });
   els.exportCsv.addEventListener('click', async () => {
     els.exportCsv.disabled = true;
     const params = new URL(horseQuery(), window.location.href).searchParams;
@@ -4507,6 +4538,8 @@ function bindControls() {
     if (document.documentElement.dataset.themePreference === "system") applyTheme("system", { persist: false });
   });
   const refresh = () => {
+    cancelPendingSearchTimer();
+    searchSessionActive = false;
     state.offset = 0;
     renderActiveFilters();
     writeUrlState("push");
@@ -4519,10 +4552,23 @@ function bindControls() {
   };
   els.resetFilters?.addEventListener("click", resetFilters);
   const updateSearch = (value, peer) => {
-    state.q = value.trim(); peer.value = value; refresh();
+    state.q = value.trim();
+    pendingSearchValue = state.q;
+    peer.value = value;
+    els.actionStatus.textContent = state.q ? "正在筛选…" : "";
+    clearTimeout(searchRenderTimer);
+    searchRenderTimer = setTimeout(() => {
+      els.actionStatus.textContent = "";
+      commitPendingSearch({ load: true });
+    }, 180);
   };
   els.search.addEventListener("input", () => updateSearch(els.search.value, els.mobileSearch));
   els.mobileSearch.addEventListener("input", () => updateSearch(els.mobileSearch.value, els.search));
+  for (const input of [els.search, els.mobileSearch]) {
+    input.addEventListener("focus", () => {
+      searchSessionActive = false;
+    });
+  }
   els.year.addEventListener("change", () => {
     state.year = els.year.value;
     refresh();
@@ -4670,6 +4716,8 @@ function bindControls() {
 }
 
 async function restoreFromUrl() {
+  cancelPendingSearchTimer();
+  searchSessionActive = false;
   readUrlState();
   syncControlsFromState();
   await showView(state.view, { updateHistory: false });

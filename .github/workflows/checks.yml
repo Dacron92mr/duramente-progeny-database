@@ -29,3 +29,51 @@ jobs:
       - run: python scripts/verify_chart_insights.py
       - run: python -m unittest discover -s scripts/tests -v
       - run: git diff --check
+
+  browser-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      TEST_BASE_URL: http://127.0.0.1:8765/
+      TEST_OUTPUT_DIR: test-results/browser
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Enable pnpm
+        run: corepack enable
+      - name: Install fixed browser dependencies
+        run: |
+          pnpm install --frozen-lockfile
+          pnpm exec playwright install --with-deps chromium
+      - name: Start local static server
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/duramente-http.log 2>&1 &
+          for attempt in $(seq 1 20); do
+            if curl --fail --silent http://127.0.0.1:8765/ > /dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/duramente-http.log
+          exit 1
+      - name: Main UI and navigation
+        run: pnpm test:browser
+      - name: Horse profiles
+        run: pnpm test:profile
+      - name: Research analysis and map
+        run: pnpm test:research
+      - name: Research citations
+        run: pnpm test:references
+      - name: Upload browser diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: browser-regression-diagnostics
+          path: test-results/browser
+          retention-days: 14
+          if-no-files-found: warn

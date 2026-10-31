@@ -6,7 +6,7 @@
 | --- | --- |
 | `data/horses.json` | 稳定收录清单 + 人工核验字段 + 允许同步的生涯资料；不是可任意重建的缓存 |
 | `data/horses/<id>.json` | 同一匹马的 `horse`、`races`、`stud`、`sources`；含来源及人工补充记录 |
-| `data/summary.json` | 列表数量与筛选 facets 的已发布快照；当前周更脚本不会重建它，增减记录或类别时须单独核对 |
+| `data/summary.json` | 列表数量、当前资料 facets 与保留的 curated 历史 facets；`build_summary.py` 只重建 catalogue-owned 字段 |
 | `data/analytics/overview,sire_profile,crops,bms_lines,broodmare_sires,breeders,racecourses,distance_surface,dam_age.json` | `rebuild_synced_analytics.py` 从清单和比赛记录派生，保留既有扩展元数据 |
 | `annual_progeny_performance.json` | 混合：比赛派生统计 + 独立权威年度奖金系列；重建明确保留旧 `earnings*` 字段 |
 | `awd.json`, `chart_insights.json` | 专用 builder 重建；与生涯、比赛及场地统计核对 |
@@ -17,6 +17,8 @@
 | `graded_siblings.json`, `horse_photos.json`, `analytics/covering_months.json` | 对应专用 `build_*` 脚本，运行前先查看脚本输入与 `--help` |
 
 `rebuild_synced_analytics.py` 不会重建整个 `data/`。不得删掉“未被 builder 输出”的文件。原始赛果和人工核验资料保留不变；有来源的分类修正在派生层应用。
+
+`build_summary.py` 更新总马数、JBIS/netkeiba 身份数、年份、性别、当前所属、颜色、牧场、母父、牝系、母龄、母父系、成就和繁殖状态 facets。`trainers`、`owners` 及未知扩展字段保留原值；历史练马师/马主筛选由 `career_history.json` 在现场生成，不拿当前清单静默覆盖历史口径。
 
 ## 标识、空值与名称
 
@@ -56,6 +58,12 @@
 
 `weekly_sync.py` 在临时目录抓取、合并、重建、校验，只有指定 `--apply` 且校验成功才覆盖数据。保护马匹集合、已知奖金、完整历史及人工统计。`rebase_sync.py` 只专门处理 `STATIC_DATA_VERSION`，遇到真正数据冲突会中止。前端编辑必须保留 `index.html` 的版本赋值格式。
 
+### JBIS queue state
+
+`.github/sync/state.json` 使用 `schema_version: 2` 的 JBIS 队列状态。`completed_ids` 只记录本周期成功的档案，`pending_ids` 记录尚未尝试的档案，`failed` 记录需要优先重试的马匹及失败次数、错误和时间。批次通过校验并完成数据发布后才原子写入新状态。
+
+旧版只含 `jbis_cycle` / `jbis_cursor` 的状态不能证明 cursor 前的档案是否成功，因此会保守地迁移为“全部档案重新排队一次”，并保留旧 cycle/cursor 作为迁移说明。周期未完成时跨月继续原周期；只有完整周期结束后才在下一月创建新周期。
+
 ## 探索派生数据与指标
 
 新增 `data/analytics/racecourse_population.json`：`horse_ids` 为各场有正式名次记录的独立产驹 ID；`starts/wins/top3` 按原有效出赛规则计数。由 `scripts/build_racecourse_population.py` 生成，接入 `rebuild_synced_analytics.py`；逐场与原 racecourses.json 对账，不替换原聚合。
@@ -63,6 +71,8 @@
 Profile：原始记录全部保留，比例分母仅为 finish 是正整数的记录，胜为 1、前三为 1–3。按日期年份、明确场地和已知米数分组；未知单列。距离为 ≤1200、1201–1600、1601–2000、2001–2400、>2400m。取消、未完成和名次缺失不补零，不从赛事名推断等级晋升；原表可恢复全部记录。
 
 工作区比例：原生涯文字中胜数大于零的已确认胜马，或原 G1/G2/G3 分类产驹，除以当前组全部产驹。战绩未解析数另报，不解释为未知记录已失败。分组使用原字段精确值，不重写历史牧场归一化统计。同龄图直接使用 crop_development 原指标，只纳入出生年加所选年龄小于快照年份的完整年龄年度。
+
+Cross 文字解析支持同一祖先后以逗号、分号、顿号或日文全角标点分隔的多个位置组合，同时兼容现有以空格开始的下一祖先格式。每个位置组合作为独立 Cross 记录；祖先名不得包含 `S/M` 代际位置或分隔符。解析器回归锁定当前 726 匹产驹的结构化输出，避免格式修复改变现有分析含义。
 
 ## 退役后记录、黑体资格与场地修正
 

@@ -17,6 +17,18 @@ from urllib.robotparser import RobotFileParser
 from urllib.parse import urlsplit
 from sync_sources import parse_profile, parse_races, parse_dynamic_races, reconcile_race_sources, parse_jra_winners, verify_known_winners
 from rebuild_synced_analytics import rebuild, read, write
+from jbis_queue import (
+    commit_state_after_publication,
+    cycle_for_day,
+    jbis_batch_acceptable,
+    jbis_status,
+    load_state_safely,
+    next_jbis_candidates,
+    prepare_jbis_state,
+    record_jbis_results,
+    write_github_summary,
+)
+from build_summary import summary_mismatches
 
 ROOT=Path(__file__).resolve().parents[1]
 AGENT='DuramenteDatabaseSync/1.0 (+https://github.com/Dacron92mr/duramente-progeny-database)'
@@ -121,6 +133,8 @@ def merge(horse,detail,patch,races=None):
 def validate(stage,original):
     horses=read(stage/'data/horses.json');old=read(original/'data/horses.json')
     assert {h['id'] for h in horses}=={h['id'] for h in old},'horse inventory changed'
+    summary=read(stage/'data/summary.json')
+    assert not summary_mismatches(summary,horses),'summary facets do not match horse catalogue'
     for h in horses:
         detail=read(stage/'data/horses'/f"{h['id']}.json")
         assert detail['horse']['name']==h['name'],'list/detail mismatch'
@@ -136,6 +150,18 @@ def validate(stage,original):
     before=prize_coverage(original);after=prize_coverage(stage)
     assert after['domestic_races']>=before['domestic_races'],'domestic race history decreased'
     assert after['domestic_prize_rows']>=before['domestic_prize_rows'],'domestic prize coverage decreased'
+
+def publish_stage(stage,root):
+    """Replace validated JSON files and update the cache-busting data version."""
+    for path in (stage/'data').rglob('*.json'):
+        target=root/path.relative_to(stage)
+        if path.read_bytes()!=target.read_bytes():
+            temporary=target.with_suffix('.json.tmp');shutil.copyfile(path,temporary);temporary.replace(target)
+    index=root/'index.html';html=index.read_text();stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')
+    updated=re.sub(r'window\.STATIC_DATA_VERSION = "[^"]+"',f'window.STATIC_DATA_VERSION = "{stamp}"',html)
+    if updated==html:
+        raise ValueError('STATIC_DATA_VERSION marker missing')
+    temporary=index.with_suffix('.html.tmp');temporary.write_text(updated);temporary.replace(index)
 
 def select_netkeiba_candidates(horses, source, limit=0, horse_id=None):
     candidates=[h for h in horses if re.fullmatch(r'\d+',str(h.get('netkeiba_id') or ''))]
@@ -153,10 +179,11 @@ def snapshot_summary(rows):
             'non_numeric_results':[{'race_id':r.get('race_id'),'finish_note':r.get('finish_note')} for r in rows if r.get('finish') is None]}
 
 def run(args):
-    root=args.root.resolve();state_path=root/'.github/sync/state.json';state=read(state_path) if state_path.exists() else {'jbis_cursor':0}
-    horses=read(root/'data/horses.json');original_count=len(horses)
+    root=args.root.resolve();state_path=root/'.github/sync/state.json'
+    raw_state,state_issues=load_state_safely(state_path)
+    horses=read(root/'data/horses.json')
     report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'netkeiba_retries':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False,
-            'prize_coverage_before':prize_coverage(root),'horse_checks':[]}
+            'prize_coverage_before':prize_coverage(root),'horse_checks':[],'state_issues':state_issues}
     horse_id=getattr(args,'horse_id',None)
     selected=select_netkeiba_candidates(horses,args.source,args.limit,horse_id)
     client=Client()
@@ -210,55 +237,84 @@ def run(args):
                 consecutive_failures+=1
                 if consecutive_failures>=5: break
         jbis=[h for h in horses if re.fullmatch(r'\d+',str(h.get('jbis_id') or ''))]
-        today=datetime.now(timezone.utc).date()
-        cycle=jbis_cycle(today)
-        if state.get('jbis_cycle')!=cycle: state.update(jbis_cycle=cycle,jbis_cursor=0)
-        cursor=min(state.get('jbis_cursor',0),len(jbis))
-        count=0 if args.source=='netkeiba' else min(args.jbis_limit,len(jbis)-cursor)
-        if not candidates and count==0:
+        horse_by_id={str(h['id']):h for h in jbis}
+        current_cycle=cycle_for_day(datetime.now(timezone.utc).date())
+        jbis_state,preparation_issues=prepare_jbis_state(raw_state,jbis,current_cycle)
+        report['state_issues'].extend(preparation_issues)
+        queue=jbis_state['jbis']
+        candidates_for_jbis=[] if args.source=='netkeiba' else next_jbis_candidates(queue,args.jbis_limit)
+        jbis_successes=[];jbis_failures={};attempted_jbis=[]
+
+        if not candidates and not candidates_for_jbis:
             report.update(batch_acceptable=True,skipped='monthly JBIS cycle complete')
-            args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report);return
-        for i in range(count):
+            report['jbis']=jbis_status(jbis_state,jbis)
+            report['finished_at']=datetime.now(timezone.utc).isoformat()
+            args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report)
+            write_github_summary(report)
+            return
+
+        for i,horse_id in enumerate(candidates_for_jbis):
             if 'www.jbis.or.jp' in client.blocked: break
-            horse=jbis[(cursor+i)%len(jbis)];print(f'JBIS {i+1}/{count} id={horse["id"]}',flush=True)
+            horse=horse_by_id[horse_id];attempted_jbis.append(horse_id)
+            print(f'JBIS {i+1}/{len(candidates_for_jbis)} id={horse["id"]}',flush=True)
             try:
                 patch=parse_profile(client.get(f'https://www.jbis.or.jp/horse/{horse["jbis_id"]}/'),horse,'jbis')
                 path=stage/'data/horses'/f"{horse['id']}.json";detail=read(path)
                 updated,new_detail=merge(horse,detail,patch)
-                if updated!=horse or new_detail!=detail: horse.update(updated);write(path,new_detail);report['changed_horses'].append(horse['id'])
+                if updated!=horse or new_detail!=detail:
+                    horse.update(updated);write(path,new_detail);report['changed_horses'].append(horse['id'])
                 report['jbis_ok']+=1
+                jbis_successes.append(horse_id)
             except (ValueError,OSError,SourceUnavailable) as exc:
+                jbis_failures[horse_id]=str(exc)
                 report['errors'].append({'source':'jbis','horse_id':horse['id'],'reason':str(exc)})
-            state['jbis_cursor']=cursor+i+1
-        total=len(candidates)+count
+
+        total=len(candidates)+len(attempted_jbis)
         success=report['netkeiba_ok']+report['jbis_ok']
-        # Never publish a mostly failed batch; all modifications exist only in staging.
-        # A netkeiba batch publishes only when every requested horse succeeds.
-        # JBIS keeps the looser batch threshold because its mandatory 10-minute
-        # spacing makes a failed profile expensive to retry within one job.
-        acceptable=total>0 and (success==total if candidates else success/total>=0.9)
+        acceptable=jbis_batch_acceptable(success,total,strict_batch=bool(candidates))
+        report['jbis_batch']={
+            'planned':len(candidates_for_jbis),
+            'attempted':len(attempted_jbis),
+            'succeeded':len(jbis_successes),
+            'failed':len(jbis_failures),
+            'failed_ids':sorted(jbis_failures),
+            'threshold_accepted':acceptable,
+        }
         report['changed_horses']=sorted(set(report['changed_horses']))
+
+        next_state=jbis_state
+        if acceptable and attempted_jbis:
+            next_queue=record_jbis_results(queue,jbis_successes,jbis_failures,
+                attempted=len(attempted_jbis),changed=len(report['changed_horses']))
+            next_state={'schema_version':jbis_state['schema_version'],'jbis':next_queue}
+        report['jbis']=jbis_status(jbis_state,jbis)
+        report['projected_jbis']=jbis_status(next_state,jbis)
+
         if acceptable and candidates and not args.limit and horse_id is None:
             try:
                 year=datetime.now(timezone.utc).year
                 official=parse_jra_winners(client.get(f'https://www.jra.go.jp/datafile/seiseki/replay/{year}/jyusyo.html'),year)
-                report['official_wins_checked']=verify_known_winners(official,horses,lambda id:read(stage/'data/horses'/f'{id}.json'))
+                report['official_wins_checked']=verify_known_winners(official,horses,lambda item_id:read(stage/'data/horses'/f'{item_id}.json'))
             except (ValueError,OSError,SourceUnavailable) as exc:
                 acceptable=False;report['errors'].append({'source':'JRA freshness check','reason':str(exc)})
+
+        publication_ready=False
         if acceptable and report['changed_horses']:
             write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
             if candidates and report['netkeiba_ok']==len(candidates) and not args.limit and horse_id is None:
                 path=stage/'data/analytics/methodology.json';method=read(path);method['last_updated']=datetime.now(timezone.utc).date().isoformat();write(path,method)
-            if args.apply:
-                for path in (stage/'data').rglob('*.json'):
-                    target=root/path.relative_to(stage)
-                    if path.read_bytes()!=target.read_bytes():
-                        temporary=target.with_suffix('.json.tmp');shutil.copyfile(path,temporary);temporary.replace(target)
-                index=root/'index.html';html=index.read_text();stamp=datetime.now(timezone.utc).strftime('%Y%m%dT%H%M%S')
-                index.write_text(re.sub(r'window.STATIC_DATA_VERSION = "[^"]+"',f'window.STATIC_DATA_VERSION = "{stamp}"',html))
-                report['applied']=True
+            publication_ready=True
         if acceptable and args.apply:
-            state_path.parent.mkdir(parents=True,exist_ok=True);write(state_path,state)
+            def publish():
+                if publication_ready: publish_stage(stage,root)
+            try:
+                commit_state_after_publication(state_path,next_state,publish)
+                report['state_saved']=True
+                report['applied']=publication_ready
+                report['jbis']=report['projected_jbis']
+            except Exception as exc:
+                acceptable=False
+                report['errors'].append({'source':'publication','reason':str(exc)})
         report['finished_at']=datetime.now(timezone.utc).isoformat();report['batch_acceptable']=acceptable
         report['prize_coverage_after']=prize_coverage(root if report['applied'] else stage)
         report['domestic_prize_rows_filled']=report['prize_coverage_after']['domestic_prize_rows']-report['prize_coverage_before']['domestic_prize_rows']
@@ -266,6 +322,7 @@ def run(args):
         print(json.dumps({k:v for k,v in report.items() if k not in ('errors','horse_checks')},ensure_ascii=False),flush=True)
         for error in report['errors']:
             print(f"Sync error [{error.get('source')}] horse={error.get('horse_id','batch')}: {error['reason']}",flush=True)
+        write_github_summary(report)
         if not acceptable: raise SystemExit('Sync batch failed validation; existing dataset preserved.')
 
 if __name__=='__main__':
