@@ -8,7 +8,7 @@ export function discoveryStats(horses) {
 export function mountDiscovery(host, horses, fetchData) {
   if (!host || host.childElementCount) return;
   const { total, years, graded } = discoveryStats(horses);
-  host.innerHTML = `<details class="discovery-overview" open>
+  host.innerHTML = `<details class="discovery-overview" ${window.matchMedia('(max-width:700px)').matches ? '' : 'open'}>
     <summary><span>大鸣大放产驹数据库</span><span class="overview-toggle"><span class="when-open">收起总览</span><span class="when-closed">展开总览</span> ↕</span></summary>
     <div class="discovery-body">
       <div class="discovery-intro"><div><p class="discovery-name" lang="ja">ドゥラメンテ</p><h1>从一匹马，探索五个世代。</h1><p>血统、竞赛成绩与繁殖生涯，沿着你感兴趣的线索继续阅读。</p></div>
