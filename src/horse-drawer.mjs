@@ -79,7 +79,7 @@ export function createHorseDrawer({ state, els, writeUrlState, getHorseIds, ensu
     header.querySelector('.profile-controls')?.remove();
     header.append(els.detail.querySelector('.profile-controls'));
     header.querySelector('#drawerCompactName').textContent=horse.name;
-    els.drawerPanel.onscroll=()=>header.classList.toggle('is-scrolled',els.drawerPanel.scrollTop>100);
+    els.drawerPanel.onscroll=()=>header.classList.toggle('is-scrolled',els.drawerPanel.scrollTop>120);
     header.classList.remove('is-scrolled');
     if(!header._resize){header._resize=new ResizeObserver(()=>els.drawerPanel.style.setProperty('--profile-header-height',`${header.offsetHeight+24}px`));header._resize.observe(header);}
     els.drawerPanel.classList.toggle('has-breeding', profile.hasBreeding);

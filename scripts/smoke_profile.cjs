@@ -27,7 +27,9 @@ const path = require('node:path');
     await page.getByRole('button',{name:'完整资料',exact:true}).click();
     await page.reload(); await page.locator('.profile-columns').waitFor();
     assert.equal(await page.locator('#drawerPanel').getAttribute('data-profile'),'full');
-    await page.keyboard.press('Escape'); assert(!new URL(page.url()).searchParams.has('horse'));
+    await page.locator('#drawerPanel[data-profile="full"] .profile-title').waitFor();
+    await page.keyboard.press('Escape');
+    await page.waitForFunction(()=>!new URL(location.href).searchParams.has('horse'));
     console.log('PASS profile',id,width,theme);
   }
   assert.deepEqual(errors,[]); await browser.close();
