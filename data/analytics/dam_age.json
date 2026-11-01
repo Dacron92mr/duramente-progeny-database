@@ -11,7 +11,7 @@
     "registered_foal_order_confirmed": 726,
     "biological_parity_rate": 1.0,
     "registered_foal_order_rate": 1.0,
-    "updated_at": "2026-10-28"
+    "updated_at": "2026-11-01"
   },
   "buckets": [
     {
@@ -2029,7 +2029,7 @@
         {
           "id": 45,
           "name": "ネブラディスク",
-          "hkjc_name_zh": null,
+          "hkjc_name_zh": "星象古盤",
           "birth_year": 2022,
           "achievement_class": "2勝クラス"
         },
@@ -6629,7 +6629,7 @@
             {
               "id": 45,
               "name": "ネブラディスク",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "星象古盤",
               "birth_year": 2022,
               "achievement_class": "2勝クラス"
             },
@@ -11236,7 +11236,7 @@
             {
               "id": 45,
               "name": "ネブラディスク",
-              "hkjc_name_zh": null,
+              "hkjc_name_zh": "星象古盤",
               "birth_year": 2022,
               "achievement_class": "2勝クラス"
             },

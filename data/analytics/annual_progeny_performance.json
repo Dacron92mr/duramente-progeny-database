@@ -14,7 +14,7 @@
       2025,
       2026
     ],
-    "updated_at": "2026-10-28"
+    "updated_at": "2026-11-01"
   },
   "annual": [
     {
@@ -16934,7 +16934,7 @@
       "year": 2024,
       "horse_id": 45,
       "horse": "ネブラディスク",
-      "hkjc_name_zh": null,
+      "hkjc_name_zh": "星象古盤",
       "race_name": "2歳新馬",
       "race_url": "https://db.netkeiba.com/race/202408060806/",
       "meeting": "京都",
@@ -19756,7 +19756,7 @@
       "year": 2025,
       "horse_id": 45,
       "horse": "ネブラディスク",
-      "hkjc_name_zh": null,
+      "hkjc_name_zh": "星象古盤",
       "race_name": "3歳以上2勝クラス",
       "race_url": "https://db.netkeiba.com/race/202508030808/",
       "meeting": "京都",
@@ -20453,7 +20453,7 @@
       "year": 2026,
       "horse_id": 45,
       "horse": "ネブラディスク",
-      "hkjc_name_zh": null,
+      "hkjc_name_zh": "星象古盤",
       "race_name": "春日特別(2勝クラス)",
       "race_url": "https://db.netkeiba.com/race/202608020609/",
       "meeting": "京都",
@@ -21354,7 +21354,7 @@
       "year": 2026,
       "horse_id": 45,
       "horse": "ネブラディスク",
-      "hkjc_name_zh": null,
+      "hkjc_name_zh": "星象古盤",
       "race_name": "博多S(3勝クラス)",
       "race_url": "https://db.netkeiba.com/race/202610020311/",
       "meeting": "小倉",
