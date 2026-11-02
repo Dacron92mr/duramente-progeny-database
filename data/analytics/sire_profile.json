@@ -5,14 +5,14 @@
     "runners": 655,
     "winners": 449,
     "two_win_horses": 321,
-    "three_win_horses": 215,
+    "three_win_horses": 216,
     "graded_winners": 29,
     "g1_horses": 11,
     "g2_horses": 7,
     "g3_horses": 11,
-    "total_earnings": 1671802.1,
-    "starts": 10965,
-    "wins_starts": 1275,
+    "total_earnings": 1672134.4,
+    "starts": 10975,
+    "wins_starts": 1277,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -50,14 +50,14 @@
         "earnings": 47277.8
       }
     ],
-    "earnings_per_foal": 2302.8,
+    "earnings_per_foal": 2303.2,
     "debut_rate": 0.9022,
     "winner_foal_rate": 0.6185,
     "graded_foal_rate": 0.0399,
     "two_win_rate": 0.4421,
-    "three_win_rate": 0.2961,
-    "start_win_rate": 0.1163,
-    "avg_starts_per_runner": 16.7,
+    "three_win_rate": 0.2975,
+    "start_win_rate": 0.1164,
+    "avg_starts_per_runner": 16.8,
     "turf_awd": 1884.6,
     "dirt_awd": 1460.2,
     "median_earnings": 800.0,
@@ -67,7 +67,7 @@
   "evaluation_cards": [
     {
       "label": "总奖金",
-      "value": 1671802.1,
+      "value": 1672134.4,
       "unit": "万円",
       "note": "产驹累计奖金"
     },
@@ -85,9 +85,9 @@
     },
     {
       "label": "3胜以上率",
-      "value": 0.2961,
+      "value": 0.2975,
       "unit": "rate",
-      "note": "215/726"
+      "note": "216/726"
     },
     {
       "label": "重赏胜马",
@@ -186,14 +186,14 @@
       "runners": 184,
       "winners": 137,
       "two_win_horses": 98,
-      "three_win_horses": 70,
+      "three_win_horses": 71,
       "graded_winners": 6,
       "g1_horses": 2,
       "g2_horses": 2,
       "g3_horses": 2,
-      "total_earnings": 433933.3,
-      "starts": 3708,
-      "wins_starts": 403,
+      "total_earnings": 434099.8,
+      "starts": 3710,
+      "wins_starts": 405,
       "representatives": [
         {
           "name": "スターズオンアース",
@@ -231,16 +231,16 @@
           "earnings": 11144.5
         }
       ],
-      "earnings_per_foal": 2148.2,
+      "earnings_per_foal": 2149.0,
       "debut_rate": 0.9109,
       "winner_foal_rate": 0.6782,
       "graded_foal_rate": 0.0297,
       "two_win_rate": 0.4851,
-      "three_win_rate": 0.3465,
-      "start_win_rate": 0.1087,
+      "three_win_rate": 0.3515,
+      "start_win_rate": 0.1092,
       "avg_starts_per_runner": 20.2,
       "turf_awd": 1879.4,
-      "dirt_awd": 1460.9,
+      "dirt_awd": 1461.2,
       "median_earnings": 817.0,
       "earnings_q25": 65.0,
       "earnings_q75": 2026.1
@@ -256,8 +256,8 @@
       "g1_horses": 5,
       "g2_horses": 1,
       "g3_horses": 2,
-      "total_earnings": 414730.3,
-      "starts": 1722,
+      "total_earnings": 414780.1,
+      "starts": 1724,
       "wins_starts": 207,
       "representatives": [
         {
@@ -296,13 +296,13 @@
           "earnings": 17168.7
         }
       ],
-      "earnings_per_foal": 3399.4,
+      "earnings_per_foal": 3399.8,
       "debut_rate": 0.9344,
       "winner_foal_rate": 0.623,
       "graded_foal_rate": 0.0656,
       "two_win_rate": 0.4918,
       "three_win_rate": 0.3115,
-      "start_win_rate": 0.1202,
+      "start_win_rate": 0.1201,
       "avg_starts_per_runner": 15.1,
       "turf_awd": 1908.9,
       "dirt_awd": 1514.1,
@@ -321,8 +321,8 @@
       "g1_horses": 0,
       "g2_horses": 1,
       "g3_horses": 2,
-      "total_earnings": 162117.1,
-      "starts": 1493,
+      "total_earnings": 162133.1,
+      "starts": 1498,
       "wins_starts": 160,
       "representatives": [
         {
@@ -361,13 +361,13 @@
           "earnings": 5876.1
         }
       ],
-      "earnings_per_foal": 1373.9,
+      "earnings_per_foal": 1374.0,
       "debut_rate": 0.8983,
       "winner_foal_rate": 0.6186,
       "graded_foal_rate": 0.0254,
       "two_win_rate": 0.3559,
       "three_win_rate": 0.2203,
-      "start_win_rate": 0.1072,
+      "start_win_rate": 0.1068,
       "avg_starts_per_runner": 14.1,
       "turf_awd": 1943.9,
       "dirt_awd": 1456.5,
@@ -386,8 +386,8 @@
       "g1_horses": 2,
       "g2_horses": 3,
       "g3_horses": 0,
-      "total_earnings": 243871.4,
-      "starts": 833,
+      "total_earnings": 243971.4,
+      "starts": 834,
       "wins_starts": 111,
       "representatives": [
         {
@@ -426,13 +426,13 @@
           "earnings": 6220.3
         }
       ],
-      "earnings_per_foal": 2567.1,
+      "earnings_per_foal": 2568.1,
       "debut_rate": 0.8842,
       "winner_foal_rate": 0.5263,
       "graded_foal_rate": 0.0526,
       "two_win_rate": 0.3684,
       "three_win_rate": 0.1684,
-      "start_win_rate": 0.1333,
+      "start_win_rate": 0.1331,
       "avg_starts_per_runner": 9.9,
       "turf_awd": 1928.6,
       "dirt_awd": 1558.2,
@@ -544,13 +544,13 @@
     {
       "crop": 2019,
       "age": "6+",
-      "starts": 598,
-      "wins": 44,
-      "cumulative_starts": 3708,
-      "cumulative_wins": 403,
-      "cumulative_wins_per_100_foals": 199.5,
-      "cumulative_wins_per_100_runners": 219.0,
-      "cumulative_win_rate": 0.1087
+      "starts": 600,
+      "wins": 46,
+      "cumulative_starts": 3710,
+      "cumulative_wins": 405,
+      "cumulative_wins_per_100_foals": 200.5,
+      "cumulative_wins_per_100_runners": 220.1,
+      "cumulative_win_rate": 0.1092
     },
     {
       "crop": 2020,
@@ -599,13 +599,13 @@
     {
       "crop": 2020,
       "age": "6+",
-      "starts": 175,
+      "starts": 177,
       "wins": 7,
-      "cumulative_starts": 1722,
+      "cumulative_starts": 1724,
       "cumulative_wins": 207,
       "cumulative_wins_per_100_foals": 169.7,
       "cumulative_wins_per_100_runners": 181.6,
-      "cumulative_win_rate": 0.1202
+      "cumulative_win_rate": 0.1201
     },
     {
       "crop": 2021,
@@ -643,13 +643,13 @@
     {
       "crop": 2021,
       "age": 5,
-      "starts": 290,
+      "starts": 295,
       "wins": 24,
-      "cumulative_starts": 1493,
+      "cumulative_starts": 1498,
       "cumulative_wins": 160,
       "cumulative_wins_per_100_foals": 135.6,
       "cumulative_wins_per_100_runners": 150.9,
-      "cumulative_win_rate": 0.1072
+      "cumulative_win_rate": 0.1068
     },
     {
       "crop": 2021,
@@ -687,13 +687,13 @@
     {
       "crop": 2022,
       "age": 4,
-      "starts": 313,
+      "starts": 314,
       "wins": 45,
-      "cumulative_starts": 833,
+      "cumulative_starts": 834,
       "cumulative_wins": 111,
       "cumulative_wins_per_100_foals": 116.8,
       "cumulative_wins_per_100_runners": 132.1,
-      "cumulative_win_rate": 0.1333
+      "cumulative_win_rate": 0.1331
     },
     {
       "crop": 2022,
@@ -1087,11 +1087,11 @@
     {
       "surface": "芝",
       "distance": "1400-1600",
-      "starts": 968,
+      "starts": 969,
       "wins": 85,
       "top3": 224,
-      "win_rate": 0.0878,
-      "top3_rate": 0.2314,
+      "win_rate": 0.0877,
+      "top3_rate": 0.2312,
       "small_sample": false
     },
     {
@@ -1107,21 +1107,21 @@
     {
       "surface": "ダ",
       "distance": "1200以下",
-      "starts": 1361,
+      "starts": 1362,
       "wins": 156,
       "top3": 402,
-      "win_rate": 0.1146,
-      "top3_rate": 0.2954,
+      "win_rate": 0.1145,
+      "top3_rate": 0.2952,
       "small_sample": false
     },
     {
       "surface": "ダ",
       "distance": "1400-1600",
-      "starts": 4147,
-      "wins": 542,
-      "top3": 1363,
-      "win_rate": 0.1307,
-      "top3_rate": 0.3287,
+      "starts": 4155,
+      "wins": 544,
+      "top3": 1365,
+      "win_rate": 0.1309,
+      "top3_rate": 0.3285,
       "small_sample": false
     },
     {
@@ -1193,27 +1193,27 @@
   "sex_performance": [
     {
       "label": "牝",
-      "starts": 4939,
-      "wins": 505,
-      "top3": 1409,
-      "win_rate": 0.1022,
-      "top3_rate": 0.2853
+      "starts": 4944,
+      "wins": 506,
+      "top3": 1410,
+      "win_rate": 0.1023,
+      "top3_rate": 0.2852
     },
     {
       "label": "牡",
-      "starts": 4848,
-      "wins": 632,
-      "top3": 1577,
-      "win_rate": 0.1304,
-      "top3_rate": 0.3253
+      "starts": 4852,
+      "wins": 633,
+      "top3": 1578,
+      "win_rate": 0.1305,
+      "top3_rate": 0.3252
     },
     {
       "label": "セン",
-      "starts": 1178,
+      "starts": 1179,
       "wins": 138,
       "top3": 385,
-      "win_rate": 0.1171,
-      "top3_rate": 0.3268
+      "win_rate": 0.117,
+      "top3_rate": 0.3265
     }
   ],
   "reference_model": {

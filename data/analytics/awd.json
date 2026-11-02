@@ -1,13 +1,13 @@
 {
   "summary": {
-    "overall_awd": 1588.8,
+    "overall_awd": 1588.6,
     "turf_awd": 1884.6,
     "dirt_awd": 1460.2,
-    "overall_wins": 1265,
+    "overall_wins": 1267,
     "synthetic_wins": 1,
     "synthetic_awd": 1600.0,
     "turf_wins": 383,
-    "dirt_wins": 881
+    "dirt_wins": 883
   },
   "by_crop": [
     {
@@ -19,10 +19,10 @@
     },
     {
       "label": "2019",
-      "overall_awd": 1563.0,
+      "overall_awd": 1562.7,
       "turf_awd": 1879.4,
-      "dirt_awd": 1460.9,
-      "wins": 399
+      "dirt_awd": 1461.2,
+      "wins": 401
     },
     {
       "label": "2020",
