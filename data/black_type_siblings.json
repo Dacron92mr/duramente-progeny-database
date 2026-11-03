@@ -8255,6 +8255,13 @@
         "localId": 45,
         "evidence": [
           {
+            "date": "2026/11/01",
+            "race": "天皇賞(秋)(GI)",
+            "grade": "G1",
+            "finish": 2,
+            "source_url": "https://db.netkeiba.com/race/202605041111/"
+          },
+          {
             "date": "2025/03/29",
             "race": "毎日杯(GIII)",
             "grade": "G3",

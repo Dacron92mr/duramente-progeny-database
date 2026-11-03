@@ -7,7 +7,7 @@
     "graded_winners": 5,
     "stakes_winners": 6,
     "g1_winners": 2,
-    "total_earnings": 243971.4,
+    "total_earnings": 256155.4,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -51,8 +51,8 @@
     "graded_foal_rate": 0.0526,
     "graded_runner_rate": 0.0595,
     "g1_foal_rate": 0.0211,
-    "avg_earnings_per_foal": 2568.1,
-    "avg_earnings_per_runner": 2904.4,
+    "avg_earnings_per_foal": 2696.4,
+    "avg_earnings_per_runner": 3049.5,
     "median_earnings_per_runner": 459.9,
     "earnings_q25": 0.0,
     "earnings_q75": 2386.5,

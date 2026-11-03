@@ -9741,6 +9741,15 @@
           "source_url": "https://db.netkeiba.com/horse/2020101552/",
           "source_name": "netkeiba",
           "kind": "observation"
+        },
+        {
+          "trainer": "及川良春",
+          "owner": "大黒富美子",
+          "affiliation": "岩手",
+          "observed_at": "2026-11-03",
+          "source_url": "https://db.netkeiba.com/horse/2020101552/",
+          "source_name": "netkeiba",
+          "kind": "observation"
         }
       ],
       "registration": [],
