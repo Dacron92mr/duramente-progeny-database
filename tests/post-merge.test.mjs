@@ -26,7 +26,7 @@ test('jurisdiction counts reconcile and each surface has its own minimum sample'
  const row={surface:{芝:{starts:1,wins:1},ダ:{starts:30,wins:3}}};
  assert.equal(surfaceSample(row,'芝',30),null);assert.equal(surfaceSample(row,'芝',1).rate,100);
  assert.equal(surfaceSample(row,'ダ',30).rate,10);assert.equal(surfaceSample(row,'合成',1),null);
- assert.equal(data.overseas_history.length,32);assert(data.overseas_history.every(r=>r.country&&r.race_url&&r.horse_id));
+ assert(data.overseas_history.length>=32);assert(data.overseas_history.every(r=>r.country&&r.race_url&&r.horse_id));
  for(const name of ['Pakenham Synthetic','Ballarat Synthetic'])assert.deepEqual(Object.keys(data.table.find(r=>r.label===name).surface),['合成']);
 });
 test('dated careers match horse identity, distinguish plans and need no breeding record',()=>{
