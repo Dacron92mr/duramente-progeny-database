@@ -33,6 +33,7 @@ from build_summary import summary_mismatches
 ROOT=Path(__file__).resolve().parents[1]
 AGENT='DuramenteDatabaseSync/1.0 (+https://github.com/Dacron92mr/duramente-progeny-database)'
 class SourceUnavailable(RuntimeError): pass
+class TransientSourceUnavailable(SourceUnavailable): pass
 
 def is_domestic_race(race):
     """netkeiba uses 12-digit IDs for Japanese JRA/NAR races."""
@@ -84,7 +85,8 @@ class Client:
             return body.decode(encoding,errors='strict')
         except HTTPError as exc:
             if exc.code in (401,403,429): self.blocked.add(host)
-            raise SourceUnavailable(f'HTTP {exc.code}; old data retained') from exc
+            error_type=TransientSourceUnavailable if exc.code in (500,502,503,504) else SourceUnavailable
+            raise error_type(f'HTTP {exc.code}; old data retained') from exc
         except HTTPException as exc:
             raise SourceUnavailable('incomplete source response; old data retained') from exc
 
@@ -243,7 +245,7 @@ def run(args):
         report['state_issues'].extend(preparation_issues)
         queue=jbis_state['jbis']
         candidates_for_jbis=[] if args.source=='netkeiba' else next_jbis_candidates(queue,args.jbis_limit)
-        jbis_successes=[];jbis_failures={};attempted_jbis=[]
+        jbis_successes=[];jbis_failures={};attempted_jbis=[];transient_jbis_failures=set()
 
         if not candidates and not candidates_for_jbis:
             report.update(batch_acceptable=True,skipped='monthly JBIS cycle complete')
@@ -267,11 +269,19 @@ def run(args):
                 jbis_successes.append(horse_id)
             except (ValueError,OSError,SourceUnavailable) as exc:
                 jbis_failures[horse_id]=str(exc)
+                if isinstance(exc,(TransientSourceUnavailable,TimeoutError)):
+                    transient_jbis_failures.add(horse_id)
                 report['errors'].append({'source':'jbis','horse_id':horse['id'],'reason':str(exc)})
 
         total=len(candidates)+len(attempted_jbis)
         success=report['netkeiba_ok']+report['jbis_ok']
         acceptable=jbis_batch_acceptable(success,total,strict_batch=bool(candidates))
+        # Validated individual profiles can progress during a temporary outage.
+        # Schema, identity and access failures retain the existing batch gate.
+        if (not candidates and jbis_successes and jbis_failures
+                and transient_jbis_failures == set(jbis_failures)):
+            acceptable=True
+            report['partial_transport_recovery']=True
         report['jbis_batch']={
             'planned':len(candidates_for_jbis),
             'attempted':len(attempted_jbis),
