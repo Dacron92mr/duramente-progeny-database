@@ -279,6 +279,37 @@ class JbisQueueStateTests(unittest.TestCase):
             self.assertFalse(report["jbis_batch"]["threshold_accepted"])
 
 
+    def test_transient_outage_commits_only_verified_progress_and_retries_failures(self):
+        for failures, mixed, accepted in [(10, False, True), (30, False, False), (10, True, False)]:
+            with self.subTest(failures=failures, mixed=mixed), tempfile.TemporaryDirectory() as temp:
+                root = _fixture_root(Path(temp), 30)
+                old = (root / 'data/horses.json').read_bytes()
+                args = types.SimpleNamespace(root=root, source='jbis', limit=0,
+                    jbis_limit=30, horse_id=None, apply=True, report=Path(temp)/'report.json')
+                class FakeClient:
+                    def __init__(self): self.blocked=set()
+                    def get(self,url): return url
+                def parse(_page, horse, _source):
+                    if horse['id'] <= failures:
+                        if mixed and horse['id']==1: raise ValueError('wrong identity')
+                        if horse['id']==2: raise TimeoutError('read timed out')
+                        raise weekly_sync.TransientSourceUnavailable('HTTP 500; old data retained')
+                    return {'earnings_jbis':1}
+                with patch.object(weekly_sync,'Client',FakeClient), patch.object(weekly_sync,'parse_profile',side_effect=parse):
+                    if accepted: weekly_sync.run(args)
+                    else:
+                        with self.assertRaises(SystemExit): weekly_sync.run(args)
+                report=json.loads(args.report.read_text())
+                self.assertEqual(report['batch_acceptable'],accepted)
+                self.assertEqual((root/'data/horses.json').read_bytes(),old)
+                if accepted:
+                    queue=json.loads((root/'.github/sync/state.json').read_text())['jbis']
+                    self.assertEqual(len(queue['completed_ids']),20)
+                    self.assertEqual(len(queue['failed']),10)
+                    retry=next_jbis_candidates(queue,10)
+                    self.assertEqual(set(map(str,retry)),{str(n) for n in range(1,11)})
+
+
 def _fixture_root(root: Path, count: int) -> Path:
     (root / "data/horses").mkdir(parents=True)
     (root / ".github/sync").mkdir(parents=True)
