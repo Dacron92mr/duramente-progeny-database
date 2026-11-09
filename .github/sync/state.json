@@ -506,37 +506,27 @@
       "497",
       "500",
       "487",
-      "505"
+      "505",
+      "519",
+      "508",
+      "521",
+      "528",
+      "512",
+      "532",
+      "523",
+      "526",
+      "530",
+      "533",
+      "431",
+      "527",
+      "511",
+      "513",
+      "529",
+      "517",
+      "507",
+      "488"
     ],
     "pending_ids": [
-      "506",
-      "507",
-      "508",
-      "509",
-      "511",
-      "510",
-      "512",
-      "513",
-      "514",
-      "515",
-      "516",
-      "517",
-      "518",
-      "519",
-      "520",
-      "521",
-      "522",
-      "523",
-      "524",
-      "525",
-      "526",
-      "527",
-      "528",
-      "529",
-      "530",
-      "531",
-      "532",
-      "533",
       "534",
       "535",
       "536",
@@ -695,21 +685,71 @@
       "570"
     ],
     "failed": {
-      "431": {
-        "attempts": 3,
-        "last_error": "The read operation timed out",
-        "last_attempted_at": "2026-11-08T15:14:54.594982+00:00"
-      },
-      "488": {
+      "506": {
         "attempts": 1,
         "last_error": "The read operation timed out",
-        "last_attempted_at": "2026-11-08T15:14:54.594982+00:00"
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "509": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "510": {
+        "attempts": 1,
+        "last_error": "HTTP 503; old data retained",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "514": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "515": {
+        "attempts": 1,
+        "last_error": "HTTP 503; old data retained",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "516": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "518": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "520": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "522": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "524": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "525": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
+      },
+      "531": {
+        "attempts": 1,
+        "last_error": "The read operation timed out",
+        "last_attempted_at": "2026-11-09T00:39:55.493227+00:00"
       }
     },
     "last_success": {
-      "at": "2026-11-08T15:14:54.594982+00:00",
-      "succeeded": 28,
-      "failed": 2
+      "at": "2026-11-09T00:39:55.493227+00:00",
+      "succeeded": 18,
+      "failed": 12
     },
     "migrated_from_legacy": {
       "cycle": "2026-10",
@@ -717,10 +757,10 @@
       "requeued_all": true
     },
     "last_batch": {
-      "at": "2026-11-08T15:14:54.594982+00:00",
+      "at": "2026-11-09T00:39:55.493227+00:00",
       "attempted": 30,
-      "succeeded": 28,
-      "failed": 2,
+      "succeeded": 18,
+      "failed": 12,
       "changed_horses": 1
     }
   }
