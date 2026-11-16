@@ -3,11 +3,11 @@
     "label": "Duramente",
     "foals": 726,
     "runners": 655,
-    "winners": 449,
+    "winners": 450,
     "graded_winners": 29,
     "stakes_winners": 34,
     "g1_winners": 11,
-    "total_earnings": 1684318.4,
+    "total_earnings": 1686051.3,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -46,24 +46,24 @@
       }
     ],
     "runner_rate": 0.9022,
-    "winner_foal_rate": 0.6185,
-    "winner_runner_rate": 0.6855,
+    "winner_foal_rate": 0.6198,
+    "winner_runner_rate": 0.687,
     "graded_foal_rate": 0.0399,
     "graded_runner_rate": 0.0443,
     "g1_foal_rate": 0.0152,
-    "avg_earnings_per_foal": 2320.0,
-    "avg_earnings_per_runner": 2571.5,
+    "avg_earnings_per_foal": 2322.4,
+    "avg_earnings_per_runner": 2574.1,
     "median_earnings_per_runner": 549.8,
     "earnings_q25": 23.2,
     "earnings_q75": 2026.1,
     "max_earnings": 106875.1,
-    "awd": 1599.9,
-    "winning_distance_count": 1277,
+    "awd": 1599.0,
+    "winning_distance_count": 1282,
     "generation_range": "2018-2022",
     "most_common_broodmare_sire": {
       "name": "ディープインパクト",
       "count": 29
     }
   },
-  "last_updated": "2026-11-09"
+  "last_updated": "2026-11-16"
 }

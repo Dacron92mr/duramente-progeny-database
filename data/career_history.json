@@ -3926,6 +3926,15 @@
           "source_url": "https://db.netkeiba.com/horse/2018101929/",
           "source_name": "netkeiba",
           "kind": "observation"
+        },
+        {
+          "trainer": "森山英雄",
+          "owner": "山邉浩",
+          "affiliation": "笠松",
+          "observed_at": "2026-11-16",
+          "source_url": "https://db.netkeiba.com/horse/2018101929/",
+          "source_name": "netkeiba",
+          "kind": "observation"
         }
       ],
       "registration": [],

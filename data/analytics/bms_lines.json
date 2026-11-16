@@ -3,11 +3,11 @@
     "label": "Sunday Silence",
     "foals": 115,
     "runners": 106,
-    "winners": 73,
+    "winners": 74,
     "graded_winners": 6,
     "stakes_winners": 7,
     "g1_winners": 2,
-    "total_earnings": 234422.9,
+    "total_earnings": 234795.9,
     "representatives": [
       {
         "name": "マスカレードボール",
@@ -46,13 +46,13 @@
       }
     ],
     "runner_rate": 0.9217,
-    "winner_foal_rate": 0.6348,
-    "winner_runner_rate": 0.6887,
+    "winner_foal_rate": 0.6435,
+    "winner_runner_rate": 0.6981,
     "graded_foal_rate": 0.0522,
     "graded_runner_rate": 0.0566,
     "g1_foal_rate": 0.0174,
-    "avg_earnings_per_foal": 2038.5,
-    "avg_earnings_per_runner": 2211.5,
+    "avg_earnings_per_foal": 2041.7,
+    "avg_earnings_per_runner": 2215.1,
     "median_earnings_per_runner": 444.6,
     "earnings_q25": 29.0,
     "earnings_q75": 1007.6,
@@ -66,7 +66,7 @@
     "graded_winners": 2,
     "stakes_winners": 2,
     "g1_winners": 2,
-    "total_earnings": 191040.4,
+    "total_earnings": 191044.4,
     "representatives": [
       {
         "name": "リバティアイランド",
@@ -90,7 +90,7 @@
     "graded_runner_rate": 0.0488,
     "g1_foal_rate": 0.0435,
     "avg_earnings_per_foal": 4153.1,
-    "avg_earnings_per_runner": 4659.5,
+    "avg_earnings_per_runner": 4659.6,
     "median_earnings_per_runner": 811.0,
     "earnings_q25": 49.8,
     "earnings_q75": 1513.8,
@@ -104,7 +104,7 @@
     "graded_winners": 10,
     "stakes_winners": 12,
     "g1_winners": 3,
-    "total_earnings": 612948.5,
+    "total_earnings": 613364.5,
     "representatives": [
       {
         "name": "タイトルホルダー",
@@ -148,11 +148,11 @@
     "graded_foal_rate": 0.0333,
     "graded_runner_rate": 0.0361,
     "g1_foal_rate": 0.01,
-    "avg_earnings_per_foal": 2043.2,
-    "avg_earnings_per_runner": 2212.8,
+    "avg_earnings_per_foal": 2044.5,
+    "avg_earnings_per_runner": 2214.3,
     "median_earnings_per_runner": 523.0,
     "earnings_q25": 50.0,
-    "earnings_q75": 1778.4,
+    "earnings_q75": 1783.9,
     "max_earnings": 106875.1
   },
   {
@@ -163,7 +163,7 @@
     "graded_winners": 4,
     "stakes_winners": 4,
     "g1_winners": 2,
-    "total_earnings": 156557.0,
+    "total_earnings": 156629.0,
     "representatives": [
       {
         "name": "エネルジコ",
@@ -200,8 +200,8 @@
     "graded_foal_rate": 0.0513,
     "graded_runner_rate": 0.0588,
     "g1_foal_rate": 0.0256,
-    "avg_earnings_per_foal": 2007.1,
-    "avg_earnings_per_runner": 2302.3,
+    "avg_earnings_per_foal": 2008.1,
+    "avg_earnings_per_runner": 2303.4,
     "median_earnings_per_runner": 483.0,
     "earnings_q25": 0.0,
     "earnings_q75": 2505.5,
@@ -215,7 +215,7 @@
     "graded_winners": 4,
     "stakes_winners": 4,
     "g1_winners": 2,
-    "total_earnings": 294337.6,
+    "total_earnings": 295187.8,
     "representatives": [
       {
         "name": "スターズオンアース",
@@ -236,7 +236,7 @@
         "hkjc_name_zh": null,
         "achievement_class": "G2",
         "major_win": "26'阪神スプリングジャンプ(J.G2)",
-        "earnings": 20514.8
+        "earnings": 21269.0
       },
       {
         "name": "キングストンボーイ",
@@ -252,8 +252,8 @@
     "graded_foal_rate": 0.036,
     "graded_runner_rate": 0.0426,
     "g1_foal_rate": 0.018,
-    "avg_earnings_per_foal": 2651.7,
-    "avg_earnings_per_runner": 3131.3,
+    "avg_earnings_per_foal": 2659.3,
+    "avg_earnings_per_runner": 3140.3,
     "median_earnings_per_runner": 612.0,
     "earnings_q25": 0.0,
     "earnings_q75": 2121.5,
@@ -313,7 +313,7 @@
     "graded_winners": 3,
     "stakes_winners": 5,
     "g1_winners": 0,
-    "total_earnings": 192205.7,
+    "total_earnings": 192223.4,
     "representatives": [
       {
         "name": "フォーヴィスム",
@@ -357,8 +357,8 @@
     "graded_foal_rate": 0.04,
     "graded_runner_rate": 0.0441,
     "g1_foal_rate": 0.0,
-    "avg_earnings_per_foal": 2562.7,
-    "avg_earnings_per_runner": 2826.6,
+    "avg_earnings_per_foal": 2563.0,
+    "avg_earnings_per_runner": 2826.8,
     "median_earnings_per_runner": 1143.0,
     "earnings_q25": 138.3,
     "earnings_q75": 2967.6,

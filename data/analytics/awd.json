@@ -1,13 +1,13 @@
 {
   "summary": {
-    "overall_awd": 1588.6,
+    "overall_awd": 1587.8,
     "turf_awd": 1884.6,
-    "dirt_awd": 1460.2,
-    "overall_wins": 1267,
+    "dirt_awd": 1459.7,
+    "overall_wins": 1272,
     "synthetic_wins": 1,
     "synthetic_awd": 1600.0,
     "turf_wins": 383,
-    "dirt_wins": 883
+    "dirt_wins": 888
   },
   "by_crop": [
     {
@@ -19,10 +19,10 @@
     },
     {
       "label": "2019",
-      "overall_awd": 1562.7,
+      "overall_awd": 1562.0,
       "turf_awd": 1879.4,
-      "dirt_awd": 1461.2,
-      "wins": 401
+      "dirt_awd": 1460.7,
+      "wins": 402
     },
     {
       "label": "2020",
@@ -33,17 +33,17 @@
     },
     {
       "label": "2021",
-      "overall_awd": 1630.1,
+      "overall_awd": 1625.6,
       "turf_awd": 1943.9,
-      "dirt_awd": 1456.5,
-      "wins": 160
+      "dirt_awd": 1454.4,
+      "wins": 163
     },
     {
       "label": "2022",
-      "overall_awd": 1745.0,
+      "overall_awd": 1742.0,
       "turf_awd": 1928.6,
-      "dirt_awd": 1558.2,
-      "wins": 111
+      "dirt_awd": 1555.4,
+      "wins": 112
     }
   ],
   "discrepancies": [
@@ -114,7 +114,7 @@
       "di": 0.85,
       "cd": -0.08,
       "race_stamina_percentile": 0.011,
-      "pedigree_stamina_percentile": 0.923,
+      "pedigree_stamina_percentile": 0.924,
       "stamina_gap": -0.91
     },
     {
@@ -170,7 +170,7 @@
       "di": 1.77,
       "cd": 0.56,
       "race_stamina_percentile": 0.977,
-      "pedigree_stamina_percentile": 0.108,
+      "pedigree_stamina_percentile": 0.107,
       "stamina_gap": 0.87
     },
     {
@@ -184,7 +184,7 @@
       "di": 0.87,
       "cd": 0.07,
       "race_stamina_percentile": 0.044,
-      "pedigree_stamina_percentile": 0.88,
+      "pedigree_stamina_percentile": 0.881,
       "stamina_gap": -0.84
     },
     {
@@ -197,8 +197,8 @@
       "dirt_awd": 1200.0,
       "di": 0.65,
       "cd": -0.07,
-      "race_stamina_percentile": 0.116,
-      "pedigree_stamina_percentile": 0.959,
+      "race_stamina_percentile": 0.115,
+      "pedigree_stamina_percentile": 0.96,
       "stamina_gap": -0.84
     },
     {
@@ -226,7 +226,7 @@
       "di": 0.92,
       "cd": 0.13,
       "race_stamina_percentile": 0.031,
-      "pedigree_stamina_percentile": 0.859,
+      "pedigree_stamina_percentile": 0.86,
       "stamina_gap": -0.83
     },
     {
@@ -240,7 +240,7 @@
       "di": 0.82,
       "cd": 0.1,
       "race_stamina_percentile": 0.059,
-      "pedigree_stamina_percentile": 0.884,
+      "pedigree_stamina_percentile": 0.885,
       "stamina_gap": -0.83
     },
     {
@@ -254,7 +254,7 @@
       "di": 2.16,
       "cd": 0.6,
       "race_stamina_percentile": 0.875,
-      "pedigree_stamina_percentile": 0.041,
+      "pedigree_stamina_percentile": 0.04,
       "stamina_gap": 0.83
     },
     {
@@ -295,7 +295,7 @@
       "dirt_awd": null,
       "di": 1.93,
       "cd": 0.59,
-      "race_stamina_percentile": 0.839,
+      "race_stamina_percentile": 0.84,
       "pedigree_stamina_percentile": 0.059,
       "stamina_gap": 0.78
     },
@@ -328,20 +328,6 @@
       "stamina_gap": -0.76
     },
     {
-      "horse_id": 267,
-      "name": "ヴァンクールシチー",
-      "hkjc_name_zh": null,
-      "wins": 5,
-      "overall_awd": 1360.0,
-      "turf_awd": null,
-      "dirt_awd": 1360.0,
-      "di": 0.71,
-      "cd": 0.0,
-      "race_stamina_percentile": 0.181,
-      "pedigree_stamina_percentile": 0.934,
-      "stamina_gap": -0.75
-    },
-    {
       "horse_id": 122,
       "name": "ストーンズ",
       "hkjc_name_zh": "群石齊飛",
@@ -353,7 +339,21 @@
       "cd": 0.64,
       "race_stamina_percentile": 0.819,
       "pedigree_stamina_percentile": 0.064,
-      "stamina_gap": 0.75
+      "stamina_gap": 0.76
+    },
+    {
+      "horse_id": 267,
+      "name": "ヴァンクールシチー",
+      "hkjc_name_zh": null,
+      "wins": 5,
+      "overall_awd": 1360.0,
+      "turf_awd": null,
+      "dirt_awd": 1360.0,
+      "di": 0.71,
+      "cd": 0.0,
+      "race_stamina_percentile": 0.182,
+      "pedigree_stamina_percentile": 0.934,
+      "stamina_gap": -0.75
     },
     {
       "horse_id": 284,
@@ -366,7 +366,7 @@
       "di": 0.82,
       "cd": 0.1,
       "race_stamina_percentile": 0.131,
-      "pedigree_stamina_percentile": 0.884,
+      "pedigree_stamina_percentile": 0.885,
       "stamina_gap": -0.75
     },
     {
@@ -380,7 +380,7 @@
       "di": 1.0,
       "cd": 0.17,
       "race_stamina_percentile": 0.059,
-      "pedigree_stamina_percentile": 0.797,
+      "pedigree_stamina_percentile": 0.798,
       "stamina_gap": -0.74
     },
     {
@@ -394,7 +394,7 @@
       "di": 1.89,
       "cd": 0.46,
       "race_stamina_percentile": 0.875,
-      "pedigree_stamina_percentile": 0.137,
+      "pedigree_stamina_percentile": 0.136,
       "stamina_gap": 0.74
     },
     {
@@ -422,8 +422,8 @@
       "di": 1.4,
       "cd": 0.5,
       "race_stamina_percentile": 0.977,
-      "pedigree_stamina_percentile": 0.252,
-      "stamina_gap": 0.72
+      "pedigree_stamina_percentile": 0.251,
+      "stamina_gap": 0.73
     },
     {
       "horse_id": 170,
@@ -450,7 +450,7 @@
       "di": 1.0,
       "cd": 0.14,
       "race_stamina_percentile": 0.1,
-      "pedigree_stamina_percentile": 0.806,
+      "pedigree_stamina_percentile": 0.807,
       "stamina_gap": -0.71
     },
     {
@@ -463,8 +463,8 @@
       "dirt_awd": 1400.0,
       "di": 0.65,
       "cd": -0.07,
-      "race_stamina_percentile": 0.25,
-      "pedigree_stamina_percentile": 0.959,
+      "race_stamina_percentile": 0.252,
+      "pedigree_stamina_percentile": 0.96,
       "stamina_gap": -0.71
     }
   ],

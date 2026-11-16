@@ -611,9 +611,9 @@
         "track_condition": "不",
         "weather": "雨",
         "winner_or_runner_up": "",
-        "finish_note": null
+        "finish_note": "取"
       },
-      "finish_note": null
+      "finish_note": "取"
     },
     {
       "source": "netkeiba",
