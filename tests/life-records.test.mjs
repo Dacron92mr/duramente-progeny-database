@@ -49,7 +49,7 @@ test('unchanged affiliation observations collapse without dates or duplicated hi
 test('genuine owner changes and returns to an earlier trainer remain distinct',()=>{
  const events=[{trainer:'A',owner:'X',observed_at:'2024-01-01'},{trainer:'A',owner:'Y',observed_at:'2025-01-01'},{trainer:'B',owner:'Y',date:'2025-06-01'},{trainer:'A',owner:'Y',date:'2026-01-01'}];
  assert.equal(affiliationChanges(events).length,4);
- const html=renderAffiliations(events);assert.match(html,/所属变动/);assert.doesNotMatch(html,/<time>|life-timeline|2024-01-01/);
+ const html=renderAffiliations(events);assert.match(html,/练马师与马主变更/);assert.doesNotMatch(html,/<time>|life-timeline|2024-01-01/);
 });
 test('internal horse links and external evidence use different arrows',()=>{
  const rows=updateRows([{horse_id:45,horse_name:'星象古盤',title:'资料补充',recorded_at:'2026-10-26',source_url:'https://www.hkjc.com/'}]);
@@ -65,4 +65,15 @@ test('one retirement announcement is displayed once while registration changes r
  assert.match(renderRegistration({...vm,registration:[{...registration[0],title:'中央登记注销'}]}),/中央登记注销/);
  assert.match(renderRegistration({...vm,postRacing:[{...careers[0],source_url:'https://example.org/another'}]}),/牧场公布退役/);
  assert.equal(registration.length,1);
+});
+
+test('generic local affiliation does not create a duplicate trainer tenure',()=>{
+ const events=[{trainer:'大塚信次',affiliation:'(西脇)',observed_at:'2026-07-06'}, {trainer:'大塚信次',owner:'大黒富美子',affiliation:'地',observed_at:'2026-07-06'}, {trainer:'菅原勲',owner:'大黒富美子',affiliation:'岩手',observed_at:'2026-10-28'}];
+ const before=JSON.stringify(events),rows=affiliationChanges(events);
+ assert.equal(rows.length,2);assert.equal(rows[1].affiliation,'西脇');
+ assert.equal(rows[1].sources.length,2);assert.equal(JSON.stringify(events),before);
+ assert.equal((renderAffiliations(events).match(/大塚信次 · 西脇/g)||[]).length,1);
+ assert.doesNotMatch(renderAffiliations(events),/马主：大黒富美子/);
+ assert.equal(affiliationChanges([{trainer:'A',affiliation:'地'},{trainer:'A',affiliation:'栗東'}]).length,2);
+ assert.equal(affiliationChanges([{trainer:'A',affiliation:'岩手'},{trainer:'A',affiliation:'西脇'}]).length,2);
 });
