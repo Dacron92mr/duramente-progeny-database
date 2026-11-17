@@ -33,17 +33,19 @@ export function attributionCounts(records=[]) {
 }
 const affiliationName=value=>{
  const name=norm(value).replace(/[()]/g,'');
- return ({'西':'栗東','東':'美浦'})[name]||name;
+ return ({'西':'栗東','東':'美浦','地':'地方'})[name]||name;
 };
+const localRegions=new Set(['地方','西脇','園田','岩手','北海道','門別','浦和','船橋','大井','川崎','金沢','笠松','愛知','名古屋','兵庫','高知','佐賀']);
+const sameRegion=(a,b)=>!a||!b||a===b||(a==='地方'&&localRegions.has(b))||(b==='地方'&&localRegions.has(a));
 // Collapse compatible observations, never a confirmed change or a different owner.
 export function affiliationChanges(events=[]) {
  const groups=[];
  for(const original of [...events].sort((a,b)=>(a.date||a.observed_at||'').localeCompare(b.date||b.observed_at||''))) {
   const e={...original,trainer:norm(original.trainer),owner:norm(original.owner),affiliation:affiliationName(original.affiliation)};
   const previous=groups.at(-1);
-  const compatible=previous && ['trainer','owner','affiliation'].every(k=>!previous[k]||!e[k]||previous[k]===e[k]);
+  const compatible=previous && ['trainer','owner'].every(k=>!previous[k]||!e[k]||previous[k]===e[k]) && sameRegion(previous.affiliation,e.affiliation);
   if(compatible && !(e.kind==='transfer'||e.kind==='ownership_change')) {
-   for(const k of ['trainer','owner','affiliation'])if(e[k])previous[k]=e[k];
+   for(const k of ['trainer','owner','affiliation'])if(e[k]&&!(k==='affiliation'&&e[k]==='地方'&&previous[k]))previous[k]=e[k];
    previous.sources.push(original);
   } else groups.push({...e,sources:[original]});
  }
@@ -53,7 +55,7 @@ export function renderAffiliations(events=[],records=[]) {
  const changes=affiliationChanges(events);
  // A single unchanged affiliation already appears under People and Breeder.
  if(changes.length<2)return '';
- return `<section class="profile-group affiliation-history"><h4>所属变动</h4><ul class="affiliation-changes">${changes.map(e=>`<li><strong>${h([e.trainer,e.affiliation].filter(Boolean).join(' · '))}</strong>${e.owner?`<span>马主：${h(e.owner)}</span>`:''}</li>`).join('')}</ul><details class="profile-method"><summary>来源与成绩归属</summary>${records.length?`<p>已核实的任职赛果（部分记录）：${attributionCounts(records).map(r=>`${h(r.trainer)} ${r.wins}胜 / ${r.races}场`).join('；')}。</p>`:''}<p>筛选包含已核实的历任练马师与马主。资料确认日不代表转厩日；未确认任职期间的赛果不归于最后一任。</p>${changes.map(e=>`<p>${h(e.trainer||e.owner)}：${[...new Map(e.sources.filter(s=>s.source_url).map(s=>[s.source_url,s])).values()].map(s=>`<a data-link-purpose="source" href="${h(s.source_url)}" target="_blank" rel="noreferrer">${h(s.source_name||'来源')} ↗</a>`).join(' · ')}</p>`).join('')}</details></section>`;
+ return `<section class="profile-group affiliation-history"><h4>练马师与马主变更</h4><ul class="affiliation-changes">${changes.map(e=>`<li><strong>${h([e.trainer,e.affiliation].filter(Boolean).join(' · '))}</strong>${e.owner&&(changes.some(c=>c.owner&&c.owner!==e.owner))?`<span>马主：${h(e.owner)}</span>`:''}</li>`).join('')}</ul><details class="profile-method"><summary>查看资料来源</summary>${records.length?`<p>已核实的任职赛果（部分记录）：${attributionCounts(records).map(r=>`${h(r.trainer)} ${r.wins}胜 / ${r.races}场`).join('；')}。</p>`:''}<p>筛选包含已核实的历任练马师与马主。资料确认日不代表转厩日；未确认任职期间的赛果不归于最后一任。</p>${changes.map(e=>`<p>${h(e.trainer||e.owner)}：${[...new Map(e.sources.filter(s=>s.source_url).map(s=>[s.source_url,s])).values()].map(s=>`<a data-link-purpose="source" href="${h(s.source_url)}" target="_blank" rel="noreferrer">${h(s.source_name||'来源')} ↗</a>`).join(' · ')}</p>`).join('')}</details></section>`;
 }
 export function renderRegistration(vm) {
  const events=(vm.registration||[]).filter(e=>!((e.status==='confirmed' && /退役/.test(e.title) && !/注销|抹消|转籍/.test(e.title)) && (vm.postRacing||[]).some(c=>c.source_url && c.source_url===e.source_url && c.date===e.date && /已退役|确认退役|公布退役/.test(c.summary)))).sort((a,b)=>b.date.localeCompare(a.date)),last=[...vm.racing.records].sort((a,b)=>String(b.race_date).localeCompare(String(a.race_date)))[0];

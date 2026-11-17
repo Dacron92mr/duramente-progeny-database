@@ -60,8 +60,23 @@ class FreshnessTests(unittest.TestCase):
   table='<table><tr>'+''.join('<th>'+s+'</th>' for s in headers)+'</tr><tr>'+''.join('<td>'+s+'</td>' for s in values)+'</tr></table>'
   result=parse_jra_winners(table,2026)
   self.assertEqual(result[0]['date'],'2026/10/17');self.assertEqual(result[0]['name'],'シュガークン')
-  self.assertEqual(parse_jra_winners(table.replace('シュガークン','—'),2026),[])
+  with self.assertRaisesRegex(ValueError,'no completed results'):
+   parse_jra_winners(table.replace('シュガークン','—'),2026)
   with self.assertRaises(ValueError):parse_jra_winners(table.replace('優勝馬','変更済'),2026)
+ def test_jra_explicit_rowspan_keeps_both_winners_and_rejects_a_short_row(self):
+  header='<tr><th>月日</th><th>レース名</th><th>競馬場</th><th>優勝馬</th><th>結果</th></tr>'
+  rows='<tr><td rowspan="2">11月10日</td><td rowspan="2">重賞</td><td rowspan="2">東京</td><td>A</td><td rowspan="2"><a href="/datafile/seiseki/test.html">結果</a></td></tr><tr><td>B</td></tr>'
+  self.assertEqual([r['name'] for r in parse_jra_winners('<table>'+header+rows+'</table>',2026)],['A','B'])
+  with self.assertRaisesRegex(ValueError,'row shape'):
+   parse_jra_winners('<table>'+header+rows.replace(' rowspan="2"','',1)+'</table>',2026)
+ def test_career_lag_quarantine_rejects_wins_and_disagreeing_sources(self):
+  from weekly_sync import can_quarantine_career_lag
+  old={**self.race('old'),'source':'netkeiba'}
+  added=self.race('new',9)
+  self.assertTrue(can_quarantine_career_lag([old,added],[old,added],[old]))
+  self.assertFalse(can_quarantine_career_lag([old,added],[old],[old]))
+  winner=self.race('new',1)
+  self.assertFalse(can_quarantine_career_lag([old,winner],[old,winner],[old]))
  def test_official_win_detects_two_agreeing_but_stale_sources(self):
   winners=[{'name':'シュガークン','date':'2026/10/17','course':'東京','source_url':'https://www.jra.go.jp/datafile/seiseki/replay/2026/095.html'}]
   horses=[{'id':40,'name':'シュガークン'}]

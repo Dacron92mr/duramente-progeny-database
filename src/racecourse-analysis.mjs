@@ -6,7 +6,7 @@ export const surfaceSample=(row,surface,min)=>{const s=row.surface?.[surface];re
 const rate=(wins,starts)=>starts?`${(100*wins/starts).toFixed(1)}%`:'—';
 const names={JRA:'JRA 中央',NAR:'NAR 地方',Overseas:'海外'};
 const surfaceNames={芝:'草地',ダ:'泥地',障:'障碍',合成:'合成跑道'};
-const countryNames={'South Korea':'韩国',Japan:'日本',Australia:'澳大利亚',France:'法国',UK:'英国',UAE:'阿联酋','Hong Kong':'中国香港','Saudi Arabia':'沙特阿拉伯'};
+const countryNames={USA:'美国','South Korea':'韩国',Japan:'日本',Australia:'澳大利亚',France:'法国',UK:'英国',UAE:'阿联酋','Hong Kong':'中国香港','Saudi Arabia':'沙特阿拉伯'};
 export function mountCourseAnalysis(root,{data,renderChart,openHorse,onScope}) {
  let scope='All',minimum=30,charts=[],distanceChart=null;
  const dispose=()=>{for(const chart of charts)if(chart&&!chart.isDisposed()){chart.__resizeObserver?.disconnect();chart.dispose();}charts=[];if(distanceChart&&!distanceChart.isDisposed()){distanceChart.__resizeObserver?.disconnect();distanceChart.dispose();}distanceChart=null;};

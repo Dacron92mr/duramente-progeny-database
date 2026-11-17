@@ -31,6 +31,7 @@ NAR_COURSES = [
     "園田", "姫路", "高知", "佐賀",
 ]
 OVERSEAS_COURSE_MAP = {
+    "キーンランド": "Keeneland", "Keeneland": "Keeneland",
     "ソウル": "Seoul", "Seoul": "Seoul", "ヨーク": "York", "York": "York",
     "ロンシャン": "ParisLongchamp",
     "ParisLongchamp": "ParisLongchamp",
@@ -946,6 +947,7 @@ def breeder_analysis(horses: list[dict[str, Any]], races: list[dict[str, Any]]) 
 
 
 OVERSEAS_COUNTRIES = {
+    "Keeneland": "USA",
     **dict.fromkeys(['Ballarat Synthetic','Pakenham Synthetic','Flemington','Bendigo','Cranbourne','Sandown-Lakeside','Seymour','Terang'], 'Australia'),
     'Seoul':'South Korea','York':'UK', 'Meydan':'UAE', 'Sha Tin':'Hong Kong', 'Ascot':'UK',
     'ParisLongchamp':'France', 'Deauville':'France', 'King Abdulaziz':'Saudi Arabia',

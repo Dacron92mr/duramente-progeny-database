@@ -29,7 +29,8 @@ class SurfaceClassificationTests(unittest.TestCase):
         published = json.loads((ROOT / 'data/analytics/racecourses.json').read_text())
         self.assertEqual(generated['table'], published['table'])
         self.assertEqual(generated['summary'], published['summary'])
-        self.assertEqual(len(generated['overseas_history']), 32)
+        self.assertEqual(len(generated['overseas_history']), len(published['overseas_history']))
+        self.assertEqual(canonical_racecourse('キーンランド')[:2], ('Keeneland', 'Overseas'))
         self.assertEqual(sum(r['surface'] == '合成' for r in generated['overseas_history']), 4)
         self.assertEqual(sum(r['finish'] == 1 and r['surface'] == '合成' for r in generated['overseas_history']), 1)
 

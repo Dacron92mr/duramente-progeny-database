@@ -15,7 +15,7 @@ from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 from urllib.robotparser import RobotFileParser
 from urllib.parse import urlsplit
-from sync_sources import parse_profile, parse_races, parse_dynamic_races, reconcile_race_sources, parse_jra_winners, verify_known_winners
+from sync_sources import CareerCountMismatch, parse_profile, parse_races, parse_dynamic_races, reconcile_race_sources, parse_jra_winners, verify_known_winners
 from rebuild_synced_analytics import rebuild, read, write
 from jbis_queue import (
     commit_state_after_publication,
@@ -180,12 +180,25 @@ def snapshot_summary(rows):
             'race_ids':[r.get('race_id') for r in rows],
             'non_numeric_results':[{'race_id':r.get('race_id'),'finish_note':r.get('finish_note')} for r in rows if r.get('finish') is None]}
 
+def can_quarantine_career_lag(static, dynamic, prior):
+    """Only defer one newly listed, completed non-winning start."""
+    old = {str(r['race_id']) for r in prior if r.get('source') == 'netkeiba' and r.get('race_id')}
+    left = {str(r['race_id']): r for r in static}
+    right = {str(r['race_id']): r for r in dynamic}
+    added = left.keys() - old
+    if not old or left.keys() != right.keys() or not old <= left.keys() or len(added) != 1:
+        return False
+    race_id = next(iter(added))
+    return all(isinstance(rows[race_id].get('finish'), int) and rows[race_id]['finish'] > 1
+               for rows in (left, right))
+
+
 def run(args):
     root=args.root.resolve();state_path=root/'.github/sync/state.json'
     raw_state,state_issues=load_state_safely(state_path)
     horses=read(root/'data/horses.json')
     report={'started_at':datetime.now(timezone.utc).isoformat(),'netkeiba_ok':0,'netkeiba_retries':0,'jbis_ok':0,'errors':[],'changed_horses':[],'applied':False,
-            'prize_coverage_before':prize_coverage(root),'horse_checks':[],'state_issues':state_issues}
+            'prize_coverage_before':prize_coverage(root),'horse_checks':[],'quarantined_horses':[],'state_issues':state_issues}
     horse_id=getattr(args,'horse_id',None)
     selected=select_netkeiba_candidates(horses,args.source,args.limit,horse_id)
     client=Client()
@@ -197,6 +210,7 @@ def run(args):
             if 'db.netkeiba.com' in client.blocked: break
             print(f'netkeiba {i+1}/{len(candidates)} id={horse["id"]}',flush=True)
             last_error=None
+            quarantine=False
             for attempt in range(3):
                 check={'horse_id':horse['id'],'attempt':attempt+1,'checked_at':datetime.now(timezone.utc).isoformat()}
                 try:
@@ -224,6 +238,9 @@ def run(args):
                     if 'challenge or access limit' in str(exc):client.blocked.add('db.netkeiba.com')
                     if ('snapshots disagree' in str(exc) or 'count mismatch' in str(exc)) and attempt<2:
                         report['netkeiba_retries']+=1;time.sleep(8*(attempt+1));continue
+                    if isinstance(exc, CareerCountMismatch) and 'db.netkeiba.com' not in client.blocked:
+                        prior=read(stage/'data/horses'/f"{horse['id']}.json").get('races',[])
+                        quarantine=can_quarantine_career_lag(races,dynamic,prior)
                     break
                 except (OSError,SourceUnavailable) as exc:
                     check['error']=str(exc)
@@ -235,6 +252,8 @@ def run(args):
                     report['horse_checks'].append(check)
             if last_error is not None:
                 report['errors'].append({'source':'netkeiba','horse_id':horse['id'],'reason':str(last_error)})
+                if quarantine:
+                    report['quarantined_horses'].append(horse['id'])
                 # Multiple schema failures indicate a source change; don't hammer the site.
                 consecutive_failures+=1
                 if consecutive_failures>=5: break
@@ -252,7 +271,8 @@ def run(args):
             report['jbis']=jbis_status(jbis_state,jbis)
             report['finished_at']=datetime.now(timezone.utc).isoformat()
             args.report.parent.mkdir(parents=True,exist_ok=True);write(args.report,report)
-            write_github_summary(report)
+            if args.source != 'netkeiba':
+                write_github_summary(report)
             return
 
         for i,horse_id in enumerate(candidates_for_jbis):
@@ -276,6 +296,11 @@ def run(args):
         total=len(candidates)+len(attempted_jbis)
         success=report['netkeiba_ok']+report['jbis_ok']
         acceptable=jbis_batch_acceptable(success,total,strict_batch=bool(candidates))
+        full_netkeiba = bool(candidates) and args.source == 'netkeiba' and not args.limit and horse_id is None
+        if (full_netkeiba and not client.blocked and len(report['quarantined_horses']) == 1
+                and report['netkeiba_ok'] == len(candidates) - 1
+                and len(report['errors']) == 1):
+            acceptable=True
         # Validated individual profiles can progress during a temporary outage.
         # Schema, identity and access failures retain the existing batch gate.
         if (not candidates and jbis_successes and jbis_failures
@@ -300,7 +325,7 @@ def run(args):
         report['jbis']=jbis_status(jbis_state,jbis)
         report['projected_jbis']=jbis_status(next_state,jbis)
 
-        if acceptable and candidates and not args.limit and horse_id is None:
+        if acceptable and candidates and (full_netkeiba or args.apply):
             try:
                 year=datetime.now(timezone.utc).year
                 official=parse_jra_winners(client.get(f'https://www.jra.go.jp/datafile/seiseki/replay/{year}/jyusyo.html'),year)
@@ -310,16 +335,23 @@ def run(args):
 
         publication_ready=False
         if acceptable and report['changed_horses']:
-            write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
-            if candidates and report['netkeiba_ok']==len(candidates) and not args.limit and horse_id is None:
-                path=stage/'data/analytics/methodology.json';method=read(path);method['last_updated']=datetime.now(timezone.utc).date().isoformat();write(path,method)
-            publication_ready=True
+            try:
+                write(stage/'data/horses.json',horses);rebuild(stage);validate(stage,root)
+                if candidates and report['netkeiba_ok']==len(candidates) and not args.limit and horse_id is None:
+                    path=stage/'data/analytics/methodology.json';method=read(path);method['last_updated']=datetime.now(timezone.utc).date().isoformat();write(path,method)
+                publication_ready=True
+            except (AssertionError, ValueError, OSError, RuntimeError) as exc:
+                acceptable=False
+                report['errors'].append({'source':'dataset validation','reason':str(exc)})
         if acceptable and args.apply:
             def publish():
                 if publication_ready: publish_stage(stage,root)
             try:
-                commit_state_after_publication(state_path,next_state,publish)
-                report['state_saved']=True
+                if args.source == 'netkeiba':
+                    publish()
+                else:
+                    commit_state_after_publication(state_path,next_state,publish)
+                    report['state_saved']=True
                 report['applied']=publication_ready
                 report['jbis']=report['projected_jbis']
             except Exception as exc:
@@ -332,7 +364,10 @@ def run(args):
         print(json.dumps({k:v for k,v in report.items() if k not in ('errors','horse_checks')},ensure_ascii=False),flush=True)
         for error in report['errors']:
             print(f"Sync error [{error.get('source')}] horse={error.get('horse_id','batch')}: {error['reason']}",flush=True)
-        write_github_summary(report)
+        if args.source != 'netkeiba':
+            write_github_summary(report)
+        if acceptable and report['quarantined_horses']:
+            print(f"::warning::Deferred horse IDs: {report['quarantined_horses']}. See sync-report.json and retry by local horse ID.")
         if not acceptable: raise SystemExit('Sync batch failed validation; existing dataset preserved.')
 
 if __name__=='__main__':

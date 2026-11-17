@@ -1867,6 +1867,40 @@
       }
     },
     {
+      "label": "Keeneland",
+      "jurisdiction": "Overseas",
+      "country": "Overseas",
+      "raw_meetings": [
+        "キーンランド"
+      ],
+      "starts": 1,
+      "wins_starts": 0,
+      "seconds": 0,
+      "thirds": 0,
+      "top3": 0,
+      "win_start_rate": 0.0,
+      "quinella_rate": 0.0,
+      "top3_rate": 0.0,
+      "surface": {
+        "芝": {
+          "starts": 1,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      },
+      "distance": {
+        "1400-1600": {
+          "starts": 1,
+          "wins": 0,
+          "top3": 0,
+          "win_rate": 0.0,
+          "top3_rate": 0.0
+        }
+      }
+    },
+    {
       "label": "King Abdulaziz",
       "jurisdiction": "Overseas",
       "country": "Overseas",
@@ -2062,40 +2096,6 @@
       },
       "distance": {
         "2200-2400": {
-          "starts": 1,
-          "wins": 0,
-          "top3": 0,
-          "win_rate": 0.0,
-          "top3_rate": 0.0
-        }
-      }
-    },
-    {
-      "label": "キーンランド",
-      "jurisdiction": "Other",
-      "country": "Unknown",
-      "raw_meetings": [
-        "キーンランド"
-      ],
-      "starts": 1,
-      "wins_starts": 0,
-      "seconds": 0,
-      "thirds": 0,
-      "top3": 0,
-      "win_start_rate": 0.0,
-      "quinella_rate": 0.0,
-      "top3_rate": 0.0,
-      "surface": {
-        "芝": {
-          "starts": 1,
-          "wins": 0,
-          "top3": 0,
-          "win_rate": 0.0,
-          "top3_rate": 0.0
-        }
-      },
-      "distance": {
-        "1400-1600": {
           "starts": 1,
           "wins": 0,
           "top3": 0,
@@ -6706,6 +6706,24 @@
       "finish_note": null,
       "course": "York",
       "country": "UK",
+      "source_surface": "芝",
+      "surface": "芝"
+    },
+    {
+      "horse_id": 6,
+      "name": "ルガル",
+      "hkjc_name_zh": "賢德之君",
+      "race_date": "2026/11/01",
+      "race_name": "BCマイル(GI)",
+      "race_url": "https://db.netkeiba.com/race/2026F5010109/",
+      "race_id": "2026F5010109",
+      "source": "netkeiba",
+      "meeting": "キーンランド",
+      "distance_m": 1600,
+      "finish": 11,
+      "finish_note": null,
+      "course": "Keeneland",
+      "country": "USA",
       "source_surface": "芝",
       "surface": "芝"
     },

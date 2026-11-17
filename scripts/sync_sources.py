@@ -21,7 +21,7 @@ class Tables(HTMLParser):
             table={'attrs':attrs,'rows':[]}; self.tables.append(table); self.stack.append(table)
         elif tag == 'tr' and self.stack: self.row=[]
         elif tag in ('td','th') and self.row is not None:
-            self.cell={'text':'','links':[]}; self.row.append(self.cell)
+            self.cell={'text':'','links':[],'attrs':attrs}; self.row.append(self.cell)
         elif tag == 'a' and self.cell is not None: self.cell['links'].append(attrs.get('href',''))
     def handle_data(self, data):
         if self.cell is not None: self.cell['text'] += data
@@ -225,6 +225,9 @@ def parse_dynamic_races(payload, horse):
     if not table:raise ValueError('dynamic horse identity missing or mismatched')
     return parse_races('<title>'+html.escape(horse['name'])+'</title>'+fragment,horse)
 
+class CareerCountMismatch(ValueError):
+    """The profile and result pages disagree about the number of starts."""
+
 def reconcile_race_sources(static, dynamic, career):
     """Only combine matching histories. Reject stale/conflicting snapshots before publication."""
     left={r['race_id']:r for r in static};right={r['race_id']:r for r in dynamic}
@@ -237,8 +240,37 @@ def reconcile_race_sources(static, dynamic, career):
     expected=re.match(r'^(\d+)戦',clean(career))
     # Career counts exclude withdrawals/cancellations; compare actual starters.
     starts=sum(r.get('finish') is not None or clean(r.get('finish_note')) in ['中','中止','失','失格'] for r in merged.values())
-    if expected and starts!=int(expected[1]):raise ValueError(f'career/race count mismatch: profile={int(expected[1])}, parsed_starts={starts}, rows={len(merged)}; source may be stale or truncated')
+    if expected and starts!=int(expected[1]):raise CareerCountMismatch(f'career/race count mismatch: profile={int(expected[1])}, parsed_starts={starts}, rows={len(merged)}; source may be stale or truncated')
     return sorted(merged.values(),key=lambda r:r['race_date'],reverse=True)
+
+def jra_result_rows(rows, width):
+    """Expand explicit row spans while rejecting shifted or ambiguous columns."""
+    carried = {}
+    for cells in rows:
+        row = [None] * width
+        for column, (cell, remaining) in list(carried.items()):
+            row[column] = cell
+            if remaining == 1:
+                del carried[column]
+            else:
+                carried[column] = (cell, remaining - 1)
+        for cell in cells:
+            try:
+                column = row.index(None)
+                attrs = cell.get('attrs', {})
+                span = int(attrs.get('rowspan', '1'))
+                if not 1 <= span <= 8 or int(attrs.get('colspan', '1')) != 1:
+                    raise ValueError()
+            except ValueError:
+                raise ValueError('JRA graded row shape changed') from None
+            row[column] = cell
+            if span > 1:
+                carried[column] = (cell, span - 1)
+        if None in row:
+            raise ValueError('JRA graded row shape changed')
+        yield row
+    if carried:
+        raise ValueError('JRA graded table ended inside a row span')
 
 def parse_jra_winners(page, year):
     """Official annual graded-results index, header-mapped and fail closed."""
@@ -250,14 +282,15 @@ def parse_jra_winners(page, year):
     required=['月日','レース名','競馬場','優勝馬','結果']
     if any(headers.count(k)!=1 for k in required):raise ValueError('JRA graded headers changed')
     output=[]
-    for cells in table['rows'][1:]:
-        if len(cells)!=len(headers):raise ValueError('JRA graded row shape changed')
+    for cells in jra_result_rows(table['rows'][1:], len(headers)):
         row=dict(zip(headers,cells));winner=clean(row['優勝馬']['text'])
         if not winner or winner in ['—','-']:continue
         md=re.search(r'(\d+)月(\d+)日',row['月日']['text'])
         links=[u for u in row['結果']['links'] if '/datafile/seiseki/' in u]
         if not md or not links:raise ValueError('JRA winner without dated result source')
         output.append({'name':winner,'date':date(year,int(md[1]),int(md[2])).strftime('%Y/%m/%d'),'race':clean(row['レース名']['text']),'course':clean(row['競馬場']['text']),'source_url':urljoin('https://www.jra.go.jp',links[0])})
+    if not output:
+        raise ValueError('JRA graded winners table has no completed results')
     return output
 
 def verify_known_winners(winners, horses, detail_for):
